@@ -1,6 +1,6 @@
 //! Deserialization support for the FiX format.
 
-use std::borrow::Cow;
+use std::{borrow::Cow, usize};
 use std::io::Read;
 
 use serde::de::value::MapDeserializer;
@@ -178,9 +178,9 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
 fn parse<'de>(input: &'de [u8], check: bool) -> Result<impl Iterator<Item=(Cow<'de, str>, Cow<'de, str>)>, Error> {
     if check {
         if let Some((pos, _)) = input.windows(4).enumerate().find(|(_, b)| *b == "\u{1}10=".as_bytes()) {
-            let sum: usize = input[0..(pos + 1)].iter().map(|b| *b as usize).sum();
-            if &input[(pos + 1)..] != format!("10={:03}\u{1}", sum % crate::CHECKSUM_MOD).as_bytes() {
-                return Err(Error::custom("Mismatching checksum"));
+            let checksum = input[0..(pos + 1)].iter().map(|b| *b as usize).sum::<usize>() % crate::CHECKSUM_MOD;
+            if &input[(pos + 1)..] != format!("10={:03}\u{1}", checksum).as_bytes() {
+                return Err(Error::custom(format!("Mismatching checksum, expected {:03} but got {}", checksum, String::from_utf8_lossy(&input[(pos + 4)..(pos + 7)]))));
             }
         }
         else {
@@ -228,10 +228,11 @@ where
 ///     ("cheese".to_owned(), "comté".to_owned()),
 ///     ("meat".to_owned(), "ham".to_owned()),
 ///     ("fat".to_owned(), "butter".to_owned()),
+///     ("10".to_owned(), "129".to_owned()),
 /// ];
 ///
 /// assert_eq!(
-///     serde_fix::from_bytes::<Vec<(String, String)>>("bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}".as_bytes()),
+///     serde_fix::from_bytes_checked::<Vec<(String, String)>>("bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=129\u{1}".as_bytes()),
 ///     Ok(meal));
 /// ```
 pub fn from_bytes_checked<'de, T>(input: &'de [u8]) -> Result<T, Error>
@@ -271,11 +272,12 @@ where
 ///     ("cheese".to_owned(), "comté".to_owned()),
 ///     ("meat".to_owned(), "ham".to_owned()),
 ///     ("fat".to_owned(), "butter".to_owned()),
+///     ("10".to_owned(), "129".to_owned()),
 /// ];
 ///
 /// assert_eq!(
 ///     serde_fix::from_str::<Vec<(String, String)>>(
-///         "bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}"),
+///         "bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=129\u{1}"),
 ///     Ok(meal));
 /// ```
 pub fn from_str_checked<'de, T>(input: &'de str) -> Result<T, Error>
