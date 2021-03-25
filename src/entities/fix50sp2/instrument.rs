@@ -7,7 +7,7 @@ use super::{evnt_grp::EvntGrps, sec_alt_id_grp::SecAltIDGrp, security_xml::Secur
 
 //regex: ^(=>\s+)?(\d+)\s+(\w+)(\s+@\w+)?\s+([YNC])(\s+.+)?$
 //replace: /// $6\n#[serde(rename = "$2")]\npub $3: $5,
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Instrument {
     /// Common, "human understood" representation of the security. SecurityID (48) value can be specified if no symbol exists (e.g. non-exchange traded Collective Investment Vehicles). Use "[N/A]" for products which do not have a symbol.
     #[serde(rename = "55")]
@@ -423,7 +423,7 @@ pub struct Instrument {
     pub CouponOtherDayCount: N,*/
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum SecurityIDSource {
     /// CUSIP
     #[serde(rename = "1")]
@@ -523,7 +523,7 @@ pub enum SecurityIDSource {
     UMTFSymbol,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Product {
     /// AGENCY
     #[serde(rename = "1")]
@@ -566,7 +566,7 @@ pub enum Product {
     FINANCING,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum SecurityType {
     /// Future
     #[serde(rename = "FUT")]
@@ -1029,7 +1029,7 @@ pub enum SecurityType {
     StructuredFinanceProduct,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum InstrmtAssignmentMethod {
     /// Random
     #[serde(rename = "R")]
@@ -1039,7 +1039,7 @@ pub enum InstrmtAssignmentMethod {
     ProRata,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum SecurityStatus {
     /// Active
     #[serde(rename = "1")]
@@ -1076,7 +1076,7 @@ pub enum SecurityStatus {
     PendingDeletion,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum RestructuringType {
     /// Full Restructuring
     #[serde(rename = "FR")]
@@ -1092,7 +1092,7 @@ pub enum RestructuringType {
     NoRestructuringSpecified,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Seniority {
     /// Senior Secured
     #[serde(rename = "SD")]
@@ -1114,7 +1114,7 @@ pub enum Seniority {
     SeniorNonPreferred,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum RepoCollateralSecurityType {
     /// Future
     FUT,
@@ -1425,7 +1425,7 @@ pub enum RepoCollateralSecurityType {
     SFP,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Country {
     /// AFGHANISTAN
     AF,
@@ -1907,7 +1907,7 @@ pub enum Country {
     ZW,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Currency {
     /// Afghani
     AFA,
@@ -2910,7 +2910,7 @@ pub enum Currency {
     N999,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum StrikePriceDeterminationMethod {
     /// Fixed Strike
     #[serde(rename = "1")]
@@ -2926,7 +2926,7 @@ pub enum StrikePriceDeterminationMethod {
     Optimal,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum StrikePriceBoundaryMethod {
     /// Less than underlying price is in-the-money (ITM)
     #[serde(rename = "1")]
@@ -2945,7 +2945,7 @@ pub enum StrikePriceBoundaryMethod {
     GT,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum UnderlyingPriceDeterminationMethod {
     /// Regular
     #[serde(rename = "1")]
@@ -2961,7 +2961,7 @@ pub enum UnderlyingPriceDeterminationMethod {
     Average,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum ContractMultiplierUnit {
     /// Shares
     #[serde(rename = "0")]
@@ -2974,7 +2974,7 @@ pub enum ContractMultiplierUnit {
     Days,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum FlowScheduleType {
     /// NERC Eastern Off-Peak
     #[serde(rename = "0")]
@@ -3011,7 +3011,7 @@ pub enum FlowScheduleType {
     Other,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum UnitOfMeasure {
     /// Barrels
     #[serde(rename = "Bbl")]
@@ -3258,7 +3258,7 @@ pub enum UnitOfMeasure {
     Yard,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum SettlMethod {
     /// Election at exercise (The settlement method will be elected at the time of contract exercise)
     #[serde(rename = "E")]
@@ -3271,7 +3271,7 @@ pub enum SettlMethod {
     Physical,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum ExerciseStyle {
     /// European
     #[serde(rename = "0")]
@@ -3287,7 +3287,7 @@ pub enum ExerciseStyle {
     Other,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum OptPayoutType {
     /// Vanilla
     #[serde(rename = "1")]
@@ -3318,7 +3318,7 @@ pub enum OptPayoutType {
     Other,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum PriceQuoteMethod {
     /// Standard, money per unit of a physical
     #[serde(rename = "STD")]
@@ -3334,7 +3334,7 @@ pub enum PriceQuoteMethod {
     PercentOfPar,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum ValuationMethod {
     /// premium style
     EQTY,
@@ -3348,7 +3348,7 @@ pub enum ValuationMethod {
     CDSD,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum ListMethod {
     /// pre-listed only
     #[serde(rename = "0")]
@@ -3358,7 +3358,7 @@ pub enum ListMethod {
     UserRequested,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum PutOrCall {
     /// Put
     #[serde(rename = "0")]
@@ -3374,7 +3374,7 @@ pub enum PutOrCall {
     Chooser,
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct EncodedIssuer {
     // #[serde(rename = "348")]
     len: usize,
@@ -3409,7 +3409,7 @@ impl Serialize for EncodedIssuer {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct EncodedSecurityDesc {
     // #[serde(rename = "350")]
     len: usize,
@@ -3444,7 +3444,7 @@ impl Serialize for EncodedSecurityDesc {
     }
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum CPProgram {
     /// 3(a)(3)
     #[serde(rename = "1")]

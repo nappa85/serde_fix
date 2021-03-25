@@ -1,12 +1,18 @@
-use std::convert::{AsRef, TryFrom};
+use std::{borrow::Cow, convert::{AsRef, TryFrom}, ops::Deref};
 
 use chrono::{DateTime, Utc, TimeZone};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
 
 const FORMAT: &'static str = "%Y%m%d-%T%.3f";
 
-#[derive(Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct UTCTimestamp(DateTime<Utc>);
+
+impl Default for UTCTimestamp {
+    fn default() -> Self {
+        UTCTimestamp(Utc::now())
+    }
+}
 
 impl AsRef<DateTime<Utc>> for UTCTimestamp {
     fn as_ref(&self) -> &DateTime<Utc> {
@@ -36,6 +42,6 @@ impl Serialize for UTCTimestamp {
 
 impl<'de> Deserialize<'de> for UTCTimestamp {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<UTCTimestamp, D::Error> {
-        UTCTimestamp::try_from(<&str as Deserialize>::deserialize(deserializer)?).map_err(serde::de::Error::custom)
+        UTCTimestamp::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.deref()).map_err(serde::de::Error::custom)
     }
 }

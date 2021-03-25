@@ -1,5 +1,4 @@
-
-use std::convert::TryFrom;
+use std::{borrow::Cow, convert::TryFrom};
 
 use serde::{Serialize, Deserialize};
 
@@ -7,7 +6,7 @@ use crate::entities::{LocalMktDate, MonthYear, UTCTimestamp, data_field};
 
 use super::time_unit::TimeUnit;
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct EvntGrps {
     // #[serde(rename = "864")]
     len: usize,
@@ -16,7 +15,7 @@ pub struct EvntGrps {
 
 impl<'de> Deserialize<'de> for EvntGrps {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<EvntGrps, D::Error> {
-        let temp = <&str as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
+        let temp = <Cow<'_, str> as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
         let mut groups = EvntGrps::default();
         let mut actual = EvntGrp::default();
         let iterator = temp.split('\u{1}').map(|a| match a.find('=') {
@@ -182,7 +181,7 @@ impl Serialize for EvntGrps {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct EvntGrp {
     /// Required if NoEvents(864) > 0.
     // #[serde(rename = "865")]
@@ -211,7 +210,7 @@ pub struct EvntGrp {
     pub encoded_event_text: Option<EncodedEventText>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum EventType {
     /// Put
     #[serde(rename = "1")]
@@ -299,7 +298,7 @@ pub enum EventType {
     TradeContinuationEffectiveDate,
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct EncodedEventText {
     // #[serde(rename = "1578")]
     len: usize,

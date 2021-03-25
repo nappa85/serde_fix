@@ -4,7 +4,7 @@ use serde::{Serialize, Deserialize};
 use crate::entities::data_field;
 
 /// Standard Message Header
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Trailer {
     /// Required when trailer contains signature. Note: Not to be included within SecureData (91) field
     #[serde(rename = "93")]
@@ -13,10 +13,11 @@ pub struct Trailer {
     pub signature: Option<Signature>,
     /// (Always unencrypted, always last field in message)
     #[serde(rename = "10")]
+    #[serde(skip_serializing)]
     pub check_sum: String,
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct Signature {
     // #[serde(rename = "93")]
     len: usize,

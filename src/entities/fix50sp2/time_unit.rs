@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum TimeUnit {
     /// Hour
     #[serde(rename = "H")]

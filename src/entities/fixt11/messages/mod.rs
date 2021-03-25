@@ -1,19 +1,19 @@
 
 use serde::{Deserialize, Serialize};
 
-mod heartbeat;
+pub mod heartbeat;
 pub use heartbeat::Heartbeat;
-mod logon;
+pub mod logon;
 pub use logon::Logon;
-mod logout;
+pub mod logout;
 pub use logout::Logout;
-mod reject;
+pub mod reject;
 pub use reject::Reject;
-mod resend_request;
+pub mod resend_request;
 pub use resend_request::ResendRequest;
-mod sequence_reset;
+pub mod sequence_reset;
 pub use sequence_reset::SequenceReset;
-mod test_request;
+pub mod test_request;
 pub use test_request::TestRequest;
 /*
 use super::{header::{Header, MsgType}, Trailer};
@@ -54,7 +54,7 @@ impl Message {
     }
 }
 */
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "35")]
 pub enum Message {
     #[serde(rename = "0")]
@@ -72,6 +72,20 @@ pub enum Message {
     #[serde(rename = "1")]
     TestRequest(TestRequest),
     // FIX50SP2(crate::entities::fix50sp2::messages::Message),
+}
+
+impl Serialize for Message {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        match self {
+            Message::Heartbeat(m) => m.serialize(serializer),
+            Message::Logon(m) => m.serialize(serializer),
+            Message::Logout(m) => m.serialize(serializer),
+            Message::Reject(m) => m.serialize(serializer),
+            Message::ResendRequest(m) => m.serialize(serializer),
+            Message::SequenceReset(m) => m.serialize(serializer),
+            Message::TestRequest(m) => m.serialize(serializer),
+        }
+    }
 }
 /*
 impl Body {
@@ -97,9 +111,19 @@ impl Body {
 */
 #[cfg(test)]
 mod test {
+    use super::Message;
+    use crate::entities::fixt11::header::MsgType;
+
     #[test]
     fn deserialize_logon() {
-        let msg = "8=FIXT.1.1\u{1}9=78\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}98=0\u{1}108=1\u{1}1137=0\u{1}369=1\u{1}789=1\u{1}10=0\u{1}";
-        dbg!(crate::from_str::<super::Message>(msg)).unwrap();
+        let msg = "8=FIXT.1.1\u{1}9=78\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}369=1\u{1}98=0\u{1}108=1\u{1}789=1\u{1}1137=0\u{1}10=061\u{1}";
+        let mut obj = dbg!(crate::from_str::<Message>(msg)).unwrap();
+        match obj {
+            Message::Logon(ref mut logon) => {
+                logon.header.msg_type = Some(MsgType::Logon);
+            },
+            _ => panic!("Message isn't of type Logon (A)"),
+        }
+        assert_eq!(crate::to_string_checksum(&obj), Ok(msg.to_owned()));
     }
 }

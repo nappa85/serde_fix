@@ -1,7 +1,8 @@
+use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct SecAltIDGrp {
     // #[serde(rename = "454")]
     len: usize,
@@ -10,7 +11,7 @@ pub struct SecAltIDGrp {
 
 impl<'de> Deserialize<'de> for SecAltIDGrp {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<SecAltIDGrp, D::Error> {
-        let temp = <&str as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
+        let temp = <Cow<'_, str> as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
         let mut group = SecAltIDGrp::default();
         let mut actual = SecAltID::default();
         let iterator = temp.split('\u{1}').map(|a| match a.find('=') {
@@ -62,7 +63,7 @@ impl Serialize for SecAltIDGrp {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct SecAltID {
     // #[serde(rename = "455")]
     pub security_alt_id: Option<String>,
@@ -70,7 +71,7 @@ pub struct SecAltID {
     pub security_alt_id_source: Option<SecurityAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum SecurityAltIDSource {
     /// CUSIP
     #[serde(rename = "1")]

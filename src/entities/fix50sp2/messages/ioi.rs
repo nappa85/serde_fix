@@ -8,7 +8,7 @@ use crate::entities::fix50sp2::{application_sequence_control::ApplicationSequenc
 
 /// MsgType = 6
 // #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer", "src/entities/fix50sp2/application_sequence_control.rs::ApplicationSequenceControl")]
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct IoI {
     #[serde(flatten)]
     pub header: crate::entities::fixt11::Header,
@@ -78,7 +78,7 @@ pub TransactTime: N,
     pub trailer: crate::entities::fixt11::Trailer,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum IOITransType {
     #[serde(rename = "N")]
     New,

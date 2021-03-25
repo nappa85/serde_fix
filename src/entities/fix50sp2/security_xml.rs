@@ -3,7 +3,7 @@ use serde::{Serialize, Deserialize};
 
 use crate::entities::data_field;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct SecurityXML {
     /// Must be provided if SecurityXML field is specified and must immediately precede it.
     #[serde(rename = "1184")]
@@ -14,7 +14,7 @@ pub struct SecurityXML {
     pub security_xml_schema: Option<String>,
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct SecurityXMLData {
     // #[serde(rename = "1184")]
     len: usize,

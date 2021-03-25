@@ -1,16 +1,19 @@
 
 use serde::{Serialize, Deserialize};
 
+use crate::entities::fixt11::Header;
+use super::super::header::MsgType;
+
 // use import_fields::import_fields;
 
 // use crate::entities::{ApplVerID, Boolean, FixDateTime, fixt11::{header::*, trailer::Signature}};
 
 /// MsgType = 3
 // #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer")]
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Reject {
     #[serde(flatten)]
-    pub header: crate::entities::fixt11::Header,
+    pub header: Header,
     /// MsgSeqNum of rejected message
     #[serde(rename = "45")]
     pub ref_seq_num: u64,
@@ -20,7 +23,7 @@ pub struct Reject {
     /// The MsgType (35) of the FIX message being referenced.
     #[serde(rename = "372")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ref_msg_type: Option<super::super::header::MsgType>,
+    pub ref_msg_type: Option<MsgType>,
     /// Recommended when rejecting an application message that does not explicitly provide ApplVerID ( 1128) on the message being rejected. In this case the value from the DefaultApplVerID(1137) or the default value specified in the NoMsgTypes repeating group on the logon message should be provided.
     #[serde(rename = "1130")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -50,7 +53,20 @@ pub struct Reject {
     pub trailer: crate::entities::fixt11::Trailer,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+impl From<Header> for Reject {
+    fn from(header: Header) -> Self {
+        let mut reply_header = header.clone();
+        reply_header.reply(MsgType::Reject);
+        Reject {
+            header: reply_header,
+            ref_seq_num: header.msg_seq_num,
+            ref_msg_type: header.msg_type,
+            ..Default::default()
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SessionRejectReason {
     /// Invalid Tag Number
     #[serde(rename = "0")]

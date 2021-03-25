@@ -1,12 +1,18 @@
-use std::convert::{AsRef, TryFrom};
+use std::{borrow::Cow, convert::{AsRef, TryFrom}, ops::Deref};
 
 use chrono::{DateTime, Local, TimeZone};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
 
 const FORMAT: &'static str = "%Y%m%d";
 
-#[derive(Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct LocalMktDate(DateTime<Local>);
+
+impl Default for LocalMktDate {
+    fn default() -> Self {
+        LocalMktDate(Local::now())
+    }
+}
 
 impl AsRef<DateTime<Local>> for LocalMktDate {
     fn as_ref(&self) -> &DateTime<Local> {
@@ -36,6 +42,6 @@ impl Serialize for LocalMktDate {
 
 impl<'de> Deserialize<'de> for LocalMktDate {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<LocalMktDate, D::Error> {
-        LocalMktDate::try_from(<&str as Deserialize>::deserialize(deserializer)?).map_err(serde::de::Error::custom)
+        LocalMktDate::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.deref()).map_err(serde::de::Error::custom)
     }
 }

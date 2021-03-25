@@ -1,4 +1,4 @@
-use std::convert::TryFrom;
+use std::{borrow::Cow, convert::TryFrom, mem::swap};
 
 use serde::{Serialize, Deserialize};
 
@@ -7,7 +7,7 @@ use crate::entities::{ApplVerID, Boolean, UTCTimestamp, data_field};
 //regex: ^(=>\s+)?(\d+)\s+(\w+)(\s+@\w+)?\s+([YNC])(\s+.+)?$
 //replace: /// $6\n#[serde(rename = "$2")]\npub $3: $5,
 /// Standard Message Header
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Header {
     /// FIXT.1.1 (Always unencrypted, must be first field in message)
     #[serde(rename = "8")]
@@ -18,7 +18,7 @@ pub struct Header {
     pub body_length: usize,
     /// (Always unencrypted, must be third field in message)
     #[serde(rename = "35")]
-    #[serde(serialize_with = "get_msgtype")]
+    #[serde(serialize_with = "serialize_msgtype")]
     #[serde(default)]
     pub msg_type: Option<MsgType>,
     /// Indicates application version using a service pack identifier. The ApplVerID (1128) applies to a specific message occurrence.
@@ -128,12 +128,20 @@ pub struct Header {
     pub hops: Option<Hops>,
 }
 
-fn get_msgtype<S: serde::Serializer>(value: &Option<MsgType>, serializer: S) -> Result<S::Ok, S::Error> {
+fn serialize_msgtype<S: serde::Serializer>(value: &Option<MsgType>, serializer: S) -> Result<S::Ok, S::Error> {
     let temp = value.as_ref().ok_or_else(|| serde::ser::Error::custom("Missing field 35 (msg_type)"))?;
     temp.serialize(serializer)
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+impl Header {
+    pub fn reply(&mut self, msg_type: MsgType) {
+        self.msg_type = Some(msg_type);
+        self.sending_time = UTCTimestamp::default();
+        swap(&mut self.sender_comp_id, &mut self.target_comp_id);
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MsgType {
     /// Heartbeat
     #[serde(rename = "0")]
@@ -483,7 +491,7 @@ pub enum MsgType {
     StreamAssignmentReportACK,
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct SecureData {
     // #[serde(rename = "90")]
     len: usize,
@@ -518,7 +526,7 @@ impl Serialize for SecureData {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct XmlData {
     // #[serde(rename = "212")]
     len: usize,
@@ -553,7 +561,7 @@ impl Serialize for XmlData {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct Hops {
     // #[serde(rename = "627")]
     len: usize,
@@ -562,7 +570,7 @@ pub struct Hops {
 
 impl<'de> Deserialize<'de> for Hops {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Hops, D::Error> {
-        let temp = <&str as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
+        let temp = <Cow<'_, str> as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
         let mut hops = Hops::default();
         let mut actual = Hop::default();
         let iterator = temp.split('\u{1}').map(|a| match a.find('=') {
@@ -624,7 +632,7 @@ impl Serialize for Hops {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct Hop {
     // #[serde(rename = "628")]
     pub hop_comp_id: Option<String>,

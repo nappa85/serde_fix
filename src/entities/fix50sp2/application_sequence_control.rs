@@ -3,7 +3,7 @@ use serde::{Serialize, Deserialize};
 
 use crate::entities::Boolean;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct ApplicationSequenceControl {
     /// Identifies the application with which a message is associated. Used only if application sequencing is in effect.
     #[serde(rename = "1180")]

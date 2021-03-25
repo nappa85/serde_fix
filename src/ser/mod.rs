@@ -31,7 +31,27 @@ use std::str;
 pub fn to_string<T: ser::Serialize>(input: T) -> Result<String, Error> {
     let mut encoder = encoder::Encoder::new();
     input.serialize(Serializer::new(&mut encoder))?;
-    Ok(encoder.finish())
+    Ok(encoder.finish(false))
+}
+
+/// Serializes a value into a FiX `String` buffer, with calculated checksum
+///
+/// ```
+/// let meal = &[
+///     ("bread", "baguette"),
+///     ("cheese", "comté"),
+///     ("meat", "ham"),
+///     ("fat", "butter"),
+/// ];
+///
+/// assert_eq!(
+///     serde_fix::to_string_checksum(meal),
+///     Ok("bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=146\u{1}".to_owned()));
+/// ```
+pub fn to_string_checksum<T: ser::Serialize>(input: T) -> Result<String, Error> {
+    let mut encoder = encoder::Encoder::new();
+    input.serialize(Serializer::new(&mut encoder))?;
+    Ok(encoder.finish(true))
 }
 
 /// A serializer for the FiX format.

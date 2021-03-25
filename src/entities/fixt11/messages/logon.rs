@@ -1,3 +1,4 @@
+use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
@@ -7,7 +8,7 @@ use crate::entities::{ApplVerID, Boolean, /*FixDateTime,*/ data_field};//, fixt1
 
 /// MsgType = A
 // #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer")]
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Logon {
     #[serde(flatten)]
     pub header: crate::entities::fixt11::Header,
@@ -104,7 +105,7 @@ pub struct Logon {
     pub trailer: crate::entities::fixt11::Trailer,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EncryptMethod {
     /// None / other
     #[serde(rename = "0")]
@@ -129,7 +130,7 @@ pub enum EncryptMethod {
     PemDesMd5,
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct RawData {
     // #[serde(rename = "95")]
     len: usize,
@@ -164,7 +165,7 @@ impl Serialize for RawData {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct EncryptedPassword {
     // #[serde(rename = "1401")]
     len: usize,
@@ -199,7 +200,7 @@ impl Serialize for EncryptedPassword {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct EncryptedNewPassword {
     // #[serde(rename = "1403")]
     len: usize,
@@ -234,7 +235,7 @@ impl Serialize for EncryptedNewPassword {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct EncodedText {
     // #[serde(rename = "354")]
     len: usize,
@@ -269,7 +270,7 @@ impl Serialize for EncodedText {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct RefMsgs {
     // #[serde(rename = "384")]
     len: usize,
@@ -278,7 +279,7 @@ pub struct RefMsgs {
 
 impl<'de> Deserialize<'de> for RefMsgs {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<RefMsgs, D::Error> {
-        let temp = <&str as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
+        let temp = <Cow<'_, str> as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
         let mut msgs = RefMsgs::default();
         let mut actual = RefMsg::default();
         let iterator = temp.split('\u{1}').map(|a| match a.find('=') {
@@ -390,7 +391,7 @@ impl Serialize for RefMsgs {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct RefMsg {
     /// Specifies a specific, supported MsgType. Required if NoMsgTypes (384) is > 0. Should be specified from the point of view of the sender of the Logon (A) message
     // #[serde(rename = "372")]
@@ -412,7 +413,7 @@ pub struct RefMsg {
     pub default_ver_indicator: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Direction {
     #[serde(rename = "R")]
     Receive,
@@ -426,7 +427,7 @@ impl ToString for Direction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SessionStatus {
     /// Session active
     #[serde(rename = "0")]

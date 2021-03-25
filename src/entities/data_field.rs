@@ -1,3 +1,4 @@
+use std::borrow::Cow;
 
 use serde::{Serialize, Serializer, Deserialize, Deserializer};
 
@@ -14,7 +15,7 @@ pub fn serialize<T: DataField, S: Serializer>(obj: &T, serializer: S, data_key: 
 }
 
 pub fn deserialize<'de, D: Deserializer<'de>, T: DataField>(deserializer: D, data_key: &str) -> Result<T, D::Error> {
-    let a = <&str as Deserialize>::deserialize(deserializer)?;
+    let a = <Cow<'_, str> as Deserialize>::deserialize(deserializer)?;
 
     let (field1, field2) = match a.find('\u{1}') {
         Some(i) => (&a[0..i], if a.len() > i + (data_key.len() + 2) { &a[(i + data_key.len() + 2)..] } else { "" }),

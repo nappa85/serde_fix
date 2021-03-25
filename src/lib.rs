@@ -9,4 +9,4 @@ pub mod entities;
 #[doc(inline)]
 pub use crate::de::{from_bytes, from_reader, from_str, Deserializer};
 #[doc(inline)]
-pub use crate::ser::{to_string, Serializer};
+pub use crate::ser::{to_string, to_string_checksum, Serializer};

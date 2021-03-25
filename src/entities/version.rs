@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplVerID {
     /// FIX27
     #[serde(rename = "0")]

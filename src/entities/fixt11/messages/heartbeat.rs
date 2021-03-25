@@ -7,7 +7,7 @@ use serde::{Serialize, Deserialize};
 
 /// MsgType = 0
 // #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer")]
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Heartbeat {
     #[serde(flatten)]
     pub header: crate::entities::fixt11::Header,
