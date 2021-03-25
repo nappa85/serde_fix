@@ -178,8 +178,8 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
 fn parse<'de>(input: &'de [u8], check: bool) -> Result<impl Iterator<Item=(Cow<'de, str>, Cow<'de, str>)>, Error> {
     if check {
         if let Some((pos, _)) = input.windows(4).enumerate().find(|(_, b)| *b == "\u{1}10=".as_bytes()) {
-            let sum: usize = input[0..pos].iter().map(|b| *b as usize).sum();
-            if &input[pos..] != format!("\u{1}10={:03}\u{1}", sum % crate::CHECKSUM_MOD).as_bytes() {
+            let sum: usize = input[0..(pos + 1)].iter().map(|b| *b as usize).sum();
+            if &input[(pos + 1)..] != format!("10={:03}\u{1}", sum % crate::CHECKSUM_MOD).as_bytes() {
                 return Err(Error::custom("Mismatching checksum"));
             }
         }
