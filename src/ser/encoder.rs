@@ -19,7 +19,7 @@ impl Encoder {
         let mut res = self.inner.join("\u{1}");
         if checksum {
             let sum: usize = res.as_bytes().iter().map(|b| *b as usize).sum();
-            res.push_str(&format!("\u{1}10={:03}\u{1}", sum % 255));
+            res.push_str(&format!("\u{1}10={:03}\u{1}", sum % crate::CHECKSUM_MOD));
         }
         else {
             res.push('\u{1}');

@@ -115,8 +115,8 @@ mod test {
     use crate::entities::fixt11::header::MsgType;
 
     #[test]
-    fn deserialize_logon() {
-        let msg = "8=FIXT.1.1\u{1}9=78\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}369=1\u{1}98=0\u{1}108=1\u{1}789=1\u{1}1137=0\u{1}10=061\u{1}";
+    fn logon() {
+        let msg = "8=FIXT.1.1\u{1}9=78\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}369=1\u{1}98=0\u{1}108=1\u{1}789=1\u{1}1137=0\u{1}10=036\u{1}";
         let mut obj = dbg!(crate::from_str::<Message>(msg)).unwrap();
         match obj {
             Message::Logon(ref mut logon) => {
@@ -124,6 +124,6 @@ mod test {
             },
             _ => panic!("Message isn't of type Logon (A)"),
         }
-        assert_eq!(crate::to_string_checksum(&obj), Ok(msg.to_owned()));
+        assert_eq!(crate::to_string_checked(&obj), Ok(msg.to_owned()));
     }
 }

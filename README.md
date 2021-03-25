@@ -33,6 +33,13 @@ faster response time but less specific knowledge about Serde or this
 crate. If IRC is not your thing, we are happy to respond to [GitHub
 issues](https://github.com/nappa85/serde_fix/issues/new) as well.
 
+## FiX docs
+
+You can find details about the protocol on those sites:
+ * [btobits](https://btobits.com/fixopaedia/fixdict11ep/index.html)
+ * [onixs](https://www.onixs.biz/fix-dictionary/FIXT1.1/index.html)
+ * [tradingtechnologies](https://www.tradingtechnologies.com/xtrader-help/fix-adapter-reference/fix-message-conversations/logon-and-logout/)
+
 ## License
 
 serde_fix is licensed under either of

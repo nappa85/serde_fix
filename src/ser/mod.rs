@@ -45,10 +45,10 @@ pub fn to_string<T: ser::Serialize>(input: T) -> Result<String, Error> {
 /// ];
 ///
 /// assert_eq!(
-///     serde_fix::to_string_checksum(meal),
-///     Ok("bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=146\u{1}".to_owned()));
+///     serde_fix::to_string_checked(meal),
+///     Ok("bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=128\u{1}".to_owned()));
 /// ```
-pub fn to_string_checksum<T: ser::Serialize>(input: T) -> Result<String, Error> {
+pub fn to_string_checked<T: ser::Serialize>(input: T) -> Result<String, Error> {
     let mut encoder = encoder::Encoder::new();
     input.serialize(Serializer::new(&mut encoder))?;
     Ok(encoder.finish(true))

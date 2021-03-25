@@ -175,10 +175,38 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
     }
 }
 
-fn parse<'de>(input: &'de [u8]) -> impl Iterator<Item=(Cow<'de, str>, Cow<'de, str>)> {
-    Parser {
-        inner: input.split(|b| b == &1)// b'\u{1}' = 1
+fn parse<'de>(input: &'de [u8], check: bool) -> Result<impl Iterator<Item=(Cow<'de, str>, Cow<'de, str>)>, Error> {
+    let inner = input.split(|b| *b == 1);// b'\u{1}' = 1
+    if check {
+        let sum: usize = inner.clone()
+            .take_while(|b| !b.starts_with(b"10="))
+            .collect::<Vec<&[u8]>>()
+            .join(&1)
+            .iter()
+            .map(|b| *b as usize)
+            .sum();
+        let mut temp = inner.clone()
+            .skip_while(|b| !b.starts_with(b"10="));
+        if temp.next() != Some(format!("10={:03}", sum % crate::CHECKSUM_MOD).as_bytes()) {
+            return Err(Error::custom("Mismatching checksum"));
+        }
+        if temp.next() != Some(&[]) {
+            return Err(Error::custom("Malformed message"));
+        }
+        if temp.next() != None {
+            return Err(Error::custom("Malformed message"));
+        }
     }
+    Ok(Parser {
+        inner
+    })
+}
+
+fn _from_bytes<'de, T>(input: &'de [u8], check: bool) -> Result<T, Error>
+where
+    T: de::Deserialize<'de>,
+{
+    T::deserialize(Deserializer::new(parse(input, check)?))
 }
 
 /// Deserializes a FiX value from a `&[u8]`.
@@ -199,7 +227,28 @@ pub fn from_bytes<'de, T>(input: &'de [u8]) -> Result<T, Error>
 where
     T: de::Deserialize<'de>,
 {
-    T::deserialize(Deserializer::new(parse(input)))
+    _from_bytes(input, false)
+}
+
+/// Deserializes a FiX value from a `&[u8]`, with checksum
+///
+/// ```
+/// let meal = vec![
+///     ("bread".to_owned(), "baguette".to_owned()),
+///     ("cheese".to_owned(), "comté".to_owned()),
+///     ("meat".to_owned(), "ham".to_owned()),
+///     ("fat".to_owned(), "butter".to_owned()),
+/// ];
+///
+/// assert_eq!(
+///     serde_fix::from_bytes::<Vec<(String, String)>>("bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}".as_bytes()),
+///     Ok(meal));
+/// ```
+pub fn from_bytes_checked<'de, T>(input: &'de [u8]) -> Result<T, Error>
+where
+    T: de::Deserialize<'de>,
+{
+    _from_bytes(input, true)
 }
 
 /// Deserializes a FiX value from a `&str`.
@@ -221,7 +270,29 @@ pub fn from_str<'de, T>(input: &'de str) -> Result<T, Error>
 where
     T: de::Deserialize<'de>,
 {
-    from_bytes(input.as_bytes())
+    _from_bytes(input.as_bytes(), false)
+}
+
+/// Deserializes a FiX value from a `&str`, with checksum
+///
+/// ```
+/// let meal = vec![
+///     ("bread".to_owned(), "baguette".to_owned()),
+///     ("cheese".to_owned(), "comté".to_owned()),
+///     ("meat".to_owned(), "ham".to_owned()),
+///     ("fat".to_owned(), "butter".to_owned()),
+/// ];
+///
+/// assert_eq!(
+///     serde_fix::from_str::<Vec<(String, String)>>(
+///         "bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}"),
+///     Ok(meal));
+/// ```
+pub fn from_str_checked<'de, T>(input: &'de str) -> Result<T, Error>
+where
+    T: de::Deserialize<'de>,
+{
+    _from_bytes(input.as_bytes(), true)
 }
 
 /// Convenience function that reads all bytes from `reader` and deserializes
@@ -235,7 +306,21 @@ where
     reader.read_to_end(&mut buf).map_err(|e| {
         de::Error::custom(format_args!("could not read input: {}", e))
     })?;
-    from_bytes(&buf)
+    _from_bytes(&buf, false)
+}
+
+/// Convenience function that reads all bytes from `reader` and deserializes
+/// them with `from_bytes`, with checksum
+pub fn from_reader_checked<T, R>(mut reader: R) -> Result<T, Error>
+where
+    T: de::DeserializeOwned,
+    R: Read,
+{
+    let mut buf = vec![];
+    reader.read_to_end(&mut buf).map_err(|e| {
+        de::Error::custom(format_args!("could not read input: {}", e))
+    })?;
+    _from_bytes(&buf, true)
 }
 
 /// A deserializer for the FiX format.
