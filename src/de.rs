@@ -175,24 +175,35 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
     }
 }
 
-fn parse<'de>(input: &'de [u8], check: bool) -> Result<impl Iterator<Item=(Cow<'de, str>, Cow<'de, str>)>, Error> {
+fn parse<'de>(input: &'de [u8]) -> impl Iterator<Item=(Cow<'de, str>, Cow<'de, str>)> {
+    Parser {
+        inner: input.split(|b| *b == 1)// b'\u{1}' = 1
+    }
+}
+
+fn _from_bytes<'de, T>(input: &'de [u8], check: bool) -> Result<T, Error>
+where
+    T: de::Deserialize<'de>,
+{
     if check {
         let len;
-        if let Some((pos, _)) = input.windows(3).enumerate().find(|(_, b)| *b == "\u{1}9=".as_bytes()) {
-            if let Some((endpos, _)) = input.iter().enumerate().skip(pos + 3).find(|(_, b)| **b == 1) {
+        let endpos;
+        if let Some(pos) = input.windows(3).position(|b| b == "\u{1}9=".as_bytes()) {
+            if let Some(relpos) = input.iter().skip(pos + 3).position(|b| *b == 1) {
+                endpos = pos + 3 + relpos;
                 len = endpos + String::from_utf8_lossy(&input[(pos + 3)..endpos]).parse::<usize>().map_err(|_| Error::custom("Malformed message (field 9 isn't an integer value)"))?;
             }
             else {
-                return Err(Error::custom("Malformed message (missing field 9)"));
+                return Err(Error::custom("Malformed message (missing field 9 terminator)"));
             }
         }
         else {
             return Err(Error::custom("Malformed message (missing field 9)"));
         }
 
-        if let Some((pos, _)) = input.windows(4).enumerate().find(|(_, b)| *b == "\u{1}10=".as_bytes()) {
+        if let Some(pos) = input.windows(4).position(|b| b == "\u{1}10=".as_bytes()) {
             if pos != len {
-                return Err(Error::custom("Malformed message (wrong body lenght)"));
+                return Err(Error::custom(format!("Wrong body lenght, expected {} but got {}", len - endpos, pos - endpos)));
             }
 
             let checksum = input[0..(pos + 1)].iter().map(|b| *b as usize).sum::<usize>() % crate::CHECKSUM_MOD;
@@ -204,16 +215,7 @@ fn parse<'de>(input: &'de [u8], check: bool) -> Result<impl Iterator<Item=(Cow<'
             return Err(Error::custom("Malformed message (missing field 10)"));
         }
     }
-    Ok(Parser {
-        inner: input.split(|b| *b == 1)// b'\u{1}' = 1
-    })
-}
-
-fn _from_bytes<'de, T>(input: &'de [u8], check: bool) -> Result<T, Error>
-where
-    T: de::Deserialize<'de>,
-{
-    T::deserialize(Deserializer::new(parse(input, check)?))
+    T::deserialize(Deserializer::new(parse(input)))
 }
 
 /// Deserializes a FiX value from a `&[u8]`.
@@ -242,14 +244,15 @@ where
 /// ```
 /// let meal = vec![
 ///     ("bread".to_owned(), "baguette".to_owned()),
+///     ("9".to_owned(), "34".to_owned()),
 ///     ("cheese".to_owned(), "comté".to_owned()),
 ///     ("meat".to_owned(), "ham".to_owned()),
 ///     ("fat".to_owned(), "butter".to_owned()),
-///     ("10".to_owned(), "129".to_owned()),
+///     ("10".to_owned(), "095".to_owned()),
 /// ];
 ///
 /// assert_eq!(
-///     serde_fix::from_bytes_checked::<Vec<(String, String)>>("bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=129\u{1}".as_bytes()),
+///     serde_fix::from_bytes_checked::<Vec<(String, String)>>("bread=baguette\u{1}9=34\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=095\u{1}".as_bytes()),
 ///     Ok(meal));
 /// ```
 pub fn from_bytes_checked<'de, T>(input: &'de [u8]) -> Result<T, Error>
@@ -286,15 +289,15 @@ where
 /// ```
 /// let meal = vec![
 ///     ("bread".to_owned(), "baguette".to_owned()),
+///     ("9".to_owned(), "34".to_owned()),
 ///     ("cheese".to_owned(), "comté".to_owned()),
 ///     ("meat".to_owned(), "ham".to_owned()),
 ///     ("fat".to_owned(), "butter".to_owned()),
-///     ("10".to_owned(), "129".to_owned()),
+///     ("10".to_owned(), "095".to_owned()),
 /// ];
 ///
 /// assert_eq!(
-///     serde_fix::from_str::<Vec<(String, String)>>(
-///         "bread=baguette\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=129\u{1}"),
+///     serde_fix::from_str_checked::<Vec<(String, String)>>("bread=baguette\u{1}9=34\u{1}cheese=comté\u{1}meat=ham\u{1}fat=butter\u{1}10=095\u{1}"),
 ///     Ok(meal));
 /// ```
 pub fn from_str_checked<'de, T>(input: &'de str) -> Result<T, Error>
