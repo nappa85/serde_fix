@@ -87,12 +87,13 @@ pub enum IOITransType {
     #[serde(rename = "R")]
     Replace,
 }
-
+/*
 #[cfg(test)]
 mod test {
     #[test]
-    fn deserialize_logon() {
+    fn ioi() {
         let msg = "1180=1\u{1}1181=1\u{1}1350=1\u{1}23=1\u{1}28=N\u{1}";
         dbg!(crate::from_str::<super::IoI>(msg)).unwrap();
     }
 }
+*/

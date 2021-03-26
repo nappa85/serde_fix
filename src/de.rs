@@ -177,14 +177,31 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
 
 fn parse<'de>(input: &'de [u8], check: bool) -> Result<impl Iterator<Item=(Cow<'de, str>, Cow<'de, str>)>, Error> {
     if check {
+        let len;
+        if let Some((pos, _)) = input.windows(3).enumerate().find(|(_, b)| *b == "\u{1}9=".as_bytes()) {
+            if let Some((endpos, _)) = input.iter().enumerate().skip(pos + 3).find(|(_, b)| **b == 1) {
+                len = endpos + String::from_utf8_lossy(&input[(pos + 3)..endpos]).parse::<usize>().map_err(|_| Error::custom("Malformed message (field 9 isn't an integer value)"))?;
+            }
+            else {
+                return Err(Error::custom("Malformed message (missing field 9)"));
+            }
+        }
+        else {
+            return Err(Error::custom("Malformed message (missing field 9)"));
+        }
+
         if let Some((pos, _)) = input.windows(4).enumerate().find(|(_, b)| *b == "\u{1}10=".as_bytes()) {
+            if pos != len {
+                return Err(Error::custom("Malformed message (wrong body lenght)"));
+            }
+
             let checksum = input[0..(pos + 1)].iter().map(|b| *b as usize).sum::<usize>() % crate::CHECKSUM_MOD;
             if &input[(pos + 1)..] != format!("10={:03}\u{1}", checksum).as_bytes() {
                 return Err(Error::custom(format!("Mismatching checksum, expected {:03} but got {}", checksum, String::from_utf8_lossy(&input[(pos + 4)..(pos + 7)]))));
             }
         }
         else {
-            return Err(Error::custom("Malformed message"));
+            return Err(Error::custom("Malformed message (missing field 10)"));
         }
     }
     Ok(Parser {
