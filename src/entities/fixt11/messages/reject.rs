@@ -1,11 +1,10 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::fixt11::header::{Header, HasHeader};
-use super::super::header::MsgType;
+use crate::entities::fixt11::{header::{Header, HasHeader, MsgType}, Trailer};
 
 /// MsgType = 3
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Reject {
     #[serde(flatten)]
     pub header: Header,
@@ -45,7 +44,13 @@ pub struct Reject {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub encoded_text: Option<super::logon::EncodedText>,
     #[serde(flatten)]
-    pub trailer: crate::entities::fixt11::Trailer,
+    pub trailer: Trailer,
+}
+
+impl Reject {
+    pub fn new() -> Self {
+        Self::default()
+    }
 }
 
 impl HasHeader for Reject {
@@ -54,6 +59,18 @@ impl HasHeader for Reject {
     }
     fn get_header_mut(&mut self) -> &mut Header {
         &mut self.header
+    }
+}
+
+impl Default for Reject {
+    fn default() -> Self {
+        Reject {
+            header: Header {
+                msg_type: Some(MsgType::Reject),
+                ..Default::default()
+            },
+            ..Default::default()
+        }
     }
 }
 

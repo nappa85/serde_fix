@@ -136,6 +136,7 @@ fn serialize_msgtype<S: serde::Serializer>(value: &Option<MsgType>, serializer: 
 impl Header {
     pub fn reply(&mut self, msg_type: MsgType) {
         self.msg_type = Some(msg_type);
+        self.body_length = 0;
         self.sending_time = UTCTimestamp::default();
         swap(&mut self.sender_comp_id, &mut self.target_comp_id);
     }

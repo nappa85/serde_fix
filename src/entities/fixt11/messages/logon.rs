@@ -2,13 +2,13 @@ use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, data_field, fixt11::header::{Header, HasHeader}};
+use crate::entities::{ApplVerID, Boolean, data_field, fixt11::{header::{Header, HasHeader, MsgType}, Trailer}};
 
 /// MsgType = A
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Logon {
     #[serde(flatten)]
-    pub header: crate::entities::fixt11::Header,
+    pub header: Header,
     /// (Always unencrypted, always last field in message)
     #[serde(rename = "98")]
     pub encrypt_method: EncryptMethod,
@@ -99,7 +99,13 @@ pub struct Logon {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub encoded_text: Option<EncodedText>,
     #[serde(flatten)]
-    pub trailer: crate::entities::fixt11::Trailer,
+    pub trailer: Trailer,
+}
+
+impl Logon {
+    pub fn new() -> Self {
+        Self::default()
+    }
 }
 
 impl HasHeader for Logon {
@@ -108,6 +114,18 @@ impl HasHeader for Logon {
     }
     fn get_header_mut(&mut self) -> &mut Header {
         &mut self.header
+    }
+}
+
+impl Default for Logon {
+    fn default() -> Self {
+        Logon {
+            header: Header {
+                msg_type: Some(MsgType::Logon),
+                ..Default::default()
+            },
+            ..Default::default()
+        }
     }
 }
 
