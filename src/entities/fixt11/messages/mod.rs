@@ -15,6 +15,8 @@ pub mod sequence_reset;
 pub use sequence_reset::SequenceReset;
 pub mod test_request;
 pub use test_request::TestRequest;
+
+use super::header::{Header, HasHeader};
 /*
 use super::{header::{Header, MsgType}, Trailer};
 use crate::entities::ApplVerID;
@@ -84,6 +86,31 @@ impl Serialize for Message {
             Message::ResendRequest(m) => m.serialize(serializer),
             Message::SequenceReset(m) => m.serialize(serializer),
             Message::TestRequest(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeader for Message {
+    fn get_header(&self) -> &Header {
+        match self {
+            Message::Heartbeat(m) => m.get_header(),
+            Message::Logon(m) => m.get_header(),
+            Message::Logout(m) => m.get_header(),
+            Message::Reject(m) => m.get_header(),
+            Message::ResendRequest(m) => m.get_header(),
+            Message::SequenceReset(m) => m.get_header(),
+            Message::TestRequest(m) => m.get_header(),
+        }
+    }
+    fn get_header_mut(&mut self) -> &mut Header {
+        match self {
+            Message::Heartbeat(m) => m.get_header_mut(),
+            Message::Logon(m) => m.get_header_mut(),
+            Message::Logout(m) => m.get_header_mut(),
+            Message::Reject(m) => m.get_header_mut(),
+            Message::ResendRequest(m) => m.get_header_mut(),
+            Message::SequenceReset(m) => m.get_header_mut(),
+            Message::TestRequest(m) => m.get_header_mut(),
         }
     }
 }

@@ -1,15 +1,10 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::fixt11::Header;
+use crate::entities::fixt11::header::{Header, HasHeader};
 use super::super::header::MsgType;
 
-// use import_fields::import_fields;
-
-// use crate::entities::{ApplVerID, Boolean, FixDateTime, fixt11::{header::*, trailer::Signature}};
-
 /// MsgType = 3
-// #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer")]
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Reject {
     #[serde(flatten)]
@@ -51,6 +46,15 @@ pub struct Reject {
     pub encoded_text: Option<super::logon::EncodedText>,
     #[serde(flatten)]
     pub trailer: crate::entities::fixt11::Trailer,
+}
+
+impl HasHeader for Reject {
+    fn get_header(&self) -> &Header {
+        &self.header
+    }
+    fn get_header_mut(&mut self) -> &mut Header {
+        &mut self.header
+    }
 }
 
 impl From<Header> for Reject {

@@ -1,12 +1,9 @@
 
 use serde::{Serialize, Deserialize};
 
-// use import_fields::import_fields;
-
-// use crate::entities::{ApplVerID, Boolean, FixDateTime, fixt11::{header::*, trailer::Signature}};
+use crate::entities::fixt11::header::{Header, HasHeader};
 
 /// MsgType = 1
-// #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer")]
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct TestRequest {
     #[serde(flatten)]
@@ -16,4 +13,13 @@ pub struct TestRequest {
     pub test_req_id: String,
     #[serde(flatten)]
     pub trailer: crate::entities::fixt11::Trailer,
+}
+
+impl HasHeader for TestRequest {
+    fn get_header(&self) -> &Header {
+        &self.header
+    }
+    fn get_header_mut(&mut self) -> &mut Header {
+        &mut self.header
+    }
 }

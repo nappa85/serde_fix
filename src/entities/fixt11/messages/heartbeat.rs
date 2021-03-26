@@ -1,12 +1,9 @@
 
 use serde::{Serialize, Deserialize};
 
-// use import_fields::import_fields;
-
-// use crate::entities::{ApplVerID, Boolean, FixDateTime, fixt11::{header::*, trailer::Signature}};
+use crate::entities::fixt11::header::{Header, HasHeader};
 
 /// MsgType = 0
-// #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer")]
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Heartbeat {
     #[serde(flatten)]
@@ -17,4 +14,13 @@ pub struct Heartbeat {
     pub rest_req_id: Option<String>,
     #[serde(flatten)]
     pub trailer: crate::entities::fixt11::Trailer,
+}
+
+impl HasHeader for Heartbeat {
+    fn get_header(&self) -> &Header {
+        &self.header
+    }
+    fn get_header_mut(&mut self) -> &mut Header {
+        &mut self.header
+    }
 }

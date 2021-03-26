@@ -1,12 +1,9 @@
 
 use serde::{Serialize, Deserialize};
 
-// use import_fields::import_fields;
-
-// use crate::entities::{ApplVerID, Boolean, FixDateTime, fixt11::{header::*, trailer::Signature}};
+use crate::entities::fixt11::header::{Header, HasHeader};
 
 /// MsgType = 5
-// #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer")]
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Logout {
     #[serde(flatten)]
@@ -27,4 +24,13 @@ pub struct Logout {
     pub encoded_text: Option<super::logon::EncodedText>,
     #[serde(flatten)]
     pub trailer: crate::entities::fixt11::Trailer,
+}
+
+impl HasHeader for Logout {
+    fn get_header(&self) -> &Header {
+        &self.header
+    }
+    fn get_header_mut(&mut self) -> &mut Header {
+        &mut self.header
+    }
 }

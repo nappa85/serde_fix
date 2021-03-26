@@ -2,12 +2,9 @@ use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
-// use import_fields::import_fields;
-
-use crate::entities::{ApplVerID, Boolean, /*FixDateTime,*/ data_field};//, fixt11::{header::*, trailer::Signature}};
+use crate::entities::{ApplVerID, Boolean, data_field, fixt11::header::{Header, HasHeader}};
 
 /// MsgType = A
-// #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer")]
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Logon {
     #[serde(flatten)]
@@ -103,6 +100,15 @@ pub struct Logon {
     pub encoded_text: Option<EncodedText>,
     #[serde(flatten)]
     pub trailer: crate::entities::fixt11::Trailer,
+}
+
+impl HasHeader for Logon {
+    fn get_header(&self) -> &Header {
+        &self.header
+    }
+    fn get_header_mut(&mut self) -> &mut Header {
+        &mut self.header
+    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
