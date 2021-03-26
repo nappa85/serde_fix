@@ -2,6 +2,22 @@
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub enum FixVersion {
+    #[serde(rename = "FIX.4.0")]
+    FIX40,
+    #[serde(rename = "FIX.4.1")]
+    FIX41,
+    #[serde(rename = "FIX.4.2")]
+    FIX42,
+    #[serde(rename = "FIX.4.3")]
+    FIX43,
+    #[serde(rename = "FIX.4.4")]
+    FIX44,
+    #[serde(rename = "FIXT.1.1")]
+    FIXT11,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplVerID {
     /// FIX27
     #[serde(rename = "0")]

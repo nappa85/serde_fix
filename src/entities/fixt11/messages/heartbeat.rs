@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::fixt11::{header::{HasHeader, Header, MsgType}, Trailer};
+use crate::entities::{fixt11::{header::{HasHeader, Header, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 0
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -35,6 +35,7 @@ impl Default for Heartbeat {
     fn default() -> Self {
         Heartbeat {
             header: Header {
+                begin_string: Some(FixVersion::FIXT11),
                 msg_type: Some(MsgType::Heartbeat),
                 ..Default::default()
             },

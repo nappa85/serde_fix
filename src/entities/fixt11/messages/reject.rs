@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::fixt11::{header::{Header, HasHeader, MsgType}, Trailer};
+use crate::entities::{fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 3
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -13,6 +13,7 @@ pub struct Reject {
     pub ref_seq_num: u64,
     /// The tag number of the FIX field being referenced.
     #[serde(rename = "371")]
+    #[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
     pub ref_tag_id: Option<i32>,
     /// The MsgType (35) of the FIX message being referenced.
     #[serde(rename = "372")]
@@ -66,6 +67,7 @@ impl Default for Reject {
     fn default() -> Self {
         Reject {
             header: Header {
+                begin_string: Some(FixVersion::FIXT11),
                 msg_type: Some(MsgType::Reject),
                 ..Default::default()
             },

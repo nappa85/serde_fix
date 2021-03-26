@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::fixt11::{header::{Header, HasHeader, MsgType}, Trailer};
+use crate::entities::{fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 5
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -45,6 +45,7 @@ impl Default for Logout {
     fn default() -> Self {
         Logout {
             header: Header {
+                begin_string: Some(FixVersion::FIXT11),
                 msg_type: Some(MsgType::Logout),
                 ..Default::default()
             },

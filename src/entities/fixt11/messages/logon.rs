@@ -2,7 +2,7 @@ use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, data_field, fixt11::{header::{Header, HasHeader, MsgType}, Trailer}};
+use crate::entities::{ApplVerID, Boolean, data_field, fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = A
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -121,6 +121,7 @@ impl Default for Logon {
     fn default() -> Self {
         Logon {
             header: Header {
+                begin_string: Some(FixVersion::FIXT11),
                 msg_type: Some(MsgType::Logon),
                 ..Default::default()
             },

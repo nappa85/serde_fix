@@ -2,7 +2,7 @@ use std::{borrow::Cow, convert::TryFrom, mem::swap};
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, UTCTimestamp, data_field};
+use crate::entities::{ApplVerID, Boolean, UTCTimestamp, data_field, version::FixVersion};
 
 //regex: ^(=>\s+)?(\d+)\s+(\w+)(\s+@\w+)?\s+([YNC])(\s+.+)?$
 //replace: /// $6\n#[serde(rename = "$2")]\npub $3: $5,
@@ -11,7 +11,8 @@ use crate::entities::{ApplVerID, Boolean, UTCTimestamp, data_field};
 pub struct Header {
     /// FIXT.1.1 (Always unencrypted, must be first field in message)
     #[serde(rename = "8")]
-    pub begin_string: String,
+    #[serde(serialize_with = "serialize_beginstring")]
+    pub begin_string: Option<FixVersion>,
     /// (Always unencrypted, must be second field in message)
     #[serde(rename = "9")]
     #[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -128,6 +129,11 @@ pub struct Header {
     pub hops: Option<Hops>,
 }
 
+fn serialize_beginstring<S: serde::Serializer>(value: &Option<FixVersion>, serializer: S) -> Result<S::Ok, S::Error> {
+    let temp = value.as_ref().ok_or_else(|| serde::ser::Error::custom("Missing field 8 (begin_string)"))?;
+    temp.serialize(serializer)
+}
+
 fn serialize_msgtype<S: serde::Serializer>(value: &Option<MsgType>, serializer: S) -> Result<S::Ok, S::Error> {
     let temp = value.as_ref().ok_or_else(|| serde::ser::Error::custom("Missing field 35 (msg_type)"))?;
     temp.serialize(serializer)
@@ -135,6 +141,7 @@ fn serialize_msgtype<S: serde::Serializer>(value: &Option<MsgType>, serializer: 
 
 impl Header {
     pub fn reply(&mut self, msg_type: MsgType) {
+        self.begin_string = Some(FixVersion::FIXT11);
         self.msg_type = Some(msg_type);
         self.body_length = 0;
         self.sending_time = UTCTimestamp::default();
@@ -482,6 +489,8 @@ pub enum MsgType {
     /// Order Mass Action Report
     #[serde(rename = "BZ")]
     OrderMassActionReport,
+    /// Order Mass Action Request
+    #[serde(rename = "CA")]
     OrderMassActionRequest,
     /// User Notification
     #[serde(rename = "CB")]
@@ -661,7 +670,7 @@ mod test {
     #[test]
     fn serialize_header() {
         let obj = super::Header {
-            begin_string: "FIXT.1.1".to_owned(),
+            begin_string: Some(crate::entities::version::FixVersion::FIXT11),
             body_length: 78,
             msg_type: Some(super::MsgType::Logon),
             appl_ver_id: None,

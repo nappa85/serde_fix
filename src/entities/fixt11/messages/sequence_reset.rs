@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::fixt11::{header::{Header, HasHeader, MsgType}, Trailer};
+use crate::entities::{fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 4
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -14,6 +14,7 @@ pub struct SequenceReset {
     pub gap_fill_flag: Option<crate::entities::Boolean>,
     /// NewSeqNo
     #[serde(rename = "36")]
+    #[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
     pub new_seq_no: u64,
     #[serde(flatten)]
     pub trailer: Trailer,
@@ -38,6 +39,7 @@ impl Default for SequenceReset {
     fn default() -> Self {
         SequenceReset {
             header: Header {
+                begin_string: Some(FixVersion::FIXT11),
                 msg_type: Some(MsgType::SequenceReset),
                 ..Default::default()
             },

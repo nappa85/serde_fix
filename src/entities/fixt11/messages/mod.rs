@@ -59,21 +59,355 @@ impl Message {
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "35")]
 pub enum Message {
+    // FIX50SP2(crate::entities::fix50sp2::messages::Message),
+    /// Heartbeat
     #[serde(rename = "0")]
     Heartbeat(Heartbeat),
-    #[serde(rename = "A")]
-    Logon(Logon),
-    #[serde(rename = "5")]
-    Logout(Logout),
-    #[serde(rename = "3")]
-    Reject(Reject),
-    #[serde(rename = "2")]
-    ResendRequest(ResendRequest),
-    #[serde(rename = "4")]
-    SequenceReset(SequenceReset),
+    /// Test Request
     #[serde(rename = "1")]
     TestRequest(TestRequest),
-    // FIX50SP2(crate::entities::fix50sp2::messages::Message),
+    /// Resend Request
+    #[serde(rename = "2")]
+    ResendRequest(ResendRequest),
+    /// Reject
+    #[serde(rename = "3")]
+    Reject(Reject),
+    /// Sequence Reset
+    #[serde(rename = "4")]
+    SequenceReset(SequenceReset),
+    /// Logout
+    #[serde(rename = "5")]
+    Logout(Logout),
+    // /// Indication of Interest
+    // #[serde(rename = "6")]
+    // IndicationOfInterest,
+    // /// Advertisement
+    // #[serde(rename = "7")]
+    // Advertisement,
+    // /// Execution Report
+    // #[serde(rename = "8")]
+    // ExecutionReport,
+    // /// Order Cancel Reject
+    // #[serde(rename = "9")]
+    // OrderCancelReject,
+    /// Logon
+    #[serde(rename = "A")]
+    Logon(Logon),
+    // /// News
+    // #[serde(rename = "B")]
+    // News,
+    // /// Email
+    // #[serde(rename = "C")]
+    // Email,
+    // /// New Order - Single
+    // #[serde(rename = "D")]
+    // NewOrderSingle,
+    // /// New Order - List
+    // #[serde(rename = "E")]
+    // NewOrderList,
+    // /// Order Cancel Request
+    // #[serde(rename = "F")]
+    // OrderCancelRequest,
+    // /// Order Cancel/Replace Request
+    // #[serde(rename = "G")]
+    // OrderCancelReplaceRequest,
+    // /// Order Status Request
+    // #[serde(rename = "H")]
+    // OrderStatusRequest,
+    // /// Allocation Instruction
+    // #[serde(rename = "J")]
+    // AllocationInstruction,
+    // /// List Cancel Request
+    // #[serde(rename = "K")]
+    // ListCancelRequest,
+    // /// List Execute
+    // #[serde(rename = "L")]
+    // ListExecute,
+    // /// List Status Request
+    // #[serde(rename = "M")]
+    // ListStatusRequest,
+    // /// List Status
+    // #[serde(rename = "N")]
+    // ListStatus,
+    // /// Allocation Instruction Ack
+    // #[serde(rename = "P")]
+    // AllocationInstructionAck,
+    // /// Don't Know Trade
+    // #[serde(rename = "Q")]
+    // DontKnowTrade,
+    // /// Quote Request
+    // #[serde(rename = "R")]
+    // QuoteRequest,
+    // /// Quote
+    // #[serde(rename = "S")]
+    // Quote,
+    // /// Settlement Instructions
+    // #[serde(rename = "T")]
+    // SettlementInstructions,
+    // /// Market Data Request
+    // #[serde(rename = "V")]
+    // MarketDataRequest,
+    // /// Market Data - Snapshot/Full Refresh
+    // #[serde(rename = "W")]
+    // MarketDataSnapshotFullRefresh,
+    // /// Market Data - Incremental Refresh
+    // #[serde(rename = "X")]
+    // MarketDataIncrementalRefresh,
+    // /// Market Data Request Reject
+    // #[serde(rename = "Y")]
+    // MarketDataRequestReject,
+    // /// Quote Cancel
+    // #[serde(rename = "Z")]
+    // QuoteCancel,
+    // /// Quote Status Request
+    // #[serde(rename = "a")]
+    // QuoteStatusRequest,
+    // /// Mass Quote Acknowledgement
+    // #[serde(rename = "b")]
+    // MassQuoteAcknowledgement,
+    // /// Security Definition Request
+    // #[serde(rename = "c")]
+    // SecurityDefinitionRequest,
+    // /// Security Definition
+    // #[serde(rename = "d")]
+    // SecurityDefinition,
+    // /// Security Status Request
+    // #[serde(rename = "e")]
+    // SecurityStatusRequest,
+    // /// Security Status
+    // #[serde(rename = "f")]
+    // SecurityStatus,
+    // /// Trading Session Status Request
+    // #[serde(rename = "g")]
+    // TradingSessionStatusRequest,
+    // /// Trading Session Status
+    // #[serde(rename = "h")]
+    // TradingSessionStatus,
+    // /// Mass Quote
+    // #[serde(rename = "i")]
+    // MassQuote,
+    // /// Business Message Reject
+    // #[serde(rename = "j")]
+    // BusinessMessageReject,
+    // /// Bid Request
+    // #[serde(rename = "k")]
+    // BidRequest,
+    // /// Bid Response
+    // #[serde(rename = "l")]
+    // BidResponse,
+    // /// List Strike Price
+    // #[serde(rename = "m")]
+    // ListStrikePrice,
+    // /// XML message
+    // #[serde(rename = "n")]
+    // XMLMessage,
+    // /// Registration Instructions
+    // #[serde(rename = "o")]
+    // RegistrationInstructions,
+    // /// Registration Instructions Response
+    // #[serde(rename = "p")]
+    // RegistrationInstructionsResponse,
+    // /// Order Mass Cancel Request
+    // #[serde(rename = "q")]
+    // OrderMassCancelRequest,
+    // /// Order Mass Cancel Report
+    // #[serde(rename = "r")]
+    // OrderMassCancelReport,
+    // /// New Order - Cross
+    // #[serde(rename = "s")]
+    // NewOrderCross,
+    // /// Cross Order Cancel/Replace Request
+    // #[serde(rename = "t")]
+    // CrossOrderCancelReplaceRequest,
+    // /// Cross Order Cancel Request
+    // #[serde(rename = "u")]
+    // CrossOrderCancelRequest,
+    // /// Security Type Request
+    // #[serde(rename = "v")]
+    // SecurityTypeRequest,
+    // /// Security Types
+    // #[serde(rename = "w")]
+    // SecurityTypes,
+    // /// Security List Request
+    // #[serde(rename = "x")]
+    // SecurityListRequest,
+    // /// Security List
+    // #[serde(rename = "y")]
+    // SecurityList,
+    // /// Derivative Security List Request
+    // #[serde(rename = "z")]
+    // DerivativeSecurityListRequest,
+    // /// Derivative Security List
+    // #[serde(rename = "AA")]
+    // DerivativeSecurityList,
+    // /// New Order - Multileg
+    // #[serde(rename = "AB")]
+    // NewOrderMultileg,
+    // /// Multileg Order Cancel/Replace
+    // #[serde(rename = "AC")]
+    // MultilegOrderCancelReplace,
+    // /// Trade Capture Report Request
+    // #[serde(rename = "AD")]
+    // TradeCaptureReportRequest,
+    // /// Trade Capture Report
+    // #[serde(rename = "AE")]
+    // TradeCaptureReport,
+    // /// Order Mass Status Request
+    // #[serde(rename = "AF")]
+    // OrderMassStatusRequest,
+    // /// Quote Request Reject
+    // #[serde(rename = "AG")]
+    // QuoteRequestReject,
+    // /// RFQ Request
+    // #[serde(rename = "AH")]
+    // RFQRequest,
+    // /// Quote Status Report
+    // #[serde(rename = "AI")]
+    // QuoteStatusReport,
+    // /// Quote Response
+    // #[serde(rename = "AJ")]
+    // QuoteResponse,
+    // /// Confirmation
+    // #[serde(rename = "AK")]
+    // Confirmation,
+    // /// Position Maintenance Request
+    // #[serde(rename = "AL")]
+    // PositionMaintenanceRequest,
+    // /// Position Maintenance Report
+    // #[serde(rename = "AM")]
+    // PositionMaintenanceReport,
+    // /// Request For Positions
+    // #[serde(rename = "AN")]
+    // RequestForPositions,
+    // /// Request For Positions Ack
+    // #[serde(rename = "AO")]
+    // RequestForPositionsAck,
+    // /// Position Report
+    // #[serde(rename = "AP")]
+    // PositionReport,
+    // /// Trade Capture Report Request Ack
+    // #[serde(rename = "AQ")]
+    // TradeCaptureReportRequestAck,
+    // /// Trade Capture Report Ack
+    // #[serde(rename = "AR")]
+    // TradeCaptureReportAck,
+    // /// Allocation Report
+    // #[serde(rename = "AS")]
+    // AllocationReport,
+    // /// Allocation Report Ack
+    // #[serde(rename = "AT")]
+    // AllocationReportAck,
+    // /// Confirmation Ack
+    // #[serde(rename = "AU")]
+    // ConfirmationAck,
+    // /// Settlement Instruction Request
+    // #[serde(rename = "AV")]
+    // SettlementInstructionRequest,
+    // /// Assignment Report
+    // #[serde(rename = "AW")]
+    // AssignmentReport,
+    // /// Collateral Request
+    // #[serde(rename = "AX")]
+    // CollateralRequest,
+    // /// Collateral Assignment
+    // #[serde(rename = "AY")]
+    // CollateralAssignment,
+    // /// Collateral Response
+    // #[serde(rename = "AZ")]
+    // CollateralResponse,
+    // /// Collateral Report
+    // #[serde(rename = "BA")]
+    // CollateralReport,
+    // /// Collateral Inquiry
+    // #[serde(rename = "BB")]
+    // CollateralInquiry,
+    // /// Network Counterparty System Status Request
+    // #[serde(rename = "BC")]
+    // NetworkCounterpartySystemStatusRequest,
+    // /// Network Counterparty System Status Response
+    // #[serde(rename = "BD")]
+    // NetworkCounterpartySystemStatusResponse,
+    // /// User Request
+    // #[serde(rename = "BE")]
+    // UserRequest,
+    // /// User Response
+    // #[serde(rename = "BF")]
+    // UserResponse,
+    // /// Collateral Inquiry Ack
+    // #[serde(rename = "BG")]
+    // CollateralInquiryAck,
+    // /// Confirmation Request
+    // #[serde(rename = "BH")]
+    // ConfirmationRequest,
+    // /// Trading Session List Request
+    // #[serde(rename = "BI")]
+    // TradingSessionListRequest,
+    // /// Trading Session List
+    // #[serde(rename = "BJ")]
+    // TradingSessionList,
+    // /// Security List Update Report
+    // #[serde(rename = "BK")]
+    // SecurityListUpdateReport,
+    // /// Adjusted Position Report
+    // #[serde(rename = "BL")]
+    // AdjustedPositionReport,
+    // /// Allocation Instruction Alert
+    // #[serde(rename = "BM")]
+    // AllocationInstructionAlert,
+    // /// Execution Acknowledgement
+    // #[serde(rename = "BN")]
+    // ExecutioNAcknowledgement,
+    // /// Contrary Intention Report
+    // #[serde(rename = "BO")]
+    // ContraryIntentionReport,
+    // /// Security Definition Update Report
+    // #[serde(rename = "BP")]
+    // SecurityDefinitionUpdateReport,
+    // /// Settlement Obligation Report
+    // #[serde(rename = "BQ")]
+    // SettlementObligationReport,
+    // /// Derivative Security List Update Report
+    // #[serde(rename = "BR")]
+    // DerivativeSecurityListUpdateReport,
+    // /// Trading Session List Update Report
+    // #[serde(rename = "BS")]
+    // TradingSessionListUpdateReport,
+    // /// Market Definition Request
+    // #[serde(rename = "BT")]
+    // MarketDefinitionRequest,
+    // /// Market Definition
+    // #[serde(rename = "BU")]
+    // MarketDefinition,
+    // /// Market Definition Update Report
+    // #[serde(rename = "BV")]
+    // MarketDefinitionUpdateReport,
+    // /// Application Message Request
+    // #[serde(rename = "BW")]
+    // ApplicationMessageRequest,
+    // /// Application Message Request Ack
+    // #[serde(rename = "BX")]
+    // ApplicationMessageRequestAck,
+    // /// Application Message Report
+    // #[serde(rename = "BY")]
+    // ApplicationMessageReport,
+    // /// Order Mass Action Report
+    // #[serde(rename = "BZ")]
+    // OrderMassActionReport,
+    // /// Order Mass Action Request
+    // #[serde(rename = "CA")]
+    // OrderMassActionRequest,
+    // /// User Notification
+    // #[serde(rename = "CB")]
+    // UserNotification,
+    // /// Stream Assignment Request
+    // #[serde(rename = "CC")]
+    // StreamAssignmentRequest,
+    // /// Stream Assignment Report
+    // #[serde(rename = "CD")]
+    // StreamAssignmentReport,
+    // /// Stream Assignment Report ACK
+    // #[serde(rename = "CE")]
+    // StreamAssignmentReportACK,
 }
 
 impl Serialize for Message {
