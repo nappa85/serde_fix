@@ -4,7 +4,7 @@ use serde::{Serialize, Deserialize};
 use crate::entities::{fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 3
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Reject {
     #[serde(flatten)]
     pub header: Header,
@@ -50,7 +50,14 @@ pub struct Reject {
 
 impl Reject {
     pub fn new() -> Self {
-        Self::default()
+        Reject {
+            header: Header {
+                begin_string: Some(FixVersion::FIXT11),
+                msg_type: Some(MsgType::Reject),
+                ..Default::default()
+            },
+            ..Default::default()
+        }
     }
 }
 
@@ -60,19 +67,6 @@ impl HasHeader for Reject {
     }
     fn get_header_mut(&mut self) -> &mut Header {
         &mut self.header
-    }
-}
-
-impl Default for Reject {
-    fn default() -> Self {
-        Reject {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::Reject),
-                ..Default::default()
-            },
-            ..Default::default()
-        }
     }
 }
 

@@ -4,7 +4,7 @@ use serde::{Serialize, Deserialize};
 use crate::entities::{fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 5
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Logout {
     #[serde(flatten)]
     pub header: Header,
@@ -28,7 +28,14 @@ pub struct Logout {
 
 impl Logout {
     pub fn new() -> Self {
-        Self::default()
+        Logout {
+            header: Header {
+                begin_string: Some(FixVersion::FIXT11),
+                msg_type: Some(MsgType::Logout),
+                ..Default::default()
+            },
+            ..Default::default()
+        }
     }
 }
 
@@ -38,18 +45,5 @@ impl HasHeader for Logout {
     }
     fn get_header_mut(&mut self) -> &mut Header {
         &mut self.header
-    }
-}
-
-impl Default for Logout {
-    fn default() -> Self {
-        Logout {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::Logout),
-                ..Default::default()
-            },
-            ..Default::default()
-        }
     }
 }

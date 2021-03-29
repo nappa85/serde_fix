@@ -4,7 +4,7 @@ use serde::{Serialize, Deserialize};
 use crate::entities::{fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 2
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct ResendRequest {
     #[serde(flatten)]
     pub header: Header,
@@ -22,7 +22,14 @@ pub struct ResendRequest {
 
 impl ResendRequest {
     pub fn new() -> Self {
-        Self::default()
+        ResendRequest {
+            header: Header {
+                begin_string: Some(FixVersion::FIXT11),
+                msg_type: Some(MsgType::ResendRequest),
+                ..Default::default()
+            },
+            ..Default::default()
+        }
     }
 }
 
@@ -32,18 +39,5 @@ impl HasHeader for ResendRequest {
     }
     fn get_header_mut(&mut self) -> &mut Header {
         &mut self.header
-    }
-}
-
-impl Default for ResendRequest {
-    fn default() -> Self {
-        ResendRequest {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::ResendRequest),
-                ..Default::default()
-            },
-            ..Default::default()
-        }
     }
 }

@@ -104,7 +104,14 @@ pub struct Logon {
 
 impl Logon {
     pub fn new() -> Self {
-        Self::default()
+        Logon {
+            header: Header {
+                begin_string: Some(FixVersion::FIXT11),
+                msg_type: Some(MsgType::Logon),
+                ..Default::default()
+            },
+            ..Default::default()
+        }
     }
 }
 
@@ -120,12 +127,28 @@ impl HasHeader for Logon {
 impl Default for Logon {
     fn default() -> Self {
         Logon {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::Logon),
-                ..Default::default()
-            },
-            ..Default::default()
+            header: Header::default(),
+            encrypt_method: EncryptMethod::None,
+            heart_bt_int: 0,
+            raw_data: None,
+            reset_seq_num_flag: None,
+            next_expected_msg_seq_num: None,
+            max_message_size: None,
+            ref_msg: None,
+            test_message_indicator: None,
+            username: None,
+            password: None,
+            new_password: None,
+            encrypted_password_method: None,
+            encrypted_password: None,
+            encrypted_new_password: None,
+            session_status: None,
+            default_appl_ver_id: ApplVerID::FIX50SP2,
+            default_appl_ext_id: None,
+            default_cstm_appl_ver_id: None,
+            text: None,
+            encoded_text: None,
+            trailer: Trailer::default(),
         }
     }
 }

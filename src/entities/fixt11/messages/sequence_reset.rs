@@ -4,7 +4,7 @@ use serde::{Serialize, Deserialize};
 use crate::entities::{fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 4
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct SequenceReset {
     #[serde(flatten)]
     pub header: Header,
@@ -22,7 +22,14 @@ pub struct SequenceReset {
 
 impl SequenceReset {
     pub fn new() -> Self {
-        Self::default()
+        SequenceReset {
+            header: Header {
+                begin_string: Some(FixVersion::FIXT11),
+                msg_type: Some(MsgType::SequenceReset),
+                ..Default::default()
+            },
+            ..Default::default()
+        }
     }
 }
 
@@ -32,18 +39,5 @@ impl HasHeader for SequenceReset {
     }
     fn get_header_mut(&mut self) -> &mut Header {
         &mut self.header
-    }
-}
-
-impl Default for SequenceReset {
-    fn default() -> Self {
-        SequenceReset {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::SequenceReset),
-                ..Default::default()
-            },
-            ..Default::default()
-        }
     }
 }
