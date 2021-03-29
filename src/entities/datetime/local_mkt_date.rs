@@ -3,7 +3,7 @@ use std::{borrow::Cow, convert::{AsRef, TryFrom}, ops::Deref};
 use chrono::{DateTime, Local, TimeZone};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
 
-const FORMAT: &'static str = "%Y%m%d";
+const FORMAT: &str = "%Y%m%d";
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct LocalMktDate(DateTime<Local>);

@@ -175,7 +175,7 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
     }
 }
 
-fn parse<'de>(input: &'de [u8]) -> impl Iterator<Item=(Cow<'de, str>, Cow<'de, str>)> {
+fn parse(input: &[u8]) -> impl Iterator<Item=(Cow<'_, str>, Cow<'_, str>)> {
     Parser {
         inner: input.split(|b| *b == 1)// b'\u{1}' = 1
     }

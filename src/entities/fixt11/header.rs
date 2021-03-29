@@ -630,8 +630,7 @@ impl<'de> Deserialize<'de> for Hops {
 
 impl Serialize for Hops {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let mut temp = Vec::new();
-        temp.push(self.len.to_string());
+        let mut temp = vec![self.len.to_string()];
         for hop in &self.inner {
             if let Some(s) = &hop.hop_comp_id {
                 temp.push(format!("628={}", s));

@@ -1,6 +1,7 @@
 //! `FiX` meets Serde
 
 #![warn(unused_extern_crates)]
+#![allow(clippy::upper_case_acronyms)]
 
 pub mod de;
 pub mod ser;

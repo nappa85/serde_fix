@@ -3,7 +3,7 @@ use std::{borrow::Cow, convert::{AsRef, TryFrom}, ops::Deref};
 use chrono::{DateTime, Utc, TimeZone};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
 
-const FORMAT: &'static str = "%Y%m%d-%T%.3f";
+const FORMAT: &str = "%Y%m%d-%T%.3f";
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct UTCTimestamp(DateTime<Utc>);

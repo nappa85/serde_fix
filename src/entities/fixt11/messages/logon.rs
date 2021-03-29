@@ -413,8 +413,7 @@ impl<'de> Deserialize<'de> for RefMsgs {
 
 impl Serialize for RefMsgs {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let mut temp = Vec::new();
-        temp.push(self.len.to_string());
+        let mut temp = vec![self.len.to_string()];
         for msg in &self.inner {
             if let Some(s) = &msg.ref_msg_type {
                 temp.push(format!("372={}", s));

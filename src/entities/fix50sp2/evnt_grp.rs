@@ -146,8 +146,7 @@ impl<'de> Deserialize<'de> for EvntGrps {
 
 impl Serialize for EvntGrps {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let mut temp = Vec::new();
-        temp.push(self.len.to_string());
+        let mut temp = vec![self.len.to_string()];
         for hop in &self.inner {
             if let Some(s) = &hop.event_type {
                 temp.push(format!("865={}", crate::to_string(s).map_err(serde::ser::Error::custom)?));

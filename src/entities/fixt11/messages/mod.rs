@@ -62,22 +62,22 @@ pub enum Message {
     // FIX50SP2(crate::entities::fix50sp2::messages::Message),
     /// Heartbeat
     #[serde(rename = "0")]
-    Heartbeat(Heartbeat),
+    Heartbeat(Box<Heartbeat>),
     /// Test Request
     #[serde(rename = "1")]
-    TestRequest(TestRequest),
+    TestRequest(Box<TestRequest>),
     /// Resend Request
     #[serde(rename = "2")]
-    ResendRequest(ResendRequest),
+    ResendRequest(Box<ResendRequest>),
     /// Reject
     #[serde(rename = "3")]
-    Reject(Reject),
+    Reject(Box<Reject>),
     /// Sequence Reset
     #[serde(rename = "4")]
-    SequenceReset(SequenceReset),
+    SequenceReset(Box<SequenceReset>),
     /// Logout
     #[serde(rename = "5")]
-    Logout(Logout),
+    Logout(Box<Logout>),
     // /// Indication of Interest
     // #[serde(rename = "6")]
     // IndicationOfInterest,
@@ -92,7 +92,7 @@ pub enum Message {
     // OrderCancelReject,
     /// Logon
     #[serde(rename = "A")]
-    Logon(Logon),
+    Logon(Box<Logon>),
     // /// News
     // #[serde(rename = "B")]
     // News,

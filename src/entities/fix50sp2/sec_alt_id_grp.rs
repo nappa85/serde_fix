@@ -2,6 +2,8 @@ use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
+use super::instrument::SecurityIDSource;
+
 #[derive(Clone, Debug, Default)]
 pub struct SecAltIDGrp {
     // #[serde(rename = "454")]
@@ -49,8 +51,7 @@ impl<'de> Deserialize<'de> for SecAltIDGrp {
 
 impl Serialize for SecAltIDGrp {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let mut temp = Vec::new();
-        temp.push(self.len.to_string());
+        let mut temp = vec![self.len.to_string()];
         for hop in &self.inner {
             if let Some(s) = &hop.security_alt_id {
                 temp.push(format!("455={}", s));
@@ -68,105 +69,5 @@ pub struct SecAltID {
     // #[serde(rename = "455")]
     pub security_alt_id: Option<String>,
     // #[serde(rename = "456")]
-    pub security_alt_id_source: Option<SecurityAltIDSource>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug)]
-pub enum SecurityAltIDSource {
-    /// CUSIP
-    #[serde(rename = "1")]
-    CUSIP,
-    /// SEDOL
-    #[serde(rename = "2")]
-    SEDOL,
-    /// QUIK
-    #[serde(rename = "3")]
-    QUIK,
-    /// ISIN
-    #[serde(rename = "4")]
-    ISIN,
-    /// RIC
-    #[serde(rename = "5")]
-    RIC,
-    /// ISO Currency Code
-    #[serde(rename = "6")]
-    ISOCurrencyCode,
-    /// ISO Country Code
-    #[serde(rename = "7")]
-    ISOCountryCode,
-    /// Exchange Symbol
-    #[serde(rename = "8")]
-    ExchangeSymbol,
-    /// Consolidated Tape Association (CTA) Symbol (SIAC CTS/CQS line format)
-    #[serde(rename = "9")]
-    CTASymbol,
-    /// Bloomberg Symbol
-    #[serde(rename = "A")]
-    BloombergSymbol,
-    /// Wertpapier
-    #[serde(rename = "B")]
-    Wertpapier,
-    /// Dutch
-    #[serde(rename = "C")]
-    Dutch,
-    /// Valoren
-    #[serde(rename = "D")]
-    Valoren,
-    /// Sicovam
-    #[serde(rename = "E")]
-    Sicovam,
-    /// Belgian
-    #[serde(rename = "F")]
-    Belgian,
-    /// "Common" (Clearstream and Euroclear)
-    #[serde(rename = "G")]
-    Common,
-    /// Clearing House / Clearing Organization
-    #[serde(rename = "H")]
-    ClearingHouse,
-    /// ISDA/FpML Product Specification
-    #[serde(rename = "I")]
-    ISDAFpMLProductSpecification,
-    /// Option Price Reporting Authority
-    #[serde(rename = "J")]
-    OptionPriceReportingAuthority,
-    /// ISDA/FpML Product URL (URL in SecurityID)
-    #[serde(rename = "K")]
-    ISDAFpMLProductURL,
-    /// Letter of Credit
-    #[serde(rename = "L")]
-    LetterOfCredit,
-    /// Marketplace-assigned Identifier
-    #[serde(rename = "M")]
-    MarketplaceAssignedIdentifier,
-    /// Markit RED entity CLIP
-    #[serde(rename = "N")]
-    MarkitREDEntityCLIP,
-    /// Markit RED pair CLIP
-    #[serde(rename = "P")]
-    MarkitREDPairCLIP,
-    /// CFTC commodity code
-    #[serde(rename = "Q")]
-    CFTCCommodityCode,
-    /// ISDA Commodity Reference Price
-    #[serde(rename = "R")]
-    ISDACommodityReferencePrice,
-    /// Financial Instrument Global Identifier
-    #[serde(rename = "S")]
-    FinancialInstrumentGlobalIdentifier,
-    /// Legal Entity Identifier
-    #[serde(rename = "T")]
-    LegalEntityIdentifier,
-    /// Synthetic
-    #[serde(rename = "U")]
-    Synthetic,
-    /// Fidessa Instrument Mnemonic (FIM)
-    #[serde(rename = "V")]
-    FidessaInstrumentMnemonic,
-    /// Index name
-    #[serde(rename = "W")]
-    IndexName,
-    /// Uniform Symbol (UMTF Symbol)
-    #[serde(rename = "X")]
-    UniformSymbol,
+    pub security_alt_id_source: Option<SecurityIDSource>,
 }

@@ -1,13 +1,12 @@
 
+#[derive(Default)]
 pub struct Encoder {
     inner: Vec<String>,
 }
 
 impl Encoder {
     pub fn new() -> Self {
-        Encoder {
-            inner: Vec::new(),
-        }
+        Encoder::default()
     }
 
     pub fn append_pair(&mut self, name: &str, value: &str) -> &mut Self {
