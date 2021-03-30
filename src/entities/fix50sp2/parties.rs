@@ -78,7 +78,8 @@ impl<'de> Deserialize<'de> for Parties {
                         if v.is_empty() || v[v.len() - 1].party_sub_id.is_some() || v[v.len() - 1].party_sub_id_type.is_some() {
                             v.push(PtysSubGrp::default());
                         }
-                        v[v.len() - 1].party_sub_id = Some(value.to_owned());
+                        let i = v.len() - 1;
+                        v[i].party_sub_id = Some(value.to_owned());
                     }
                 },
                 "803" => {
@@ -89,7 +90,8 @@ impl<'de> Deserialize<'de> for Parties {
                         if v.is_empty() || v[v.len() - 1].party_sub_id_type.is_some() {
                             v.push(PtysSubGrp::default());
                         }
-                        v[v.len() - 1].party_sub_id_type = crate::from_str(value).map_err(serde::de::Error::custom)?;
+                        let i = v.len() - 1;
+                        v[i].party_sub_id_type = crate::from_str(value).map_err(serde::de::Error::custom)?;
                     }
                 },
                 // 453
