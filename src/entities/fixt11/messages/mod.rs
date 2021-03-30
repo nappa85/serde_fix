@@ -17,45 +17,7 @@ pub mod test_request;
 pub use test_request::TestRequest;
 
 use super::header::{Header, HasHeader};
-/*
-use super::{header::{Header, MsgType}, Trailer};
-use crate::entities::ApplVerID;
 
-#[derive(Serialize, Debug)]
-pub struct Message {
-    #[serde(flatten)]
-    pub header: Header,
-    #[serde(flatten)]
-    pub body: Body,
-    #[serde(flatten)]
-    pub trailer: Trailer,
-}
-
-impl<'de> Deserialize<'de> for Message {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let s = <&str as Deserialize>::deserialize(deserializer)?;
-        println!("{}", s);
-        Ok(Message {
-            header: crate::from_str(s).map_err(serde::de::Error::custom)?,
-            body: crate::from_str(s).map_err(serde::de::Error::custom)?,
-            trailer: crate::from_str(s).map_err(serde::de::Error::custom)?,
-        })
-    }
-}
-
-impl Message {
-    /// approach due to https://github.com/serde-rs/serde/issues/1183
-    pub fn from_str(s: &str) -> Result<Message, serde::de::value::Error> {
-        let header: Header = crate::from_str(s)?;
-        let body = Body::from_str(&header, s)?;
-        Ok(Message {
-            header,
-            body,
-            trailer: crate::from_str(s)?,
-        })
-    }
-}
-*/
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "35")]
 pub enum Message {
@@ -99,9 +61,9 @@ pub enum Message {
     // /// Email
     // #[serde(rename = "C")]
     // Email,
-    // /// New Order - Single
-    // #[serde(rename = "D")]
-    // NewOrderSingle,
+    /// New Order - Single
+    #[serde(rename = "D")]
+    NewOrderSingle(NewOrderSingle),
     // /// New Order - List
     // #[serde(rename = "E")]
     // NewOrderList,
@@ -420,6 +382,7 @@ impl Serialize for Message {
             Message::ResendRequest(m) => m.serialize(serializer),
             Message::SequenceReset(m) => m.serialize(serializer),
             Message::TestRequest(m) => m.serialize(serializer),
+            Message::NewOrderSingle(m) => m.serialize(serializer),
         }
     }
 }
@@ -434,6 +397,7 @@ impl HasHeader for Message {
             Message::ResendRequest(m) => m.get_header(),
             Message::SequenceReset(m) => m.get_header(),
             Message::TestRequest(m) => m.get_header(),
+            Message::NewOrderSingle(m) => m.get_header(),
         }
     }
     fn get_header_mut(&mut self) -> &mut Header {
@@ -445,31 +409,40 @@ impl HasHeader for Message {
             Message::ResendRequest(m) => m.get_header_mut(),
             Message::SequenceReset(m) => m.get_header_mut(),
             Message::TestRequest(m) => m.get_header_mut(),
+            Message::NewOrderSingle(m) => m.get_header_mut(),
         }
     }
 }
-/*
-impl Body {
-    /// approach due to https://github.com/serde-rs/serde/issues/1183
-    pub fn from_str(h: &Header, s: &str) -> Result<Body, serde::de::value::Error> {
-        Ok(match h.msg_type {
-            MsgType::Heartbeat => Body::Heartbeat(crate::from_str(s)?),
-            MsgType::Logon => Body::Logon(crate::from_str(s)?),
-            MsgType::Logout => Body::Logout(crate::from_str(s)?),
-            MsgType::Reject => Body::Reject(crate::from_str(s)?),
-            MsgType::ResendRequest => Body::ResendRequest(crate::from_str(s)?),
-            MsgType::SequenceReset => Body::SequenceReset(crate::from_str(s)?),
-            MsgType::TestRequest => Body::TestRequest(crate::from_str(s)?),
-            _ => {
-                match h.appl_ver_id {
-                    Some(ApplVerID::FIX50SP2) => Body::FIX50SP2(crate::entities::fix50sp2::messages::Body::from_str(&h.msg_type, s)?),
-                    _ => unimplemented!(),
-                }
-            },
-        })
+
+#[derive(Deserialize, Clone, Debug, PartialEq)]
+#[serde(tag = "1128")]
+pub enum NewOrderSingle {
+    /// FIX50SP2
+    #[serde(rename = "9")]
+    FIX50SP2(crate::entities::fix50sp2::messages::NewOrderSingle),
+}
+
+impl Serialize for NewOrderSingle {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        match self {
+            NewOrderSingle::FIX50SP2(m) => m.serialize(serializer),
+        }
     }
 }
-*/
+
+impl HasHeader for NewOrderSingle {
+    fn get_header(&self) -> &Header {
+        match self {
+            NewOrderSingle::FIX50SP2(m) => m.get_header(),
+        }
+    }
+    fn get_header_mut(&mut self) -> &mut Header {
+        match self {
+            NewOrderSingle::FIX50SP2(m) => m.get_header_mut(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::Message;

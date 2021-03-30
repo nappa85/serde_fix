@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
+use crate::entities::{EncodedText, fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = 5
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,7 +21,7 @@ pub struct Logout {
     /// Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. 
     #[serde(alias = "355")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub encoded_text: Option<super::logon::EncodedText>,
+    pub encoded_text: Option<EncodedText>,
     #[serde(flatten)]
     pub trailer: Trailer,
 }

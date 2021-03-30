@@ -4,7 +4,7 @@ use serde::{Serialize, Deserialize};
 
 use super::instrument::SecurityIDSource;
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct SecAltIDGrp {
     // #[serde(rename = "454")]
     len: usize,
@@ -64,7 +64,7 @@ impl Serialize for SecAltIDGrp {
     }
 }
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct SecAltID {
     // #[serde(rename = "455")]
     pub security_alt_id: Option<String>,

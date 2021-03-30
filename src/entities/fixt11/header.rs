@@ -1,4 +1,4 @@
-use std::{borrow::Cow, convert::TryFrom, mem::swap};
+use std::{borrow::Cow, convert::TryFrom};
 
 use serde::{Serialize, Deserialize};
 
@@ -140,12 +140,10 @@ fn serialize_msgtype<S: serde::Serializer>(value: &Option<MsgType>, serializer: 
 }
 
 impl Header {
-    pub fn reply(&mut self, msg_type: MsgType) {
-        self.begin_string = Some(FixVersion::FIXT11);
-        self.msg_type = Some(msg_type);
-        self.body_length = 0;
-        self.sending_time = UTCTimestamp::default();
-        swap(&mut self.sender_comp_id, &mut self.target_comp_id);
+    pub fn reply(&mut self, headers: &Header) {
+        self.sender_comp_id = headers.target_comp_id.clone();
+        self.target_comp_id = headers.sender_comp_id.clone();
+        self.msg_seq_num = headers.msg_seq_num;
     }
 }
 

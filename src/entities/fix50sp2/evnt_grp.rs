@@ -6,7 +6,7 @@ use crate::entities::{LocalMktDate, MonthYear, UTCTimestamp, data_field};
 
 use super::time_unit::TimeUnit;
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct EvntGrps {
     // #[serde(rename = "864")]
     len: usize,
@@ -180,7 +180,7 @@ impl Serialize for EvntGrps {
     }
 }
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct EvntGrp {
     /// Required if NoEvents(864) > 0.
     // #[serde(rename = "865")]
@@ -209,7 +209,7 @@ pub struct EvntGrp {
     pub encoded_event_text: Option<EncodedEventText>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EventType {
     /// Put
     #[serde(rename = "1")]
@@ -297,7 +297,7 @@ pub enum EventType {
     TradeContinuationEffectiveDate,
 }
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct EncodedEventText {
     // #[serde(rename = "1578")]
     len: usize,
