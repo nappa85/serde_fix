@@ -130,7 +130,7 @@ impl Serialize for Parties {
             }
             if let Some(v) = &party.party_sub_ids {
                 if !v.is_empty() {
-                    temp.push(format!("447={}", v.len()));
+                    temp.push(format!("802={}", v.len()));
                     for p in v {
                         if let Some(s) = &p.party_sub_id {
                             temp.push(format!("523={}", s));

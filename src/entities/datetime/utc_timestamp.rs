@@ -1,4 +1,4 @@
-use std::{borrow::Cow, convert::{AsRef, TryFrom}, ops::Deref};
+use std::{borrow::Cow, convert::{AsRef, TryFrom}};
 
 use chrono::{DateTime, Utc, TimeZone};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
@@ -42,6 +42,6 @@ impl Serialize for UTCTimestamp {
 
 impl<'de> Deserialize<'de> for UTCTimestamp {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<UTCTimestamp, D::Error> {
-        UTCTimestamp::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.deref()).map_err(serde::de::Error::custom)
+        UTCTimestamp::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.as_ref()).map_err(serde::de::Error::custom)
     }
 }

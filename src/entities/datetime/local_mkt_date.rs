@@ -1,4 +1,4 @@
-use std::{borrow::Cow, convert::{AsRef, TryFrom}, ops::Deref};
+use std::{borrow::Cow, convert::{AsRef, TryFrom}};
 
 use chrono::{DateTime, Local, TimeZone};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
@@ -42,6 +42,6 @@ impl Serialize for LocalMktDate {
 
 impl<'de> Deserialize<'de> for LocalMktDate {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<LocalMktDate, D::Error> {
-        LocalMktDate::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.deref()).map_err(serde::de::Error::custom)
+        LocalMktDate::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.as_ref()).map_err(serde::de::Error::custom)
     }
 }

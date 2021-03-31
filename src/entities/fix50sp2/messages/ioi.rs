@@ -1,13 +1,9 @@
 
 use serde::{Serialize, Deserialize};
 
-// use import_fields::import_fields;
-
-// use crate::entities::{ApplVerID, Boolean, FixDateTime, fixt11::{header::*, trailer::Signature}};
 use crate::entities::fix50sp2::{application_sequence_control::ApplicationSequenceControl, instrument::Instrument};
 
 /// MsgType = 6
-// #[import_fields("src/entities/fixt11/header.rs::Header", "src/entities/fixt11/trailer.rs::Trailer", "src/entities/fix50sp2/application_sequence_control.rs::ApplicationSequenceControl")]
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct IoI {
     #[serde(flatten)]

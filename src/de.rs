@@ -72,16 +72,18 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Parser<'de, T> {
 
         value
     }
-    fn extract_fields(&mut self, value: Cow<'de, str>, next_fields: &[&[u8]]) -> Cow<'de, str> {
+    fn extract_fields(&mut self, value: Cow<'de, str>, next_fields: &[&str]) -> Cow<'de, str> {
         let mut rollback = false;
         let mut backup;
         let mut owned_value = value.into_owned();
         loop {
             backup = self.inner.clone();
-            if let Some(next) = self.inner.next() {
-                if Self::starts_with(next, next_fields).is_some() {
+            if let Some((next_key, next_value)) = self.next() {
+                if next_fields.contains(&next_key.as_ref()) {
                     owned_value.push('\u{1}');
-                    owned_value += &String::from_utf8_lossy(next);
+                    owned_value += next_key.as_ref();
+                    owned_value.push('=');
+                    owned_value += next_value.as_ref();
                 }
                 else {
                     rollback = true;
@@ -139,10 +141,106 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
                         value = self.extract_length(value, len, &[b"213="]);
                     }
                 },
+                "348" => {// EncodedIssuerLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedIssuer (349)
+                        value = self.extract_length(value, len, &[b"349="]);
+                    }
+                },
+                "350" => {// EncodedSecurityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedSecurityDesc (351)
+                        value = self.extract_length(value, len, &[b"351="]);
+                    }
+                },
+                "352" => {// EncodedListExecInstLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedListExecInst (353)
+                        value = self.extract_length(value, len, &[b"353="]);
+                    }
+                },
                 "354" => {// EncodedTextLen
                     if let Ok(len) = value.parse::<usize>() {
                         // next field should be EncodedText (355)
                         value = self.extract_length(value, len, &[b"355="]);
+                    }
+                },
+                "356" => {// EncodedSubjectLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedSubject (357)
+                        value = self.extract_length(value, len, &[b"357="]);
+                    }
+                },
+                "358" => {// EncodedHeadlineLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedHeadline (359)
+                        value = self.extract_length(value, len, &[b"359="]);
+                    }
+                },
+                "360" => {// EncodedAllocTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedAllocText (361)
+                        value = self.extract_length(value, len, &[b"361="]);
+                    }
+                },
+                "362" => {// EncodedUnderlyingIssuerLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingIssuer (363)
+                        value = self.extract_length(value, len, &[b"363="]);
+                    }
+                },
+                "364" => {// EncodedUnderlyingSecurityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingSecurityDesc (365)
+                        value = self.extract_length(value, len, &[b"365="]);
+                    }
+                },
+                "445" => {// EncodedListStatusTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedListStatusText (446)
+                        value = self.extract_length(value, len, &[b"446="]);
+                    }
+                },
+                "618" => {// EncodedLegIssuerLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegIssuer (619)
+                        value = self.extract_length(value, len, &[b"619="]);
+                    }
+                },
+                "621" => {// EncodedLegSecurityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegSecurityDesc (622)
+                        value = self.extract_length(value, len, &[b"622="]);
+                    }
+                },
+                "1184" => {// SecurityXMLLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be SecurityXML (1185)
+                        value = self.extract_length(value, len, &[b"1185="]);
+                    }
+                },
+                "1277" => {// DerivativeEncodedIssuerLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be DerivativeEncodedIssuer (1278)
+                        value = self.extract_length(value, len, &[b"1278="]);
+                    }
+                },
+                "1280" => {// DerivativeEncodedSecurityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be DerivativeEncodedSecurityDesc (1281)
+                        value = self.extract_length(value, len, &[b"1281="]);
+                    }
+                },
+                "1282" => {// DerivativeSecurityXMLLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be DerivativeSecurityXML (1283)
+                        value = self.extract_length(value, len, &[b"1283="]);
+                    }
+                },
+                "1397" => {// EncodedMktSegmDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedMktSegmDesc (1398)
+                        value = self.extract_length(value, len, &[b"1398="]);
                     }
                 },
                 "1401" => {// EncryptedPasswordLen
@@ -157,13 +255,385 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
                         value = self.extract_length(value, len, &[b"1404="]);
                     }
                 },
+                "1468" => {// EncodedSecurityListDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedSecurityListDesc (1469)
+                        value = self.extract_length(value, len, &[b"1469="]);
+                    }
+                },
+                "1525" => {// EncodedDocumentationTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedDocumentationText (1527)
+                        value = self.extract_length(value, len, &[b"1527="]);
+                    }
+                },
+                "1578" => {// EncodedEventTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedEventText (1579)
+                        value = self.extract_length(value, len, &[b"1579="]);
+                    }
+                },
+                "1620" => {// InstrumentScopeEncodedSecurityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be InstrumentScopeEncodedSecurityDesc (1621)
+                        value = self.extract_length(value, len, &[b"1621="]);
+                    }
+                },
+                "1664" => {// EncodedRejectTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedRejectText (1665)
+                        value = self.extract_length(value, len, &[b"1665="]);
+                    }
+                },
+                "1678" => {// EncodedOptionExpirationDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedOptionExpirationDesc (1697)
+                        value = self.extract_length(value, len, &[b"1697="]);
+                    }
+                },
+                "1733" => {// EncodedFirmAllocTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedFirmAllocText (1734)
+                        value = self.extract_length(value, len, &[b"1734="]);
+                    }
+                },
+                "1871" => {// LegSecurityXMLLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be LegSecurityXML (1872)
+                        value = self.extract_length(value, len, &[b"1872="]);
+                    }
+                },
+                "1874" => {// UnderlyingSecurityXMLLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be UnderlyingSecurityXML (1875)
+                        value = self.extract_length(value, len, &[b"1875="]);
+                    }
+                },
+                "2072" => {// EncodedUnderlyingEventTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingEventText (2073)
+                        value = self.extract_length(value, len, &[b"2073="]);
+                    }
+                },
+                "2074" => {// EncodedLegEventTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegEventText (2075)
+                        value = self.extract_length(value, len, &[b"2075="]);
+                    }
+                },
+                "2111" => {// EncodedAttachmentLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedAttachment (2112)
+                        value = self.extract_length(value, len, &[b"2112="]);
+                    }
+                },
+                "2179" => {// EncodedLegOptionExpirationDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegOptionExpirationDesc (2180)
+                        value = self.extract_length(value, len, &[b"2180="]);
+                    }
+                },
+                "2287" => {// EncodedUnderlyingOptionExpirationDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingOptionExpirationDesc (2288)
+                        value = self.extract_length(value, len, &[b"2288="]);
+                    }
+                },
+                "2351" => {// EncodedComplianceTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedComplianceText (2352)
+                        value = self.extract_length(value, len, &[b"2352="]);
+                    }
+                },
+                "2372" => {// EncodedTradeContinuationTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedTradeContinuationText (2371)
+                        value = self.extract_length(value, len, &[b"2371="]);
+                    }
+                },
+                "2481" => {// EncodedMDStatisticDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedMDStatisticDesc (2482)
+                        value = self.extract_length(value, len, &[b"2482="]);
+                    }
+                },
+                "2494" => {// EncodedLegDocumentationTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegDocumentationText (2493)
+                        value = self.extract_length(value, len, &[b"2493="]);
+                    }
+                },
+                "2522" => {// EncodedWarningTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedWarningText (2521)
+                        value = self.extract_length(value, len, &[b"2521="]);
+                    }
+                },
+                "2637" => {// EncodedMiscFeeSubTypeDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedMiscFeeSubTypeDesc (2638)
+                        value = self.extract_length(value, len, &[b"2638="]);
+                    }
+                },
+                "2651" => {// EncodedCommissionDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedCommissionDesc (2652)
+                        value = self.extract_length(value, len, &[b"2652="]);
+                    }
+                },
+                "2665" => {// EncodedAllocCommissionDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedAllocCommissionDesc (2666)
+                        value = self.extract_length(value, len, &[b"2666="]);
+                    }
+                },
+                "2715" => {// EncodedFinancialInstrumentFullNameLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedFinancialInstrumentFullName (2716)
+                        value = self.extract_length(value, len, &[b"2716="]);
+                    }
+                },
+                "2718" => {// EncodedLegFinancialInstrumentFullNameLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegFinancialInstrumentFullName (2719)
+                        value = self.extract_length(value, len, &[b"2719="]);
+                    }
+                },
+                "2721" => {// EncodedUnderlyingFinancialInstrumentFullNameLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingFinancialInstrumentFullName (2722)
+                        value = self.extract_length(value, len, &[b"2722="]);
+                    }
+                },
+                "2797" => {// EncodedMatchExceptionTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedMatchExceptionText (2798)
+                        value = self.extract_length(value, len, &[b"2798="]);
+                    }
+                },
+                "2802" => {// EncodedReplaceTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedReplaceText (2801)
+                        value = self.extract_length(value, len, &[b"2801="]);
+                    }
+                },
+                "2809" => {// EncodedCancelTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedCancelText (2808)
+                        value = self.extract_length(value, len, &[b"2808="]);
+                    }
+                },
+                "2815" => {// EncodedPostTradePaymentDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedPostTradePaymentDesc (2814)
+                        value = self.extract_length(value, len, &[b"2814="]);
+                    }
+                },
+                "40004" => {// EncodedAdditionalTermBondDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedAdditionalTermBondDesc (40005)
+                        value = self.extract_length(value, len, &[b"40005="]);
+                    }
+                },
+                "40008" => {// EncodedAdditionalTermBondIssuerLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedAdditionalTermBondIssuer (40009)
+                        value = self.extract_length(value, len, &[b"40009="]);
+                    }
+                },
+                "40978" => {// EncodedLegStreamTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegStreamText (40979)
+                        value = self.extract_length(value, len, &[b"40979="]);
+                    }
+                },
+                "40980" => {// EncodedLegProvisionTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegProvisionText (40981)
+                        value = self.extract_length(value, len, &[b"40981="]);
+                    }
+                },
+                "40982" => {// EncodedStreamTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedStreamText (40983)
+                        value = self.extract_length(value, len, &[b"40983="]);
+                    }
+                },
+                "40984" => {// EncodedPaymentTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedPaymentText (40985)
+                        value = self.extract_length(value, len, &[b"40985="]);
+                    }
+                },
+                "40986" => {// EncodedProvisionTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedProvisionText (40987)
+                        value = self.extract_length(value, len, &[b"40987="]);
+                    }
+                },
+                "40988" => {// EncodedUnderlyingStreamTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingStreamText (40989)
+                        value = self.extract_length(value, len, &[b"40989="]);
+                    }
+                },
+                "41083" => {// EncodedDeliveryStreamCycleDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedDeliveryStreamCycleDesc (41084)
+                        value = self.extract_length(value, len, &[b"41084="]);
+                    }
+                },
+                "41101" => {// EncodedMarketDisruptionFallbackUnderlierSecurityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedMarketDisruptionFallbackUnderlierSecurityDesc (41102)
+                        value = self.extract_length(value, len, &[b"41102="]);
+                    }
+                },
+                "41107" => {// EncodedExerciseDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedExerciseDesc (41108)
+                        value = self.extract_length(value, len, &[b"41108="]);
+                    }
+                },
+                "41256" => {// EncodedStreamCommodityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedStreamCommodityDesc (41257)
+                        value = self.extract_length(value, len, &[b"41257="]);
+                    }
+                },
+                "41320" => {// EncodedLegAdditionalTermBondDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegAdditionalTermBondDesc (41321)
+                        value = self.extract_length(value, len, &[b"41321="]);
+                    }
+                },
+                "41324" => {// EncodedLegAdditionalTermBondIssuerLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegAdditionalTermBondIssuer (41325)
+                        value = self.extract_length(value, len, &[b"41325="]);
+                    }
+                },
+                "41458" => {// EncodedLegDeliveryStreamCycleDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegDeliveryStreamCycleDesc (41459)
+                        value = self.extract_length(value, len, &[b"41459="]);
+                    }
+                },
+                "41476" => {// EncodedLegMarketDisruptionFallbackUnderlierSecurityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegMarketDisruptionFallbackUnderlierSecurityDesc (41477)
+                        value = self.extract_length(value, len, &[b"41477="]);
+                    }
+                },
+                "41482" => {// EncodedLegExerciseDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegExerciseDesc (41483)
+                        value = self.extract_length(value, len, &[b"41483="]);
+                    }
+                },
+                "41653" => {// EncodedLegStreamCommodityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedLegStreamCommodityDesc (41654)
+                        value = self.extract_length(value, len, &[b"41654="]);
+                    }
+                },
+                "41710" => {// EncodedUnderlyingAdditionalTermBondDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingAdditionalTermBondDesc (41711)
+                        value = self.extract_length(value, len, &[b"41711="]);
+                    }
+                },
+                "41806" => {// EncodedUnderlyingDeliveryStreamCycleDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingDeliveryStreamCycleDesc (41807)
+                        value = self.extract_length(value, len, &[b"41807="]);
+                    }
+                },
+                "41811" => {// EncodedUnderlyingExerciseDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingExerciseDesc (41812)
+                        value = self.extract_length(value, len, &[b"41812="]);
+                    }
+                },
+                "41873" => {// EncodedUnderlyingMarketDisruptionFallbackUnderlierSecurityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingMarketDisruptionFallbackUnderlierSecurityDesc (41874)
+                        value = self.extract_length(value, len, &[b"41874="]);
+                    }
+                },
+                "41969" => {// EncodedUnderlyingStreamCommodityDescLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingStreamCommodityDesc (41970)
+                        value = self.extract_length(value, len, &[b"41970="]);
+                    }
+                },
+                "42025" => {// EncodedUnderlyingAdditionalTermBondIssuerLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingAdditionalTermBondIssuer (42026)
+                        value = self.extract_length(value, len, &[b"42026="]);
+                    }
+                },
+                "42171" => {// EncodedUnderlyingProvisionTextLen
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be EncodedUnderlyingProvisionText (42172)
+                        value = self.extract_length(value, len, &[b"42172="]);
+                    }
+                },
+                "42451" => {// LegPaymentStreamFormulaImageLength
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be LegPaymentStreamFormulaImage (42452)
+                        value = self.extract_length(value, len, &[b"42452="]);
+                    }
+                },
+                "42652" => {// PaymentStreamFormulaImageLength
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be PaymentStreamFormulaImage (42653)
+                        value = self.extract_length(value, len, &[b"42653="]);
+                    }
+                },
+                "42947" => {// UnderlyingPaymentStreamFormulaImageLength
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be UnderlyingPaymentStreamFormulaImage (42948)
+                        value = self.extract_length(value, len, &[b"42948="]);
+                    }
+                },
+                "43109" => {// PaymentStreamFormulaLength
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be PaymentStreamFormula (42684)
+                        value = self.extract_length(value, len, &[b"42684="]);
+                    }
+                },
+                "43110" => {// LegPaymentStreamFormulaLength
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be LegPaymentStreamFormula (42486)
+                        value = self.extract_length(value, len, &[b"42486="]);
+                    }
+                },
+                "43111" => {// UnderlyingPaymentStreamFormulaLength
+                    if let Ok(len) = value.parse::<usize>() {
+                        // next field should be UnderlyingPaymentStreamFormula (42982)
+                        value = self.extract_length(value, len, &[b"42982="]);
+                    }
+                },
                 "384" => {// NoMsgTypes
                     // next fields can be RefMsgType (372), MsgDirection (385), RefApplVerID (1130), RefApplExtID (1406), RefCstmApplVerID (1131) and DefaultVerIndicator (1410)
-                    value = self.extract_fields(value, &[b"372=", b"385=", b"1130=", b"1406=", b"1131=", b"1410="]);
+                    value = self.extract_fields(value, &["372", "385", "1130", "1406", "1131", "1410"]);
+                },
+                "453" => {// NoPartyIDs
+                    // next fields can be PartyID (448), PartyIDSource (447), PartyRole (452), PartyRoleQualifier (2376), NoPartySubIDs (802), PartySubID (523) and PartySubIDType (803)
+                    value = self.extract_fields(value, &["448", "447", "452", "2376", "802", "523", "803"]);
+                },
+                "454" => {// NoSecurityAltID
+                    // next fields can be SecurityAltID (455) and SecurityAltIDSource (456)
+                    value = self.extract_fields(value, &["455", "456"]);
                 },
                 "627" => {// NoHops
                     // next fields can be HopCompID (628), HopSendingTime (629) and HopRefID (630)
-                    value = self.extract_fields(value, &[b"628=", b"629=", b"630="]);
+                    value = self.extract_fields(value, &["628", "629", "630"]);
+                },
+                "864" => {// NoEvents
+                    // next fields can be EventType (865), EventDate (866), EventTime (630), EventPx (867), EventText (868), EventTimeUnit (1827), EventTimePeriod (1826), EventMonthYear (2340), EncodedEventTextLen (1578) and EncodedEventText (1579)
+                    value = self.extract_fields(value, &["865", "866", "1145", "867", "868", "1827", "1826", "2340", "1578", "1579"]);
                 },
                 _=> {},
             }
