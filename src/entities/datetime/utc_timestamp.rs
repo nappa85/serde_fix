@@ -1,4 +1,4 @@
-use std::{borrow::Cow, convert::{AsRef, TryFrom}};
+use std::{borrow::Cow, convert::TryFrom};
 
 use chrono::{DateTime, Utc, TimeZone};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
@@ -17,6 +17,12 @@ impl Default for UTCTimestamp {
 impl AsRef<DateTime<Utc>> for UTCTimestamp {
     fn as_ref(&self) -> &DateTime<Utc> {
         &self.0
+    }
+}
+
+impl AsMut<DateTime<Utc>> for UTCTimestamp {
+    fn as_mut(&mut self) -> &mut DateTime<Utc> {
+        &mut self.0
     }
 }
 

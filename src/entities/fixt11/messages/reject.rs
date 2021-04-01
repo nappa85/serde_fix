@@ -43,7 +43,7 @@ pub struct Reject {
     /// Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field. 
     #[serde(alias = "355")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub encoded_text: Option<EncodedText>,
+    pub encoded_text: Option<EncodedText<355>>,
     #[serde(flatten)]
     pub trailer: Trailer,
 }

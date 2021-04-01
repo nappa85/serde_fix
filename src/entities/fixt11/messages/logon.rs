@@ -2,7 +2,7 @@ use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, EncodedText, data_field, fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, EncodedText, fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = A
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -20,7 +20,7 @@ pub struct Logon {
     #[serde(rename = "95")]
     #[serde(alias = "96")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub raw_data: Option<RawData>,
+    pub raw_data: Option<EncodedText<96>>,
     /// Indicates both sides of a FIX session should reset sequence numbers
     #[serde(rename = "141")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -68,12 +68,12 @@ pub struct Logon {
     #[serde(rename = "1401")]
     #[serde(alias = "1402")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub encrypted_password: Option<EncryptedPassword>,
+    pub encrypted_password: Option<EncodedText<1402>>,
     /// Encrypted new password- encrypted via the method specified in the field EncryptedPasswordMethod(1400)
     #[serde(rename = "1403")]
     #[serde(alias = "1404")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub encrypted_new_password: Option<EncryptedNewPassword>,
+    pub encrypted_new_password: Option<EncodedText<1404>>,
     /// Session status at time of logon. Field is intended to be used when the logon is sent as an acknowledgement from acceptor of the FIX session.
     #[serde(rename = "1409")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -97,7 +97,7 @@ pub struct Logon {
     /// Encoded (non-ASCII characters) representation of the Text field in the encoded format specified via the MessageEncoding field.
     #[serde(alias = "355")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub encoded_text: Option<EncodedText>,
+    pub encoded_text: Option<EncodedText<355>>,
     #[serde(flatten)]
     pub trailer: Trailer,
 }
@@ -176,111 +176,6 @@ pub enum EncryptMethod {
     /// PEM/DES-MD5 (see app note on FIX web site)
     #[serde(rename = "6")]
     PemDesMd5,
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct RawData {
-    // #[serde(rename = "95")]
-    len: usize,
-    // #[serde(rename = "96")]
-    data: String,
-}
-
-impl data_field::DataField for RawData {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for RawData {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "96")
-    }
-}
-
-impl Serialize for RawData {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "96")
-    }
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct EncryptedPassword {
-    // #[serde(rename = "1401")]
-    len: usize,
-    // #[serde(rename = "1402")]
-    data: String,
-}
-
-impl data_field::DataField for EncryptedPassword {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for EncryptedPassword {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "1402")
-    }
-}
-
-impl Serialize for EncryptedPassword {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "1402")
-    }
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct EncryptedNewPassword {
-    // #[serde(rename = "1403")]
-    len: usize,
-    // #[serde(rename = "1404")]
-    data: String,
-}
-
-impl data_field::DataField for EncryptedNewPassword {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for EncryptedNewPassword {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "1404")
-    }
-}
-
-impl Serialize for EncryptedNewPassword {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "1404")
-    }
 }
 
 #[derive(Clone, Debug, Default, PartialEq)]

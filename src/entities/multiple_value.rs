@@ -13,6 +13,13 @@ where T: DeserializeOwned + Serialize + Clone + Debug + PartialEq {
     }
 }
 
+impl<T> AsMut<Vec<T>> for MultipleValue<T>
+where T: DeserializeOwned + Serialize + Clone + Debug + PartialEq {
+    fn as_mut(&mut self) -> &mut Vec<T> {
+        &mut self.0
+    }
+}
+
 impl<T> Serialize for MultipleValue<T>
 where T: DeserializeOwned + Serialize + Clone + Debug + PartialEq {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {

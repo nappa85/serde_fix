@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{Boolean, data_field, LocalMktDate, MonthYear, TZTimeOnly};
+use crate::entities::{Boolean, EncodedText, LocalMktDate, MonthYear, TZTimeOnly};
 
 use super::{evnt_grp::EvntGrps, sec_alt_id_grp::SecAltIDGrp, security_xml::SecurityXML, time_unit::TimeUnit};
 
@@ -226,7 +226,7 @@ pub struct Instrument {
     /// Encoded (non-ASCII characters) representation of the Issuer(106) field in the encoded format specified via the MessageEncoding(347) field.
     #[serde(rename = "348")]
     #[serde(alias = "349")]
-    pub encoded_issuer: Option<EncodedIssuer>,
+    pub encoded_issuer: Option<EncodedText<349>>,
     /// SecurityDesc
     #[serde(rename = "107")]
     pub security_desc: Option<String>,
@@ -234,7 +234,7 @@ pub struct Instrument {
     /// Encoded (non-ASCII characters) representation of the SecurityDesc(107) field in the encoded format specified via the MessageEncoding(347) field.
     #[serde(rename = "350")]
     #[serde(alias = "351")]
-    pub encoded_security_desc: Option<EncodedSecurityDesc>,
+    pub encoded_security_desc: Option<EncodedText<351>>,
     /// Embedded XML document describing the instrument.
     #[serde(flatten)]
     pub security_xml: SecurityXML,
@@ -3372,76 +3372,6 @@ pub enum PutOrCall {
     /// Chooser
     #[serde(rename = "3")]
     Chooser,
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct EncodedIssuer {
-    // #[serde(rename = "348")]
-    len: usize,
-    // #[serde(rename = "349")]
-    data: String,
-}
-
-impl data_field::DataField for EncodedIssuer {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for EncodedIssuer {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "349")
-    }
-}
-
-impl Serialize for EncodedIssuer {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "349")
-    }
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct EncodedSecurityDesc {
-    // #[serde(rename = "350")]
-    len: usize,
-    // #[serde(rename = "351")]
-    data: String,
-}
-
-impl data_field::DataField for EncodedSecurityDesc {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for EncodedSecurityDesc {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "351")
-    }
-}
-
-impl Serialize for EncodedSecurityDesc {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "351")
-    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

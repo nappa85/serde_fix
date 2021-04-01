@@ -2,7 +2,7 @@ use std::{borrow::Cow, convert::TryFrom};
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{LocalMktDate, MonthYear, UTCTimestamp, data_field};
+use crate::entities::{LocalMktDate, MonthYear, UTCTimestamp, EncodedText};
 
 use super::time_unit::TimeUnit;
 
@@ -206,7 +206,7 @@ pub struct EvntGrp {
     /// Encoded (non-ASCII characters) representation of the EventText(868) field in the encoded format specified via the MessageEncoding(347) field.
     // #[serde(rename = "1578")]
     // #[serde(alias = "1579")]
-    pub encoded_event_text: Option<EncodedEventText>,
+    pub encoded_event_text: Option<EncodedText<1579>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -295,39 +295,4 @@ pub enum EventType {
     /// Trade continuation effective date
     #[serde(rename = "27")]
     TradeContinuationEffectiveDate,
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct EncodedEventText {
-    // #[serde(rename = "1578")]
-    len: usize,
-    // #[serde(rename = "1579")]
-    data: String,
-}
-
-impl data_field::DataField for EncodedEventText {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for EncodedEventText {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "1579")
-    }
-}
-
-impl Serialize for EncodedEventText {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "1579")
-    }
 }

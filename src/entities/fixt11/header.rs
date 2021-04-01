@@ -2,7 +2,7 @@ use std::{borrow::Cow, convert::TryFrom};
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, UTCTimestamp, data_field, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, UTCTimestamp, EncodedText, version::FixVersion};
 
 //regex: ^(=>\s+)?(\d+)\s+(\w+)(\s+@\w+)?\s+([YNC])(\s+.+)?$
 //replace: /// $6\n#[serde(rename = "$2")]\npub $3: $5,
@@ -53,7 +53,7 @@ pub struct Header {
     /// Required when message body is encrypted. Always immediately follows SecureDataLen (90) field.
     #[serde(alias = "91")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub secure_data: Option<SecureData>,
+    pub secure_data: Option<EncodedText<91>>,
     /// (Can be embedded within encrypted data section.)
     #[serde(rename = "34")]
     #[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -110,7 +110,7 @@ pub struct Header {
     /// Can contain a XML formatted message block (e.g. FIXML). Always immediately follows XmlDataLen (212) field. (Can be embedded within encrypted data section.) See Volume 1: FIXML Support
     #[serde(alias = "213")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub xml_data: Option<XmlData>,
+    pub xml_data: Option<EncodedText<213>>,
     /// Type of message encoding (non-ASCII characters) used in a message's "Encoded" fields. Required if any "Encoding" fields are used.
     #[serde(rename = "347")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -505,76 +505,6 @@ pub enum MsgType {
 }
 
 #[derive(Clone, Debug, Default, PartialEq)]
-pub struct SecureData {
-    // #[serde(rename = "90")]
-    len: usize,
-    // #[serde(rename = "91")]
-    data: String,
-}
-
-impl data_field::DataField for SecureData {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for SecureData {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "91")
-    }
-}
-
-impl Serialize for SecureData {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "91")
-    }
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct XmlData {
-    // #[serde(rename = "212")]
-    len: usize,
-    // #[serde(rename = "213")]
-    data: String,
-}
-
-impl data_field::DataField for XmlData {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for XmlData {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "213")
-    }
-}
-
-impl Serialize for XmlData {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "213")
-    }
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
 pub struct Hops {
     // #[serde(rename = "627")]
     len: usize,
@@ -691,10 +621,7 @@ mod test {
             poss_resend: None,
             sending_time: crate::entities::datetime::UTCTimestamp::try_from("20210310-16:38:01.821").unwrap(),
             orig_sending_time: None,
-            xml_data: Some(super::XmlData {
-                len: 10,
-                data: "0123456789".to_owned(),
-            }),
+            xml_data: Some(crate::entities::EncodedText("0123456789".to_owned())),
             message_encoding: None,
             last_msg_seq_num_processed: None,
             hops: Some(

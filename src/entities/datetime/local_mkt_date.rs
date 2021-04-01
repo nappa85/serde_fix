@@ -1,4 +1,4 @@
-use std::{borrow::Cow, convert::{AsRef, TryFrom}};
+use std::{borrow::Cow, convert::TryFrom};
 
 use chrono::{DateTime, Local, TimeZone};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
@@ -17,6 +17,12 @@ impl Default for LocalMktDate {
 impl AsRef<DateTime<Local>> for LocalMktDate {
     fn as_ref(&self) -> &DateTime<Local> {
         &self.0
+    }
+}
+
+impl AsMut<DateTime<Local>> for LocalMktDate {
+    fn as_mut(&mut self) -> &mut DateTime<Local> {
+        &mut self.0
     }
 }
 

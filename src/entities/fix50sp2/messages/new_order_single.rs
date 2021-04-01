@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, EncodedText, LocalMktDate, MultipleValue, UTCTimestamp, data_field, fix50sp2::{commission_data::CommissionData, commission_data_grp::CommissionDataGrp, disclosure_instruction_grp::DisclosureInstructionGrp, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, financing_details::FinancingDetails, instrument::{Currency, Instrument}, matching_instructions::MatchingInstructions, order_attribute_grp::OrderAttributeGrp, order_qty_data::OrderQtyData, parties::Parties, peg_instructions::PegInstructions, pre_alloc_grp::PreAllocGrp, rate_source::RateSource, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, strategy_parameters_grp::StrategyParametersGrp, target_parties::TargetParties, trd_reg_publication_grp::TrdRegPublicationGrp, trd_reg_timestamps::TrdRegTimestamps, trdg_ses_grp::TrdgSesGrp, triggering_instruction::TriggeringInstruction, und_instrmt_grp::UndInstrmtGrp, value_checks_grp::ValueChecksGrp, yield_data::YieldData}, fixt11::{Trailer, header::{Header, HasHeader, MsgType}}, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, EncodedText, LocalMktDate, MultipleValue, UTCTimestamp, fix50sp2::{commission_data::CommissionData, commission_data_grp::CommissionDataGrp, disclosure_instruction_grp::DisclosureInstructionGrp, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, financing_details::FinancingDetails, instrument::{Currency, Instrument}, matching_instructions::MatchingInstructions, order_attribute_grp::OrderAttributeGrp, order_qty_data::OrderQtyData, parties::Parties, peg_instructions::PegInstructions, pre_alloc_grp::PreAllocGrp, rate_source::RateSource, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, strategy_parameters_grp::StrategyParametersGrp, target_parties::TargetParties, trd_reg_publication_grp::TrdRegPublicationGrp, trd_reg_timestamps::TrdRegTimestamps, trdg_ses_grp::TrdgSesGrp, triggering_instruction::TriggeringInstruction, und_instrmt_grp::UndInstrmtGrp, value_checks_grp::ValueChecksGrp, yield_data::YieldData}, fixt11::{Trailer, header::{Header, HasHeader, MsgType}}, version::FixVersion};
 
 /// MsgType = D
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -216,7 +216,7 @@ pub struct NewOrderSingle {
     #[serde(rename = "354")]
     /// Encoded (non-ASCII characters) representation of the Text (58) field in the encoded format specified via the MessageEncoding (347) field.
     #[serde(alias = "355")]
-    pub encoded_text: Option<EncodedText>,
+    pub encoded_text: Option<EncodedText<355>>,
     /// (Deprecated in FIX.5.0)Can be used with OrdType (40) = "Forex - Swap" to specify the "value date" for the future portion of a F/X swap.
     #[serde(rename = "193")]
     pub settl_date2: Option<LocalMktDate>,
@@ -367,7 +367,7 @@ pub struct NewOrderSingle {
     #[serde(rename = "2351")]
     /// Encoded (non-ASCII characters) representation of the ComplianceText(2404) field in the encoded format specified via the MessageEncoding(347) field.
     #[serde(alias = "2352")]
-    pub encoded_compliance_text: Option<EncodedComplianceText>,
+    pub encoded_compliance_text: Option<EncodedText<2352>>,
     /// OrderRequestID
     #[serde(rename = "2422")]
     pub order_request_id: Option<i32>,
@@ -2016,41 +2016,6 @@ pub enum ExposureDurationUnit {
     /// years
     #[serde(rename = "15")]
     Years,
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct EncodedComplianceText {
-    // #[serde(rename = "2351")]
-    len: usize,
-    // #[serde(rename = "2352")]
-    data: String,
-}
-
-impl data_field::DataField for EncodedComplianceText {
-    fn get_len(&self) -> &usize {
-        &self.len
-    }
-    fn set_len(&mut self, len: usize) {
-        self.len = len;
-    }
-    fn get_data(&self) -> &str {
-        &self.data
-    }
-    fn set_data(&mut self, data: String) {
-        self.data = data;
-    }
-}
-
-impl<'de> Deserialize<'de> for EncodedComplianceText {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        data_field::deserialize(deserializer, "2352")
-    }
-}
-
-impl Serialize for EncodedComplianceText {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        data_field::serialize(self, serializer, "2352")
-    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

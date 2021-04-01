@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{Boolean, LocalMktDate, UTCTimestamp, fix50sp2::{application_sequence_control::ApplicationSequenceControl, commission_data::CommissionData, commission_data_grp::CommissionDataGrp, cont_amt_grp::ContAmtGrp, contra_grp::ContraGrp, disclosure_instruction_grp::DisclosureInstructionGrp, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, fills_grp::FillsGrp, financing_details::FinancingDetails, instrmt_leg_exec_grp::InstrmtLegExecGrp, instrument::{Currency, Instrument}, limit_amts::LimitAmts, matching_instructions::MatchingInstructions, misc_fees_grp::MiscFeesGrp, order_attribute_grp::OrderAttributeGrp, order_event_grp::OrderEventGrp, order_qty_data::OrderQtyData, parties::Parties, payment_grp::PaymentGrp, peg_instructions::PegInstructions, pre_alloc_grp::PreAllocGrp, price_qualifier_grp::PriceQualifierGrp, rate_source::RateSource, regulatory_trade_id_grp::RegulatoryTradeIDGrp, related_order_grp::RelatedOrderGrp, relative_value_grp::RelativeValueGrp, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, strategy_parameters_grp::StrategyParametersGrp, target_parties::TargetParties, throttle_response::ThrottleResponse, trade_price_condition_grp::TradePriceConditionGrp, trd_reg_publication_grp::TrdRegPublicationGrp, trd_reg_timestamps::TrdRegTimestamps, triggering_instruction::TriggeringInstruction, und_instrmt_grp::UndInstrmtGrp, value_checks_grp::ValueChecksGrp, yield_data::YieldData}, fixt11::{header::{Header, HasHeader}, Trailer}};
+use crate::entities::{Boolean, EncodedText, LocalMktDate, UTCTimestamp, fix50sp2::{application_sequence_control::ApplicationSequenceControl, commission_data::CommissionData, commission_data_grp::CommissionDataGrp, cont_amt_grp::ContAmtGrp, contra_grp::ContraGrp, disclosure_instruction_grp::DisclosureInstructionGrp, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, fills_grp::FillsGrp, financing_details::FinancingDetails, instrmt_leg_exec_grp::InstrmtLegExecGrp, instrument::{Currency, Instrument}, limit_amts::LimitAmts, matching_instructions::MatchingInstructions, misc_fees_grp::MiscFeesGrp, order_attribute_grp::OrderAttributeGrp, order_event_grp::OrderEventGrp, order_qty_data::OrderQtyData, parties::Parties, payment_grp::PaymentGrp, peg_instructions::PegInstructions, pre_alloc_grp::PreAllocGrp, price_qualifier_grp::PriceQualifierGrp, rate_source::RateSource, regulatory_trade_id_grp::RegulatoryTradeIDGrp, related_order_grp::RelatedOrderGrp, relative_value_grp::RelativeValueGrp, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, strategy_parameters_grp::StrategyParametersGrp, target_parties::TargetParties, throttle_response::ThrottleResponse, trade_price_condition_grp::TradePriceConditionGrp, trd_reg_publication_grp::TrdRegPublicationGrp, trd_reg_timestamps::TrdRegTimestamps, triggering_instruction::TriggeringInstruction, und_instrmt_grp::UndInstrmtGrp, value_checks_grp::ValueChecksGrp, yield_data::YieldData}, fixt11::{header::{Header, HasHeader}, Trailer}};
 
 /// MsgType = 8
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -465,10 +465,9 @@ pub struct ExecutionReport {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText_.html">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text_.html">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding_.html">MessageEncoding&nbsp;(347)</a> field.
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<EncodedText<355>>,
 	/// (Deprecated in FIX.5.0)Can be used with <a href="tag_40_OrdType_.html">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the "value date" for the future portion of a F/X swap.
 	#[serde(rename = "193")]
 	pub settl_date_2: Option<LocalMktDate>,
@@ -676,10 +675,9 @@ pub struct ExecutionReport {
 	pub reject_text: Option<String>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText_.html">EncodedRejectTextLen(1665)&nbsp;(1665)</a> field is specified and must immediately precede it.
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1328_RejectText_.html">RejectedText(1328)&nbsp;(1328)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding_.html">MessageEncoding(347)&nbsp;(347)</a> field.
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<EncodedText<1665>>,
 	/// OrderOrigination
 	#[serde(rename = "1724")]
 	pub order_origination: Option<OrderOrigination>,
@@ -724,10 +722,9 @@ pub struct ExecutionReport {
 	pub compliance_text: Option<String>,
 	/// Must be set if <a href="tag_2352_EncodedComplianceText_.html">EncodedComplianceTextLen(2352)&nbsp;(2352)</a> field is specified and must immediately precede it.
 	#[serde(rename = "2351")]
-	pub encoded_compliance_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_2404_ComplianceText_.html">ComplianceText(2404)&nbsp;(2404)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding_.html">MessageEncoding(347)&nbsp;(347)</a> field.
-	#[serde(rename = "2352")]
-	pub encoded_compliance_text: Option<String>,
+	#[serde(alias = "2352")]
+	pub encoded_compliance_text: Option<EncodedText<2352>>,
 	/// Required if provided on the order message. Echo back the value provided in the order message.
 	#[serde(rename = "2422")]
 	pub order_request_id: Option<i32>,
@@ -834,11 +831,10 @@ pub struct ExecutionReport {
 	pub trade_continuation_text: Option<String>,
 	/// Must be set if EncodedTradeContinuationText(2371) field is specified and must immediately precede it.
 	#[serde(rename = "2372")]
-	pub encoded_trade_continuation_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the TradeContinuationText(2374) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
-	#[serde(rename = "2371")]
-	pub encoded_trade_continuation_text: Option<String>,
+	#[serde(alias = "2371")]
+	pub encoded_trade_continuation_text: Option<EncodedText<2371>>,
 	/// May be used to provide a list of orders and their relationship to the order identified in this message.
 	#[serde(flatten)]
 	pub related_order_grp: Option<RelatedOrderGrp>,
