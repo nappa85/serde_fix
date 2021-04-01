@@ -44,7 +44,7 @@ async fn main() -> Result<(), ()> {
         .map_err(|e| error!("Body load error: {}", e))?;
 
     // prepare regexs
-    let table = Regex::new(r#"<h1>(?P<name>\w+)[\s\S]+?<table[^>]+>[\n\s]+<tr class="tbl-hdr">([\n\s]+<th[^>]*>[^<]+</th>)+[\n\s]+</tr>(?P<body>[\s\S]+?)</table>"#)
+    let table = Regex::new(r#"<h1>(&lt;)?(?P<name>\w+)(&gt;)?[\s\S]+?<table[^>]+>[\n\s]+<tr class="tbl-hdr">([\n\s]+<th[^>]*>[^<]+</th>)+[\n\s]+</tr>(?P<body>[\s\S]+?)</table>"#)
         .map_err(|e| error!("Error building table Regex: {}", e))?;
     let tr = Regex::new(r#"<tr[^>]+>(?P<body>[\s\S]+?)</tr>"#)
         .map_err(|e| error!("Error building tr Regex: {}", e))?;
