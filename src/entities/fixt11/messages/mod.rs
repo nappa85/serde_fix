@@ -46,9 +46,9 @@ pub enum Message {
     // /// Advertisement
     // #[serde(rename = "7")]
     // Advertisement,
-    // /// Execution Report
-    // #[serde(rename = "8")]
-    // ExecutionReport,
+    /// Execution Report
+    #[serde(rename = "8")]
+    ExecutionReport(ExecutionReport),
     // /// Order Cancel Reject
     // #[serde(rename = "9")]
     // OrderCancelReject,
@@ -383,6 +383,7 @@ impl Serialize for Message {
             Message::SequenceReset(m) => m.serialize(serializer),
             Message::TestRequest(m) => m.serialize(serializer),
             Message::NewOrderSingle(m) => m.serialize(serializer),
+            Message::ExecutionReport(m) => m.serialize(serializer),
         }
     }
 }
@@ -398,6 +399,7 @@ impl HasHeader for Message {
             Message::SequenceReset(m) => m.get_header(),
             Message::TestRequest(m) => m.get_header(),
             Message::NewOrderSingle(m) => m.get_header(),
+            Message::ExecutionReport(m) => m.get_header(),
         }
     }
     fn get_header_mut(&mut self) -> &mut Header {
@@ -410,6 +412,7 @@ impl HasHeader for Message {
             Message::SequenceReset(m) => m.get_header_mut(),
             Message::TestRequest(m) => m.get_header_mut(),
             Message::NewOrderSingle(m) => m.get_header_mut(),
+            Message::ExecutionReport(m) => m.get_header_mut(),
         }
     }
 }
@@ -419,7 +422,7 @@ impl HasHeader for Message {
 pub enum NewOrderSingle {
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(crate::entities::fix50sp2::messages::NewOrderSingle),
+    FIX50SP2(Box<crate::entities::fix50sp2::messages::NewOrderSingle>),
 }
 
 impl Serialize for NewOrderSingle {
@@ -439,6 +442,35 @@ impl HasHeader for NewOrderSingle {
     fn get_header_mut(&mut self) -> &mut Header {
         match self {
             NewOrderSingle::FIX50SP2(m) => m.get_header_mut(),
+        }
+    }
+}
+
+#[derive(Deserialize, Clone, Debug, PartialEq)]
+#[serde(tag = "1128")]
+pub enum ExecutionReport {
+    /// FIX50SP2
+    #[serde(rename = "9")]
+    FIX50SP2(Box<crate::entities::fix50sp2::messages::ExecutionReport>),
+}
+
+impl Serialize for ExecutionReport {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        match self {
+            ExecutionReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeader for ExecutionReport {
+    fn get_header(&self) -> &Header {
+        match self {
+            ExecutionReport::FIX50SP2(m) => m.get_header(),
+        }
+    }
+    fn get_header_mut(&mut self) -> &mut Header {
+        match self {
+            ExecutionReport::FIX50SP2(m) => m.get_header_mut(),
         }
     }
 }

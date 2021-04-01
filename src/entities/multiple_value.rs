@@ -30,7 +30,7 @@ where T: DeserializeOwned + Serialize + Clone + Debug + PartialEq {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let a = <Cow<'_, str> as Deserialize>::deserialize(deserializer)?;
         let mut v = Vec::new();
-        for t in a.split(" ") {
+        for t in a.split(' ') {
             v.push(crate::from_str::<T>(t).map_err(serde::de::Error::custom)?);
         }
         Ok(MultipleValue(v))
