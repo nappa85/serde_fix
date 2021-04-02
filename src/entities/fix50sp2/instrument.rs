@@ -348,7 +348,7 @@ pub struct Instrument {
 	pub convertible_bond_equity_id: Option<String>,
 	/// Conditionally required when ConvertibleBondEquityID(1951) is specified.
 	#[serde(rename = "1952")]
-	pub convertible_bond_equity_id_source: Option<ConvertibleBondEquityIDSource>,
+	pub convertible_bond_equity_id_source: Option<SecurityIDSource>,
 	/// ContractPriceRefMonth
 	#[serde(rename = "1953")]
 	pub contract_price_ref_month: Option<MonthYear>,
@@ -2839,106 +2839,6 @@ pub enum CouponDayCount {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub enum ConvertibleBondEquityIDSource {
-	/// CUSIP
-	#[serde(rename = "1")]
-	Cusip,
-	/// SEDOL
-	#[serde(rename = "2")]
-	Sedol,
-	/// QUIK
-	#[serde(rename = "3")]
-	Quik,
-	/// ISIN
-	#[serde(rename = "4")]
-	Isin,
-	/// RIC
-	#[serde(rename = "5")]
-	Ric,
-	/// ISO Currency Code
-	#[serde(rename = "6")]
-	IsoCurrencyCode,
-	/// ISO Country Code
-	#[serde(rename = "7")]
-	IsoCountryCode,
-	/// Exchange Symbol
-	#[serde(rename = "8")]
-	ExchangeSymbol,
-	/// Consolidated Tape Association (CTA) Symbol (SIAC CTS/CQS line format)
-	#[serde(rename = "9")]
-	ConsolidatedTapeAssociation,
-	/// Bloomberg Symbol
-	#[serde(rename = "A")]
-	BloombergSymbol,
-	/// Wertpapier
-	#[serde(rename = "B")]
-	Wertpapier,
-	/// Dutch
-	#[serde(rename = "C")]
-	Dutch,
-	/// Valoren
-	#[serde(rename = "D")]
-	Valoren,
-	/// Sicovam
-	#[serde(rename = "E")]
-	Sicovam,
-	/// Belgian
-	#[serde(rename = "F")]
-	Belgian,
-	/// "Common" (Clearstream and Euroclear)
-	#[serde(rename = "G")]
-	Common,
-	/// Clearing House / Clearing Organization
-	#[serde(rename = "H")]
-	ClearingHouse,
-	/// ISDA/FpML Product Specification
-	#[serde(rename = "I")]
-	IsdaFpMlProductSpecification,
-	/// Option Price Reporting Authority
-	#[serde(rename = "J")]
-	OptionPriceReportingAuthority,
-	/// ISDA/FpML Product URL (URL in SecurityID)
-	#[serde(rename = "K")]
-	IsdaFpMlProductUrl,
-	/// Letter of Credit
-	#[serde(rename = "L")]
-	LetterOfCredit,
-	/// Marketplace-assigned Identifier
-	#[serde(rename = "M")]
-	MarketplaceAssignedIdentifier,
-	/// Markit RED entity CLIP
-	#[serde(rename = "N")]
-	MarkitRedEntityClip,
-	/// Markit RED pair CLIP
-	#[serde(rename = "P")]
-	MarkitRedPairClip,
-	/// CFTC commodity code
-	#[serde(rename = "Q")]
-	CftcCommodityCode,
-	/// ISDA Commodity Reference Price
-	#[serde(rename = "R")]
-	IsdaCommodityReferencePrice,
-	/// Financial Instrument Global Identifier
-	#[serde(rename = "S")]
-	FinancialInstrumentGlobalIdentifier,
-	/// Legal Entity Identifier
-	#[serde(rename = "T")]
-	LegalEntityIdentifier,
-	/// Synthetic
-	#[serde(rename = "U")]
-	Synthetic,
-	/// Fidessa Instrument Mnemonic (FIM)
-	#[serde(rename = "V")]
-	FidessaInstrumentMnemonic,
-	/// Index name
-	#[serde(rename = "W")]
-	IndexName,
-	/// Uniform Symbol (UMTF Symbol)
-	#[serde(rename = "X")]
-	UniformSymbol,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
