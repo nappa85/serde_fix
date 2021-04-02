@@ -52,7 +52,7 @@ async fn main() -> Result<(), ()> {
         .map_err(|e| error!("Error building block Regex: {}", e))?;
     let tag = Regex::new(r#"<td class="tag[^>]+>(?P<id>\d+)</td>[\n\s]+<td class="field-name[^>]+><a href="(?P<url>[^"]+)">(?P<name>[\w\s]+)</a></td>[\s\S]+?<td class="req[^>]+>(?P<req>[YNC])</td>[\n\s]+<td class="comment[^>]+>(?P<comment>[\s\S]*?)</td>"#)
         .map_err(|e| error!("Error building tag Regex: {}", e))?;
-    let vartype = Regex::new(r#"<h1>\w+<font[^>]+> \(Tag = \d+, Type: <a href="[^"]+">(?P<type>\w+)</a>\)</font></h1>"#)
+    let vartype = Regex::new(r#"<h1>\w+<font[^>]+> \(Tag = \d+, Type: <a href="[^"]+">(?P<type>[\w-]+)</a>\)</font></h1>"#)
         .map_err(|e| error!("Error building vartype Regex: {}", e))?;
     let enum_body = Regex::new(r#"<p>Valid values:[\n\s]+<table[^>]+>(?P<enum>[\s\S]+?)</table>[\n\s]+</p>"#)
         .map_err(|e| error!("Error building enum_body Regex: {}", e))?;
@@ -85,7 +85,7 @@ async fn main() -> Result<(), ()> {
                 &name
             }
             else {
-                type_map(&t_type["type"])
+                type_map(&t_type["type"]).map_err(|_| error!("Unmapped type {} in {}", &t_type["type"], &t["url"]))?
             };
             println!("\t/// {}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},", clean_comment(&t["comment"], &t["name"]), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"]));
         }
@@ -165,8 +165,8 @@ fn maybe_option<'a>(name: &'a str, req: &'a str) -> Cow<'a, str> {
     }
 }
 
-fn type_map(t: &str) -> &str {
-    match t {
+fn type_map(t: &str) -> Result<&str, ()> {
+    Ok(match t {
         "String" => "String",
         "int" => "i32",
         "LocalMktDate" => "LocalMktDate",
@@ -181,6 +181,9 @@ fn type_map(t: &str) -> &str {
         "Amt" => "f64",
         "Length" => "usize",
         "data" => "String",
-        _ => panic!("Unmapped type {}", t),
-    }
+        "month-year" => "MonthYear",
+        "TZTimeOnly" => "TZTimeOnly",
+        "char" => "char",
+        _ => return Err(()),
+    })
 }

@@ -1,5 +1,6 @@
 
 pub mod messages;
+pub mod currency;
 pub mod application_sequence_control;
 pub mod instrument;
 pub mod sec_alt_id_grp;
@@ -45,3 +46,17 @@ pub mod trade_price_condition_grp;
 pub mod payment_grp;
 pub mod price_qualifier_grp;
 pub mod related_order_grp;
+pub mod extraordinary_event_grp;
+pub mod option_exercise;
+pub mod market_disruption;
+pub mod pricing_date_time;
+pub mod asset_attribute_grp;
+pub mod physical_settl_term_grp;
+pub mod cash_settl_term_grp;
+pub mod protection_term_grp;
+pub mod additional_term_grp;
+pub mod provision_grp;
+pub mod stream_grp;
+pub mod date_adjustment;
+pub mod secondary_asset_grp;
+pub mod complex_events;
