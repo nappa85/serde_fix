@@ -1,9 +1,9 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{Boolean, LocalMktDate, MonthYear, TZTimeOnly};
+use crate::entities::{Boolean, Currency, LocalMktDate, MonthYear, TZTimeOnly};
 
-use super::{additional_term_grp::AdditionalTermGrp, asset_attribute_grp::AssetAttributeGrp, cash_settl_term_grp::CashSettlTermGrp, complex_events::ComplexEvents, currency::Currency, date_adjustment::DateAdjustment, evnt_grp::EvntGrps, extraordinary_event_grp::ExtraordinaryEventGrp, instrument_parties::InstrumentParties, market_disruption::MarketDisruption, option_exercise::OptionExercise, physical_settl_term_grp::PhysicalSettlTermGrp, pricing_date_time::PricingDateTime, protection_term_grp::ProtectionTermGrp, provision_grp::ProvisionGrp, sec_alt_id_grp::SecAltIDGrp, secondary_asset_grp::SecondaryAssetGrp, security_xml::SecurityXML, stream_grp::StreamGrp};
+use super::{additional_term_grp::AdditionalTermGrp, asset_attribute_grp::AssetAttributeGrp, cash_settl_term_grp::CashSettlTermGrp, complex_events::ComplexEvents, date_adjustment::DateAdjustment, evnt_grp::EvntGrp, extraordinary_event_grp::ExtraordinaryEventGrp, instrument_parties::InstrumentParties, market_disruption::MarketDisruption, option_exercise::OptionExercise, physical_settl_term_grp::PhysicalSettlTermGrp, pricing_date_time::PricingDateTime, protection_term_grp::ProtectionTermGrp, provision_grp::ProvisionGrp, sec_alt_id_grp::SecAltIDGrp, secondary_asset_grp::SecondaryAssetGrp, security_xml::SecurityXML, stream_grp::StreamGrp};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Instrument {
@@ -270,7 +270,7 @@ pub struct Instrument {
 	pub cp_reg_type: Option<String>,
 	/// Number of repeating EventType group entries.
 	#[serde(flatten)]
-	pub evnt_grp: Option<EvntGrps>,
+	pub evnt_grp: Option<EvntGrp>,
 	/// If different from IssueDate
 	#[serde(rename = "873")]
 	pub dated_date: Option<LocalMktDate>,

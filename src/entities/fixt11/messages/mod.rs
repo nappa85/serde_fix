@@ -420,6 +420,12 @@ impl HasHeader for Message {
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum NewOrderSingle {
+    /// FIX50
+    #[serde(rename = "7")]
+    FIX50(Box<crate::entities::fix50::messages::NewOrderSingle>),
+    // /// FIX50SP1
+    // #[serde(rename = "8")]
+    // FIX50SP1(Box<crate::entities::fix50sp1::messages::NewOrderSingle>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<crate::entities::fix50sp2::messages::NewOrderSingle>),
@@ -428,6 +434,8 @@ pub enum NewOrderSingle {
 impl Serialize for NewOrderSingle {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
+            NewOrderSingle::FIX50(m) => m.serialize(serializer),
+            // NewOrderSingle::FIX50SP1(m) => m.serialize(serializer),
             NewOrderSingle::FIX50SP2(m) => m.serialize(serializer),
         }
     }
@@ -436,11 +444,15 @@ impl Serialize for NewOrderSingle {
 impl HasHeader for NewOrderSingle {
     fn get_header(&self) -> &Header {
         match self {
+            NewOrderSingle::FIX50(m) => m.get_header(),
+            // NewOrderSingle::FIX50SP1(m) => m.get_header(),
             NewOrderSingle::FIX50SP2(m) => m.get_header(),
         }
     }
     fn get_header_mut(&mut self) -> &mut Header {
         match self {
+            NewOrderSingle::FIX50(m) => m.get_header_mut(),
+            // NewOrderSingle::FIX50SP1(m) => m.get_header_mut(),
             NewOrderSingle::FIX50SP2(m) => m.get_header_mut(),
         }
     }
@@ -449,6 +461,12 @@ impl HasHeader for NewOrderSingle {
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ExecutionReport {
+    /// FIX50
+    #[serde(rename = "7")]
+    FIX50(Box<crate::entities::fix50::messages::ExecutionReport>),
+    // /// FIX50SP1
+    // #[serde(rename = "8")]
+    // FIX50SP1(Box<crate::entities::fix50sp1::messages::ExecutionReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<crate::entities::fix50sp2::messages::ExecutionReport>),
@@ -457,6 +475,8 @@ pub enum ExecutionReport {
 impl Serialize for ExecutionReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
+            ExecutionReport::FIX50(m) => m.serialize(serializer),
+            // ExecutionReport::FIX50SP1(m) => m.serialize(serializer),
             ExecutionReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
@@ -465,11 +485,15 @@ impl Serialize for ExecutionReport {
 impl HasHeader for ExecutionReport {
     fn get_header(&self) -> &Header {
         match self {
+            ExecutionReport::FIX50(m) => m.get_header(),
+            // ExecutionReport::FIX50SP1(m) => m.get_header(),
             ExecutionReport::FIX50SP2(m) => m.get_header(),
         }
     }
     fn get_header_mut(&mut self) -> &mut Header {
         match self {
+            ExecutionReport::FIX50(m) => m.get_header_mut(),
+            // ExecutionReport::FIX50SP1(m) => m.get_header_mut(),
             ExecutionReport::FIX50SP2(m) => m.get_header_mut(),
         }
     }

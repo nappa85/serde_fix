@@ -1,171 +1,46 @@
-use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
-#[derive(Clone, Debug, Default, PartialEq)]
+use crate::entities::RepeatingValues;
+
+#[derive(Deserialize, Serialize, Clone, Debug, Default, PartialEq)]
 pub struct Parties {
-    // #[serde(rename = "453")]
-    len: usize,
-    inner: Vec<Party>,
+    /// Repeating group below should contain unique combinations of PartyID, PartyIDSource, and PartyRole
+    #[serde(rename = "453")]
+    pub inner: RepeatingValues<Party>,
 }
 
-impl<'de> Deserialize<'de> for Parties {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Parties, D::Error> {
-        let temp = <Cow<'_, str> as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
-        let mut group = Parties::default();
-        let mut actual = Party::default();
-        let iterator = temp.split('\u{1}').map(|a| match a.find('=') {
-            Some(i) => (&a[0..i], &a[(i + 1)..]),
-            None => ("", &a[0..]),
-        });
-        for (code, value) in iterator {
-            match &*code {
-                "448" => {
-                    if actual.party_id.is_some()
-                    || actual.party_id_source.is_some()
-                    || actual.party_role.is_some()
-                    || actual.party_role_qualifier.is_some()
-                    || actual.no_party_sub_ids.is_some()
-                    || actual.party_sub_ids.is_some() {
-                        group.inner.push(actual);
-                        actual = Party::default();
-                    }
-                    actual.party_id = Some(value.to_owned());
-                },
-                "447" => {
-                    if actual.party_id_source.is_some()
-                    || actual.party_role.is_some()
-                    || actual.party_role_qualifier.is_some()
-                    || actual.no_party_sub_ids.is_some()
-                    || actual.party_sub_ids.is_some() {
-                        group.inner.push(actual);
-                        actual = Party::default();
-                    }
-                    actual.party_id_source = crate::from_str(value).map_err(serde::de::Error::custom)?;
-                },
-                "452" => {
-                    if actual.party_role.is_some()
-                    || actual.party_role_qualifier.is_some()
-                    || actual.no_party_sub_ids.is_some()
-                    || actual.party_sub_ids.is_some() {
-                        group.inner.push(actual);
-                        actual = Party::default();
-                    }
-                    actual.party_role = crate::from_str(value).map_err(serde::de::Error::custom)?;
-                },
-                "2376" => {
-                    if actual.party_role_qualifier.is_some()
-                    || actual.no_party_sub_ids.is_some()
-                    || actual.party_sub_ids.is_some() {
-                        group.inner.push(actual);
-                        actual = Party::default();
-                    }
-                    actual.party_role_qualifier = Some(value.parse().map_err(serde::de::Error::custom)?);
-                },
-                "802" => {
-                    if actual.no_party_sub_ids.is_some()
-                    || actual.party_sub_ids.is_some() {
-                        group.inner.push(actual);
-                        actual = Party::default();
-                    }
-                    actual.no_party_sub_ids = Some(value.parse().map_err(serde::de::Error::custom)?);
-                },
-                "523" => {
-                    if actual.party_sub_ids.is_none() {
-                        actual.party_sub_ids = Some(Vec::new());
-                    }
-                    if let Some(ref mut v) = actual.party_sub_ids {
-                        if v.is_empty() || v[v.len() - 1].party_sub_id.is_some() || v[v.len() - 1].party_sub_id_type.is_some() {
-                            v.push(PtysSubGrp::default());
-                        }
-                        let i = v.len() - 1;
-                        v[i].party_sub_id = Some(value.to_owned());
-                    }
-                },
-                "803" => {
-                    if actual.party_sub_ids.is_none() {
-                        actual.party_sub_ids = Some(Vec::new());
-                    }
-                    if let Some(ref mut v) = actual.party_sub_ids {
-                        if v.is_empty() || v[v.len() - 1].party_sub_id_type.is_some() {
-                            v.push(PtysSubGrp::default());
-                        }
-                        let i = v.len() - 1;
-                        v[i].party_sub_id_type = crate::from_str(value).map_err(serde::de::Error::custom)?;
-                    }
-                },
-                // 453
-                _ => {
-                    group.len = value.parse().map_err(serde::de::Error::custom)?;
-                },
-            }
-        }
-        if actual.party_id.is_some()
-        || actual.party_id_source.is_some()
-        || actual.party_role.is_some()
-        || actual.party_role_qualifier.is_some()
-        || actual.no_party_sub_ids.is_some()
-        || actual.party_sub_ids.is_some() {
-            group.inner.push(actual);
-        }
-        Ok(group)
+impl AsRef<Vec<Party>> for Parties {
+    fn as_ref(&self) -> &Vec<Party> {
+        self.inner.as_ref()
     }
 }
 
-impl Serialize for Parties {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let mut temp = vec![self.len.to_string()];
-        for party in &self.inner {
-            if let Some(s) = &party.party_id {
-                temp.push(format!("448={}", s));
-            }
-            if let Some(s) = &party.party_id_source {
-                temp.push(format!("447={}", crate::to_string(s).map_err(serde::ser::Error::custom)?));
-            }
-            if let Some(s) = &party.party_role {
-                temp.push(format!("452={}", crate::to_string(s).map_err(serde::ser::Error::custom)?));
-            }
-            if let Some(s) = &party.party_role_qualifier {
-                temp.push(format!("2376={}", s));
-            }
-            if let Some(v) = &party.party_sub_ids {
-                if !v.is_empty() {
-                    temp.push(format!("802={}", v.len()));
-                    for p in v {
-                        if let Some(s) = &p.party_sub_id {
-                            temp.push(format!("523={}", s));
-                        }
-                        if let Some(s) = &p.party_sub_id_type {
-                            temp.push(format!("803={}", crate::to_string(s).map_err(serde::ser::Error::custom)?));
-                        }
-                    }
-                }
-            }
-        }
-        temp.join("\u{1}").serialize(serializer)
+impl AsMut<Vec<Party>> for Parties {
+    fn as_mut(&mut self) -> &mut Vec<Party> {
+        self.inner.as_mut()
     }
 }
 
-#[derive(Clone, Debug, Default, PartialEq)]
+#[derive(Deserialize, Serialize, Clone, Debug, Default, PartialEq)]
 pub struct Party {
     /// Required if NoPartyIDs(453) > 0. Identification of the party.
-    // #[serde(rename = "448")]
+    #[serde(rename = "448")]
     pub party_id: Option<String>,
     /// Required if NoPartyIDs(453) > 0. Used to identify classification source.
-    // #[serde(rename = "447")]
+    #[serde(rename = "447")]
     pub party_id_source: Option<PartyIDSource>,
     /// Required if NoPartyIDs(453) > 0. Identifies the type of PartyID(448).
-    // #[serde(rename = "452")]
+    #[serde(rename = "452")]
     pub party_role: Option<PartyRole>,
     /// PartyRoleQualifier
-    // #[serde(rename = "2376")]
+    #[serde(rename = "2376")]
     pub party_role_qualifier: Option<i32>,
     /// PtysSubGrp
-    // #[serde(rename = "802")]
-    pub no_party_sub_ids: Option<usize>,
-    // #[serde(rename = "523")]
-    // #[serde(alias = "803")]
-    pub party_sub_ids: Option<Vec<PtysSubGrp>>,
+    #[serde(rename = "802")]
+    #[serde(alias = "523")]
+    #[serde(alias = "803")]
+    pub party_sub_ids: Option<RepeatingValues<PtysSubGrp>>,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
@@ -641,13 +516,13 @@ pub enum PartyRole {
     ContraInvestmentDecisionMaker,
 }
 
-#[derive(Clone, Debug, Default, PartialEq)]
+#[derive(Deserialize, Serialize, Clone, Debug, Default, PartialEq)]
 pub struct PtysSubGrp {
     /// PartySubID
-    // #[serde(rename = "523")]
+    #[serde(rename = "523")]
     pub party_sub_id: Option<String>,
     /// PartySubIDType
-    // #[serde(rename = "803")]
+    #[serde(rename = "803")]
     pub party_sub_id_type: Option<PartySubIDType>,
 }
 

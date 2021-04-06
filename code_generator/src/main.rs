@@ -2,9 +2,9 @@ use std::borrow::Cow;
 
 use structopt::StructOpt;
 
-use reqwest::ClientBuilder;
+use reqwest::{Client, ClientBuilder};
 
-use regex::Regex;
+use regex::{Captures, Regex};
 
 use convert_case::{Case, Casing};
 
@@ -46,7 +46,7 @@ async fn main() -> Result<(), ()> {
     // prepare regexs
     let table = Regex::new(r#"<h1>(&lt;)?(?P<name>\w+)(&gt;)?[\s\S]+?<table[^>]+>[\n\s]+<tr class="tbl-hdr">([\n\s]+<th[^>]*>[^<]+</th>)+[\n\s]+</tr>(?P<body>[\s\S]+?)</table>"#)
         .map_err(|e| error!("Error building table Regex: {}", e))?;
-    let tr = Regex::new(r#"<tr[^>]+>(?P<body>[\s\S]+?)</tr>"#)
+    let tr = Regex::new(r#"<tr[^>]+>(?P<body>[\s\S]+?)</tr>(?P<rows>([\n\s]+<tr[^>]+>[\n\s]+<td[^>]+>=&gt;</td>[\s\S]+?</tr>)+)?"#)
         .map_err(|e| error!("Error building tr Regex: {}", e))?;
     let block = Regex::new(r#"<td class="block[^>]+><a href="[^"]+">&lt;(?P<name>[\w\s]+)&gt;</a></td>[\n\s]+<td class="req[^>]+>(?P<req>[YNC])</td>[\n\s]+<td class="comment[^>]+>(?P<comment>[\s\S]*?)</td>"#)
         .map_err(|e| error!("Error building block Regex: {}", e))?;
@@ -58,12 +58,14 @@ async fn main() -> Result<(), ()> {
         .map_err(|e| error!("Error building enum_body Regex: {}", e))?;
 
     let mut enums = Vec::new();
+    let mut arrays = Vec::new();
 
     // retrieve struct name and table body
     let captures = table.captures(&text).ok_or_else(|| error!("Unrecognized body table"))?;
     println!("#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{", clean_name(&captures["name"]));
     for tr_match in tr.captures_iter(&captures["body"]) {
         let tr_body = &tr_match["body"];
+
         // an import block
         if let Some(b) = block.captures(tr_body) {
             let name = clean_name(&b["name"]);
@@ -71,29 +73,29 @@ async fn main() -> Result<(), ()> {
         }
         // a normal tagvalue
         else if let Some(t) = tag.captures(tr_body) {
-            let name = clean_name(&t["name"]);
-            let descr = client.get(format!("{}{}", base_url, &t["url"]))
-                .send()
-                .await
-                .map_err(|e| error!("Child URL {} get error: {}", &t["url"], e))?
-                .text()
-                .await
-                .map_err(|e| error!("Child body {} load error: {}", &t["url"], e))?;
-            let t_type = vartype.captures(&descr).ok_or_else(|| error!("Unrecognized vartype on {}", &t["url"]))?;
-            let type_name = if let Some(list) = enum_body.captures(&descr) {
-                enums.push((name.clone(), (&list["enum"]).to_owned()));
-                &name
+            let is_array = tr_match.name("rows").is_some();
+            let name = tag_processor(&t, &client, &base_url, tr_body, is_array, &mut enums, &vartype, &enum_body).await?;
+            if is_array {
+                arrays.push(((&name[0..(name.len() - 1)]).to_owned(), (&tr_match["rows"]).to_owned()));
             }
-            else {
-                type_map(&t_type["type"]).map_err(|_| error!("Unmapped type {} in {}", &t_type["type"], &t["url"]))?
-            };
-            println!("\t/// {}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},", clean_comment(&t["comment"], &t["name"]), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"]));
         }
         else {
-            panic!("Unrecognized tr: {}", tr_body);
+            error!("Unrecognized tr: {}", tr_body);
+            return Err(());
         }
     }
     println!("}}");
+
+    // manage arrays
+    if !arrays.is_empty() {
+        for (name, list) in arrays {
+            println!("\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{", name);
+            for t in tag.captures_iter(&list) {
+                tag_processor(&t, &client, &base_url, &list, false, &mut enums, &vartype, &enum_body).await?;
+            }
+            println!("}}");
+        }
+    }
 
     // manage enums
     if !enums.is_empty() {
@@ -110,6 +112,45 @@ async fn main() -> Result<(), ()> {
     }
 
     Ok(())
+}
+
+async fn tag_processor(t: &Captures<'_>, client: &Client, base_url: &str, tr_body: &str, is_array: bool, enums: &mut Vec<(String, String)>, vartype: &Regex, enum_body: &Regex) -> Result<String, ()> {
+    let mut name = clean_name(&t["name"]);
+    let descr = client.get(format!("{}{}", base_url, &t["url"]))
+        .send()
+        .await
+        .map_err(|e| error!("Child URL {} get error: {}", &t["url"], e))?
+        .text()
+        .await
+        .map_err(|e| error!("Child body {} load error: {}", &t["url"], e))?;
+    let t_type = vartype.captures(&descr).ok_or_else(|| error!("Unrecognized vartype on {}", &t["url"]))?;
+    let type_name: Cow<'_, str> = if let Some(list) = enum_body.captures(&descr) {
+        enums.push((name.clone(), (&list["enum"]).to_owned()));
+        if (&t_type["type"]).starts_with("Multiple") {
+            format!("SeparatedValues<{}>", name).into()
+        }
+        else {
+            name.as_str().into()
+        }
+    }
+    else {
+        let mut temp: Cow<'_, str> = type_map(&t_type["type"]).map_err(|_| error!("Unmapped type {} in {}", &t_type["type"], &t["url"]))?.into();
+        if is_array {
+            if temp.as_ref() == "usize" {
+                name = (&name[2..]).to_owned();
+                temp = format!("RepeatingValues<{}>", &name[0..(name.len() - 1)]).into();
+            }
+            else {
+                error!("Found array without length: {}", tr_body);
+                return Err(());
+            }
+        }
+        temp
+    };
+
+    println!("\t/// {}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},", clean_comment(&t["comment"], &t["name"]), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"]));
+
+    Ok(name)
 }
 
 fn clean_name(name: &str) -> String {
@@ -184,6 +225,7 @@ fn type_map(t: &str) -> Result<&str, ()> {
         "month-year" => "MonthYear",
         "TZTimeOnly" => "TZTimeOnly",
         "char" => "char",
+        "NumInGroup" => "usize",
         _ => return Err(()),
     })
 }

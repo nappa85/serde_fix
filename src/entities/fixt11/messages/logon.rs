@@ -1,8 +1,7 @@
-use std::borrow::Cow;
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, EncodedText, fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, EncodedText, RepeatingValues, fixt11::{header::{Header, HasHeader, MsgType}, Trailer}, version::FixVersion};
 
 /// MsgType = A
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -46,7 +45,7 @@ pub struct Logon {
     #[serde(alias = "1131")]
     #[serde(alias = "1410")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ref_msg: Option<RefMsgs>,
+    pub ref_msg: Option<RepeatingValues<RefMsg>>,
     /// Can be used to specify that this FIX session will be sending and receiving "test" vs. "production" messages.
     #[serde(rename = "464")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -178,145 +177,25 @@ pub enum EncryptMethod {
     PemDesMd5,
 }
 
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct RefMsgs {
-    // #[serde(rename = "384")]
-    len: usize,
-    inner: Vec<RefMsg>,
-}
-
-impl<'de> Deserialize<'de> for RefMsgs {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<RefMsgs, D::Error> {
-        let temp = <Cow<'_, str> as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
-        let mut msgs = RefMsgs::default();
-        let mut actual = RefMsg::default();
-        let iterator = temp.split('\u{1}').map(|a| match a.find('=') {
-            Some(i) => (&a[0..i], &a[(i + 1)..]),
-            None => ("", &a[0..]),
-        });
-        for (code, value) in iterator {
-            match &*code {
-                "372" => {
-                    if actual.ref_msg_type.is_some() ||
-                        actual.msg_direction.is_some() ||
-                        actual.ref_appl_ver_id.is_some() ||
-                        actual.ref_appl_ext_id.is_some() ||
-                        actual.ref_cstm_appl_ver_id.is_some() ||
-                        actual.default_ver_indicator.is_some() {
-                        msgs.inner.push(actual);
-                        actual = RefMsg::default();
-                    }
-                    actual.ref_msg_type = Some(value.to_owned());
-                },
-                "385" => {
-                    if actual.msg_direction.is_some() ||
-                        actual.ref_appl_ver_id.is_some() ||
-                        actual.ref_appl_ext_id.is_some() ||
-                        actual.ref_cstm_appl_ver_id.is_some() ||
-                        actual.default_ver_indicator.is_some() {
-                        msgs.inner.push(actual);
-                        actual = RefMsg::default();
-                    }
-                    actual.msg_direction = crate::from_str(value).ok();//TODO: error management
-                },
-                "1130" => {
-                    if actual.ref_appl_ver_id.is_some() ||
-                        actual.ref_appl_ext_id.is_some() ||
-                        actual.ref_cstm_appl_ver_id.is_some() ||
-                        actual.default_ver_indicator.is_some() {
-                        msgs.inner.push(actual);
-                        actual = RefMsg::default();
-                    }
-                    actual.ref_appl_ver_id = crate::from_str(value).ok();//TODO: error management
-                },
-                "1406" => {
-                    if actual.ref_appl_ext_id.is_some() ||
-                        actual.ref_cstm_appl_ver_id.is_some() ||
-                        actual.default_ver_indicator.is_some() {
-                        msgs.inner.push(actual);
-                        actual = RefMsg::default();
-                    }
-                    actual.ref_appl_ext_id = Some(value.to_owned());
-                },
-                "1131" => {
-                    if actual.ref_cstm_appl_ver_id.is_some() ||
-                        actual.default_ver_indicator.is_some() {
-                        msgs.inner.push(actual);
-                        actual = RefMsg::default();
-                    }
-                    actual.ref_cstm_appl_ver_id = Some(value.to_owned());
-                },
-                "1410" => {
-                    if actual.default_ver_indicator.is_some() {
-                        msgs.inner.push(actual);
-                        actual = RefMsg::default();
-                    }
-                    actual.default_ver_indicator = Some(value.to_owned());
-                },
-                // 384
-                _ => {
-                    msgs.len = value.parse().map_err(serde::de::Error::custom)?;
-                },
-            }
-        }
-        if actual.ref_msg_type.is_some() ||
-            actual.msg_direction.is_some() ||
-            actual.ref_appl_ver_id.is_some() ||
-            actual.ref_appl_ext_id.is_some() ||
-            actual.ref_cstm_appl_ver_id.is_some() ||
-            actual.default_ver_indicator.is_some() {
-            msgs.inner.push(actual);
-        }
-        Ok(msgs)
-    }
-}
-
-impl Serialize for RefMsgs {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let mut temp = vec![self.len.to_string()];
-        for msg in &self.inner {
-            if let Some(s) = &msg.ref_msg_type {
-                temp.push(format!("372={}", s));
-            }
-            if let Some(s) = &msg.msg_direction {
-                temp.push(format!("385={}", s.to_string()));
-            }
-            if let Some(s) = &msg.ref_appl_ver_id {
-                temp.push(format!("1130={}", s.to_string()));
-            }
-            if let Some(s) = &msg.ref_appl_ext_id {
-                temp.push(format!("1406={}", s));
-            }
-            if let Some(s) = &msg.ref_cstm_appl_ver_id {
-                temp.push(format!("1131={}", s));
-            }
-            if let Some(s) = &msg.default_ver_indicator {
-                temp.push(format!("1410={}", s));
-            }
-        }
-        temp.join("\u{1}").serialize(serializer)
-    }
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
+#[derive(Deserialize, Serialize, Clone, Debug, Default, PartialEq)]
 pub struct RefMsg {
     /// Specifies a specific, supported MsgType. Required if NoMsgTypes (384) is > 0. Should be specified from the point of view of the sender of the Logon (A) message
-    // #[serde(rename = "372")]
+    #[serde(rename = "372")]
     pub ref_msg_type: Option<String>,
     /// Indicates direction (send vs. receive) of a supported MsgType. Required if NoMsgTypes (384) is > 0. Should be specified from the point of view of the sender of the Logon (A) message
-    // #[serde(rename = "385")]
+    #[serde(rename = "385")]
     pub msg_direction: Option<Direction>,
     /// Specifies the service pack release being applied to a message at the session level. Enumerated field with values assigned at time of service pack release
-    // #[serde(rename = "1130")]
+    #[serde(rename = "1130")]
     pub ref_appl_ver_id: Option<ApplVerID>,
     /// Specified the extension pack being applied to a message
-    // #[serde(rename = "1406")]
+    #[serde(rename = "1406")]
     pub ref_appl_ext_id: Option<String>,
     /// Specifies a custom extension to a message being applied at the session level.
-    // #[serde(rename = "1131")]
+    #[serde(rename = "1131")]
     pub ref_cstm_appl_ver_id: Option<String>,
     /// Indicates that this Application Version (RefApplVerID(1130), RefApplExtID(1406),RefCstmApplVerID(1131)) is the default for the RefMsgType(372) field
-    // #[serde(rename = "1410")]
+    #[serde(rename = "1410")]
     pub default_ver_indicator: Option<String>,
 }
 

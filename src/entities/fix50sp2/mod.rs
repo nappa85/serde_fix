@@ -1,6 +1,6 @@
 
 pub mod messages;
-pub mod currency;
+pub mod order_qty_data;
 pub mod application_sequence_control;
 pub mod instrument;
 pub mod sec_alt_id_grp;
@@ -15,7 +15,6 @@ pub mod trdg_ses_grp;
 pub mod financing_details;
 pub mod und_instrmt_grp;
 pub mod stipulations;
-pub mod order_qty_data;
 pub mod triggering_instruction;
 pub mod spread_or_benchmark_curve_data;
 pub mod yield_data;

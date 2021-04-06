@@ -631,6 +631,10 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
                     // next fields can be HopCompID (628), HopSendingTime (629) and HopRefID (630)
                     value = self.extract_fields(value, &["628", "629", "630"]);
                 },
+                "802" => {// NoPartySubIDs
+                    // next fields can be PartySubID (523) and PartySubIDType (803)
+                    value = self.extract_fields(value, &["523", "803"]);
+                },
                 "864" => {// NoEvents
                     // next fields can be EventType (865), EventDate (866), EventTime (630), EventPx (867), EventText (868), EventTimeUnit (1827), EventTimePeriod (1826), EventMonthYear (2340), EncodedEventTextLen (1578) and EncodedEventText (1579)
                     value = self.extract_fields(value, &["865", "866", "1145", "867", "868", "1827", "1826", "2340", "1578", "1579"]);

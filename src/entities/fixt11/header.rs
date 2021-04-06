@@ -1,8 +1,7 @@
-use std::{borrow::Cow, convert::TryFrom};
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, UTCTimestamp, EncodedText, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, EncodedText, RepeatingValues, UTCTimestamp, version::FixVersion};
 
 //regex: ^(=>\s+)?(\d+)\s+(\w+)(\s+@\w+)?\s+([YNC])(\s+.+)?$
 //replace: /// $6\n#[serde(rename = "$2")]\npub $3: $5,
@@ -126,7 +125,7 @@ pub struct Header {
     #[serde(alias = "629")]
     #[serde(alias = "630")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub hops: Option<Hops>,
+    pub hops: Option<RepeatingValues<Hop>>,
 }
 
 fn serialize_beginstring<S: serde::Serializer>(value: &Option<FixVersion>, serializer: S) -> Result<S::Ok, S::Error> {
@@ -504,83 +503,13 @@ pub enum MsgType {
     StreamAssignmentReportACK,
 }
 
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct Hops {
-    // #[serde(rename = "627")]
-    len: usize,
-    inner: Vec<Hop>,
-}
-
-impl<'de> Deserialize<'de> for Hops {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Hops, D::Error> {
-        let temp = <Cow<'_, str> as Deserialize>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
-        let mut hops = Hops::default();
-        let mut actual = Hop::default();
-        let iterator = temp.split('\u{1}').map(|a| match a.find('=') {
-            Some(i) => (&a[0..i], &a[(i + 1)..]),
-            None => ("", &a[0..]),
-        });
-        for (code, value) in iterator {
-            match &*code {
-                "628" => {
-                    if actual.hop_comp_id.is_some() || actual.hop_sending_time.is_some() || actual.hop_ref_id.is_some() {
-                        hops.inner.push(actual);
-                        actual = Hop::default();
-                    }
-                    actual.hop_comp_id = Some(value.to_string());
-                },
-                "629" => {
-                    if actual.hop_sending_time.is_some() || actual.hop_ref_id.is_some() {
-                        hops.inner.push(actual);
-                        actual = Hop::default();
-                    }
-                    actual.hop_sending_time = Some(UTCTimestamp::try_from(value).map_err(serde::de::Error::custom)?);
-                },
-                "630" => {
-                    if actual.hop_ref_id.is_some() {
-                        hops.inner.push(actual);
-                        actual = Hop::default();
-                    }
-                    actual.hop_ref_id = Some(value.parse().map_err(serde::de::Error::custom)?);
-                },
-                // 627
-                _ => {
-                    hops.len = value.parse().map_err(serde::de::Error::custom)?;
-                },
-            }
-        }
-        if actual.hop_comp_id.is_some() || actual.hop_sending_time.is_some() || actual.hop_ref_id.is_some() {
-            hops.inner.push(actual);
-        }
-        Ok(hops)
-    }
-}
-
-impl Serialize for Hops {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let mut temp = vec![self.len.to_string()];
-        for hop in &self.inner {
-            if let Some(s) = &hop.hop_comp_id {
-                temp.push(format!("628={}", s));
-            }
-            if let Some(s) = &hop.hop_sending_time {
-                temp.push(format!("629={}", s.to_string()));
-            }
-            if let Some(s) = &hop.hop_ref_id {
-                temp.push(format!("630={}", s));
-            }
-        }
-        temp.join("\u{1}").serialize(serializer)
-    }
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
+#[derive(Deserialize, Serialize, Clone, Debug, Default, PartialEq)]
 pub struct Hop {
-    // #[serde(rename = "628")]
+    #[serde(rename = "628")]
     pub hop_comp_id: Option<String>,
-    // #[serde(rename = "629")]
+    #[serde(rename = "629")]
     pub hop_sending_time: Option<UTCTimestamp>,
-    // #[serde(rename = "630")]
+    #[serde(rename = "630")]
     pub hop_ref_id: Option<u64>,
 }
 
@@ -624,35 +553,30 @@ mod test {
             xml_data: Some(crate::entities::EncodedText("0123456789".to_owned())),
             message_encoding: None,
             last_msg_seq_num_processed: None,
-            hops: Some(
-                super::Hops {
-                    len: 2,
-                    inner: vec![
-                        super::Hop {
-                            hop_comp_id: Some(
-                                "A".to_owned(),
-                            ),
-                            hop_sending_time: Some(
-                                crate::entities::datetime::UTCTimestamp::try_from("20210310-16:38:01.821").unwrap(),
-                            ),
-                            hop_ref_id: Some(
-                                1,
-                            ),
-                        },
-                        super::Hop {
-                            hop_comp_id: Some(
-                                "B".to_owned(),
-                            ),
-                            hop_sending_time: Some(
-                                crate::entities::datetime::UTCTimestamp::try_from("20210310-16:38:01.821").unwrap(),
-                            ),
-                            hop_ref_id: Some(
-                                2,
-                            ),
-                        },
-                    ],
+            hops: Some(crate::entities::RepeatingValues(vec![
+                super::Hop {
+                    hop_comp_id: Some(
+                        "A".to_owned(),
+                    ),
+                    hop_sending_time: Some(
+                        crate::entities::datetime::UTCTimestamp::try_from("20210310-16:38:01.821").unwrap(),
+                    ),
+                    hop_ref_id: Some(
+                        1,
+                    ),
                 },
-            ),
+                super::Hop {
+                    hop_comp_id: Some(
+                        "B".to_owned(),
+                    ),
+                    hop_sending_time: Some(
+                        crate::entities::datetime::UTCTimestamp::try_from("20210310-16:38:01.821").unwrap(),
+                    ),
+                    hop_ref_id: Some(
+                        2,
+                    ),
+                },
+            ])),
         };
         let msg = "8=FIXT.1.1\u{1}9=78\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}627=2\u{1}628=A\u{1}629=20210310-16:38:01.821\u{1}630=1\u{1}628=B\u{1}629=20210310-16:38:01.821\u{1}630=2\u{1}";
         assert_eq!(crate::to_string(obj), Ok(msg.to_owned()));

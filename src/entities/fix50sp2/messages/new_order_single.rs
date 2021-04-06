@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, EncodedText, LocalMktDate, MultipleValue, UTCTimestamp, fix50sp2::{commission_data::CommissionData, commission_data_grp::CommissionDataGrp, currency::Currency, disclosure_instruction_grp::DisclosureInstructionGrp, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, financing_details::FinancingDetails, instrument::Instrument, matching_instructions::MatchingInstructions, order_attribute_grp::OrderAttributeGrp, order_qty_data::OrderQtyData, parties::Parties, peg_instructions::PegInstructions, pre_alloc_grp::PreAllocGrp, rate_source::RateSource, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, strategy_parameters_grp::StrategyParametersGrp, target_parties::TargetParties, trd_reg_publication_grp::TrdRegPublicationGrp, trd_reg_timestamps::TrdRegTimestamps, trdg_ses_grp::TrdgSesGrp, triggering_instruction::TriggeringInstruction, und_instrmt_grp::UndInstrmtGrp, value_checks_grp::ValueChecksGrp, yield_data::YieldData}, fixt11::{Trailer, header::{Header, HasHeader, MsgType}}, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, Currency, EncodedText, LocalMktDate, SeparatedValues, UTCTimestamp, fix50sp2::{commission_data::CommissionData, commission_data_grp::CommissionDataGrp, disclosure_instruction_grp::DisclosureInstructionGrp, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, financing_details::FinancingDetails, instrument::Instrument, matching_instructions::MatchingInstructions, order_attribute_grp::OrderAttributeGrp, order_qty_data::OrderQtyData, parties::Parties, peg_instructions::PegInstructions, pre_alloc_grp::PreAllocGrp, rate_source::RateSource, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, strategy_parameters_grp::StrategyParametersGrp, target_parties::TargetParties, trd_reg_publication_grp::TrdRegPublicationGrp, trd_reg_timestamps::TrdRegTimestamps, trdg_ses_grp::TrdgSesGrp, triggering_instruction::TriggeringInstruction, und_instrmt_grp::UndInstrmtGrp, value_checks_grp::ValueChecksGrp, yield_data::YieldData}, fixt11::{Trailer, header::{Header, HasHeader, MsgType}}, version::FixVersion};
 
 /// MsgType = D
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -67,7 +67,7 @@ pub struct NewOrderSingle {
     pub handl_inst: Option<HandlInst>,
     /// Can contain multiple instructions, space delimited. If OrdType (40) =P, exactly one of the following values ( ExecInst (18) = L, R, M, P, O, T, W, a, d) must be specified.
     #[serde(rename = "18")]
-    pub exec_inst: Option<MultipleValue<ExecInst>>,
+    pub exec_inst: Option<SeparatedValues<ExecInst>>,
     /// MinQty
     #[serde(rename = "110")]
     pub min_qty: Option<f64>,
@@ -187,7 +187,7 @@ pub struct NewOrderSingle {
     pub order_capacity: Option<OrderCapacity>,
     /// OrderRestrictions
     #[serde(rename = "529")]
-    pub order_restrictions: Option<MultipleValue<OrderRestrictions>>,
+    pub order_restrictions: Option<SeparatedValues<OrderRestrictions>>,
     /// PreTradeAnonymity
     #[serde(rename = "1091")]
     pub pre_trade_anonymity: Option<Boolean>,
@@ -275,7 +275,7 @@ pub struct NewOrderSingle {
     pub received_dept_id: Option<String>,
     /// CustOrderHandlingInst
     #[serde(rename = "1031")]
-    pub cust_order_handling_inst: Option<MultipleValue<CustOrderHandlingInst>>,
+    pub cust_order_handling_inst: Option<SeparatedValues<CustOrderHandlingInst>>,
     /// OrderHandlingInstSource
     #[serde(rename = "1032")]
     pub order_handling_inst_source: Option<OrderHandlingInstSource>,
@@ -428,7 +428,7 @@ impl NewOrderSingle {
         NewOrderSingle {
             header: Header {
                 begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::Heartbeat),
+                msg_type: Some(MsgType::NewOrderSingle),
                 appl_ver_id: Some(ApplVerID::FIX50SP2),
                 ..Default::default()
             },
