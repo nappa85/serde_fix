@@ -1,4 +1,4 @@
-use std::{fs::read_dir, path::{PathBuf, Path}};
+use std::{collections::HashMap, fs::read_dir, path::{PathBuf, Path}};
 
 use tokio::{fs::File, io::AsyncReadExt};
 
@@ -90,16 +90,17 @@ async fn main() -> Result<(), ()> {
     let entries = try_join_all(files.into_iter().map(|path| async {
         read_file(path).await
     })).await?;
-    let ref_entries = entries.iter().flatten();
+    let ref_entries = entries.iter().fold(HashMap::new(), |mut hm, ev| {
+        for e in ev {
+            let entry = hm.entry(format!("{:?}", e.elements)).or_insert_with(Vec::new);
+            entry.push(e);
+        }
+        hm
+    });
 
-    for entry1 in ref_entries.clone() {
-        for entry2 in ref_entries.clone() {
-            if entry1.file == entry2.file && entry1.name == entry2.name {
-                continue;
-            }
-            if entry1.elements == entry2.elements {
-                println!("Equal {}::{} == {}::{} ({:?})", entry1.file.display(), entry1.name, entry2.file.display(), entry2.name, entry1.elements);
-            }
+    for (footprint, entries) in ref_entries.clone() {
+        if entries.len() > 1 {
+            println!("Footprint {}:\n\t{}\n", footprint, entries.iter().map(|e| format!("{}::{}", e.file.display(), e.name)).collect::<Vec<_>>().join("\n\t"));
         }
     }
 
