@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::entities::{ApplVerID, Boolean, Currency, LocalMktDate, RepeatingValues, SeparatedValues, UTCTimestamp, fix50::order_qty_data::OrderQtyData, fix50sp2::parties::Parties, fixt11::{Trailer, header::{HasHeader, Header, MsgType}}, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, Currency, EncodedText, LocalMktDate, RepeatingValues, SeparatedValues, UTCTimestamp, fix50::underlying::Underlying, fix50sp2::{commission_data::CommissionData, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, financing_details::FinancingDetails, instrument::Instrument, order_qty_data::OrderQtyData, parties::Parties, peg_instructions::PegInstructions, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, trd_reg_timestamps::TrdRegTimestamps, triggering_instruction::TriggeringInstruction, yield_data::YieldData}, fixt11::{Trailer, header::{HasHeader, Header, MsgType}}, version::FixVersion};
 
 /// MsgType = D
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -204,7 +204,7 @@ pub struct NewOrderSingle {
 	pub forex_req: Option<ForexReq>,
 	/// Required if <a href="tag_121_ForexReq_.html">ForexReq&nbsp;(121)</a> = Y.
 	#[serde(rename = "120")]
-	pub settl_currency: Option<SettlCurrency>,
+	pub settl_currency: Option<Currency>,
 	/// Method for booking out this order. Used when notifying a broker that an order to be settled by that broker is to be booked
 	/// out as an OTC derivative (e.g. CFD or similar). Absence of this field implies regular booking.
 	#[serde(rename = "775")]

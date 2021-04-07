@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::entities::{ApplVerID, Boolean, Currency, LocalMktDate, RepeatingValues, SeparatedValues, UTCTimestamp, fix50::{order_qty_data::OrderQtyData}, fix50sp2::parties::Parties, fixt11::{Trailer, header::{HasHeader, Header, MsgType}}, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, Currency, EncodedText, LocalMktDate, RepeatingValues, SeparatedValues, UTCTimestamp, fix50::underlying::Underlying, fix50sp2::{commission_data::CommissionData, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, financing_details::FinancingDetails, instrument::Instrument, order_qty_data::OrderQtyData, parties::Parties, peg_instructions::PegInstructions, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, trd_reg_timestamps::TrdRegTimestamps, triggering_instruction::TriggeringInstruction, yield_data::YieldData}, fixt11::{Trailer, header::{HasHeader, Header, MsgType}}, version::FixVersion};
 
 //// MsgType = 8
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -378,7 +378,7 @@ pub struct ExecutionReport {
 	pub settl_curr_amt: Option<f64>,
 	/// Used to report results of forex accommodation trade
 	#[serde(rename = "120")]
-	pub settl_currency: Option<SettlCurrency>,
+	pub settl_currency: Option<Currency>,
 	/// Foreign exchange rate used to compute <a href="tag_119_SettlCurrAmt_.html">SettlCurrAmt&nbsp;(119)</a> from <a href="tag_15_Currency_.html">Currency&nbsp;(15)</a> to SettlCurrency
 	#[serde(rename = "155")]
 	pub settl_curr_fx_rate: Option<f64>,
@@ -604,7 +604,7 @@ pub struct Leg {
 	pub leg_last_px: Option<f64>,
 	/// LegSettlCurrency
 	#[serde(rename = "675")]
-	pub leg_settl_currency: Option<LegSettlCurrency>,
+	pub leg_settl_currency: Option<Currency>,
 	/// LegLastForwardPoints
 	#[serde(rename = "1073")]
 	pub leg_last_forward_points: Option<f64>,
@@ -624,7 +624,7 @@ pub struct MiscFee {
 	pub misc_fee_amt: Option<f64>,
 	/// MiscFeeCurr
 	#[serde(rename = "138")]
-	pub misc_fee_curr: Option<MiscFeeCurr>,
+	pub misc_fee_curr: Option<Currency>,
 	/// Required if <a href="tag_136_NoMiscFees_.html">NoMiscFees&nbsp;(136)</a> &gt; 0
 	#[serde(rename = "139")]
 	pub misc_fee_type: Option<MiscFeeType>,

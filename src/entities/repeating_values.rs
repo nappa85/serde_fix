@@ -65,7 +65,12 @@ where T: Serialize + DeserializeOwned + Default {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let mut temp = vec![self.0.len().to_string()];
         for t in &self.0 {
-            temp.push(crate::to_string(t).map_err(serde::ser::Error::custom)?);
+            let mut s = crate::to_string(t).map_err(serde::ser::Error::custom)?;
+            if s.ends_with('\u{1}') {
+                // avoid double separator
+                s.truncate(s.len() - 1);
+            }
+            temp.push(s);
         }
         temp.join("\u{1}").serialize(serializer)
     }
