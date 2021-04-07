@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::entities::{ApplVerID, Boolean, Currency, EncodedText, LocalMktDate, UTCTimestamp, fix50sp2::{application_sequence_control::ApplicationSequenceControl, commission_data::CommissionData, commission_data_grp::CommissionDataGrp, cont_amt_grp::ContAmtGrp, contra_grp::ContraGrp, disclosure_instruction_grp::DisclosureInstructionGrp, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, fills_grp::FillsGrp, financing_details::FinancingDetails, instrmt_leg_exec_grp::InstrmtLegExecGrp, instrument::Instrument, limit_amts::LimitAmts, matching_instructions::MatchingInstructions, misc_fees_grp::MiscFeesGrp, order_attribute_grp::OrderAttributeGrp, order_event_grp::OrderEventGrp, order_qty_data::OrderQtyData, parties::Parties, payment_grp::PaymentGrp, peg_instructions::PegInstructions, pre_alloc_grp::PreAllocGrp, price_qualifier_grp::PriceQualifierGrp, rate_source::RateSource, regulatory_trade_id_grp::RegulatoryTradeIDGrp, related_order_grp::RelatedOrderGrp, relative_value_grp::RelativeValueGrp, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, strategy_parameters_grp::StrategyParametersGrp, target_parties::TargetParties, throttle_response::ThrottleResponse, trade_price_condition_grp::TradePriceConditionGrp, trd_reg_publication_grp::TrdRegPublicationGrp, trd_reg_timestamps::TrdRegTimestamps, triggering_instruction::TriggeringInstruction, und_instrmt_grp::UndInstrmtGrp, value_checks_grp::ValueChecksGrp, yield_data::YieldData}, fixt11::{Trailer, header::{HasHeader, Header, MsgType}}, version::FixVersion};
+use crate::entities::{ApplVerID, Boolean, Currency, EncodedText, LocalMktDate, SeparatedValues, UTCTimestamp, fix50sp2::{application_sequence_control::ApplicationSequenceControl, commission_data::CommissionData, commission_data_grp::CommissionDataGrp, cont_amt_grp::ContAmtGrp, contra_grp::ContraGrp, disclosure_instruction_grp::DisclosureInstructionGrp, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, fills_grp::FillsGrp, financing_details::FinancingDetails, instrmt_leg_exec_grp::InstrmtLegExecGrp, instrument::Instrument, limit_amts::LimitAmts, matching_instructions::MatchingInstructions, misc_fees_grp::MiscFeesGrp, order_attribute_grp::OrderAttributeGrp, order_event_grp::OrderEventGrp, order_qty_data::OrderQtyData, parties::Parties, payment_grp::PaymentGrp, peg_instructions::PegInstructions, pre_alloc_grp::PreAllocGrp, price_qualifier_grp::PriceQualifierGrp, rate_source::RateSource, regulatory_trade_id_grp::RegulatoryTradeIDGrp, related_order_grp::RelatedOrderGrp, relative_value_grp::RelativeValueGrp, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, strategy_parameters_grp::StrategyParametersGrp, target_parties::TargetParties, throttle_response::ThrottleResponse, trade_price_condition_grp::TradePriceConditionGrp, trd_reg_publication_grp::TrdRegPublicationGrp, trd_reg_timestamps::TrdRegTimestamps, triggering_instruction::TriggeringInstruction, und_instrmt_grp::UndInstrmtGrp, value_checks_grp::ValueChecksGrp, yield_data::YieldData}, fixt11::{Trailer, header::{HasHeader, Header, MsgType}}, version::FixVersion};
 
 /// MsgType = 8
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -16,12 +16,15 @@ pub struct ExecutionReport {
 	#[serde(rename = "37")]
 	pub order_id: String,
 	/// Can be used to provide order id used by exchange or executing system. Can alternatively be used to convey implicit order priority.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "198")]
 	pub secondary_order_id: Option<String>,
 	/// SecondaryClOrdID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "526")]
 	pub secondary_cl_ord_id: Option<String>,
 	/// SecondaryExecID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "527")]
 	pub secondary_exec_id: Option<String>,
 	/// <p>Required when referring to orders that where electronically submitted over FIX or otherwise assigned a ClOrdID(11).<br>In the case of quotes can be mapped to:
@@ -31,58 +34,75 @@ pub struct ExecutionReport {
 	/// <li>QuoteID(117) of a MassQuote(35=i)</li>
 	/// <li>MassOrderReportID(2424) of a MassOrderAck(35=DK)</li>
 	/// </ul>
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "11")]
 	pub cl_ord_id: Option<String>,
 	/// Conditionally required for response to a Cancel or Cancel/Replace request (ExecType(150) = 6 (Pending Cancel), 5 (Replaced),
 	/// or 4 (Canceled)) when referring to orders that where electronically submitted over FIX or otherwise assigned a ClOrdID(11).
 	/// ClOrdID(11) of the previous accepted order (NOT the initial order of the day) when canceling or replacing an order.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41")]
 	pub orig_cl_ord_id: Option<String>,
 	/// ClOrdLinkID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "583")]
 	pub cl_ord_link_id: Option<String>,
 	/// Required if responding to a QuoteResponse(35=AJ) message. Echo back the Initiator's value specified in the message.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "693")]
 	pub quote_resp_id: Option<String>,
 	/// Required if responding to and if provided on the OrderStatusRequest(35=H) message. Echo back the value provided by the requester.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "790")]
 	pub ord_status_req_id: Option<String>,
 	/// Required if responding to a OrderMassStatusRequest(35=AF). Echo back the value provided by the requester.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "584")]
 	pub mass_status_req_id: Option<String>,
 	/// Host assigned entity ID that can be used to reference all components of a cross; sides + strategy + legs.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "961")]
 	pub host_cross_id: Option<String>,
 	/// Can be used when responding to an OrderMassStatusRequest(35=AF) to identify the total number of ExecutionReport(35=8) messages
 	/// which will be returned.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "911")]
 	pub tot_num_reports: Option<i32>,
 	/// Can be used when responding to an OrderMassStatusRequest(35=AF) to indicate that this is the last ExecutionReport(35=8) messages
 	/// which will be returned as a result of the request.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "912")]
 	pub last_rpt_requested: Option<LastRptRequested>,
 	/// <p>Specifies party information related to the submitter</p>
 	#[serde(flatten)]
 	pub parties: Option<Parties>,
 	/// TradeOriginationDate
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "229")]
 	pub trade_origination_date: Option<LocalMktDate>,
 	/// ContraGrp
 	#[serde(flatten)]
 	pub contra_grp: Option<ContraGrp>,
 	/// Required for executions against orders which were submitted as part of a list.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
 	pub list_id: Option<String>,
 	/// CrossID for the replacement order
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "548")]
 	pub cross_id: Option<String>,
 	/// Must match original cross order. Same order chaining mechanism as ClOrdID(11)/OrigClOrdID(41) with OrderCancelReplaceRequest(35=G).
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "551")]
 	pub orig_cross_id: Option<String>,
 	/// CrossType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "549")]
 	pub cross_type: Option<CrossType>,
 	/// TrdMatchID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "880")]
 	pub trd_match_id: Option<String>,
 	/// Unique identifier of execution message as assigned by sell-side (broker, exchange, ECN) (will be 0 (zero) for ExecType(150)
@@ -90,6 +110,7 @@ pub struct ExecutionReport {
 	#[serde(rename = "17")]
 	pub exec_id: String,
 	/// Required for ExecType(150) = H (Trade Cancel) and ExecType(150) = G (Trade Correct).
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "19")]
 	pub exec_ref_id: Option<String>,
 	/// Describes the purpose of the execution report.
@@ -99,54 +120,70 @@ pub struct ExecutionReport {
 	#[serde(rename = "39")]
 	pub ord_status: OrdStatus,
 	/// For optional use with <a href="tag_39_OrdStatus_.html">OrdStatus&nbsp;(39)</a> = 0 (New)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "636")]
 	pub working_indicator: Option<WorkingIndicator>,
 	/// For optional use with <a href="tag_150_ExecType_.html">ExecType&nbsp;(150)</a> = 8 (Rejected)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "103")]
 	pub ord_rej_reason: Option<OrdRejReason>,
 	/// Required for <a href="tag_150_ExecType_.html">ExecType&nbsp;(150)</a> = D (Restated).
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "378")]
 	pub exec_restatement_reason: Option<ExecRestatementReason>,
 	/// Required for executions against electronically submitted orders which were assigned an account by the institution or intermediary
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
 	pub account: Option<String>,
 	/// AcctIDSource
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "660")]
 	pub acct_id_source: Option<AcctIDSource>,
 	/// Specifies type of account
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "581")]
 	pub account_type: Option<AccountType>,
 	/// DayBookingInst
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "589")]
 	pub day_booking_inst: Option<DayBookingInst>,
 	/// BookingUnit
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "590")]
 	pub booking_unit: Option<BookingUnit>,
 	/// PreallocMethod
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "591")]
 	pub prealloc_method: Option<PreallocMethod>,
 	/// AllocID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "70")]
 	pub alloc_id: Option<String>,
 	/// Pre-trade allocation instructions.
 	#[serde(flatten)]
 	pub pre_alloc_grp: Option<PreAllocGrp>,
 	/// SettlType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "63")]
 	pub settl_type: Option<SettlType>,
 	/// Takes precedence over <a href="tag_63_SettlType_.html">SettlType&nbsp;(63)</a> value and conditionally required/omitted for specific <a href="tag_63_SettlType_.html">SettlType&nbsp;(63)</a> values.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
 	pub settl_date: Option<LocalMktDate>,
 	/// MatchType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "574")]
 	pub match_type: Option<MatchType>,
 	/// OrderCategory
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1115")]
 	pub order_category: Option<OrderCategory>,
 	/// CashMargin
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "544")]
 	pub cash_margin: Option<CashMargin>,
 	/// ClearingFeeIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "635")]
 	pub clearing_fee_indicator: Option<ClearingFeeIndicator>,
 	/// Instrument
@@ -165,6 +202,7 @@ pub struct ExecutionReport {
 	#[serde(flatten)]
 	pub stipulations: Option<Stipulations>,
 	/// QtyType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "854")]
 	pub qty_type: Option<QtyType>,
 	/// Conditionally required when the OrderQtyData component is required or specified in a prior, related message. For example,
@@ -175,21 +213,31 @@ pub struct ExecutionReport {
 	#[serde(flatten)]
 	pub order_qty_data: Option<OrderQtyData>,
 	/// LotType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1093")]
 	pub lot_type: Option<LotType>,
 	/// OrdType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40")]
 	pub ord_type: Option<OrdType>,
 	/// PriceType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "423")]
 	pub price_type: Option<PriceType>,
 	/// Required if specified on the order
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "44")]
 	pub price: Option<f64>,
 	/// PriceProtectionScope
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1092")]
 	pub price_protection_scope: Option<PriceProtectionScope>,
 	/// Required if specified on the order
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "99")]
 	pub stop_px: Option<f64>,
 	/// TriggeringInstruction
@@ -202,83 +250,125 @@ pub struct ExecutionReport {
 	#[serde(flatten)]
 	pub discretion_instructions: Option<DiscretionInstructions>,
 	/// The current price the order is pegged at.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "839")]
 	pub pegged_price: Option<f64>,
 	/// The reference price of a pegged order.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1095")]
 	pub pegged_ref_price: Option<f64>,
 	/// The current discretionary price of the order.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "845")]
 	pub discretion_price: Option<f64>,
 	/// The target strategy of the order.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "847")]
 	pub target_strategy: Option<TargetStrategy>,
 	/// Strategy parameter block
 	#[serde(flatten)]
 	pub strategy_parameters_grp: Option<StrategyParametersGrp>,
 	/// (Deprecated in FIX.5.0)For further specification of the <a href="tag_847_TargetStrategy_.html">TargetStrategy&nbsp;(847)</a> .
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "848")]
 	pub target_strategy_parameters: Option<String>,
 	/// (Deprecated in FIX.5.0) Mandatory for a TargetStrategy=Participate order and specifies the target particpation rate. For other
 	/// order types optionally specifies a volume limit (i.e. do not be more than this percent of the market volume)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "849")]
 	pub participation_rate: Option<f32>,
 	/// For communication of the performance of the order versus the target strategy
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "850")]
 	pub target_strategy_performance: Option<f64>,
 	/// Currency
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]
 	pub currency: Option<Currency>,
 	/// ComplianceID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "376")]
 	pub compliance_id: Option<String>,
 	/// SolicitedFlag
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "377")]
 	pub solicited_flag: Option<SolicitedFlag>,
 	/// Absence of this field indicates Day order
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "59")]
 	pub time_in_force: Option<TimeInForce>,
 	/// Time specified on the order at which the order should be considered valid
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "168")]
 	pub effective_time: Option<UTCTimestamp>,
 	/// Conditionally required if TimeInForce(59) = 6 (GTD) and ExpireTime(126) is not specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "432")]
 	pub expire_date: Option<LocalMktDate>,
 	/// Conditionally required if TimeInForce(59) = 6 (GTD) and ExpireDate(432) is not specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "126")]
 	pub expire_time: Option<UTCTimestamp>,
 	/// Can contain multiple instructions, space delimited.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "18")]
-	pub exec_inst: Option<ExecInst>,
+	pub exec_inst: Option<SeparatedValues<ExecInst>>,
 	/// AggressorIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1057")]
 	pub aggressor_indicator: Option<AggressorIndicator>,
 	/// OrderCapacity
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "528")]
 	pub order_capacity: Option<OrderCapacity>,
 	/// OrderRestrictions
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "529")]
-	pub order_restrictions: Option<OrderRestrictions>,
+	pub order_restrictions: Option<SeparatedValues<OrderRestrictions>>,
 	/// PreTradeAnonymity
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1091")]
 	pub pre_trade_anonymity: Option<Boolean>,
 	/// CustOrderCapacity
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "582")]
 	pub cust_order_capacity: Option<CustOrderCapacity>,
 	/// Quantity (e.g. shares) bought/sold on this (last) fill. Required if ExecType(150) = F (Trade) or ExecType(150) = G (Trade
 	/// Correct) unless FillsGrp or OrderEventGrp is used. If ExecType(150) = 7 (Stopped), represents the quantity stopped/guaranteed/protected
 	/// for.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "32")]
 	pub last_qty: Option<f64>,
 	/// Used for FX trades to express the quantity or amount of the other side of the currency. Conditionally required if ExecType(150)
 	/// = F (Trade) or G (Trade Correct) and is an FX trade.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1056")]
 	pub calculated_ccy_last_qty: Option<f64>,
 	/// Optionally used when ExecType(150) = F (Trade) or G (Trade Correct) and is a FX Swap trade. Used to express the swap points
 	/// for the swap trade event.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1071")]
 	pub last_swap_points: Option<f64>,
 	/// UnderlyingLastQty
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "652")]
 	pub underlying_last_qty: Option<f64>,
 	/// Price of this (last) fill. Required if ExecType(150) = ExecType = F (Trade) or G (Trade Correct) unless FillsGrp or OrderEventGrp
@@ -286,76 +376,118 @@ pub struct ExecutionReport {
 	/// (LastSpotRate(194) + LastForwardPoints(195)) rate for F/X orders.). If ExecType(150) = 7 (Stopped), represents the price stopped/guaranteed/protected
 	/// at. Not required for FX Swap when ExecType(150) = F (Trade) or G (Trade Correct) as there is no "all-in" rate that applies
 	/// to both legs of the FX Swap.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "31")]
 	pub last_px: Option<f64>,
 	/// UnderlyingLastPx
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "651")]
 	pub underlying_last_px: Option<f64>,
 	/// Last price expressed in percent-of-par. Conditionally required for Fixed Income trades when LastPx(31) is expressed in Yield,
 	/// Spread, Discount or any other price type that is not percent-of-par.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "669")]
 	pub last_par_px: Option<f64>,
 	/// Applicable for F/X orders
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "194")]
 	pub last_spot_rate: Option<f64>,
 	/// Applicable for F/X orders
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "195")]
 	pub last_forward_points: Option<f64>,
 	/// If ExecType(150) = F (Trade), indicates the market where the trade was executed. If ExecType(150) = 0 (New), indicates the
 	/// market where the order was routed.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "30")]
 	pub last_mkt: Option<String>,
 	/// TradingSessionID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "336")]
 	pub trading_session_id: Option<TradingSessionID>,
 	/// TradingSessionSubID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "625")]
 	pub trading_session_sub_id: Option<TradingSessionSubID>,
 	/// TimeBracket
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "943")]
 	pub time_bracket: Option<String>,
 	/// LastCapacity
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "29")]
 	pub last_capacity: Option<LastCapacity>,
 	/// Quantity open for further execution. If the OrdStatus(39) is = 4 (Canceled), 3 (Done For Day), C (Expired), B (Calculated),
 	/// or 8 (Rejected) (in which case the order is no longer active) then LeavesQty(151) could be 0, otherwise LeavesQty(151) = OrderQty(38)
 	/// - CumQty(14).
+	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "151")]
 	pub leaves_qty: f64,
 	/// Currently executed quantity for chain of orders.
+	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "14")]
 	pub cum_qty: f64,
 	/// Not required for markets where average price is not calculated by the market. Conditionally required otherwise.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "6")]
 	pub avg_px: Option<f64>,
 	/// For GT orders on days following the day of the first trade.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "424")]
 	pub day_order_qty: Option<f64>,
 	/// For GT orders on days following the day of the first trade.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "425")]
 	pub day_cum_qty: Option<f64>,
 	/// For GT orders on days following the day of the first trade.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "426")]
 	pub day_avg_px: Option<f64>,
 	/// Used to support fragmentation. Sum of NoFills(1362) across all messages with the same ExecID(17).
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1361")]
 	pub tot_no_fills: Option<i32>,
 	/// Indicates whether this is the last fragment in a sequence of message fragments. Only required where message has been fragmented.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "893")]
 	pub last_fragment: Option<LastFragment>,
 	/// Specifies the partial fills included in this Execution Report(35=8), mutually exclusive with OrderEventGrp component
 	#[serde(flatten)]
 	pub fills_grp: Option<FillsGrp>,
 	/// States whether executions are booked out or accumulated on a partially filled GT order
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "427")]
 	pub gt_booking_inst: Option<GTBookingInst>,
 	/// Used when reporting other than current day trades.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
 	pub trade_date: Option<LocalMktDate>,
 	/// Time the transaction represented by this ExecutionReport occurred
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
 	pub transact_time: Option<UTCTimestamp>,
 	/// ReportToExch
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "113")]
 	pub report_to_exch: Option<ReportToExch>,
 	/// Note: On a fill/partial-fill message, it represents value for that fill/partial fill. On ExecType(150) = B (Calculated), it
@@ -369,148 +501,239 @@ pub struct ExecutionReport {
 	#[serde(flatten)]
 	pub yield_data: Option<YieldData>,
 	/// GrossTradeAmt
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "381")]
 	pub gross_trade_amt: Option<f64>,
 	/// NumDaysInterest
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "157")]
 	pub num_days_interest: Option<i32>,
 	/// ExDate
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "230")]
 	pub ex_date: Option<LocalMktDate>,
 	/// AccruedInterestRate
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "158")]
 	pub accrued_interest_rate: Option<f32>,
 	/// AccruedInterestAmt
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "159")]
 	pub accrued_interest_amt: Option<f64>,
 	/// For fixed income products which pay lump-sum interest at maturity.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "738")]
 	pub interest_at_maturity: Option<f64>,
 	/// For repurchase agreements the accrued interest on termination.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "920")]
 	pub end_accrued_interest_amt: Option<f64>,
 	/// For repurchase agreements the start (dirty) cash consideration.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "921")]
 	pub start_cash: Option<f64>,
 	/// For repurchase agreements the end (dirty) cash consideration.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "922")]
 	pub end_cash: Option<f64>,
 	/// TradedFlatSwitch
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "258")]
 	pub traded_flat_switch: Option<TradedFlatSwitch>,
 	/// BasisFeatureDate
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "259")]
 	pub basis_feature_date: Option<LocalMktDate>,
 	/// BasisFeaturePrice
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "260")]
 	pub basis_feature_price: Option<f64>,
 	/// Concession
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "238")]
 	pub concession: Option<f64>,
 	/// TotalTakedown
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "237")]
 	pub total_takedown: Option<f64>,
 	/// On a fill/partial fill message, it represents value for that fill/partial fill. On a ExecType(150) = B (Calculated) message,
 	/// it represents cumulative value for the order. Value expressed in the currency reflected by the Currency(15) field.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "118")]
 	pub net_money: Option<f64>,
 	/// Used to report results of forex accommodation trade.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "119")]
 	pub settl_curr_amt: Option<f64>,
 	/// Used to report results of forex accommodation trade. Required for Non-Deliverable Forwards.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "120")]
 	pub settl_currency: Option<Currency>,
 	/// RateSource
 	#[serde(flatten)]
 	pub rate_source: Option<RateSource>,
 	/// OffshoreIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2795")]
 	pub offshore_indicator: Option<OffshoreIndicator>,
 	/// Foreign exchange rate used to compute SettlCurrAmt(119) from Currency(15) to SettlCurrency(120).
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "155")]
 	pub settl_curr_fx_rate: Option<f64>,
 	/// Specifies whether the SettlCurrFxRate(155) should be multiplied or divided.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "156")]
 	pub settl_curr_fx_rate_calc: Option<SettlCurrFxRateCalc>,
 	/// HandlInst
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "21")]
 	pub handl_inst: Option<HandlInst>,
 	/// MinQty
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "110")]
 	pub min_qty: Option<f64>,
 	/// MatchIncrement
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1089")]
 	pub match_increment: Option<f64>,
 	/// MaxPriceLevels
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1090")]
 	pub max_price_levels: Option<i32>,
 	/// DisplayInstruction
 	#[serde(flatten)]
 	pub display_instruction: Option<DisplayInstruction>,
 	/// MaxFloor
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "111")]
 	pub max_floor: Option<f64>,
 	/// For use in derivatives omnibus accounting
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "77")]
 	pub position_effect: Option<PositionEffect>,
 	/// (Deprecated in FIX.5.0)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "210")]
 	pub max_show: Option<f64>,
 	/// Method for booking out this order. Used when notifying a broker that an order to be settled by that broker is to be booked
 	/// out as an OTC derivative (e.g. CFD or similar). Absence of this field implies regular booking.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "775")]
 	pub booking_type: Option<BookingType>,
 	/// Text
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText_.html">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "354")]
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text_.html">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding_.html">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(alias = "355")]
 	pub encoded_text: Option<EncodedText<355>>,
 	/// (Deprecated in FIX.5.0)Can be used with <a href="tag_40_OrdType_.html">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the "value date" for the future portion of a F/X swap.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "193")]
 	pub settl_date_2: Option<LocalMktDate>,
 	/// (Deprecated in FIX.5.0)Can be used with <a href="tag_40_OrdType_.html">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the order quantity for the future portion of a F/X swap.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "192")]
 	pub order_qty_2: Option<f64>,
 	/// Can be used with <a href="tag_40_OrdType_.html">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the forward points (added to LastSpotRate) for the future portion of a F/X swap.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "641")]
 	pub last_forward_points_2: Option<f64>,
 	/// Default is a single security if not specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "442")]
 	pub multi_leg_reporting_type: Option<MultiLegReportingType>,
 	/// For CIV - Optional
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "480")]
 	pub cancellation_rights: Option<CancellationRights>,
 	/// MoneyLaunderingStatus
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "481")]
 	pub money_laundering_status: Option<MoneyLaunderingStatus>,
 	/// Reference to <a href="message_Registration_Instructions_o_.html">Registration Instructions&nbsp;(o)</a> message for this Order.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "513")]
 	pub regist_id: Option<String>,
 	/// Supplementary registration information for this Order
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "494")]
 	pub designation: Option<String>,
 	/// For CIV - Optional
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "483")]
 	pub trans_bkd_time: Option<UTCTimestamp>,
 	/// For CIV - Optional
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "515")]
 	pub exec_valuation_point: Option<UTCTimestamp>,
 	/// For CIV - Optional
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "484")]
 	pub exec_price_type: Option<ExecPriceType>,
 	/// For CIV - Optional
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "485")]
 	pub exec_price_adjustment: Option<f64>,
 	/// PriorityIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "638")]
 	pub priority_indicator: Option<PriorityIndicator>,
 	/// PriceImprovement
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "639")]
 	pub price_improvement: Option<f64>,
 	/// Applicable only on OrdStatus(39) = 1 of (Partially filled) or 2(Filled).
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "851")]
 	pub last_liquidity_ind: Option<LastLiquidityInd>,
 	/// ContAmtGrp
@@ -520,60 +743,87 @@ pub struct ExecutionReport {
 	#[serde(flatten)]
 	pub instrmt_leg_exec_grp: Option<InstrmtLegExecGrp>,
 	/// CopyMsgIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "797")]
 	pub copy_msg_indicator: Option<Boolean>,
 	/// Required if any miscellaneous fees are reported.
 	#[serde(flatten)]
 	pub misc_fees_grp: Option<MiscFeesGrp>,
 	/// DividendYield
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1380")]
 	pub dividend_yield: Option<f32>,
 	/// ManualOrderIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1028")]
 	pub manual_order_indicator: Option<Boolean>,
 	/// CustDirectedOrder
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1029")]
 	pub cust_directed_order: Option<Boolean>,
 	/// ReceivedDeptID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1030")]
 	pub received_dept_id: Option<String>,
 	/// CustOrderHandlingInst
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1031")]
-	pub cust_order_handling_inst: Option<CustOrderHandlingInst>,
+	pub cust_order_handling_inst: Option<SeparatedValues<CustOrderHandlingInst>>,
 	/// OrderHandlingInstSource
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1032")]
 	pub order_handling_inst_source: Option<OrderHandlingInstSource>,
 	/// TrdRegTimestamps
 	#[serde(flatten)]
 	pub trd_reg_timestamps: Option<TrdRegTimestamps>,
 	/// Volatility
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1188")]
 	pub volatility: Option<f64>,
 	/// TimeToExpiration
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1189")]
 	pub time_to_expiration: Option<f64>,
 	/// RiskFreeRate
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1190")]
 	pub risk_free_rate: Option<f64>,
 	/// PriceDelta
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "811")]
 	pub price_delta: Option<f64>,
 	/// MatchingInstructions
 	#[serde(flatten)]
 	pub matching_instructions: Option<MatchingInstructions>,
 	/// Conditionally required when TimeInForce(59)=10 (Good for Time)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1629")]
 	pub exposure_duration: Option<i32>,
 	/// For contingency orders, the type of contingency as specified in the order
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1385")]
 	pub contingency_type: Option<ContingencyType>,
 	/// LimitAmts
 	#[serde(flatten)]
 	pub limit_amts: Option<LimitAmts>,
 	/// ExDestination
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "100")]
 	pub ex_destination: Option<String>,
 	/// ExDestinationIDSource
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1133")]
 	pub ex_destination_id_source: Option<ExDestinationIDSource>,
 	/// ThrottleResponse
@@ -581,164 +831,238 @@ pub struct ExecutionReport {
 	pub throttle_response: Option<ThrottleResponse>,
 	/// Upfront Price for CDS transactions. Conditionally required if TradePriceNegotiationMethod(1740) = 4(Percent of par and upfront
 	/// amount), 5(Deal spread and upfront amount) or 6(Upfront points and upfront amount)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1743")]
 	pub last_upfront_price: Option<f64>,
 	/// TradePriceNegotiationMethod
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1740")]
 	pub trade_price_negotiation_method: Option<TradePriceNegotiationMethod>,
 	/// UpfrontPriceType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1741")]
 	pub upfront_price_type: Option<UpfrontPriceType>,
 	/// Required if specified on the order.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1742")]
 	pub upfront_price: Option<f64>,
 	/// Available for optional use when Side(54) = 6(Sell short exempt)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1688")]
 	pub short_sale_exemption_reason: Option<ShortSaleExemptionReason>,
 	/// Reference to the MDEntryID(278) of this order or quote in the market data.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "278")]
 	pub md_entry_id: Option<String>,
 	/// RefOrderID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1080")]
 	pub ref_order_id: Option<String>,
 	/// RefOrderIDSource
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1081")]
 	pub ref_order_id_source: Option<RefOrderIDSource>,
 	/// Specifies parties not directly associated with or owning the order, who are to be informed to effect processing of the order
 	#[serde(flatten)]
 	pub target_parties: Option<TargetParties>,
 	/// Triggered
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1823")]
 	pub triggered: Option<Triggered>,
 	/// AuctionInstruction
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1805")]
 	pub auction_instruction: Option<AuctionInstruction>,
 	/// TradingCapacity
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1815")]
 	pub trading_capacity: Option<TradingCapacity>,
 	/// Applies to trades resulting from the order
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1390")]
 	pub trade_publish_indicator: Option<TradePublishIndicator>,
 	/// MarketSegmentID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1300")]
 	pub market_segment_id: Option<String>,
 	/// Specifies the order events included in this ExecutionReport(35=8), mutually exclusive with FillsGrp component.
 	#[serde(flatten)]
 	pub order_event_grp: Option<OrderEventGrp>,
 	/// MinQtyMethod
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1822")]
 	pub min_qty_method: Option<MinQtyMethod>,
 	/// DisclosureInstructionGrp
 	#[serde(flatten)]
 	pub disclosure_instruction_grp: Option<DisclosureInstructionGrp>,
 	/// ClearingAccountType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1816")]
 	pub clearing_account_type: Option<ClearingAccountType>,
 	/// RefClOrdID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1806")]
 	pub ref_cl_ord_id: Option<String>,
 	/// AuctionType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1803")]
 	pub auction_type: Option<AuctionType>,
 	/// AuctionAllocationPct
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1804")]
 	pub auction_allocation_pct: Option<f32>,
 	/// LockedQty
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1808")]
 	pub locked_qty: Option<f64>,
 	/// SecondaryLockedQty
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1809")]
 	pub secondary_locked_qty: Option<f64>,
 	/// LockType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1807")]
 	pub lock_type: Option<LockType>,
 	/// ReleaseInstruction
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1810")]
 	pub release_instruction: Option<ReleaseInstruction>,
 	/// ReleaseQty
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1811")]
 	pub release_qty: Option<f64>,
 	/// RelatedHighPrice
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1819")]
 	pub related_high_price: Option<f64>,
 	/// RelatedLowPrice
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1820")]
 	pub related_low_price: Option<f64>,
 	/// RelatedPriceSource
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1821")]
 	pub related_price_source: Option<RelatedPriceSource>,
 	/// LastQtyVariance
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1828")]
 	pub last_qty_variance: Option<f64>,
 	/// Reason description for rejecting the transaction
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText_.html">EncodedRejectTextLen(1665)&nbsp;(1665)</a> field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1664")]
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1328_RejectText_.html">RejectedText(1328)&nbsp;(1328)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding_.html">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(alias = "1665")]
 	pub encoded_reject_text: Option<EncodedText<1665>>,
 	/// OrderOrigination
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1724")]
 	pub order_origination: Option<OrderOrigination>,
 	/// OriginatingDeptID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1725")]
 	pub originating_dept_id: Option<String>,
 	/// ReceivingDeptID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1726")]
 	pub receiving_dept_id: Option<String>,
 	/// OwnerType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "522")]
 	pub owner_type: Option<OwnerType>,
 	/// In the case of quotes can be mapped to: QuoteMsgID(1166) of a single Quote(35=S) or QuoteID(117) of a Mass Quote(35=i).
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1166")]
 	pub quote_msg_id: Option<String>,
 	/// CoverPrice
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1917")]
 	pub cover_price: Option<f64>,
 	/// ShortMarkingExemptIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2102")]
 	pub short_marking_exempt_indicator: Option<ShortMarkingExemptIndicator>,
 	/// RefRiskLimitCheckID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2334")]
 	pub ref_risk_limit_check_id: Option<String>,
 	/// Conditionally required when RefRiskLimitCheckID(2334) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2335")]
 	pub ref_risk_limit_check_id_type: Option<RefRiskLimitCheckIDType>,
 	/// RegulatoryTradeIDGrp
 	#[serde(flatten)]
 	pub regulatory_trade_id_grp: Option<RegulatoryTradeIDGrp>,
 	/// MidPx
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "631")]
 	pub mid_px: Option<f64>,
 	/// TrdType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "828")]
 	pub trd_type: Option<TrdType>,
 	/// RegulatoryTransactionType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2347")]
 	pub regulatory_transaction_type: Option<RegulatoryTransactionType>,
 	/// ComplianceText
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2404")]
 	pub compliance_text: Option<String>,
 	/// Must be set if <a href="tag_2352_EncodedComplianceText_.html">EncodedComplianceTextLen(2352)&nbsp;(2352)</a> field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2351")]
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_2404_ComplianceText_.html">ComplianceText(2404)&nbsp;(2404)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding_.html">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(alias = "2352")]
 	pub encoded_compliance_text: Option<EncodedText<2352>>,
 	/// Required if provided on the order message. Echo back the value provided in the order message.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2422")]
 	pub order_request_id: Option<i32>,
 	/// Can be used to link execution to the MassOrder(35=DJ) message.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2423")]
 	pub mass_order_request_id: Option<String>,
 	/// Can be used to provide further detail for ExecType(150) field.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2431")]
 	pub exec_type_reason: Option<ExecTypeReason>,
 	/// Can be used to specify the remaining quantity that was cancelled prior to order reaching terminal state (i.e. when LeavesQty(151)=0).
 	/// If specified, OrderQty(38) = CumQty(14) + CxlQty(84).
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "84")]
 	pub cxl_qty: Option<f64>,
 	/// ExposureDurationUnit
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1916")]
 	pub exposure_duration_unit: Option<ExposureDurationUnit>,
 	/// RelativeValueGrp
@@ -748,27 +1072,35 @@ pub struct ExecutionReport {
 	#[serde(flatten)]
 	pub commission_data_grp: Option<CommissionDataGrp>,
 	/// VenueType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1430")]
 	pub venue_type: Option<VenueType>,
 	/// May be used as an alternative to MatchingInstructions when the identifier does not appear in another field.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2362")]
 	pub self_match_prevention_id: Option<String>,
 	/// CrossedIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2523")]
 	pub crossed_indicator: Option<CrossedIndicator>,
 	/// AlgorithmicTradeIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2667")]
 	pub algorithmic_trade_indicator: Option<AlgorithmicTradeIndicator>,
 	/// TrdSubType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "829")]
 	pub trd_sub_type: Option<TrdSubType>,
 	/// SecondaryTrdType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "855")]
 	pub secondary_trd_type: Option<TrdType>,
 	/// PreviouslyReported
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "570")]
 	pub previously_reported: Option<PreviouslyReported>,
 	/// May be used to bilaterally inform counterparty of trade reporting status.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2524")]
 	pub trade_reporting_indicator: Option<TradeReportingIndicator>,
 	/// OrderAttributeGrp
@@ -781,55 +1113,81 @@ pub struct ExecutionReport {
 	#[serde(flatten)]
 	pub trade_price_condition_grp: Option<TradePriceConditionGrp>,
 	/// TrdMatchSubID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1891")]
 	pub trd_match_sub_id: Option<String>,
 	/// MaximumPriceDeviation
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2676")]
 	pub maximum_price_deviation: Option<f32>,
 	/// ValueChecksGrp
 	#[serde(flatten)]
 	pub value_checks_grp: Option<ValueChecksGrp>,
 	/// Can be used to highlight change of order ownership.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2679")]
 	pub order_ownership_indicator: Option<OrderOwnershipIndicator>,
 	/// PaymentGrp
 	#[serde(flatten)]
 	pub payment_grp: Option<PaymentGrp>,
 	/// ExDestinationType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2704")]
 	pub ex_destination_type: Option<ExDestinationType>,
 	/// PriceQualifierGrp
 	#[serde(flatten)]
 	pub price_qualifier_grp: Option<PriceQualifierGrp>,
 	/// ReportingPx
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2750")]
 	pub reporting_px: Option<f64>,
 	/// ReportingQty
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2751")]
 	pub reporting_qty: Option<f64>,
 	/// CurrentWorkingPrice
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2838")]
 	pub current_working_price: Option<f64>,
 	/// EventInitiatorType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2830")]
 	pub event_initiator_type: Option<EventInitiatorType>,
 	/// RoutingArrangmentIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2883")]
 	pub routing_arrangment_indicator: Option<RoutingArrangmentIndicator>,
 	/// May be used for cross orders submitted with single order messages.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2884")]
 	pub contra_routing_arrangment_indicator: Option<i32>,
 	/// May be used for cross orders submitted with single order messages.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2882")]
 	pub contra_order_origination: Option<i32>,
 	/// May be used to indicate the post-execution trade continuation or lifecycle event. This should echo the value in the message
 	/// that resulted in this report.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1937")]
 	pub trade_continuation: Option<TradeContinuation>,
 	/// TradeContinuationText
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2374")]
 	pub trade_continuation_text: Option<String>,
 	/// Must be set if EncodedTradeContinuationText(2371) field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2372")]
 	/// Encoded (non-ASCII characters) representation of the TradeContinuationText(2374) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
@@ -839,9 +1197,11 @@ pub struct ExecutionReport {
 	#[serde(flatten)]
 	pub related_order_grp: Option<RelatedOrderGrp>,
 	/// RegulatoryReportType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1934")]
 	pub regulatory_report_type: Option<RegulatoryReportType>,
 	/// AffiliatedFirmsTradeIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2525")]
 	pub affiliated_firms_trade_indicator: Option<AffiliatedFirmsTradeIndicator>,
 	/// Standard Message Trailer

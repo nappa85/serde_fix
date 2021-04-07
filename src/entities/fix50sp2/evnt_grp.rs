@@ -27,28 +27,41 @@ impl AsMut<Vec<EvntGrpItem>> for EvntGrp {
 pub struct EvntGrpItem {
     /// Required if NoEvents(864) > 0.
     #[serde(rename = "865")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub event_type: Option<EventType>,
     /// Conditionally required when EventTime(1145) is specified.
     #[serde(rename = "866")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub event_date: Option<LocalMktDate>,
     #[serde(rename = "1145")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub event_time: Option<UTCTimestamp>,
     #[serde(rename = "867")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
     pub event_px: Option<f64>,
     #[serde(rename = "868")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub event_text: Option<String>,
     /// Conditionally required when EventTimePeriod(1826) is specified.
     #[serde(rename = "1827")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub event_time_unit: Option<TimeUnit>,
     /// Conditionally required when EventTimeUnit(1827) is specified.
     #[serde(rename = "1826")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
     pub event_time_period: Option<i32>,
     #[serde(rename = "2340")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub event_month_year: Option<MonthYear>,
     /// Must be set if EncodedEventText(1579) field is specified and must immediately precede it.
     /// Encoded (non-ASCII characters) representation of the EventText(868) field in the encoded format specified via the MessageEncoding(347) field.
     #[serde(rename = "1578")]
     #[serde(alias = "1579")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub encoded_event_text: Option<EncodedText<1579>>,
 }
 

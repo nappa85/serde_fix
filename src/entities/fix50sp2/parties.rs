@@ -26,20 +26,27 @@ impl AsMut<Vec<Party>> for Parties {
 pub struct Party {
     /// Required if NoPartyIDs(453) > 0. Identification of the party.
     #[serde(rename = "448")]
+	#[serde(skip_serializing_if = "Option::is_none")]
     pub party_id: Option<String>,
     /// Required if NoPartyIDs(453) > 0. Used to identify classification source.
     #[serde(rename = "447")]
+	#[serde(skip_serializing_if = "Option::is_none")]
     pub party_id_source: Option<PartyIDSource>,
     /// Required if NoPartyIDs(453) > 0. Identifies the type of PartyID(448).
     #[serde(rename = "452")]
+	#[serde(skip_serializing_if = "Option::is_none")]
     pub party_role: Option<PartyRole>,
     /// PartyRoleQualifier
     #[serde(rename = "2376")]
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
     pub party_role_qualifier: Option<i32>,
     /// PtysSubGrp
     #[serde(rename = "802")]
     #[serde(alias = "523")]
     #[serde(alias = "803")]
+	#[serde(skip_serializing_if = "Option::is_none")]
     pub party_sub_ids: Option<RepeatingValues<PtysSubGrp>>,
 }
 

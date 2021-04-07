@@ -124,6 +124,7 @@ async fn tag_processor(t: &Captures<'_>, client: &Client, base_url: &str, tr_bod
         .await
         .map_err(|e| error!("Child body {} load error: {}", &t["url"], e))?;
     let t_type = vartype.captures(&descr).ok_or_else(|| error!("Unrecognized vartype on {}", &t["url"]))?;
+    let mut workaround = false;
     let type_name: Cow<'_, str> = if let Some(list) = enum_body.captures(&descr) {
         enums.push((name.clone(), (&list["enum"]).to_owned()));
         if (&t_type["type"]).starts_with("Multiple") {
@@ -145,10 +146,13 @@ async fn tag_processor(t: &Captures<'_>, client: &Client, base_url: &str, tr_bod
                 return Err(());
             }
         }
+        else {
+            workaround = needs_workaround(temp.as_ref());
+        }
         temp
     };
 
-    println!("\t/// {}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},", clean_comment(&t["comment"], &t["name"]), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"]));
+    println!("\t/// {}{}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},", clean_comment(&t["comment"], &t["name"]), option_check(&t["req"], workaround), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"]));
 
     Ok(name)
 }
@@ -203,6 +207,20 @@ fn maybe_option<'a>(name: &'a str, req: &'a str) -> Cow<'a, str> {
     }
     else {
         format!("Option<{}>", name).into()
+    }
+}
+
+fn needs_workaround(var_type: &str) -> bool {
+    static TYPES: &[&str] = &["i32", "f64", "f32", "usize"];
+    TYPES.contains(&var_type)
+}
+
+fn option_check(req: &str, workaround: bool) -> &str {
+    match (req == "Y", workaround) {
+        (true, false) => "",
+        (true, true) => "\n\t#[serde(deserialize_with = \"crate::entities::workarounds::from_str\")]// https://github.com/serde-rs/serde/issues/1183",
+        (false, false) => "\n\t#[serde(skip_serializing_if = \"Option::is_none\")]",
+        (false, true) => "\n\t#[serde(skip_serializing_if = \"Option::is_none\")]\n\t#[serde(deserialize_with = \"crate::entities::workarounds::from_opt_str\")]// https://github.com/serde-rs/serde/issues/1183\n\t#[serde(default)]",
     }
 }
 

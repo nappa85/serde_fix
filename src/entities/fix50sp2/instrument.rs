@@ -9,272 +9,401 @@ use super::{additional_term_grp::AdditionalTermGrp, asset_attribute_grp::AssetAt
 pub struct Instrument {
 	/// Common, "human understood" representation of the security. <a href="tag_48_SecurityID_.html">SecurityID&nbsp;(48)</a> value can be specified if no symbol exists (e.g. non-exchange traded Collective Investment Vehicles). Use "[N/A]" for products
 	/// which do not have a symbol.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "55")]
 	pub symbol: Option<String>,
 	/// Used in Fixed Income with a value of "WI" to indicate "When Issued" for a security to be reissued under an old CUSIP or ISIN
 	/// or with a value of "CD" to indicate a EUCP with lump-sum interest rather than discount price.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
 	pub symbol_sfx: Option<String>,
 	/// Takes precedence in identifying security to counterparty over <a href="tag_455_SecurityAltID_.html">SecurityAltID&nbsp;(455)</a> block. Requires <a href="tag_22_SecurityIDSource_.html">SecurityIDSource&nbsp;(22)</a> if specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
 	pub security_id: Option<String>,
 	/// Required if <a href="tag_48_SecurityID_.html">SecurityID&nbsp;(48)</a> is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
 	pub security_id_source: Option<SecurityIDSource>,
 	/// Number of alternate Security Identifiers
 	#[serde(flatten)]
 	pub sec_alt_id_grp: Option<SecAltIDGrp>,
 	/// Indicates the type of product the security is associated with (high-level category)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "460")]
 	pub product: Option<Product>,
 	/// Identifies an entire suite of products for a given market. In Futures this may be "interest rates", "agricultural", "equity
 	/// indexes", etc
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1227")]
 	pub product_complex: Option<String>,
 	/// An exchange specific name assigned to a group of related securities which may be concurrently affected by market events and
 	/// actions.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1151")]
 	pub security_group: Option<String>,
 	/// Indicates the type of security using ISO 10962 standard, Classification of Financial Instruments (CFI code) values. It is
 	/// recommended that <a href="tag_461_CFICode_.html">CFICode&nbsp;(461)</a> be used instead of <a href="tag_167_SecurityType_.html">SecurityType&nbsp;(167)</a> for non-Fixed Income instruments.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "461")]
 	pub cfi_code: Option<String>,
 	/// It is recommended that <a href="tag_461_CFICode_.html">CFICode&nbsp;(461)</a> be used instead of <a href="tag_167_SecurityType_.html">SecurityType&nbsp;(167)</a> for non-Fixed Income instruments. Required for Fixed Income. Refer to Volume 7 - Fixed Income Futures and Options should be
 	/// specified using the <a href="tag_461_CFICode_.html">CFICode&nbsp;(461)</a> field instead of <a href="tag_167_SecurityType_.html">SecurityType&nbsp;(167)</a> (Refer to Volume 7 - Recommendations and Guidelines for Futures and Options Markets.)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "167")]
 	pub security_type: Option<SecurityType>,
 	/// Sub-type qualification/identification of the <a href="tag_167_SecurityType_.html">SecurityType&nbsp;(167)</a> (e.g. for SecurityType="MLEG"). If specified, <a href="tag_167_SecurityType_.html">SecurityType&nbsp;(167)</a> is required.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "762")]
 	pub security_sub_type: Option<String>,
 	/// Specifies the month and year of maturity. Applicable for standardized derivatives which are typically only referenced b y
 	/// month and year (e.g. S&amp;P futures). Note <a href="tag_541_MaturityDate_.html">MaturityDate&nbsp;(541)</a> (a full date) can also be specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "200")]
 	pub maturity_month_year: Option<MonthYear>,
 	/// Specifies date of maturity (a full date). Note that standardized derivatives which are typically only referenced by month
 	/// and year (e.g. S&amp;P futures).may use <a href="tag_200_MaturityMonthYear_.html">MaturityMonthYear&nbsp;(200)</a> and/or this field. When using MaturityMonthYear, it is recommended that markets and sell sides report the <a href="tag_541_MaturityDate_.html">MaturityDate&nbsp;(541)</a> on all outbound messages as a means of data enrichment.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "541")]
 	pub maturity_date: Option<LocalMktDate>,
 	/// For NDFs this represents the fixing time of the contract. It is optional to specify the fixing time.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1079")]
 	pub maturity_time: Option<TZTimeOnly>,
 	/// Indicator to determine if <a href="block_Instrument_.html">Instrument</a> is Settle on Open.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "966")]
 	pub settle_on_open_flag: Option<String>,
 	/// InstrmtAssignmentMethod
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1049")]
 	pub instrmt_assignment_method: Option<InstrmtAssignmentMethod>,
 	/// Gives the current state of the instrument
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "965")]
 	pub security_status: Option<SecurityStatus>,
 	/// Date interest is to be paid. Used in identifying Corporate Bond issues.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "224")]
 	pub coupon_payment_date: Option<LocalMktDate>,
 	/// RestructuringType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1449")]
 	pub restructuring_type: Option<RestructuringType>,
 	/// Seniority
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1450")]
 	pub seniority: Option<Seniority>,
 	/// NotionalPercentageOutstanding
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1451")]
 	pub notional_percentage_outstanding: Option<f32>,
 	/// OriginalNotionalPercentageOutstanding
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1452")]
 	pub original_notional_percentage_outstanding: Option<f32>,
 	/// AttachmentPoint
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1457")]
 	pub attachment_point: Option<f32>,
 	/// DetachmentPoint
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1458")]
 	pub detachment_point: Option<f32>,
 	/// Date instrument was issued. For Fixed Income IOIs for new issues, specifies the issue date.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "225")]
 	pub issue_date: Option<LocalMktDate>,
 	/// (Deprecated in FIX.4.4)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "239")]
 	pub repo_collateral_security_type: Option<SecurityType>,
 	/// (Deprecated in FIX.4.4)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "226")]
 	pub repurchase_term: Option<i32>,
 	/// (Deprecated in FIX.4.4)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "227")]
 	pub repurchase_rate: Option<f32>,
 	/// For Fixed Income: Amortization Factor for deriving Current face from Original face for ABS or MBS securities, note the fraction
 	/// may be greater than, equal to or less than 1. In TIPS securities this is the Inflation index. Qty * Factor * Price = Gross
 	/// Trade Amount. For Derivatives: Contract Value Factor by which price must be adjusted to determine the true nominal value of
 	/// one futures/options contract. (Qty * Price) * Factor = Nominal Value.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "228")]
 	pub factor: Option<f64>,
 	/// CreditRating
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "255")]
 	pub credit_rating: Option<String>,
 	/// The location at which records of ownership are maintained for this instrument, and at which ownership changes must be recorded.
 	/// Can be used in conjunction with ISIN to address ISIN uniqueness issues.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "543")]
 	pub instr_registry: Option<String>,
 	/// ISO Country code of instrument issue (e.g. the country portion typically used in ISIN). Can be used in conjunction with non-ISIN <a href="tag_48_SecurityID_.html">SecurityID&nbsp;(48)</a> (e.g. CUSIP for Municipal Bonds without ISIN) to provide uniqueness.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "470")]
 	pub country_of_issue: Option<CountryOfIssue>,
 	/// A two-character state or province abbreviation.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "471")]
 	pub state_or_province_of_issue: Option<String>,
 	/// The three-character IATA code for a locale (e.g. airport code for Municipal Bonds).
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "472")]
 	pub locale_of_issue: Option<String>,
 	/// (Deprecated in FIX.4.4)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "240")]
 	pub redemption_date: Option<LocalMktDate>,
 	/// Used for derivatives, such as options and covered warrants
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "202")]
 	pub strike_price: Option<f64>,
 	/// Used for derivatives
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "947")]
 	pub strike_currency: Option<Currency>,
 	/// Used for derivatives. Multiplier applied to the strike price for the purpose of calculating the settlement value.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "967")]
 	pub strike_multiplier: Option<f64>,
 	/// Used for derivatives. The number of shares/units for the financial instrument involved in the option trade.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "968")]
 	pub strike_value: Option<f64>,
 	/// StrikePriceDeterminationMethod
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1478")]
 	pub strike_price_determination_method: Option<StrikePriceDeterminationMethod>,
 	/// When specified, PutOrCall(201), StrikePrice(202), and StrikePriceBoundaryPrecision(1480) must also be specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1479")]
 	pub strike_price_boundary_method: Option<StrikePriceBoundaryMethod>,
 	/// StrikePriceBoundaryPrecision
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1480")]
 	pub strike_price_boundary_precision: Option<f32>,
 	/// UnderlyingPriceDeterminationMethod
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1481")]
 	pub underlying_price_determination_method: Option<UnderlyingPriceDeterminationMethod>,
 	/// Used for derivatives, such as options and covered warrants to indicate a versioning of the contract when required due to corporate
 	/// actions to the underlying. Should not be used to indicate type of option - use the CFICode[461] for this purpose.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "206")]
 	pub opt_attribute: Option<char>,
 	/// For Fixed Income, Convertible Bonds, Derivatives, etc. Note: If used, quantities should be expressed in the "nominal" (e.g.
 	/// contracts vs. shares) amount.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "231")]
 	pub contract_multiplier: Option<f64>,
 	/// ContractMultiplierUnit
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1435")]
 	pub contract_multiplier_unit: Option<ContractMultiplierUnit>,
 	/// FlowScheduleType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1439")]
 	pub flow_schedule_type: Option<FlowScheduleType>,
 	/// Minimum price increment for the instrument. Could also be used to represent tick value.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "969")]
 	pub min_price_increment: Option<f64>,
 	/// Minimum price increment amount associated with the <a href="tag_969_MinPriceIncrement_.html">MinPriceIncrement&nbsp;(969)</a> . For listed derivatives, the value can be calculated by multiplying MinPriceIncrement by <a href="tag_231_ContractMultiplier_.html">ContractValueFactor&nbsp;(231)</a>
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1146")]
 	pub min_price_increment_amount: Option<f64>,
 	/// Used to indicate the size of the underlying commodity on which the contract is based (e.g., 2500 lbs of lean cattle, 1000
 	/// barrels of crude oil, 1000 bushels of corn, etc.)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "996")]
 	pub unit_of_measure: Option<UnitOfMeasure>,
 	/// UnitOfMeasureQty
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1147")]
 	pub unit_of_measure_qty: Option<f64>,
 	/// PriceUnitOfMeasure
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1191")]
 	pub price_unit_of_measure: Option<UnitOfMeasure>,
 	/// PriceUnitOfMeasureQty
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1192")]
 	pub price_unit_of_measure_qty: Option<f64>,
 	/// Conditionally required if SettlSubMethod(2579) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1193")]
 	pub settl_method: Option<SettlMethod>,
 	/// Type of exercise of a derivatives security
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1194")]
 	pub exercise_style: Option<ExerciseStyle>,
 	/// OptPayoutType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1482")]
 	pub opt_payout_type: Option<OptPayoutType>,
 	/// Conditionally required if OptPayoutType(1482) = 3 (Binary).
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1195")]
 	pub opt_payout_amount: Option<f64>,
 	/// Method for price quotation
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1196")]
 	pub price_quote_method: Option<PriceQuoteMethod>,
 	/// For futures, indicates type of valuation method applied
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1197")]
 	pub valuation_method: Option<ValuationMethod>,
 	/// Indicates whether the instruments are pre-listed only or can also be defined via user request
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1198")]
 	pub list_method: Option<ListMethod>,
 	/// Used to express the ceiling price of a capped call
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1199")]
 	pub cap_price: Option<f64>,
 	/// Used to express the floor price of a capped put
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1200")]
 	pub floor_price: Option<f64>,
 	/// Used to express option right
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "201")]
 	pub put_or_call: Option<PutOrCall>,
 	/// Used to indicate if a security has been defined as flexible according to "non-standard" means. Analog to CFICode Standard/Non-standard
 	/// indicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1244")]
 	pub flexible_indicator: Option<Boolean>,
 	/// Used to indicate if a product or group of product supports the creation of flexible securities
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1242")]
 	pub flex_product_eligibility_indicator: Option<Boolean>,
 	/// Used to indicate a time unit for the contract (e.g., days, weeks, months, etc.)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "997")]
 	pub time_unit: Option<TimeUnit>,
 	/// For Fixed Income.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "223")]
 	pub coupon_rate: Option<f32>,
 	/// Can be used to identify the security.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "207")]
 	pub security_exchange: Option<String>,
 	/// Position Limit for the instrument.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "970")]
 	pub position_limit: Option<i32>,
 	/// Near-term Position Limit for the instrument.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "971")]
 	pub nt_position_limit: Option<i32>,
 	/// Issuer
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
 	pub issuer: Option<String>,
 	/// Must be set if EncodedIssuer(349) field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "348")]
 	pub encoded_issuer_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Issuer(106) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "349")]
 	pub encoded_issuer: Option<String>,
 	/// SecurityDesc
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
 	pub security_desc: Option<String>,
 	/// Must be set if EncodedSecurityDesc(351) field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "350")]
 	pub encoded_security_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the SecurityDesc(107) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "351")]
 	pub encoded_security_desc: Option<String>,
 	/// Embedded XML document describing the instrument.
 	#[serde(flatten)]
 	pub security_xml: Option<SecurityXML>,
 	/// Identifies MBS / ABS pool
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "691")]
 	pub pool: Option<String>,
 	/// Must be present for MBS/TBA
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "667")]
 	pub contract_settl_month: Option<MonthYear>,
 	/// The program under which a commercial paper is issued
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "875")]
 	pub cp_program: Option<CPProgram>,
 	/// The registration type of a commercial paper issuance
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "876")]
 	pub cp_reg_type: Option<String>,
 	/// Number of repeating EventType group entries.
 	#[serde(flatten)]
 	pub evnt_grp: Option<EvntGrp>,
 	/// If different from IssueDate
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "873")]
 	pub dated_date: Option<LocalMktDate>,
 	/// If different from <a href="tag_225_IssueDate_.html">IssueDate&nbsp;(225)</a> and DatedDate
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "874")]
 	pub interest_accrual_date: Option<LocalMktDate>,
 	/// Used to identify the parties related to a specific instrument.
@@ -284,93 +413,136 @@ pub struct Instrument {
 	#[serde(flatten)]
 	pub complex_events: Option<ComplexEvents>,
 	/// PriceQuoteCurrency
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1524")]
 	pub price_quote_currency: Option<Currency>,
 	/// ObligationType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1739")]
 	pub obligation_type: Option<ObligationType>,
 	/// ShortSaleRestriction
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1687")]
 	pub short_sale_restriction: Option<ShortSaleRestriction>,
 	/// UnitOfMeasureCurrency
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1716")]
 	pub unit_of_measure_currency: Option<Currency>,
 	/// PriceUnitOfMeasureCurrency
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1717")]
 	pub price_unit_of_measure_currency: Option<Currency>,
 	/// <p>Spread table code referred by the security or symbol</p>
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1787")]
 	pub ref_tick_table_id: Option<i32>,
 	/// Required if AssetSubClass(1939) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1938")]
 	pub asset_class: Option<AssetClass>,
 	/// Required if AssetType(1940) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1939")]
 	pub asset_sub_class: Option<AssetSubClass>,
 	/// Required if AssetSubType(2735) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1940")]
 	pub asset_type: Option<String>,
 	/// SecondaryAssetGrp
 	#[serde(flatten)]
 	pub secondary_asset_grp: Option<SecondaryAssetGrp>,
 	/// SwapClass
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1941")]
 	pub swap_class: Option<SwapClass>,
 	/// Conditionally required when MthToDefault(1943) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1942")]
 	pub nth_to_default: Option<i32>,
 	/// MthToDefault
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1943")]
 	pub mth_to_default: Option<i32>,
 	/// SettledEntityMatrixSource
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1944")]
 	pub settled_entity_matrix_source: Option<String>,
 	/// SettledEntityMatrixPublicationDate
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1945")]
 	pub settled_entity_matrix_publication_date: Option<LocalMktDate>,
 	/// CouponType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1946")]
 	pub coupon_type: Option<CouponType>,
 	/// TotalIssuedAmount
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1947")]
 	pub total_issued_amount: Option<f64>,
 	/// Conditionally required when CouponFrequencyUnit(1949) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1948")]
 	pub coupon_frequency_period: Option<i32>,
 	/// Conditionally required when CouponFrequencyPeriod(1948) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1949")]
 	pub coupon_frequency_unit: Option<CouponFrequencyUnit>,
 	/// CouponDayCount
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1950")]
 	pub coupon_day_count: Option<CouponDayCount>,
 	/// ConvertibleBondEquityID
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1951")]
 	pub convertible_bond_equity_id: Option<String>,
 	/// Conditionally required when ConvertibleBondEquityID(1951) is specified.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1952")]
 	pub convertible_bond_equity_id_source: Option<SecurityIDSource>,
 	/// ContractPriceRefMonth
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1953")]
 	pub contract_price_ref_month: Option<MonthYear>,
 	/// LienSeniority
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1954")]
 	pub lien_seniority: Option<LienSeniority>,
 	/// LoanFacility
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1955")]
 	pub loan_facility: Option<LoanFacility>,
 	/// ReferenceEntityType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1956")]
 	pub reference_entity_type: Option<ReferenceEntityType>,
 	/// IndexSeries
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1957")]
 	pub index_series: Option<i32>,
 	/// IndexAnnexVersion
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1958")]
 	pub index_annex_version: Option<i32>,
 	/// IndexAnnexDate
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1959")]
 	pub index_annex_date: Option<LocalMktDate>,
 	/// IndexAnnexSource
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1960")]
 	pub index_annex_source: Option<String>,
 	/// DateAdjustment
@@ -398,52 +570,74 @@ pub struct Instrument {
 	#[serde(flatten)]
 	pub asset_attribute_grp: Option<AssetAttributeGrp>,
 	/// SwapSubClass
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1575")]
 	pub swap_sub_class: Option<SwapSubClass>,
 	/// SettlRateIndex
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1577")]
 	pub settl_rate_index: Option<String>,
 	/// SettlRateIndexLocation
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1580")]
 	pub settl_rate_index_location: Option<String>,
 	/// OptionExpirationDesc
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1581")]
 	pub option_expiration_desc: Option<String>,
 	/// Must be set if EncodedOptionExpirationDesc(1697) field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "1678")]
 	pub encoded_option_expiration_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the OptionExpirationDesc(1581) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1697")]
 	pub encoded_option_expiration_desc: Option<String>,
 	/// StrikeUnitOfMeasure
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1698")]
 	pub strike_unit_of_measure: Option<UnitOfMeasure>,
 	/// StrikeIndex
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1866")]
 	pub strike_index: Option<String>,
 	/// StrikeIndexSpread
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2001")]
 	pub strike_index_spread: Option<f64>,
 	/// ValuationSource
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2002")]
 	pub valuation_source: Option<String>,
 	/// ValuationReferenceModel
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2140")]
 	pub valuation_reference_model: Option<String>,
 	/// StrategyType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2141")]
 	pub strategy_type: Option<StrategyType>,
 	/// CommonPricingIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2142")]
 	pub common_pricing_indicator: Option<Boolean>,
 	/// SettlDisruptionProvision
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2143")]
 	pub settl_disruption_provision: Option<SettlDisruptionProvision>,
 	/// InstrumentRoundingDirection
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2144")]
 	pub instrument_rounding_direction: Option<InstrumentRoundingDirection>,
 	/// InstrumentRoundingPrecision
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2145")]
 	pub instrument_rounding_precision: Option<i32>,
 	/// PricingDateTime
@@ -456,73 +650,105 @@ pub struct Instrument {
 	#[serde(flatten)]
 	pub option_exercise: Option<OptionExercise>,
 	/// TradingUnitPeriodMultiplier
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2353")]
 	pub trading_unit_period_multiplier: Option<i32>,
 	/// AssetGroup
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2210")]
 	pub asset_group: Option<AssetGroup>,
 	/// OrigStrikePrice
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2578")]
 	pub orig_strike_price: Option<f64>,
 	/// StrikePricePrecision
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2577")]
 	pub strike_price_precision: Option<i32>,
 	/// SettlSubMethod
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2579")]
 	pub settl_sub_method: Option<SettlSubMethod>,
 	/// BlockTradeEligibilityIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2575")]
 	pub block_trade_eligibility_indicator: Option<Boolean>,
 	/// LowExercisePriceOptionIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2574")]
 	pub low_exercise_price_option_indicator: Option<Boolean>,
 	/// InstrumentPricePrecision
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2576")]
 	pub instrument_price_precision: Option<i32>,
 	/// StrikeIndexCurvePoint
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2600")]
 	pub strike_index_curve_point: Option<String>,
 	/// StrikeIndexQuote
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2601")]
 	pub strike_index_quote: Option<StrikeIndexQuote>,
 	/// ExtraordinaryEventGrp
 	#[serde(flatten)]
 	pub extraordinary_event_grp: Option<ExtraordinaryEventGrp>,
 	/// ExtraordinaryEventAdjustmentMethod
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2602")]
 	pub extraordinary_event_adjustment_method: Option<ExtraordinaryEventAdjustmentMethod>,
 	/// ExchangeLookAlike
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2603")]
 	pub exchange_look_alike: Option<Boolean>,
 	/// Used to express in-the-moneyness behavior in general terms for the option without the use of StrikePrice(202) and PutOrCall(201).
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2681")]
 	pub in_the_money_condition: Option<InTheMoneyCondition>,
 	/// ContraryInstructionEligibilityIndicator
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2685")]
 	pub contrary_instruction_eligibility_indicator: Option<Boolean>,
 	/// FinancialInstrumentFullName
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2714")]
 	pub financial_instrument_full_name: Option<String>,
 	/// Must be set if EncodedFinancialInstrumentFullName(2716) field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "2715")]
 	pub encoded_financial_instrument_full_name_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the FinancialInstrumentFullName(2714) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2716")]
 	pub encoded_financial_instrument_full_name: Option<String>,
 	/// AssetSubType
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2735")]
 	pub asset_sub_type: Option<String>,
 	/// FinancialInstrumentShortName
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2737")]
 	pub financial_instrument_short_name: Option<String>,
 	/// ReturnTrigger
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2753")]
 	pub return_trigger: Option<ReturnTrigger>,
 	/// DeliveryRouteOrCharter
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2752")]
 	pub delivery_route_or_charter: Option<String>,
 	/// CouponOtherDayCount
+	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2879")]
 	pub coupon_other_day_count: Option<String>,
 }

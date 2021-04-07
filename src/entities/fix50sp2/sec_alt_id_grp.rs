@@ -26,7 +26,9 @@ impl AsMut<Vec<SecAltID>> for SecAltIDGrp {
 #[derive(Deserialize, Serialize, Clone, Debug, Default, PartialEq)]
 pub struct SecAltID {
     #[serde(rename = "455")]
+	#[serde(skip_serializing_if = "Option::is_none")]
     pub security_alt_id: Option<String>,
     #[serde(rename = "456")]
+	#[serde(skip_serializing_if = "Option::is_none")]
     pub security_alt_id_source: Option<SecurityIDSource>,
 }
