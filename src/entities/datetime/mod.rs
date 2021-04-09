@@ -8,6 +8,6 @@ pub type TZTimestamp = String;
 mod utc_timestamp;
 pub use utc_timestamp::UTCTimestamp;
 mod utc_dateonly;
-pub use utc_dateony::UTCDateOnly;
+pub use utc_dateonly::UTCDateOnly;
 mod local_mkt_date;
 pub use local_mkt_date::LocalMktDate;
