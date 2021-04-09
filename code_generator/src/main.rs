@@ -1,4 +1,10 @@
-use std::borrow::Cow;
+use std::{borrow::Cow, path::PathBuf};
+
+use tokio::{io::{AsyncWrite, AsyncWriteExt, stdout}, fs::{File, create_dir_all, remove_file}};
+
+use futures_util::stream::{iter, StreamExt};
+
+use async_lock::Mutex;
 
 use structopt::StructOpt;
 
@@ -8,12 +14,18 @@ use regex::{Captures, Regex};
 
 use convert_case::{Case, Casing};
 
-use log::error;
+use log::{error, info};
 
 #[derive(Debug, StructOpt)]
 #[structopt(name = "code_generator", about = "FiX code generator")]
 struct Opt {
+    #[structopt(short, long)]
+    recursive: bool,
     url: String,
+    #[structopt(short, long)]
+    out: Option<PathBuf>,
+    #[structopt(short, long, default_value = "10")]
+    concurrency: usize,
 }
 
 #[tokio::main]
@@ -28,31 +40,162 @@ async fn main() -> Result<(), ()> {
         .build()
         .map_err(|e| error!("Client build error: {}", e))?;
 
-    // prepare base_url for future relative calls
-    let mut base_url = opt.url.split('/').collect::<Vec<_>>();
-    base_url.pop();
-    base_url.push("");
-    let base_url = base_url.join("/");
+    if opt.recursive {
+        let base_dir = opt.out.ok_or_else(|| error!("Can't work recursively without an <out> dir"))?;
+        if !base_dir.as_path().exists() {
+            create_dir_all(&base_dir).await
+                .map_err(|e| error!("Error creating folder {}: {}", base_dir.display(), e))?;
+        }
+        if !base_dir.as_path().is_dir() {
+            error!("When working recursively, <out> must be a directory");
+            return Err(());
+        }
 
-    // call url and retrieve body text
-    let text = client.get(&opt.url)
-        .send()
-        .await
-        .map_err(|e| error!("URL get error: {}", e))?
-        .text()
-        .await
-        .map_err(|e| error!("Body load error: {}", e))?;
+        let text = get_body(&opt.url, &client).await?;
+        let base_url = get_base_url(&opt.url);
+
+        let block_mod = Mutex::new(Vec::new());
+        let message_mod = Mutex::new(Vec::new());
+
+        let li = Regex::new(r#"<li><a target="main" href="(?P<url>[^"]+)">(\(\w+\)&nbsp;)?(?P<name>[^<&]+)(&nbsp;\(\w+\))?</a></li>"#)
+            .map_err(|e| error!("Error building li Regex: {}", e))?;
+        iter(li.captures_iter(&text)).for_each_concurrent(Some(opt.concurrency), |c| {
+            let mut file = base_dir.clone();
+            let base_url = &base_url;
+            let client = &client;
+            let block_mod = &block_mod;
+            let message_mod = &message_mod;
+            async move {
+                let is_message;
+                let name = (&c["name"]).replace(|c| {
+                        static CHARS: &[char] = &['/', '(', ')'];
+                        CHARS.contains(&c)
+                    }, "").to_case(Case::Snake);
+                if (&c["url"]).starts_with("message_") {
+                    file.push("messages");
+                    if !file.as_path().exists() {
+                        if let Err(e) = create_dir_all(&file).await {
+                            error!("Error creating folder {}: {}", file.display(), e);
+                            return;
+                        }
+                    }
+                    is_message = true;
+                }
+                else {
+                    if !(&c["url"]).starts_with("block_") {
+                        return;
+                    }
+                    is_message = false;
+                }
+                file.push(name.clone());
+                file = file.with_extension("rs");
+                if file.as_path().exists() {
+                    return;
+                }
+
+                let url = format!("{}{}", base_url, &c["url"]);
+                info!("{} => {}", url, file.display());
+                match File::create(&file).await {
+                    Ok(mut f) => {
+                        if parse_url(&url, &client, is_message, &mut f).await.is_err() {
+                            remove_file(&file).await
+                                .map_err(|e| error!("File delete error {}: {}", file.display(), e))
+                                .ok();
+                        }
+                        else {
+                            if is_message {
+                                let mut lock = message_mod.lock().await;
+                                lock.push((name, clean_name(&c["name"])));
+                            }
+                            else {
+                                let mut lock = block_mod.lock().await;
+                                lock.push(name);
+                            }
+                        }
+                    },
+                    Err(e) => error!("File open error {}: {}", file.display(), e),
+                }
+            }
+        }).await;
+
+        let lock = message_mod.lock().await;
+        let messages;
+        if !lock.is_empty() {
+            messages = true;
+            let mut file = base_dir.clone();
+            file.push("messages");
+            file.push("mod.rs");
+            if !file.as_path().exists() {
+                let mut f = File::create(&file)
+                    .await
+                    .map_err(|e| error!("File open error {}: {}", file.display(), e))?;
+                for (mod_name, struct_name) in lock.iter() {
+                    f.write_all(format!("pub mod {};\npub use {}::{};\n", mod_name, mod_name, struct_name).as_bytes())
+                        .await
+                        .map_err(|e| error!("File write error {}: {}", file.display(), e))?;
+                }
+            }
+        }
+        else {
+            messages = false;
+        }
+
+        let lock = block_mod.lock().await;
+        if !lock.is_empty() {
+            let mut file = base_dir.clone();
+            file.push("mod.rs");
+            if !file.as_path().exists() {
+                let mut f = File::create(&file)
+                    .await
+                    .map_err(|e| error!("File open error {}: {}", file.display(), e))?;
+                if messages {
+                    f.write_all("pub mod messages;\n".as_bytes())
+                        .await
+                        .map_err(|e| error!("File write error {}: {}", file.display(), e))?;
+                }
+                for mod_name in lock.iter() {
+                    f.write_all(format!("pub mod {};\n", mod_name).as_bytes())
+                        .await
+                        .map_err(|e| error!("File write error {}: {}", file.display(), e))?;
+                }
+            }
+        }
+    }
+    else {
+        if let Some(file) = opt.out {
+            if file.as_path().is_dir() {
+                error!("When working on a single <url>, <out> must be a file");
+                return Err(());
+            }
+
+            let mut f = File::create(&file)
+                .await
+                .map_err(|e| error!("File open error {}: {}", file.display(), e))?;
+            parse_url(&opt.url, &client, false, &mut f).await?;
+        }
+        else {
+            let mut stdout = stdout();
+            parse_url(&opt.url, &client, false, &mut stdout).await?;
+        }
+    }
+
+    Ok(())
+}
+
+async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message: bool, out: &mut W) -> Result<(), ()> {
+    let text = get_body(url, client).await?;
+    let base_url = get_base_url(url);
 
     // prepare regexs
     let table = Regex::new(r#"<h1>(&lt;)?(?P<name>\w+)(&gt;)?[\s\S]+?<table[^>]+>[\n\s]+<tr class="tbl-hdr">([\n\s]+<th[^>]*>[^<]+</th>)+[\n\s]+</tr>(?P<body>[\s\S]+?)</table>"#)
         .map_err(|e| error!("Error building table Regex: {}", e))?;
     let tr = Regex::new(r#"<tr[^>]+>(?P<body>[\s\S]+?)</tr>(?P<rows>([\n\s]+<tr[^>]+>[\n\s]+<td[^>]+>=&gt;</td>[\s\S]+?</tr>)+)?"#)
         .map_err(|e| error!("Error building tr Regex: {}", e))?;
-    let block = Regex::new(r#"<td class="block[^>]+><a href="[^"]+">&lt;(?P<name>[\w\s]+)&gt;</a></td>[\n\s]+<td class="req[^>]+>(?P<req>[YNC])</td>[\n\s]+<td class="comment[^>]+>(?P<comment>[\s\S]*?)</td>"#)
+    let block = Regex::new(r#"<td class="block[^>]+><a[\s\S]+?href="[^"]+">&lt;(?P<name>[\w\s]+)&gt;</a></td>[\n\s]+<td class="req[^>]+>(?P<req>[YNC])</td>[\n\s]+<td class="comment[^>]+>(?P<comment>[\s\S]*?)</td>"#)
         .map_err(|e| error!("Error building block Regex: {}", e))?;
-    let tag = Regex::new(r#"<td class="tag[^>]+>(?P<id>\d+)</td>[\n\s]+<td class="field-name[^>]+><a href="(?P<url>[^"]+)">(?P<name>[\w\s]+)</a></td>[\s\S]+?<td class="req[^>]+>(?P<req>[YNC])</td>[\n\s]+<td class="comment[^>]+>(?P<comment>[\s\S]*?)</td>"#)
+    let tag = Regex::new(r#"<td class="tag[^>]+>(?P<id>\d+)</td>[\n\s]+<td class="field-name[^>]+><a[\s\S]+?href="(?P<url>[^"]+)">(?P<name>[\w\s]+)</a></td>[\s\S]+?<td class="req[^>]+>(?P<req>[YNC])</td>[\n\s]+<td class="comment[^>]+>(?P<comment>[\s\S]*?)</td>"#)
         .map_err(|e| error!("Error building tag Regex: {}", e))?;
-    let vartype = Regex::new(r#"<h1>\w+<font[^>]+> \(Tag = \d+, Type: <a href="[^"]+">(?P<type>[\w-]+)</a>\)</font></h1>"#)
+    let vartype = Regex::new(r#"<h1>\w+<font[^>]+> \(Tag = \d+, Type: <a[\s\S]+?href="[^"]+">(?P<type>[\w-]+)</a>\)</font></h1>"#)
         .map_err(|e| error!("Error building vartype Regex: {}", e))?;
     let enum_body = Regex::new(r#"<p>Valid values:[\n\s]+<table[^>]+>(?P<enum>[\s\S]+?)</table>[\n\s]+</p>"#)
         .map_err(|e| error!("Error building enum_body Regex: {}", e))?;
@@ -62,19 +205,23 @@ async fn main() -> Result<(), ()> {
 
     // retrieve struct name and table body
     let captures = table.captures(&text).ok_or_else(|| error!("Unrecognized body table"))?;
-    println!("#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{", clean_name(&captures["name"]));
+    out.write_all(format!("\nuse serde::{{Deserialize, Serialize}};\n\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{\n", clean_name(&captures["name"])).as_bytes())
+        .await
+        .map_err(|e| error!("{}", e))?;
     for tr_match in tr.captures_iter(&captures["body"]) {
         let tr_body = &tr_match["body"];
 
         // an import block
         if let Some(b) = block.captures(tr_body) {
             let name = clean_name(&b["name"]);
-            println!("\t/// {}\n\t#[serde(flatten)]\n\tpub {}: {},", clean_comment(&b["comment"], &b["name"]), to_snake_case(&name), maybe_option(&name, &b["req"]));
+            out.write_all(format!("\t/// {}\n\t#[serde(flatten)]\n\tpub {}: {},\n", clean_comment(&b["comment"], &b["name"]), to_snake_case(&name), maybe_option(&name, &b["req"], if is_message { 2 } else { 1 })).as_bytes())
+                .await
+                .map_err(|e| error!("{}", e))?;
         }
         // a normal tagvalue
         else if let Some(t) = tag.captures(tr_body) {
             let is_array = tr_match.name("rows").is_some();
-            let name = tag_processor(&t, &client, &base_url, tr_body, is_array, &mut enums, &vartype, &enum_body).await?;
+            let name = tag_processor(&t, &client, &base_url, tr_body, is_array, &mut enums, &vartype, &enum_body, out).await?;
             if is_array {
                 arrays.push(((&name[0..(name.len() - 1)]).to_owned(), (&tr_match["rows"]).to_owned()));
             }
@@ -84,16 +231,22 @@ async fn main() -> Result<(), ()> {
             return Err(());
         }
     }
-    println!("}}");
+    out.write_all("}\n".as_bytes())
+        .await
+        .map_err(|e| error!("{}", e))?;
 
     // manage arrays
     if !arrays.is_empty() {
         for (name, list) in arrays {
-            println!("\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{", name);
+            out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{\n", name).as_bytes())
+                .await
+                .map_err(|e| error!("{}", e))?;
             for t in tag.captures_iter(&list) {
-                tag_processor(&t, &client, &base_url, &list, false, &mut enums, &vartype, &enum_body).await?;
+                tag_processor(&t, &client, &base_url, &list, false, &mut enums, &vartype, &enum_body, out).await?;
             }
-            println!("}}");
+            out.write_all("}\n".as_bytes())
+                .await
+                .map_err(|e| error!("{}", e))?;
         }
     }
 
@@ -102,19 +255,25 @@ async fn main() -> Result<(), ()> {
         let enum_items = Regex::new(r#"<tr[^>]+>[\n\s]+<td class="val">'(?P<val>[^']+)'</td>[\n\s]+<td class="val-descr">(?P<desc>[\s\S]+?)</td>[\n\s]+</tr>"#)
             .map_err(|e| error!("Error building enum_items Regex: {}", e))?;
         for (name, list) in enums {
-            println!("\n#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]\npub enum {} {{", name);
+            out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]\npub enum {} {{\n", name).as_bytes())
+                .await
+                .map_err(|e| error!("{}", e))?;
             for cap in enum_items.captures_iter(&list) {
                 let name = clean_enum_name(&cap["desc"], &cap["val"]).map_err(|_| error!("Unable to clean enum name for {:?}", cap))?;
-                println!("\t/// {}\n\t#[serde(rename = \"{}\")]\n\t{},", clean_comment(&cap["desc"], &cap["val"]), &cap["val"], name);
+                out.write_all(format!("\t/// {}\n\t#[serde(rename = \"{}\")]\n\t{},\n", clean_comment(&cap["desc"], &cap["val"]), &cap["val"], name).as_bytes())
+                    .await
+                    .map_err(|e| error!("{}", e))?;
             }
-            println!("}}");
+            out.write_all("}\n".as_bytes())
+                .await
+                .map_err(|e| error!("{}", e))?;
         }
     }
 
     Ok(())
 }
 
-async fn tag_processor(t: &Captures<'_>, client: &Client, base_url: &str, tr_body: &str, is_array: bool, enums: &mut Vec<(String, String)>, vartype: &Regex, enum_body: &Regex) -> Result<String, ()> {
+async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client, base_url: &str, tr_body: &str, is_array: bool, enums: &mut Vec<(String, String)>, vartype: &Regex, enum_body: &Regex, out: &mut W) -> Result<String, ()> {
     let mut name = clean_name(&t["name"]);
     let descr = client.get(format!("{}{}", base_url, &t["url"]))
         .send()
@@ -128,7 +287,7 @@ async fn tag_processor(t: &Captures<'_>, client: &Client, base_url: &str, tr_bod
     let type_name: Cow<'_, str> = if let Some(list) = enum_body.captures(&descr) {
         enums.push((name.clone(), (&list["enum"]).to_owned()));
         if (&t_type["type"]).starts_with("Multiple") {
-            format!("SeparatedValues<{}>", name).into()
+            format!("crate::entities::SeparatedValues<{}>", name).into()
         }
         else {
             name.as_str().into()
@@ -139,7 +298,7 @@ async fn tag_processor(t: &Captures<'_>, client: &Client, base_url: &str, tr_bod
         if is_array {
             if temp.as_ref() == "usize" {
                 name = (&name[2..]).to_owned();
-                temp = format!("RepeatingValues<{}>", &name[0..(name.len() - 1)]).into();
+                temp = format!("crate::entities::RepeatingValues<{}>", &name[0..(name.len() - 1)]).into();
             }
             else {
                 error!("Found array without length: {}", tr_body);
@@ -152,9 +311,30 @@ async fn tag_processor(t: &Captures<'_>, client: &Client, base_url: &str, tr_bod
         temp
     };
 
-    println!("\t/// {}{}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},", clean_comment(&t["comment"], &t["name"]), option_check(&t["req"], workaround), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"]));
+    out.write_all(format!("\t/// {}{}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},\n", clean_comment(&t["comment"], &t["name"]), option_check(&t["req"], workaround), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"], 0)).as_bytes())
+        .await
+        .map_err(|e| error!("{}", e))?;
 
     Ok(name)
+}
+
+// prepare base_url for future relative calls
+fn get_base_url(url: &str) -> String {
+    let mut base_url = url.split('/').collect::<Vec<_>>();
+    base_url.pop();
+    base_url.push("");
+    base_url.join("/")
+}
+
+// call url and retrieve body text
+async fn get_body(url: &str, client: &Client) -> Result<String, ()> {
+    client.get(url)
+        .send()
+        .await
+        .map_err(|e| error!("URL get error {}: {}", url, e))?
+        .text()
+        .await
+        .map_err(|e| error!("Body load error {}: {}", url, e))
 }
 
 fn clean_name(name: &str) -> String {
@@ -201,12 +381,22 @@ fn to_snake_case(name: &str) -> String {
     name.to_case(Case::Snake)
 }
 
-fn maybe_option<'a>(name: &'a str, req: &'a str) -> Cow<'a, str> {
+fn maybe_option<'a>(name: &'a str, req: &'a str, n: usize) -> Cow<'a, str> {
     if req == "Y" {
-        name.into()
+        if n == 0 {
+            name.into()
+        }
+        else {
+            format!("{}{}::{}", "super::".repeat(n), to_snake_case(name), name).into()
+        }
     }
     else {
-        format!("Option<{}>", name).into()
+        if n == 0 {
+            format!("Option<{}>", name).into()
+        }
+        else {
+            format!("Option<{}{}::{}>", "super::".repeat(n), to_snake_case(name), name).into()
+        }
     }
 }
 
@@ -228,22 +418,30 @@ fn type_map(t: &str) -> Result<&str, ()> {
     Ok(match t {
         "String" => "String",
         "int" => "i32",
-        "LocalMktDate" => "LocalMktDate",
+        "LocalMktDate" => "crate::entities::LocalMktDate",
         "Price" => "f64",
         "Percentage" => "f32",
         "float" => "f64",
-        "UTCTimestamp" => "UTCTimestamp",
-        "Boolean" => "Boolean",
+        "UTCTimestamp" => "crate::entities::UTCTimestamp",
+        "Boolean" => "crate::entities::Boolean",
         "Qty" => "f64",
         "PriceOffset" => "f64",
         "Exchange" => "String",
         "Amt" => "f64",
         "Length" => "usize",
         "data" => "String",
-        "month-year" => "MonthYear",
-        "TZTimeOnly" => "TZTimeOnly",
+        "month-year" => "crate::entities::MonthYear",
+        "TZTimeOnly" => "crate::entities::TZTimeOnly",
+        "TZTimestamp" => "crate::entities::TZTimestamp",
+        "UTCTimeOnly" => "crate::entities::UTCTimeOnly",
+        "UTCDateOnly" => "crate::entities::UTCDateOnly",
         "char" => "char",
         "NumInGroup" => "usize",
+        "Currency" => "String",
+        "Country" => "String",
+        "SeqNum" => "usize",
+        "XMLData" => "String",
+        "TagNum" => "u16",
         _ => return Err(()),
     })
 }
