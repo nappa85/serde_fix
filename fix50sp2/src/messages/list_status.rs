@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct List {
 	/// MsgType = N
 	#[serde(flatten)]
@@ -65,7 +65,7 @@ pub struct List {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ListStatusType {
 	/// Ack
 	#[serde(rename = "1")]
@@ -87,7 +87,7 @@ pub enum ListStatusType {
 	Alert,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ListOrderStatus {
 	/// In bidding process
 	#[serde(rename = "1")]
@@ -112,7 +112,7 @@ pub enum ListOrderStatus {
 	Reject,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ContingencyType {
 	/// One Cancels the Other (OCO)
 	#[serde(rename = "1")]
@@ -135,7 +135,7 @@ pub enum ContingencyType {
 	BidAndOfferOco,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ListRejectReason {
 	/// Broker / Exchange option
 	#[serde(rename = "0")]
@@ -160,7 +160,7 @@ pub enum ListRejectReason {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]

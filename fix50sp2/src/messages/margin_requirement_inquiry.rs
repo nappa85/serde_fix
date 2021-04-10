@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Margin {
 	/// MsgType = CH
 	#[serde(flatten)]
@@ -70,7 +70,7 @@ pub struct Margin {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]
@@ -83,7 +83,7 @@ pub enum SubscriptionRequestType {
 	DisablePreviousSnapshotUpdateRequest,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ResponseTransportType {
 	/// In-band (default)
 	#[serde(rename = "0")]
@@ -93,7 +93,7 @@ pub enum ResponseTransportType {
 	OutOfBand,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlSessID {
 	/// Intraday
 	#[serde(rename = "ITD")]

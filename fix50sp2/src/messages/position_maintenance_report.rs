@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Position {
 	/// MsgType = AM
 	#[serde(flatten)]
@@ -207,7 +207,7 @@ pub struct Position {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosTransType {
 	/// Exercise
 	#[serde(rename = "1")]
@@ -259,7 +259,7 @@ pub enum PosTransType {
 	Reopen,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosMaintAction {
 	/// New
 	#[serde(rename = "1")]
@@ -275,7 +275,7 @@ pub enum PosMaintAction {
 	Reverse,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosMaintStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -294,7 +294,7 @@ pub enum PosMaintStatus {
 	CompletedWithWarnings,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosMaintResult {
 	/// Successful completion - no warnings or errors
 	#[serde(rename = "0")]
@@ -307,7 +307,7 @@ pub enum PosMaintResult {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlSessID {
 	/// Intraday
 	#[serde(rename = "ITD")]
@@ -323,7 +323,7 @@ pub enum SettlSessID {
 	EndOfDay,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -348,7 +348,7 @@ pub enum AcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -388,7 +388,7 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1592,7 +1592,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2796,7 +2796,7 @@ pub enum SettlCurrency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AdjustmentType {
 	/// Process request as Margin Disposition
 	#[serde(rename = "0")]
@@ -2815,7 +2815,7 @@ pub enum AdjustmentType {
 	CustomerSpecificPosition,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearedIndicator {
 	/// Not cleared
 	#[serde(rename = "0")]
@@ -2831,7 +2831,7 @@ pub enum ClearedIndicator {
 	Rejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ContractRefPosType {
 	/// Two component intercommodity spread
 	#[serde(rename = "0")]
@@ -2847,7 +2847,7 @@ pub enum ContractRefPosType {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PositionCapacity {
 	/// Principal
 	#[serde(rename = "0")]

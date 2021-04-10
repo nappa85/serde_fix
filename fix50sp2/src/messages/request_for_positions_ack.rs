@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Request {
 	/// MsgType = AO
 	#[serde(flatten)]
@@ -120,7 +120,7 @@ pub struct Request {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
 	#[serde(rename = "N")]
@@ -130,7 +130,7 @@ pub enum UnsolicitedIndicator {
 	MessageIsBeingSentUnsolicited,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosReqResult {
 	/// Valid request
 	#[serde(rename = "0")]
@@ -152,7 +152,7 @@ pub enum PosReqResult {
 	OtherAInConjunctionWithThisCodeForAnExplaination,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosReqStatus {
 	/// Completed
 	#[serde(rename = "0")]
@@ -165,7 +165,7 @@ pub enum PosReqStatus {
 	Rejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosReqType {
 	/// Positions
 	#[serde(rename = "0")]
@@ -202,7 +202,7 @@ pub enum PosReqType {
 	PositionLimitReportingSubmission,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
 	#[serde(rename = "0")]
@@ -219,7 +219,7 @@ pub enum MatchStatus {
 	MismatchedAndConfirmationAreMatchedButThereAreVariancesMatchExceptionGrpComponentMayBeUsedToDetailOnTheMisMatchedDataFields,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]
@@ -232,7 +232,7 @@ pub enum SubscriptionRequestType {
 	DisablePreviousSnapshotUpdateRequest,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlSessID {
 	/// Intraday
 	#[serde(rename = "ITD")]
@@ -248,7 +248,7 @@ pub enum SettlSessID {
 	EndOfDay,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1452,7 +1452,7 @@ pub enum SettlCurrency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -1477,7 +1477,7 @@ pub enum AcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -1517,7 +1517,7 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2721,7 +2721,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ResponseTransportType {
 	/// In-band (default)
 	#[serde(rename = "0")]

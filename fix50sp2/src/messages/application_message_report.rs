@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Application {
 	/// MsgType = BY
 	#[serde(flatten)]
@@ -38,7 +38,7 @@ pub struct Application {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplReportType {
 	/// Reset ApplSeqNum to new value specified in <a href="tag_1399_ApplNewSeqNum.html" target="bottom">ApplNewSeqNum&nbsp;(1399)</a>
 	#[serde(rename = "0")]

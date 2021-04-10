@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Trading {
 	/// MsgType = h
 	#[serde(flatten)]
@@ -116,7 +116,7 @@ pub struct Trading {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -141,7 +141,7 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -185,7 +185,7 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesMethod {
 	/// Electronic
 	#[serde(rename = "1")]
@@ -201,7 +201,7 @@ pub enum TradSesMethod {
 	Voice,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesMode {
 	/// Testing
 	#[serde(rename = "1")]
@@ -214,7 +214,7 @@ pub enum TradSesMode {
 	Production,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
 	#[serde(rename = "N")]
@@ -224,7 +224,7 @@ pub enum UnsolicitedIndicator {
 	MessageIsBeingSentUnsolicited,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesStatus {
 	/// Unknown
 	#[serde(rename = "0")]
@@ -249,7 +249,7 @@ pub enum TradSesStatus {
 	RequestRejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesEvent {
 	/// Trading resumes (after Halt)
 	#[serde(rename = "0")]
@@ -265,7 +265,7 @@ pub enum TradSesEvent {
 	ChangeOfTradingStatus,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesStatusRejReason {
 	/// Unknown or invalid TradingSessionID
 	#[serde(rename = "1")]
@@ -275,7 +275,7 @@ pub enum TradSesStatusRejReason {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesControl {
 	/// Automatic
 	#[serde(rename = "0")]

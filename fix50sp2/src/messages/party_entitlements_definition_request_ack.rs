@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Party {
 	/// MsgType = DB
 	#[serde(flatten)]
@@ -41,7 +41,7 @@ pub struct Party {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EntitlementRequestStatus {
 	/// Valid request
 	#[serde(rename = "0")]
@@ -66,7 +66,7 @@ pub enum EntitlementRequestStatus {
 	OtherField,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EntitlementRequestResult {
 	/// Successful(default)
 	#[serde(rename = "0")]

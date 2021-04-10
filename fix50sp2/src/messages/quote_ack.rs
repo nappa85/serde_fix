@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct QuoteAck {
 	/// MsgType = CW
 	#[serde(flatten)]
@@ -77,7 +77,7 @@ pub struct QuoteAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteType {
 	/// Indicative
 	#[serde(rename = "0")]
@@ -96,7 +96,7 @@ pub enum QuoteType {
 	InitiallyTradeable,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteCancelType {
 	/// Cancel for Symbol(s)
 	#[serde(rename = "1")]
@@ -124,7 +124,7 @@ pub enum QuoteCancelType {
 	CancelForIssuerOfUnderlyingSecurity,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteAckStatus {
 	/// Received, not yet processed
 	#[serde(rename = "0")]
@@ -137,7 +137,7 @@ pub enum QuoteAckStatus {
 	Rejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteRejectReason {
 	/// Unknown symbol (security)
 	#[serde(rename = "1")]

@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Market {
 	/// MsgType = W
 	#[serde(flatten)]
@@ -135,7 +135,7 @@ pub struct Market {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDBookType {
 	/// Top of Book
 	#[serde(rename = "1")]
@@ -148,7 +148,7 @@ pub enum MDBookType {
 	OrderDepth,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
 	#[serde(rename = "0")]
@@ -158,7 +158,7 @@ pub enum MarketDepth {
 	TopOfBook,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RefreshIndicator {
 	/// Mandatory refresh by all participants
 	#[serde(rename = "Y")]
@@ -168,7 +168,7 @@ pub enum RefreshIndicator {
 	ProcessAsRequired,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum FinancialStatus {
 	/// Bankrupt
 	#[serde(rename = "1")]
@@ -181,7 +181,7 @@ pub enum FinancialStatus {
 	Restricted,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CorporateAction {
 	/// Ex-Dividend
 	#[serde(rename = "A")]
@@ -254,7 +254,7 @@ pub enum CorporateAction {
 	SuccessionEvent,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplQueueResolution {
 	/// No action taken
 	#[serde(rename = "0")]
@@ -270,7 +270,7 @@ pub enum ApplQueueResolution {
 	EndSession,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDSecurityTradingStatus {
 	/// Opening delay
 	#[serde(rename = "1")]
@@ -352,7 +352,7 @@ pub enum MDSecurityTradingStatus {
 	PostClose,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDHaltReason {
 	/// News Dissemination
 	#[serde(rename = "0")]

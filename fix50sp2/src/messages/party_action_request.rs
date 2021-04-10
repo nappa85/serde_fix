@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Party {
 	/// MsgType = DH
 	#[serde(flatten)]
@@ -60,7 +60,7 @@ pub struct Party {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PartyActionType {
 	/// Suspend
 	#[serde(rename = "0")]
@@ -73,7 +73,7 @@ pub enum PartyActionType {
 	Reinstate,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplTestMessageIndicator {
 	/// Not a test message
 	#[serde(rename = "N")]

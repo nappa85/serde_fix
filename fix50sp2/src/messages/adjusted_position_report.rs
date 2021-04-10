@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Adjusted {
 	/// MsgType = BL
 	#[serde(flatten)]
@@ -50,7 +50,7 @@ pub struct Adjusted {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosReqType {
 	/// Positions
 	#[serde(rename = "0")]
@@ -87,7 +87,7 @@ pub enum PosReqType {
 	PositionLimitReportingSubmission,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlSessID {
 	/// Intraday
 	#[serde(rename = "ITD")]

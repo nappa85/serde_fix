@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct News {
 	/// MsgType = B
 	#[serde(flatten)]
@@ -87,7 +87,7 @@ pub struct News {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum NewsID {
 	/// ICB (Industry Classification Benchmark) published by Dow Jones and FTSE - <a xmlns="http://www.b2bits.com/FIXProtocol" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://www.icbenchmark.com" target="_blank">www.icbenchmark.com</a> .
 	#[serde(rename = "1")]
@@ -100,7 +100,7 @@ pub enum NewsID {
 	GicsPublishedByStandardsAndPoor,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum NewsCategory {
 	/// Company News
 	#[serde(rename = "0")]
@@ -119,7 +119,7 @@ pub enum NewsCategory {
 	OtherNews,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LanguageCode {
 	/// Abkhaz
 	#[serde(rename = "ab")]
@@ -675,7 +675,7 @@ pub enum LanguageCode {
 	Zulu,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Urgency {
 	/// Normal
 	#[serde(rename = "0")]

@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Mass {
 	/// MsgType = DJ
 	#[serde(flatten)]
@@ -105,7 +105,7 @@ pub struct Mass {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderResponseLevel {
 	/// No acknowledgement (Responses are provided through one or more ExecutionReport(35=8) messages)
 	#[serde(rename = "0")]
@@ -123,7 +123,7 @@ pub enum OrderResponseLevel {
 	SummaryAcknowledgementWithoutEntriesAndOneOrMoreExecutionReportMessages,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingCapacity {
 	/// Customer
 	#[serde(rename = "1")]
@@ -151,7 +151,7 @@ pub enum TradingCapacity {
 	SystematicInternaliser,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearingAccountType {
 	/// Customer
 	#[serde(rename = "1")]
@@ -164,7 +164,7 @@ pub enum ClearingAccountType {
 	MarketMaker,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -189,7 +189,7 @@ pub enum AcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -229,7 +229,7 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderCapacity {
 	/// Agency
 	#[serde(rename = "A")]
@@ -254,7 +254,7 @@ pub enum OrderCapacity {
 	MixedCapacity,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderRestrictions {
 	/// Program Trade
 	#[serde(rename = "1")]
@@ -312,7 +312,7 @@ pub enum OrderRestrictions {
 	NormalCourseIssuerBid,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CustOrderCapacity {
 	/// Member trading for their own account
 	#[serde(rename = "1")]
@@ -331,7 +331,7 @@ pub enum CustOrderCapacity {
 	RetailCustomer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CustOrderHandlingInst {
 	/// Add-on Order
 	#[serde(rename = "ADD")]
@@ -569,7 +569,7 @@ pub enum CustOrderHandlingInst {
 	WorkToTargetStrategy,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
 	#[serde(rename = "0")]
@@ -579,7 +579,7 @@ pub enum ThrottleInst {
 	QueueIfThrottleLimitExceeded,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]

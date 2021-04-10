@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Registration {
 	/// MsgType = o
 	#[serde(flatten)]
@@ -58,7 +58,7 @@ pub struct Registration {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RegistTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -71,7 +71,7 @@ pub enum RegistTransType {
 	Replace,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -96,7 +96,7 @@ pub enum AcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TaxAdvantageType {
 	/// None/Not Applicable (default)
 	#[serde(rename = "0")]
@@ -193,7 +193,7 @@ pub enum TaxAdvantageType {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OwnershipType {
 	/// Joint Investors
 	#[serde(rename = "J")]

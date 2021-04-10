@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Security {
 	/// MsgType = w
 	#[serde(flatten)]
@@ -72,7 +72,7 @@ pub struct Security {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityResponseType {
 	/// Accept security proposal as is
 	#[serde(rename = "1")]
@@ -94,7 +94,7 @@ pub enum SecurityResponseType {
 	CanNotMatchSelectionCriteria,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]
@@ -104,7 +104,7 @@ pub enum LastFragment {
 	LastMessage,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -129,7 +129,7 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -173,7 +173,7 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]

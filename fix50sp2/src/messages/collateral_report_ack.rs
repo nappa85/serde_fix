@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Collateral {
 	/// MsgType = DQ
 	#[serde(flatten)]
@@ -56,7 +56,7 @@ pub struct Collateral {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollRptStatus {
 	/// Accepted (successfullly processed)
 	#[serde(rename = "0")]
@@ -69,7 +69,7 @@ pub enum CollRptStatus {
 	Rejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollRptRejectReason {
 	/// Unknown trade or transaction
 	#[serde(rename = "0")]

@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Allocation {
 	/// MsgType = P
 	#[serde(flatten)]
@@ -103,7 +103,7 @@ pub struct Allocation {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocStatus {
 	/// accepted (successfully processed)
 	#[serde(rename = "0")]
@@ -152,7 +152,7 @@ pub enum AllocStatus {
 	ReversalPending,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocRejCode {
 	/// Unknown account(s)
 	#[serde(rename = "0")]
@@ -246,7 +246,7 @@ pub enum AllocRejCode {
 	N28,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocType {
 	/// Calculated (includes MiscFees and NetMoney)
 	#[serde(rename = "1")]
@@ -328,7 +328,7 @@ pub enum AllocType {
 	NotionalValueAveragePriceGroupAllocation,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocIntermedReqType {
 	/// Pending Accept
 	#[serde(rename = "1")]
@@ -350,7 +350,7 @@ pub enum AllocIntermedReqType {
 	AccountLevelReject,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
 	#[serde(rename = "0")]

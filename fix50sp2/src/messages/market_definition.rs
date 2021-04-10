@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct MarketDefinition {
 	/// MsgType = BU
 	#[serde(flatten)]
@@ -124,7 +124,7 @@ pub struct MarketDefinition {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1328,7 +1328,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketSegmentStatus {
 	/// Active
 	#[serde(rename = "1")]
@@ -1341,7 +1341,7 @@ pub enum MarketSegmentStatus {
 	Published,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketSegmentType {
 	/// Pool
 	#[serde(rename = "1")]
@@ -1354,7 +1354,7 @@ pub enum MarketSegmentType {
 	Wholesale,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketSegmentSubType {
 	/// Inter-product spread
 	#[serde(rename = "1")]

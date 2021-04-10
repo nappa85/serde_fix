@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Confirmation {
 	/// MsgType = AK
 	#[serde(flatten)]
@@ -359,7 +359,7 @@ pub struct Confirmation {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ConfirmTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -372,7 +372,7 @@ pub enum ConfirmTransType {
 	Cancel,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ConfirmType {
 	/// Status
 	#[serde(rename = "1")]
@@ -385,7 +385,7 @@ pub enum ConfirmType {
 	ConfirmationRequestRejectedAField,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegalConfirm {
 	/// Does not constitute a legal confirm
 	#[serde(rename = "N")]
@@ -395,7 +395,7 @@ pub enum LegalConfirm {
 	LegalConfirm,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ConfirmStatus {
 	/// Received
 	#[serde(rename = "1")]
@@ -414,7 +414,7 @@ pub enum ConfirmStatus {
 	RequestRejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
 	#[serde(rename = "0")]
@@ -431,7 +431,7 @@ pub enum MatchStatus {
 	MismatchedAndConfirmationAreMatchedButThereAreVariancesMatchExceptionGrpComponentMayBeUsedToDetailOnTheMisMatchedDataFields,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
 	#[serde(rename = "0")]
@@ -444,7 +444,7 @@ pub enum QtyType {
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -499,7 +499,7 @@ pub enum Side {
 	SellUndisclosed,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1703,7 +1703,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocAcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -1728,7 +1728,7 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocAccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -1753,7 +1753,7 @@ pub enum AllocAccountType {
 	JointBackofficeAccount,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]
@@ -1834,7 +1834,7 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProcessCode {
 	/// Regular
 	#[serde(rename = "0")]
@@ -1859,7 +1859,7 @@ pub enum ProcessCode {
 	PlanSponsor,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -3063,7 +3063,7 @@ pub enum SettlCurrency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrFxRateCalc {
 	/// Multiply
 	#[serde(rename = "M")]
@@ -3073,7 +3073,7 @@ pub enum SettlCurrFxRateCalc {
 	Divide,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlType {
 	/// Regular / FX Spot settlement (T+1 or T+2 depending on currency)
 	#[serde(rename = "0")]
@@ -3113,7 +3113,7 @@ pub enum SettlType {
 	FxSpotNextSettlement,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearedIndicator {
 	/// Not cleared
 	#[serde(rename = "0")]
@@ -3129,7 +3129,7 @@ pub enum ClearedIndicator {
 	Rejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AffirmStatus {
 	/// Received
 	#[serde(rename = "1")]
@@ -3142,7 +3142,7 @@ pub enum AffirmStatus {
 	Affirmed,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdType {
 	/// Regular Trade
 	#[serde(rename = "0")]
@@ -3347,7 +3347,7 @@ pub enum TrdType {
 	N66,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdSubType {
 	/// CMTA
 	#[serde(rename = "0")]
@@ -3514,7 +3514,7 @@ pub enum TrdSubType {
 	TradeAtCashOpenTheMarketplaceNameGivenToTradingFuturesBasedOnAnOpeningQuoteOfTheUnderlyingCashMarket,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecondaryTrdType {
 	/// Regular Trade
 	#[serde(rename = "0")]
@@ -3719,7 +3719,7 @@ pub enum SecondaryTrdType {
 	N66,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeContinuation {
 	/// Novation
 	#[serde(rename = "0")]
@@ -3825,7 +3825,7 @@ pub enum TradeContinuation {
 	Rerate,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchType {
 	/// ACT Accepted Trade
 	#[serde(rename = "M3")]

@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Collateral {
 	/// MsgType = AZ
 	#[serde(flatten)]
@@ -266,7 +266,7 @@ pub struct Collateral {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollAsgnReason {
 	/// Initial
 	#[serde(rename = "0")]
@@ -303,7 +303,7 @@ pub enum CollAsgnReason {
 	Pledge,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollAsgnTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -322,7 +322,7 @@ pub enum CollAsgnTransType {
 	Reverse,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollAsgnRespType {
 	/// Received
 	#[serde(rename = "0")]
@@ -344,7 +344,7 @@ pub enum CollAsgnRespType {
 	TransactionCompletedWithWarningSeeAHrefTag58TextHtmlTargetBottomTextNbspAForFurtherInformation,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollAsgnRejectReason {
 	/// Unknown deal (order / trade)
 	#[serde(rename = "0")]
@@ -369,7 +369,7 @@ pub enum CollAsgnRejectReason {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollApplType {
 	/// Specific Deposit
 	#[serde(rename = "0")]
@@ -379,7 +379,7 @@ pub enum CollApplType {
 	General,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum FinancialStatus {
 	/// Bankrupt
 	#[serde(rename = "1")]
@@ -392,7 +392,7 @@ pub enum FinancialStatus {
 	Restricted,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -432,7 +432,7 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
 	#[serde(rename = "0")]
@@ -445,7 +445,7 @@ pub enum QtyType {
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1649,7 +1649,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -1704,7 +1704,7 @@ pub enum Side {
 	SellUndisclosed,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]

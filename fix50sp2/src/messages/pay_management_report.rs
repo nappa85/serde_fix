@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct PayManagementReport {
 	/// MsgType = DY
 	#[serde(flatten)]
@@ -105,7 +105,7 @@ pub struct PayManagementReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PayReportTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -118,7 +118,7 @@ pub enum PayReportTransType {
 	Status,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PayRequestStatus {
 	/// Received, not yet processed
 	#[serde(rename = "0")]

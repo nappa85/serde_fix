@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct New {
 	/// MsgType = s
 	#[serde(flatten)]
@@ -264,7 +264,7 @@ pub struct New {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CrossType {
 	/// Cross AON - cross tade which is executed complete or not. Both sides are treated in the same manner. This is equivalent to
 	/// an "All or None"."
@@ -305,7 +305,7 @@ pub enum CrossType {
 	CustomerToCustomerCross,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CrossPrioritization {
 	/// None
 	#[serde(rename = "0")]
@@ -318,7 +318,7 @@ pub enum CrossPrioritization {
 	SellSideIsPrioritized,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlType {
 	/// Regular / FX Spot settlement (T+1 or T+2 depending on currency)
 	#[serde(rename = "0")]
@@ -358,7 +358,7 @@ pub enum SettlType {
 	FxSpotNextSettlement,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum HandlInst {
 	/// Automated execution order, private, no Broker intervention
 	#[serde(rename = "1")]
@@ -371,7 +371,7 @@ pub enum HandlInst {
 	ManualOrderBestExecution,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExecInst {
 	/// Stay on offerside
 	#[serde(rename = "0")]
@@ -561,7 +561,7 @@ pub enum ExecInst {
 	AllowFacilitation,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExDestinationIDSource {
 	/// BIC (Bank Identification Code) (ISO 9362)
 	#[serde(rename = "B")]
@@ -580,7 +580,7 @@ pub enum ExDestinationIDSource {
 	Mic,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProcessCode {
 	/// Regular
 	#[serde(rename = "0")]
@@ -605,7 +605,7 @@ pub enum ProcessCode {
 	PlanSponsor,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LocateReqd {
 	/// Indicates the broker is responsible for locating the stock
 	#[serde(rename = "Y")]
@@ -615,7 +615,7 @@ pub enum LocateReqd {
 	IndicatesTheBrokerIsNotRequiredToLocate,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrdType {
 	/// Market
 	#[serde(rename = "1")]
@@ -701,7 +701,7 @@ pub enum OrdType {
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]
@@ -782,7 +782,7 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceProtectionScope {
 	/// None
 	#[serde(rename = "0")]
@@ -795,7 +795,7 @@ pub enum PriceProtectionScope {
 	National,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1999,7 +1999,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
 	#[serde(rename = "0")]
@@ -2042,7 +2042,7 @@ pub enum TimeInForce {
 	GoodForThisMonth,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum GTBookingInst {
 	/// Book out all trades on day of execution
 	#[serde(rename = "0")]
@@ -2055,7 +2055,7 @@ pub enum GTBookingInst {
 	AccumulateUntilVerballyNotifiedOtherwise,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TargetStrategy {
 	/// VWAP
 	#[serde(rename = "1")]
@@ -2068,7 +2068,7 @@ pub enum TargetStrategy {
 	MininizeMarketImpact,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CancellationRights {
 	/// Yes
 	#[serde(rename = "Y")]
@@ -2084,7 +2084,7 @@ pub enum CancellationRights {
 	NoInstitutional,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MoneyLaunderingStatus {
 	/// Passed
 	#[serde(rename = "Y")]
@@ -2103,7 +2103,7 @@ pub enum MoneyLaunderingStatus {
 	ExemptAuthorisedCreditOrFinancialInstitution,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
 	#[serde(rename = "0")]
@@ -2113,7 +2113,7 @@ pub enum ThrottleInst {
 	QueueIfThrottleLimitExceeded,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MinQtyMethod {
 	/// Once (applies only to first execution)
 	#[serde(rename = "1")]
@@ -2123,7 +2123,7 @@ pub enum MinQtyMethod {
 	Multiple,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingCapacity {
 	/// Customer
 	#[serde(rename = "1")]
@@ -2151,7 +2151,7 @@ pub enum TradingCapacity {
 	SystematicInternaliser,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExposureDurationUnit {
 	/// Seconds (default if not specified)
 	#[serde(rename = "0")]

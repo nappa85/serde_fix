@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct PartyRiskLimitsReport {
 	/// MsgType = CM
 	#[serde(flatten)]
@@ -80,7 +80,7 @@ pub struct PartyRiskLimitsReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RequestResult {
 	/// Valid request
 	#[serde(rename = "0")]
@@ -105,7 +105,7 @@ pub enum RequestResult {
 	OtherField,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]
@@ -115,7 +115,7 @@ pub enum LastFragment {
 	LastMessage,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitRequestType {
 	/// Definitions (default)
 	#[serde(rename = "1")]
@@ -128,7 +128,7 @@ pub enum RiskLimitRequestType {
 	DefinitionsAndUtilizations,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
 	#[serde(rename = "N")]

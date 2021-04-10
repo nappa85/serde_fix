@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct ExecutionAck {
 	/// MsgType = BN
 	#[serde(flatten)]
@@ -102,7 +102,7 @@ pub struct ExecutionAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExecAckStatus {
 	/// Received, not yet processed
 	#[serde(rename = "0")]
@@ -115,7 +115,7 @@ pub enum ExecAckStatus {
 	DonTKnowRejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DKReason {
 	/// Unknown Symbol
 	#[serde(rename = "A")]
@@ -143,7 +143,7 @@ pub enum DKReason {
 	NoMatchingExecutionReport,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -198,7 +198,7 @@ pub enum Side {
 	SellUndisclosed,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]

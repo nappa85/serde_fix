@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct TradeAggregationReport {
 	/// MsgType = DX
 	#[serde(flatten)]
@@ -80,7 +80,7 @@ pub struct TradeAggregationReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeAggregationRequestStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -90,7 +90,7 @@ pub enum TradeAggregationRequestStatus {
 	Rejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeAggregationRejectReason {
 	/// Unknown order(s)
 	#[serde(rename = "0")]
@@ -103,7 +103,7 @@ pub enum TradeAggregationRejectReason {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

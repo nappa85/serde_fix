@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Party {
 	/// MsgType = DF
 	#[serde(flatten)]
@@ -101,7 +101,7 @@ pub struct Party {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitCheckTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -114,7 +114,7 @@ pub enum RiskLimitCheckTransType {
 	Replace,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitCheckType {
 	/// Submit
 	#[serde(rename = "0")]
@@ -124,7 +124,7 @@ pub enum RiskLimitCheckType {
 	LimitConsumed,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RefOrderIDSource {
 	/// Secondary order ID
 	#[serde(rename = "0")]
@@ -161,7 +161,7 @@ pub enum RefOrderIDSource {
 	ManualOrderIdentifier,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitCheckRequestType {
 	/// All or none (default if not specified).
 	#[serde(rename = "0")]
@@ -171,7 +171,7 @@ pub enum RiskLimitCheckRequestType {
 	Partial,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1375,7 +1375,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Position {
 	/// MsgType = DN
 	#[serde(flatten)]
@@ -117,7 +117,7 @@ pub struct Position {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TransferTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -130,7 +130,7 @@ pub enum TransferTransType {
 	Cancel,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TransferReportType {
 	/// Submit
 	#[serde(rename = "0")]
@@ -140,7 +140,7 @@ pub enum TransferReportType {
 	Alleged,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TransferStatus {
 	/// Received
 	#[serde(rename = "0")]
@@ -162,7 +162,7 @@ pub enum TransferStatus {
 	Cancelled,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TransferRejectReason {
 	/// Success
 	#[serde(rename = "0")]
@@ -184,7 +184,7 @@ pub enum TransferRejectReason {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TransferScope {
 	/// Inter-firm transfer
 	#[serde(rename = "0")]
@@ -197,7 +197,7 @@ pub enum TransferScope {
 	ClearingMemberTradeAssignment,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1401,7 +1401,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]

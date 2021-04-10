@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Advertisement {
 	/// MsgType = 7
 	#[serde(flatten)]
@@ -101,7 +101,7 @@ pub struct Advertisement {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AdvTransType {
 	/// New
 	#[serde(rename = "N")]
@@ -120,7 +120,7 @@ impl Default for AdvTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AdvSide {
 	/// Buy
 	#[serde(rename = "B")]
@@ -136,7 +136,7 @@ pub enum AdvSide {
 	Cross,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
 	#[serde(rename = "0")]
@@ -149,7 +149,7 @@ pub enum QtyType {
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1353,7 +1353,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -1378,7 +1378,7 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]

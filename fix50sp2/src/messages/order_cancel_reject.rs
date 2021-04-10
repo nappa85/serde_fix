@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Order {
 	/// MsgType = 9
 	#[serde(flatten)]
@@ -126,7 +126,7 @@ pub struct Order {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrdStatus {
 	/// New
 	#[serde(rename = "0")]
@@ -175,7 +175,7 @@ pub enum OrdStatus {
 	PendingReplace,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum WorkingIndicator {
 	/// Order has been accepted but not yet in a working state
 	#[serde(rename = "N")]
@@ -185,7 +185,7 @@ pub enum WorkingIndicator {
 	OrderIsCurrentlyBeingWorked,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -210,7 +210,7 @@ pub enum AcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -250,7 +250,7 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CxlRejResponseTo {
 	/// Order cancel request
 	#[serde(rename = "1")]
@@ -260,7 +260,7 @@ pub enum CxlRejResponseTo {
 	OrderCancelReplaceRequest,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CxlRejReason {
 	/// Too late to cancel
 	#[serde(rename = "0")]
@@ -297,7 +297,7 @@ pub enum CxlRejReason {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExDestinationIDSource {
 	/// BIC (Bank Identification Code) (ISO 9362)
 	#[serde(rename = "B")]

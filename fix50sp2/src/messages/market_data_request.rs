@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Market {
 	/// MsgType = V
 	#[serde(flatten)]
@@ -75,7 +75,7 @@ pub struct Market {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]
@@ -88,7 +88,7 @@ pub enum SubscriptionRequestType {
 	DisablePreviousSnapshotUpdateRequest,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
 	#[serde(rename = "0")]
@@ -98,7 +98,7 @@ pub enum MarketDepth {
 	TopOfBook,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDUpdateType {
 	/// Full refresh
 	#[serde(rename = "0")]
@@ -108,7 +108,7 @@ pub enum MDUpdateType {
 	IncrementalRefresh,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AggregatedBook {
 	/// book entries to be aggregated
 	#[serde(rename = "Y")]
@@ -118,7 +118,7 @@ pub enum AggregatedBook {
 	BookEntriesShouldNotBeAggregated,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OpenCloseSettlFlag {
 	/// Daily Open / Close / Settlement entry
 	#[serde(rename = "0")]
@@ -140,7 +140,7 @@ pub enum OpenCloseSettlFlag {
 	TheoreticalPriceValue,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Scope {
 	/// Local (Exchange, ECN, ATS)
 	#[serde(rename = "1")]
@@ -153,7 +153,7 @@ pub enum Scope {
 	Global,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDImplicitDelete {
 	/// Server must send an explicit delete for bids or offers falling outside the requested MarketDepth of the request
 	#[serde(rename = "N")]
@@ -163,7 +163,7 @@ pub enum MDImplicitDelete {
 	ClientHasResponsibilityForImplicitlyDeletingBidsOrOffersFallingOutsideTheMarketDepthOfTheRequest,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplQueueAction {
 	/// No action taken
 	#[serde(rename = "0")]
@@ -179,7 +179,7 @@ pub enum ApplQueueAction {
 	EndSession,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDQuoteType {
 	/// Indicative
 	#[serde(rename = "0")]

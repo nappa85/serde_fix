@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Party {
 	/// MsgType = CT
 	#[serde(flatten)]
@@ -41,7 +41,7 @@ pub struct Party {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitRequestResult {
 	/// Successful
 	#[serde(rename = "0")]
@@ -96,7 +96,7 @@ pub enum RiskLimitRequestResult {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitRequestStatus {
 	/// Accepted
 	#[serde(rename = "0")]

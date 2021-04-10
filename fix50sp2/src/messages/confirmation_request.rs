@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Confirmation {
 	/// MsgType = BH
 	#[serde(flatten)]
@@ -61,7 +61,7 @@ pub struct Confirmation {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ConfirmType {
 	/// Status
 	#[serde(rename = "1")]
@@ -74,7 +74,7 @@ pub enum ConfirmType {
 	ConfirmationRequestRejectedAField,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocAcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -99,7 +99,7 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocAccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]

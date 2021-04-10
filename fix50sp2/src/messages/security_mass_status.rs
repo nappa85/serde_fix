@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct SecurityMassStatus {
 	/// MsgType = CO
 	#[serde(flatten)]
@@ -84,7 +84,7 @@ pub struct SecurityMassStatus {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -109,7 +109,7 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -153,7 +153,7 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
 	#[serde(rename = "N")]
@@ -163,7 +163,7 @@ pub enum UnsolicitedIndicator {
 	MessageIsBeingSentUnsolicited,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityMassTradingStatus {
 	/// Opening delay
 	#[serde(rename = "1")]
@@ -245,7 +245,7 @@ pub enum SecurityMassTradingStatus {
 	PostClose,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityMassTradingEvent {
 	/// Order imbalance, auction is extended
 	#[serde(rename = "1")]
@@ -273,7 +273,7 @@ pub enum SecurityMassTradingEvent {
 	ChangeOfMarketDepth,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MassHaltReason {
 	/// News Dissemination
 	#[serde(rename = "0")]
@@ -295,7 +295,7 @@ pub enum MassHaltReason {
 	EquipmentChangeover,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDBookType {
 	/// Top of Book
 	#[serde(rename = "1")]
@@ -308,7 +308,7 @@ pub enum MDBookType {
 	OrderDepth,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
 	#[serde(rename = "0")]
@@ -318,7 +318,7 @@ pub enum MarketDepth {
 	TopOfBook,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Adjustment {
 	/// Cancel
 	#[serde(rename = "1")]

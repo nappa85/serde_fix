@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Mass {
 	/// MsgType = i
 	#[serde(flatten)]
@@ -87,7 +87,7 @@ pub struct Mass {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteType {
 	/// Indicative
 	#[serde(rename = "0")]
@@ -106,7 +106,7 @@ pub enum QuoteType {
 	InitiallyTradeable,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteResponseLevel {
 	/// No Acknowledgement (Default)
 	#[serde(rename = "0")]
@@ -122,7 +122,7 @@ pub enum QuoteResponseLevel {
 	SummaryAcknowledgement,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -147,7 +147,7 @@ pub enum AcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -187,7 +187,7 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
 	#[serde(rename = "0")]
@@ -197,7 +197,7 @@ pub enum ThrottleInst {
 	QueueIfThrottleLimitExceeded,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteModelType {
 	/// Quote Entry (New quote is entered or previously submitted quote is updated in full without regard to amount executed when
 	/// a subsequent quote (e.g. with the same QuoteID reference) is received by the Recipient of the quote message.)

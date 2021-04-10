@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct MarginRequirementReport {
 	/// MsgType = CJ
 	#[serde(flatten)]
@@ -102,7 +102,7 @@ pub struct MarginRequirementReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarginReqmtRptType {
 	/// Summary
 	#[serde(rename = "0")]
@@ -115,7 +115,7 @@ pub enum MarginReqmtRptType {
 	ExcessDeficit,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastRptRequested {
 	/// Not last message
 	#[serde(rename = "N")]
@@ -125,7 +125,7 @@ pub enum LastRptRequested {
 	LastMessage,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
 	#[serde(rename = "N")]
@@ -135,7 +135,7 @@ pub enum UnsolicitedIndicator {
 	MessageIsBeingSentUnsolicited,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlSessID {
 	/// Intraday
 	#[serde(rename = "ITD")]
@@ -151,7 +151,7 @@ pub enum SettlSessID {
 	EndOfDay,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1355,7 +1355,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RegulatoryReportType {
 	/// Real-time (RT)
 	#[serde(rename = "0")]

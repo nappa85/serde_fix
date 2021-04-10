@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Application {
 	/// MsgType = BX
 	#[serde(flatten)]
@@ -52,7 +52,7 @@ pub struct Application {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplReqType {
 	/// Retransmission of application messages for the specified Applications
 	#[serde(rename = "0")]
@@ -77,7 +77,7 @@ pub enum ApplReqType {
 	CancelRetransmissionAndUnsubscribeToTheSpecifiedApplications,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplResponseType {
 	/// Request successfully processed
 	#[serde(rename = "0")]

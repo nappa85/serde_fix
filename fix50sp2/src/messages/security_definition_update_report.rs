@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Security {
 	/// MsgType = BP
 	#[serde(flatten)]
@@ -136,7 +136,7 @@ pub struct Security {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityResponseType {
 	/// Accept security proposal as is
 	#[serde(rename = "1")]
@@ -158,7 +158,7 @@ pub enum SecurityResponseType {
 	CanNotMatchSelectionCriteria,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -171,7 +171,7 @@ pub enum SecurityUpdateAction {
 	Modify,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CorporateAction {
 	/// Ex-Dividend
 	#[serde(rename = "A")]
@@ -244,7 +244,7 @@ pub enum CorporateAction {
 	SuccessionEvent,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]

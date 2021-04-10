@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Order {
 	/// MsgType = r
 	#[serde(flatten)]
@@ -102,7 +102,7 @@ pub struct Order {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MassCancelRequestType {
 	/// Cancel orders for a security
 	#[serde(rename = "1")]
@@ -142,7 +142,7 @@ pub enum MassCancelRequestType {
 	CancelForIssuerOfUnderlyingSecurity,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MassCancelResponse {
 	/// Cancel Request Rejected - See <a href="tag_532_MassCancelRejectReason.html" target="bottom">MassCancelRejectReason&nbsp;(532)</a>
 	#[serde(rename = "0")]
@@ -185,7 +185,7 @@ pub enum MassCancelResponse {
 	CancelOrdersForIssuerOfUnderlyingSecurity,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MassCancelRejectReason {
 	/// Mass Cancel Not Supported
 	#[serde(rename = "0")]
@@ -228,7 +228,7 @@ pub enum MassCancelRejectReason {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -253,7 +253,7 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -297,7 +297,7 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

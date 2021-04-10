@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Quote {
 	/// MsgType = R
 	#[serde(flatten)]
@@ -87,7 +87,7 @@ pub struct Quote {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BookingType {
 	/// Regular booking
 	#[serde(rename = "0")]
@@ -100,7 +100,7 @@ pub enum BookingType {
 	TotalReturnSwap,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderCapacity {
 	/// Agency
 	#[serde(rename = "A")]
@@ -125,7 +125,7 @@ pub enum OrderCapacity {
 	MixedCapacity,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderRestrictions {
 	/// Program Trade
 	#[serde(rename = "1")]
@@ -183,7 +183,7 @@ pub enum OrderRestrictions {
 	NormalCourseIssuerBid,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PrivateQuote {
 	/// Private Quote
 	#[serde(rename = "Y")]
@@ -193,7 +193,7 @@ pub enum PrivateQuote {
 	PublicQuote,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RespondentType {
 	/// All market participants
 	#[serde(rename = "1")]
