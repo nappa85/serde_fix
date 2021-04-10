@@ -1,22 +1,11 @@
-[package]
-name = "serde_fix"
-version = "0.1.0"
-authors = ["Marco Napetti <marco.napetti@gmail.com>"]
-license = "MIT/Apache-2.0"
-repository = "https://github.com/nappa85/serde_fix"
-documentation = "https://docs.rs/serde_fix/"
-description = "FiX meets Serde"
-categories = ["encoding", "financial"]
-keywords = ["serde", "serialization", "fix"]
-edition = "2018"
+[workspace]
 
-[lib]
-test = false
-
-[dependencies]
-itoa = "0.4"
-ryu = "1"
-serde = { version = "1", features = ["derive"] }
-chrono = { version = "0.4", features = ["serde"] }
-
-[dev-dependencies]
+members = [
+    "serde_fix",
+    "code_generator",
+    "enum_checker",
+    "fix_common",
+    "fixt11",
+    "fix50sp2",
+    "fix50",
+]
