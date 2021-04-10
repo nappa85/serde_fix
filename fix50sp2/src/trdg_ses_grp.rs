@@ -6,7 +6,7 @@ pub struct TrdgSesGrp {
 	/// Specifies the number of repeating TradingSessionIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "386")]
-	pub trading_sessions: Option<crate::entities::RepeatingValues<TradingSession>>,
+	pub trading_sessions: Option<fix_common::RepeatingValues<TradingSession>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

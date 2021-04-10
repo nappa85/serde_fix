@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Assignment {
 	/// MsgType = AW
 	#[serde(flatten)]
@@ -18,7 +18,7 @@ pub struct Assignment {
 	pub pos_req_id: Option<String>,
 	/// Total Number of Assignment Reports being returned to a firm
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "832")]
 	pub tot_num_assignment_reports: Option<i32>,
@@ -58,13 +58,13 @@ pub struct Assignment {
 	pub position_amount_data: Option<super::super::position_amount_data::PositionAmountData>,
 	/// ThresholdAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "834")]
 	pub threshold_amount: Option<f64>,
 	/// Settlement <a href="tag_44_Price.html" target="bottom">Price&nbsp;(44)</a> of Option
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "730")]
 	pub settl_price: Option<f64>,
@@ -74,33 +74,33 @@ pub struct Assignment {
 	pub settl_price_type: Option<SettlPriceType>,
 	/// Settlement <a href="tag_44_Price.html" target="bottom">Price&nbsp;(44)</a> of Underlying
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "732")]
 	pub underlying_settl_price: Option<f64>,
 	/// PriorSettlPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "734")]
 	pub prior_settl_price: Option<f64>,
 	/// Expiration Date of Option
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "432")]
-	pub expire_date: Option<crate::entities::LocalMktDate>,
+	pub expire_date: Option<fix_common::LocalMktDate>,
 	/// Method under which assignment was conducted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "744")]
 	pub assignment_method: Option<AssignmentMethod>,
 	/// Quantity Increment used in performing assignment
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "745")]
 	pub assignment_unit: Option<f64>,
 	/// Open interest that was eligible for assignment
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "746")]
 	pub open_interest: Option<f64>,
@@ -118,14 +118,14 @@ pub struct Assignment {
 	pub settl_sess_sub_id: Option<String>,
 	/// Business date of assignment
 	#[serde(rename = "715")]
-	pub clearing_business_date: crate::entities::LocalMktDate,
+	pub clearing_business_date: fix_common::LocalMktDate,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -135,7 +135,7 @@ pub struct Assignment {
 	pub encoded_text: Option<String>,
 	/// PositionContingentPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1595")]
 	pub position_contingent_price: Option<f64>,

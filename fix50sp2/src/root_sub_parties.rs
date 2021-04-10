@@ -6,7 +6,7 @@ pub struct RootSubParties {
 	/// Repeating group of RootParty sub-identifiers.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1120")]
-	pub root_party_sub_i_ds: Option<crate::entities::RepeatingValues<RootPartySubID>>,
+	pub root_party_sub_i_ds: Option<fix_common::RepeatingValues<RootPartySubID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

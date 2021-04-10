@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MatchingInstructions {
 	/// Number of Instructions. Required if MatchingInstructions block used
 	#[serde(rename = "1624")]
-	pub match_inst: crate::entities::RepeatingValues<MatchIns>,
+	pub match_inst: fix_common::RepeatingValues<MatchIns>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

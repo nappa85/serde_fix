@@ -6,7 +6,7 @@ pub struct LegStreamCommoditySettlPeriodGrp {
 	/// NoLegStreamCommoditySettlPeriods
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41686")]
-	pub leg_stream_commodity_settl_periods: Option<crate::entities::RepeatingValues<LegStreamCommoditySettlPeriod>>,
+	pub leg_stream_commodity_settl_periods: Option<fix_common::RepeatingValues<LegStreamCommoditySettlPeriod>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct LegStreamCommoditySettlPeriod {
 	pub leg_stream_commodity_settl_flow_type: Option<LegStreamCommoditySettlFlowType>,
 	/// LegStreamCommoditySettlPeriodNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41690")]
 	pub leg_stream_commodity_settl_period_notional: Option<f64>,
@@ -35,7 +35,7 @@ pub struct LegStreamCommoditySettlPeriod {
 	pub leg_stream_commodity_settl_period_notional_unit_of_measure: Option<LegStreamCommoditySettlPeriodNotionalUnitOfMeasure>,
 	/// Conditionally required when LegStreamCommoditySettlPeriodFrequencyUnit(41693) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41692")]
 	pub leg_stream_commodity_settl_period_frequency_period: Option<i32>,
@@ -45,7 +45,7 @@ pub struct LegStreamCommoditySettlPeriod {
 	pub leg_stream_commodity_settl_period_frequency_unit: Option<LegStreamCommoditySettlPeriodFrequencyUnit>,
 	/// LegStreamCommoditySettlPeriodPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41694")]
 	pub leg_stream_commodity_settl_period_price: Option<f64>,

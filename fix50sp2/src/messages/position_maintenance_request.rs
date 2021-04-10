@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Position {
 	/// MsgType = AL
 	#[serde(flatten)]
@@ -27,7 +27,7 @@ pub struct Position {
 	pub pos_maint_rpt_ref_id: Option<String>,
 	/// The Clearing Business Date referred to by this maintenance request
 	#[serde(rename = "715")]
-	pub clearing_business_date: crate::entities::LocalMktDate,
+	pub clearing_business_date: fix_common::LocalMktDate,
 	/// SettlSessID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "716")]
@@ -70,7 +70,7 @@ pub struct Position {
 	/// Time this order request was initiated/released by the trader, trading system, or intermediary.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// PositionQty
 	#[serde(flatten)]
 	pub position_qty: super::super::position_qty::PositionQty,
@@ -84,14 +84,14 @@ pub struct Position {
 	/// Boolean - if Y then indicates you are requesting a position maintenance that acting
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "719")]
-	pub contrary_instruction_indicator: Option<crate::entities::Boolean>,
+	pub contrary_instruction_indicator: Option<fix_common::Boolean>,
 	/// Boolean - Y indicates you are requesting rollover of prior days spread submissions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "720")]
-	pub prior_spread_indicator: Option<crate::entities::Boolean>,
+	pub prior_spread_indicator: Option<fix_common::Boolean>,
 	/// ThresholdAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "834")]
 	pub threshold_amount: Option<f64>,
@@ -101,7 +101,7 @@ pub struct Position {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -119,7 +119,7 @@ pub struct Position {
 	/// SettlDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

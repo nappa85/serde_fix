@@ -6,7 +6,7 @@ pub struct AllocGrp {
 	/// Indicates number of allocation groups to follow.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "78")]
-	pub allocs: Option<crate::entities::RepeatingValues<Alloc>>,
+	pub allocs: Option<fix_common::RepeatingValues<Alloc>>,
 	/// AllocRegulatoryTradeIDGrp
 	#[serde(flatten)]
 	pub alloc_regulatory_trade_id_grp: Option<super::alloc_regulatory_trade_id_grp::AllocRegulatoryTradeIDGrp>,
@@ -30,13 +30,13 @@ pub struct Alloc {
 	/// Used when performing "executed price" vs. "average price" allocations (e.g. Japan). AllocAccount plus AllocPrice form a unique
 	/// Allocs entry. Used in lieu of AllocAvgPx.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "366")]
 	pub alloc_price: Option<f64>,
 	/// Conditionally required except when for AllocTransType="Cancel", or when AllocType= "Ready-To-Book" or "Warehouse instruction".
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "80")]
 	pub alloc_qty: Option<f64>,
@@ -82,7 +82,7 @@ pub struct Alloc {
 	pub alloc_text: Option<String>,
 	/// Must be set if EncodedAllocText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "360")]
 	pub encoded_alloc_text_len: Option<usize>,
@@ -94,7 +94,7 @@ pub struct Alloc {
 	/// AvgPx for this AllocAccount. For F/X orders, should be the "all-in" rate (spot rate adjusted for forward points) for this
 	/// allocation, expressed in terms of <a href="tag_15_Currency.html" target="bottom">Currency(15)&nbsp;(15)</a> . For Fixed Income always express value as "percent of par".
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "153")]
 	pub alloc_avg_px: Option<f64>,
@@ -102,19 +102,19 @@ pub struct Alloc {
 	/// ((AllocQty * AllocAvgPx) + Commission + sum of MiscFeeAmt + AccruedInterestAmt) if a Buy. For FX, if specified, expressed
 	/// in terms of Currency(15). .
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "154")]
 	pub alloc_net_money: Option<f64>,
 	/// (Deprecated in FIX.4.4) Replaced by AllocSettlCurrAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "119")]
 	pub settl_curr_amt: Option<f64>,
 	/// AllocNetMoney in AllocSettlCurrency for this AllocAccount if AllocSettlCurrency is different from "overall" Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "737")]
 	pub alloc_settl_curr_amt: Option<f64>,
@@ -130,7 +130,7 @@ pub struct Alloc {
 	pub alloc_settl_currency: Option<AllocSettlCurrency>,
 	/// Foreign exchange rate used to compute AllocSettlCurrAmt from Currency to AllocSettlCurrency
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "155")]
 	pub settl_curr_fx_rate: Option<f64>,
@@ -140,13 +140,13 @@ pub struct Alloc {
 	pub settl_curr_fx_rate_calc: Option<SettlCurrFxRateCalc>,
 	/// Applicable for Convertible Bonds and fixed income
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "742")]
 	pub alloc_accrued_interest_amt: Option<f64>,
 	/// Applicable for securities that pay interest in lump-sum at maturity
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "741")]
 	pub alloc_interest_at_maturity: Option<f64>,
@@ -174,7 +174,7 @@ pub struct Alloc {
 	pub firm_alloc_text: Option<String>,
 	/// EncodedFirmAllocTextLen
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1733")]
 	pub encoded_firm_alloc_text_len: Option<usize>,
@@ -194,24 +194,24 @@ pub struct Alloc {
 	/// for specific lot trades. If this field is used, either VersusPurchasePrice(1754) or CurrentCostBasis(1755) should be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1753")]
-	pub versus_purchase_date: Option<crate::entities::LocalMktDate>,
+	pub versus_purchase_date: Option<fix_common::LocalMktDate>,
 	/// Price per Share. The Price value should be computed as Current Cost Basis / Quantity Held. Only used for specific lot trades.
 	/// If this field is used, VersusPurchaseDate(1753) should be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1754")]
 	pub versus_purchase_price: Option<f64>,
 	/// Current Cost Basis for the lot. Only used for specific lot trades. If this field is used, VersusPurchaseDate(1753) should
 	/// be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1755")]
 	pub current_cost_basis: Option<f64>,
 	/// AllocGrossTradeAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2300")]
 	pub alloc_gross_trade_amt: Option<f64>,
@@ -229,7 +229,7 @@ pub struct Alloc {
 	pub alloc_risk_limit_check_status: Option<AllocRiskLimitCheckStatus>,
 	/// AllocCalculatedCcyQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2515")]
 	pub alloc_calculated_ccy_qty: Option<f64>,
@@ -239,7 +239,7 @@ pub struct Alloc {
 	pub alloc_leg_ref_id: Option<String>,
 	/// AllocGroupAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2761")]
 	pub alloc_group_amount: Option<f64>,

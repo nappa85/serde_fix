@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct CompIDStatGrp {
 	/// Specifies the number of repeating CompId's
 	#[serde(rename = "936")]
-	pub comp_i_ds: crate::entities::RepeatingValues<CompID>,
+	pub comp_i_ds: fix_common::RepeatingValues<CompID>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -48,4 +48,10 @@ pub enum StatusValue {
 	/// In Process
 	#[serde(rename = "4")]
 	InProcess,
+}
+
+impl Default for StatusValue {
+    fn default() -> Self {
+        StatusValue::Connected
+    }
 }

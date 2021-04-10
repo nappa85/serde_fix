@@ -9,7 +9,7 @@ pub struct DiscretionInstructions {
 	pub discretion_inst: Option<DiscretionInst>,
 	/// Amount (signed) added to the "related to" price specified via DiscretionInst, in the context of DiscretionOffsetType.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "389")]
 	pub discretion_offset_value: Option<f64>,

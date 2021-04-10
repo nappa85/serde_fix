@@ -6,7 +6,7 @@ pub struct RelatedInstrumentGrp {
 	/// NoRelatedInstruments
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1647")]
-	pub related_instruments: Option<crate::entities::RepeatingValues<RelatedInstrument>>,
+	pub related_instruments: Option<fix_common::RepeatingValues<RelatedInstrument>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -37,7 +37,7 @@ pub struct RelatedInstrument {
 	/// May be omitted if RelatedSecurityID(1650) or RelatedSymbol(1649) refers to an underlying instrument in the current message.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1653")]
-	pub related_maturity_month_year: Option<crate::entities::MonthYear>,
+	pub related_maturity_month_year: Option<fix_common::MonthYear>,
 	/// Mutually exclusive with RelatedToStreamXIDRef(2415) and RelatedToDividendPeriodXIDRef(2417). If correlation is with the security
 	/// in Instrument component then all "related to" fields may be omitted.
 	#[serde(skip_serializing_if = "Option::is_none")]

@@ -6,7 +6,7 @@ pub struct LegPreAllocGrp {
 	/// NoLegAllocs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "670")]
-	pub leg_allocs: Option<crate::entities::RepeatingValues<LegAlloc>>,
+	pub leg_allocs: Option<fix_common::RepeatingValues<LegAlloc>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,7 +21,7 @@ pub struct LegAlloc {
 	pub leg_individual_alloc_id: Option<String>,
 	/// LegAllocQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "673")]
 	pub leg_alloc_qty: Option<f64>,
@@ -42,18 +42,18 @@ pub struct LegAlloc {
 	/// specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1757")]
-	pub leg_versus_purchase_date: Option<crate::entities::LocalMktDate>,
+	pub leg_versus_purchase_date: Option<fix_common::LocalMktDate>,
 	/// Price per Share. The Price value should be computed as Current Cost Basis / Quantity Held. Only used for specific lot trades.
 	/// If this field is used, LegVersusPurchaseDate(1757) should be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1758")]
 	pub leg_versus_purchase_price: Option<f64>,
 	/// Current Cost Basis for the lot. Only used for specific lot trades. If this field is used, LegVersusPurchaseDate(1757) should
 	/// be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1759")]
 	pub leg_current_cost_basis: Option<f64>,

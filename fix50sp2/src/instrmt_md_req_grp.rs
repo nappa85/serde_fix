@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct InstrmtMDReqGrp {
 	/// Number of symbols (instruments) requested.
 	#[serde(rename = "146")]
-	pub related_sym: crate::entities::RepeatingValues<RelatedSy>,
+	pub related_sym: fix_common::RepeatingValues<RelatedSy>,
 	/// SpreadOrBenchmarkCurveData
 	#[serde(flatten)]
 	pub spread_or_benchmark_curve_data: Option<super::spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData>,
@@ -28,12 +28,12 @@ pub struct RelatedSy {
 	/// SettlType (specifying the tenor) or SettlDate must be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// Quantity or volume represented by the Market Data Entry. In the context of the Market Data Request this allows the Initiator
 	/// to indicate the quantity of the market data request. Specific to FX this field indicates the ceiling amount the customer is
 	/// seeking prices for.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "271")]
 	pub md_entry_size: Option<f64>,

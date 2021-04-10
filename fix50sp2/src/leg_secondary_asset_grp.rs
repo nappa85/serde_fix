@@ -6,7 +6,7 @@ pub struct LegSecondaryAssetGrp {
 	/// NoLegSecondaryAssetClasses
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2076")]
-	pub leg_secondary_asset_classes: Option<crate::entities::RepeatingValues<LegSecondaryAssetClasse>>,
+	pub leg_secondary_asset_classes: Option<fix_common::RepeatingValues<LegSecondaryAssetClasse>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

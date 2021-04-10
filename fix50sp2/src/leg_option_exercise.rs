@@ -9,7 +9,7 @@ pub struct LegOptionExercise {
 	pub leg_exercise_desc: Option<String>,
 	/// Must be set if EncodedLegExerciseDesc (41483) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41482")]
 	pub encoded_leg_exercise_desc_len: Option<usize>,
@@ -21,10 +21,10 @@ pub struct LegOptionExercise {
 	/// LegAutomaticExerciseIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41484")]
-	pub leg_automatic_exercise_indicator: Option<crate::entities::Boolean>,
+	pub leg_automatic_exercise_indicator: Option<fix_common::Boolean>,
 	/// LegAutomaticExerciseThresholdRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41485")]
 	pub leg_automatic_exercise_threshold_rate: Option<f64>,
@@ -39,15 +39,15 @@ pub struct LegOptionExercise {
 	/// LegFallbackExerciseIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41488")]
-	pub leg_fallback_exercise_indicator: Option<crate::entities::Boolean>,
+	pub leg_fallback_exercise_indicator: Option<fix_common::Boolean>,
 	/// LegLimitRightToConfirmIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41489")]
-	pub leg_limit_right_to_confirm_indicator: Option<crate::entities::Boolean>,
+	pub leg_limit_right_to_confirm_indicator: Option<fix_common::Boolean>,
 	/// LegExerciseSplitTicketIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41490")]
-	pub leg_exercise_split_ticket_indicator: Option<crate::entities::Boolean>,
+	pub leg_exercise_split_ticket_indicator: Option<fix_common::Boolean>,
 	/// LegOptionExerciseDates
 	#[serde(flatten)]
 	pub leg_option_exercise_dates: Option<super::leg_option_exercise_dates::LegOptionExerciseDates>,
@@ -56,7 +56,7 @@ pub struct LegOptionExercise {
 	pub leg_option_exercise_expiration: Option<super::leg_option_exercise_expiration::LegOptionExerciseExpiration>,
 	/// LegSettlMethodElectingPartySide
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42391")]
 	pub leg_settl_method_electing_party_side: Option<i32>,

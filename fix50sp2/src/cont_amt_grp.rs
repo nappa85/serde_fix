@@ -6,7 +6,7 @@ pub struct ContAmtGrp {
 	/// Number of contract details in this message (number of repeating groups to follow)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "518")]
-	pub cont_amts: Option<crate::entities::RepeatingValues<ContAmt>>,
+	pub cont_amts: Option<fix_common::RepeatingValues<ContAmt>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct ContAmt {
 	pub cont_amt_type: Option<ContAmtType>,
 	/// ContAmtValue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "520")]
 	pub cont_amt_value: Option<f64>,

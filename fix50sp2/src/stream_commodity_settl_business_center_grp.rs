@@ -6,7 +6,7 @@ pub struct StreamCommoditySettlBusinessCenterGrp {
 	/// NoStreamCommoditySettlBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41249")]
-	pub stream_commodity_settl_business_centers: Option<crate::entities::RepeatingValues<StreamCommoditySettlBusinessCenter>>,
+	pub stream_commodity_settl_business_centers: Option<fix_common::RepeatingValues<StreamCommoditySettlBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

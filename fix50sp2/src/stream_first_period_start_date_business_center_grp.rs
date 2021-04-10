@@ -6,7 +6,7 @@ pub struct StreamFirstPeriodStartDateBusinessCenterGrp {
 	/// NoStreamFirstPeriodStartDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40959")]
-	pub stream_first_period_start_date_business_centers: Option<crate::entities::RepeatingValues<StreamFirstPeriodStartDateBusinessCenter>>,
+	pub stream_first_period_start_date_business_centers: Option<fix_common::RepeatingValues<StreamFirstPeriodStartDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

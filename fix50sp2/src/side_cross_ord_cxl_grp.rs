@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SideCrossOrdCxlGrp {
 	/// Must be 1 or 2
 	#[serde(rename = "552")]
-	pub sides: crate::entities::RepeatingValues<NoSide>,
+	pub sides: fix_common::RepeatingValues<NoSide>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -32,15 +32,15 @@ pub struct NoSide {
 	/// OrigOrdModTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "586")]
-	pub orig_ord_mod_time: Option<crate::entities::UTCTimestamp>,
+	pub orig_ord_mod_time: Option<fix_common::UTCTimestamp>,
 	/// TradeOriginationDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "229")]
-	pub trade_origination_date: Option<crate::entities::LocalMktDate>,
+	pub trade_origination_date: Option<fix_common::LocalMktDate>,
 	/// TradeDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// ComplianceID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "376")]
@@ -51,7 +51,7 @@ pub struct NoSide {
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -65,7 +65,7 @@ pub struct NoSide {
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2351")]
 	pub encoded_compliance_text_len: Option<usize>,
@@ -139,4 +139,10 @@ pub enum Side {
 	/// Sell undisclosed
 	#[serde(rename = "H")]
 	SellUndisclosed,
+}
+
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
 }

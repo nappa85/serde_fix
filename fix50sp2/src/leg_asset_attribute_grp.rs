@@ -6,7 +6,7 @@ pub struct LegAssetAttributeGrp {
 	/// NoLegAssetAttributes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2308")]
-	pub leg_asset_attributes: Option<crate::entities::RepeatingValues<LegAssetAttribute>>,
+	pub leg_asset_attributes: Option<fix_common::RepeatingValues<LegAssetAttribute>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

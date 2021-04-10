@@ -6,7 +6,7 @@ pub struct SettlObligationInstructions {
 	/// Number of Settlement Obligations.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1165")]
-	pub settl_oblig: Option<crate::entities::RepeatingValues<SettlObli>>,
+	pub settl_oblig: Option<fix_common::RepeatingValues<SettlObli>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -29,13 +29,13 @@ pub struct SettlObli {
 	pub settl_oblig_ref_id: Option<String>,
 	/// Net flow of currency 1.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1157")]
 	pub ccy_amt: Option<f64>,
 	/// Net flow of currency 2.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "119")]
 	pub settl_curr_amt: Option<f64>,
@@ -49,26 +49,26 @@ pub struct SettlObli {
 	pub settl_currency: Option<SettlCurrency>,
 	/// Derived rate of Ccy2 per Ccy1 based on netting
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "155")]
 	pub settl_curr_fx_rate: Option<f64>,
 	/// Value Date
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// Effective (start) date/time for this settlement instruction.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "168")]
-	pub effective_time: Option<crate::entities::UTCTimestamp>,
+	pub effective_time: Option<fix_common::UTCTimestamp>,
 	/// Termination date/time for this settlement instruction.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "126")]
-	pub expire_time: Option<crate::entities::UTCTimestamp>,
+	pub expire_time: Option<fix_common::UTCTimestamp>,
 	/// Date/time this settlement instruction was last updated (or created if not updated since creation).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "779")]
-	pub last_update_time: Option<crate::entities::UTCTimestamp>,
+	pub last_update_time: Option<fix_common::UTCTimestamp>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

@@ -5,20 +5,20 @@ use serde::{Deserialize, Serialize};
 pub struct QuotReqLegsGrp {
 	/// NoLegs
 	#[serde(rename = "555")]
-	pub legs: crate::entities::RepeatingValues<Leg>,
+	pub legs: fix_common::RepeatingValues<Leg>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Leg {
 	/// Deprecated in FIX 5.0 SP1. The LegQty(687) field is deprecated. The use of LegOrderQty(685) is recommended instead
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "687")]
 	pub leg_qty: Option<f64>,
 	/// Quantity ordered for this leg as provided during order entry.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "685")]
 	pub leg_order_qty: Option<f64>,
@@ -33,14 +33,14 @@ pub struct Leg {
 	/// LegSettlDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "588")]
-	pub leg_settl_date: Option<crate::entities::LocalMktDate>,
+	pub leg_settl_date: Option<fix_common::LocalMktDate>,
 	/// Use of LegRefID(654) in this component is deprecated. Recommend the use of LegID(1788) in the InstrumentLeg component.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "654")]
 	pub leg_ref_id: Option<String>,
 	/// For OTC swaps, may be used to provide the estimated midmarket-mark.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2346")]
 	pub leg_mid_px: Option<f64>,

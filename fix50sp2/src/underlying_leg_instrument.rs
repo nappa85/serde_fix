@@ -37,18 +37,18 @@ pub struct UnderlyingLegInstrument {
 	/// UnderlyingLegMaturityMonthYear
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1339")]
-	pub underlying_leg_maturity_month_year: Option<crate::entities::MonthYear>,
+	pub underlying_leg_maturity_month_year: Option<fix_common::MonthYear>,
 	/// UnderlyingLegMaturityDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1345")]
-	pub underlying_leg_maturity_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_leg_maturity_date: Option<fix_common::LocalMktDate>,
 	/// UnderlyingLegMaturityTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1405")]
-	pub underlying_leg_maturity_time: Option<crate::entities::TZTimeOnly>,
+	pub underlying_leg_maturity_time: Option<fix_common::TZTimeOnly>,
 	/// UnderlyingLegStrikePrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1340")]
 	pub underlying_leg_strike_price: Option<f64>,

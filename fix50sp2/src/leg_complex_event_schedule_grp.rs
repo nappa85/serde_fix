@@ -6,7 +6,7 @@ pub struct LegComplexEventScheduleGrp {
 	/// NoLegComplexEventSchedules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41400")]
-	pub leg_complex_event_schedules: Option<crate::entities::RepeatingValues<LegComplexEventSchedule>>,
+	pub leg_complex_event_schedules: Option<fix_common::RepeatingValues<LegComplexEventSchedule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,14 +14,14 @@ pub struct LegComplexEventSchedule {
 	/// Required if NoLegComplexEventScedules(41400) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41401")]
-	pub leg_complex_event_schedule_start_date: Option<crate::entities::LocalMktDate>,
+	pub leg_complex_event_schedule_start_date: Option<fix_common::LocalMktDate>,
 	/// LegComplexEventScheduleEndDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41402")]
-	pub leg_complex_event_schedule_end_date: Option<crate::entities::LocalMktDate>,
+	pub leg_complex_event_schedule_end_date: Option<fix_common::LocalMktDate>,
 	/// Conditionally required when LegComplexEventScheduleFrequencyUnit(41404) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41403")]
 	pub leg_complex_event_schedule_frequency_period: Option<i32>,

@@ -6,7 +6,7 @@ pub struct ReferenceDataDateGrp {
 	/// NoReferenceDataDates
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2746")]
-	pub reference_data_dates: Option<crate::entities::RepeatingValues<ReferenceDataDate>>,
+	pub reference_data_dates: Option<fix_common::RepeatingValues<ReferenceDataDate>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct ReferenceDataDate {
 	/// Required if NoReferenceDataDates(2746) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2747")]
-	pub reference_data_date: Option<crate::entities::UTCTimestamp>,
+	pub reference_data_date: Option<fix_common::UTCTimestamp>,
 	/// ReferenceDataDateType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2748")]

@@ -6,7 +6,7 @@ pub struct InstrumentPtysSubGrp {
 	/// NoInstrumentPartySubIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1052")]
-	pub instrument_party_sub_i_ds: Option<crate::entities::RepeatingValues<InstrumentPartySubID>>,
+	pub instrument_party_sub_i_ds: Option<fix_common::RepeatingValues<InstrumentPartySubID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

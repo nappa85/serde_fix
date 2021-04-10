@@ -6,7 +6,7 @@ pub struct LegProvisionOptionRelevantUnderlyingDateBusinessCenterGrp {
 	/// NoLegProvisionOptionRelevantUnderlyingDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40938")]
-	pub leg_provision_option_relevant_underlying_date_business_centers: Option<crate::entities::RepeatingValues<LegProvisionOptionRelevantUnderlyingDateBusinessCenter>>,
+	pub leg_provision_option_relevant_underlying_date_business_centers: Option<fix_common::RepeatingValues<LegProvisionOptionRelevantUnderlyingDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

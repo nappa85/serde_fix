@@ -6,7 +6,7 @@ pub struct PaymentStreamPaymentDates {
 	/// When specified, this overrides the business day convention defined in the DateAdjustment component in Instrument. The specified
 	/// value would be specific to this instance of the payment stream's payment dates.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40751")]
 	pub payment_stream_payment_date_business_day_convention: Option<i32>,
@@ -16,7 +16,7 @@ pub struct PaymentStreamPaymentDates {
 	pub payment_stream_payment_date_business_center_grp: Option<super::payment_stream_payment_date_business_center_grp::PaymentStreamPaymentDateBusinessCenterGrp>,
 	/// Conditionally required when PaymentStreamPaymentFrequencyUnit(40754) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40753")]
 	pub payment_stream_payment_frequency_period: Option<i32>,
@@ -31,20 +31,20 @@ pub struct PaymentStreamPaymentDates {
 	/// PaymentStreamFirstPaymentDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40756")]
-	pub payment_stream_first_payment_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub payment_stream_first_payment_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// PaymentStreamLastRegularPaymentDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40757")]
-	pub payment_stream_last_regular_payment_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub payment_stream_last_regular_payment_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// PaymentStreamPaymentDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40758")]
 	pub payment_stream_payment_date_relative_to: Option<i32>,
 	/// Conditionally required when PaymentStreamPaymentDateOffsetUnit(40760) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40759")]
 	pub payment_stream_payment_date_offset_period: Option<i32>,
@@ -62,7 +62,7 @@ pub struct PaymentStreamPaymentDates {
 	/// PaymentStreamMasterAgreementPaymentDatesIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41223")]
-	pub payment_stream_master_agreement_payment_dates_indicator: Option<crate::entities::Boolean>,
+	pub payment_stream_master_agreement_payment_dates_indicator: Option<fix_common::Boolean>,
 	/// PaymentStreamFinalPricePaymentDate
 	#[serde(flatten)]
 	pub payment_stream_final_price_payment_date: Option<super::payment_stream_final_price_payment_date::PaymentStreamFinalPricePaymentDate>,

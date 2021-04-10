@@ -6,7 +6,7 @@ pub struct TargetParties {
 	/// Repeating group below should contain unique combinations of <a href="tag_1462_TargetPartyID.html" target="bottom">TargetPartyID&nbsp;(1462)</a> , <a href="tag_1463_TargetPartyIDSource.html" target="bottom">TargetPartyIDSource&nbsp;(1463)</a> , and <a href="tag_1464_TargetPartyRole.html" target="bottom">TargetPartyRole&nbsp;(1464)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1461")]
-	pub target_party_i_ds: Option<crate::entities::RepeatingValues<TargetPartyID>>,
+	pub target_party_i_ds: Option<fix_common::RepeatingValues<TargetPartyID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

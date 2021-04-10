@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct PayManagementReportAck {
 	/// MsgType = DZ
 	#[serde(flatten)]
@@ -14,7 +14,7 @@ pub struct PayManagementReportAck {
 	pub pay_report_status: PayReportStatus,
 	/// May be used to provide reason for PayReportStatus(2806)=3 (Disputed).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2800")]
 	pub pay_dispute_reason: Option<i32>,
@@ -24,7 +24,7 @@ pub struct PayManagementReportAck {
 	pub reject_text: Option<String>,
 	/// Must be set if EncodedRejectText(1665) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1664")]
 	pub encoded_reject_text_len: Option<usize>,

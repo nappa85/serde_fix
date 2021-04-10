@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrdListStatGrp {
 	/// Number of orders statused in this message, i.e. number of repeating groups to follow.
 	#[serde(rename = "73")]
-	pub orders: crate::entities::RepeatingValues<Order>,
+	pub orders: fix_common::RepeatingValues<Order>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -22,7 +22,7 @@ pub struct Order {
 	#[serde(rename = "526")]
 	pub secondary_cl_ord_id: Option<String>,
 	/// CumQty
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "14")]
 	pub cum_qty: f64,
 	/// OrdStatus
@@ -34,16 +34,16 @@ pub struct Order {
 	pub working_indicator: Option<WorkingIndicator>,
 	/// Quantity open for further execution. LeavesQty = OrderQty - CumQty.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "151")]
 	pub leaves_qty: Option<f64>,
 	/// CxlQty
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "84")]
 	pub cxl_qty: f64,
 	/// AvgPx
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "6")]
 	pub avg_px: f64,
 	/// Used if the order is rejected
@@ -56,7 +56,7 @@ pub struct Order {
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -113,6 +113,12 @@ pub enum OrdStatus {
 	/// Pending Replace (i.e. result of Order Cancel/Replace Request)
 	#[serde(rename = "E")]
 	PendingReplace,
+}
+
+impl Default for OrdStatus {
+    fn default() -> Self {
+        OrdStatus::New
+    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

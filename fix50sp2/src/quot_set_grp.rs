@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct QuotSetGrp {
 	/// The number of sets of quotes in the message
 	#[serde(rename = "296")]
-	pub quote_sets: crate::entities::RepeatingValues<QuoteSet>,
+	pub quote_sets: fix_common::RepeatingValues<QuoteSet>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,10 +17,10 @@ pub struct QuoteSet {
 	/// QuoteSetValidUntilTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "367")]
-	pub quote_set_valid_until_time: Option<crate::entities::UTCTimestamp>,
+	pub quote_set_valid_until_time: Option<fix_common::UTCTimestamp>,
 	/// Total number of quotes for the QuoteSet across all messages. Should be the sum of all NoQuoteEntries in each message that
 	/// has repeating quotes that are part of the same QuoteSet.
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "304")]
 	pub tot_no_quote_entries: i32,
 	/// Indicates whether this is the last fragment in a sequence of message fragments. Only required where message has been fragmented.

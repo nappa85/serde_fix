@@ -6,14 +6,14 @@ pub struct MarginAmount {
 	/// Number of margin amount entries
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1643")]
-	pub margin_amt: Option<crate::entities::RepeatingValues<MarginAm>>,
+	pub margin_amt: Option<fix_common::RepeatingValues<MarginAm>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct MarginAm {
 	/// MarginAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1645")]
 	pub margin_amt: Option<f64>,
@@ -35,7 +35,7 @@ pub struct MarginAm {
 	pub margin_amount_market_id: Option<String>,
 	/// MarginAmtFXRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2088")]
 	pub margin_amt_fx_rate: Option<f64>,

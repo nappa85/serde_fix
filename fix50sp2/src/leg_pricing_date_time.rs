@@ -6,7 +6,7 @@ pub struct LegPricingDateTime {
 	/// LegPricingDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41609")]
-	pub leg_pricing_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_pricing_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegPricingDateBusinessDayConvention
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41610")]
@@ -17,7 +17,7 @@ pub struct LegPricingDateTime {
 	/// LegPricingDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41611")]
-	pub leg_pricing_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_pricing_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// LegPricingTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41612")]

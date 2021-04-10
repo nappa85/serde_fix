@@ -6,7 +6,7 @@ pub struct RiskInstrumentScopeGrp {
 	/// NoRiskInstrumentScopes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1534")]
-	pub risk_instrument_scopes: Option<crate::entities::RepeatingValues<RiskInstrumentScope>>,
+	pub risk_instrument_scopes: Option<fix_common::RepeatingValues<RiskInstrumentScope>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct RiskInstrumentScope {
 	pub instrument_scope_operator: Option<InstrumentScopeOperator>,
 	/// RiskInstrumentMultiplier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1558")]
 	pub risk_instrument_multiplier: Option<f64>,

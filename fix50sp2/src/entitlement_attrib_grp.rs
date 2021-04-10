@@ -6,14 +6,14 @@ pub struct EntitlementAttribGrp {
 	/// NoEntitlementAttrib
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1777")]
-	pub entitlement_attrib: Option<crate::entities::RepeatingValues<EntitlementAttri>>,
+	pub entitlement_attrib: Option<fix_common::RepeatingValues<EntitlementAttri>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct EntitlementAttri {
 	/// Required if NoEntitlementAttrib(1777) &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1778")]
 	pub entitlement_attrib_type: Option<i32>,

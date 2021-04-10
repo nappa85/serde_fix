@@ -9,27 +9,27 @@ pub struct LegPaymentStream {
 	pub leg_payment_stream_type: Option<LegPaymentStreamType>,
 	/// LegPaymentStreamMarketRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40280")]
 	pub leg_payment_stream_market_rate: Option<i32>,
 	/// LegPaymentStreamDelayIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40281")]
-	pub leg_payment_stream_delay_indicator: Option<crate::entities::Boolean>,
+	pub leg_payment_stream_delay_indicator: Option<fix_common::Boolean>,
 	/// LegPaymentStreamSettlCurrency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40282")]
 	pub leg_payment_stream_settl_currency: Option<LegPaymentStreamSettlCurrency>,
 	/// LegPaymentStreamDayCount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40283")]
 	pub leg_payment_stream_day_count: Option<i32>,
 	/// LegPaymentStreamAccrualDays
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40284")]
 	pub leg_payment_stream_accrual_days: Option<i32>,
@@ -39,7 +39,7 @@ pub struct LegPaymentStream {
 	pub leg_payment_stream_discount_type: Option<LegPaymentStreamDiscountType>,
 	/// LegPaymentStreamDiscountRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40286")]
 	pub leg_payment_stream_discount_rate: Option<f32>,
@@ -54,15 +54,15 @@ pub struct LegPaymentStream {
 	/// LegPaymentStreamInitialPrincipalExchangeIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40289")]
-	pub leg_payment_stream_initial_principal_exchange_indicator: Option<crate::entities::Boolean>,
+	pub leg_payment_stream_initial_principal_exchange_indicator: Option<fix_common::Boolean>,
 	/// LegPaymentStreamInterimPrincipalExchangeIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40290")]
-	pub leg_payment_stream_interim_principal_exchange_indicator: Option<crate::entities::Boolean>,
+	pub leg_payment_stream_interim_principal_exchange_indicator: Option<fix_common::Boolean>,
 	/// LegPaymentStreamFinalPrincipalExchangeIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40291")]
-	pub leg_payment_stream_final_principal_exchange_indicator: Option<crate::entities::Boolean>,
+	pub leg_payment_stream_final_principal_exchange_indicator: Option<fix_common::Boolean>,
 	/// LegPaymentStreamPaymentDates
 	#[serde(flatten)]
 	pub leg_payment_stream_payment_dates: Option<super::leg_payment_stream_payment_dates::LegPaymentStreamPaymentDates>,
@@ -81,10 +81,10 @@ pub struct LegPaymentStream {
 	/// LegPaymentStreamFlatRateIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41549")]
-	pub leg_payment_stream_flat_rate_indicator: Option<crate::entities::Boolean>,
+	pub leg_payment_stream_flat_rate_indicator: Option<fix_common::Boolean>,
 	/// LegPaymentStreamFlatRateAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41550")]
 	pub leg_payment_stream_flat_rate_amount: Option<f64>,
@@ -94,7 +94,7 @@ pub struct LegPaymentStream {
 	pub leg_payment_stream_flat_rate_currency: Option<String>,
 	/// LegStreamMaximumPaymentAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41552")]
 	pub leg_stream_maximum_payment_amount: Option<f64>,
@@ -104,7 +104,7 @@ pub struct LegPaymentStream {
 	pub leg_stream_maximum_payment_currency: Option<String>,
 	/// LegStreamMaximumTransactionAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41554")]
 	pub leg_stream_maximum_transaction_amount: Option<f64>,
@@ -115,32 +115,32 @@ pub struct LegPaymentStream {
 	/// LegPaymentStreamCashSettlIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42399")]
-	pub leg_payment_stream_cash_settl_indicator: Option<crate::entities::Boolean>,
+	pub leg_payment_stream_cash_settl_indicator: Option<fix_common::Boolean>,
 	/// Mutually exclusive with LegPaymentStreamCompoundingFixedRate(42404) or the LegPaymentStreamCompoundingFloatingRate component.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42400")]
 	pub leg_payment_stream_compounding_xid_ref: Option<String>,
 	/// LegPaymentStreamCompoundingSpread
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42401")]
 	pub leg_payment_stream_compounding_spread: Option<f64>,
 	/// LegPaymentStreamInterpolationMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42402")]
 	pub leg_payment_stream_interpolation_method: Option<i32>,
 	/// LegPaymentStreamInterpolationPeriod
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42403")]
 	pub leg_payment_stream_interpolation_period: Option<i32>,
 	/// Mutually exclusive with LegPaymentStreamCompoundingXIDRef(42400) or the LegPaymentStreamCompoundingFloatingRate component.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42404")]
 	pub leg_payment_stream_compounding_fixed_rate: Option<f64>,

@@ -42,20 +42,20 @@ pub struct TradeReportOrderDetail {
 	pub ord_type: Option<OrdType>,
 	/// Order price at time of trade.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "44")]
 	pub price: Option<f64>,
 	/// Stop/Limit order price.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "99")]
 	pub stop_px: Option<f64>,
 	/// Execution Instruction from the order associated with the trade.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "18")]
-	pub exec_inst: Option<crate::entities::SeparatedValues<ExecInst>>,
+	pub exec_inst: Option<fix_common::SeparatedValues<ExecInst>>,
 	/// Status of order as of this trade report.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "39")]
@@ -65,13 +65,13 @@ pub struct TradeReportOrderDetail {
 	pub order_qty_data: Option<super::order_qty_data::OrderQtyData>,
 	/// LeavesQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "151")]
 	pub leaves_qty: Option<f64>,
 	/// CumQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "14")]
 	pub cum_qty: Option<f64>,
@@ -82,7 +82,7 @@ pub struct TradeReportOrderDetail {
 	/// The order expiration date/time in UTC.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "126")]
-	pub expire_time: Option<crate::entities::UTCTimestamp>,
+	pub expire_time: Option<fix_common::UTCTimestamp>,
 	/// DisplayInstruction
 	#[serde(flatten)]
 	pub display_instruction: Option<super::display_instruction::DisplayInstruction>,
@@ -93,7 +93,7 @@ pub struct TradeReportOrderDetail {
 	/// OrderRestrictions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "529")]
-	pub order_restrictions: Option<crate::entities::SeparatedValues<OrderRestrictions>>,
+	pub order_restrictions: Option<fix_common::SeparatedValues<OrderRestrictions>>,
 	/// BookingType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "775")]
@@ -113,14 +113,14 @@ pub struct TradeReportOrderDetail {
 	/// TransBkdTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "483")]
-	pub trans_bkd_time: Option<crate::entities::UTCTimestamp>,
+	pub trans_bkd_time: Option<fix_common::UTCTimestamp>,
 	/// OrigOrdModTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "586")]
-	pub orig_ord_mod_time: Option<crate::entities::UTCTimestamp>,
+	pub orig_ord_mod_time: Option<fix_common::UTCTimestamp>,
 	/// OrderPercentOfTotalVolume
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2766")]
 	pub order_percent_of_total_volume: Option<f32>,
@@ -130,11 +130,11 @@ pub struct TradeReportOrderDetail {
 	/// PreTradeAnonymity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1091")]
-	pub pre_trade_anonymity: Option<crate::entities::Boolean>,
+	pub pre_trade_anonymity: Option<fix_common::Boolean>,
 	/// The(minimum or suggested) period of time a quoted price is to be tradable before it becomes indicative.(i.e. quoted price
 	/// becomes off-the-wire).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1629")]
 	pub exposure_duration: Option<i32>,

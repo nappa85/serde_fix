@@ -10,11 +10,11 @@ pub struct AveragePriceDetail {
 	/// Required if AveragePriceType(2763)=2 (Percent of volume average price) or 0 (Time weighted average price).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2764")]
-	pub average_price_start_time: Option<crate::entities::UTCTimestamp>,
+	pub average_price_start_time: Option<fix_common::UTCTimestamp>,
 	/// Required if AveragePriceType(2763)=2 (Percent of volume average price) or 0 (Time weighted average price).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2765")]
-	pub average_price_end_time: Option<crate::entities::UTCTimestamp>,
+	pub average_price_end_time: Option<fix_common::UTCTimestamp>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

@@ -1,0 +1,17 @@
+[package]
+name = "fix_message"
+version = "0.1.0"
+authors = ["Marco Napetti <nappa85@therocktrading.com>"]
+license = "MIT/Apache-2.0"
+description = "FiX meets Serde"
+categories = ["encoding", "financial"]
+keywords = ["serde", "serialization", "fix"]
+edition = "2018"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+fixt11 = { path = "../fixt11" }
+fix50sp2 = { path = "../fix50sp2" }
+fix50 = { path = "../fix50" }
+
+[dev-dependencies]

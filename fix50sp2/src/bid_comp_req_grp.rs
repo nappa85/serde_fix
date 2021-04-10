@@ -6,7 +6,7 @@ pub struct BidCompReqGrp {
 	/// Used if BidType="Disclosed"
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "420")]
-	pub bid_components: Option<crate::entities::RepeatingValues<BidComponent>>,
+	pub bid_components: Option<fix_common::RepeatingValues<BidComponent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -39,7 +39,7 @@ pub struct BidComponent {
 	/// Takes precedence over SettlType value and conditionally required/omitted for specific SettlType values.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]

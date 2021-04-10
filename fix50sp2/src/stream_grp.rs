@@ -6,7 +6,7 @@ pub struct StreamGrp {
 	/// NoStreams
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40049")]
-	pub streams: Option<crate::entities::RepeatingValues<Stream>>,
+	pub streams: Option<fix_common::RepeatingValues<Stream>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -29,7 +29,7 @@ pub struct Stream {
 	pub stream_receive_side: Option<StreamReceiveSide>,
 	/// StreamNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40054")]
 	pub stream_notional: Option<f64>,
@@ -43,7 +43,7 @@ pub struct Stream {
 	pub stream_text: Option<String>,
 	/// Must be set if EncodedStreamText(40983) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40982")]
 	pub encoded_stream_text_len: Option<usize>,
@@ -62,7 +62,7 @@ pub struct Stream {
 	pub stream_notional_xid_ref: Option<String>,
 	/// Conditionally required when StreamNotionalFrequencyUnit(41307) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41306")]
 	pub stream_notional_frequency_period: Option<i32>,
@@ -80,7 +80,7 @@ pub struct Stream {
 	pub stream_notional_unit_of_measure: Option<StreamNotionalUnitOfMeasure>,
 	/// StreamTotalNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41310")]
 	pub stream_total_notional: Option<f64>,
@@ -95,7 +95,7 @@ pub struct Stream {
 	/// StreamVersionEffectiveDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42785")]
-	pub stream_version_effective_date: Option<crate::entities::LocalMktDate>,
+	pub stream_version_effective_date: Option<fix_common::LocalMktDate>,
 	/// StreamNotionalDeterminationMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42786")]

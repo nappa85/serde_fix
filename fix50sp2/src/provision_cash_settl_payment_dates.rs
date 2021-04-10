@@ -18,7 +18,7 @@ pub struct ProvisionCashSettlPaymentDates {
 	pub provision_cash_settl_payment_date_relative_to: Option<ProvisionCashSettlPaymentDateRelativeTo>,
 	/// Conditionally required when ProvisionCashSettlPaymentDateOffsetUnit(40167) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40166")]
 	pub provision_cash_settl_payment_date_offset_period: Option<i32>,
@@ -33,11 +33,11 @@ pub struct ProvisionCashSettlPaymentDates {
 	/// ProvisionCashSettlPaymentDateRangeFirst
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40169")]
-	pub provision_cash_settl_payment_date_range_first: Option<crate::entities::LocalMktDate>,
+	pub provision_cash_settl_payment_date_range_first: Option<fix_common::LocalMktDate>,
 	/// ProvisionCashSettlPaymentDateRangeLast
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40170")]
-	pub provision_cash_settl_payment_date_range_last: Option<crate::entities::LocalMktDate>,
+	pub provision_cash_settl_payment_date_range_last: Option<fix_common::LocalMktDate>,
 	/// ProvisionCashSettlPaymentFixedDateGrp
 	#[serde(flatten)]
 	pub provision_cash_settl_payment_fixed_date_grp: Option<super::provision_cash_settl_payment_fixed_date_grp::ProvisionCashSettlPaymentFixedDateGrp>,

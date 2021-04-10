@@ -6,7 +6,7 @@ pub struct RgstDtlsGrp {
 	/// Number of registration details in this message (number of repeating groups to follow).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "473")]
-	pub regist_dtls: Option<crate::entities::RepeatingValues<RegistDtl>>,
+	pub regist_dtls: Option<fix_common::RepeatingValues<RegistDtl>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -34,7 +34,7 @@ pub struct RegistDtl {
 	/// DateOfBirth
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "486")]
-	pub date_of_birth: Option<crate::entities::LocalMktDate>,
+	pub date_of_birth: Option<fix_common::LocalMktDate>,
 	/// InvestorCountryOfResidence
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "475")]

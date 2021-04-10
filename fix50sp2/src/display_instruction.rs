@@ -5,13 +5,13 @@ use serde::{Deserialize, Serialize};
 pub struct DisplayInstruction {
 	/// DisplayQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1138")]
 	pub display_qty: Option<f64>,
 	/// SecondaryDisplayQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1082")]
 	pub secondary_display_qty: Option<f64>,
@@ -25,37 +25,37 @@ pub struct DisplayInstruction {
 	pub display_method: Option<DisplayMethod>,
 	/// Required when <a href="tag_1084_DisplayMethod.html" target="bottom">DisplayMethod&nbsp;(1084)</a> = 3
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1085")]
 	pub display_low_qty: Option<f64>,
 	/// Required when <a href="tag_1084_DisplayMethod.html" target="bottom">DisplayMethod&nbsp;(1084)</a> = 3
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1086")]
 	pub display_high_qty: Option<f64>,
 	/// Can be used to specify larger increments than the standard increment provided by the market. Optionally used when <a href="tag_1084_DisplayMethod.html" target="bottom">DisplayMethod&nbsp;(1084)</a> = 3
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1087")]
 	pub display_min_incr: Option<f64>,
 	/// Required when <a href="tag_1084_DisplayMethod.html" target="bottom">DisplayMethod&nbsp;(1084)</a> = 2
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1088")]
 	pub refresh_qty: Option<f64>,
 	/// Only to be used in the ExecutionReport
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1608")]
 	pub initial_display_qty: Option<f64>,
 	/// CurrentDisplayPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2828")]
 	pub current_display_price: Option<f64>,

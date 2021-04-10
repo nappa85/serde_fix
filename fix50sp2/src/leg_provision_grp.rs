@@ -6,7 +6,7 @@ pub struct LegProvisionGrp {
 	/// NoLegProvisions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40448")]
-	pub leg_provisions: Option<crate::entities::RepeatingValues<LegProvision>>,
+	pub leg_provisions: Option<fix_common::RepeatingValues<LegProvision>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct LegProvision {
 	/// LegProvisionDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40450")]
-	pub leg_provision_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// When specified, this overrides the business day convention defined in the LegDateAdjustment component in InstrumentLeg. The
 	/// specified value would be specific to this instance of the instrument's leg provision.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -27,10 +27,10 @@ pub struct LegProvision {
 	/// LegProvisionDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40453")]
-	pub leg_provision_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// Conditionally required when LegProvisionDateTenorUnit(40455) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40454")]
 	pub leg_provision_date_tenor_period: Option<i32>,
@@ -56,38 +56,38 @@ pub struct LegProvision {
 	pub leg_provision_option_exercise_style: Option<LegProvisionOptionExerciseStyle>,
 	/// LegProvisionOptionExerciseMultipleNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40460")]
 	pub leg_provision_option_exercise_multiple_notional: Option<f64>,
 	/// LegProvisionOptionExerciseMinimumNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40461")]
 	pub leg_provision_option_exercise_minimum_notional: Option<f64>,
 	/// LegProvisionOptionExerciseMaximumNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40462")]
 	pub leg_provision_option_exercise_maximum_notional: Option<f64>,
 	/// LegProvisionOptionMinimumNumber
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40463")]
 	pub leg_provision_option_minimum_number: Option<i32>,
 	/// LegProvisionOptionMaximumNumber
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40464")]
 	pub leg_provision_option_maximum_number: Option<i32>,
 	/// LegProvisionOptionExerciseConfirmation
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40465")]
-	pub leg_provision_option_exercise_confirmation: Option<crate::entities::Boolean>,
+	pub leg_provision_option_exercise_confirmation: Option<fix_common::Boolean>,
 	/// LegProvisionCashSettlMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40466")]
@@ -110,7 +110,7 @@ pub struct LegProvision {
 	pub leg_provision_text: Option<String>,
 	/// Must be set if EncodedLegProvisionText(40981) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40980")]
 	pub encoded_leg_provision_text_len: Option<usize>,
@@ -121,13 +121,13 @@ pub struct LegProvision {
 	pub encoded_leg_provision_text: Option<String>,
 	/// LegProvisionBreakFeeElection
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42506")]
 	pub leg_provision_break_fee_election: Option<i32>,
 	/// LegProvisionBreakFeeRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42507")]
 	pub leg_provision_break_fee_rate: Option<f32>,

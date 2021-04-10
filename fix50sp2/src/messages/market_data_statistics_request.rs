@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Market {
 	/// MsgType = DO
 	#[serde(flatten)]
@@ -18,7 +18,7 @@ pub struct Market {
 	/// <p>Used to specify the business date</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// <p>Used to specify a single market</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1301")]
@@ -33,7 +33,7 @@ pub struct Market {
 	pub market_segment_desc: Option<String>,
 	/// Must be set if <a href="tag_1398_EncodedMktSegmDesc.html" target="bottom">EncodedMktSegmDesc(1398)&nbsp;(1398)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1397")]
 	pub encoded_mkt_segm_desc_len: Option<usize>,
@@ -60,14 +60,14 @@ pub struct Market {
 	/// Time that the request was submitted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TargetPtysSubGrp {
 	/// NoTargetPartySubIDs
 	#[serde(rename = "2433")]
-	pub target_party_sub_i_ds: crate::entities::RepeatingValues<TargetPartySubID>,
+	pub target_party_sub_i_ds: fix_common::RepeatingValues<TargetPartySubID>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -6,7 +6,7 @@ pub struct PartyEntitlementUpdateGrp {
 	/// NoPartyEntitlements
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1772")]
-	pub party_entitlements: Option<crate::entities::RepeatingValues<PartyEntitlement>>,
+	pub party_entitlements: Option<fix_common::RepeatingValues<PartyEntitlement>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

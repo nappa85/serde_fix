@@ -6,14 +6,14 @@ pub struct UnderlyingStreamGrp {
 	/// NoUnderlyingStreams
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40540")]
-	pub underlying_streams: Option<crate::entities::RepeatingValues<UnderlyingStream>>,
+	pub underlying_streams: Option<fix_common::RepeatingValues<UnderlyingStream>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct UnderlyingStream {
 	/// Required if NoUnderlyingStreams(40540) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40541")]
 	pub underlying_stream_type: Option<i32>,
@@ -23,19 +23,19 @@ pub struct UnderlyingStream {
 	pub underlying_stream_desc: Option<String>,
 	/// UnderlyingStreamPaySide
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40543")]
 	pub underlying_stream_pay_side: Option<i32>,
 	/// UnderlyingStreamReceiveSide
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40544")]
 	pub underlying_stream_receive_side: Option<i32>,
 	/// UnderlyingStreamNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40545")]
 	pub underlying_stream_notional: Option<f64>,
@@ -49,7 +49,7 @@ pub struct UnderlyingStream {
 	pub underlying_stream_text: Option<String>,
 	/// Must be set if EncodedUnderlyingStreamText(40989) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40988")]
 	pub encoded_underlying_stream_text_len: Option<usize>,
@@ -68,7 +68,7 @@ pub struct UnderlyingStream {
 	pub underlying_stream_notional_xid_ref: Option<String>,
 	/// Conditionally required when UnderlyingStreamNotionalFrequencyUnit(42020) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42019")]
 	pub underlying_stream_notional_frequency_period: Option<i32>,
@@ -86,7 +86,7 @@ pub struct UnderlyingStream {
 	pub underlying_stream_notional_unit_of_measure: Option<UnderlyingStreamNotionalUnitOfMeasure>,
 	/// UnderlyingStreamTotalNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42023")]
 	pub underlying_stream_total_notional: Option<f64>,
@@ -101,14 +101,14 @@ pub struct UnderlyingStream {
 	/// UnderlyingStreamVersionEffectiveDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "43084")]
-	pub underlying_stream_version_effective_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_stream_version_effective_date: Option<fix_common::LocalMktDate>,
 	/// UnderlyingStreamNotionalDeterminationMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "43085")]
 	pub underlying_stream_notional_determination_method: Option<String>,
 	/// UnderlyingStreamNotionalAdjustments
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43086")]
 	pub underlying_stream_notional_adjustments: Option<i32>,

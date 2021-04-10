@@ -6,7 +6,7 @@ pub struct RequestingPartyGrp {
 	/// NoRequestingPartyIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1657")]
-	pub requesting_party_i_ds: Option<crate::entities::RepeatingValues<RequestingPartyID>>,
+	pub requesting_party_i_ds: Option<fix_common::RepeatingValues<RequestingPartyID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -28,7 +28,7 @@ pub struct RequestingPartyID {
 	pub requesting_party_role: Option<RequestingPartyRole>,
 	/// RequestingPartyRoleQualifier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2338")]
 	pub requesting_party_role_qualifier: Option<i32>,

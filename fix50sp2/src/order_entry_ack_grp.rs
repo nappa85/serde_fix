@@ -6,7 +6,7 @@ pub struct OrderEntryAckGrp {
 	/// NoOrderEntries
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2428")]
-	pub order_entries: Option<crate::entities::RepeatingValues<OrderEntrie>>,
+	pub order_entries: Option<fix_common::RepeatingValues<OrderEntrie>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -29,7 +29,7 @@ pub struct OrderEntrie {
 	pub order_entry_action: Option<OrderEntryAction>,
 	/// Conditionally required when neither ClOrdID(11) nor OrderID(37) is provided.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2430")]
 	pub order_entry_id: Option<i32>,
@@ -52,19 +52,19 @@ pub struct OrderEntrie {
 	pub ord_rej_reason: Option<OrdRejReason>,
 	/// Use to explicitly provide executed quantity.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "14")]
 	pub cum_qty: Option<f64>,
 	/// Use to explicitly provide remaining quantity.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "151")]
 	pub leaves_qty: Option<f64>,
 	/// Use to explicitly provide cancelled quantity.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "84")]
 	pub cxl_qty: Option<f64>,
@@ -74,7 +74,7 @@ pub struct OrderEntrie {
 	pub ord_type: Option<OrdType>,
 	/// Price
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "44")]
 	pub price: Option<f64>,

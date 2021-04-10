@@ -6,7 +6,7 @@ pub struct PayCollectGrp {
 	/// NoPayCollects
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1707")]
-	pub pay_collects: Option<crate::entities::RepeatingValues<PayCollect>>,
+	pub pay_collects: Option<fix_common::RepeatingValues<PayCollect>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,13 +21,13 @@ pub struct PayCollect {
 	pub pay_collect_currency: Option<PayCollectCurrency>,
 	/// PayAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1710")]
 	pub pay_amount: Option<f64>,
 	/// CollectAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1711")]
 	pub collect_amount: Option<f64>,
@@ -41,7 +41,7 @@ pub struct PayCollect {
 	pub pay_collect_market_id: Option<String>,
 	/// PayCollectFXRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2094")]
 	pub pay_collect_fx_rate: Option<f64>,

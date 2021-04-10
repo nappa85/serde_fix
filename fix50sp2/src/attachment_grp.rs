@@ -6,7 +6,7 @@ pub struct AttachmentGrp {
 	/// NoAttachments
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2104")]
-	pub attachments: Option<crate::entities::RepeatingValues<Attachment>>,
+	pub attachments: Option<fix_common::RepeatingValues<Attachment>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -33,13 +33,13 @@ pub struct Attachment {
 	pub attachment_encoding_type: Option<AttachmentEncodingType>,
 	/// UnencodedAttachmentLen
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2110")]
 	pub unencoded_attachment_len: Option<i32>,
 	/// Must be set if <a href="tag_2112_EncodedAttachment.html" target="bottom">EncodedAttachement(2112)&nbsp;(2112)</a> is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2111")]
 	pub encoded_attachment_len: Option<usize>,

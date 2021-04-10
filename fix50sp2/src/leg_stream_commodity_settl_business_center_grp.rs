@@ -6,7 +6,7 @@ pub struct LegStreamCommoditySettlBusinessCenterGrp {
 	/// NoLegStreamCommoditySettlBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41646")]
-	pub leg_stream_commodity_settl_business_centers: Option<crate::entities::RepeatingValues<LegStreamCommoditySettlBusinessCenter>>,
+	pub leg_stream_commodity_settl_business_centers: Option<fix_common::RepeatingValues<LegStreamCommoditySettlBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

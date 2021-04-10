@@ -6,7 +6,7 @@ pub struct UnderlyingStipulations {
 	/// NoUnderlyingStips
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "887")]
-	pub underlying_stips: Option<crate::entities::RepeatingValues<UnderlyingStip>>,
+	pub underlying_stips: Option<fix_common::RepeatingValues<UnderlyingStip>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

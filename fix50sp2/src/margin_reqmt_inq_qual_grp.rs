@@ -6,7 +6,7 @@ pub struct MarginReqmtInqQualGrp {
 	/// Number of qualifier entries
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1636")]
-	pub margin_reqmt_inq_qualifier: Option<crate::entities::RepeatingValues<MarginReqmtInqQualifie>>,
+	pub margin_reqmt_inq_qualifier: Option<fix_common::RepeatingValues<MarginReqmtInqQualifie>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

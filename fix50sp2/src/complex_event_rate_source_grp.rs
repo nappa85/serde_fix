@@ -6,7 +6,7 @@ pub struct ComplexEventRateSourceGrp {
 	/// NoComplexEventRateSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41013")]
-	pub complex_event_rate_sources: Option<crate::entities::RepeatingValues<ComplexEventRateSource>>,
+	pub complex_event_rate_sources: Option<fix_common::RepeatingValues<ComplexEventRateSource>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

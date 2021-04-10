@@ -6,7 +6,7 @@ pub struct CashSettlDealerGrp {
 	/// NoCashSettlDealers
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40277")]
-	pub cash_settl_dealers: Option<crate::entities::RepeatingValues<CashSettlDealer>>,
+	pub cash_settl_dealers: Option<fix_common::RepeatingValues<CashSettlDealer>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

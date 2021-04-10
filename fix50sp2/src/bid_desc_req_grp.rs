@@ -6,7 +6,7 @@ pub struct BidDescReqGrp {
 	/// Used if BidType="Non Disclosed"
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "398")]
-	pub bid_descriptors: Option<crate::entities::RepeatingValues<BidDescriptor>>,
+	pub bid_descriptors: Option<fix_common::RepeatingValues<BidDescriptor>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,49 +25,49 @@ pub struct BidDescriptor {
 	pub side_value_ind: Option<SideValueInd>,
 	/// Value between <a href="tag_402_LiquidityPctLow.html" target="bottom">LiquidityPctLow&nbsp;(402)</a> and <a href="tag_403_LiquidityPctHigh.html" target="bottom">LiquidityPctHigh&nbsp;(403)</a> in Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "404")]
 	pub liquidity_value: Option<f64>,
 	/// Number of Securites between <a href="tag_402_LiquidityPctLow.html" target="bottom">LiquidityPctLow&nbsp;(402)</a> and <a href="tag_403_LiquidityPctHigh.html" target="bottom">LiquidityPctHigh&nbsp;(403)</a> in Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "441")]
 	pub liquidity_num_securities: Option<i32>,
 	/// Liquidity indicator or lower limit if <a href="tag_441_LiquidityNumSecurities.html" target="bottom">LiquidityNumSecurities&nbsp;(441)</a> &gt; 1
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "402")]
 	pub liquidity_pct_low: Option<f32>,
 	/// Upper liquidity indicator if <a href="tag_441_LiquidityNumSecurities.html" target="bottom">LiquidityNumSecurities&nbsp;(441)</a> &gt; 1
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "403")]
 	pub liquidity_pct_high: Option<f32>,
 	/// Eg Used in EFP (Exchange For Physical) trades 12%
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "405")]
 	pub efp_tracking_error: Option<f32>,
 	/// Used in EFP trades
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "406")]
 	pub fair_value: Option<f64>,
 	/// Used in EFP trades
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "407")]
 	pub outside_index_pct: Option<f32>,
 	/// Used in EFP trades
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "408")]
 	pub value_of_futures: Option<f64>,

@@ -6,7 +6,7 @@ pub struct UnderlyingStreamAssetAttributeGrp {
 	/// NoUnderlyingStreamAssetAttributes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41800")]
-	pub underlying_stream_asset_attributes: Option<crate::entities::RepeatingValues<UnderlyingStreamAssetAttribute>>,
+	pub underlying_stream_asset_attributes: Option<fix_common::RepeatingValues<UnderlyingStreamAssetAttribute>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

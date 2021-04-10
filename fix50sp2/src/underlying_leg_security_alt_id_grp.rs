@@ -6,7 +6,7 @@ pub struct UnderlyingLegSecurityAltIDGrp {
 	/// NoUnderlyingLegSecurityAltID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1334")]
-	pub underlying_leg_security_alt_id: Option<crate::entities::RepeatingValues<UnderlyingLegSecurityAltI>>,
+	pub underlying_leg_security_alt_id: Option<fix_common::RepeatingValues<UnderlyingLegSecurityAltI>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

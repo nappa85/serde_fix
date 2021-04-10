@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Position {
 	/// MsgType = DN
 	#[serde(flatten)]
@@ -44,15 +44,15 @@ pub struct Position {
 	/// <p>Business date the transfer would clear</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// <p>Trade date associated with the position being transferred.</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// <p>If not specified, indicates the transfer is for all instruments</p>
 	#[serde(flatten)]
 	pub instrument: Option<super::super::instrument::Instrument>,
@@ -67,7 +67,7 @@ pub struct Position {
 	pub position_qty: Option<super::super::position_qty::PositionQty>,
 	/// <p>Price at which the position is transferred.</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1596")]
 	pub clearing_trade_price: Option<f64>,
@@ -88,7 +88,7 @@ pub struct Position {
 	pub reject_text: Option<String>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText.html" target="bottom">EncodedRejectTextLen&nbsp;(1665)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1664")]
 	pub encoded_reject_text_len: Option<usize>,
@@ -103,7 +103,7 @@ pub struct Position {
 	/// <p>Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	/// </p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

@@ -6,7 +6,7 @@ pub struct UnderlyingCashSettlTermGrp {
 	/// NoUnderlyingCashSettlTerms
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42041")]
-	pub underlying_cash_settl_terms: Option<crate::entities::RepeatingValues<UnderlyingCashSettlTerm>>,
+	pub underlying_cash_settl_terms: Option<fix_common::RepeatingValues<UnderlyingCashSettlTerm>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,19 +17,19 @@ pub struct UnderlyingCashSettlTerm {
 	pub underlying_cash_settl_currency: Option<UnderlyingCashSettlCurrency>,
 	/// UnderlyingCashSettlValuationFirstBusinessDayOffset
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42043")]
 	pub underlying_cash_settl_valuation_first_business_day_offset: Option<i32>,
 	/// UnderlyingCashSettlValuationSubsequentBusinessDaysOffset
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42044")]
 	pub underlying_cash_settl_valuation_subsequent_business_days_offset: Option<i32>,
 	/// UnderlyingCashSettlNumOfValuationDates
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42045")]
 	pub underlying_cash_settl_num_of_valuation_dates: Option<i32>,
@@ -47,7 +47,7 @@ pub struct UnderlyingCashSettlTerm {
 	pub underlying_cash_settl_quote_method: Option<UnderlyingCashSettlQuoteMethod>,
 	/// UnderlyingCashSettlQuoteAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42049")]
 	pub underlying_cash_settl_quote_amount: Option<f64>,
@@ -57,7 +57,7 @@ pub struct UnderlyingCashSettlTerm {
 	pub underlying_cash_settl_quote_currency: Option<UnderlyingCashSettlQuoteCurrency>,
 	/// UnderlyingCashSettlMinimumQuoteAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42051")]
 	pub underlying_cash_settl_minimum_quote_amount: Option<f64>,
@@ -67,30 +67,30 @@ pub struct UnderlyingCashSettlTerm {
 	pub underlying_cash_settl_minimum_quote_currency: Option<UnderlyingCashSettlMinimumQuoteCurrency>,
 	/// UnderlyingCashSettlBusinessDays
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42053")]
 	pub underlying_cash_settl_business_days: Option<i32>,
 	/// UnderlyingCashSettlAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42054")]
 	pub underlying_cash_settl_amount: Option<f64>,
 	/// UnderlyingCashSettlRecoveryFactor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42055")]
 	pub underlying_cash_settl_recovery_factor: Option<f64>,
 	/// UnderlyingCashSettlFixedTermIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42056")]
-	pub underlying_cash_settl_fixed_term_indicator: Option<crate::entities::Boolean>,
+	pub underlying_cash_settl_fixed_term_indicator: Option<fix_common::Boolean>,
 	/// UnderlyingCashSettlAccruedInterestIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42057")]
-	pub underlying_cash_settl_accrued_interest_indicator: Option<crate::entities::Boolean>,
+	pub underlying_cash_settl_accrued_interest_indicator: Option<fix_common::Boolean>,
 	/// UnderlyingCashSettlValuationMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42058")]
@@ -105,7 +105,7 @@ pub struct UnderlyingCashSettlTerm {
 	pub underlying_cash_settl_price_source: Option<String>,
 	/// UnderlyingCashSettlPriceDefault
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42798")]
 	pub underlying_cash_settl_price_default: Option<i32>,

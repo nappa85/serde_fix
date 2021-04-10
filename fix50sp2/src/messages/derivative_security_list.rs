@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Derivative {
 	/// MsgType = AA
 	#[serde(flatten)]
@@ -11,7 +11,7 @@ pub struct Derivative {
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
 	/// SecurityReportID
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "964")]
 	pub security_report_id: Option<i32>,
@@ -30,7 +30,7 @@ pub struct Derivative {
 	/// ClearingBusinessDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// Underlying security for which derivatives are being returned
 	#[serde(flatten)]
 	pub underlying_instrument: Option<super::super::underlying_instrument::UnderlyingInstrument>,
@@ -41,11 +41,11 @@ pub struct Derivative {
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Used to indicate the total number of securities being returned for this request. Used in the event that message fragmentation
 	/// is required.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "393")]
 	pub tot_no_related_sym: Option<i32>,
@@ -59,7 +59,7 @@ pub struct Derivative {
 	/// Represents the time at which a security was last updated.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "779")]
-	pub last_update_time: Option<crate::entities::UTCTimestamp>,
+	pub last_update_time: Option<fix_common::UTCTimestamp>,
 	/// Used to specify a rejection reason when SecurityResponseType (323) is equal to 5 (Reject Security Proposal).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1607")]

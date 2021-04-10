@@ -8,4 +8,5 @@ members = [
     "fixt11",
     "fix50sp2",
     "fix50",
+    "fix_message",
 ]

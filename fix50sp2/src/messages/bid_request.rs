@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Bid {
 	/// MsgType = k
 	#[serde(flatten)]
@@ -21,7 +21,7 @@ pub struct Bid {
 	#[serde(rename = "392")]
 	pub list_name: Option<String>,
 	/// TotNoRelatedSym
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "393")]
 	pub tot_no_related_sym: i32,
 	/// e.g. "Non Disclosed", "Disclosed", "No Bidding Process"
@@ -29,7 +29,7 @@ pub struct Bid {
 	pub bid_type: BidType,
 	/// Total number of tickets/allocations assuming fully executed
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "395")]
 	pub num_tickets: Option<i32>,
@@ -39,13 +39,13 @@ pub struct Bid {
 	pub currency: Option<Currency>,
 	/// Expressed in Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "396")]
 	pub side_value_1: Option<f64>,
 	/// Expressed in Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "397")]
 	pub side_value_2: Option<f64>,
@@ -61,7 +61,7 @@ pub struct Bid {
 	pub liquidity_ind_type: Option<LiquidityIndType>,
 	/// Overall weighted average liquidity expressed as a % of average daily volume
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "410")]
 	pub wt_average_liquidity: Option<f32>,
@@ -71,13 +71,13 @@ pub struct Bid {
 	pub exchange_for_physical: Option<ExchangeForPhysical>,
 	/// % value of stocks outside main country in Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "412")]
 	pub out_main_cntry_u_index: Option<f64>,
 	/// % of program that crosses in Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "413")]
 	pub cross_percent: Option<f32>,
@@ -87,7 +87,7 @@ pub struct Bid {
 	pub prog_rpt_reqs: Option<ProgRptReqs>,
 	/// Time in minutes between each ListStatus report sent by SellSide. Zero means dont send status.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "415")]
 	pub prog_period_interval: Option<i32>,
@@ -101,14 +101,14 @@ pub struct Bid {
 	pub forex_req: Option<ForexReq>,
 	/// Indicates the total number of bidders on the list
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "417")]
 	pub num_bidders: Option<i32>,
 	/// TradeDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// BidTradeType
 	#[serde(rename = "418")]
 	pub bid_trade_type: BidTradeType,
@@ -118,14 +118,14 @@ pub struct Bid {
 	/// Used when <a href="tag_419_BasisPxType.html" target="bottom">BasisPxType&nbsp;(419)</a> = "C"
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "443")]
-	pub strike_time: Option<crate::entities::UTCTimestamp>,
+	pub strike_time: Option<fix_common::UTCTimestamp>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

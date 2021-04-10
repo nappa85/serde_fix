@@ -6,7 +6,7 @@ pub struct FinancingContractualMatrixGrp {
 	/// NoContractualMatrices
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40042")]
-	pub contractual_matrices: Option<crate::entities::RepeatingValues<ContractualMatrice>>,
+	pub contractual_matrices: Option<fix_common::RepeatingValues<ContractualMatrice>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct ContractualMatrice {
 	/// ContractualMatrixDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40044")]
-	pub contractual_matrix_date: Option<crate::entities::LocalMktDate>,
+	pub contractual_matrix_date: Option<fix_common::LocalMktDate>,
 	/// ContractualMatrixTerm
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40045")]

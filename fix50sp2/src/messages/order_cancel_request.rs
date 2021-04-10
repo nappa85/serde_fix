@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Order {
 	/// MsgType = F
 	#[serde(flatten)]
@@ -33,7 +33,7 @@ pub struct Order {
 	/// OrigOrdModTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "586")]
-	pub orig_ord_mod_time: Option<crate::entities::UTCTimestamp>,
+	pub orig_ord_mod_time: Option<fix_common::UTCTimestamp>,
 	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
@@ -64,7 +64,7 @@ pub struct Order {
 	pub side: Side,
 	/// Time this order request was initiated/released by the trader or trading system.
 	#[serde(rename = "60")]
-	pub transact_time: crate::entities::UTCTimestamp,
+	pub transact_time: fix_common::UTCTimestamp,
 	/// Conditionally required when the OrderQtyData component is required or specified in a prior, related message. For example,
 	/// when used in a work flow including a NewOrderSingle(35=D) or NewOrderCross(35=s) message, the OrderQtyData component is a
 	/// required component in these messages and thus the component is required here. When the OrderQtyData component is optional
@@ -82,7 +82,7 @@ pub struct Order {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -109,7 +109,7 @@ pub struct Order {
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2351")]
 	pub encoded_compliance_text_len: Option<usize>,
@@ -120,7 +120,7 @@ pub struct Order {
 	pub encoded_compliance_text: Option<String>,
 	/// Required if provided on the order being cancelled. Echo back the value provided by the requester.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2422")]
 	pub order_request_id: Option<i32>,

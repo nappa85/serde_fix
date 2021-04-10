@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MDReqGrp {
 	/// Number of MDEntryType fields requested.
 	#[serde(rename = "267")]
-	pub md_entry_types: crate::entities::RepeatingValues<MDEntryType>,
+	pub md_entry_types: fix_common::RepeatingValues<MDEntryType>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -138,4 +138,10 @@ pub enum MDEntryTypeItem {
 	/// Previous closing price
 	#[serde(rename = "e")]
 	PreviousClosingPrice,
+}
+
+impl Default for MDEntryTypeItem {
+    fn default() -> Self {
+        MDEntryTypeItem::Bid
+    }
 }

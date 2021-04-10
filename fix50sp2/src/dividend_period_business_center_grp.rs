@@ -6,7 +6,7 @@ pub struct DividendPeriodBusinessCenterGrp {
 	/// NoDividendPeriodBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42294")]
-	pub dividend_period_business_centers: Option<crate::entities::RepeatingValues<DividendPeriodBusinessCenter>>,
+	pub dividend_period_business_centers: Option<fix_common::RepeatingValues<DividendPeriodBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

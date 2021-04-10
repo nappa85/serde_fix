@@ -6,7 +6,7 @@ pub struct MatchRules {
 	/// Number of match rules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1235")]
-	pub match_rules: Option<crate::entities::RepeatingValues<MatchRule>>,
+	pub match_rules: Option<fix_common::RepeatingValues<MatchRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

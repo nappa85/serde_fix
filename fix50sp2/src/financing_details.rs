@@ -15,7 +15,7 @@ pub struct FinancingDetails {
 	/// A reference to the date the underlying agreement was executed.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "915")]
-	pub agreement_date: Option<crate::entities::LocalMktDate>,
+	pub agreement_date: Option<fix_common::LocalMktDate>,
 	/// Currency of the underlying agreement.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "918")]
@@ -27,18 +27,18 @@ pub struct FinancingDetails {
 	/// Settlement date of the beginning of the deal
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "916")]
-	pub start_date: Option<crate::entities::LocalMktDate>,
+	pub start_date: Option<fix_common::LocalMktDate>,
 	/// Repayment / repurchase date
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "917")]
-	pub end_date: Option<crate::entities::LocalMktDate>,
+	pub end_date: Option<fix_common::LocalMktDate>,
 	/// Delivery or custody arrangement for the underlying securities
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "919")]
 	pub delivery_type: Option<DeliveryType>,
 	/// Percentage of cash value that underlying security collateral must meet.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "898")]
 	pub margin_ratio: Option<f32>,
@@ -53,7 +53,7 @@ pub struct FinancingDetails {
 	/// MasterConfirmationDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1963")]
-	pub master_confirmation_date: Option<crate::entities::LocalMktDate>,
+	pub master_confirmation_date: Option<fix_common::LocalMktDate>,
 	/// MasterConfirmationAnnexDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1964")]
@@ -61,7 +61,7 @@ pub struct FinancingDetails {
 	/// MasterConfirmationAnnexDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1965")]
-	pub master_confirmation_annex_date: Option<crate::entities::LocalMktDate>,
+	pub master_confirmation_annex_date: Option<fix_common::LocalMktDate>,
 	/// BrokerConfirmationDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1966")]
@@ -82,7 +82,7 @@ pub struct FinancingDetails {
 	/// CreditSupportAgreementDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1968")]
-	pub credit_support_agreement_date: Option<crate::entities::LocalMktDate>,
+	pub credit_support_agreement_date: Option<fix_common::LocalMktDate>,
 	/// CreditSupportAgreementID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1969")]
@@ -97,7 +97,7 @@ pub struct FinancingDetails {
 	pub documentation_text: Option<String>,
 	/// Must be set if EncodedDocuentationText(1527) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1525")]
 	pub encoded_documentation_text_len: Option<usize>,

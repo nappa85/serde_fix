@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct IOI {
 	/// MsgType = 6
 	#[serde(flatten)]
@@ -62,14 +62,14 @@ pub struct IOI {
 	pub price_type: Option<PriceType>,
 	/// Price
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "44")]
 	pub price: Option<f64>,
 	/// ValidUntilTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "62")]
-	pub valid_until_time: Option<crate::entities::UTCTimestamp>,
+	pub valid_until_time: Option<fix_common::UTCTimestamp>,
 	/// IOIQltyInd
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "25")]
@@ -87,7 +87,7 @@ pub struct IOI {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -98,7 +98,7 @@ pub struct IOI {
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// A URL (Uniform Resource Locator) link to additional information (i.e. <a xmlns="http://www.b2bits.com/FIXProtocol" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://www.XYZ.com/research.html" target="_blank">http://www.XYZ.com/research.html)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "149")]

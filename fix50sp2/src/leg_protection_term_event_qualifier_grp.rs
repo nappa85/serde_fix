@@ -6,7 +6,7 @@ pub struct LegProtectionTermEventQualifierGrp {
 	/// NoLegProtectionTermEventQualifiers
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41633")]
-	pub leg_protection_term_event_qualifiers: Option<crate::entities::RepeatingValues<LegProtectionTermEventQualifier>>,
+	pub leg_protection_term_event_qualifiers: Option<fix_common::RepeatingValues<LegProtectionTermEventQualifier>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

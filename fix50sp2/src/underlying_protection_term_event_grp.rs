@@ -6,7 +6,7 @@ pub struct UnderlyingProtectionTermEventGrp {
 	/// NoUnderlyingProtectionTermEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42077")]
-	pub underlying_protection_term_events: Option<crate::entities::RepeatingValues<UnderlyingProtectionTermEvent>>,
+	pub underlying_protection_term_events: Option<fix_common::RepeatingValues<UnderlyingProtectionTermEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct UnderlyingProtectionTermEvent {
 	pub underlying_protection_term_event_currency: Option<UnderlyingProtectionTermEventCurrency>,
 	/// Conditionally required when UnderlyingProtectionTermEventUnit(42082) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42081")]
 	pub underlying_protection_term_event_period: Option<i32>,

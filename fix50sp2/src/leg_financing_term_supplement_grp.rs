@@ -6,7 +6,7 @@ pub struct LegFinancingTermSupplementGrp {
 	/// NoLegFinancingTermSupplements
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42200")]
-	pub leg_financing_term_supplements: Option<crate::entities::RepeatingValues<LegFinancingTermSupplement>>,
+	pub leg_financing_term_supplements: Option<fix_common::RepeatingValues<LegFinancingTermSupplement>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,5 +18,5 @@ pub struct LegFinancingTermSupplement {
 	/// LegFinancingTermSupplementDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42202")]
-	pub leg_financing_term_supplement_date: Option<crate::entities::LocalMktDate>,
+	pub leg_financing_term_supplement_date: Option<fix_common::LocalMktDate>,
 }

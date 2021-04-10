@@ -6,7 +6,7 @@ pub struct NestedInstrumentAttribute {
 	/// NoNestedInstrAttrib
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1312")]
-	pub nested_instr_attrib: Option<crate::entities::RepeatingValues<NestedInstrAttri>>,
+	pub nested_instr_attrib: Option<fix_common::RepeatingValues<NestedInstrAttri>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

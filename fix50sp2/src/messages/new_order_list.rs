@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct New {
 	/// MsgType = E
 	#[serde(flatten)]
@@ -26,7 +26,7 @@ pub struct New {
 	pub bid_type: BidType,
 	/// ProgPeriodInterval
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "415")]
 	pub prog_period_interval: Option<i32>,
@@ -56,7 +56,7 @@ pub struct New {
 	pub contingency_type: Option<ContingencyType>,
 	/// Must be set if <a href="tag_353_EncodedListExecInst.html" target="bottom">EncodedListExecInst&nbsp;(353)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "352")]
 	pub encoded_list_exec_inst_len: Option<usize>,
@@ -66,13 +66,13 @@ pub struct New {
 	pub encoded_list_exec_inst: Option<String>,
 	/// The maximum percentage that execution of one side of a program trade can exceed execution of the other.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "765")]
 	pub allowable_one_sidedness_pct: Option<f32>,
 	/// The maximum amount that execution of one side of a program trade can exceed execution of the other.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "766")]
 	pub allowable_one_sidedness_value: Option<f64>,
@@ -81,7 +81,7 @@ pub struct New {
 	#[serde(rename = "767")]
 	pub allowable_one_sidedness_curr: Option<AllowableOneSidednessCurr>,
 	/// Used to support fragmentation. Sum of <a href="tag_73_NoOrders.html" target="bottom">NoOrders&nbsp;(73)</a> across all messages with the same ListID.
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "68")]
 	pub tot_no_orders: i32,
 	/// Indicates whether this is the last fragment in a sequence of message fragments. Only required where message has been fragmented.
@@ -102,7 +102,7 @@ pub struct New {
 	/// ListManualOrderIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2401")]
-	pub list_manual_order_indicator: Option<crate::entities::Boolean>,
+	pub list_manual_order_indicator: Option<fix_common::Boolean>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

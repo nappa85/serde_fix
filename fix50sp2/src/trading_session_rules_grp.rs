@@ -6,7 +6,7 @@ pub struct TradingSessionRulesGrp {
 	/// Allows trading rules to be expressed by trading session.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1309")]
-	pub trading_session_rules: Option<crate::entities::RepeatingValues<TradingSessionRule>>,
+	pub trading_session_rules: Option<fix_common::RepeatingValues<TradingSessionRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

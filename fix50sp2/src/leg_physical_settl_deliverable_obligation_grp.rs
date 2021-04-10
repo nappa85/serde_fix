@@ -6,7 +6,7 @@ pub struct LegPhysicalSettlDeliverableObligationGrp {
 	/// NoLegPhysicalSettlDeliverableObligations
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41604")]
-	pub leg_physical_settl_deliverable_obligations: Option<crate::entities::RepeatingValues<LegPhysicalSettlDeliverableObligation>>,
+	pub leg_physical_settl_deliverable_obligations: Option<fix_common::RepeatingValues<LegPhysicalSettlDeliverableObligation>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

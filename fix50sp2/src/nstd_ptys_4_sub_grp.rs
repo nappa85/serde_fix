@@ -6,7 +6,7 @@ pub struct NstdPtys4SubGrp {
 	/// NoNested4PartySubIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1413")]
-	pub nested_4_party_sub_i_ds: Option<crate::entities::RepeatingValues<Nested4PartySubID>>,
+	pub nested_4_party_sub_i_ds: Option<fix_common::RepeatingValues<Nested4PartySubID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

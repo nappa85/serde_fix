@@ -6,7 +6,7 @@ pub struct LegComplexEventCreditEventSourceGrp {
 	/// NoLegComplexEventCreditEventSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41398")]
-	pub leg_complex_event_credit_event_sources: Option<crate::entities::RepeatingValues<LegComplexEventCreditEventSource>>,
+	pub leg_complex_event_credit_event_sources: Option<fix_common::RepeatingValues<LegComplexEventCreditEventSource>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

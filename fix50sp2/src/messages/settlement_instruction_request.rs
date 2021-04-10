@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Settlement {
 	/// MsgType = AV
 	#[serde(flatten)]
@@ -11,7 +11,7 @@ pub struct Settlement {
 	pub settl_inst_req_id: String,
 	/// Date/Time this request message was generated
 	#[serde(rename = "60")]
-	pub transact_time: crate::entities::UTCTimestamp,
+	pub transact_time: fix_common::UTCTimestamp,
 	/// Insert here the set of "Parties" (firm identification) fields defined in "Common Components of Application Messages". Used
 	/// here for party whose instructions this message is requesting and (optionally) for settlement location Not required if database
 	/// identifiers are being used to request settlement instructions. Required otherwise.
@@ -48,15 +48,15 @@ pub struct Settlement {
 	/// Should not be populated if <a href="tag_169_StandInstDbType.html" target="bottom">StandInstDbType&nbsp;(169)</a> is populated
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "168")]
-	pub effective_time: Option<crate::entities::UTCTimestamp>,
+	pub effective_time: Option<fix_common::UTCTimestamp>,
 	/// Should not be populated if <a href="tag_169_StandInstDbType.html" target="bottom">StandInstDbType&nbsp;(169)</a> is populated
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "126")]
-	pub expire_time: Option<crate::entities::UTCTimestamp>,
+	pub expire_time: Option<fix_common::UTCTimestamp>,
 	/// Should not be populated if <a href="tag_169_StandInstDbType.html" target="bottom">StandInstDbType&nbsp;(169)</a> is populated
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "779")]
-	pub last_update_time: Option<crate::entities::UTCTimestamp>,
+	pub last_update_time: Option<fix_common::UTCTimestamp>,
 	/// Should not be populated if any of <a href="tag_79_AllocAccount.html" target="bottom">AllocAccount&nbsp;(79)</a> through to <a href="tag_779_LastUpdateTime.html" target="bottom">LastUpdateTime&nbsp;(779)</a> are populated
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "169")]

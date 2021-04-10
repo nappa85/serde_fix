@@ -8,7 +8,7 @@ pub struct CompIDReqGrp {
 	/// expect to see information about other brokers, similarly one fund manager etc.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "936")]
-	pub comp_i_ds: Option<crate::entities::RepeatingValues<CompID>>,
+	pub comp_i_ds: Option<fix_common::RepeatingValues<CompID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct LinesOfTextGrp {
 	/// Specifies the number of repeating lines of text specified
 	#[serde(rename = "33")]
-	pub lines_of_text: crate::entities::RepeatingValues<LinesOfTex>,
+	pub lines_of_text: fix_common::RepeatingValues<LinesOfTex>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -15,7 +15,7 @@ pub struct LinesOfTex {
 	pub text: String,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

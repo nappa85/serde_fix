@@ -9,7 +9,7 @@ pub struct UnderlyingOptionExercise {
 	pub underlying_exercise_desc: Option<String>,
 	/// Must be set if EncodedUnderlyingExerciseDesc(41812) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41811")]
 	pub encoded_underlying_exercise_desc_len: Option<usize>,
@@ -21,10 +21,10 @@ pub struct UnderlyingOptionExercise {
 	/// UnderlyingAutomaticExerciseIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41813")]
-	pub underlying_automatic_exercise_indicator: Option<crate::entities::Boolean>,
+	pub underlying_automatic_exercise_indicator: Option<fix_common::Boolean>,
 	/// UnderlyingAutomaticExerciseThresholdRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41814")]
 	pub underlying_automatic_exercise_threshold_rate: Option<f64>,
@@ -39,15 +39,15 @@ pub struct UnderlyingOptionExercise {
 	/// UnderlyingFallbackExerciseIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41817")]
-	pub underlying_fallback_exercise_indicator: Option<crate::entities::Boolean>,
+	pub underlying_fallback_exercise_indicator: Option<fix_common::Boolean>,
 	/// UnderlyingLimitedRightToConfirmIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41818")]
-	pub underlying_limited_right_to_confirm_indicator: Option<crate::entities::Boolean>,
+	pub underlying_limited_right_to_confirm_indicator: Option<fix_common::Boolean>,
 	/// UnderlyingExerciseSplitTicketIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41819")]
-	pub underlying_exercise_split_ticket_indicator: Option<crate::entities::Boolean>,
+	pub underlying_exercise_split_ticket_indicator: Option<fix_common::Boolean>,
 	/// UnderlyingOptionExerciseDates
 	#[serde(flatten)]
 	pub underlying_option_exercise_dates: Option<super::underlying_option_exercise_dates::UnderlyingOptionExerciseDates>,
@@ -56,7 +56,7 @@ pub struct UnderlyingOptionExercise {
 	pub underlying_option_exercise_expiration: Option<super::underlying_option_exercise_expiration::UnderlyingOptionExerciseExpiration>,
 	/// UnderlyingSettlMethodElectingPartySide
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42887")]
 	pub underlying_settl_method_electing_party_side: Option<i32>,

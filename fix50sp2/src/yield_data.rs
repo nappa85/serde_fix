@@ -9,21 +9,21 @@ pub struct YieldData {
 	pub yield_type: Option<YieldType>,
 	/// Yield
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "236")]
 	pub _yield: Option<f32>,
 	/// YieldCalcDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "701")]
-	pub yield_calc_date: Option<crate::entities::LocalMktDate>,
+	pub yield_calc_date: Option<fix_common::LocalMktDate>,
 	/// YieldRedemptionDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "696")]
-	pub yield_redemption_date: Option<crate::entities::LocalMktDate>,
+	pub yield_redemption_date: Option<fix_common::LocalMktDate>,
 	/// YieldRedemptionPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "697")]
 	pub yield_redemption_price: Option<f64>,

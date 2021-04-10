@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct SecurityMassStatus {
 	/// MsgType = CO
 	#[serde(flatten)]
@@ -63,7 +63,7 @@ pub struct SecurityMassStatus {
 	/// Time of state change for security list.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Adjustment
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "334")]
@@ -74,11 +74,11 @@ pub struct SecurityMassStatus {
 	/// Business day that the state change applies to.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// FastMarketIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2447")]
-	pub fast_market_indicator: Option<crate::entities::Boolean>,
+	pub fast_market_indicator: Option<fix_common::Boolean>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Collateral {
 	/// MsgType = BA
 	#[serde(flatten)]
@@ -16,7 +16,7 @@ pub struct Collateral {
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Differentiates collateral pledged specifically against a position from collateral pledged against an entire portfolio on a
 	/// valued basis.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -25,13 +25,13 @@ pub struct Collateral {
 	/// Tells whether security has been restricted.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "291")]
-	pub financial_status: Option<crate::entities::SeparatedValues<FinancialStatus>>,
+	pub financial_status: Option<fix_common::SeparatedValues<FinancialStatus>>,
 	/// Collateral status
 	#[serde(rename = "910")]
 	pub coll_status: CollStatus,
 	/// TotNumReports
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "911")]
 	pub tot_num_reports: Option<i32>,
@@ -81,10 +81,10 @@ pub struct Collateral {
 	/// SettlDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// Quantity
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "53")]
 	pub quantity: Option<f64>,
@@ -104,19 +104,19 @@ pub struct Collateral {
 	pub und_instrmt_grp: Option<super::super::und_instrmt_grp::UndInstrmtGrp>,
 	/// MarginExcess
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "899")]
 	pub margin_excess: Option<f64>,
 	/// TotalNetValue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "900")]
 	pub total_net_value: Option<f64>,
 	/// CashOutstanding
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "901")]
 	pub cash_outstanding: Option<f64>,
@@ -132,7 +132,7 @@ pub struct Collateral {
 	pub misc_fees_grp: Option<super::super::misc_fees_grp::MiscFeesGrp>,
 	/// Price
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "44")]
 	pub price: Option<f64>,
@@ -142,25 +142,25 @@ pub struct Collateral {
 	pub price_type: Option<PriceType>,
 	/// AccruedInterestAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "159")]
 	pub accrued_interest_amt: Option<f64>,
 	/// EndAccruedInterestAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "920")]
 	pub end_accrued_interest_amt: Option<f64>,
 	/// StartCash
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "921")]
 	pub start_cash: Option<f64>,
 	/// EndCash
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "922")]
 	pub end_cash: Option<f64>,
@@ -192,14 +192,14 @@ pub struct Collateral {
 	/// The clearing business date of the report
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -220,7 +220,7 @@ pub struct Collateral {
 	/// TradeDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// The unique transaction entity identifier assigned by counterparty to the transaction receiving this message, if known.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2485")]
@@ -232,7 +232,7 @@ pub struct Collateral {
 	/// CollateralizationValueDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2868")]
-	pub collateralization_value_date: Option<crate::entities::LocalMktDate>,
+	pub collateralization_value_date: Option<fix_common::LocalMktDate>,
 	/// TradeCollateralization
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1936")]
@@ -245,7 +245,7 @@ pub struct Collateral {
 	/// in TrdRegTimestamps component).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2869")]
-	pub regulatory_report_type_business_date: Option<crate::entities::LocalMktDate>,
+	pub regulatory_report_type_business_date: Option<fix_common::LocalMktDate>,
 	/// FundingSourceGrp
 	#[serde(flatten)]
 	pub funding_source_grp: Option<super::super::funding_source_grp::FundingSourceGrp>,

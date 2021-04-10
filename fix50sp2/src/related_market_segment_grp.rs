@@ -6,7 +6,7 @@ pub struct RelatedMarketSegmentGrp {
 	/// NoRelatedMarketSegments
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2545")]
-	pub related_market_segments: Option<crate::entities::RepeatingValues<RelatedMarketSegment>>,
+	pub related_market_segments: Option<fix_common::RepeatingValues<RelatedMarketSegment>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

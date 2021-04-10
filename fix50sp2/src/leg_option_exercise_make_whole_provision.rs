@@ -6,10 +6,10 @@ pub struct LegOptionExerciseMakeWholeProvision {
 	/// LegMakeWholeDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42392")]
-	pub leg_make_whole_date: Option<crate::entities::LocalMktDate>,
+	pub leg_make_whole_date: Option<fix_common::LocalMktDate>,
 	/// LegMakeWholeAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42393")]
 	pub leg_make_whole_amount: Option<f64>,
@@ -23,19 +23,19 @@ pub struct LegOptionExerciseMakeWholeProvision {
 	pub leg_make_whole_benchmark_curve_point: Option<String>,
 	/// LegMakeWholeRecallSpread
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42396")]
 	pub leg_make_whole_recall_spread: Option<f64>,
 	/// LegMakeWholeBenchmarkQuote
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42397")]
 	pub leg_make_whole_benchmark_quote: Option<i32>,
 	/// LegMakeWholeInterpolationMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42398")]
 	pub leg_make_whole_interpolation_method: Option<i32>,

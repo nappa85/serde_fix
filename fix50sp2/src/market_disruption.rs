@@ -22,19 +22,19 @@ pub struct MarketDisruption {
 	pub market_disruption_fallback_reference_price_grp: Option<super::market_disruption_fallback_reference_price_grp::MarketDisruptionFallbackReferencePriceGrp>,
 	/// MarketDisruptionMaximumDays
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41089")]
 	pub market_disruption_maximum_days: Option<i32>,
 	/// If specified, the disruption event should be specified in MarketDisruptionEventGrp.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41090")]
 	pub market_disruption_materiality_percentage: Option<f32>,
 	/// Applicable only when MarketDisruptionEvent(41093)='DeMinimisTrading'.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41091")]
 	pub market_disruption_minimum_futures_contracts: Option<i32>,

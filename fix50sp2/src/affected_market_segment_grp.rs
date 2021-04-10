@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct AffectedMarketSegmentGrp {
 	/// NoAffectedMarketSegments
 	#[serde(rename = "1791")]
-	pub affected_market_segments: crate::entities::RepeatingValues<AffectedMarketSegment>,
+	pub affected_market_segments: fix_common::RepeatingValues<AffectedMarketSegment>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

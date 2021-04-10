@@ -6,7 +6,7 @@ pub struct NewsRefGrp {
 	/// Number of news item references
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1475")]
-	pub news_ref_i_ds: Option<crate::entities::RepeatingValues<NewsRefID>>,
+	pub news_ref_i_ds: Option<fix_common::RepeatingValues<NewsRefID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

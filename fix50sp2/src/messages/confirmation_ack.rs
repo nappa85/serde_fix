@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Confirmation {
 	/// MsgType = AU
 	#[serde(flatten)]
@@ -11,10 +11,10 @@ pub struct Confirmation {
 	pub confirm_id: String,
 	/// TradeDate
 	#[serde(rename = "75")]
-	pub trade_date: crate::entities::LocalMktDate,
+	pub trade_date: fix_common::LocalMktDate,
 	/// Date/Time <a href="message_Allocation_Instruction_Ack_P.html" target="main">Allocation Instruction Ack&nbsp;(P)</a> generated
 	#[serde(rename = "60")]
-	pub transact_time: crate::entities::UTCTimestamp,
+	pub transact_time: fix_common::UTCTimestamp,
 	/// AffirmStatus
 	#[serde(rename = "940")]
 	pub affirm_status: AffirmStatus,
@@ -38,7 +38,7 @@ pub struct Confirmation {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

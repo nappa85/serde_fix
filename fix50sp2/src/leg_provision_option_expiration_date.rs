@@ -6,7 +6,7 @@ pub struct LegProvisionOptionExpirationDate {
 	/// LegProvisionOptionExpirationDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40498")]
-	pub leg_provision_option_expiration_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_option_expiration_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// When specified, this overrides the business day convention defined in the LegDateAdjustment component in InstrumentLeg. The
 	/// specified value would be specific to this instance of the leg provision option expiration date.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -22,7 +22,7 @@ pub struct LegProvisionOptionExpirationDate {
 	pub leg_provision_option_expiration_date_relative_to: Option<LegProvisionOptionExpirationDateRelativeTo>,
 	/// Conditionally required when LegProvisionOptionExpirationDateOffsetUnit(40503) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40502")]
 	pub leg_provision_option_expiration_date_offset_period: Option<i32>,
@@ -37,7 +37,7 @@ pub struct LegProvisionOptionExpirationDate {
 	/// LegProvisionOptionExpirationDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40505")]
-	pub leg_provision_option_expiration_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_option_expiration_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// LegProvisionOptionExpirationTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40506")]

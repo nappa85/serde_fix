@@ -6,7 +6,7 @@ pub struct ProvisionCashSettlPaymentFixedDateGrp {
 	/// NoProvisionCashSettlPaymentDates
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40171")]
-	pub provision_cash_settl_payment_dates: Option<crate::entities::RepeatingValues<ProvisionCashSettlPaymentDate>>,
+	pub provision_cash_settl_payment_dates: Option<fix_common::RepeatingValues<ProvisionCashSettlPaymentDate>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct ProvisionCashSettlPaymentDate {
 	/// Required if NoProvisionCashSettlPaymentDates (40171) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40172")]
-	pub provision_cash_settl_payment_date: Option<crate::entities::LocalMktDate>,
+	pub provision_cash_settl_payment_date: Option<fix_common::LocalMktDate>,
 	/// ProvisionCashSettlPaymentDateType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40173")]

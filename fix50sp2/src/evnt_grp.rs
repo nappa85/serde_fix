@@ -6,7 +6,7 @@ pub struct EvntGrp {
 	/// NoEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "864")]
-	pub events: Option<crate::entities::RepeatingValues<Event>>,
+	pub events: Option<fix_common::RepeatingValues<Event>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,14 +18,14 @@ pub struct Event {
 	/// Conditionally required when EventTime(1145) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "866")]
-	pub event_date: Option<crate::entities::LocalMktDate>,
+	pub event_date: Option<fix_common::LocalMktDate>,
 	/// <p></p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1145")]
-	pub event_time: Option<crate::entities::UTCTimestamp>,
+	pub event_time: Option<fix_common::UTCTimestamp>,
 	/// EventPx
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "867")]
 	pub event_px: Option<f64>,
@@ -39,17 +39,17 @@ pub struct Event {
 	pub event_time_unit: Option<EventTimeUnit>,
 	/// Conditionally required when EventTimeUnit(1827) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1826")]
 	pub event_time_period: Option<i32>,
 	/// EventMonthYear
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2340")]
-	pub event_month_year: Option<crate::entities::MonthYear>,
+	pub event_month_year: Option<fix_common::MonthYear>,
 	/// Must be set if EncodedEventText(1579) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1578")]
 	pub encoded_event_text_len: Option<usize>,

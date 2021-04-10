@@ -6,7 +6,7 @@ pub struct LegProtectionTermObligationGrp {
 	/// NoLegProtectionTermObligations
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41635")]
-	pub leg_protection_term_obligations: Option<crate::entities::RepeatingValues<LegProtectionTermObligation>>,
+	pub leg_protection_term_obligations: Option<fix_common::RepeatingValues<LegProtectionTermObligation>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

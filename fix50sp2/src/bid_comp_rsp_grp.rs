@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct BidCompRspGrp {
 	/// Used if BidType="Disclosed"
 	#[serde(rename = "420")]
-	pub bid_components: crate::entities::RepeatingValues<BidComponent>,
+	pub bid_components: fix_common::RepeatingValues<BidComponent>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct BidComponent {
 	pub side: Option<Side>,
 	/// Second element of price
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "44")]
 	pub price: Option<f64>,
@@ -36,7 +36,7 @@ pub struct BidComponent {
 	/// The difference between the value of a future and the value of the underlying equities after allowing for the discounted cash
 	/// flows associated with the underlying stocks (E.g. Dividends etc).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "406")]
 	pub fair_value: Option<f64>,
@@ -51,7 +51,7 @@ pub struct BidComponent {
 	/// Takes precedence over SettlType value and conditionally required/omitted for specific SettlType values.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// TradingSessionID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "336")]
@@ -66,7 +66,7 @@ pub struct BidComponent {
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

@@ -17,7 +17,7 @@ pub struct ProvisionOptionExerciseDates {
 	pub provision_option_exercise_fixed_date_grp: Option<super::provision_option_exercise_fixed_date_grp::ProvisionOptionExerciseFixedDateGrp>,
 	/// Conditionally required when ProvisionOptionExerciseEarliestDateUnit(40126) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40125")]
 	pub provision_option_exercise_earliest_date_period: Option<i32>,
@@ -27,7 +27,7 @@ pub struct ProvisionOptionExerciseDates {
 	pub provision_option_exercise_earliest_date_unit: Option<ProvisionOptionExerciseEarliestDateUnit>,
 	/// Conditionally required when ProvisionOptionExerciseFrequencyUnit(40128) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40127")]
 	pub provision_option_exercise_frequency_period: Option<i32>,
@@ -38,14 +38,14 @@ pub struct ProvisionOptionExerciseDates {
 	/// ProvisionOptionExerciseStartDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40129")]
-	pub provision_option_exercise_start_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub provision_option_exercise_start_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// ProvisionOptionExerciseStartDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40130")]
 	pub provision_option_exercise_start_date_relative_to: Option<ProvisionOptionExerciseStartDateRelativeTo>,
 	/// Conditionally required when ProvisionOptionExerciseStartDateOffsetUnit(40132) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40131")]
 	pub provision_option_exercise_start_date_offset_period: Option<i32>,
@@ -60,21 +60,21 @@ pub struct ProvisionOptionExerciseDates {
 	/// ProvisionOptionExerciseStartDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40134")]
-	pub provision_option_exercise_start_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub provision_option_exercise_start_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// ProvisionOptionExercisePeriodSkip
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40135")]
 	pub provision_option_exercise_period_skip: Option<i32>,
 	/// ProvisionOptionExerciseBoundsFirstDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40136")]
-	pub provision_option_exercise_bounds_first_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub provision_option_exercise_bounds_first_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// ProvisionOptionExerciseBoundsLastDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40137")]
-	pub provision_option_exercise_bounds_last_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub provision_option_exercise_bounds_last_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// ProvisionOptionExerciseEarliestTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40138")]

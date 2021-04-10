@@ -6,7 +6,7 @@ pub struct DeliveryScheduleGrp {
 	/// NoDeliverySchedules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41037")]
-	pub delivery_schedules: Option<crate::entities::RepeatingValues<DeliverySchedule>>,
+	pub delivery_schedules: Option<fix_common::RepeatingValues<DeliverySchedule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,7 +21,7 @@ pub struct DeliverySchedule {
 	pub delivery_schedule_xid: Option<String>,
 	/// DeliveryScheduleNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41040")]
 	pub delivery_schedule_notional: Option<f64>,
@@ -35,13 +35,13 @@ pub struct DeliverySchedule {
 	pub delivery_schedule_notional_commodity_frequency: Option<DeliveryScheduleNotionalCommodityFrequency>,
 	/// DeliveryScheduleNegativeTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41043")]
 	pub delivery_schedule_negative_tolerance: Option<f64>,
 	/// DeliverySchedulePositiveTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41044")]
 	pub delivery_schedule_positive_tolerance: Option<f64>,

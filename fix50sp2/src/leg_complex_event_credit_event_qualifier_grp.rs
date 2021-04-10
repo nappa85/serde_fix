@@ -6,7 +6,7 @@ pub struct LegComplexEventCreditEventQualifierGrp {
 	/// NoLegComplexEventCreditEventQualifiers
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41374")]
-	pub leg_complex_event_credit_event_qualifiers: Option<crate::entities::RepeatingValues<LegComplexEventCreditEventQualifier>>,
+	pub leg_complex_event_credit_event_qualifiers: Option<fix_common::RepeatingValues<LegComplexEventCreditEventQualifier>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

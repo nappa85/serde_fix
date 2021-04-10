@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct News {
 	/// MsgType = B
 	#[serde(flatten)]
@@ -27,7 +27,7 @@ pub struct News {
 	/// OrigTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42")]
-	pub orig_time: Option<crate::entities::UTCTimestamp>,
+	pub orig_time: Option<fix_common::UTCTimestamp>,
 	/// Urgency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "61")]
@@ -37,7 +37,7 @@ pub struct News {
 	pub headline: String,
 	/// Must be set if <a href="tag_359_EncodedHeadline.html" target="bottom">EncodedHeadline&nbsp;(359)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "358")]
 	pub encoded_headline_len: Option<usize>,
@@ -74,7 +74,7 @@ pub struct News {
 	pub url_link: Option<String>,
 	/// RawDataLength
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "95")]
 	pub raw_data_length: Option<usize>,

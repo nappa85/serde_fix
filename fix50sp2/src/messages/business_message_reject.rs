@@ -1,14 +1,14 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Business {
 	/// MsgType = j
 	#[serde(flatten)]
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
 	/// MsgSeqNum of rejected message
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "45")]
 	pub ref_seq_num: Option<usize>,
@@ -21,7 +21,7 @@ pub struct Business {
 	pub ref_appl_ver_id: Option<String>,
 	/// Recommended when rejecting an application message that does not explicitly provide <a href="tag_1156_ApplExtID.html" target="bottom">ApplExtID(1156)&nbsp;(1156)</a> on the rejected message. In this case the value from the <a href="tag_1407_DefaultApplExtID.html" target="bottom">DefaultApplExtID(1407)&nbsp;(1407)</a> or the default value specified in the <a href="tag_384_NoMsgTypes.html" target="bottom">NoMsgTypes&nbsp;(384)</a> repeating group on the logon message should be provided.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1406")]
 	pub ref_appl_ext_id: Option<i32>,
@@ -43,7 +43,7 @@ pub struct Business {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

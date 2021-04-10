@@ -6,7 +6,7 @@ pub struct LegPaymentScheduleGrp {
 	/// NoLegPaymentSchedules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40374")]
-	pub leg_payment_schedules: Option<crate::entities::RepeatingValues<LegPaymentSchedule>>,
+	pub leg_payment_schedules: Option<fix_common::RepeatingValues<LegPaymentSchedule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -22,11 +22,11 @@ pub struct LegPaymentSchedule {
 	/// LegPaymentScheduleStartDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40377")]
-	pub leg_payment_schedule_start_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_payment_schedule_start_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegPaymentScheduleEndDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40378")]
-	pub leg_payment_schedule_end_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_payment_schedule_end_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegPaymentSchedulePaySide
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40379")]
@@ -37,7 +37,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_receive_side: Option<LegPaymentScheduleReceiveSide>,
 	/// LegPaymentScheduleNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40381")]
 	pub leg_payment_schedule_notional: Option<f64>,
@@ -47,19 +47,19 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_currency: Option<String>,
 	/// LegPaymentScheduleRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40383")]
 	pub leg_payment_schedule_rate: Option<f32>,
 	/// LegPaymentScheduleRateMultiplier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40384")]
 	pub leg_payment_schedule_rate_multiplier: Option<f64>,
 	/// LegPaymentScheduleRateSpread
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40385")]
 	pub leg_payment_schedule_rate_spread: Option<f64>,
@@ -73,7 +73,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_rate_treatment: Option<LegPaymentScheduleRateTreatment>,
 	/// LegPaymentScheduleFixedAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40388")]
 	pub leg_payment_schedule_fixed_amount: Option<f64>,
@@ -83,7 +83,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_fixed_currency: Option<String>,
 	/// Conditionally required when LegPaymentScheduleStepFrequencyUnit(40391) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40390")]
 	pub leg_payment_schedule_step_frequency_period: Option<i32>,
@@ -93,19 +93,19 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_step_frequency_unit: Option<LegPaymentScheduleStepFrequencyUnit>,
 	/// LegPaymentScheduleStepOffsetValue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40392")]
 	pub leg_payment_schedule_step_offset_value: Option<f64>,
 	/// LegPaymentScheduleStepRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40393")]
 	pub leg_payment_schedule_step_rate: Option<f32>,
 	/// LegPaymentScheduleStepOffsetRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40394")]
 	pub leg_payment_schedule_step_offset_rate: Option<f32>,
@@ -116,10 +116,10 @@ pub struct LegPaymentSchedule {
 	/// LegPaymentScheduleFixingDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40396")]
-	pub leg_payment_schedule_fixing_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_payment_schedule_fixing_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegPaymentScheduleWeight
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40397")]
 	pub leg_payment_schedule_weight: Option<f64>,
@@ -134,7 +134,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_fixing_date_business_day_convention: Option<LegPaymentScheduleFixingDateBusinessDayConvention>,
 	/// Conditionally required when LegPaymentScheduleFixingDatesOffsetUnit(40402) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40401")]
 	pub leg_payment_schedule_fixing_date_offset_period: Option<i32>,
@@ -169,7 +169,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_interim_exchange_dates_business_day_convention: Option<LegPaymentScheduleInterimExchangeDatesBusinessDayConvention>,
 	/// Conditionally required when LegPaymentScheduleInterimExchangeDatesOffsetUnit(40411) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40410")]
 	pub leg_payment_schedule_interim_exchange_dates_offset_period: Option<i32>,
@@ -184,7 +184,7 @@ pub struct LegPaymentSchedule {
 	/// LegPaymentScheduleInterimExchangeDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40413")]
-	pub leg_payment_schedule_interim_exchange_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_payment_schedule_interim_exchange_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// LegPaymentScheduleXID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41533")]
@@ -203,7 +203,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_rate_unit_of_measure: Option<LegPaymentScheduleRateUnitOfMeasure>,
 	/// LegPaymentScheduleRateConversionFactor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41537")]
 	pub leg_payment_schedule_rate_conversion_factor: Option<f64>,
@@ -213,7 +213,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_rate_spread_type: Option<LegPaymentScheduleRateSpreadType>,
 	/// LegPaymentScheduleSettlPeriodPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41539")]
 	pub leg_payment_schedule_settl_period_price: Option<f64>,
@@ -235,13 +235,13 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_fixing_day_distribution: Option<LegPaymentScheduleFixingDayDistribution>,
 	/// LegPaymentScheduleFixingDayCount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41544")]
 	pub leg_payment_schedule_fixing_day_count: Option<i32>,
 	/// Conditionally required when LegPaymentScheduleFixingLagUnit(41546) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41545")]
 	pub leg_payment_schedule_fixing_lag_period: Option<i32>,
@@ -251,7 +251,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_fixing_lag_unit: Option<LegPaymentScheduleFixingLagUnit>,
 	/// Conditionally required when LegPaymentScheduleFixingFirstObservationDateOffsetUnit(41548) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41547")]
 	pub leg_payment_schedule_fixing_first_observation_date_offset_period: Option<i32>,

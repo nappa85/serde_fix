@@ -6,7 +6,7 @@ pub struct UnderlyingAssetAttributeGrp {
 	/// NoUnderlyingAssetAttributes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2312")]
-	pub underlying_asset_attributes: Option<crate::entities::RepeatingValues<UnderlyingAssetAttribute>>,
+	pub underlying_asset_attributes: Option<fix_common::RepeatingValues<UnderlyingAssetAttribute>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

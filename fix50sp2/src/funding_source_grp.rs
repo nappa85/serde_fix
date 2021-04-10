@@ -6,7 +6,7 @@ pub struct FundingSourceGrp {
 	/// NoFundingSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2849")]
-	pub funding_sources: Option<crate::entities::RepeatingValues<FundingSource>>,
+	pub funding_sources: Option<fix_common::RepeatingValues<FundingSource>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct FundingSource {
 	pub funding_source_item: Option<FundingSourceItem>,
 	/// FundingSourceMarketValue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2848")]
 	pub funding_source_market_value: Option<f64>,

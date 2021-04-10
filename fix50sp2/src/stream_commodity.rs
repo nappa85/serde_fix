@@ -28,7 +28,7 @@ pub struct StreamCommodity {
 	pub stream_commodity_desc: Option<String>,
 	/// Must be set if EncodedCommodityDesc(41257) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41256")]
 	pub encoded_stream_commodity_desc_len: Option<usize>,
@@ -54,7 +54,7 @@ pub struct StreamCommodity {
 	pub stream_commodity_exchange: Option<String>,
 	/// StreamCommodityRateSource
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41261")]
 	pub stream_commodity_rate_source: Option<i32>,
@@ -79,7 +79,7 @@ pub struct StreamCommodity {
 	pub stream_commodity_pricing_type: Option<String>,
 	/// Conditionally required when StreamCommodityNearbySettlDayUnit(41267) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41266")]
 	pub stream_commodity_nearby_settl_day_period: Option<i32>,
@@ -90,7 +90,7 @@ pub struct StreamCommodity {
 	/// StreamCommoditySettlDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41268")]
-	pub stream_commodity_settl_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub stream_commodity_settl_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// StreamCommoditySettlDateBusinessDayConvention
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41269")]
@@ -101,16 +101,16 @@ pub struct StreamCommodity {
 	/// StreamCommoditySettlDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41270")]
-	pub stream_commodity_settl_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub stream_commodity_settl_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// StreamCommoditySettlMonth
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41271")]
 	pub stream_commodity_settl_month: Option<i32>,
 	/// Conditionally required when StreamCommoditySettlDateRollUnit(41273) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41272")]
 	pub stream_commodity_settl_date_roll_period: Option<i32>,

@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Security {
 	/// MsgType = BK
 	#[serde(flatten)]
@@ -11,7 +11,7 @@ pub struct Security {
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
 	/// Identifier for the <a href="message_Security_List_y.html" target="main">Security List&nbsp;(y)</a> Update message in a bulk transfer environment (No Request/Response)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "964")]
 	pub security_report_id: Option<i32>,
@@ -29,7 +29,7 @@ pub struct Security {
 	pub security_list_desc: Option<String>,
 	/// EncodedSecurityListDescLen
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1468")]
 	pub encoded_security_list_desc_len: Option<usize>,
@@ -60,14 +60,14 @@ pub struct Security {
 	/// Used to indicate the total number of securities being returned for this request. Used in the event that message fragmentation
 	/// is required.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "393")]
 	pub tot_no_related_sym: Option<i32>,
 	/// ClearingBusinessDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// SecurityUpdateAction
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "980")]
@@ -75,7 +75,7 @@ pub struct Security {
 	/// Identifies the type of Corporate Action that triggered the update
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "292")]
-	pub corporate_action: Option<crate::entities::SeparatedValues<CorporateAction>>,
+	pub corporate_action: Option<fix_common::SeparatedValues<CorporateAction>>,
 	/// Identifies the market which lists and trades the instrument.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1301")]
@@ -87,7 +87,7 @@ pub struct Security {
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Indicates whether this is the last fragment in a sequence of message fragments. Only required where message has been fragmented.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "893")]

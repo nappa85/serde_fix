@@ -6,7 +6,7 @@ pub struct SecListGrp {
 	/// Specifies the number of repeating symbols (instruments) specified
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "146")]
-	pub related_sym: Option<crate::entities::RepeatingValues<RelatedSy>>,
+	pub related_sym: Option<fix_common::RepeatingValues<RelatedSy>>,
 	/// SecurityClassificationGrp
 	#[serde(flatten)]
 	pub security_classification_grp: Option<super::security_classification_grp::SecurityClassificationGrp>,
@@ -21,14 +21,14 @@ pub struct RelatedSy {
 	/// RelSymTransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1504")]
-	pub rel_sym_transact_time: Option<crate::entities::UTCTimestamp>,
+	pub rel_sym_transact_time: Option<fix_common::UTCTimestamp>,
 	/// Comment, instructions, or other identifying information.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -38,7 +38,7 @@ pub struct RelatedSy {
 	pub encoded_text: Option<String>,
 	/// Number of simple instruments
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1606")]
 	pub num_of_simple_instruments: Option<i32>,

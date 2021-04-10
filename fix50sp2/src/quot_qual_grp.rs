@@ -6,7 +6,7 @@ pub struct QuotQualGrp {
 	/// NoQuoteQualifiers
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "735")]
-	pub quote_qualifiers: Option<crate::entities::RepeatingValues<QuoteQualifier>>,
+	pub quote_qualifiers: Option<fix_common::RepeatingValues<QuoteQualifier>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -7,14 +7,14 @@ pub struct ExecAllocGrp {
 	/// are included. Primarily used to support stepouts.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "124")]
-	pub execs: Option<crate::entities::RepeatingValues<Exec>>,
+	pub execs: Option<fix_common::RepeatingValues<Exec>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Exec {
 	/// Amount of quantity (e.g. number of shares) in individual execution. Required if NoExecs &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "32")]
 	pub last_qty: Option<f64>,
@@ -28,14 +28,14 @@ pub struct Exec {
 	pub secondary_exec_id: Option<String>,
 	/// Price of individual execution. Required if NoExecs &gt; 0.For FX, if specified, expressed in terms of <a href="tag_15_Currency.html" target="bottom">Currency(15)&nbsp;(15)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "31")]
 	pub last_px: Option<f64>,
 	/// Last price expressed in percent-of-par. Conditionally required for Fixed Income trades when LastPx is expressed in Yield,
 	/// Spread, Discount or any other price type
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "669")]
 	pub last_par_px: Option<f64>,
@@ -54,7 +54,7 @@ pub struct Exec {
 	/// ExecutionTimestamp
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2749")]
-	pub execution_timestamp: Option<crate::entities::UTCTimestamp>,
+	pub execution_timestamp: Option<fix_common::UTCTimestamp>,
 	/// TradeReportingIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2524")]

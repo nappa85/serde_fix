@@ -6,7 +6,7 @@ pub struct InstrmtLegSecListGrp {
 	/// Number of legs that make up the Security
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "555")]
-	pub legs: Option<crate::entities::RepeatingValues<Leg>>,
+	pub legs: Option<fix_common::RepeatingValues<Leg>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

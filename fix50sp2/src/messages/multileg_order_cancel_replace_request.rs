@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Multileg {
 	/// MsgType = AC
 	#[serde(flatten)]
@@ -30,18 +30,18 @@ pub struct Multileg {
 	/// OrigOrdModTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "586")]
-	pub orig_ord_mod_time: Option<crate::entities::UTCTimestamp>,
+	pub orig_ord_mod_time: Option<fix_common::UTCTimestamp>,
 	/// This is party information related to the submitter of the request
 	#[serde(flatten)]
 	pub parties: Option<super::super::parties::Parties>,
 	/// TradeOriginationDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "229")]
-	pub trade_origination_date: Option<crate::entities::LocalMktDate>,
+	pub trade_origination_date: Option<fix_common::LocalMktDate>,
 	/// TradeDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
@@ -80,7 +80,7 @@ pub struct Multileg {
 	/// Takes precedence over <a href="tag_63_SettlType.html" target="bottom">SettlType&nbsp;(63)</a> value and conditionally required/omitted for specific <a href="tag_63_SettlType.html" target="bottom">SettlType&nbsp;(63)</a> values.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// CashMargin
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "544")]
@@ -96,22 +96,22 @@ pub struct Multileg {
 	/// Can contain multiple instructions, space delimited. If <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> =P, exactly one of the following values (ExecInst = L, R, M, P, O, T, or W) must be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "18")]
-	pub exec_inst: Option<crate::entities::SeparatedValues<ExecInst>>,
+	pub exec_inst: Option<fix_common::SeparatedValues<ExecInst>>,
 	/// MinQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "110")]
 	pub min_qty: Option<f64>,
 	/// MatchIncrement
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1089")]
 	pub match_increment: Option<f64>,
 	/// MaxPriceLevels
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1090")]
 	pub max_price_levels: Option<i32>,
@@ -120,7 +120,7 @@ pub struct Multileg {
 	pub display_instruction: Option<super::super::display_instruction::DisplayInstruction>,
 	/// (Deprecated in FIX.5.0)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "111")]
 	pub max_floor: Option<f64>,
@@ -150,13 +150,13 @@ pub struct Multileg {
 	pub und_instrmt_grp: Option<super::super::und_instrmt_grp::UndInstrmtGrp>,
 	/// Useful for verifying security identification
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "140")]
 	pub prev_close_px: Option<f64>,
 	/// SwapPoints
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1069")]
 	pub swap_points: Option<f64>,
@@ -169,7 +169,7 @@ pub struct Multileg {
 	pub locate_reqd: Option<LocateReqd>,
 	/// Time this order request was initiated/released by the trader, trading system, or intermediary.
 	#[serde(rename = "60")]
-	pub transact_time: crate::entities::UTCTimestamp,
+	pub transact_time: fix_common::UTCTimestamp,
 	/// QtyType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "854")]
@@ -195,7 +195,7 @@ pub struct Multileg {
 	/// Required for limit OrdTypes. For F/X orders, should be the "all-in" rate (spot rate adjusted for forward points). Can be used
 	/// to specify a limit price for a pegged order, previously indicated, etc.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "44")]
 	pub price: Option<f64>,
@@ -205,7 +205,7 @@ pub struct Multileg {
 	pub price_protection_scope: Option<PriceProtectionScope>,
 	/// Required for <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> = "Stop" or <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> = "Stop limit".
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "99")]
 	pub stop_px: Option<f64>,
@@ -239,15 +239,15 @@ pub struct Multileg {
 	/// Can specify the time at which the order should be considered valid
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "168")]
-	pub effective_time: Option<crate::entities::UTCTimestamp>,
+	pub effective_time: Option<fix_common::UTCTimestamp>,
 	/// Conditionally required if <a href="tag_59_TimeInForce.html" target="bottom">TimeInForce&nbsp;(59)</a> = GTD and <a href="tag_126_ExpireTime.html" target="bottom">ExpireTime&nbsp;(126)</a> is not specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "432")]
-	pub expire_date: Option<crate::entities::LocalMktDate>,
+	pub expire_date: Option<fix_common::LocalMktDate>,
 	/// Conditionally required if <a href="tag_59_TimeInForce.html" target="bottom">TimeInForce&nbsp;(59)</a> = GTD and <a href="tag_432_ExpireDate.html" target="bottom">ExpireDate&nbsp;(432)</a> is not specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "126")]
-	pub expire_time: Option<crate::entities::UTCTimestamp>,
+	pub expire_time: Option<fix_common::UTCTimestamp>,
 	/// States whether executions are booked out or accumulated on a partially filled GT order
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "427")]
@@ -262,11 +262,11 @@ pub struct Multileg {
 	/// OrderRestrictions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "529")]
-	pub order_restrictions: Option<crate::entities::SeparatedValues<OrderRestrictions>>,
+	pub order_restrictions: Option<fix_common::SeparatedValues<OrderRestrictions>>,
 	/// PreTradeAnonymity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1091")]
-	pub pre_trade_anonymity: Option<crate::entities::Boolean>,
+	pub pre_trade_anonymity: Option<fix_common::Boolean>,
 	/// CustOrderCapacity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "582")]
@@ -290,7 +290,7 @@ pub struct Multileg {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -308,7 +308,7 @@ pub struct Multileg {
 	pub covered_or_uncovered: Option<CoveredOrUncovered>,
 	/// (Deprecated in FIX.5.0)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "210")]
 	pub max_show: Option<f64>,
@@ -331,14 +331,14 @@ pub struct Multileg {
 	pub target_strategy_parameters: Option<String>,
 	/// RiskFreeRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1190")]
 	pub risk_free_rate: Option<f64>,
 	/// (Deprecated in FIX.5.0)Mandatory for a TargetStrategy=Participate order and specifies the target particpation rate. For other
 	/// order types optionally specifies a volume limit (i.e. do not be more than this percent of the market volume)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "849")]
 	pub participation_rate: Option<f32>,
@@ -367,7 +367,7 @@ pub struct Multileg {
 	pub matching_instructions: Option<super::super::matching_instructions::MatchingInstructions>,
 	/// ExposureDuration
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1629")]
 	pub exposure_duration: Option<i32>,
@@ -407,19 +407,19 @@ pub struct Multileg {
 	pub auction_type: Option<AuctionType>,
 	/// AuctionAllocationPct
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1804")]
 	pub auction_allocation_pct: Option<f32>,
 	/// RelatedHighPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1819")]
 	pub related_high_price: Option<f64>,
 	/// RelatedLowPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1820")]
 	pub related_low_price: Option<f64>,
@@ -441,7 +441,7 @@ pub struct Multileg {
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2351")]
 	pub encoded_compliance_text_len: Option<usize>,
@@ -452,7 +452,7 @@ pub struct Multileg {
 	pub encoded_compliance_text: Option<String>,
 	/// Required if provided on the order being replaced (or cancelled). Echo back the value provided by the requester.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2422")]
 	pub order_request_id: Option<i32>,
@@ -465,7 +465,7 @@ pub struct Multileg {
 	pub self_match_prevention_id: Option<String>,
 	/// MaximumPriceDeviation
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2676")]
 	pub maximum_price_deviation: Option<f32>,

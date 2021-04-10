@@ -6,7 +6,7 @@ pub struct PartyDetailAltSubGrp {
 	/// NoPartyDetailAltSubIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1519")]
-	pub party_detail_alt_sub_i_ds: Option<crate::entities::RepeatingValues<PartyDetailAltSubID>>,
+	pub party_detail_alt_sub_i_ds: Option<fix_common::RepeatingValues<PartyDetailAltSubID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -6,7 +6,7 @@ pub struct LegProvisionOptionExerciseBusinessCenterGrp {
 	/// NoLegProvisionOptionExerciseBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40936")]
-	pub leg_provision_option_exercise_business_centers: Option<crate::entities::RepeatingValues<LegProvisionOptionExerciseBusinessCenter>>,
+	pub leg_provision_option_exercise_business_centers: Option<fix_common::RepeatingValues<LegProvisionOptionExerciseBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

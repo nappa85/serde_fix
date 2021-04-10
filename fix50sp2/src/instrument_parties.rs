@@ -6,7 +6,7 @@ pub struct InstrumentParties {
 	/// Repeating group below should contain unique combinations of <a href="tag_1019_InstrumentPartyID.html" target="bottom">InstrumentPartyID&nbsp;(1019)</a> , <a href="tag_1050_InstrumentPartyIDSource.html" target="bottom">InstrumentPartyIDSource&nbsp;(1050)</a> , and <a href="tag_1051_InstrumentPartyRole.html" target="bottom">InstrumentPartyRole&nbsp;(1051)</a>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1018")]
-	pub instrument_parties: Option<crate::entities::RepeatingValues<InstrumentPartie>>,
+	pub instrument_parties: Option<fix_common::RepeatingValues<InstrumentPartie>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct InstrumentPartie {
 	pub instrument_party_role: Option<InstrumentPartyRole>,
 	/// InstrumentPartyRoleQualifier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2378")]
 	pub instrument_party_role_qualifier: Option<i32>,

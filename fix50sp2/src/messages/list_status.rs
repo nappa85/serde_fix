@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct List {
 	/// MsgType = N
 	#[serde(flatten)]
@@ -13,7 +13,7 @@ pub struct List {
 	#[serde(rename = "429")]
 	pub list_status_type: ListStatusType,
 	/// Total number of messages required to status complete list.
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "82")]
 	pub no_rpts: i32,
 	/// ListOrderStatus
@@ -28,7 +28,7 @@ pub struct List {
 	#[serde(rename = "1386")]
 	pub list_reject_reason: Option<ListRejectReason>,
 	/// Sequence number of this report message.
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "83")]
 	pub rpt_seq: i32,
 	/// ListStatusText
@@ -37,7 +37,7 @@ pub struct List {
 	pub list_status_text: Option<String>,
 	/// Must be set if <a href="tag_446_EncodedListStatusText.html" target="bottom">EncodedListStatusText&nbsp;(446)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "445")]
 	pub encoded_list_status_text_len: Option<usize>,
@@ -48,9 +48,9 @@ pub struct List {
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Used to support fragmentation. Sum of <a href="tag_73_NoOrders.html" target="bottom">NoOrders&nbsp;(73)</a> across all messages with the same ListID.
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "68")]
 	pub tot_no_orders: i32,
 	/// Indicates whether this is the last fragment in a sequence of message fragments. Only required where message has been fragmented.

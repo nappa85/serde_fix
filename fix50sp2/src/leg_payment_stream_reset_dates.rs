@@ -18,7 +18,7 @@ pub struct LegPaymentStreamResetDates {
 	pub leg_payment_stream_reset_date_business_center_grp: Option<super::leg_payment_stream_reset_date_business_center_grp::LegPaymentStreamResetDateBusinessCenterGrp>,
 	/// Conditionally required when LegPaymentStreamResetFrequencyUnit(40307) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40306")]
 	pub leg_payment_stream_reset_frequency_period: Option<i32>,
@@ -45,7 +45,7 @@ pub struct LegPaymentStreamResetDates {
 	pub leg_payment_stream_initial_fixing_date_business_center_grp: Option<super::leg_payment_stream_initial_fixing_date_business_center_grp::LegPaymentStreamInitialFixingDateBusinessCenterGrp>,
 	/// Conditionally required when LegPaymentStreamInitialFixingDateOffsetUnit(40313) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40312")]
 	pub leg_payment_stream_initial_fixing_date_offset_period: Option<i32>,
@@ -60,7 +60,7 @@ pub struct LegPaymentStreamResetDates {
 	/// LegPaymentStreamInitialFixingDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40315")]
-	pub leg_payment_stream_initial_fixing_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_payment_stream_initial_fixing_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// LegPaymentStreamFixingDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40316")]
@@ -76,7 +76,7 @@ pub struct LegPaymentStreamResetDates {
 	pub leg_payment_stream_fixing_date_business_center_grp: Option<super::leg_payment_stream_fixing_date_business_center_grp::LegPaymentStreamFixingDateBusinessCenterGrp>,
 	/// Conditionally required when LegPaymentStreamFixingDateOffsetUnit(40320) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40319")]
 	pub leg_payment_stream_fixing_date_offset_period: Option<i32>,
@@ -91,10 +91,10 @@ pub struct LegPaymentStreamResetDates {
 	/// LegPaymentStreamFixingDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40322")]
-	pub leg_payment_stream_fixing_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_payment_stream_fixing_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// Conditionally required when LegPaymentStreamRateCutoffDateOffsetUnit(40324) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40323")]
 	pub leg_payment_stream_rate_cutoff_date_offset_period: Option<i32>,

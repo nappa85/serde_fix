@@ -6,7 +6,7 @@ pub struct UnderlyingEvntGrp {
 	/// NoUnderlyingEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1981")]
-	pub underlying_events: Option<crate::entities::RepeatingValues<UnderlyingEvent>>,
+	pub underlying_events: Option<fix_common::RepeatingValues<UnderlyingEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,28 +18,28 @@ pub struct UnderlyingEvent {
 	/// Conditionally required when UnderlyingEventTime(1984) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1983")]
-	pub underlying_event_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_event_date: Option<fix_common::LocalMktDate>,
 	/// UnderlyingEventTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1984")]
-	pub underlying_event_time: Option<crate::entities::UTCTimestamp>,
+	pub underlying_event_time: Option<fix_common::UTCTimestamp>,
 	/// Conditionally required when UnderlyingEventTimePeriod(1986) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1985")]
 	pub underlying_event_time_unit: Option<String>,
 	/// Conditionally required when UnderlyingEventTimeUnit(1985) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1986")]
 	pub underlying_event_time_period: Option<i32>,
 	/// UnderlyingEventMonthYear
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2342")]
-	pub underlying_event_month_year: Option<crate::entities::MonthYear>,
+	pub underlying_event_month_year: Option<fix_common::MonthYear>,
 	/// UnderlyingEventPx
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1987")]
 	pub underlying_event_px: Option<f64>,
@@ -49,7 +49,7 @@ pub struct UnderlyingEvent {
 	pub underlying_event_text: Option<String>,
 	/// Must be set if EncodedUnderlyingEventText(2073) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2072")]
 	pub encoded_underlying_event_text_len: Option<usize>,

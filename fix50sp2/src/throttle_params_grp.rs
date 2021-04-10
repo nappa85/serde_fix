@@ -6,7 +6,7 @@ pub struct ThrottleParamsGrp {
 	/// Indicates number of throttles to follow
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1610")]
-	pub throttles: Option<crate::entities::RepeatingValues<Throttle>>,
+	pub throttles: Option<fix_common::RepeatingValues<Throttle>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,13 +21,13 @@ pub struct Throttle {
 	pub throttle_type: Option<ThrottleType>,
 	/// Number of messages per time interval, or number of outstanding requests. Required when <a href="tag_1610_NoThrottles.html" target="bottom">NoThrottles&nbsp;(1610)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1613")]
 	pub throttle_no_msgs: Option<i32>,
 	/// Can be used only when <a href="tag_1612_ThrottleType.html" target="bottom">ThrottleType&nbsp;(1612)</a> = Inbound Rate. Indicates, along with <a href="tag_1615_ThrottleTimeUnit.html" target="bottom">ThrottleTimeUnit&nbsp;(1615)</a> , the interval of time in which <a href="tag_1613_ThrottleNoMsgs.html" target="bottom">ThrottleNoMsgs&nbsp;(1613)</a> may be sent. Default is 1
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1614")]
 	pub throttle_time_interval: Option<i32>,

@@ -6,7 +6,7 @@ pub struct StreamCalculationPeriodDateGrp {
 	/// NoStreamCalculationPeriodDates
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41241")]
-	pub stream_calculation_period_dates: Option<crate::entities::RepeatingValues<StreamCalculationPeriodDate>>,
+	pub stream_calculation_period_dates: Option<fix_common::RepeatingValues<StreamCalculationPeriodDate>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct StreamCalculationPeriodDate {
 	/// Required if NoStreamCalculationPeriodDates(41241) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41242")]
-	pub stream_calculation_period_date: Option<crate::entities::LocalMktDate>,
+	pub stream_calculation_period_date: Option<fix_common::LocalMktDate>,
 	/// StreamCalculationPeriodDateType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41243")]

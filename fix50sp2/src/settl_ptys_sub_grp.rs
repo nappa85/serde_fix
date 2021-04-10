@@ -6,7 +6,7 @@ pub struct SettlPtysSubGrp {
 	/// NoSettlPartySubIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "801")]
-	pub settl_party_sub_i_ds: Option<crate::entities::RepeatingValues<SettlPartySubID>>,
+	pub settl_party_sub_i_ds: Option<fix_common::RepeatingValues<SettlPartySubID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

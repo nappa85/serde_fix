@@ -6,7 +6,7 @@ pub struct ClearingAccountTypeGrp {
 	/// NoClearingAccountTypes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1918")]
-	pub clearing_account_types: Option<crate::entities::RepeatingValues<ClearingAccountType>>,
+	pub clearing_account_types: Option<fix_common::RepeatingValues<ClearingAccountType>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

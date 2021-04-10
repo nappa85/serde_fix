@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct AllocationInstructionAlertRequest {
 	/// MsgType = DU
 	#[serde(flatten)]
@@ -21,7 +21,7 @@ pub struct AllocationInstructionAlertRequest {
 	/// TradeDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// Parties
 	#[serde(flatten)]
 	pub parties: Option<super::super::parties::Parties>,

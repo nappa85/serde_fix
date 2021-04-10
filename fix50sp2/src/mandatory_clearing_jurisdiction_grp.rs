@@ -6,7 +6,7 @@ pub struct MandatoryClearingJurisdictionGrp {
 	/// NoMandatoryClearingJurisdictions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41312")]
-	pub mandatory_clearing_jurisdictions: Option<crate::entities::RepeatingValues<MandatoryClearingJurisdiction>>,
+	pub mandatory_clearing_jurisdictions: Option<fix_common::RepeatingValues<MandatoryClearingJurisdiction>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

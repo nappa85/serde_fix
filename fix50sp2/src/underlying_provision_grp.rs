@@ -6,7 +6,7 @@ pub struct UnderlyingProvisionGrp {
 	/// NoUnderlyingProvisions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42149")]
-	pub underlying_provisions: Option<crate::entities::RepeatingValues<UnderlyingProvision>>,
+	pub underlying_provisions: Option<fix_common::RepeatingValues<UnderlyingProvision>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct UnderlyingProvision {
 	/// UnderlyingProvisionDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42151")]
-	pub underlying_provision_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_provision_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// When specified, this overrides the busienss day convention defined in the UnderlyingDateAdjustment component in UnderlyingInstrument.
 	/// The specified value would be specific to this instance of the instrument provisions.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -27,10 +27,10 @@ pub struct UnderlyingProvision {
 	/// UnderlyingProvisionDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42153")]
-	pub underlying_provision_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_provision_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// Conditionally required when UnderlyingProvisionDateTenorUnit(42155) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42154")]
 	pub underlying_provision_date_tenor_period: Option<i32>,
@@ -56,38 +56,38 @@ pub struct UnderlyingProvision {
 	pub underlying_provision_option_exercise_style: Option<UnderlyingProvisionOptionExerciseStyle>,
 	/// UnderlyingProvisionOptionExerciseMultipleNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42160")]
 	pub underlying_provision_option_exercise_multiple_notional: Option<f64>,
 	/// UnderlyingProvisionOptionExerciseMinimumNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42161")]
 	pub underlying_provision_option_exercise_minimum_notional: Option<f64>,
 	/// UnderlyingProvisionOptionExerciseMaximumNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42162")]
 	pub underlying_provision_option_exercise_maximum_notional: Option<f64>,
 	/// UnderlyingProvisionOptionMinimumNumber
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42163")]
 	pub underlying_provision_option_minimum_number: Option<i32>,
 	/// UnderlyingProvisionOptionMaximumNumber
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42164")]
 	pub underlying_provision_option_maximum_number: Option<i32>,
 	/// UnderlyingProvisionOptionExerciseConfirmation
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42165")]
-	pub underlying_provision_option_exercise_confirmation: Option<crate::entities::Boolean>,
+	pub underlying_provision_option_exercise_confirmation: Option<fix_common::Boolean>,
 	/// UnderlyingProvisionCashSettlMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42166")]
@@ -110,7 +110,7 @@ pub struct UnderlyingProvision {
 	pub underlying_provision_text: Option<String>,
 	/// Must be set if EncodedProvisionText(40987) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42171")]
 	pub encoded_underlying_provision_text_len: Option<usize>,
@@ -121,13 +121,13 @@ pub struct UnderlyingProvision {
 	pub encoded_underlying_provision_text: Option<String>,
 	/// UnderlyingProvisionBreakFeeElection
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43002")]
 	pub underlying_provision_break_fee_election: Option<i32>,
 	/// UnderlyingProvisionBreakFeeRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43003")]
 	pub underlying_provision_break_fee_rate: Option<f32>,

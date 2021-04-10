@@ -6,14 +6,14 @@ pub struct TrdInstrmtLegGrp {
 	/// NoLegs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "555")]
-	pub legs: Option<crate::entities::RepeatingValues<Leg>>,
+	pub legs: Option<fix_common::RepeatingValues<Leg>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Leg {
 	/// The LegQty(687) field is deprecated. The use of LegOrderQty(685) is recommended instead
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "687")]
 	pub leg_qty: Option<f64>,
@@ -27,7 +27,7 @@ pub struct Leg {
 	pub leg_report_id: Option<String>,
 	/// Allow sequencing of legs for a strategy to be captured
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1152")]
 	pub leg_number: Option<i32>,
@@ -52,10 +52,10 @@ pub struct Leg {
 	/// when LegSettlType(587) = B(Broken date).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "588")]
-	pub leg_settl_date: Option<crate::entities::LocalMktDate>,
+	pub leg_settl_date: Option<fix_common::LocalMktDate>,
 	/// Used to report the execution price assigned to the leg of the multileg instrument
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "637")]
 	pub leg_last_px: Option<f64>,
@@ -65,48 +65,48 @@ pub struct Leg {
 	pub leg_settl_currency: Option<LegSettlCurrency>,
 	/// LegLastForwardPoints
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1073")]
 	pub leg_last_forward_points: Option<f64>,
 	/// LegCalculatedCcyLastQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1074")]
 	pub leg_calculated_ccy_last_qty: Option<f64>,
 	/// For FX Futures can be used to express the notional value of a trade when LegLastQty(1418) and other quantity fields are expressed
 	/// in terms of number of contracts - LegContractMultiplier(231) is required in this case.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1075")]
 	pub leg_gross_trade_amt: Option<f64>,
 	/// LegVolatility
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1379")]
 	pub leg_volatility: Option<f64>,
 	/// LegDividendYield
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1381")]
 	pub leg_dividend_yield: Option<f32>,
 	/// LegCurrencyRatio
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1383")]
 	pub leg_currency_ratio: Option<f64>,
 	/// LegExecInst
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1384")]
-	pub leg_exec_inst: Option<crate::entities::SeparatedValues<LegExecInst>>,
+	pub leg_exec_inst: Option<fix_common::SeparatedValues<LegExecInst>>,
 	/// Quantity execution for this leg.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1418")]
 	pub leg_last_qty: Option<f64>,
@@ -116,7 +116,7 @@ pub struct Leg {
 	pub leg_price_type: Option<LegPriceType>,
 	/// Leg quantity type to be specified at the leg level. Can be different for each leg.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1591")]
 	pub leg_qty_type: Option<i32>,
@@ -126,43 +126,43 @@ pub struct Leg {
 	pub leg_short_sale_exemption_reason: Option<LegShortSaleExemptionReason>,
 	/// Quantity ordered for this leg as provided during order entry.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "685")]
 	pub leg_order_qty: Option<f64>,
 	/// LegMidPx
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2346")]
 	pub leg_mid_px: Option<f64>,
 	/// LegLastMultipliedQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2358")]
 	pub leg_last_multiplied_qty: Option<f64>,
 	/// LegTotalTradeQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2357")]
 	pub leg_total_trade_qty: Option<f64>,
 	/// LegTotalTradeMultipliedQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2360")]
 	pub leg_total_trade_multiplied_qty: Option<f64>,
 	/// LegTotalGrossTradeAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2359")]
 	pub leg_total_gross_trade_amt: Option<f64>,
 	/// LegDifferentialPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2492")]
 	pub leg_differential_price: Option<f64>,

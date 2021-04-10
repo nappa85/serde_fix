@@ -6,7 +6,7 @@ pub struct MatchExceptionGrp {
 	/// NoMatchExceptions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2772")]
-	pub match_exceptions: Option<crate::entities::RepeatingValues<MatchException>>,
+	pub match_exceptions: Option<fix_common::RepeatingValues<MatchException>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -33,7 +33,7 @@ pub struct MatchException {
 	pub match_exception_confirm_value: Option<String>,
 	/// MatchExceptionToleranceValue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2778")]
 	pub match_exception_tolerance_value: Option<f64>,
@@ -47,7 +47,7 @@ pub struct MatchException {
 	pub match_exception_text: Option<String>,
 	/// Must be set if EncodedMatchExceptio nText(2780) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2797")]
 	pub encoded_match_exception_text_len: Option<usize>,

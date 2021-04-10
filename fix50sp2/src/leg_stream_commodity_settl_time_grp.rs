@@ -6,7 +6,7 @@ pub struct LegStreamCommoditySettlTimeGrp {
 	/// NoLegStreamCommoditySettlTimes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41683")]
-	pub leg_stream_commodity_settl_times: Option<crate::entities::RepeatingValues<LegStreamCommoditySettlTime>>,
+	pub leg_stream_commodity_settl_times: Option<fix_common::RepeatingValues<LegStreamCommoditySettlTime>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

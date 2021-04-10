@@ -6,7 +6,7 @@ pub struct PaymentStreamNonDeliverableFixingDatesBusinessCenterGrp {
 	/// NoPaymentStreamNonDeliverableFixingDatesBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40946")]
-	pub payment_stream_non_deliverable_fixing_dates_business_centers: Option<crate::entities::RepeatingValues<PaymentStreamNonDeliverableFixingDatesBusinessCenter>>,
+	pub payment_stream_non_deliverable_fixing_dates_business_centers: Option<fix_common::RepeatingValues<PaymentStreamNonDeliverableFixingDatesBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

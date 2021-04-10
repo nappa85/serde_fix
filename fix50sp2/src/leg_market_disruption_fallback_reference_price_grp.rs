@@ -6,7 +6,7 @@ pub struct LegMarketDisruptionFallbackReferencePriceGrp {
 	/// NoLegMarketDisruptionFallbackReferencePrices
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41471")]
-	pub leg_market_disruption_fallback_reference_prices: Option<crate::entities::RepeatingValues<LegMarketDisruptionFallbackReferencePrice>>,
+	pub leg_market_disruption_fallback_reference_prices: Option<fix_common::RepeatingValues<LegMarketDisruptionFallbackReferencePrice>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -30,7 +30,7 @@ pub struct LegMarketDisruptionFallbackReferencePrice {
 	/// Must be set if EncodedLegMarketDisruptionFallbackUnderlierSecurityDesc(41477) field is specified and must immediately precede
 	/// it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41476")]
 	pub encoded_leg_market_disruption_fallback_underlier_security_desc_len: Option<usize>,
@@ -41,7 +41,7 @@ pub struct LegMarketDisruptionFallbackReferencePrice {
 	pub encoded_leg_market_disruption_fallback_underlier_security_desc: Option<String>,
 	/// LegMarketDisruptionFallbackOpenUnits
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41478")]
 	pub leg_market_disruption_fallback_open_units: Option<f64>,
@@ -51,7 +51,7 @@ pub struct LegMarketDisruptionFallbackReferencePrice {
 	pub leg_market_disruption_fallback_basket_currency: Option<String>,
 	/// LegMarketDisruptionFallbackBasketDivisor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41480")]
 	pub leg_market_disruption_fallback_basket_divisor: Option<f64>,

@@ -6,7 +6,7 @@ pub struct UnderlyingAdditionalTermBondRefGrp {
 	/// NoUnderlyingAdditionalTermBondRefs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41340")]
-	pub underlying_additional_term_bond_refs: Option<crate::entities::RepeatingValues<UnderlyingAdditionalTermBondRef>>,
+	pub underlying_additional_term_bond_refs: Option<fix_common::RepeatingValues<UnderlyingAdditionalTermBondRef>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct UnderlyingAdditionalTermBondRef {
 	pub underlying_additional_term_bond_desc: Option<String>,
 	/// Must be set if EncodedUnderlyingAdditionalTermBondDesc(41709) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41710")]
 	pub encoded_underlying_additional_term_bond_desc_len: Option<usize>,
@@ -44,7 +44,7 @@ pub struct UnderlyingAdditionalTermBondRef {
 	pub underlying_additional_term_bond_issuer: Option<String>,
 	/// Must be set if EncodedUnderlyingAdditionalTermBondIssuer(42017) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42025")]
 	pub encoded_underlying_additional_term_bond_issuer_len: Option<usize>,
@@ -63,29 +63,29 @@ pub struct UnderlyingAdditionalTermBondRef {
 	pub underlying_additional_term_bond_coupon_type: Option<UnderlyingAdditionalTermBondCouponType>,
 	/// UnderlyingAdditionalTermBondCouponRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42029")]
 	pub underlying_additional_term_bond_coupon_rate: Option<f32>,
 	/// UnderlyingAdditionalTermBondMaturityDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42030")]
-	pub underlying_additional_term_bond_maturity_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_additional_term_bond_maturity_date: Option<fix_common::LocalMktDate>,
 	/// UnderlyingAdditionalTermBondParValue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42031")]
 	pub underlying_additional_term_bond_par_value: Option<f64>,
 	/// UnderlyingAdditionalTermBondCurrentTotalIssuedAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42032")]
 	pub underlying_additional_term_bond_current_total_issued_amount: Option<f64>,
 	/// Conditionally required when UnderlyingAdditionalTermBondCouponFrequencyUnit(42034) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42033")]
 	pub underlying_additional_term_bond_coupon_frequency_period: Option<i32>,

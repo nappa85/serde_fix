@@ -19,7 +19,7 @@ pub struct UnderlyingOptionExerciseDates {
 	pub underlying_option_exercise_earliest_date_offset_day_type: Option<UnderlyingOptionExerciseEarliestDateOffsetDayType>,
 	/// Conditionally required when UnderlyingOptionExerciseEarliestDateUnit(41825) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41824")]
 	pub underlying_option_exercise_earliest_date_period: Option<i32>,
@@ -29,7 +29,7 @@ pub struct UnderlyingOptionExerciseDates {
 	pub underlying_option_exercise_earliest_date_unit: Option<UnderlyingOptionExerciseEarliestDateUnit>,
 	/// Conditinally required when UnderlyingOptionExerciseFrequencyUnit(41827) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41826")]
 	pub underlying_option_exercise_frequency_period: Option<i32>,
@@ -40,14 +40,14 @@ pub struct UnderlyingOptionExerciseDates {
 	/// UnderlyingOptionExerciseStartDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41828")]
-	pub underlying_option_exercise_start_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_option_exercise_start_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingOptionExerciseStartDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41829")]
 	pub underlying_option_exercise_start_date_relative_to: Option<UnderlyingOptionExerciseStartDateRelativeTo>,
 	/// Conditionally required when UnderlyingOptionExerciseStartDateOffsetUnit(41831) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41830")]
 	pub underlying_option_exercise_start_date_offset_period: Option<i32>,
@@ -62,25 +62,25 @@ pub struct UnderlyingOptionExerciseDates {
 	/// UnderlyingOptionExerciseStartDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41833")]
-	pub underlying_option_exercise_start_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_option_exercise_start_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingOptionExerciseSkip
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41834")]
 	pub underlying_option_exercise_skip: Option<i32>,
 	/// UnderlyingOptionExerciseNominationDeadline
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41835")]
-	pub underlying_option_exercise_nomination_deadline: Option<crate::entities::LocalMktDate>,
+	pub underlying_option_exercise_nomination_deadline: Option<fix_common::LocalMktDate>,
 	/// UnderlyingOptionExerciseFirstDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41836")]
-	pub underlying_option_exercise_first_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_option_exercise_first_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingOptionExerciseLastDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41837")]
-	pub underlying_option_exercise_last_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_option_exercise_last_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingOptionExerciseEarliestTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41838")]

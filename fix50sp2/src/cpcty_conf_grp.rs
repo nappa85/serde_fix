@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct CpctyConfGrp {
 	/// NoCapacities
 	#[serde(rename = "862")]
-	pub capacities: crate::entities::RepeatingValues<Capacitie>,
+	pub capacities: fix_common::RepeatingValues<Capacitie>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -16,12 +16,12 @@ pub struct Capacitie {
 	/// OrderRestrictions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "529")]
-	pub order_restrictions: Option<crate::entities::SeparatedValues<OrderRestrictions>>,
+	pub order_restrictions: Option<fix_common::SeparatedValues<OrderRestrictions>>,
 	/// The quantity that was executed under this capacity (e.g. quantity executed as agent, as principal etc.). If any are specified,
 	/// all entries in the component must have OrderCapacityQty specified and the sum of OrderCapacityQty values must equal this message's
 	/// AllocQty.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "863")]
 	pub order_capacity_qty: Option<f64>,
@@ -50,6 +50,12 @@ pub enum OrderCapacity {
 	/// Mixed capacity
 	#[serde(rename = "M")]
 	MixedCapacity,
+}
+
+impl Default for OrderCapacity {
+    fn default() -> Self {
+        OrderCapacity::Agency
+    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

@@ -6,7 +6,7 @@ pub struct LegEvntGrp {
 	/// NoLegEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2059")]
-	pub leg_events: Option<crate::entities::RepeatingValues<LegEvent>>,
+	pub leg_events: Option<fix_common::RepeatingValues<LegEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,28 +18,28 @@ pub struct LegEvent {
 	/// Conditionally required when LegEventTime(2062) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2061")]
-	pub leg_event_date: Option<crate::entities::LocalMktDate>,
+	pub leg_event_date: Option<fix_common::LocalMktDate>,
 	/// LegEventTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2062")]
-	pub leg_event_time: Option<crate::entities::UTCTimestamp>,
+	pub leg_event_time: Option<fix_common::UTCTimestamp>,
 	/// Conditionally required when LegEventTimePeriod(2064) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2063")]
 	pub leg_event_time_unit: Option<LegEventTimeUnit>,
 	/// Conditionally required when LegEventTimeUnit(2063) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2064")]
 	pub leg_event_time_period: Option<i32>,
 	/// LegEventMonthYear
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2341")]
-	pub leg_event_month_year: Option<crate::entities::MonthYear>,
+	pub leg_event_month_year: Option<fix_common::MonthYear>,
 	/// LegEventPx
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2065")]
 	pub leg_event_px: Option<f64>,
@@ -49,7 +49,7 @@ pub struct LegEvent {
 	pub leg_event_text: Option<String>,
 	/// Must be set if EncodedLegEventText(2075) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2074")]
 	pub encoded_leg_event_text_len: Option<usize>,

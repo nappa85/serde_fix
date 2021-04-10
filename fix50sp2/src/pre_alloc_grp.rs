@@ -6,7 +6,7 @@ pub struct PreAllocGrp {
 	/// Number of repeating groups for pre-trade allocation.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "78")]
-	pub allocs: Option<crate::entities::RepeatingValues<Alloc>>,
+	pub allocs: Option<fix_common::RepeatingValues<Alloc>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -33,7 +33,7 @@ pub struct Alloc {
 	pub alloc_handl_inst: Option<AllocHandlInst>,
 	/// AllocQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "80")]
 	pub alloc_qty: Option<f64>,
@@ -45,18 +45,18 @@ pub struct Alloc {
 	/// for specific lot trades. If this field is used, either VersusPurchasePrice(1754) or CurrentCostBasis(1755) should be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1753")]
-	pub versus_purchase_date: Option<crate::entities::LocalMktDate>,
+	pub versus_purchase_date: Option<fix_common::LocalMktDate>,
 	/// Price per Share. The Price value should be computed as Current Cost Basis / Quantity Held. Only used for specific lot trades.
 	/// If this field is used, VersusPurchaseDate(1753) should be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1754")]
 	pub versus_purchase_price: Option<f64>,
 	/// Current Cost Basis for the lot. Only used for specific lot trades. If this field is used, VersusPurchaseDate(1753) should
 	/// be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1755")]
 	pub current_cost_basis: Option<f64>,

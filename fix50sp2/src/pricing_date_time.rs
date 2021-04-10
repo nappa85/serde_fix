@@ -6,7 +6,7 @@ pub struct PricingDateTime {
 	/// PricingDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41232")]
-	pub pricing_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub pricing_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// PricingDateBusinessDayConvention
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41233")]
@@ -17,7 +17,7 @@ pub struct PricingDateTime {
 	/// PricingDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41234")]
-	pub pricing_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub pricing_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// PricingTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41235")]

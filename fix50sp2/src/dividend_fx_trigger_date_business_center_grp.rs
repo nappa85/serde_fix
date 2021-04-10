@@ -6,7 +6,7 @@ pub struct DividendFXTriggerDateBusinessCenterGrp {
 	/// NoDividendFXTriggerDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42272")]
-	pub dividend_fx_trigger_date_business_centers: Option<crate::entities::RepeatingValues<DividendFXTriggerDateBusinessCenter>>,
+	pub dividend_fx_trigger_date_business_centers: Option<fix_common::RepeatingValues<DividendFXTriggerDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

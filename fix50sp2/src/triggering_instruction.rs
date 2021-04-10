@@ -13,7 +13,7 @@ pub struct TriggeringInstruction {
 	pub trigger_action: Option<TriggerAction>,
 	/// Only relevant and required for <a href="tag_1101_TriggerAction.html" target="bottom">TriggerAction&nbsp;(1101)</a> = 1
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1102")]
 	pub trigger_price: Option<f64>,
@@ -47,7 +47,7 @@ pub struct TriggeringInstruction {
 	pub trigger_price_direction: Option<TriggerPriceDirection>,
 	/// Should be specified if the order changes Price.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1110")]
 	pub trigger_new_price: Option<f64>,
@@ -57,7 +57,7 @@ pub struct TriggeringInstruction {
 	pub trigger_order_type: Option<TriggerOrderType>,
 	/// Required if the order should change quantity
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1112")]
 	pub trigger_new_qty: Option<f64>,

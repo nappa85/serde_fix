@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct PayManagementRequest {
 	/// MsgType = EA
 	#[serde(flatten)]
@@ -22,7 +22,7 @@ pub struct PayManagementRequest {
 	pub cancel_text: Option<String>,
 	/// Must be set if EncodedCancelText(2808) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2809")]
 	pub encoded_cancel_text_len: Option<usize>,
@@ -34,18 +34,18 @@ pub struct PayManagementRequest {
 	/// The business date of the request. This may carry the same date as the payment calculation date in PostTradePaymentCalculationDate(2825).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

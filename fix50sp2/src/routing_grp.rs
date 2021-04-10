@@ -6,7 +6,7 @@ pub struct RoutingGrp {
 	/// Required if any RoutingType and RoutingIDs are specified. Indicates the number within repeating group.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "215")]
-	pub routing_i_ds: Option<crate::entities::RepeatingValues<RoutingID>>,
+	pub routing_i_ds: Option<fix_common::RepeatingValues<RoutingID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

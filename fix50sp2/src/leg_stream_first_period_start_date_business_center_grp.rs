@@ -6,7 +6,7 @@ pub struct LegStreamFirstPeriodStartDateBusinessCenterGrp {
 	/// NoLegStreamFirstPeriodStartDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40941")]
-	pub leg_stream_first_period_start_date_business_centers: Option<crate::entities::RepeatingValues<LegStreamFirstPeriodStartDateBusinessCenter>>,
+	pub leg_stream_first_period_start_date_business_centers: Option<fix_common::RepeatingValues<LegStreamFirstPeriodStartDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

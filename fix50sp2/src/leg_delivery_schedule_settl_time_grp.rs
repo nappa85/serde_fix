@@ -6,7 +6,7 @@ pub struct LegDeliveryScheduleSettlTimeGrp {
 	/// NoLegDeliveryScheduleSettlTimes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41425")]
-	pub leg_delivery_schedule_settl_times: Option<crate::entities::RepeatingValues<LegDeliveryScheduleSettlTime>>,
+	pub leg_delivery_schedule_settl_times: Option<fix_common::RepeatingValues<LegDeliveryScheduleSettlTime>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

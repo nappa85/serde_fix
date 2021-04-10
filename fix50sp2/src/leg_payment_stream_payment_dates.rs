@@ -14,7 +14,7 @@ pub struct LegPaymentStreamPaymentDates {
 	pub leg_payment_stream_payment_date_business_center_grp: Option<super::leg_payment_stream_payment_date_business_center_grp::LegPaymentStreamPaymentDateBusinessCenterGrp>,
 	/// Conditionally required when LegPaymentStreamPaymentFrequencyUnit(40295) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40294")]
 	pub leg_payment_stream_payment_frequency_period: Option<i32>,
@@ -29,18 +29,18 @@ pub struct LegPaymentStreamPaymentDates {
 	/// LegPaymentStreamFirstPaymentDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40297")]
-	pub leg_payment_stream_first_payment_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_payment_stream_first_payment_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegPaymentStreamLastRegularPaymentDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40298")]
-	pub leg_payment_stream_last_regular_payment_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_payment_stream_last_regular_payment_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegPaymentStreamPaymentDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40299")]
 	pub leg_payment_stream_payment_date_relative_to: Option<LegPaymentStreamPaymentDateRelativeTo>,
 	/// Conditionally required when LegPaymentStreamPaymentDateOffsetUnit(40301) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40300")]
 	pub leg_payment_stream_payment_date_offset_period: Option<i32>,
@@ -58,7 +58,7 @@ pub struct LegPaymentStreamPaymentDates {
 	/// LegPaymentStreamMasterAgreementPaymentDatesIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41592")]
-	pub leg_payment_stream_master_agreement_payment_dates_indicator: Option<crate::entities::Boolean>,
+	pub leg_payment_stream_master_agreement_payment_dates_indicator: Option<fix_common::Boolean>,
 	/// LegPaymentStreamFinalPricePaymentDate
 	#[serde(flatten)]
 	pub leg_payment_stream_final_price_payment_date: Option<super::leg_payment_stream_final_price_payment_date::LegPaymentStreamFinalPricePaymentDate>,

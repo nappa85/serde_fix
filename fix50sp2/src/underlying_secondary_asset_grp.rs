@@ -6,7 +6,7 @@ pub struct UnderlyingSecondaryAssetGrp {
 	/// NoUnderlyingSecondaryAssetClasses
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2080")]
-	pub underlying_secondary_asset_classes: Option<crate::entities::RepeatingValues<UnderlyingSecondaryAssetClasse>>,
+	pub underlying_secondary_asset_classes: Option<fix_common::RepeatingValues<UnderlyingSecondaryAssetClasse>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

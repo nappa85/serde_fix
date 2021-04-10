@@ -6,7 +6,7 @@ pub struct LegPaymentScheduleRateSourceGrp {
 	/// NoLegPaymentScheduleRateSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40414")]
-	pub leg_payment_schedule_rate_sources: Option<crate::entities::RepeatingValues<LegPaymentScheduleRateSource>>,
+	pub leg_payment_schedule_rate_sources: Option<fix_common::RepeatingValues<LegPaymentScheduleRateSource>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

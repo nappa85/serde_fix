@@ -6,7 +6,7 @@ pub struct SecTypesGrp {
 	/// NoSecurityTypes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "558")]
-	pub security_types: Option<crate::entities::RepeatingValues<SecurityType>>,
+	pub security_types: Option<fix_common::RepeatingValues<SecurityType>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -30,7 +30,7 @@ pub struct SecurityType {
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

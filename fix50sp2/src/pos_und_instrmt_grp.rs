@@ -6,14 +6,14 @@ pub struct PosUndInstrmtGrp {
 	/// NoUnderlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<crate::entities::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Underlying {
 	/// UnderlyingSettlPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "732")]
 	pub underlying_settl_price: Option<f64>,
@@ -23,7 +23,7 @@ pub struct Underlying {
 	pub underlying_settl_price_type: Option<UnderlyingSettlPriceType>,
 	/// UnderlyingDeliveryAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1037")]
 	pub underlying_delivery_amount: Option<f64>,

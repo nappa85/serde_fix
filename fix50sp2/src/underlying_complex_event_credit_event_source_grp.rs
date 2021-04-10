@@ -6,7 +6,7 @@ pub struct UnderlyingComplexEventCreditEventSourceGrp {
 	/// NoUnderlyingComplexEventCreditEventSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41748")]
-	pub underlying_complex_event_credit_event_sources: Option<crate::entities::RepeatingValues<UnderlyingComplexEventCreditEventSource>>,
+	pub underlying_complex_event_credit_event_sources: Option<fix_common::RepeatingValues<UnderlyingComplexEventCreditEventSource>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

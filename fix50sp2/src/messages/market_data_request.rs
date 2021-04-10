@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Market {
 	/// MsgType = V
 	#[serde(flatten)]
@@ -31,11 +31,11 @@ pub struct Market {
 	/// Can be used to clarify a request if <a href="tag_269_MDEntryType.html" target="bottom">MDEntryType&nbsp;(269)</a> = Opening Price(4), Closing Price(5), or Settlement Price(6).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "286")]
-	pub open_close_settl_flag: Option<crate::entities::SeparatedValues<OpenCloseSettlFlag>>,
+	pub open_close_settl_flag: Option<fix_common::SeparatedValues<OpenCloseSettlFlag>>,
 	/// Defines the scope(s) of the request
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "546")]
-	pub scope: Option<crate::entities::SeparatedValues<Scope>>,
+	pub scope: Option<fix_common::SeparatedValues<Scope>>,
 	/// Can be used when <a href="tag_264_MarketDepth.html" target="bottom">MarketDepth&nbsp;(264)</a> &gt;= 2 and <a href="tag_265_MDUpdateType.html" target="bottom">MDUpdateType&nbsp;(265)</a> = Incremental Refresh(1).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "547")]
@@ -55,7 +55,7 @@ pub struct Market {
 	pub appl_queue_action: Option<ApplQueueAction>,
 	/// Maximum application queue depth that must be exceeded before queuing action is taken.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "812")]
 	pub appl_queue_max: Option<i32>,
@@ -69,7 +69,7 @@ pub struct Market {
 	/// FastMarketIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2447")]
-	pub fast_market_indicator: Option<crate::entities::Boolean>,
+	pub fast_market_indicator: Option<fix_common::Boolean>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

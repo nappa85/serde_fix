@@ -6,7 +6,7 @@ pub struct ComplexEventDateBusinessCenterGrp {
 	/// NoComplexEventDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41018")]
-	pub complex_event_date_business_centers: Option<crate::entities::RepeatingValues<ComplexEventDateBusinessCenter>>,
+	pub complex_event_date_business_centers: Option<fix_common::RepeatingValues<ComplexEventDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

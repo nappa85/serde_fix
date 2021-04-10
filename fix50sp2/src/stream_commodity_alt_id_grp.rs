@@ -6,7 +6,7 @@ pub struct StreamCommodityAltIDGrp {
 	/// NoStreamCommodityAltIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41277")]
-	pub stream_commodity_alt_i_ds: Option<crate::entities::RepeatingValues<StreamCommodityAltID>>,
+	pub stream_commodity_alt_i_ds: Option<fix_common::RepeatingValues<StreamCommodityAltID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

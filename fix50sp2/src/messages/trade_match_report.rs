@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Trade {
 	/// MsgType = DC
 	#[serde(flatten)]
@@ -25,7 +25,7 @@ pub struct Trade {
 	/// The business date for which the trade is expected to be cleared
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// TrdType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "828")]
@@ -37,7 +37,7 @@ pub struct Trade {
 	/// Used when reporting other than current day trades.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// MarketID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1301")]
@@ -62,12 +62,12 @@ pub struct Trade {
 	/// exchange. This timestamp will be the same on all the trades and will not change when a trade is modified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1888")]
-	pub trade_match_timestamp: Option<crate::entities::UTCTimestamp>,
+	pub trade_match_timestamp: Option<fix_common::UTCTimestamp>,
 	/// Indicates time of the transaction. Used after initial submission to indicate time of addendum, cancellation, etc. Time of
 	/// the match event or transaction that resulted in this match report.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Type of report if multileg instrument. Differentiates match events involving complex instruments(MultiLegReportingType(442)=3(multi-leg
 	/// security)) from those only involving simple instruments (MultiLegReportingType(442)= 1, 2) should not be used.
 	#[serde(skip_serializing_if = "Option::is_none")]

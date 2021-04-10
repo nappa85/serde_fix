@@ -6,7 +6,7 @@ pub struct DisclosureInstructionGrp {
 	/// NoDisclosureInstructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1812")]
-	pub disclosure_instructions: Option<crate::entities::RepeatingValues<DisclosureInstruction>>,
+	pub disclosure_instructions: Option<fix_common::RepeatingValues<DisclosureInstruction>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

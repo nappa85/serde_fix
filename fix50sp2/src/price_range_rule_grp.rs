@@ -6,32 +6,32 @@ pub struct PriceRangeRuleGrp {
 	/// NoPriceRangeRules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2550")]
-	pub price_range_rules: Option<crate::entities::RepeatingValues<PriceRangeRule>>,
+	pub price_range_rules: Option<fix_common::RepeatingValues<PriceRangeRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct PriceRangeRule {
 	/// Required if NoPriceRangeRules(2550) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2551")]
 	pub start_price_range: Option<f64>,
 	/// EndPriceRange
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2552")]
 	pub end_price_range: Option<f64>,
 	/// Mutually exclusive with PriceRangePercentage(2554).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2553")]
 	pub price_range_value: Option<f64>,
 	/// Mutually exclusive with PriceRangeValue(2553).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2554")]
 	pub price_range_percentage: Option<f32>,

@@ -9,7 +9,7 @@ pub struct InstrumentExtension {
 	pub delivery_form: Option<DeliveryForm>,
 	/// Percent at risk due to lowest possible call.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "869")]
 	pub pct_at_risk: Option<f32>,
@@ -26,7 +26,7 @@ pub struct InstrumentExtension {
 	/// NextIndexRollDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2738")]
-	pub next_index_roll_date: Option<crate::entities::LocalMktDate>,
+	pub next_index_roll_date: Option<fix_common::LocalMktDate>,
 	/// FloatingRateIndex
 	#[serde(flatten)]
 	pub floating_rate_index: Option<super::floating_rate_index::FloatingRateIndex>,

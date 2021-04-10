@@ -6,7 +6,7 @@ pub struct ExtraordinaryEventGrp {
 	/// NoExtraordinaryEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42296")]
-	pub extraordinary_events: Option<crate::entities::RepeatingValues<ExtraordinaryEvent>>,
+	pub extraordinary_events: Option<fix_common::RepeatingValues<ExtraordinaryEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

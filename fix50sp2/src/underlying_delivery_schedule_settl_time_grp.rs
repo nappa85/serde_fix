@@ -6,7 +6,7 @@ pub struct UnderlyingDeliveryScheduleSettlTimeGrp {
 	/// NoUnderlyingDeliveryScheduleSettlTimes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41773")]
-	pub underlying_delivery_schedule_settl_times: Option<crate::entities::RepeatingValues<UnderlyingDeliveryScheduleSettlTime>>,
+	pub underlying_delivery_schedule_settl_times: Option<fix_common::RepeatingValues<UnderlyingDeliveryScheduleSettlTime>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

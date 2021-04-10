@@ -6,7 +6,7 @@ pub struct LegPricingDateBusinessCenterGrp {
 	/// NoLegPricingDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41607")]
-	pub leg_pricing_date_business_centers: Option<crate::entities::RepeatingValues<LegPricingDateBusinessCenter>>,
+	pub leg_pricing_date_business_centers: Option<fix_common::RepeatingValues<LegPricingDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

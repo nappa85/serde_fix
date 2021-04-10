@@ -6,7 +6,7 @@ pub struct DlvyInstGrp {
 	/// NoDlvyInst
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "85")]
-	pub dlvy_inst: Option<crate::entities::RepeatingValues<DlvyIns>>,
+	pub dlvy_inst: Option<fix_common::RepeatingValues<DlvyIns>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

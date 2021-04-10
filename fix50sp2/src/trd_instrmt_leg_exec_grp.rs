@@ -6,7 +6,7 @@ pub struct TrdInstrmtLegExecGrp {
 	/// Number of legs. Identifies a Multi-leg Execution if present and non-zero.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1892")]
-	pub leg_execs: Option<crate::entities::RepeatingValues<LegExec>>,
+	pub leg_execs: Option<fix_common::RepeatingValues<LegExec>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -33,7 +33,7 @@ pub struct LegExec {
 	pub leg_trade_report_id: Option<String>,
 	/// LegOrderQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "685")]
 	pub leg_order_qty: Option<f64>,
@@ -47,7 +47,7 @@ pub struct LegExec {
 	pub leg_covered_or_uncovered: Option<LegCoveredOrUncovered>,
 	/// Used to report the execution price assigned to the leg of the multileg instrument
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "637")]
 	pub leg_last_px: Option<f64>,
@@ -65,13 +65,13 @@ pub struct LegExec {
 	pub leg_short_sale_exemption_reason: Option<LegShortSaleExemptionReason>,
 	/// LegLastQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1418")]
 	pub leg_last_qty: Option<f64>,
 	/// LegQtyType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1591")]
 	pub leg_qty_type: Option<i32>,

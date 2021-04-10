@@ -10,7 +10,7 @@ pub struct UnderlyingPaymentStreamNonDeliverableSettlTerms {
 	/// When specified, this overrides the business day convention defined in the UnderlyingDateAdjustment component in UnderlyingInstrument.
 	/// The specified value would be specific to this instance of the underlying instrument's non-deliverable settlement terms.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40649")]
 	pub underlying_payment_stream_non_deliverable_fixing_dates_business_day_convention: Option<i32>,
@@ -20,13 +20,13 @@ pub struct UnderlyingPaymentStreamNonDeliverableSettlTerms {
 	pub underlying_payment_stream_non_deliverable_fixing_dates_business_center_grp: Option<super::underlying_payment_stream_non_deliverable_fixing_dates_business_center_grp::UnderlyingPaymentStreamNonDeliverableFixingDatesBusinessCenterGrp>,
 	/// UnderlyingPaymentStreamNonDeliverableFixingDatesRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40651")]
 	pub underlying_payment_stream_non_deliverable_fixing_dates_relative_to: Option<i32>,
 	/// Conditionally required when UnderlyingPaymentStreamNonDeliverableFixingDatesOffsetUnit(40653) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40652")]
 	pub underlying_payment_stream_non_deliverable_fixing_dates_offset_period: Option<i32>,
@@ -36,7 +36,7 @@ pub struct UnderlyingPaymentStreamNonDeliverableSettlTerms {
 	pub underlying_payment_stream_non_deliverable_fixing_dates_offset_unit: Option<String>,
 	/// UnderlyingPaymentStreamNonDeliverableFixingDatesOffsetDayType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40654")]
 	pub underlying_payment_stream_non_deliverable_fixing_dates_offset_day_type: Option<i32>,

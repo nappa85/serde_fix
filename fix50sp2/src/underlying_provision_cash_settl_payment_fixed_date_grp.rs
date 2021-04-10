@@ -6,7 +6,7 @@ pub struct UnderlyingProvisionCashSettlPaymentFixedDateGrp {
 	/// NoUnderlyingProvisionCashSettlPaymentDates
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42099")]
-	pub underlying_provision_cash_settl_payment_dates: Option<crate::entities::RepeatingValues<UnderlyingProvisionCashSettlPaymentDate>>,
+	pub underlying_provision_cash_settl_payment_dates: Option<fix_common::RepeatingValues<UnderlyingProvisionCashSettlPaymentDate>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct UnderlyingProvisionCashSettlPaymentDate {
 	/// Required if NoUnderlyingProvisionCashSettlPaymentDates (42099) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42100")]
-	pub underlying_provision_cash_settl_payment_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_provision_cash_settl_payment_date: Option<fix_common::LocalMktDate>,
 	/// UnderlyingProvisionCashSettlPaymentDateType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42101")]

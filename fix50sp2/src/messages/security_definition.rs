@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Security {
 	/// MsgType = d
 	#[serde(flatten)]
@@ -11,14 +11,14 @@ pub struct Security {
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
 	/// Used to identify the SecurityDefinition(35=d) message.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "964")]
 	pub security_report_id: Option<i32>,
 	/// ClearingBusinessDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// SecurityReqID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "320")]
@@ -34,7 +34,7 @@ pub struct Security {
 	/// CorporateAction
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "292")]
-	pub corporate_action: Option<crate::entities::SeparatedValues<CorporateAction>>,
+	pub corporate_action: Option<fix_common::SeparatedValues<CorporateAction>>,
 	/// Instrument
 	#[serde(flatten)]
 	pub instrument: Option<super::super::instrument::Instrument>,
@@ -54,7 +54,7 @@ pub struct Security {
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -81,7 +81,7 @@ pub struct Security {
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Allow result of query request to be returned to requester
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "560")]
@@ -92,10 +92,10 @@ pub struct Security {
 	/// Represents the time at which a security was last updated.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "779")]
-	pub last_update_time: Option<crate::entities::UTCTimestamp>,
+	pub last_update_time: Option<fix_common::UTCTimestamp>,
 	/// NumOfSimpleInstruments
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1606")]
 	pub num_of_simple_instruments: Option<i32>,
@@ -105,7 +105,7 @@ pub struct Security {
 	pub security_reject_reason: Option<SecurityRejectReason>,
 	/// OrderRequestID
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2422")]
 	pub order_request_id: Option<i32>,
@@ -117,32 +117,32 @@ pub struct Security {
 	pub related_instrument_grp: Option<super::super::related_instrument_grp::RelatedInstrumentGrp>,
 	/// PreviousAdjustedOpenInterest
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2572")]
 	pub previous_adjusted_open_interest: Option<f64>,
 	/// PreviousUnadjustedOpenInterest
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2573")]
 	pub previous_unadjusted_open_interest: Option<f64>,
 	/// PriorSettlPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "734")]
 	pub prior_settl_price: Option<f64>,
 	/// NumOfComplexInstruments
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2562")]
 	pub num_of_complex_instruments: Option<i32>,
 	/// EffectiveBusinessDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2400")]
-	pub effective_business_date: Option<crate::entities::LocalMktDate>,
+	pub effective_business_date: Option<fix_common::LocalMktDate>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

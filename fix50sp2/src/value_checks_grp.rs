@@ -6,7 +6,7 @@ pub struct ValueChecksGrp {
 	/// NoValueChecks
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1868")]
-	pub value_checks: Option<crate::entities::RepeatingValues<ValueCheck>>,
+	pub value_checks: Option<fix_common::RepeatingValues<ValueCheck>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

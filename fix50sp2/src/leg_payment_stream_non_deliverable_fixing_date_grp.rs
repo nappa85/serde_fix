@@ -6,7 +6,7 @@ pub struct LegPaymentStreamNonDeliverableFixingDateGrp {
 	/// NoLegNonDeliverableFixingDates
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40367")]
-	pub leg_non_deliverable_fixing_dates: Option<crate::entities::RepeatingValues<LegNonDeliverableFixingDate>>,
+	pub leg_non_deliverable_fixing_dates: Option<fix_common::RepeatingValues<LegNonDeliverableFixingDate>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct LegNonDeliverableFixingDate {
 	/// Required if NoLegNonDeliverableFixingDates(40367) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40368")]
-	pub leg_non_deliverable_fixing_date: Option<crate::entities::LocalMktDate>,
+	pub leg_non_deliverable_fixing_date: Option<fix_common::LocalMktDate>,
 	/// LegNonDeliverableFixingDateType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40369")]

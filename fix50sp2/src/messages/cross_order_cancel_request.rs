@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Cross {
 	/// MsgType = u
 	#[serde(flatten)]
@@ -44,14 +44,14 @@ pub struct Cross {
 	pub instrmt_leg_grp: Option<super::super::instrmt_leg_grp::InstrmtLegGrp>,
 	/// Time this order request was initiated/released by the trader, trading system, or intermediary.
 	#[serde(rename = "60")]
-	pub transact_time: crate::entities::UTCTimestamp,
+	pub transact_time: fix_common::UTCTimestamp,
 	/// MarketSegmentID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1300")]
 	pub market_segment_id: Option<String>,
 	/// Required if provided on the order being cancelled. Echo back the value provided by the requester.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2422")]
 	pub order_request_id: Option<i32>,

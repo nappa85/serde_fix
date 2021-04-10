@@ -6,7 +6,7 @@ pub struct DeliveryStreamCycleGrp {
 	/// NoDeliveryStreamCycles
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41081")]
-	pub delivery_stream_cycles: Option<crate::entities::RepeatingValues<DeliveryStreamCycle>>,
+	pub delivery_stream_cycles: Option<fix_common::RepeatingValues<DeliveryStreamCycle>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct DeliveryStreamCycle {
 	pub delivery_stream_cycle_desc: Option<String>,
 	/// Must be set if EncodedDeliveryStreamCycleDesc(41084) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41083")]
 	pub encoded_delivery_stream_cycle_desc_len: Option<usize>,

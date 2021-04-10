@@ -6,7 +6,7 @@ pub struct LegMarketDisruptionFallbackGrp {
 	/// NoLegMarketDisruptionFallbacks
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41469")]
-	pub leg_market_disruption_fallbacks: Option<crate::entities::RepeatingValues<LegMarketDisruptionFallback>>,
+	pub leg_market_disruption_fallbacks: Option<fix_common::RepeatingValues<LegMarketDisruptionFallback>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

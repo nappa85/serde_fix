@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct List {
 	/// MsgType = m
 	#[serde(flatten)]
@@ -10,7 +10,7 @@ pub struct List {
 	#[serde(rename = "66")]
 	pub list_id: String,
 	/// Used to support fragmentation. Sum of <a href="tag_428_NoStrikes.html" target="bottom">NoStrikes&nbsp;(428)</a> across all messages with the same ListID.
-	#[serde(deserialize_with = "crate::entities::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "422")]
 	pub tot_no_strikes: i32,
 	/// Indicates whether this is the last fragment in a sequence of message fragments. Only required where message has been fragmented.

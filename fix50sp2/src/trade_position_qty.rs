@@ -6,7 +6,7 @@ pub struct TradePositionQty {
 	/// NoPositions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "702")]
-	pub positions: Option<crate::entities::RepeatingValues<Position>>,
+	pub positions: Option<fix_common::RepeatingValues<Position>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,19 +17,19 @@ pub struct Position {
 	pub pos_type: Option<PosType>,
 	/// LongQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "704")]
 	pub long_qty: Option<f64>,
 	/// ShortQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "705")]
 	pub short_qty: Option<f64>,
 	/// CoveredQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1654")]
 	pub covered_qty: Option<f64>,
@@ -40,7 +40,7 @@ pub struct Position {
 	/// QuantityDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "976")]
-	pub quantity_date: Option<crate::entities::LocalMktDate>,
+	pub quantity_date: Option<fix_common::LocalMktDate>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

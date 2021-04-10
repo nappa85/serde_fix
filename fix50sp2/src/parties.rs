@@ -6,7 +6,7 @@ pub struct Parties {
 	/// Repeating group below should contain unique combinations of PartyID, PartyIDSource, and PartyRole
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "453")]
-	pub party_i_ds: Option<crate::entities::RepeatingValues<PartyID>>,
+	pub party_i_ds: Option<fix_common::RepeatingValues<PartyID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct PartyID {
 	pub party_role: Option<PartyRole>,
 	/// PartyRoleQualifier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2376")]
 	pub party_role_qualifier: Option<i32>,

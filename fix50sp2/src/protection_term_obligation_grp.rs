@@ -6,7 +6,7 @@ pub struct ProtectionTermObligationGrp {
 	/// NoProtectionTermObligations
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40201")]
-	pub protection_term_obligations: Option<crate::entities::RepeatingValues<ProtectionTermObligation>>,
+	pub protection_term_obligations: Option<fix_common::RepeatingValues<ProtectionTermObligation>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

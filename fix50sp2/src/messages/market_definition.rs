@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct MarketDefinition {
 	/// MsgType = BU
 	#[serde(flatten)]
@@ -30,7 +30,7 @@ pub struct MarketDefinition {
 	pub market_segment_desc: Option<String>,
 	/// Must be set if EncodedMktSegmDesc(1398) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1397")]
 	pub encoded_mkt_segm_desc_len: Option<usize>,
@@ -62,14 +62,14 @@ pub struct MarketDefinition {
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -115,7 +115,7 @@ pub struct MarketDefinition {
 	/// EffectiveBusinessDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2400")]
-	pub effective_business_date: Option<crate::entities::LocalMktDate>,
+	pub effective_business_date: Option<fix_common::LocalMktDate>,
 	/// MiscFeesGrp
 	#[serde(flatten)]
 	pub misc_fees_grp: Option<super::super::misc_fees_grp::MiscFeesGrp>,

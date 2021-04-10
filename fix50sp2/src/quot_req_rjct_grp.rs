@@ -5,14 +5,14 @@ use serde::{Deserialize, Serialize};
 pub struct QuotReqRjctGrp {
 	/// Number of related symbols (instruments) in Request
 	#[serde(rename = "146")]
-	pub related_sym: crate::entities::RepeatingValues<RelatedSy>,
+	pub related_sym: fix_common::RepeatingValues<RelatedSy>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct RelatedSy {
 	/// Useful for verifying security identification
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "140")]
 	pub prev_close_px: Option<f64>,
@@ -35,7 +35,7 @@ pub struct RelatedSy {
 	/// TradeOriginationDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "229")]
-	pub trade_origination_date: Option<crate::entities::LocalMktDate>,
+	pub trade_origination_date: Option<fix_common::LocalMktDate>,
 	/// If OrdType = "Forex - Swap", should be the side of the future portion of a F/X swap. The absence of a side implies that a
 	/// two-sided quote is being requested. Required if specified in Quote Request message.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -52,16 +52,16 @@ pub struct RelatedSy {
 	/// Can be used (e.g. with forex quotes) to specify the desired "value date"
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// (Deprecated in FIX.5.0)Can be used with OrdType = "Forex - Swap" to specify the "value date" for the future portion of a F/X
 	/// swap.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "193")]
-	pub settl_date_2: Option<crate::entities::LocalMktDate>,
+	pub settl_date_2: Option<fix_common::LocalMktDate>,
 	/// (Deprecated in FIX.5.0)Can be used with OrdType = "Forex - Swap" to specify the order quantity for the future portion of a
 	/// F/X swap.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "192")]
 	pub order_qty_2: Option<f64>,
@@ -94,25 +94,25 @@ pub struct RelatedSy {
 	/// The time when Quote Request will expire.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "126")]
-	pub expire_time: Option<crate::entities::UTCTimestamp>,
+	pub expire_time: Option<fix_common::UTCTimestamp>,
 	/// Time transaction was entered
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// PriceType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "423")]
 	pub price_type: Option<PriceType>,
 	/// Quoted or target price
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "44")]
 	pub price: Option<f64>,
 	/// (Deprecated in FIX.5.0)Can be used with OrdType = "Forex - Swap" to specify the Quoted or target price for the future portion
 	/// of a F/X swap.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "640")]
 	pub price_2: Option<f64>,
@@ -123,7 +123,7 @@ pub struct RelatedSy {
 	/// Conditionally required when QuoteQual(695) = d (Deferred spot) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "443")]
-	pub strike_time: Option<crate::entities::UTCTimestamp>,
+	pub strike_time: Option<fix_common::UTCTimestamp>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

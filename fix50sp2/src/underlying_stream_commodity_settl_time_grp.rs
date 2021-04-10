@@ -6,7 +6,7 @@ pub struct UnderlyingStreamCommoditySettlTimeGrp {
 	/// NoUnderlyingStreamCommoditySettlTimes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41999")]
-	pub underlying_stream_commodity_settl_times: Option<crate::entities::RepeatingValues<UnderlyingStreamCommoditySettlTime>>,
+	pub underlying_stream_commodity_settl_times: Option<fix_common::RepeatingValues<UnderlyingStreamCommoditySettlTime>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

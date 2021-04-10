@@ -6,14 +6,14 @@ pub struct CollateralAmountGrp {
 	/// NoCollateralAmounts
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1703")]
-	pub collateral_amounts: Option<crate::entities::RepeatingValues<CollateralAmount>>,
+	pub collateral_amounts: Option<fix_common::RepeatingValues<CollateralAmount>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct CollateralAmount {
 	/// Required if <a href="tag_1703_NoCollateralAmounts.html" target="bottom">NoCollateralsAmounts&nbsp;(1703)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1704")]
 	pub current_collateral_amount: Option<f64>,
@@ -29,10 +29,10 @@ pub struct CollateralAmount {
 	/// HaircutIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1902")]
-	pub haircut_indicator: Option<crate::entities::Boolean>,
+	pub haircut_indicator: Option<fix_common::Boolean>,
 	/// CollateralFXRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2090")]
 	pub collateral_fx_rate: Option<f64>,
@@ -58,19 +58,19 @@ pub struct CollateralAmount {
 	pub collateral_amount_type: Option<CollateralAmountType>,
 	/// CollateralPercentOverage
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2690")]
 	pub collateral_percent_overage: Option<f32>,
 	/// CollateralMarketPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2689")]
 	pub collateral_market_price: Option<f64>,
 	/// May be used to specify the average reinvestment rate when there are multiple instances of the CollateralReinvestmentGrp.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2840")]
 	pub collateral_reinvestment_rate: Option<f32>,

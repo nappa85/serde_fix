@@ -6,14 +6,14 @@ pub struct RiskWarningLevelGrp {
 	/// NoRiskWarningLevels
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1559")]
-	pub risk_warning_levels: Option<crate::entities::RepeatingValues<RiskWarningLevel>>,
+	pub risk_warning_levels: Option<fix_common::RepeatingValues<RiskWarningLevel>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct RiskWarningLevel {
 	/// <p>Conditionally required when RiskWarningLevelAmount(1768) is not provided</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1560")]
 	pub risk_warning_level_percent: Option<f32>,
@@ -27,7 +27,7 @@ pub struct RiskWarningLevel {
 	pub risk_warning_level_action: Option<RiskWarningLevelAction>,
 	/// <p>Conditionally required when RiskWarningLevelPercent(1560) is not provided.</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1768")]
 	pub risk_warning_level_amount: Option<i32>,

@@ -6,7 +6,7 @@ pub struct LegStreamEffectiveDateBusinessCenterGrp {
 	/// NoLegStreamEffectiveDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40942")]
-	pub leg_stream_effective_date_business_centers: Option<crate::entities::RepeatingValues<LegStreamEffectiveDateBusinessCenter>>,
+	pub leg_stream_effective_date_business_centers: Option<fix_common::RepeatingValues<LegStreamEffectiveDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

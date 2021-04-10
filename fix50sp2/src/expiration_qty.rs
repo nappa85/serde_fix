@@ -6,7 +6,7 @@ pub struct ExpirationQty {
 	/// NoExpiration
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "981")]
-	pub expiration: Option<crate::entities::RepeatingValues<Expiratio>>,
+	pub expiration: Option<fix_common::RepeatingValues<Expiratio>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct Expiratio {
 	pub expiration_qty_type: Option<ExpirationQtyType>,
 	/// ExpQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "983")]
 	pub exp_qty: Option<f64>,

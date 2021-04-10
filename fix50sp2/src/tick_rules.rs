@@ -7,26 +7,26 @@ pub struct TickRules {
 	/// it can be quoted and traded, depending on the current price of the security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1205")]
-	pub tick_rules: Option<crate::entities::RepeatingValues<TickRule>>,
+	pub tick_rules: Option<fix_common::RepeatingValues<TickRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct TickRule {
 	/// Required if NoTickRules(1205) &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1206")]
 	pub start_tick_price_range: Option<f64>,
 	/// Ending price range for the specified tick increment.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1207")]
 	pub end_tick_price_range: Option<f64>,
 	/// Tick increment for stated price range. Specifies the valid price increments at which a security can be quoted and traded
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1208")]
 	pub tick_increment: Option<f64>,
@@ -36,13 +36,13 @@ pub struct TickRule {
 	pub tick_rule_type: Option<TickRuleType>,
 	/// SettlPriceIncrement
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1830")]
 	pub settl_price_increment: Option<f64>,
 	/// SettlPriceSecondaryIncrement
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1831")]
 	pub settl_price_secondary_increment: Option<f64>,

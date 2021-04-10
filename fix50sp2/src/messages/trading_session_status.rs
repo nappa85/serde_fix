@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Trading {
 	/// MsgType = h
 	#[serde(flatten)]
@@ -54,26 +54,26 @@ pub struct Trading {
 	/// Starting time of the trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "341")]
-	pub trad_ses_start_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_start_time: Option<fix_common::UTCTimestamp>,
 	/// Time of the opening of the trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "342")]
-	pub trad_ses_open_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_open_time: Option<fix_common::UTCTimestamp>,
 	/// Time of the pre-close of the trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "343")]
-	pub trad_ses_pre_close_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_pre_close_time: Option<fix_common::UTCTimestamp>,
 	/// Closing time of the trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "344")]
-	pub trad_ses_close_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_close_time: Option<fix_common::UTCTimestamp>,
 	/// End time of the trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "345")]
-	pub trad_ses_end_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_end_time: Option<fix_common::UTCTimestamp>,
 	/// TotalVolumeTraded
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "387")]
 	pub total_volume_traded: Option<f64>,
@@ -83,7 +83,7 @@ pub struct Trading {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -102,15 +102,15 @@ pub struct Trading {
 	/// Business day for which trading session applies to.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// Indicates if trading session is in fast market.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2447")]
-	pub fast_market_indicator: Option<crate::entities::Boolean>,
+	pub fast_market_indicator: Option<fix_common::Boolean>,
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

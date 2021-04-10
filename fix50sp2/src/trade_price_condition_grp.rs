@@ -6,7 +6,7 @@ pub struct TradePriceConditionGrp {
 	/// NoTradePriceConditions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1838")]
-	pub trade_price_conditions: Option<crate::entities::RepeatingValues<TradePriceCondition>>,
+	pub trade_price_conditions: Option<fix_common::RepeatingValues<TradePriceCondition>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

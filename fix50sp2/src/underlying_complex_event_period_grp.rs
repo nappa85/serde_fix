@@ -6,7 +6,7 @@ pub struct UnderlyingComplexEventPeriodGrp {
 	/// NoUnderlyingComplexEventPeriods
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41729")]
-	pub underlying_complex_event_periods: Option<crate::entities::RepeatingValues<UnderlyingComplexEventPeriod>>,
+	pub underlying_complex_event_periods: Option<fix_common::RepeatingValues<UnderlyingComplexEventPeriod>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

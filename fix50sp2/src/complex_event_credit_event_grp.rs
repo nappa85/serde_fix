@@ -6,7 +6,7 @@ pub struct ComplexEventCreditEventGrp {
 	/// NoComplexEventCreditEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40997")]
-	pub complex_event_credit_events: Option<crate::entities::RepeatingValues<ComplexEventCreditEvent>>,
+	pub complex_event_credit_events: Option<fix_common::RepeatingValues<ComplexEventCreditEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct ComplexEventCreditEvent {
 	pub complex_event_credit_event_currency: Option<String>,
 	/// Conditionally required when ComplexEventCreditEventUnit(41002) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41001")]
 	pub complex_event_credit_event_period: Option<i32>,
@@ -35,13 +35,13 @@ pub struct ComplexEventCreditEvent {
 	pub complex_event_credit_event_unit: Option<ComplexEventCreditEventUnit>,
 	/// ComplexEventCreditEventDayType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41003")]
 	pub complex_event_credit_event_day_type: Option<i32>,
 	/// ComplexEventCreditEventRateSource
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41004")]
 	pub complex_event_credit_event_rate_source: Option<i32>,

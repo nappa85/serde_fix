@@ -6,14 +6,14 @@ pub struct LegReturnRateGrp {
 	/// NoLegReturnRates
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42534")]
-	pub leg_return_rates: Option<crate::entities::RepeatingValues<LegReturnRate>>,
+	pub leg_return_rates: Option<fix_common::RepeatingValues<LegReturnRate>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct LegReturnRate {
 	/// Required if NoLegReturnRates(42534) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42535")]
 	pub leg_return_rate_price_sequence: Option<i32>,
@@ -23,7 +23,7 @@ pub struct LegReturnRate {
 	pub leg_return_rate_commission_basis: Option<char>,
 	/// LegReturnRateCommissionAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42537")]
 	pub leg_return_rate_commission_amount: Option<f64>,
@@ -33,7 +33,7 @@ pub struct LegReturnRate {
 	pub leg_return_rate_commission_currency: Option<String>,
 	/// LegReturnRateTotalCommissionPerTrade
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42539")]
 	pub leg_return_rate_total_commission_per_trade: Option<f64>,
@@ -43,7 +43,7 @@ pub struct LegReturnRate {
 	pub leg_return_rate_determination_method: Option<String>,
 	/// LegReturnRateAmountRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42541")]
 	pub leg_return_rate_amount_relative_to: Option<i32>,
@@ -57,7 +57,7 @@ pub struct LegReturnRate {
 	pub leg_return_rate_quote_units: Option<String>,
 	/// LegReturnRateQuoteMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42544")]
 	pub leg_return_rate_quote_method: Option<i32>,
@@ -71,7 +71,7 @@ pub struct LegReturnRate {
 	pub leg_return_rate_quote_currency_type: Option<String>,
 	/// Mutually exclusive with LegReturnRateQuoteTime(42548).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42547")]
 	pub leg_return_rate_quote_time_type: Option<i32>,
@@ -82,7 +82,7 @@ pub struct LegReturnRate {
 	/// LegReturnRateQuoteDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42549")]
-	pub leg_return_rate_quote_date: Option<crate::entities::LocalMktDate>,
+	pub leg_return_rate_quote_date: Option<fix_common::LocalMktDate>,
 	/// LegReturnRateQuoteExpirationTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42550")]
@@ -105,7 +105,7 @@ pub struct LegReturnRate {
 	pub leg_return_rate_cash_flow_type: Option<String>,
 	/// Mutually exclusive with LegReturnRateValuationTime(42556).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42555")]
 	pub leg_return_rate_valuation_time_type: Option<i32>,
@@ -119,13 +119,13 @@ pub struct LegReturnRate {
 	pub leg_return_rate_valuation_time_business_center: Option<String>,
 	/// LegReturnRateValuationPriceOption
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42558")]
 	pub leg_return_rate_valuation_price_option: Option<i32>,
 	/// LegReturnRateFinalPriceFallback
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42559")]
 	pub leg_return_rate_final_price_fallback: Option<i32>,

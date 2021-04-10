@@ -6,7 +6,7 @@ pub struct RiskLimitTypesGrp {
 	/// NoRiskLimitTypes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1529")]
-	pub risk_limit_types: Option<crate::entities::RepeatingValues<RiskLimitType>>,
+	pub risk_limit_types: Option<fix_common::RepeatingValues<RiskLimitType>>,
 	/// RiskWarningLevelGrp
 	#[serde(flatten)]
 	pub risk_warning_level_grp: Option<super::risk_warning_level_grp::RiskWarningLevelGrp>,
@@ -20,7 +20,7 @@ pub struct RiskLimitType {
 	pub risk_limit_type_item: Option<RiskLimitTypeItem>,
 	/// RiskLimitAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1531")]
 	pub risk_limit_amount: Option<f64>,
@@ -38,19 +38,19 @@ pub struct RiskLimitType {
 	pub risk_limit_action: Option<RiskLimitAction>,
 	/// Not applicable in a request
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1766")]
 	pub risk_limit_utilization_amount: Option<f64>,
 	/// Not applicable in a request
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1765")]
 	pub risk_limit_utilization_percent: Option<f32>,
 	/// Conditionally required when RiskLimitType(1530) = 10 (Clip size)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2336")]
 	pub risk_limit_velocity_period: Option<i32>,

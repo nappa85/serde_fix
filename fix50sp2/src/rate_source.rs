@@ -6,7 +6,7 @@ pub struct RateSource {
 	/// Number of rate sources being specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1445")]
-	pub rate_sources: Option<crate::entities::RepeatingValues<RateSourceElement>>,
+	pub rate_sources: Option<fix_common::RepeatingValues<RateSourceElement>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -6,7 +6,7 @@ pub struct StreamCommoditySettlDayGrp {
 	/// NoStreamCommoditySettlDays
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41283")]
-	pub stream_commodity_settl_days: Option<crate::entities::RepeatingValues<StreamCommoditySettlDay>>,
+	pub stream_commodity_settl_days: Option<fix_common::RepeatingValues<StreamCommoditySettlDay>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct StreamCommoditySettlDay {
 	pub stream_commodity_settl_day_item: Option<StreamCommoditySettlDayItem>,
 	/// StreamCommoditySettlTotalHours
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41285")]
 	pub stream_commodity_settl_total_hours: Option<i32>,

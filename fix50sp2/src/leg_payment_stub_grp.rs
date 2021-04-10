@@ -6,7 +6,7 @@ pub struct LegPaymentStubGrp {
 	/// NoLegPaymentStubs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40418")]
-	pub leg_payment_stubs: Option<crate::entities::RepeatingValues<LegPaymentStub>>,
+	pub leg_payment_stubs: Option<fix_common::RepeatingValues<LegPaymentStub>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,13 +21,13 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_length: Option<LegPaymentStubLength>,
 	/// LegPaymentStubRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40421")]
 	pub leg_payment_stub_rate: Option<f32>,
 	/// LegPaymentStubFixedAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40422")]
 	pub leg_payment_stub_fixed_amount: Option<f64>,
@@ -45,7 +45,7 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_index_source: Option<LegPaymentStubIndexSource>,
 	/// Conditionally required when LegPaymentStubIndexCurveUnit(40427) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40426")]
 	pub leg_payment_stub_index_curve_period: Option<i32>,
@@ -55,13 +55,13 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_index_curve_unit: Option<LegPaymentStubIndexCurveUnit>,
 	/// LegPaymentStubIndexRateMultiplier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40428")]
 	pub leg_payment_stub_index_rate_multiplier: Option<f64>,
 	/// LegPaymentStubIndexRateSpread
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40429")]
 	pub leg_payment_stub_index_rate_spread: Option<f64>,
@@ -75,7 +75,7 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_index_rate_treatment: Option<LegPaymentStubIndexRateTreatment>,
 	/// LegPaymentStubIndexCapRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40432")]
 	pub leg_payment_stub_index_cap_rate: Option<f32>,
@@ -89,7 +89,7 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_index_cap_rate_sell_side: Option<LegPaymentStubIndexCapRateSellSide>,
 	/// LegPaymentStubIndexFloorRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40435")]
 	pub leg_payment_stub_index_floor_rate: Option<f32>,
@@ -107,13 +107,13 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_index_2: Option<String>,
 	/// LegPaymentStubIndex2Source
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40439")]
 	pub leg_payment_stub_index_2_source: Option<i32>,
 	/// Conditionally required when LegPaymentStubIndex2CurveUnit(40441) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40440")]
 	pub leg_payment_stub_index_2_curve_period: Option<i32>,
@@ -123,13 +123,13 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_index_2_curve_unit: Option<LegPaymentStubIndex2CurveUnit>,
 	/// LegPaymentStubIndex2RateMultiplier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40442")]
 	pub leg_payment_stub_index_2_rate_multiplier: Option<f64>,
 	/// LegPaymentStubIndex2RateSpread
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40443")]
 	pub leg_payment_stub_index_2_rate_spread: Option<f64>,
@@ -143,13 +143,13 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_index_2_rate_treatment: Option<LegPaymentStubIndex2RateTreatment>,
 	/// LegPaymentStubIndex2CapRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40446")]
 	pub leg_payment_stub_index_2_cap_rate: Option<f32>,
 	/// LegPaymentStubIndex2FloorRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40447")]
 	pub leg_payment_stub_index_2_floor_rate: Option<f32>,

@@ -6,7 +6,7 @@ pub struct AllocAckGrp {
 	/// Indicates number of allocation groups to follow.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "78")]
-	pub allocs: Option<crate::entities::RepeatingValues<Alloc>>,
+	pub allocs: Option<fix_common::RepeatingValues<Alloc>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -22,7 +22,7 @@ pub struct Alloc {
 	/// Used when performing "executed price" vs. "average price" allocations (e.g. Japan). AllocAccount plus AllocPrice form a unique
 	/// Allocs entry. Used in lieu of AllocAvgPx.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "366")]
 	pub alloc_price: Option<f64>,
@@ -48,7 +48,7 @@ pub struct Alloc {
 	pub alloc_text: Option<String>,
 	/// Must be set if <a href="tag_361_EncodedAllocText.html" target="bottom">EncodedAllocText&nbsp;(361)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "360")]
 	pub encoded_alloc_text_len: Option<usize>,
@@ -71,7 +71,7 @@ pub struct Alloc {
 	pub individual_alloc_type: Option<IndividualAllocType>,
 	/// AllocQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "80")]
 	pub alloc_qty: Option<f64>,
@@ -85,7 +85,7 @@ pub struct Alloc {
 	pub firm_alloc_text: Option<String>,
 	/// Must be set if <a href="tag_1734_EncodedFirmAllocText.html" target="bottom">EncodedFirmAllocText (1734)&nbsp;(1734)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1733")]
 	pub encoded_firm_alloc_text_len: Option<usize>,
@@ -100,16 +100,16 @@ pub struct Alloc {
 	/// Only used for specific lot trades. If this field is used, either <a href="tag_1754_VersusPurchasePrice.html" target="bottom">VersusPurchasePrice(1754)&nbsp;(1754)</a> or <a href="tag_1755_CurrentCostBasis.html" target="bottom">CurrentCostBasis(1755)&nbsp;(1755)</a> should be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1753")]
-	pub versus_purchase_date: Option<crate::entities::LocalMktDate>,
+	pub versus_purchase_date: Option<fix_common::LocalMktDate>,
 	/// Only used for specific lot trades. If this field is used, <a href="tag_1753_VersusPurchaseDate.html" target="bottom">VersusPurchaseDate(1753)&nbsp;(1753)</a> should be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1754")]
 	pub versus_purchase_price: Option<f64>,
 	/// Only used for specific lot trades. If this field is used, <a href="tag_1753_VersusPurchaseDate.html" target="bottom">VersusPurchaseDate(1753)&nbsp;(1753)</a> should be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1755")]
 	pub current_cost_basis: Option<f64>,
@@ -127,7 +127,7 @@ pub struct Alloc {
 	pub parent_alloc_id: Option<String>,
 	/// AllocCalculatedCcyQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2515")]
 	pub alloc_calculated_ccy_qty: Option<f64>,

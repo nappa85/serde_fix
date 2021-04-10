@@ -17,13 +17,13 @@ pub struct FloatingRateIndex {
 	pub floating_rate_index_curve_unit: Option<String>,
 	/// Conditionally required when FloatingRateIndexCurveUnit(2730) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2728")]
 	pub floating_rate_index_curve_period: Option<i32>,
 	/// FloatingRateIndexCurveSpread
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2729")]
 	pub floating_rate_index_curve_spread: Option<f64>,

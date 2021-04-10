@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Confirmation {
 	/// MsgType = BH
 	#[serde(flatten)]
@@ -29,7 +29,7 @@ pub struct Confirmation {
 	pub individual_alloc_id: Option<String>,
 	/// Represents the time this message was generated
 	#[serde(rename = "60")]
-	pub transact_time: crate::entities::UTCTimestamp,
+	pub transact_time: fix_common::UTCTimestamp,
 	/// Account number for the trade being confirmed by this message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "79")]
@@ -48,7 +48,7 @@ pub struct Confirmation {
 	pub text: Option<String>,
 	/// EncodedTextLen
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

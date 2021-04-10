@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct TradeCaptureReport {
 	/// MsgType = AE
 	#[serde(flatten)]
@@ -71,7 +71,7 @@ pub struct TradeCaptureReport {
 	/// OrigTradeDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1125")]
-	pub orig_trade_date: Option<crate::entities::LocalMktDate>,
+	pub orig_trade_date: Option<fix_common::LocalMktDate>,
 	/// OrigTradeID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1126")]
@@ -90,7 +90,7 @@ pub struct TradeCaptureReport {
 	pub exec_type: Option<ExecType>,
 	/// TotNumTradeReports
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "748")]
 	pub tot_num_trade_reports: Option<i32>,
@@ -200,25 +200,25 @@ pub struct TradeCaptureReport {
 	pub underlying_trading_session_sub_id: Option<String>,
 	/// LastQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "32")]
 	pub last_qty: Option<f64>,
 	/// LastPx
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "31")]
 	pub last_px: Option<f64>,
 	/// CalculatedCcyLastQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1056")]
 	pub calculated_ccy_last_qty: Option<f64>,
 	/// PriceMarkup
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2762")]
 	pub price_markup: Option<f64>,
@@ -235,25 +235,25 @@ pub struct TradeCaptureReport {
 	pub settl_currency: Option<SettlCurrency>,
 	/// LastParPx
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "669")]
 	pub last_par_px: Option<f64>,
 	/// Applicable for F/X orders
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "194")]
 	pub last_spot_rate: Option<f64>,
 	/// Applicable for F/X orders
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "195")]
 	pub last_forward_points: Option<f64>,
 	/// LastSwapPoints
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1071")]
 	pub last_swap_points: Option<f64>,
@@ -264,14 +264,14 @@ pub struct TradeCaptureReport {
 	/// Used when reporting other than current day trades.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// ClearingBusinessDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// Average <a href="tag_44_Price.html" target="bottom">Price&nbsp;(44)</a> - if present then the <a href="tag_31_LastPx.html" target="bottom">LastPx&nbsp;(31)</a> will contain the original price on the execution
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "6")]
 	pub avg_px: Option<f64>,
@@ -299,7 +299,7 @@ pub struct TradeCaptureReport {
 	/// Time the transaction represented by when this <a href="message_TradeCaptureReport_AE.html" target="main">Trade Capture Report&nbsp;(AE)</a> occurred. Execution time of trade. Also describes the time of block trades.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// TrdRegTimestamps
 	#[serde(flatten)]
 	pub trd_reg_timestamps: Option<super::super::trd_reg_timestamps::TrdRegTimestamps>,
@@ -310,11 +310,11 @@ pub struct TradeCaptureReport {
 	/// Takes precedence over <a href="tag_63_SettlType.html" target="bottom">SettlType&nbsp;(63)</a> value and conditionally required/omitted for specific <a href="tag_63_SettlType.html" target="bottom">SettlType&nbsp;(63)</a> values.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// The settlement date for the underlying instrument of a derivatives security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "987")]
-	pub underlying_settlement_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_settlement_date: Option<fix_common::LocalMktDate>,
 	/// MatchStatus
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "573")]
@@ -328,32 +328,32 @@ pub struct TradeCaptureReport {
 	pub trd_cap_rpt_side_grp: super::super::trd_cap_rpt_side_grp::TrdCapRptSideGrp,
 	/// Volatility
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1188")]
 	pub volatility: Option<f64>,
 	/// DividendYield
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1380")]
 	pub dividend_yield: Option<f32>,
 	/// RiskFreeRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1190")]
 	pub risk_free_rate: Option<f64>,
 	/// CurrencyRatio
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1382")]
 	pub currency_ratio: Option<f64>,
 	/// CopyMsgIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "797")]
-	pub copy_msg_indicator: Option<crate::entities::Boolean>,
+	pub copy_msg_indicator: Option<fix_common::Boolean>,
 	/// TrdRepIndicatorsGrp
 	#[serde(flatten)]
 	pub trd_rep_indicators_grp: Option<super::super::trd_rep_indicators_grp::TrdRepIndicatorsGrp>,
@@ -380,24 +380,24 @@ pub struct TradeCaptureReport {
 	/// Used to indicate reports after a specific time
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "779")]
-	pub last_update_time: Option<crate::entities::UTCTimestamp>,
+	pub last_update_time: Option<fix_common::UTCTimestamp>,
 	/// Specifies the rounded price to quoted precision.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "991")]
 	pub rnd_px: Option<f64>,
 	/// TZTransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1132")]
-	pub tz_transact_time: Option<crate::entities::TZTimestamp>,
+	pub tz_transact_time: Option<fix_common::TZTimestamp>,
 	/// ReportedPxDiff
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1134")]
-	pub reported_px_diff: Option<crate::entities::Boolean>,
+	pub reported_px_diff: Option<fix_common::Boolean>,
 	/// ( <a href="tag_32_LastQty.html" target="bottom">LastQty&nbsp;(32)</a> * <a href="tag_31_LastPx.html" target="bottom">LastPx&nbsp;(31)</a> or <a href="tag_669_LastParPx.html" target="bottom">LastParPx&nbsp;(669)</a> ) For Fixed Income, <a href="tag_669_LastParPx.html" target="bottom">LastParPx&nbsp;(669)</a> is used when <a href="tag_31_LastPx.html" target="bottom">LastPx&nbsp;(31)</a> is not expressed as "percent of par" price.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "381")]
 	pub gross_trade_amt: Option<f64>,
@@ -407,7 +407,7 @@ pub struct TradeCaptureReport {
 	pub reject_text: Option<String>,
 	/// FeeMultiplier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1329")]
 	pub fee_multiplier: Option<f64>,
@@ -417,7 +417,7 @@ pub struct TradeCaptureReport {
 	pub cross_type: Option<CrossType>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText.html" target="bottom">EncodedRejectTextLen(1665)&nbsp;(1665)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1664")]
 	pub encoded_reject_text_len: Option<usize>,
@@ -427,7 +427,7 @@ pub struct TradeCaptureReport {
 	pub encoded_reject_text: Option<String>,
 	/// Used to specify the differential price when reporting the individual leg of a spread trade.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1522")]
 	pub differential_price: Option<f64>,
@@ -437,7 +437,7 @@ pub struct TradeCaptureReport {
 	pub trade_report_reject_reason: Option<TradeReportRejectReason>,
 	/// Used when clearing price differs from execution price.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1596")]
 	pub clearing_trade_price: Option<f64>,
@@ -448,7 +448,7 @@ pub struct TradeCaptureReport {
 	/// Upfront Price for CDS transactions. Conditionally required if TradePriceNegotiationMethod(1740) = 4(Percent of Par and Upfront
 	/// Amount), 5(Deal Spread and Upfront Amount) or 6(Upfront Points and Upfront Amount)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1743")]
 	pub last_upfront_price: Option<f64>,
@@ -458,7 +458,7 @@ pub struct TradeCaptureReport {
 	pub upfront_price_type: Option<UpfrontPriceType>,
 	/// LastQtyVariance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1828")]
 	pub last_qty_variance: Option<f64>,
@@ -478,13 +478,13 @@ pub struct TradeCaptureReport {
 	pub trade_qty_grp: Option<super::super::trade_qty_grp::TradeQtyGrp>,
 	/// TimeToExpiration
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1189")]
 	pub time_to_expiration: Option<f64>,
 	/// PriceDelta
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "811")]
 	pub price_delta: Option<f64>,
@@ -509,7 +509,7 @@ pub struct TradeCaptureReport {
 	/// BackloadedTradeIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1926")]
-	pub backloaded_trade_indicator: Option<crate::entities::Boolean>,
+	pub backloaded_trade_indicator: Option<fix_common::Boolean>,
 	/// ConfirmationMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1927")]
@@ -517,15 +517,15 @@ pub struct TradeCaptureReport {
 	/// MandatoryClearingIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1928")]
-	pub mandatory_clearing_indicator: Option<crate::entities::Boolean>,
+	pub mandatory_clearing_indicator: Option<fix_common::Boolean>,
 	/// MixedSwapIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1929")]
-	pub mixed_swap_indicator: Option<crate::entities::Boolean>,
+	pub mixed_swap_indicator: Option<fix_common::Boolean>,
 	/// OffMarketPriceIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1930")]
-	pub off_market_price_indicator: Option<crate::entities::Boolean>,
+	pub off_market_price_indicator: Option<fix_common::Boolean>,
 	/// VerificationMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1931")]
@@ -545,7 +545,7 @@ pub struct TradeCaptureReport {
 	/// VoluntaryRegulatoryReport
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1935")]
-	pub voluntary_regulatory_report: Option<crate::entities::Boolean>,
+	pub voluntary_regulatory_report: Option<fix_common::Boolean>,
 	/// TradeCollateralization
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1936")]
@@ -559,14 +559,14 @@ pub struct TradeCaptureReport {
 	pub attachment_grp: Option<super::super::attachment_grp::AttachmentGrp>,
 	/// LastQtyChanged
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2301")]
 	pub last_qty_changed: Option<f64>,
 	/// ValuationDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2085")]
-	pub valuation_date: Option<crate::entities::LocalMktDate>,
+	pub valuation_date: Option<fix_common::LocalMktDate>,
 	/// ValuationTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2086")]
@@ -585,14 +585,14 @@ pub struct TradeCaptureReport {
 	/// HistoricalReportIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2303")]
-	pub historical_report_indicator: Option<crate::entities::Boolean>,
+	pub historical_report_indicator: Option<fix_common::Boolean>,
 	/// RiskLimitCheckStatus
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2343")]
 	pub risk_limit_check_status: Option<RiskLimitCheckStatus>,
 	/// MidPx
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "631")]
 	pub mid_px: Option<f64>,
@@ -609,19 +609,19 @@ pub struct TradeCaptureReport {
 	pub collateral_amount_grp: Option<super::super::collateral_amount_grp::CollateralAmountGrp>,
 	/// LastMultipliedQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2368")]
 	pub last_multiplied_qty: Option<f64>,
 	/// TotalTradeQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2367")]
 	pub total_trade_qty: Option<f64>,
 	/// TotalTradeMultipliedQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2370")]
 	pub total_trade_multiplied_qty: Option<f64>,
@@ -631,7 +631,7 @@ pub struct TradeCaptureReport {
 	pub settl_price_fx_rate_calc: Option<SettlPriceFxRateCalc>,
 	/// TotalGrossTradeAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2369")]
 	pub total_gross_trade_amt: Option<f64>,
@@ -641,7 +641,7 @@ pub struct TradeCaptureReport {
 	pub trade_continuation_text: Option<String>,
 	/// Must be set if EncodedTradeContinuationText(2371) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2372")]
 	pub encoded_trade_continuation_text_len: Option<usize>,
@@ -666,7 +666,7 @@ pub struct TradeCaptureReport {
 	pub rate_source: Option<super::super::rate_source::RateSource>,
 	/// PricePrecision
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2349")]
 	pub price_precision: Option<i32>,
@@ -680,7 +680,7 @@ pub struct TradeCaptureReport {
 	pub package_id: Option<String>,
 	/// TradeNumber
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2490")]
 	pub trade_number: Option<i32>,
@@ -702,7 +702,7 @@ pub struct TradeCaptureReport {
 	/// DeltaCrossed
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2596")]
-	pub delta_crossed: Option<crate::entities::Boolean>,
+	pub delta_crossed: Option<fix_common::Boolean>,
 	/// AlgorithmicTradeIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2667")]
@@ -716,7 +716,7 @@ pub struct TradeCaptureReport {
 	/// CollateralizationValueDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2868")]
-	pub collateralization_value_date: Option<crate::entities::LocalMktDate>,
+	pub collateralization_value_date: Option<fix_common::LocalMktDate>,
 	/// TransactionAttributeGrp
 	#[serde(flatten)]
 	pub transaction_attribute_grp: Option<super::super::transaction_attribute_grp::TransactionAttributeGrp>,
@@ -727,16 +727,16 @@ pub struct TradeCaptureReport {
 	/// TerminationDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2878")]
-	pub termination_date: Option<crate::entities::LocalMktDate>,
+	pub termination_date: Option<fix_common::LocalMktDate>,
 	/// May be used when the business event date differs from when the regulatory report is actually being submitted (typically specified
 	/// in TrdRegTimestamps component).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2869")]
-	pub regulatory_report_type_business_date: Option<crate::entities::LocalMktDate>,
+	pub regulatory_report_type_business_date: Option<fix_common::LocalMktDate>,
 	/// May be used to indicate manual reporting of the trade.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1028")]
-	pub manual_order_indicator: Option<crate::entities::Boolean>,
+	pub manual_order_indicator: Option<fix_common::Boolean>,
 	/// Reference to an execution identifier previously assigned by the market (exchange). If specified, ExecID(17) is required.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "19")]

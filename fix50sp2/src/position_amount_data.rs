@@ -6,7 +6,7 @@ pub struct PositionAmountData {
 	/// Number of Position Amount entries.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "753")]
-	pub pos_amt: Option<crate::entities::RepeatingValues<PosAm>>,
+	pub pos_amt: Option<fix_common::RepeatingValues<PosAm>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct PosAm {
 	pub pos_amt_type: Option<PosAmtType>,
 	/// PosAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "708")]
 	pub pos_amt: Option<f64>,
@@ -36,7 +36,7 @@ pub struct PosAm {
 	pub pos_amt_stream_desc: Option<String>,
 	/// PositionFXRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2097")]
 	pub position_fx_rate: Option<f64>,
@@ -54,13 +54,13 @@ pub struct PosAm {
 	pub pos_amt_market_id: Option<String>,
 	/// PosAmtPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2876")]
 	pub pos_amt_price: Option<f64>,
 	/// PosAmtPriceType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2877")]
 	pub pos_amt_price_type: Option<i32>,

@@ -6,7 +6,7 @@ pub struct ExecCollGrp {
 	/// Executions for which collateral is required.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "124")]
-	pub execs: Option<crate::entities::RepeatingValues<Exec>>,
+	pub execs: Option<fix_common::RepeatingValues<Exec>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

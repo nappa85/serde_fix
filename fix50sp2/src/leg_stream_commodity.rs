@@ -28,7 +28,7 @@ pub struct LegStreamCommodity {
 	pub leg_stream_commodity_desc: Option<String>,
 	/// Must be set if EncodedLegStreamCommodityDesc(41654) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41653")]
 	pub encoded_leg_stream_commodity_desc_len: Option<usize>,
@@ -54,7 +54,7 @@ pub struct LegStreamCommodity {
 	pub leg_stream_commodity_exchange: Option<String>,
 	/// LegStreamCommodityRateSource
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41658")]
 	pub leg_stream_commodity_rate_source: Option<i32>,
@@ -79,7 +79,7 @@ pub struct LegStreamCommodity {
 	pub leg_stream_commodity_pricing_type: Option<String>,
 	/// Conditionally required when LegStreamCommodityNearbySettlDayUnit(41664) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41663")]
 	pub leg_stream_commodity_nearby_settl_day_period: Option<i32>,
@@ -90,7 +90,7 @@ pub struct LegStreamCommodity {
 	/// LegStreamCommoditySettlDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41665")]
-	pub leg_stream_commodity_settl_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_stream_commodity_settl_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegStreamCommoditySettlDateBusinessDayConvention
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41666")]
@@ -101,16 +101,16 @@ pub struct LegStreamCommodity {
 	/// LegStreamCommoditySettlDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41667")]
-	pub leg_stream_commodity_settl_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_stream_commodity_settl_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// LegStreamCommoditySettlMonth
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41668")]
 	pub leg_stream_commodity_settl_month: Option<i32>,
 	/// Conditionally required when LegStreamCommoditySettlDateRollUnit(41670) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41669")]
 	pub leg_stream_commodity_settl_date_roll_period: Option<i32>,

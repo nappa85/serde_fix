@@ -6,7 +6,7 @@ pub struct FillsGrp {
 	/// Specifies the number of partial fills included in this Execution Report.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1362")]
-	pub fills: Option<crate::entities::RepeatingValues<Fill>>,
+	pub fills: Option<fix_common::RepeatingValues<Fill>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,13 +18,13 @@ pub struct Fill {
 	pub fill_exec_id: Option<String>,
 	/// Price of this partial fill. Required if NoFills(1362) &gt; 0. Refer to LastPx(31).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1364")]
 	pub fill_px: Option<f64>,
 	/// Quantity (e.g. shares) bought/sold on this partial fill. Required if NoFills(1362) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1365")]
 	pub fill_qty: Option<f64>,
@@ -38,7 +38,7 @@ pub struct Fill {
 	pub fill_yield_type: Option<FillYieldType>,
 	/// FillYield
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1623")]
 	pub fill_yield: Option<f32>,

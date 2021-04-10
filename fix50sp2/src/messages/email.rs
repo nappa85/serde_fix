@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Email {
 	/// MsgType = C
 	#[serde(flatten)]
@@ -15,13 +15,13 @@ pub struct Email {
 	/// OrigTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42")]
-	pub orig_time: Option<crate::entities::UTCTimestamp>,
+	pub orig_time: Option<fix_common::UTCTimestamp>,
 	/// Specifies the <a href="tag_147_Subject.html" target="bottom">Subject&nbsp;(147)</a> text
 	#[serde(rename = "147")]
 	pub subject: String,
 	/// Must be set if <a href="tag_357_EncodedSubject.html" target="bottom">EncodedSubject&nbsp;(357)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "356")]
 	pub encoded_subject_len: Option<usize>,
@@ -54,7 +54,7 @@ pub struct Email {
 	pub lines_of_text_grp: super::super::lines_of_text_grp::LinesOfTextGrp,
 	/// RawDataLength
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "95")]
 	pub raw_data_length: Option<usize>,

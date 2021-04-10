@@ -6,7 +6,7 @@ pub struct AdditionalTermBondRefGrp {
 	/// NoAdditionalTermBondRefs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40000")]
-	pub additional_term_bond_refs: Option<crate::entities::RepeatingValues<AdditionalTermBondRef>>,
+	pub additional_term_bond_refs: Option<fix_common::RepeatingValues<AdditionalTermBondRef>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct AdditionalTermBondRef {
 	pub additional_term_bond_desc: Option<String>,
 	/// Must be set if EncodedAdditionalTermBondDesc(40005) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40004")]
 	pub encoded_additional_term_bond_desc_len: Option<usize>,
@@ -44,7 +44,7 @@ pub struct AdditionalTermBondRef {
 	pub additional_term_bond_issuer: Option<String>,
 	/// Must be set if EncodedAdditionalTermBondIssuer(40009) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40008")]
 	pub encoded_additional_term_bond_issuer_len: Option<usize>,
@@ -63,29 +63,29 @@ pub struct AdditionalTermBondRef {
 	pub additional_term_bond_coupon_type: Option<AdditionalTermBondCouponType>,
 	/// AdditionalTermBondCouponRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40012")]
 	pub additional_term_bond_coupon_rate: Option<f32>,
 	/// AdditionalTermBondMaturityDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40013")]
-	pub additional_term_bond_maturity_date: Option<crate::entities::LocalMktDate>,
+	pub additional_term_bond_maturity_date: Option<fix_common::LocalMktDate>,
 	/// AdditionalTermBondParValue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40014")]
 	pub additional_term_bond_par_value: Option<f64>,
 	/// AdditionalTermBondCurrentTotalIssuedAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40015")]
 	pub additional_term_bond_current_total_issued_amount: Option<f64>,
 	/// Conditionally required when AdditionalTermBondCouponFrequencyUnit(40017) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40016")]
 	pub additional_term_bond_coupon_frequency_period: Option<i32>,

@@ -7,7 +7,7 @@ pub struct StrikeRules {
 	/// stated price range of the underlying instrument.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1201")]
-	pub strike_rules: Option<crate::entities::RepeatingValues<StrikeRule>>,
+	pub strike_rules: Option<fix_common::RepeatingValues<StrikeRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,19 +18,19 @@ pub struct StrikeRule {
 	pub strike_rule_id: Option<String>,
 	/// Starting price for the range to which the StrikeIncrement applies. Price refers to the price of the underlying.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1202")]
 	pub start_strike_px_range: Option<f64>,
 	/// Ending price of the range to which the StrikeIncrement applies. Price refers to the price of the underlying.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1203")]
 	pub end_strike_px_range: Option<f64>,
 	/// Value by which strike price should be incremented within the specified price.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1204")]
 	pub strike_increment: Option<f64>,

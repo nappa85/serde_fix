@@ -6,46 +6,46 @@ pub struct UnderlyingPaymentScheduleGrp {
 	/// NoUnderlyingPaymentSchedules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40664")]
-	pub underlying_payment_schedules: Option<crate::entities::RepeatingValues<UnderlyingPaymentSchedule>>,
+	pub underlying_payment_schedules: Option<fix_common::RepeatingValues<UnderlyingPaymentSchedule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct UnderlyingPaymentSchedule {
 	/// Required if NoUnderlyingPaymentScheules(40664) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40665")]
 	pub underlying_payment_schedule_type: Option<i32>,
 	/// UnderlyingPaymentScheduleStubType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40666")]
 	pub underlying_payment_schedule_stub_type: Option<i32>,
 	/// UnderlyingPaymentScheduleStartDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40667")]
-	pub underlying_payment_schedule_start_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_payment_schedule_start_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingPaymentScheduleEndDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40668")]
-	pub underlying_payment_schedule_end_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_payment_schedule_end_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingPaymentSchedulePaySide
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40669")]
 	pub underlying_payment_schedule_pay_side: Option<i32>,
 	/// UnderlyingPaymentScheduleReceiveSide
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40670")]
 	pub underlying_payment_schedule_receive_side: Option<i32>,
 	/// UnderlyingPaymentScheduleNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40671")]
 	pub underlying_payment_schedule_notional: Option<f64>,
@@ -55,31 +55,31 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_currency: Option<String>,
 	/// UnderlyingPaymentScheduleRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40673")]
 	pub underlying_payment_schedule_rate: Option<f32>,
 	/// UnderlyingPaymentScheduleRateMultiplier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40674")]
 	pub underlying_payment_schedule_rate_multiplier: Option<f64>,
 	/// UnderlyingPaymentScheduleRateSpread
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40675")]
 	pub underlying_payment_schedule_rate_spread: Option<f64>,
 	/// UnderlyingPaymentScheduleRateSpreadPositionType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40676")]
 	pub underlying_payment_schedule_rate_spread_position_type: Option<i32>,
 	/// UnderlyingPaymentScheduleFixedAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40678")]
 	pub underlying_payment_schedule_fixed_amount: Option<f64>,
@@ -89,7 +89,7 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_fixed_currency: Option<String>,
 	/// Conditionally required when UnderlyingPaymentScheduleStepFrequeencyUnit(40681) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40680")]
 	pub underlying_payment_schedule_step_frequency_period: Option<i32>,
@@ -99,54 +99,54 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_step_frequency_unit: Option<String>,
 	/// UnderlyingPaymentScheduleStepOffsetValue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40682")]
 	pub underlying_payment_schedule_step_offset_value: Option<f64>,
 	/// UnderlyingPaymentScheduleStepRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40683")]
 	pub underlying_payment_schedule_step_rate: Option<f32>,
 	/// UnderlyingPaymentScheduleStepOffsetRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40684")]
 	pub underlying_payment_schedule_step_offset_rate: Option<f32>,
 	/// UnderlyingPaymentScheduleStepRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40685")]
 	pub underlying_payment_schedule_step_relative_to: Option<i32>,
 	/// UnderlyingPaymentScheduleFixingDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40686")]
-	pub underlying_payment_schedule_fixing_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_payment_schedule_fixing_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingPaymentScheduleWeight
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40687")]
 	pub underlying_payment_schedule_weight: Option<f64>,
 	/// UnderlyingPaymentScheduleFixingDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40688")]
 	pub underlying_payment_schedule_fixing_date_relative_to: Option<i32>,
 	/// When specified, this overrides the business day convention defined in the UnderlyingDateAdjustment component in UnderlyingInstrument.
 	/// The specified value would be specific to this instance of the underlying instrument's payment schedule.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40689")]
 	pub underlying_payment_schedule_fixing_date_business_day_cnvtn: Option<i32>,
 	/// Conditionally required when UnderlyingPaymentScheduleFixingDateOffsetUnit(40692) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40691")]
 	pub underlying_payment_schedule_fixing_date_offset_period: Option<i32>,
@@ -156,7 +156,7 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_fixing_date_offset_unit: Option<String>,
 	/// UnderlyingPaymentScheduleFixingDateOffsetDayType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40693")]
 	pub underlying_payment_schedule_fixing_date_offset_day_type: Option<i32>,
@@ -174,20 +174,20 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_fixing_time_business_center: Option<String>,
 	/// UnderlyingPaymentScheduleInterimExchangePaymentDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40697")]
 	pub underlying_payment_schedule_interim_exchange_payment_date_relative_to: Option<i32>,
 	/// When specified, this overrides the business day convention defined in the UnderlyingDateAdjustment component in UnderlyingInstrument.
 	/// The specified value would be specific to this instance of the underlying instrument's payment schedule.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40698")]
 	pub underlying_payment_schedule_interim_exchange_dates_business_day_convention: Option<i32>,
 	/// Conditionally required when UnderlyingPaymentScheduleInterimExchangeDatesOffsetUnit(40701) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40700")]
 	pub underlying_payment_schedule_interim_exchange_dates_offset_period: Option<i32>,
@@ -197,14 +197,14 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_interim_exchange_dates_offset_unit: Option<String>,
 	/// UnderlyingPaymentScheduleInterimExchangeDatesOffsetDayType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40702")]
 	pub underlying_payment_schedule_interim_exchange_dates_offset_day_type: Option<i32>,
 	/// UnderlyingPaymentScheduleInterimExchangeDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40703")]
-	pub underlying_payment_schedule_interim_exchange_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_payment_schedule_interim_exchange_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingPaymentScheduleXID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41881")]
@@ -223,7 +223,7 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_rate_unit_of_measure: Option<UnderlyingPaymentScheduleRateUnitOfMeasure>,
 	/// UnderlyingPaymentScheduleRateConversionFactor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41885")]
 	pub underlying_payment_schedule_rate_conversion_factor: Option<f64>,
@@ -233,7 +233,7 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_rate_spread_type: Option<UnderlyingPaymentScheduleRateSpreadType>,
 	/// UnderlyingPaymentScheduleSettlPeriodPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41887")]
 	pub underlying_payment_schedule_settl_period_price: Option<f64>,
@@ -255,13 +255,13 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_fixing_day_distribution: Option<UnderlyingPaymentScheduleFixingDayDistribution>,
 	/// UnderlyingPaymentScheduleFixingDayCount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41892")]
 	pub underlying_payment_schedule_fixing_day_count: Option<i32>,
 	/// Conditionally required when UnderlyingPaymentScheduleFixingLagUnit(41894) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41893")]
 	pub underlying_payment_schedule_fixing_lag_period: Option<i32>,
@@ -271,7 +271,7 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_fixing_lag_unit: Option<UnderlyingPaymentScheduleFixingLagUnit>,
 	/// Conditionally required when UnderlyingPaymentScheduleFixingFirstObservationDateOffsetUnit(41896) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41895")]
 	pub underlying_payment_schedule_fixing_first_observation_date_offset_period: Option<i32>,

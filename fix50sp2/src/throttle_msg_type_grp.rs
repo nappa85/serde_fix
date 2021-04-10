@@ -6,7 +6,7 @@ pub struct ThrottleMsgTypeGrp {
 	/// NoThrottleMsgType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1618")]
-	pub throttle_msg_type: Option<crate::entities::RepeatingValues<ThrottleMsgTyp>>,
+	pub throttle_msg_type: Option<fix_common::RepeatingValues<ThrottleMsgTyp>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

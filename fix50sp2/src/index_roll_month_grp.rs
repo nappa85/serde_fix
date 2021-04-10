@@ -6,7 +6,7 @@ pub struct IndexRollMonthGrp {
 	/// NoIndexRollMonths
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2734")]
-	pub index_roll_months: Option<crate::entities::RepeatingValues<IndexRollMonth>>,
+	pub index_roll_months: Option<fix_common::RepeatingValues<IndexRollMonth>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

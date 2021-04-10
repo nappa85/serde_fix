@@ -27,7 +27,7 @@ pub struct MDStatisticParameters {
 	pub md_statistic_desc: Option<String>,
 	/// Must be set if <a href="tag_2482_EncodedMDStatisticDesc.html" target="bottom">EncodedMDStatisticDesc(2482)&nbsp;(2482)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2481")]
 	pub encoded_md_statistic_desc_len: Option<usize>,
@@ -41,7 +41,7 @@ pub struct MDStatisticParameters {
 	pub market_depth: Option<MarketDepth>,
 	/// <p>Conditionally required when MDStatisticFrequencyPeriod(2461) is specified. Omission represents a one-time dissemination</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2460")]
 	pub md_statistic_frequency_period: Option<i32>,
@@ -51,7 +51,7 @@ pub struct MDStatisticParameters {
 	pub md_statistic_frequency_unit: Option<MDStatisticFrequencyUnit>,
 	/// <p>Conditionally required when MDStatisticDelayUnit(2463) is specified.</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2462")]
 	pub md_statistic_delay_period: Option<i32>,
@@ -68,7 +68,7 @@ pub struct MDStatisticParameters {
 	pub md_statistic_interval_type_unit: Option<MDStatisticIntervalTypeUnit>,
 	/// <p>Conditionally required when MDStatisticIntervalUnit(2467) is specified.</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2466")]
 	pub md_statistic_interval_period: Option<i32>,
@@ -83,25 +83,25 @@ pub struct MDStatisticParameters {
 	/// </p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2468")]
-	pub md_statistic_start_date: Option<crate::entities::UTCTimestamp>,
+	pub md_statistic_start_date: Option<fix_common::UTCTimestamp>,
 	/// <p>Can be used to define a date range for a sliding window peak other than the current day. Omission represents a date range
 	/// including the current day
 	/// </p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2469")]
-	pub md_statistic_end_date: Option<crate::entities::UTCTimestamp>,
+	pub md_statistic_end_date: Option<fix_common::UTCTimestamp>,
 	/// <p>Can be used to define a date range for a sliding window peak other than the complete day. Omission represents a date range
 	/// starting with the first available day.
 	/// </p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2470")]
-	pub md_statistic_start_time: Option<crate::entities::UTCTimeOnly>,
+	pub md_statistic_start_time: Option<fix_common::UTCTimeOnly>,
 	/// <p>Can be used to define a date range for a sliding window peak other than the complete day. Omission represents a date range
 	/// including the current day
 	/// </p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2471")]
-	pub md_statistic_end_time: Option<crate::entities::UTCTimeOnly>,
+	pub md_statistic_end_time: Option<fix_common::UTCTimeOnly>,
 	/// <p>Conditionally required when MDStatisticType(2456) = 5=(Ratio).</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2472")]
@@ -121,11 +121,11 @@ pub struct MDStatisticParameters {
 	/// QuoteCondition
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "276")]
-	pub quote_condition: Option<crate::entities::SeparatedValues<QuoteCondition>>,
+	pub quote_condition: Option<fix_common::SeparatedValues<QuoteCondition>>,
 	/// TradeCondition
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "277")]
-	pub trade_condition: Option<crate::entities::SeparatedValues<TradeCondition>>,
+	pub trade_condition: Option<fix_common::SeparatedValues<TradeCondition>>,
 	/// Side
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "54")]
@@ -160,7 +160,7 @@ pub struct MDStatisticParameters {
 	pub md_feed_type: Option<String>,
 	/// ExposureDuration
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1629")]
 	pub exposure_duration: Option<i32>,
@@ -177,7 +177,7 @@ pub struct MDStatisticParameters {
 	pub nested_parties: Option<super::nested_parties::NestedParties>,
 	/// AnnualTradingBusinessDays
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2584")]
 	pub annual_trading_business_days: Option<i32>,

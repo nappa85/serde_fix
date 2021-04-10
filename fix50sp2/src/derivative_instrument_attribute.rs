@@ -6,7 +6,7 @@ pub struct DerivativeInstrumentAttribute {
 	/// NoDerivativeInstrAttrib
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1311")]
-	pub derivative_instr_attrib: Option<crate::entities::RepeatingValues<DerivativeInstrAttri>>,
+	pub derivative_instr_attrib: Option<fix_common::RepeatingValues<DerivativeInstrAttri>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

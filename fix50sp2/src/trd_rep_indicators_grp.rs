@@ -6,7 +6,7 @@ pub struct TrdRepIndicatorsGrp {
 	/// Number of trade publication indicators following
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1387")]
-	pub trd_rep_indicators: Option<crate::entities::RepeatingValues<TrdRepIndicator>>,
+	pub trd_rep_indicators: Option<fix_common::RepeatingValues<TrdRepIndicator>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct TrdRepIndicator {
 	/// TrdRepIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1389")]
-	pub trd_rep_indicator: Option<crate::entities::Boolean>,
+	pub trd_rep_indicator: Option<fix_common::Boolean>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

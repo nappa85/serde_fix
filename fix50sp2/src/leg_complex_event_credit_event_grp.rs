@@ -6,7 +6,7 @@ pub struct LegComplexEventCreditEventGrp {
 	/// NoLegComplexEventCreditEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41366")]
-	pub leg_complex_event_credit_events: Option<crate::entities::RepeatingValues<LegComplexEventCreditEvent>>,
+	pub leg_complex_event_credit_events: Option<fix_common::RepeatingValues<LegComplexEventCreditEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct LegComplexEventCreditEvent {
 	pub leg_complex_event_credit_event_currency: Option<String>,
 	/// Conditionally required when LegComplexEventCreditEventUnit(41371) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41370")]
 	pub leg_complex_event_credit_event_period: Option<i32>,
@@ -39,7 +39,7 @@ pub struct LegComplexEventCreditEvent {
 	pub leg_complex_event_credit_event_day_type: Option<LegComplexEventCreditEventDayType>,
 	/// LegComplexEventCreditEventRateSource
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41373")]
 	pub leg_complex_event_credit_event_rate_source: Option<i32>,

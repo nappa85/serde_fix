@@ -32,11 +32,11 @@ pub struct NoSide {
 	/// TradeOriginationDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "229")]
-	pub trade_origination_date: Option<crate::entities::LocalMktDate>,
+	pub trade_origination_date: Option<fix_common::LocalMktDate>,
 	/// TradeDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
@@ -76,11 +76,11 @@ pub struct NoSide {
 	/// OrderRestrictions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "529")]
-	pub order_restrictions: Option<crate::entities::SeparatedValues<OrderRestrictions>>,
+	pub order_restrictions: Option<fix_common::SeparatedValues<OrderRestrictions>>,
 	/// PreTradeAnonymity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1091")]
-	pub pre_trade_anonymity: Option<crate::entities::Boolean>,
+	pub pre_trade_anonymity: Option<fix_common::Boolean>,
 	/// CustOrderCapacity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "582")]
@@ -104,7 +104,7 @@ pub struct NoSide {
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -139,7 +139,7 @@ pub struct NoSide {
 	/// Specifies how long the order as specified in the side stays in effect. Absence of this field indicates Day order.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "962")]
-	pub side_time_in_force: Option<crate::entities::UTCTimestamp>,
+	pub side_time_in_force: Option<fix_common::UTCTimestamp>,
 	/// Available for optional use when Side(54) = 6 (Sell short exempt).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1690")]

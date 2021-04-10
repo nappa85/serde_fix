@@ -6,7 +6,7 @@ pub struct TradeAllocAmtGrp {
 	/// NoTradeAllocAmts
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1844")]
-	pub trade_alloc_amts: Option<crate::entities::RepeatingValues<TradeAllocAmt>>,
+	pub trade_alloc_amts: Option<fix_common::RepeatingValues<TradeAllocAmt>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct TradeAllocAmt {
 	pub trade_alloc_amt_type: Option<TradeAllocAmtType>,
 	/// TradeAllocAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1846")]
 	pub trade_alloc_amt: Option<f64>,

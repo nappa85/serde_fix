@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Market {
 	/// MsgType = X
 	#[serde(flatten)]
@@ -20,7 +20,7 @@ pub struct Market {
 	/// Used to specify the trading date for which a set of market data applies
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// Conditionally required if this message is in response to a Market Data Request.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "262")]
@@ -30,7 +30,7 @@ pub struct Market {
 	pub md_inc_grp: super::super::md_inc_grp::MDIncGrp,
 	/// Depth of application messages queued for transmission as of delivery of this message
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "813")]
 	pub appl_queue_depth: Option<i32>,

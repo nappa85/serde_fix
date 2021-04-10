@@ -6,7 +6,7 @@ pub struct ProvisionOptionExerciseBusinessCenterGrp {
 	/// NoProvisionOptionExerciseBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40954")]
-	pub provision_option_exercise_business_centers: Option<crate::entities::RepeatingValues<ProvisionOptionExerciseBusinessCenter>>,
+	pub provision_option_exercise_business_centers: Option<fix_common::RepeatingValues<ProvisionOptionExerciseBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -6,7 +6,7 @@ pub struct MatchingDataPointGrp {
 	/// NoMatchingDataPoints
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2781")]
-	pub matching_data_points: Option<crate::entities::RepeatingValues<MatchingDataPoint>>,
+	pub matching_data_points: Option<fix_common::RepeatingValues<MatchingDataPoint>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

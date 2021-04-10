@@ -6,7 +6,7 @@ pub struct InstrumentScopeSecurityAltIDGrp {
 	/// NoInstrumentScopeSecurityAltIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1540")]
-	pub instrument_scope_security_alt_i_ds: Option<crate::entities::RepeatingValues<InstrumentScopeSecurityAltID>>,
+	pub instrument_scope_security_alt_i_ds: Option<fix_common::RepeatingValues<InstrumentScopeSecurityAltID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

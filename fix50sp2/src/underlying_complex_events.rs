@@ -6,7 +6,7 @@ pub struct UnderlyingComplexEvents {
 	/// NoUnderlyingComplexEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2045")]
-	pub underlying_complex_events: Option<crate::entities::RepeatingValues<UnderlyingComplexEvent>>,
+	pub underlying_complex_events: Option<fix_common::RepeatingValues<UnderlyingComplexEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,13 +17,13 @@ pub struct UnderlyingComplexEvent {
 	pub underlying_complex_event_type: Option<UnderlyingComplexEventType>,
 	/// UnderlyingComplexOptPayoutAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2047")]
 	pub underlying_complex_opt_payout_amount: Option<f64>,
 	/// UnderlyingComplexEventPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2048")]
 	pub underlying_complex_event_price: Option<f64>,
@@ -33,7 +33,7 @@ pub struct UnderlyingComplexEvent {
 	pub underlying_complex_event_price_boundary_method: Option<UnderlyingComplexEventPriceBoundaryMethod>,
 	/// UnderlyingComplexEventPriceBoundaryPrecision
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2050")]
 	pub underlying_complex_event_price_boundary_precision: Option<f32>,
@@ -62,7 +62,7 @@ pub struct UnderlyingComplexEvent {
 	pub underlying_complex_opt_payout_underlier: Option<String>,
 	/// UnderlyingComplexOptPayoutPercentage
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2264")]
 	pub underlying_complex_opt_payout_percentage: Option<f32>,
@@ -76,7 +76,7 @@ pub struct UnderlyingComplexEvent {
 	pub underlying_complex_opt_payout_currency: Option<String>,
 	/// UnderlyingComplexEventPricePercentage
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2267")]
 	pub underlying_complex_event_price_percentage: Option<f32>,
@@ -94,7 +94,7 @@ pub struct UnderlyingComplexEvent {
 	pub underlying_complex_event_quote_basis: Option<UnderlyingComplexEventQuoteBasis>,
 	/// UnderlyingComplexEventFixedFXRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2271")]
 	pub underlying_complex_event_fixed_fx_rate: Option<f64>,
@@ -108,19 +108,19 @@ pub struct UnderlyingComplexEvent {
 	pub underlying_complex_event_calculation_agent: Option<UnderlyingComplexEventCalculationAgent>,
 	/// UnderlyingComplexEventStrikePrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2274")]
 	pub underlying_complex_event_strike_price: Option<f64>,
 	/// UnderlyingComplexEventStrikeFactor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2275")]
 	pub underlying_complex_event_strike_factor: Option<f64>,
 	/// UnderlyingComplexEventStrikeNumberOfOptions
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2276")]
 	pub underlying_complex_event_strike_number_of_options: Option<i32>,
@@ -139,10 +139,10 @@ pub struct UnderlyingComplexEvent {
 	/// UnderlyingComplexEventCreditEventStandardSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2280")]
-	pub underlying_complex_event_credit_event_standard_sources: Option<crate::entities::Boolean>,
+	pub underlying_complex_event_credit_event_standard_sources: Option<fix_common::Boolean>,
 	/// UnderlyingComplexEventCreditEventMinimumSources
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2281")]
 	pub underlying_complex_event_credit_event_minimum_sources: Option<i32>,
@@ -156,27 +156,27 @@ pub struct UnderlyingComplexEvent {
 	pub underlying_complex_event_xid_ref: Option<String>,
 	/// UnderlyingComplexEventSpotRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2419")]
 	pub underlying_complex_event_spot_rate: Option<f64>,
 	/// UnderlyingComplexEventForwardPoints
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2420")]
 	pub underlying_complex_event_forward_points: Option<f64>,
 	/// UnderlyingComplexEventFuturesPriceValuation
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2611")]
-	pub underlying_complex_event_futures_price_valuation: Option<crate::entities::Boolean>,
+	pub underlying_complex_event_futures_price_valuation: Option<fix_common::Boolean>,
 	/// UnderlyingComplexEventOptionsPriceValuation
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2612")]
-	pub underlying_complex_event_options_price_valuation: Option<crate::entities::Boolean>,
+	pub underlying_complex_event_options_price_valuation: Option<fix_common::Boolean>,
 	/// UnderlyingComplexEventPVFinalPriceElectionFallback
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2613")]
 	pub underlying_complex_event_pv_final_price_election_fallback: Option<i32>,

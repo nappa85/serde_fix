@@ -6,7 +6,7 @@ pub struct PaymentGrp {
 	/// NoPayments
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40212")]
-	pub payments: Option<crate::entities::RepeatingValues<Payment>>,
+	pub payments: Option<fix_common::RepeatingValues<Payment>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -29,26 +29,26 @@ pub struct Payment {
 	pub payment_currency: Option<String>,
 	/// Either PaymentAmount(40217), PaymentFixedRate(43097) or PaymentRFloatingRateIndex(43098) must be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40217")]
 	pub payment_amount: Option<f64>,
 	/// PaymentPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40218")]
 	pub payment_price: Option<f64>,
 	/// PaymentPriceType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40919")]
 	pub payment_price_type: Option<f64>,
 	/// PaymentDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40219")]
-	pub payment_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub payment_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// When specified, this overrides the business day convention defined in the DateAdjustment component in Instrument. The specified
 	/// value would be specific to this instance of the payment information.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -57,16 +57,16 @@ pub struct Payment {
 	/// PaymentDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40222")]
-	pub payment_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub payment_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// PaymentDiscountFactor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40224")]
 	pub payment_discount_factor: Option<f64>,
 	/// PaymentPresentValueAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40225")]
 	pub payment_present_value_amount: Option<f64>,
@@ -88,7 +88,7 @@ pub struct Payment {
 	pub payment_text: Option<String>,
 	/// Must be set if EncodedPaymentText(40985) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40984")]
 	pub encoded_payment_text_len: Option<usize>,
@@ -107,7 +107,7 @@ pub struct Payment {
 	pub payment_date_relative_to: Option<PaymentDateRelativeTo>,
 	/// Conditionally required when PaymentDateOffsetUnit(41158) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41157")]
 	pub payment_date_offset_period: Option<i32>,
@@ -137,7 +137,7 @@ pub struct Payment {
 	pub payment_desc: Option<String>,
 	/// PaymentAmountRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42598")]
 	pub payment_amount_relative_to: Option<i32>,
@@ -147,7 +147,7 @@ pub struct Payment {
 	pub payment_amount_determination_method: Option<String>,
 	/// Either PaymentAmount(40217), PaymentFixedRate(43097) or PaymentFloatingRateIndex(43098) must be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43097")]
 	pub payment_fixed_rate: Option<f32>,
@@ -161,14 +161,14 @@ pub struct Payment {
 	pub payment_floating_rate_index_curve_unit: Option<String>,
 	/// Conditionally required when PaymentFloatingRateIndexCurveUnit(43100) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43099")]
 	pub payment_floating_rate_index_curve_period: Option<i32>,
 	/// Conditionally required when PaymentFloatingRateIndex(43098) is specified and the spread to the index is not "zero". When the
 	/// spread to the index is "zero" this may be omitted.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43101")]
 	pub payment_floating_rate_spread: Option<f64>,
@@ -178,7 +178,7 @@ pub struct Payment {
 	pub payment_rate_reset_frequency_unit: Option<String>,
 	/// Conditionally required when PaymentRateResetFrequencyUnit(43105) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43104")]
 	pub payment_rate_reset_frequency_period: Option<i32>,
@@ -188,7 +188,7 @@ pub struct Payment {
 	pub payment_frequency_unit: Option<String>,
 	/// Conditionally required when PaymentFrequencyUnitPeriod(43103) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43102")]
 	pub payment_frequency_period: Option<i32>,

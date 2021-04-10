@@ -6,7 +6,7 @@ pub struct TrdRegPublicationGrp {
 	/// NoTrdRegPublications
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2668")]
-	pub trd_reg_publications: Option<crate::entities::RepeatingValues<TrdRegPublication>>,
+	pub trd_reg_publications: Option<fix_common::RepeatingValues<TrdRegPublication>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

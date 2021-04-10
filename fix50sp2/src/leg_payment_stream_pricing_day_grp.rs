@@ -6,7 +6,7 @@ pub struct LegPaymentStreamPricingDayGrp {
 	/// NoLegPaymentStreamPricingDays
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41596")]
-	pub leg_payment_stream_pricing_days: Option<crate::entities::RepeatingValues<LegPaymentStreamPricingDay>>,
+	pub leg_payment_stream_pricing_days: Option<fix_common::RepeatingValues<LegPaymentStreamPricingDay>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct LegPaymentStreamPricingDay {
 	pub leg_payment_stream_pricing_day_of_week: Option<LegPaymentStreamPricingDayOfWeek>,
 	/// LegPaymentStreamPricingDayNumber
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41598")]
 	pub leg_payment_stream_pricing_day_number: Option<i32>,

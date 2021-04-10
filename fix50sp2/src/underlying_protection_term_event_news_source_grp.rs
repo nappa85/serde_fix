@@ -6,7 +6,7 @@ pub struct UnderlyingProtectionTermEventNewsSourceGrp {
 	/// NoUnderlyingProtectionTermEventNewsSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42090")]
-	pub underlying_protection_term_event_news_sources: Option<crate::entities::RepeatingValues<UnderlyingProtectionTermEventNewsSource>>,
+	pub underlying_protection_term_event_news_sources: Option<fix_common::RepeatingValues<UnderlyingProtectionTermEventNewsSource>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

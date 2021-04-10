@@ -6,7 +6,7 @@ pub struct LegFinancingContractualMatrixGrp {
 	/// NoLegContractualMatrices
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42203")]
-	pub leg_contractual_matrices: Option<crate::entities::RepeatingValues<LegContractualMatrice>>,
+	pub leg_contractual_matrices: Option<fix_common::RepeatingValues<LegContractualMatrice>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct LegContractualMatrice {
 	/// LegContractualMatrixDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42205")]
-	pub leg_contractual_matrix_date: Option<crate::entities::LocalMktDate>,
+	pub leg_contractual_matrix_date: Option<fix_common::LocalMktDate>,
 	/// LegContractualMatrixTerm
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42206")]

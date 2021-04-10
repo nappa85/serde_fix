@@ -6,7 +6,7 @@ pub struct LegDeliveryStreamCycleGrp {
 	/// NoLegDeliveryStreamCycles
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41456")]
-	pub leg_delivery_stream_cycles: Option<crate::entities::RepeatingValues<LegDeliveryStreamCycle>>,
+	pub leg_delivery_stream_cycles: Option<fix_common::RepeatingValues<LegDeliveryStreamCycle>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct LegDeliveryStreamCycle {
 	pub leg_delivery_stream_cycle_desc: Option<String>,
 	/// Must be set if EncodedLegDeliveryStreamCycleDesc(41459) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41458")]
 	pub encoded_leg_delivery_stream_cycle_desc_len: Option<usize>,

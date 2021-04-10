@@ -6,7 +6,7 @@ pub struct Stipulations {
 	/// NoStipulations
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "232")]
-	pub stipulations: Option<crate::entities::RepeatingValues<Stipulation>>,
+	pub stipulations: Option<fix_common::RepeatingValues<Stipulation>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

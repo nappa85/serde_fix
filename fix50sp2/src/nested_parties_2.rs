@@ -6,7 +6,7 @@ pub struct NestedParties2 {
 	/// Repeating group below should contain unique combinations of Nested2PartyID, Nested2PartyIDSource, and Nested2PartyRole
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "756")]
-	pub nested_2_party_i_ds: Option<crate::entities::RepeatingValues<Nested2PartyID>>,
+	pub nested_2_party_i_ds: Option<fix_common::RepeatingValues<Nested2PartyID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct Nested2PartyID {
 	pub nested_2_party_role: Option<Nested2PartyRole>,
 	/// Nested2PartyRoleQualifier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2381")]
 	pub nested_2_party_role_qualifier: Option<i32>,

@@ -6,7 +6,7 @@ pub struct PaymentStreamPricingDateGrp {
 	/// NoPaymentStreamPricingDates
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41224")]
-	pub payment_stream_pricing_dates: Option<crate::entities::RepeatingValues<PaymentStreamPricingDate>>,
+	pub payment_stream_pricing_dates: Option<fix_common::RepeatingValues<PaymentStreamPricingDate>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct PaymentStreamPricingDate {
 	/// Required if NoPaymentStreamPricingDates(41224) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41225")]
-	pub payment_stream_pricing_date: Option<crate::entities::LocalMktDate>,
+	pub payment_stream_pricing_date: Option<fix_common::LocalMktDate>,
 	/// PaymentStreamPricingDateType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41226")]

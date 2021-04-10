@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TrdSessLstGrp {
 	/// NoTradingSessions
 	#[serde(rename = "386")]
-	pub trading_sessions: crate::entities::RepeatingValues<TradingSession>,
+	pub trading_sessions: fix_common::RepeatingValues<TradingSession>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -59,40 +59,40 @@ pub struct TradingSession {
 	/// Starting time of trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "341")]
-	pub trad_ses_start_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_start_time: Option<fix_common::UTCTimestamp>,
 	/// Time of the opening of the trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "342")]
-	pub trad_ses_open_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_open_time: Option<fix_common::UTCTimestamp>,
 	/// Time of pre-close of trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "343")]
-	pub trad_ses_pre_close_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_pre_close_time: Option<fix_common::UTCTimestamp>,
 	/// Closing time of trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "344")]
-	pub trad_ses_close_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_close_time: Option<fix_common::UTCTimestamp>,
 	/// End time of trading session
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "345")]
-	pub trad_ses_end_time: Option<crate::entities::UTCTimestamp>,
+	pub trad_ses_end_time: Option<fix_common::UTCTimestamp>,
 	/// TotalVolumeTraded
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "387")]
 	pub total_volume_traded: Option<f64>,
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

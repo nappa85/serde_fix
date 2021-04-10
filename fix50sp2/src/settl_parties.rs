@@ -6,7 +6,7 @@ pub struct SettlParties {
 	/// Repeating group below should contain unique combinations of <a href="tag_782_SettlPartyID.html" target="bottom">SettlPartyID&nbsp;(782)</a> , <a href="tag_783_SettlPartyIDSource.html" target="bottom">SettlPartyIDSource&nbsp;(783)</a> , and <a href="tag_784_SettlPartyRole.html" target="bottom">SettlPartyRole&nbsp;(784)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "781")]
-	pub settl_party_i_ds: Option<crate::entities::RepeatingValues<SettlPartyID>>,
+	pub settl_party_i_ds: Option<fix_common::RepeatingValues<SettlPartyID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct SettlPartyID {
 	pub settl_party_role: Option<SettlPartyRole>,
 	/// SettlPartyRoleQualifier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2389")]
 	pub settl_party_role_qualifier: Option<i32>,

@@ -6,7 +6,7 @@ pub struct UnderlyingStreamCalculationPeriodBusinessCenterGrp {
 	/// NoUnderlyingStreamCalculationPeriodBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40973")]
-	pub underlying_stream_calculation_period_business_centers: Option<crate::entities::RepeatingValues<UnderlyingStreamCalculationPeriodBusinessCenter>>,
+	pub underlying_stream_calculation_period_business_centers: Option<fix_common::RepeatingValues<UnderlyingStreamCalculationPeriodBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

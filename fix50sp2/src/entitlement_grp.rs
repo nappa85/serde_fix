@@ -6,7 +6,7 @@ pub struct EntitlementGrp {
 	/// NoEntitlements
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1773")]
-	pub entitlements: Option<crate::entities::RepeatingValues<Entitlement>>,
+	pub entitlements: Option<fix_common::RepeatingValues<Entitlement>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct Entitlement {
 	/// Required if NoEntitlements(1773) &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1774")]
-	pub entitlement_indicator: Option<crate::entities::Boolean>,
+	pub entitlement_indicator: Option<fix_common::Boolean>,
 	/// Absence of this field indicates the meaning of the entitlement is implicit.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1775")]
@@ -30,11 +30,11 @@ pub struct Entitlement {
 	/// EntitlementStartDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1782")]
-	pub entitlement_start_date: Option<crate::entities::LocalMktDate>,
+	pub entitlement_start_date: Option<fix_common::LocalMktDate>,
 	/// EntitlementEndDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1783")]
-	pub entitlement_end_date: Option<crate::entities::LocalMktDate>,
+	pub entitlement_end_date: Option<fix_common::LocalMktDate>,
 	/// EntitlementSubType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2402")]

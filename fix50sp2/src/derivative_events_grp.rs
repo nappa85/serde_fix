@@ -6,7 +6,7 @@ pub struct DerivativeEventsGrp {
 	/// NoDerivativeEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1286")]
-	pub derivative_events: Option<crate::entities::RepeatingValues<DerivativeEvent>>,
+	pub derivative_events: Option<fix_common::RepeatingValues<DerivativeEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,14 +18,14 @@ pub struct DerivativeEvent {
 	/// DerivativeEventDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1288")]
-	pub derivative_event_date: Option<crate::entities::LocalMktDate>,
+	pub derivative_event_date: Option<fix_common::LocalMktDate>,
 	/// Specific time of event. To be used in combination with <a href="tag_1288_DerivativeEventDate.html" target="bottom">EventDate&nbsp;(1288)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1289")]
-	pub derivative_event_time: Option<crate::entities::UTCTimestamp>,
+	pub derivative_event_time: Option<fix_common::UTCTimestamp>,
 	/// DerivativeEventPx
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1290")]
 	pub derivative_event_px: Option<f64>,

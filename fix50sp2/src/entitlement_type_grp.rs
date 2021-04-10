@@ -6,7 +6,7 @@ pub struct EntitlementTypeGrp {
 	/// Number of Entitlement Types.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2345")]
-	pub entitlement_types: Option<crate::entities::RepeatingValues<EntitlementType>>,
+	pub entitlement_types: Option<fix_common::RepeatingValues<EntitlementType>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

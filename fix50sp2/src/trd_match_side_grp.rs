@@ -6,7 +6,7 @@ pub struct TrdMatchSideGrp {
 	/// Number of trade match sides
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1890")]
-	pub trd_match_sides: Option<crate::entities::RepeatingValues<TrdMatchSide>>,
+	pub trd_match_sides: Option<fix_common::RepeatingValues<TrdMatchSide>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -35,7 +35,7 @@ pub struct TrdMatchSide {
 	/// Time lapsed from order entry until match, based on the unit of time specified in OrderDelayUnit. Default is seconds if OrderDelayUnit
 	/// is not specified. Value = 0, indicates the aggressor (the initiating side of the trade)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1428")]
 	pub order_delay: Option<i32>,
@@ -46,19 +46,19 @@ pub struct TrdMatchSide {
 	/// <p>Used to indicate the matched quantity for this trade side as a result of the match event.</p>
 	/// <p>Required if NoTrdMatchSides(1890) &gt; 0.</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1009")]
 	pub side_last_qty: Option<f64>,
 	/// Used to indicate a side specific alternate clearing price.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1597")]
 	pub side_clearing_trade_price: Option<f64>,
 	/// Used to indicate the Price Differential between the first and second leg of a complex instrument.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1599")]
 	pub side_price_differential: Option<f64>,
@@ -136,7 +136,7 @@ pub struct TrdMatchSide {
 	pub alloc_id: Option<String>,
 	/// SideGrossTradeAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1072")]
 	pub side_gross_trade_amt: Option<f64>,
@@ -182,7 +182,7 @@ pub struct TrdMatchSide {
 	/// CustOrderHandlingInst
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1031")]
-	pub cust_order_handling_inst: Option<crate::entities::SeparatedValues<CustOrderHandlingInst>>,
+	pub cust_order_handling_inst: Option<fix_common::SeparatedValues<CustOrderHandlingInst>>,
 	/// OrderHandlingInstSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1032")]
@@ -194,7 +194,7 @@ pub struct TrdMatchSide {
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -208,7 +208,7 @@ pub struct TrdMatchSide {
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2351")]
 	pub encoded_compliance_text_len: Option<usize>,

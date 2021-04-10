@@ -6,7 +6,7 @@ pub struct MarketSegmentGrp {
 	/// Number of Market Segments on which a security may trade..
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1310")]
-	pub market_segments: Option<crate::entities::RepeatingValues<MarketSegment>>,
+	pub market_segments: Option<fix_common::RepeatingValues<MarketSegment>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

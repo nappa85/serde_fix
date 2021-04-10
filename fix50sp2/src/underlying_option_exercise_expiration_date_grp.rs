@@ -6,7 +6,7 @@ pub struct UnderlyingOptionExerciseExpirationDateGrp {
 	/// NoUnderlyingOptionExerciseExpirationDates
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41856")]
-	pub underlying_option_exercise_expiration_dates: Option<crate::entities::RepeatingValues<UnderlyingOptionExerciseExpirationDate>>,
+	pub underlying_option_exercise_expiration_dates: Option<fix_common::RepeatingValues<UnderlyingOptionExerciseExpirationDate>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct UnderlyingOptionExerciseExpirationDate {
 	/// Required if NoUnderlyingOptionExpirationDates(41856) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41857")]
-	pub underlying_option_exercise_expiration_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_option_exercise_expiration_date: Option<fix_common::LocalMktDate>,
 	/// UnderlyingOptionExerciseExpirationDateType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41858")]

@@ -6,7 +6,7 @@ pub struct SideRegulatoryTradeIDGrp {
 	/// NoSideRegulatoryTradeIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1971")]
-	pub side_regulatory_trade_i_ds: Option<crate::entities::RepeatingValues<SideRegulatoryTradeID>>,
+	pub side_regulatory_trade_i_ds: Option<fix_common::RepeatingValues<SideRegulatoryTradeID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

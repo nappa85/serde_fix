@@ -6,7 +6,7 @@ pub struct RelatedPositionGrp {
 	/// NoRelatedPositions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1861")]
-	pub related_positions: Option<crate::entities::RepeatingValues<RelatedPosition>>,
+	pub related_positions: Option<fix_common::RepeatingValues<RelatedPosition>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -22,7 +22,7 @@ pub struct RelatedPosition {
 	/// RelatedPositionDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1864")]
-	pub related_position_date: Option<crate::entities::LocalMktDate>,
+	pub related_position_date: Option<fix_common::LocalMktDate>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

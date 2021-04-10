@@ -19,7 +19,7 @@ pub struct LegOptionExerciseDates {
 	pub leg_option_exercise_earliest_date_offset_day_type: Option<LegOptionExerciseEarliestDateOffsetDayType>,
 	/// Conditionally required when LegOptionExerciseEarliestDateUnit(41496) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41495")]
 	pub leg_option_exercise_earliest_date_period: Option<i32>,
@@ -29,7 +29,7 @@ pub struct LegOptionExerciseDates {
 	pub leg_option_exercise_earliest_date_unit: Option<LegOptionExerciseEarliestDateUnit>,
 	/// Conditionally required when LegOptionExerciseFrequencyUnit(41498) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41497")]
 	pub leg_option_exercise_frequency_period: Option<i32>,
@@ -40,14 +40,14 @@ pub struct LegOptionExerciseDates {
 	/// LegOptionExerciseStartDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41499")]
-	pub leg_option_exercise_start_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_option_exercise_start_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegOptionExerciseStartDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41500")]
 	pub leg_option_exercise_start_date_relative_to: Option<LegOptionExerciseStartDateRelativeTo>,
 	/// Conditionally required when LegOptionExerciseStartDateOffsetUnit(41502) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41501")]
 	pub leg_option_exercise_start_date_offset_period: Option<i32>,
@@ -62,25 +62,25 @@ pub struct LegOptionExerciseDates {
 	/// LegOptionExerciseStartDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41504")]
-	pub leg_option_exercise_start_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_option_exercise_start_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// LegOptionExerciseSkip
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41505")]
 	pub leg_option_exercise_skip: Option<i32>,
 	/// LegOptionExerciseNominationDeadline
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41506")]
-	pub leg_option_exercise_nomination_deadline: Option<crate::entities::LocalMktDate>,
+	pub leg_option_exercise_nomination_deadline: Option<fix_common::LocalMktDate>,
 	/// LegOptionExerciseFirstDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41507")]
-	pub leg_option_exercise_first_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_option_exercise_first_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegOptionExerciseLastDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41508")]
-	pub leg_option_exercise_last_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_option_exercise_last_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegOptionExerciseEarliestTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41509")]

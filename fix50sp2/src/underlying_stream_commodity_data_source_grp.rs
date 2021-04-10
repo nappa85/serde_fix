@@ -6,7 +6,7 @@ pub struct UnderlyingStreamCommodityDataSourceGrp {
 	/// NoUnderlyingStreamCommodityDataSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41993")]
-	pub underlying_stream_commodity_data_sources: Option<crate::entities::RepeatingValues<UnderlyingStreamCommodityDataSource>>,
+	pub underlying_stream_commodity_data_sources: Option<fix_common::RepeatingValues<UnderlyingStreamCommodityDataSource>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

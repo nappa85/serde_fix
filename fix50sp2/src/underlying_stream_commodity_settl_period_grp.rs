@@ -6,7 +6,7 @@ pub struct UnderlyingStreamCommoditySettlPeriodGrp {
 	/// NoUnderlyingStreamCommoditySettlPeriods
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42002")]
-	pub underlying_stream_commodity_settl_periods: Option<crate::entities::RepeatingValues<UnderlyingStreamCommoditySettlPeriod>>,
+	pub underlying_stream_commodity_settl_periods: Option<fix_common::RepeatingValues<UnderlyingStreamCommoditySettlPeriod>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct UnderlyingStreamCommoditySettlPeriod {
 	pub underlying_stream_commodity_settl_flow_type: Option<UnderlyingStreamCommoditySettlFlowType>,
 	/// UnderlyingStreamCommoditySettlPeriodNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42006")]
 	pub underlying_stream_commodity_settl_period_notional: Option<f64>,
@@ -35,7 +35,7 @@ pub struct UnderlyingStreamCommoditySettlPeriod {
 	pub underlying_stream_commodity_settl_period_notional_unit_of_measure: Option<UnderlyingStreamCommoditySettlPeriodNotionalUnitOfMeasure>,
 	/// Conditionally required when UnderlyingStreamCommoditySettlPeriodFrequencyUnit(42009) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42008")]
 	pub underlying_stream_commodity_settl_period_frequency_period: Option<i32>,
@@ -45,7 +45,7 @@ pub struct UnderlyingStreamCommoditySettlPeriod {
 	pub underlying_stream_commodity_settl_period_frequency_unit: Option<UnderlyingStreamCommoditySettlPeriodFrequencyUnit>,
 	/// UnderlyingStreamCommoditySettlPeriodPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42010")]
 	pub underlying_stream_commodity_settl_period_price: Option<f64>,

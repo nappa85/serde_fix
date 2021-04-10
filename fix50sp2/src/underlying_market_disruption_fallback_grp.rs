@@ -6,7 +6,7 @@ pub struct UnderlyingMarketDisruptionFallbackGrp {
 	/// NoUnderlyingMarketDisruptionFallbacks
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41866")]
-	pub underlying_market_disruption_fallbacks: Option<crate::entities::RepeatingValues<UnderlyingMarketDisruptionFallback>>,
+	pub underlying_market_disruption_fallbacks: Option<fix_common::RepeatingValues<UnderlyingMarketDisruptionFallback>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

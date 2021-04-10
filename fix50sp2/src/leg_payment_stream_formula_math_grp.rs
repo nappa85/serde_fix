@@ -6,7 +6,7 @@ pub struct LegPaymentStreamFormulaMathGrp {
 	/// NoLegPaymentStreamFormulas
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42485")]
-	pub leg_payment_stream_formulas: Option<crate::entities::RepeatingValues<LegPaymentStreamFormula>>,
+	pub leg_payment_stream_formulas: Option<fix_common::RepeatingValues<LegPaymentStreamFormula>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,7 +21,7 @@ pub struct LegPaymentStreamFormula {
 	pub leg_payment_stream_formula_desc: Option<String>,
 	/// Required if NoLegPaymentStreamFormulas(42485) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "43110")]
 	pub leg_payment_stream_formula_length: Option<usize>,

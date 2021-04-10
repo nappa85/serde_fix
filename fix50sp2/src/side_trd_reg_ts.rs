@@ -6,7 +6,7 @@ pub struct SideTrdRegTS {
 	/// NoSideTrdRegTS
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1016")]
-	pub side_trd_reg_ts: Option<crate::entities::RepeatingValues<SideTrdRegT>>,
+	pub side_trd_reg_ts: Option<fix_common::RepeatingValues<SideTrdRegT>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct SideTrdRegT {
 	/// SideTrdRegTimestamp
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1012")]
-	pub side_trd_reg_timestamp: Option<crate::entities::UTCTimestamp>,
+	pub side_trd_reg_timestamp: Option<fix_common::UTCTimestamp>,
 	/// SideTrdRegTimestampType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1013")]

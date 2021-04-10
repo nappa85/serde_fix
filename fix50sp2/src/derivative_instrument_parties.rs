@@ -6,7 +6,7 @@ pub struct DerivativeInstrumentParties {
 	/// Should contain unique combinations of DerivativeInstrumentPartyID, DerivativeInstrumentPartyIDSource, and DerivativeInstrumentPartyRole.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1292")]
-	pub derivative_instrument_parties: Option<crate::entities::RepeatingValues<DerivativeInstrumentPartie>>,
+	pub derivative_instrument_parties: Option<fix_common::RepeatingValues<DerivativeInstrumentPartie>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct DerivativeInstrumentPartie {
 	pub derivative_instrument_party_role: Option<DerivativeInstrumentPartyRole>,
 	/// DerivativeInstrumentPartyRoleQualifier
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2377")]
 	pub derivative_instrument_party_role_qualifier: Option<i32>,

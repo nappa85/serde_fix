@@ -6,7 +6,7 @@ pub struct LegDeliveryStreamCommoditySourceGrp {
 	/// NoLegDeliveryStreamCommoditySources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41460")]
-	pub leg_delivery_stream_commodity_sources: Option<crate::entities::RepeatingValues<LegDeliveryStreamCommoditySource>>,
+	pub leg_delivery_stream_commodity_sources: Option<fix_common::RepeatingValues<LegDeliveryStreamCommoditySource>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

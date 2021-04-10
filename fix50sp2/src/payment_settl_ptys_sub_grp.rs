@@ -6,7 +6,7 @@ pub struct PaymentSettlPtysSubGrp {
 	/// NoPaymentSettlPartySubIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40238")]
-	pub payment_settl_party_sub_i_ds: Option<crate::entities::RepeatingValues<PaymentSettlPartySubID>>,
+	pub payment_settl_party_sub_i_ds: Option<fix_common::RepeatingValues<PaymentSettlPartySubID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

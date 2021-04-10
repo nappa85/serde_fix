@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Settlement {
 	/// MsgType = T
 	#[serde(flatten)]
@@ -26,7 +26,7 @@ pub struct Settlement {
 	pub text: Option<String>,
 	/// EncodedTextLen
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -40,7 +40,7 @@ pub struct Settlement {
 	pub cl_ord_id: Option<String>,
 	/// Date/time this message was generated
 	#[serde(rename = "60")]
-	pub transact_time: crate::entities::UTCTimestamp,
+	pub transact_time: fix_common::UTCTimestamp,
 	/// Required except where <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> is 5=Reject SSI request
 	#[serde(flatten)]
 	pub settl_inst_grp: Option<super::super::settl_inst_grp::SettlInstGrp>,

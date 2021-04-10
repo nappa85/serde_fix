@@ -6,7 +6,7 @@ pub struct RelativeValueGrp {
 	/// NoRelativeValues
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2529")]
-	pub relative_values: Option<crate::entities::RepeatingValues<RelativeValue>>,
+	pub relative_values: Option<fix_common::RepeatingValues<RelativeValue>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct RelativeValue {
 	pub relative_value_type: Option<RelativeValueType>,
 	/// Required if NoRelativeValues(2529) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2531")]
 	pub relative_value: Option<f64>,

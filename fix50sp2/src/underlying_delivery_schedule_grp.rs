@@ -6,7 +6,7 @@ pub struct UnderlyingDeliveryScheduleGrp {
 	/// NoUnderlyingDeliverySchedules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41756")]
-	pub underlying_delivery_schedules: Option<crate::entities::RepeatingValues<UnderlyingDeliverySchedule>>,
+	pub underlying_delivery_schedules: Option<fix_common::RepeatingValues<UnderlyingDeliverySchedule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,7 +21,7 @@ pub struct UnderlyingDeliverySchedule {
 	pub underlying_delivery_schedule_xid: Option<String>,
 	/// UnderlyingDeliveryScheduleNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41759")]
 	pub underlying_delivery_schedule_notional: Option<f64>,
@@ -35,13 +35,13 @@ pub struct UnderlyingDeliverySchedule {
 	pub underlying_delivery_schedule_notional_commodity_frequency: Option<UnderlyingDeliveryScheduleNotionalCommodityFrequency>,
 	/// UnderlyingDeliveryScheduleNegativeTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41762")]
 	pub underlying_delivery_schedule_negative_tolerance: Option<f64>,
 	/// UnderlyingDeliverySchedulePositiveTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41763")]
 	pub underlying_delivery_schedule_positive_tolerance: Option<f64>,

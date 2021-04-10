@@ -6,7 +6,7 @@ pub struct UnderlyingProvisionOptionRelevantUnderlyingDate {
 	/// UnderlyingProvisionOptionRelevantUnderlyingDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42142")]
-	pub underlying_provision_option_relevant_underlying_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_provision_option_relevant_underlying_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// When specified, this overrides the business day convention defined in the UnderlyingDateAdjustment component in UnderlyingInstrument.
 	/// The specified value would be specific to this instance of the provisional option relevant underlying date.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -22,7 +22,7 @@ pub struct UnderlyingProvisionOptionRelevantUnderlyingDate {
 	pub underlying_provision_option_relevant_underlying_date_relative_to: Option<UnderlyingProvisionOptionRelevantUnderlyingDateRelativeTo>,
 	/// Conditionally required when UnderlyingProvisionOptionRelevantUnderlyingDateOffsetUnit(42146) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42145")]
 	pub underlying_provision_option_relevant_underlying_date_offset_period: Option<i32>,
@@ -37,7 +37,7 @@ pub struct UnderlyingProvisionOptionRelevantUnderlyingDate {
 	/// UnderlyingProvisionOptionRelevantUnderlyingDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42148")]
-	pub underlying_provision_option_relevant_underlying_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_provision_option_relevant_underlying_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

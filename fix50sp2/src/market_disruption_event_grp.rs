@@ -6,7 +6,7 @@ pub struct MarketDisruptionEventGrp {
 	/// NoMarketDisruptionEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41092")]
-	pub market_disruption_events: Option<crate::entities::RepeatingValues<MarketDisruptionEvent>>,
+	pub market_disruption_events: Option<fix_common::RepeatingValues<MarketDisruptionEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

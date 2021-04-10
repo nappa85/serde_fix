@@ -6,7 +6,7 @@ pub struct MDStatisticReqGrp {
 	/// NoMDStatistics
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2474")]
-	pub md_statistics: Option<crate::entities::RepeatingValues<MDStatistic>>,
+	pub md_statistics: Option<fix_common::RepeatingValues<MDStatistic>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

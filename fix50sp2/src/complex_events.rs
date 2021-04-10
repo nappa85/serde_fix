@@ -6,7 +6,7 @@ pub struct ComplexEvents {
 	/// NoComplexEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1483")]
-	pub complex_events: Option<crate::entities::RepeatingValues<ComplexEvent>>,
+	pub complex_events: Option<fix_common::RepeatingValues<ComplexEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,13 +17,13 @@ pub struct ComplexEvent {
 	pub complex_event_type: Option<ComplexEventType>,
 	/// ComplexOptPayoutAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1485")]
 	pub complex_opt_payout_amount: Option<f64>,
 	/// ComplexEventPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1486")]
 	pub complex_event_price: Option<f64>,
@@ -33,7 +33,7 @@ pub struct ComplexEvent {
 	pub complex_event_price_boundary_method: Option<ComplexEventPriceBoundaryMethod>,
 	/// ComplexEventPriceBoundaryPrecision
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1488")]
 	pub complex_event_price_boundary_precision: Option<f32>,
@@ -61,7 +61,7 @@ pub struct ComplexEvent {
 	pub complex_opt_payout_underlier: Option<String>,
 	/// ComplexOptPayoutPercentage
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2120")]
 	pub complex_opt_payout_percentage: Option<f32>,
@@ -75,7 +75,7 @@ pub struct ComplexEvent {
 	pub complex_opt_payout_currency: Option<String>,
 	/// ComplexEventPricePercentage
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2123")]
 	pub complex_event_price_percentage: Option<f32>,
@@ -93,7 +93,7 @@ pub struct ComplexEvent {
 	pub complex_event_quote_basis: Option<ComplexEventQuoteBasis>,
 	/// ComplexEventFixedFXRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2127")]
 	pub complex_event_fixed_fx_rate: Option<f64>,
@@ -107,19 +107,19 @@ pub struct ComplexEvent {
 	pub complex_event_calculation_agent: Option<ComplexEventCalculationAgent>,
 	/// ComplexEventStrikePrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2130")]
 	pub complex_event_strike_price: Option<f64>,
 	/// ComplexEventStrikeFactor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2131")]
 	pub complex_event_strike_factor: Option<f64>,
 	/// ComplexEventStrikeNumberOfOptions
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2132")]
 	pub complex_event_strike_number_of_options: Option<i32>,
@@ -138,10 +138,10 @@ pub struct ComplexEvent {
 	/// ComplexEventCreditEventStandardSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2136")]
-	pub complex_event_credit_event_standard_sources: Option<crate::entities::Boolean>,
+	pub complex_event_credit_event_standard_sources: Option<fix_common::Boolean>,
 	/// ComplexEventCreditEventMinimumSources
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2137")]
 	pub complex_event_credit_event_minimum_sources: Option<i32>,
@@ -155,24 +155,24 @@ pub struct ComplexEvent {
 	pub complex_event_xid_ref: Option<String>,
 	/// ComplexEventSpotRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2407")]
 	pub complex_event_spot_rate: Option<f64>,
 	/// ComplexEventForwardPoints
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2408")]
 	pub complex_event_forward_points: Option<f64>,
 	/// ComplexEventFuturesPriceValuation
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2597")]
-	pub complex_event_futures_price_valuation: Option<crate::entities::Boolean>,
+	pub complex_event_futures_price_valuation: Option<fix_common::Boolean>,
 	/// ComplexEventOptionsPriceValuation
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2598")]
-	pub complex_event_options_price_valuation: Option<crate::entities::Boolean>,
+	pub complex_event_options_price_valuation: Option<fix_common::Boolean>,
 	/// ComplexEventPVFinalPriceElectionFallback
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2599")]

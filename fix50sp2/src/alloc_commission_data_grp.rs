@@ -6,7 +6,7 @@ pub struct AllocCommissionDataGrp {
 	/// NoAllocCommissions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2653")]
-	pub alloc_commissions: Option<crate::entities::RepeatingValues<AllocCommission>>,
+	pub alloc_commissions: Option<fix_common::RepeatingValues<AllocCommission>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct AllocCommission {
 	/// Required if NoAllocCommissions(2653) &gt; 0. If the commission is based on a percentage of trade quantity or a factor of "unit
 	/// of measure", AllocCommissionRate(2660) and AllocCommissionUnitOfMeasure(2658) may also be specified as appropriate.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2654")]
 	pub alloc_commission_amount: Option<f64>,
@@ -40,17 +40,17 @@ pub struct AllocCommission {
 	pub alloc_commission_unit_of_measure_currency: Option<String>,
 	/// AllocCommissionRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2660")]
 	pub alloc_commission_rate: Option<f64>,
 	/// AllocCommissionSharedIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2661")]
-	pub alloc_commission_shared_indicator: Option<crate::entities::Boolean>,
+	pub alloc_commission_shared_indicator: Option<fix_common::Boolean>,
 	/// If specified, AllocCommissionSharedIndicator(2661) must be set to "Y".
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2662")]
 	pub alloc_commission_amount_shared: Option<f64>,
@@ -65,7 +65,7 @@ pub struct AllocCommission {
 	pub alloc_commission_desc: Option<String>,
 	/// Must be set if EncodedAllocCommissionDesc(2666) is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2665")]
 	pub encoded_alloc_commission_desc_len: Option<usize>,

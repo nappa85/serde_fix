@@ -6,14 +6,14 @@ pub struct LegPositionAmountData {
 	/// Number of Position Amount entries.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1586")]
-	pub leg_pos_amt: Option<crate::entities::RepeatingValues<LegPosAm>>,
+	pub leg_pos_amt: Option<fix_common::RepeatingValues<LegPosAm>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct LegPosAm {
 	/// LegPosAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1587")]
 	pub leg_pos_amt: Option<f64>,

@@ -6,7 +6,7 @@ pub struct ProtectionTermEventQualifierGrp {
 	/// NoProtectionTermEventQualifiers
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40199")]
-	pub protection_term_event_qualifiers: Option<crate::entities::RepeatingValues<ProtectionTermEventQualifier>>,
+	pub protection_term_event_qualifiers: Option<fix_common::RepeatingValues<ProtectionTermEventQualifier>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

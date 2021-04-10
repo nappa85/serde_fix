@@ -6,7 +6,7 @@ pub struct NotAffectedOrdersGrp {
 	/// Optional field used to indicate the number of order identifiers for orders not affected by the request. Must be followed with <a href="tag_1372_NotAffOrigClOrdID.html" target="bottom">NotAffOrigClOrdID (1372)&nbsp;(1372)</a> as the next field.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1370")]
-	pub not_affected_orders: Option<crate::entities::RepeatingValues<NotAffectedOrder>>,
+	pub not_affected_orders: Option<fix_common::RepeatingValues<NotAffectedOrder>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

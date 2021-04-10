@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Request {
 	/// MsgType = AN
 	#[serde(flatten)]
@@ -54,7 +54,7 @@ pub struct Request {
 	pub und_instrmt_grp: Option<super::super::und_instrmt_grp::UndInstrmtGrp>,
 	/// The Clearing Business Date referred to by this request
 	#[serde(rename = "715")]
-	pub clearing_business_date: crate::entities::LocalMktDate,
+	pub clearing_business_date: fix_common::LocalMktDate,
 	/// Intraday(ITD), Regular Trading Hours(EOD)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "716")]
@@ -68,7 +68,7 @@ pub struct Request {
 	pub trdg_ses_grp: Option<super::super::trdg_ses_grp::TrdgSesGrp>,
 	/// Time this order request was initiated/released by the trader, trading system, or intermediary.
 	#[serde(rename = "60")]
-	pub transact_time: crate::entities::UTCTimestamp,
+	pub transact_time: fix_common::UTCTimestamp,
 	/// Ability to specify whether the response to the request should be delivered inband or via pre-arranged out-of-band transport.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "725")]
@@ -83,7 +83,7 @@ pub struct Request {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -94,7 +94,7 @@ pub struct Request {
 	/// SettlDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

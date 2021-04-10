@@ -18,7 +18,7 @@ pub struct LegFinancingDetails {
 	/// LegAgreementDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2496")]
-	pub leg_agreement_date: Option<crate::entities::LocalMktDate>,
+	pub leg_agreement_date: Option<fix_common::LocalMktDate>,
 	/// LegAgreementCurrency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2495")]
@@ -30,7 +30,7 @@ pub struct LegFinancingDetails {
 	/// LegMasterConfirmationDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2510")]
-	pub leg_master_confirmation_date: Option<crate::entities::LocalMktDate>,
+	pub leg_master_confirmation_date: Option<fix_common::LocalMktDate>,
 	/// LegMasterConfirmationAnnexDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2512")]
@@ -38,7 +38,7 @@ pub struct LegFinancingDetails {
 	/// LegMasterConfirmationAnnexDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2509")]
-	pub leg_master_confirmation_annex_date: Option<crate::entities::LocalMktDate>,
+	pub leg_master_confirmation_annex_date: Option<fix_common::LocalMktDate>,
 	/// LegBrokerConfirmationDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2500")]
@@ -53,7 +53,7 @@ pub struct LegFinancingDetails {
 	/// LegCreditSupportAgreementDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2501")]
-	pub leg_credit_support_agreement_date: Option<crate::entities::LocalMktDate>,
+	pub leg_credit_support_agreement_date: Option<fix_common::LocalMktDate>,
 	/// LegCreditSupportAgreementID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2503")]
@@ -68,7 +68,7 @@ pub struct LegFinancingDetails {
 	pub leg_documentation_text: Option<String>,
 	/// Must be set if <a href="tag_2493_EncodedLegDocumentationText.html" target="bottom">EncodedLegDocumentationText&nbsp;(2493)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2494")]
 	pub encoded_leg_documentation_text_len: Option<usize>,
@@ -83,18 +83,18 @@ pub struct LegFinancingDetails {
 	/// LegStartDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2513")]
-	pub leg_start_date: Option<crate::entities::LocalMktDate>,
+	pub leg_start_date: Option<fix_common::LocalMktDate>,
 	/// LegEndDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2506")]
-	pub leg_end_date: Option<crate::entities::LocalMktDate>,
+	pub leg_end_date: Option<fix_common::LocalMktDate>,
 	/// LegDeliveryType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2504")]
 	pub leg_delivery_type: Option<LegDeliveryType>,
 	/// LegMarginRatio
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2508")]
 	pub leg_margin_ratio: Option<f32>,

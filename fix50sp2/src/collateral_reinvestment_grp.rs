@@ -6,7 +6,7 @@ pub struct CollateralReinvestmentGrp {
 	/// NoCollateralReinvestments
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2845")]
-	pub collateral_reinvestments: Option<crate::entities::RepeatingValues<CollateralReinvestment>>,
+	pub collateral_reinvestments: Option<fix_common::RepeatingValues<CollateralReinvestment>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct CollateralReinvestment {
 	pub collateral_reinvestment_type: Option<CollateralReinvestmentType>,
 	/// CollateralReinvestmentAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2842")]
 	pub collateral_reinvestment_amount: Option<f64>,

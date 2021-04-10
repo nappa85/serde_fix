@@ -6,7 +6,7 @@ pub struct CommissionDataGrp {
 	/// NoCommissions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2639")]
-	pub commissions: Option<crate::entities::RepeatingValues<Commission>>,
+	pub commissions: Option<fix_common::RepeatingValues<Commission>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct Commission {
 	/// Required if NoCommissions(2639) &gt; 0. If the commission is based on a percentage of trade quantity or a factor of "unit of
 	/// measure", CommissionRate(2646) and CommissionUnitOfMeasure(2644) may also be specified as appropriate.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2640")]
 	pub commission_amount: Option<f64>,
@@ -40,17 +40,17 @@ pub struct Commission {
 	pub commission_unit_of_measure_currency: Option<String>,
 	/// CommissionRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2646")]
 	pub commission_rate: Option<f64>,
 	/// CommissionSharedIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2647")]
-	pub commission_shared_indicator: Option<crate::entities::Boolean>,
+	pub commission_shared_indicator: Option<fix_common::Boolean>,
 	/// If specified, CommissionSharedIndicator(2647) must be set to "Y".
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2648")]
 	pub commission_amount_shared: Option<f64>,
@@ -65,7 +65,7 @@ pub struct Commission {
 	pub commission_desc: Option<String>,
 	/// Must be set if EncodedCommissionDesc(2652) is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2651")]
 	pub encoded_commission_desc_len: Option<usize>,

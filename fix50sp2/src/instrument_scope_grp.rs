@@ -6,7 +6,7 @@ pub struct InstrumentScopeGrp {
 	/// NoInstrumentScopes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1656")]
-	pub instrument_scopes: Option<crate::entities::RepeatingValues<InstrumentScope>>,
+	pub instrument_scopes: Option<fix_common::RepeatingValues<InstrumentScope>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

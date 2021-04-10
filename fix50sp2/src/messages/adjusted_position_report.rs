@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Adjusted {
 	/// MsgType = BL
 	#[serde(flatten)]
@@ -15,7 +15,7 @@ pub struct Adjusted {
 	pub pos_req_type: Option<PosReqType>,
 	/// The Clearing Business Date referred to by this maintenance request
 	#[serde(rename = "715")]
-	pub clearing_business_date: crate::entities::LocalMktDate,
+	pub clearing_business_date: fix_common::LocalMktDate,
 	/// SettlSessID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "716")]
@@ -35,13 +35,13 @@ pub struct Adjusted {
 	pub instrmt_grp: Option<super::super::instrmt_grp::InstrmtGrp>,
 	/// Settlement Price
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "730")]
 	pub settl_price: Option<f64>,
 	/// Prior Settlement Price
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "734")]
 	pub prior_settl_price: Option<f64>,

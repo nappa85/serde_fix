@@ -6,14 +6,14 @@ pub struct SettlementAmountGrp {
 	/// NoSettlementAmounts
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1700")]
-	pub settlement_amounts: Option<crate::entities::RepeatingValues<SettlementAmount>>,
+	pub settlement_amounts: Option<fix_common::RepeatingValues<SettlementAmount>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct SettlementAmount {
 	/// w Required if NoSettlementAmounts(1700) &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1701")]
 	pub settlement_amount: Option<f64>,

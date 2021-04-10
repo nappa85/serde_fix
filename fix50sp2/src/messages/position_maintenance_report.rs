@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Position {
 	/// MsgType = AM
 	#[serde(flatten)]
@@ -33,7 +33,7 @@ pub struct Position {
 	pub pos_maint_result: Option<PosMaintResult>,
 	/// The Clearing Business Date covered by this request
 	#[serde(rename = "715")]
-	pub clearing_business_date: crate::entities::LocalMktDate,
+	pub clearing_business_date: fix_common::LocalMktDate,
 	/// Intraday(ITD), Regular Trading Hours(EOD),
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "716")]
@@ -76,11 +76,11 @@ pub struct Position {
 	/// exercise of an out of the money position or an abandonement (do not exercise ) of an in the money position
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "719")]
-	pub contrary_instruction_indicator: Option<crate::entities::Boolean>,
+	pub contrary_instruction_indicator: Option<fix_common::Boolean>,
 	/// PriorSpreadIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "720")]
-	pub prior_spread_indicator: Option<crate::entities::Boolean>,
+	pub prior_spread_indicator: Option<fix_common::Boolean>,
 	/// Specifies the number of legs that make up the Security
 	#[serde(flatten)]
 	pub instrmt_leg_grp: Option<super::super::instrmt_leg_grp::InstrmtLegGrp>,
@@ -94,7 +94,7 @@ pub struct Position {
 	/// when requests for reports are processed in batch, transaction time is not available, or when <a href="tag_710_PosReqID.html" target="bottom">PosReqID&nbsp;(710)</a> is not present.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Conditionally required, when PosMaintAction(712) = 1(New), 2(Replace) or 4(Reverse)
 	#[serde(flatten)]
 	pub position_qty: Option<super::super::position_qty::PositionQty>,
@@ -107,7 +107,7 @@ pub struct Position {
 	pub adjustment_type: Option<AdjustmentType>,
 	/// ThresholdAmount
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "834")]
 	pub threshold_amount: Option<f64>,
@@ -117,7 +117,7 @@ pub struct Position {
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -134,7 +134,7 @@ pub struct Position {
 	pub related_instrument_grp: Option<super::super::related_instrument_grp::RelatedInstrumentGrp>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText.html" target="bottom">EncodedRejectTextLen(1665)&nbsp;(1665)</a> field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1664")]
 	pub encoded_reject_text_len: Option<usize>,
@@ -164,11 +164,11 @@ pub struct Position {
 	/// The business date previous to the clearing business date referred to by this maintenance request.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2084")]
-	pub previous_clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub previous_clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// Valuation date of the position(s) in this report.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2085")]
-	pub valuation_date: Option<crate::entities::LocalMktDate>,
+	pub valuation_date: Option<fix_common::LocalMktDate>,
 	/// Valuation time of the position(s) in this report.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2086")]
@@ -180,18 +180,18 @@ pub struct Position {
 	/// For a forward position this is an appropriate value to discount the mark to market amount from the contract's maturity date
 	/// back to present value.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1592")]
 	pub discount_factor: Option<f64>,
 	/// TerminatedIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2101")]
-	pub terminated_indicator: Option<crate::entities::Boolean>,
+	pub terminated_indicator: Option<fix_common::Boolean>,
 	/// SettlDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// The source, value and relationship of multiple trade identifiers for the same trade, e.g. Unique Swap Identifiers.
 	#[serde(flatten)]
 	pub regulatory_trade_id_grp: Option<super::super::regulatory_trade_id_grp::RegulatoryTradeIDGrp>,

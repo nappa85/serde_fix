@@ -6,7 +6,7 @@ pub struct LegComplexEventPeriodGrp {
 	/// NoLegComplexEventPeriods
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41379")]
-	pub leg_complex_event_periods: Option<crate::entities::RepeatingValues<LegComplexEventPeriod>>,
+	pub leg_complex_event_periods: Option<fix_common::RepeatingValues<LegComplexEventPeriod>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

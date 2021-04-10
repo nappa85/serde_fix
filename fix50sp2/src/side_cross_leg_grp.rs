@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SideCrossLegGrp {
 	/// NoCrossLegs
 	#[serde(rename = "1829")]
-	pub cross_legs: crate::entities::RepeatingValues<CrossLeg>,
+	pub cross_legs: fix_common::RepeatingValues<CrossLeg>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -16,7 +16,7 @@ pub struct CrossLeg {
 	pub leg_ref_id: Option<String>,
 	/// Quantity ordered from this leg as provided during order entry
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "685")]
 	pub leg_order_qty: Option<f64>,
@@ -49,33 +49,33 @@ pub struct CrossLeg {
 	/// LegSettlDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "588")]
-	pub leg_settl_date: Option<crate::entities::LocalMktDate>,
+	pub leg_settl_date: Option<fix_common::LocalMktDate>,
 	/// LegSettlCurrency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "675")]
 	pub leg_settl_currency: Option<LegSettlCurrency>,
 	/// LegVolatility
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1379")]
 	pub leg_volatility: Option<f64>,
 	/// LegDividendYield
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1381")]
 	pub leg_dividend_yield: Option<f32>,
 	/// LegCurrencyRatio
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1383")]
 	pub leg_currency_ratio: Option<f64>,
 	/// LegExecInst
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1384")]
-	pub leg_exec_inst: Option<crate::entities::SeparatedValues<LegExecInst>>,
+	pub leg_exec_inst: Option<fix_common::SeparatedValues<LegExecInst>>,
 	/// Available for optional use when LegSide(624) = 6 (Sell short exempt) in InstrumentLeg component
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1689")]

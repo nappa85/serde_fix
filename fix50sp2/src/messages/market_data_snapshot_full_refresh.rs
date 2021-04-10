@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Market {
 	/// MsgType = W
 	#[serde(flatten)]
@@ -11,27 +11,27 @@ pub struct Market {
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
 	/// Total number or reports returned in response to a request.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "911")]
 	pub tot_num_reports: Option<i32>,
 	/// Unique identifier for the market data report.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "963")]
 	pub md_report_id: Option<i32>,
 	/// ClearingBusinessDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// Describes the type of book for which the feed is intended. Can be used when multiple feeds are provided over the same connection
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1021")]
 	pub md_book_type: Option<MDBookType>,
 	/// Can be used to define a subordinate book.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1173")]
 	pub md_sub_book_type: Option<i32>,
@@ -50,7 +50,7 @@ pub struct Market {
 	/// Used to specify the trading date for which a set of market data applies
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "75")]
-	pub trade_date: Option<crate::entities::LocalMktDate>,
+	pub trade_date: Option<fix_common::LocalMktDate>,
 	/// Conditionally required if this message is in response to a MarketDataRequest(35=V).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "262")]
@@ -71,14 +71,14 @@ pub struct Market {
 	/// FinancialStatus
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "291")]
-	pub financial_status: Option<crate::entities::SeparatedValues<FinancialStatus>>,
+	pub financial_status: Option<fix_common::SeparatedValues<FinancialStatus>>,
 	/// CorporateAction
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "292")]
-	pub corporate_action: Option<crate::entities::SeparatedValues<CorporateAction>>,
+	pub corporate_action: Option<fix_common::SeparatedValues<CorporateAction>>,
 	/// NetChgPrevDay
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "451")]
 	pub net_chg_prev_day: Option<f64>,
@@ -87,7 +87,7 @@ pub struct Market {
 	pub md_full_grp: super::super::md_full_grp::MDFullGrp,
 	/// Depth of application messages queued for transmission as of delivery of this message
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "813")]
 	pub appl_queue_depth: Option<i32>,
@@ -120,7 +120,7 @@ pub struct Market {
 	pub md_halt_reason: Option<MDHaltReason>,
 	/// LastUpdateTime
 	#[serde(rename = "779")]
-	pub last_update_time: crate::entities::UTCTimestamp,
+	pub last_update_time: fix_common::UTCTimestamp,
 	/// InstrumentExtension
 	#[serde(flatten)]
 	pub instrument_extension: Option<super::super::instrument_extension::InstrumentExtension>,

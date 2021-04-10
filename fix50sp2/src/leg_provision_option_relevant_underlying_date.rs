@@ -6,7 +6,7 @@ pub struct LegProvisionOptionRelevantUnderlyingDate {
 	/// LegProvisionOptionRelevantUnderlyingDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40508")]
-	pub leg_provision_option_relevant_underlying_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_option_relevant_underlying_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// When specified, this overrides the business day convention defined in the LegDateAdjustment component in InstrumentLeg. The
 	/// specified value would be specific to this instance of the leg provision option relevant underlying date.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -18,13 +18,13 @@ pub struct LegProvisionOptionRelevantUnderlyingDate {
 	pub leg_provision_option_relevant_underlying_date_business_center_grp: Option<super::leg_provision_option_relevant_underlying_date_business_center_grp::LegProvisionOptionRelevantUnderlyingDateBusinessCenterGrp>,
 	/// LegProvisionOptionRelevantUnderlyingDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40511")]
 	pub leg_provision_option_relevant_underlying_date_relative_to: Option<i32>,
 	/// Conditionally required when LegProvisionOptionRelevantUnderlyingDateOffsetUnit(40513) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40512")]
 	pub leg_provision_option_relevant_underlying_date_offset_period: Option<i32>,
@@ -34,14 +34,14 @@ pub struct LegProvisionOptionRelevantUnderlyingDate {
 	pub leg_provision_option_relevant_underlying_date_offset_unit: Option<String>,
 	/// LegProvisionOptionRelevantUnderlyingDateOffsetDayType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40514")]
 	pub leg_provision_option_relevant_underlying_date_offset_day_type: Option<i32>,
 	/// LegProvisionOptionRelevantUnderlyingDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40515")]
-	pub leg_provision_option_relevant_underlying_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_option_relevant_underlying_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

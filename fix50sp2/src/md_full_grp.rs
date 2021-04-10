@@ -5,10 +5,10 @@ use serde::{Deserialize, Serialize};
 pub struct MDFullGrp {
 	/// Number of entries following.
 	#[serde(rename = "268")]
-	pub md_entries: crate::entities::RepeatingValues<MDEntrie>,
+	pub md_entries: fix_common::RepeatingValues<MDEntrie>,
 	/// DiscountFactor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1592")]
 	pub discount_factor: Option<f64>,
@@ -27,7 +27,7 @@ pub struct MDEntrie {
 	/// Conditionally required if MDEntryType is not 'A' (Imbalance), 'B' (Trade Volume), or 'C' (Open Interest). Conditionally required
 	/// when MDEntryType = 'Q' (Auction clearing price).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "270")]
 	pub md_entry_px: Option<f64>,
@@ -53,7 +53,7 @@ pub struct MDEntrie {
 	pub settl_currency: Option<SettlCurrency>,
 	/// Conditionally required if MDEntryType = '0'(Bid), '1' (Offer), '2'(Trade), 'B'(Trade Volume), or 'C'(Open Interest).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "271")]
 	pub md_entry_size: Option<f64>,
@@ -64,11 +64,11 @@ pub struct MDEntrie {
 	/// MDEntryDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "272")]
-	pub md_entry_date: Option<crate::entities::UTCDateOnly>,
+	pub md_entry_date: Option<fix_common::UTCDateOnly>,
 	/// MDEntryTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "273")]
-	pub md_entry_time: Option<crate::entities::UTCTimeOnly>,
+	pub md_entry_time: Option<fix_common::UTCTimeOnly>,
 	/// TickDirection
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "274")]
@@ -96,11 +96,11 @@ pub struct MDEntrie {
 	/// Space-delimited list of conditions describing a quote.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "276")]
-	pub quote_condition: Option<crate::entities::SeparatedValues<QuoteCondition>>,
+	pub quote_condition: Option<fix_common::SeparatedValues<QuoteCondition>>,
 	/// Space-delimited list of conditions describing a trade
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "277")]
-	pub trade_condition: Option<crate::entities::SeparatedValues<TradeCondition>>,
+	pub trade_condition: Option<fix_common::SeparatedValues<TradeCondition>>,
 	/// (Deprecated in FIX.5.0)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "282")]
@@ -116,7 +116,7 @@ pub struct MDEntrie {
 	/// Used if MDEntryType = Opening Price(4), Closing Price(5), or Settlement Price(6).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "286")]
-	pub open_close_settl_flag: Option<crate::entities::SeparatedValues<OpenCloseSettlFlag>>,
+	pub open_close_settl_flag: Option<fix_common::SeparatedValues<OpenCloseSettlFlag>>,
 	/// For optional use when this Bid or Offer represents an order
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "59")]
@@ -125,25 +125,25 @@ pub struct MDEntrie {
 	/// Data Entry.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "432")]
-	pub expire_date: Option<crate::entities::LocalMktDate>,
+	pub expire_date: Option<fix_common::LocalMktDate>,
 	/// For optional use when this Bid or Offer represents an order. ExpireDate and ExpireTime cannot both be specified in one Market
 	/// Data Entry.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "126")]
-	pub expire_time: Option<crate::entities::UTCTimestamp>,
+	pub expire_time: Option<fix_common::UTCTimestamp>,
 	/// For optional use when this Bid or Offer represents an order
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "110")]
 	pub min_qty: Option<f64>,
 	/// Can contain multiple instructions, space delimited.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "18")]
-	pub exec_inst: Option<crate::entities::SeparatedValues<ExecInst>>,
+	pub exec_inst: Option<fix_common::SeparatedValues<ExecInst>>,
 	/// SellerDays
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "287")]
 	pub seller_days: Option<i32>,
@@ -169,23 +169,23 @@ pub struct MDEntrie {
 	pub md_entry_seller: Option<String>,
 	/// In an Aggregated Book, used to show how many individual orders make up an MDEntry
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "346")]
 	pub number_of_orders: Option<i32>,
 	/// Display position of a bid or offer, numbered from most competitive to least competitive, per market side, beginning with 1
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "290")]
 	pub md_entry_position_no: Option<i32>,
 	/// Scope
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "546")]
-	pub scope: Option<crate::entities::SeparatedValues<Scope>>,
+	pub scope: Option<fix_common::SeparatedValues<Scope>>,
 	/// PriceDelta
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "811")]
 	pub price_delta: Option<f64>,
@@ -199,7 +199,7 @@ pub struct MDEntrie {
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -209,7 +209,7 @@ pub struct MDEntrie {
 	pub encoded_text: Option<String>,
 	/// Display position of a bid or offer, numbered from most competitive to least competitive, per market side, beginning with 1
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1023")]
 	pub md_price_level: Option<i32>,
@@ -223,31 +223,31 @@ pub struct MDEntrie {
 	pub md_origin_type: Option<MDOriginType>,
 	/// Used to report high price in association with trade, bid or ask rather than a separate entity
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "332")]
 	pub high_px: Option<f64>,
 	/// Used to report low price in association with trade, bid or ask rather than a separate entitty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "333")]
 	pub low_px: Option<f64>,
 	/// Indicates the first price of a trading session; can be a bid, ask, or trade price.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1025")]
 	pub first_px: Option<f64>,
 	/// Indicates the last price of a trading session; can be a bid, ask, or trade price.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "31")]
 	pub last_px: Option<f64>,
 	/// Used to report trade volume in association with trade, bid or ask rather than a separate entity
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1020")]
 	pub trade_volume: Option<f64>,
@@ -258,14 +258,14 @@ pub struct MDEntrie {
 	/// Indicates date on which instrument will settle.For NDFs required for specifying the "value date".
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
-	pub settl_date: Option<crate::entities::LocalMktDate>,
+	pub settl_date: Option<fix_common::LocalMktDate>,
 	/// MDQuoteType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1070")]
 	pub md_quote_type: Option<MDQuoteType>,
 	/// Used to identify the sequence number within a feed type
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "83")]
 	pub rpt_seq: Option<i32>,
@@ -275,19 +275,19 @@ pub struct MDEntrie {
 	pub dealing_capacity: Option<DealingCapacity>,
 	/// MDEntrySpotRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1026")]
 	pub md_entry_spot_rate: Option<f64>,
 	/// MDEntryForwardPoints
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1027")]
 	pub md_entry_forward_points: Option<f64>,
 	/// Conditionally required when TimeInForce(59) = 10 (Good for Time)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1629")]
 	pub exposure_duration: Option<i32>,
@@ -314,20 +314,20 @@ pub struct MDEntrie {
 	/// FastMarketIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2447")]
-	pub fast_market_indicator: Option<crate::entities::Boolean>,
+	pub fast_market_indicator: Option<fix_common::Boolean>,
 	/// ExposureDurationUnit
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1916")]
 	pub exposure_duration_unit: Option<ExposureDurationUnit>,
 	/// For optional use in reporting trades
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2449")]
 	pub number_of_buy_orders: Option<i32>,
 	/// For optional use in reporting trades
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2450")]
 	pub number_of_sell_orders: Option<i32>,
@@ -342,7 +342,7 @@ pub struct MDEntrie {
 	/// AggressorTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2445")]
-	pub aggressor_time: Option<crate::entities::UTCTimestamp>,
+	pub aggressor_time: Option<fix_common::UTCTimestamp>,
 	/// AggressorSide
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2446")]

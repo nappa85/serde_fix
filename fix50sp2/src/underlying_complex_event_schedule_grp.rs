@@ -6,7 +6,7 @@ pub struct UnderlyingComplexEventScheduleGrp {
 	/// NoUnderlyingComplexEventSchedules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41750")]
-	pub underlying_complex_event_schedules: Option<crate::entities::RepeatingValues<UnderlyingComplexEventSchedule>>,
+	pub underlying_complex_event_schedules: Option<fix_common::RepeatingValues<UnderlyingComplexEventSchedule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,14 +14,14 @@ pub struct UnderlyingComplexEventSchedule {
 	/// Required if NoUnderlyingComplexEventSchedules(41750) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41751")]
-	pub underlying_complex_event_schedule_start_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_complex_event_schedule_start_date: Option<fix_common::LocalMktDate>,
 	/// UnderlyingComplexEventScheduleEndDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41752")]
-	pub underlying_complex_event_schedule_end_date: Option<crate::entities::LocalMktDate>,
+	pub underlying_complex_event_schedule_end_date: Option<fix_common::LocalMktDate>,
 	/// Conditionally required when UnderlyingComplexEventScheduleFrequencyUnit(41754) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41753")]
 	pub underlying_complex_event_schedule_frequency_period: Option<i32>,

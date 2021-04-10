@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PegInstructions {
 	/// Amount (signed) added to the peg for a pegged order in the context of the PegOffsetType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "211")]
 	pub peg_offset_value: Option<f64>,

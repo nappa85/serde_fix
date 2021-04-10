@@ -6,7 +6,7 @@ pub struct UnderlyingBusinessCenterGrp {
 	/// NoUnderlyingBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40962")]
-	pub underlying_business_centers: Option<crate::entities::RepeatingValues<UnderlyingBusinessCenter>>,
+	pub underlying_business_centers: Option<fix_common::RepeatingValues<UnderlyingBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

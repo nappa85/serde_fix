@@ -6,7 +6,7 @@ pub struct LegDeliveryScheduleGrp {
 	/// NoLegDeliverySchedules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41408")]
-	pub leg_delivery_schedules: Option<crate::entities::RepeatingValues<LegDeliverySchedule>>,
+	pub leg_delivery_schedules: Option<fix_common::RepeatingValues<LegDeliverySchedule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -21,7 +21,7 @@ pub struct LegDeliverySchedule {
 	pub leg_delivery_schedule_xid: Option<String>,
 	/// LegDeliveryScheduleNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41411")]
 	pub leg_delivery_schedule_notional: Option<f64>,
@@ -35,13 +35,13 @@ pub struct LegDeliverySchedule {
 	pub leg_delivery_schedule_notional_commodity_frequency: Option<LegDeliveryScheduleNotionalCommodityFrequency>,
 	/// LegDeliveryScheduleNegativeTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41414")]
 	pub leg_delivery_schedule_negative_tolerance: Option<f64>,
 	/// LegDeliverySchedulePositiveTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41415")]
 	pub leg_delivery_schedule_positive_tolerance: Option<f64>,

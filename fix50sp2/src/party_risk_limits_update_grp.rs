@@ -6,7 +6,7 @@ pub struct PartyRiskLimitsUpdateGrp {
 	/// NoPartyRiskLimits
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1677")]
-	pub party_risk_limits: Option<crate::entities::RepeatingValues<PartyRiskLimit>>,
+	pub party_risk_limits: Option<fix_common::RepeatingValues<PartyRiskLimit>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

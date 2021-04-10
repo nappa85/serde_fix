@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct MarginRequirementReport {
 	/// MsgType = CJ
 	#[serde(flatten)]
@@ -21,7 +21,7 @@ pub struct MarginRequirementReport {
 	pub margin_reqmt_rpt_type: MarginReqmtRptType,
 	/// Type of report provided
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "911")]
 	pub tot_num_reports: Option<i32>,
@@ -40,7 +40,7 @@ pub struct MarginRequirementReport {
 	/// Indicates the date for which the margin is to be calculated
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
-	pub clearing_business_date: Option<crate::entities::LocalMktDate>,
+	pub clearing_business_date: Option<fix_common::LocalMktDate>,
 	/// Indicates the settlement session for which the margin is to be calculated - End Of Day or Intraday
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "716")]
@@ -66,14 +66,14 @@ pub struct MarginRequirementReport {
 	/// Represents the time the inquiry was submitted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
-	pub transact_time: Option<crate::entities::UTCTimestamp>,
+	pub transact_time: Option<fix_common::UTCTimestamp>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,
@@ -89,7 +89,7 @@ pub struct MarginRequirementReport {
 	/// in TrdRegTimestamps component).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2869")]
-	pub regulatory_report_type_business_date: Option<crate::entities::LocalMktDate>,
+	pub regulatory_report_type_business_date: Option<fix_common::LocalMktDate>,
 	/// TrdRegTimestamps
 	#[serde(flatten)]
 	pub trd_reg_timestamps: Option<super::super::trd_reg_timestamps::TrdRegTimestamps>,

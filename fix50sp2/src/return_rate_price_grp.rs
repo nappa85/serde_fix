@@ -6,7 +6,7 @@ pub struct ReturnRatePriceGrp {
 	/// NoReturnRatePrices
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42765")]
-	pub return_rate_prices: Option<crate::entities::RepeatingValues<ReturnRatePrice>>,
+	pub return_rate_prices: Option<fix_common::RepeatingValues<ReturnRatePrice>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct ReturnRatePrice {
 	pub return_rate_price_basis: Option<ReturnRatePriceBasis>,
 	/// ReturnRatePrice
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42767")]
 	pub return_rate_price: Option<f64>,
@@ -27,7 +27,7 @@ pub struct ReturnRatePrice {
 	pub return_rate_price_currency: Option<String>,
 	/// ReturnRatePriceType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42769")]
 	pub return_rate_price_type: Option<i32>,

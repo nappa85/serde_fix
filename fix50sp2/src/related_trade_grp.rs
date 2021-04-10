@@ -6,7 +6,7 @@ pub struct RelatedTradeGrp {
 	/// NoRelatedTrades
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1855")]
-	pub related_trades: Option<crate::entities::RepeatingValues<RelatedTrade>>,
+	pub related_trades: Option<fix_common::RepeatingValues<RelatedTrade>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -22,14 +22,14 @@ pub struct RelatedTrade {
 	/// Optionally used to help identify the trade when <a href="tag_1856_RelatedTradeID.html" target="bottom">RelatedTradeID&nbsp;(1856)</a> is not unique across multiple days.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1858")]
-	pub related_trade_date: Option<crate::entities::LocalMktDate>,
+	pub related_trade_date: Option<fix_common::LocalMktDate>,
 	/// Optionally used to help identify the trade when <a href="tag_1856_RelatedTradeID.html" target="bottom">RelatedTradeID&nbsp;(1856)</a> is not unique across multiple days.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1859")]
 	pub related_trade_market_id: Option<String>,
 	/// RelatedTradeQuantity
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1860")]
 	pub related_trade_quantity: Option<f64>,

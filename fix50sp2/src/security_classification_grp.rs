@@ -6,7 +6,7 @@ pub struct SecurityClassificationGrp {
 	/// NoSecurityClassifications
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1582")]
-	pub security_classifications: Option<crate::entities::RepeatingValues<SecurityClassification>>,
+	pub security_classifications: Option<fix_common::RepeatingValues<SecurityClassification>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

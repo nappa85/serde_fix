@@ -6,7 +6,7 @@ pub struct StrategyParametersGrp {
 	/// Indicates number of strategy parameters.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "957")]
-	pub strategy_parameters: Option<crate::entities::RepeatingValues<StrategyParameter>>,
+	pub strategy_parameters: Option<fix_common::RepeatingValues<StrategyParameter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

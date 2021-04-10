@@ -6,7 +6,7 @@ pub struct DerivativeSecurityAltIDGrp {
 	/// NoDerivativeSecurityAltID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1218")]
-	pub derivative_security_alt_id: Option<crate::entities::RepeatingValues<DerivativeSecurityAltI>>,
+	pub derivative_security_alt_id: Option<fix_common::RepeatingValues<DerivativeSecurityAltI>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -6,7 +6,7 @@ pub struct UnderlyingPaymentStreamResetDateBusinessCenterGrp {
 	/// NoUnderlyingPaymentStreamResetDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40970")]
-	pub underlying_payment_stream_reset_date_business_centers: Option<crate::entities::RepeatingValues<UnderlyingPaymentStreamResetDateBusinessCenter>>,
+	pub underlying_payment_stream_reset_date_business_centers: Option<fix_common::RepeatingValues<UnderlyingPaymentStreamResetDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

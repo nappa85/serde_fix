@@ -6,7 +6,7 @@ pub struct AttrbGrp {
 	/// NoInstrAttrib
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "870")]
-	pub instr_attrib: Option<crate::entities::RepeatingValues<InstrAttri>>,
+	pub instr_attrib: Option<fix_common::RepeatingValues<InstrAttri>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

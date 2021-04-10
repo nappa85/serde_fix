@@ -6,7 +6,7 @@ pub struct TimeInForceRules {
 	/// Number of time in force techniques
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1239")]
-	pub time_in_force_rules: Option<crate::entities::RepeatingValues<TimeInForceRule>>,
+	pub time_in_force_rules: Option<fix_common::RepeatingValues<TimeInForceRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

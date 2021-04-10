@@ -6,7 +6,7 @@ pub struct LotTypeRules {
 	/// Number of Lot Types
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1234")]
-	pub lot_type_rules: Option<crate::entities::RepeatingValues<LotTypeRule>>,
+	pub lot_type_rules: Option<fix_common::RepeatingValues<LotTypeRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct LotTypeRule {
 	pub lot_type: Option<LotType>,
 	/// Minimum lot size allowed based on lot type specified in <a href="tag_1093_LotType.html" target="bottom">LotType&nbsp;(1093)</a>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1231")]
 	pub min_lot_size: Option<f64>,

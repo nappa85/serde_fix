@@ -41,7 +41,7 @@ pub struct LegDeliveryStream {
 	/// LegDeliveryStreamDeliverAtSourceIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41437")]
-	pub leg_delivery_stream_deliver_at_source_indicator: Option<crate::entities::Boolean>,
+	pub leg_delivery_stream_deliver_at_source_indicator: Option<fix_common::Boolean>,
 	/// LegDeliveryStreamRiskApportionment
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41438")]
@@ -67,13 +67,13 @@ pub struct LegDeliveryStream {
 	pub leg_delivery_stream_importer_of_record: Option<String>,
 	/// LegDeliveryStreamNegativeTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41442")]
 	pub leg_delivery_stream_negative_tolerance: Option<f64>,
 	/// LegDeliveryStreamPositiveTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41443")]
 	pub leg_delivery_stream_positive_tolerance: Option<f64>,
@@ -91,19 +91,19 @@ pub struct LegDeliveryStream {
 	pub leg_delivery_stream_tolerance_option_side: Option<LegDeliveryStreamToleranceOptionSide>,
 	/// LegDeliveryStreamTotalPositiveTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41447")]
 	pub leg_delivery_stream_total_positive_tolerance: Option<f32>,
 	/// LegDeliveryStreamTotalNegativeTolerance
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41448")]
 	pub leg_delivery_stream_total_negative_tolerance: Option<f32>,
 	/// LegDeliveryStreamNotionalConversionFactor
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41449")]
 	pub leg_delivery_stream_notional_conversion_factor: Option<f64>,

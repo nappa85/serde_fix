@@ -6,7 +6,7 @@ pub struct TrdRegTimestamps {
 	/// NoTrdRegTimestamps
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "768")]
-	pub trd_reg_timestamps: Option<crate::entities::RepeatingValues<TrdRegTimestamp>>,
+	pub trd_reg_timestamps: Option<fix_common::RepeatingValues<TrdRegTimestamp>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct TrdRegTimestamp {
 	/// Required if <a href="tag_768_NoTrdRegTimestamps.html" target="bottom">NoTrdRegTimestamps&nbsp;(768)</a> &gt; 1
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "769")]
-	pub trd_reg_timestamp: Option<crate::entities::UTCTimestamp>,
+	pub trd_reg_timestamp: Option<fix_common::UTCTimestamp>,
 	/// Required if <a href="tag_768_NoTrdRegTimestamps.html" target="bottom">NoTrdRegTimestamps&nbsp;(768)</a> &gt; 1
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "770")]
@@ -34,7 +34,7 @@ pub struct TrdRegTimestamp {
 	/// DeskOrderHandlingInst
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1035")]
-	pub desk_order_handling_inst: Option<crate::entities::SeparatedValues<DeskOrderHandlingInst>>,
+	pub desk_order_handling_inst: Option<fix_common::SeparatedValues<DeskOrderHandlingInst>>,
 	/// DeskType is required for OATS Reporting if InformationBarrierID(1727) is specified
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1727")]
@@ -49,13 +49,13 @@ pub struct TrdRegTimestamp {
 	pub nbbo_entry_type: Option<NBBOEntryType>,
 	/// May be used with TrdRegTimestampType(770)=34 (Reference time for NBBO).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2832")]
 	pub nbbo_price: Option<f64>,
 	/// May be used with TrdRegTimestampType(770)=34 (Reference time for NBBO).
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2833")]
 	pub nbbo_qty: Option<f64>,

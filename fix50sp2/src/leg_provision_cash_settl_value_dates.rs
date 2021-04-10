@@ -14,7 +14,7 @@ pub struct LegProvisionCashSettlValueDates {
 	/// When specified, this overrides the business day convention defined in the LegDateAdjustment component in InstrumentLeg. The
 	/// specified value would be specific to this instance of the leg provision cash settlement value date.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40526")]
 	pub leg_provision_cash_settl_value_date_business_day_convention: Option<i32>,
@@ -24,13 +24,13 @@ pub struct LegProvisionCashSettlValueDates {
 	pub leg_provision_cash_settl_value_date_business_center_grp: Option<super::leg_provision_cash_settl_value_date_business_center_grp::LegProvisionCashSettlValueDateBusinessCenterGrp>,
 	/// LegProvisionCashSettlValueDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40528")]
 	pub leg_provision_cash_settl_value_date_relative_to: Option<i32>,
 	/// Conditionally required when LegProvisionCashSettlValueDateOffsetUnit(40530) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40529")]
 	pub leg_provision_cash_settl_value_date_offset_period: Option<i32>,
@@ -40,12 +40,12 @@ pub struct LegProvisionCashSettlValueDates {
 	pub leg_provision_cash_settl_value_date_offset_unit: Option<String>,
 	/// LegProvisionCashSettlValueDateOffsetDayType
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40531")]
 	pub leg_provision_cash_settl_value_date_offset_day_type: Option<i32>,
 	/// LegProvisionCashSettlValueDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40532")]
-	pub leg_provision_cash_settl_value_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_cash_settl_value_date_adjusted: Option<fix_common::LocalMktDate>,
 }

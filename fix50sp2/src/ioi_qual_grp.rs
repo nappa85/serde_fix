@@ -6,7 +6,7 @@ pub struct IOIQualGrp {
 	/// Required if any IOIQualifiers are specified. Indicates the number of repeating IOIQualifiers.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "199")]
-	pub ioi_qualifiers: Option<crate::entities::RepeatingValues<IOIQualifier>>,
+	pub ioi_qualifiers: Option<fix_common::RepeatingValues<IOIQualifier>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

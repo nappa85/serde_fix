@@ -6,7 +6,7 @@ pub struct UnderlyingDeliveryScheduleSettlDayGrp {
 	/// NoUnderlyingDeliveryScheduleSettlDays
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41770")]
-	pub underlying_delivery_schedule_settl_days: Option<crate::entities::RepeatingValues<UnderlyingDeliveryScheduleSettlDay>>,
+	pub underlying_delivery_schedule_settl_days: Option<fix_common::RepeatingValues<UnderlyingDeliveryScheduleSettlDay>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,7 +17,7 @@ pub struct UnderlyingDeliveryScheduleSettlDay {
 	pub underlying_delivery_schedule_settl_day_item: Option<UnderlyingDeliveryScheduleSettlDayItem>,
 	/// UnderlyingDeliveryScheduleSettlTotalHours
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41772")]
 	pub underlying_delivery_schedule_settl_total_hours: Option<i32>,

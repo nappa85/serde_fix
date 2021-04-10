@@ -6,7 +6,7 @@ pub struct MDStatisticRptGrp {
 	/// NoMDStatistics
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2474")]
-	pub md_statistics: Option<crate::entities::RepeatingValues<MDStatistic>>,
+	pub md_statistics: Option<fix_common::RepeatingValues<MDStatistic>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct MDStatistic {
 	/// Required if <a href="tag_2474_NoMDStatistics.html" target="bottom">NoMDStatistics (2474)&nbsp;(2474)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2476")]
-	pub md_statistic_time: Option<crate::entities::UTCTimestamp>,
+	pub md_statistic_time: Option<fix_common::UTCTimestamp>,
 	/// Required if <a href="tag_2474_NoMDStatistics.html" target="bottom">NoMDStatistics (2474)&nbsp;(2474)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2477")]
@@ -26,7 +26,7 @@ pub struct MDStatistic {
 	/// Calculated statistic value. Conditionally required unless sending reference data only to establish MDStatisticID(2475) as
 	/// a shortcut to a set parameters given by the MDStatsParameters component.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2478")]
 	pub md_statistic_value: Option<f64>,

@@ -18,19 +18,19 @@ pub struct BaseTradingRules {
 	pub expiration_cycle: Option<ExpirationCycle>,
 	/// MinTradeVol
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "562")]
 	pub min_trade_vol: Option<f64>,
 	/// For listed derivatives this indicates the minimum quantity necessary for an order or trade to qualify as a block trade.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1140")]
 	pub max_trade_vol: Option<f64>,
 	/// MaxPriceVariation
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1143")]
 	pub max_price_variation: Option<f64>,
@@ -44,7 +44,7 @@ pub struct BaseTradingRules {
 	pub trading_currency: Option<TradingCurrency>,
 	/// RoundLot
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "561")]
 	pub round_lot: Option<f64>,
@@ -73,7 +73,7 @@ pub struct BaseTradingRules {
 	/// Can be used as a factor to be applied to other base trading rules during a fast market, e.g. to widen price or size ranges
 	/// by the specified percentage factor.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2557")]
 	pub fast_market_percentage: Option<f32>,

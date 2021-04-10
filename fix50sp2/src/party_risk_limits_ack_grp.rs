@@ -6,7 +6,7 @@ pub struct PartyRiskLimitsAckGrp {
 	/// NoPartyRiskLimits
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1677")]
-	pub party_risk_limits: Option<crate::entities::RepeatingValues<PartyRiskLimit>>,
+	pub party_risk_limits: Option<fix_common::RepeatingValues<PartyRiskLimit>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -33,7 +33,7 @@ pub struct PartyRiskLimit {
 	pub reject_text: Option<String>,
 	/// Must be set if EncodedRejectText(1665) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1664")]
 	pub encoded_reject_text_len: Option<usize>,

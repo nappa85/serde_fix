@@ -6,7 +6,7 @@ pub struct QuoteAttributeGrp {
 	/// NoQuoteAttributes
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2706")]
-	pub quote_attributes: Option<crate::entities::RepeatingValues<QuoteAttribute>>,
+	pub quote_attributes: Option<fix_common::RepeatingValues<QuoteAttribute>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct TradeAggregationRequest {
 	/// MsgType = DW
 	#[serde(flatten)]
@@ -19,7 +19,7 @@ pub struct TradeAggregationRequest {
 	/// This may optionally be used to show the aggregated amount/quantity in this message based on the orders or executions identified
 	/// in either of the components below.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2789")]
 	pub aggregated_qty: Option<f64>,
@@ -29,7 +29,7 @@ pub struct TradeAggregationRequest {
 	pub currency: Option<Currency>,
 	/// The all-in average price, if specified, for the aggregation.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "6")]
 	pub avg_px: Option<f64>,
@@ -38,7 +38,7 @@ pub struct TradeAggregationRequest {
 	pub side: Side,
 	/// PricePrecision
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2349")]
 	pub price_precision: Option<i32>,

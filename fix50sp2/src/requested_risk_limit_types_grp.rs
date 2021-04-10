@@ -6,7 +6,7 @@ pub struct RequestedRiskLimitTypesGrp {
 	/// NoRequestedRiskLimitType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1668")]
-	pub requested_risk_limit_type: Option<crate::entities::RepeatingValues<RequestedRiskLimitTyp>>,
+	pub requested_risk_limit_type: Option<fix_common::RepeatingValues<RequestedRiskLimitTyp>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

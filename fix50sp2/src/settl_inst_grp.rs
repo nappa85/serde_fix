@@ -6,7 +6,7 @@ pub struct SettlInstGrp {
 	/// Required except where SettlInstMode is 5=Reject SSI request
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "778")]
-	pub settl_inst: Option<crate::entities::RepeatingValues<SettlIns>>,
+	pub settl_inst: Option<fix_common::RepeatingValues<SettlIns>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -46,16 +46,16 @@ pub struct SettlIns {
 	/// Effective (start) date/time for this settlement instruction. Required except where SettlInstMode is 5=Reject SSI request.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "168")]
-	pub effective_time: Option<crate::entities::UTCTimestamp>,
+	pub effective_time: Option<fix_common::UTCTimestamp>,
 	/// Termination date/time for this settlement instruction.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "126")]
-	pub expire_time: Option<crate::entities::UTCTimestamp>,
+	pub expire_time: Option<fix_common::UTCTimestamp>,
 	/// Date/time this settlement instruction was last updated (or created if not updated since creation). Required except where SettlInstMode
 	/// is 5=Reject SSI request.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "779")]
-	pub last_update_time: Option<crate::entities::UTCTimestamp>,
+	pub last_update_time: Option<fix_common::UTCTimestamp>,
 	/// For use with CIV settlement instructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "492")]
@@ -75,11 +75,11 @@ pub struct SettlIns {
 	/// For use with CIV settlement instructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "503")]
-	pub card_start_date: Option<crate::entities::LocalMktDate>,
+	pub card_start_date: Option<fix_common::LocalMktDate>,
 	/// For use with CIV settlement instructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "490")]
-	pub card_exp_date: Option<crate::entities::LocalMktDate>,
+	pub card_exp_date: Option<fix_common::LocalMktDate>,
 	/// For use with CIV settlement instructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "491")]
@@ -87,7 +87,7 @@ pub struct SettlIns {
 	/// For use with CIV settlement instructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "504")]
-	pub payment_date: Option<crate::entities::LocalMktDate>,
+	pub payment_date: Option<fix_common::LocalMktDate>,
 	/// For use with CIV settlement instructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "505")]

@@ -6,7 +6,7 @@ pub struct LegDividendAccrualPaymentDateBusinessCenterGrp {
 	/// NoLegDividendAccrualPaymentDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42310")]
-	pub leg_dividend_accrual_payment_date_business_centers: Option<crate::entities::RepeatingValues<LegDividendAccrualPaymentDateBusinessCenter>>,
+	pub leg_dividend_accrual_payment_date_business_centers: Option<fix_common::RepeatingValues<LegDividendAccrualPaymentDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

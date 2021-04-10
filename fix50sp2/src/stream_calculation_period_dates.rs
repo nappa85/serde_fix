@@ -15,7 +15,7 @@ pub struct StreamCalculationPeriodDates {
 	/// StreamFirstPeriodStartDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40075")]
-	pub stream_first_period_start_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub stream_first_period_start_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// When specified, this overrides the business day convention defined in the DateAdjustment component in Instrument. The specified
 	/// value would be specific to this instance of the calculation period dates of the stream.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -28,22 +28,22 @@ pub struct StreamCalculationPeriodDates {
 	/// StreamFirstPeriodStartDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40078")]
-	pub stream_first_period_start_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub stream_first_period_start_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// StreamFirstRegularPeriodStartDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40079")]
-	pub stream_first_regular_period_start_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub stream_first_regular_period_start_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// StreamFirstCompoundingPeriodEndDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40080")]
-	pub stream_first_compounding_period_end_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub stream_first_compounding_period_end_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// StreamLastRegularPeriodEndDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40081")]
-	pub stream_last_regular_period_end_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub stream_last_regular_period_end_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// Conditionally required when StreamCalculationFrequencyUnit(40083) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40082")]
 	pub stream_calculation_frequency_period: Option<i32>,
@@ -69,10 +69,10 @@ pub struct StreamCalculationPeriodDates {
 	/// StreamCalculationBalanceOfFirstPeriod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41246")]
-	pub stream_calculation_balance_of_first_period: Option<crate::entities::Boolean>,
+	pub stream_calculation_balance_of_first_period: Option<fix_common::Boolean>,
 	/// Conditionally required when StreamCalculationCorrectionUnit(41248) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41247")]
 	pub stream_calculation_correction_period: Option<i32>,

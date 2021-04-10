@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct LimitAmts {
 	/// Number of limit amount occurences
 	#[serde(rename = "1630")]
-	pub limit_amts: crate::entities::RepeatingValues<LimitAmt>,
+	pub limit_amts: fix_common::RepeatingValues<LimitAmt>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -17,14 +17,14 @@ pub struct LimitAmt {
 	/// Either LastLimitAmt(1632) or LimitAmtRemaining(1633) or LimitUtilizationAmt(2394) must be specified when NoLimitAmts (1630)
 	/// &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1632")]
 	pub last_limit_amt: Option<f64>,
 	/// Either LastLimitAmt(1632) or LimitAmtRemaining(1633) or LimitUtilizationAmt(2394) must be specified when NoLimitAmts (1630)
 	/// &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1633")]
 	pub limit_amt_remaining: Option<f64>,
@@ -35,13 +35,13 @@ pub struct LimitAmt {
 	/// Either LastLimitAmt(1632) or LimitAmtRemaining(1633) or LimitUtilizationAmt(2394) must be specified when NoLimitAmts (1630)
 	/// &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2394")]
 	pub limit_utilization_amt: Option<f64>,
 	/// LimitAmt
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2395")]
 	pub limit_amt: Option<f64>,

@@ -6,7 +6,7 @@ pub struct LegStipulations {
 	/// NoLegStipulations
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "683")]
-	pub leg_stipulations: Option<crate::entities::RepeatingValues<LegStipulation>>,
+	pub leg_stipulations: Option<fix_common::RepeatingValues<LegStipulation>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

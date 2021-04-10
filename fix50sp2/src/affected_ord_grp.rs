@@ -6,7 +6,7 @@ pub struct AffectedOrdGrp {
 	/// NoAffectedOrders
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "534")]
-	pub affected_orders: Option<crate::entities::RepeatingValues<AffectedOrder>>,
+	pub affected_orders: Option<fix_common::RepeatingValues<AffectedOrder>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

@@ -6,7 +6,7 @@ pub struct UnderlyingProvisionOptionExpirationDate {
 	/// UnderlyingProvisionOptionExpirationDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42133")]
-	pub underlying_provision_option_expiration_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_provision_option_expiration_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// When specified, this overrides the busienss day convention defined in the UnderlyingDateAdjustment component in UnderlyingInstrument.
 	/// The specified value would be specific to this instance of the provisional option expiration date.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -22,7 +22,7 @@ pub struct UnderlyingProvisionOptionExpirationDate {
 	pub underlying_provision_option_expiration_date_relative_to: Option<UnderlyingProvisionOptionExpirationDateRelativeTo>,
 	/// Conditionally required when UnderlyingProvisionOptionExpirationDateOffsetUnit(42137) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42136")]
 	pub underlying_provision_option_expiration_date_offset_period: Option<i32>,
@@ -37,7 +37,7 @@ pub struct UnderlyingProvisionOptionExpirationDate {
 	/// UnderlyingProvisionOptionExpirationDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42139")]
-	pub underlying_provision_option_expiration_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub underlying_provision_option_expiration_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// UnderlyingProvisionOptionExpirationTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42140")]

@@ -6,7 +6,7 @@ pub struct PtysSubGrp {
 	/// NoPartySubIDs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "802")]
-	pub party_sub_i_ds: Option<crate::entities::RepeatingValues<PartySubID>>,
+	pub party_sub_i_ds: Option<fix_common::RepeatingValues<PartySubID>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

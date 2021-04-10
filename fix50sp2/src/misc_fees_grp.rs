@@ -6,14 +6,14 @@ pub struct MiscFeesGrp {
 	/// Required if any miscellaneous fees are reported. Indicates number of repeating entries.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "136")]
-	pub misc_fees: Option<crate::entities::RepeatingValues<MiscFee>>,
+	pub misc_fees: Option<fix_common::RepeatingValues<MiscFee>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct MiscFee {
 	/// Required if NoMiscFees(136) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "137")]
 	pub misc_fee_amt: Option<f64>,
@@ -31,13 +31,13 @@ pub struct MiscFee {
 	pub misc_fee_basis: Option<MiscFeeBasis>,
 	/// MiscFeeRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2216")]
 	pub misc_fee_rate: Option<f32>,
 	/// MiscFeeAmountDue
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "2217")]
 	pub misc_fee_amount_due: Option<f64>,

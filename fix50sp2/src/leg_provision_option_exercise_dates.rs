@@ -17,7 +17,7 @@ pub struct LegProvisionOptionExerciseDates {
 	pub leg_provision_option_exercise_fixed_date_grp: Option<super::leg_provision_option_exercise_fixed_date_grp::LegProvisionOptionExerciseFixedDateGrp>,
 	/// Conditionally required when LegProvisionOptionExerciseEarliestDateUnit(40479) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40478")]
 	pub leg_provision_option_exercise_earliest_date_period: Option<i32>,
@@ -27,7 +27,7 @@ pub struct LegProvisionOptionExerciseDates {
 	pub leg_provision_option_exercise_earliest_date_unit: Option<LegProvisionOptionExerciseEarliestDateUnit>,
 	/// Conditionally required when LegProvisionOptionExerciseFrequencyUnit(40481) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40480")]
 	pub leg_provision_option_exercise_frequency_period: Option<i32>,
@@ -38,14 +38,14 @@ pub struct LegProvisionOptionExerciseDates {
 	/// LegProvisionOptionExerciseStartDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40482")]
-	pub leg_provision_option_exercise_start_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_option_exercise_start_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegProvisionOptionExerciseStartDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40483")]
 	pub leg_provision_option_exercise_start_date_relative_to: Option<LegProvisionOptionExerciseStartDateRelativeTo>,
 	/// Conditionally required when LegProvisionOptionExerciseStartDateOffsetUnit(40485) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40484")]
 	pub leg_provision_option_exercise_start_date_offset_period: Option<i32>,
@@ -60,21 +60,21 @@ pub struct LegProvisionOptionExerciseDates {
 	/// LegProvisionOptionExerciseStartDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40487")]
-	pub leg_provision_option_exercise_start_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_option_exercise_start_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// LegProvisionOptionExercisePeriodSkip
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40488")]
 	pub leg_provision_option_exercise_period_skip: Option<i32>,
 	/// LegProvisionOptionExerciseBoundsFirstDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40489")]
-	pub leg_provision_option_exercise_bounds_first_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_option_exercise_bounds_first_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegProvisionOptionExerciseBoundsLastDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40490")]
-	pub leg_provision_option_exercise_bounds_last_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub leg_provision_option_exercise_bounds_last_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// LegProvisionOptionExerciseEarliestTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40491")]

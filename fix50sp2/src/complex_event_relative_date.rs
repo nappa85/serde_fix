@@ -6,14 +6,14 @@ pub struct ComplexEventRelativeDate {
 	/// ComplexEventDateUnadjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41020")]
-	pub complex_event_date_unadjusted: Option<crate::entities::LocalMktDate>,
+	pub complex_event_date_unadjusted: Option<fix_common::LocalMktDate>,
 	/// ComplexEventDateRelativeTo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41021")]
 	pub complex_event_date_relative_to: Option<ComplexEventDateRelativeTo>,
 	/// Conditionally required when ComplexEventDateOffsetUnit(41023) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41022")]
 	pub complex_event_date_offset_period: Option<i32>,
@@ -35,7 +35,7 @@ pub struct ComplexEventRelativeDate {
 	/// ComplexEventDateAdjusted
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41026")]
-	pub complex_event_date_adjusted: Option<crate::entities::LocalMktDate>,
+	pub complex_event_date_adjusted: Option<fix_common::LocalMktDate>,
 	/// ComplexEventFixingTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41027")]

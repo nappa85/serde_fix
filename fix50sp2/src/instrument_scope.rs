@@ -49,11 +49,11 @@ pub struct InstrumentScope {
 	/// InstrumentScopeMaturityMonthYear
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1549")]
-	pub instrument_scope_maturity_month_year: Option<crate::entities::MonthYear>,
+	pub instrument_scope_maturity_month_year: Option<fix_common::MonthYear>,
 	/// InstrumentScopeMaturityTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1550")]
-	pub instrument_scope_maturity_time: Option<crate::entities::TZTimeOnly>,
+	pub instrument_scope_maturity_time: Option<fix_common::TZTimeOnly>,
 	/// InstrumentScopeRestructuringType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1551")]
@@ -69,10 +69,10 @@ pub struct InstrumentScope {
 	/// InstrumentScopeFlexibleIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1554")]
-	pub instrument_scope_flexible_indicator: Option<crate::entities::Boolean>,
+	pub instrument_scope_flexible_indicator: Option<fix_common::Boolean>,
 	/// InstrumentScopeCouponRate
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1555")]
 	pub instrument_scope_coupon_rate: Option<f32>,
@@ -86,7 +86,7 @@ pub struct InstrumentScope {
 	pub instrument_scope_security_desc: Option<String>,
 	/// InstrumentScopeEncodedSecurityDescLen
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "1620")]
 	pub instrument_scope_encoded_security_desc_len: Option<usize>,

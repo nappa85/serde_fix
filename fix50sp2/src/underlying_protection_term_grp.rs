@@ -6,14 +6,14 @@ pub struct UnderlyingProtectionTermGrp {
 	/// NoUnderlyingProtectionTerms
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42068")]
-	pub underlying_protection_terms: Option<crate::entities::RepeatingValues<UnderlyingProtectionTerm>>,
+	pub underlying_protection_terms: Option<fix_common::RepeatingValues<UnderlyingProtectionTerm>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct UnderlyingProtectionTerm {
 	/// Required if NoUnderlyingProtectionTerms(42068) &gt; 0.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42069")]
 	pub underlying_protection_term_notional: Option<f64>,
@@ -24,11 +24,11 @@ pub struct UnderlyingProtectionTerm {
 	/// UnderlyingProtectionTermSellerNotifies
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42071")]
-	pub underlying_protection_term_seller_notifies: Option<crate::entities::Boolean>,
+	pub underlying_protection_term_seller_notifies: Option<fix_common::Boolean>,
 	/// UnderlyingProtectionTermBuyerNotifies
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42072")]
-	pub underlying_protection_term_buyer_notifies: Option<crate::entities::Boolean>,
+	pub underlying_protection_term_buyer_notifies: Option<fix_common::Boolean>,
 	/// UnderlyingProtectionTermEventBusinessCenter
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42073")]
@@ -36,10 +36,10 @@ pub struct UnderlyingProtectionTerm {
 	/// UnderlyingProtectionTermStandardSources
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42074")]
-	pub underlying_protection_term_standard_sources: Option<crate::entities::Boolean>,
+	pub underlying_protection_term_standard_sources: Option<fix_common::Boolean>,
 	/// UnderlyingProtectionTermEventMinimumSources
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42075")]
 	pub underlying_protection_term_event_minimum_sources: Option<i32>,

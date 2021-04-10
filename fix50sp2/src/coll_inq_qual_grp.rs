@@ -6,7 +6,7 @@ pub struct CollInqQualGrp {
 	/// Number of qualifiers to inquiry.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "938")]
-	pub coll_inquiry_qualifier: Option<crate::entities::RepeatingValues<CollInquiryQualifie>>,
+	pub coll_inquiry_qualifier: Option<fix_common::RepeatingValues<CollInquiryQualifie>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

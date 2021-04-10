@@ -6,7 +6,7 @@ pub struct MDRjctGrp {
 	/// NoAltMDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "816")]
-	pub alt_md_source: Option<crate::entities::RepeatingValues<AltMDSourc>>,
+	pub alt_md_source: Option<fix_common::RepeatingValues<AltMDSourc>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

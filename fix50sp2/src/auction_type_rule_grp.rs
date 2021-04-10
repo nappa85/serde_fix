@@ -6,7 +6,7 @@ pub struct AuctionTypeRuleGrp {
 	/// NoAuctionTypeRules
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2548")]
-	pub auction_type_rules: Option<crate::entities::RepeatingValues<AuctionTypeRule>>,
+	pub auction_type_rules: Option<fix_common::RepeatingValues<AuctionTypeRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

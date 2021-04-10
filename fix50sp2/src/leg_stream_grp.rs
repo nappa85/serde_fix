@@ -6,7 +6,7 @@ pub struct LegStreamGrp {
 	/// NoLegStreams
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40241")]
-	pub leg_streams: Option<crate::entities::RepeatingValues<LegStream>>,
+	pub leg_streams: Option<fix_common::RepeatingValues<LegStream>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -29,7 +29,7 @@ pub struct LegStream {
 	pub leg_stream_receive_side: Option<LegStreamReceiveSide>,
 	/// LegStreamNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40246")]
 	pub leg_stream_notional: Option<f64>,
@@ -43,7 +43,7 @@ pub struct LegStream {
 	pub leg_stream_text: Option<String>,
 	/// Must be set if EncodedLegStreamText(40979) field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40978")]
 	pub encoded_leg_stream_text_len: Option<usize>,
@@ -62,7 +62,7 @@ pub struct LegStream {
 	pub leg_stream_notional_xid_ref: Option<String>,
 	/// Conditionally required when LegStreamNotionalFrequencyUnit(41704) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41703")]
 	pub leg_stream_notional_frequency_period: Option<i32>,
@@ -80,7 +80,7 @@ pub struct LegStream {
 	pub leg_stream_notional_unit_of_measure: Option<LegStreamNotionalUnitOfMeasure>,
 	/// LegStreamTotalNotional
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "41707")]
 	pub leg_stream_total_notional: Option<f64>,
@@ -95,14 +95,14 @@ pub struct LegStream {
 	/// LegStreamVersionEffectiveDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42584")]
-	pub leg_stream_version_effective_date: Option<crate::entities::LocalMktDate>,
+	pub leg_stream_version_effective_date: Option<fix_common::LocalMktDate>,
 	/// LegStreamNotionalDeterminationMethod
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42585")]
 	pub leg_stream_notional_determination_method: Option<String>,
 	/// LegStreamNotionalAdjustments
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "42586")]
 	pub leg_stream_notional_adjustments: Option<i32>,

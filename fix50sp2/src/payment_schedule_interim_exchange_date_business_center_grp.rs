@@ -6,7 +6,7 @@ pub struct PaymentScheduleInterimExchangeDateBusinessCenterGrp {
 	/// NoPaymentScheduleInterimExchangeDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40945")]
-	pub payment_schedule_interim_exchange_date_business_centers: Option<crate::entities::RepeatingValues<PaymentScheduleInterimExchangeDateBusinessCenter>>,
+	pub payment_schedule_interim_exchange_date_business_centers: Option<fix_common::RepeatingValues<PaymentScheduleInterimExchangeDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

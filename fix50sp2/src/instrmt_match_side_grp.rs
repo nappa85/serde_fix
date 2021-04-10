@@ -6,7 +6,7 @@ pub struct InstrmtMatchSideGrp {
 	/// Number of instrument match sides that are part of the same match event
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1889")]
-	pub instrmt_match_sides: Option<crate::entities::RepeatingValues<InstrmtMatchSide>>,
+	pub instrmt_match_sides: Option<fix_common::RepeatingValues<InstrmtMatchSide>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct InstrmtMatchSide {
 	/// Total quantity for this instrument in th is match event. This is the cumulative sum of LastQty(32) for all match steps for
 	/// this instrument.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "53")]
 	pub quantity: Option<f64>,
@@ -43,7 +43,7 @@ pub struct InstrmtMatchSide {
 	/// </p>
 	/// <p>Required if NoInstrmtMatchSides (1889) &gt; 0</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "32")]
 	pub last_qty: Option<f64>,
@@ -53,7 +53,7 @@ pub struct InstrmtMatchSide {
 	pub price_type: Option<PriceType>,
 	/// Trade price. Required if NoInstrmtMatchSides (1889) &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "31")]
 	pub last_px: Option<f64>,

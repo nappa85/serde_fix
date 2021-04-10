@@ -6,7 +6,7 @@ pub struct RelSymDerivSecUpdGrp {
 	/// NoRelatedSym
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "146")]
-	pub related_sym: Option<crate::entities::RepeatingValues<RelatedSy>>,
+	pub related_sym: Option<fix_common::RepeatingValues<RelatedSy>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -18,7 +18,7 @@ pub struct RelatedSy {
 	/// CorporateAction
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "292")]
-	pub corporate_action: Option<crate::entities::SeparatedValues<CorporateAction>>,
+	pub corporate_action: Option<fix_common::SeparatedValues<CorporateAction>>,
 	/// Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]
@@ -26,14 +26,14 @@ pub struct RelatedSy {
 	/// RelSymTransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1504")]
-	pub rel_sym_transact_time: Option<crate::entities::UTCTimestamp>,
+	pub rel_sym_transact_time: Option<fix_common::UTCTimestamp>,
 	/// Comment, instructions, or other identifying information.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "354")]
 	pub encoded_text_len: Option<usize>,

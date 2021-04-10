@@ -6,7 +6,7 @@ pub struct ExecInstRules {
 	/// Number of execution instructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1232")]
-	pub exec_inst_rules: Option<crate::entities::RepeatingValues<ExecInstRule>>,
+	pub exec_inst_rules: Option<fix_common::RepeatingValues<ExecInstRule>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -14,7 +14,7 @@ pub struct ExecInstRule {
 	/// Indicates execution instructions that are valid for the specified market segment
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1308")]
-	pub exec_inst_value: Option<crate::entities::SeparatedValues<ExecInstValue>>,
+	pub exec_inst_value: Option<fix_common::SeparatedValues<ExecInstValue>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]

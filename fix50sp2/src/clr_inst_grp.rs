@@ -6,7 +6,7 @@ pub struct ClrInstGrp {
 	/// NoClearingInstructions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "576")]
-	pub clearing_instructions: Option<crate::entities::RepeatingValues<ClearingInstruction>>,
+	pub clearing_instructions: Option<fix_common::RepeatingValues<ClearingInstruction>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

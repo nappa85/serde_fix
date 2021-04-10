@@ -7,7 +7,7 @@ pub struct OrdAllocGrp {
 	/// AllocNoOrdersType = 1
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "73")]
-	pub orders: Option<crate::entities::RepeatingValues<Order>>,
+	pub orders: Option<fix_common::RepeatingValues<Order>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -37,20 +37,20 @@ pub struct Order {
 	pub list_id: Option<String>,
 	/// OrderQty
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "38")]
 	pub order_qty: Option<f64>,
 	/// Average price for this order. For FX, if specified, expressed in terms of <a href="tag_15_Currency.html" target="bottom">Currency(15)&nbsp;(15)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "799")]
 	pub order_avg_px: Option<f64>,
 	/// Quantity of this order that is being booked out by this message (will be equal to or less than this order's OrderQty) Note
 	/// that the sum of the OrderBookingQty values in this repeating group must equal the total quantity being allocated (in <a href="tag_53_Quantity.html" target="bottom">Quantity (53)&nbsp;(53)</a> field)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "800")]
 	pub order_booking_qty: Option<f64>,

@@ -6,7 +6,7 @@ pub struct PriceQualifierGrp {
 	/// NoPriceQualifiers
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2709")]
-	pub price_qualifiers: Option<crate::entities::RepeatingValues<PriceQualifier>>,
+	pub price_qualifiers: Option<fix_common::RepeatingValues<PriceQualifier>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

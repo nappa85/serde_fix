@@ -6,7 +6,7 @@ pub struct LegPaymentStreamNonDeliverableFixingDatesBusinessCenterGrp {
 	/// NoLegPaymentStreamNonDeliverableFixingDateBusinessCenters
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40929")]
-	pub leg_payment_stream_non_deliverable_fixing_date_business_centers: Option<crate::entities::RepeatingValues<LegPaymentStreamNonDeliverableFixingDateBusinessCenter>>,
+	pub leg_payment_stream_non_deliverable_fixing_date_business_centers: Option<fix_common::RepeatingValues<LegPaymentStreamNonDeliverableFixingDateBusinessCenter>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

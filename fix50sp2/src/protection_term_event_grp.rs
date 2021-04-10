@@ -6,7 +6,7 @@ pub struct ProtectionTermEventGrp {
 	/// NoProtectionTermEvents
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40191")]
-	pub protection_term_events: Option<crate::entities::RepeatingValues<ProtectionTermEvent>>,
+	pub protection_term_events: Option<fix_common::RepeatingValues<ProtectionTermEvent>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -25,7 +25,7 @@ pub struct ProtectionTermEvent {
 	pub protection_term_event_currency: Option<String>,
 	/// Conditionally required when ProtectionTermEventUnit(40196) is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "crate::entities::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "40195")]
 	pub protection_term_event_period: Option<i32>,
