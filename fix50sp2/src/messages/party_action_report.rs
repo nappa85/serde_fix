@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Party {
 	/// MsgType = DI
 	#[serde(flatten)]
@@ -94,7 +94,7 @@ pub struct Party {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum PartyActionType {
 	/// Suspend
 	#[serde(rename = "0")]
@@ -107,7 +107,7 @@ pub enum PartyActionType {
 	Reinstate,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum PartyActionResponse {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -120,7 +120,7 @@ pub enum PartyActionResponse {
 	Rejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum PartyActionRejectReason {
 	/// Invalid party or parties
 	#[serde(rename = "0")]
@@ -136,7 +136,7 @@ pub enum PartyActionRejectReason {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum ApplTestMessageIndicator {
 	/// Not a test message
 	#[serde(rename = "N")]

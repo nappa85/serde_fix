@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Assignment {
 	/// MsgType = AW
 	#[serde(flatten)]
@@ -144,7 +144,7 @@ pub struct Assignment {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum LastRptRequested {
 	/// Not last message
 	#[serde(rename = "N")]
@@ -154,7 +154,7 @@ pub enum LastRptRequested {
 	LastMessage,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -194,7 +194,7 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1398,7 +1398,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SettlPriceType {
 	/// Final
 	#[serde(rename = "1")]
@@ -1408,7 +1408,7 @@ pub enum SettlPriceType {
 	Theoretical,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AssignmentMethod {
 	/// Pro-rata
 	#[serde(rename = "P")]
@@ -1418,7 +1418,7 @@ pub enum AssignmentMethod {
 	Random,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum ExerciseMethod {
 	/// Automatic
 	#[serde(rename = "A")]
@@ -1428,7 +1428,7 @@ pub enum ExerciseMethod {
 	Manual,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SettlSessID {
 	/// Intraday
 	#[serde(rename = "ITD")]

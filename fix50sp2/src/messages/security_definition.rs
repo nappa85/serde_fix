@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Security {
 	/// MsgType = d
 	#[serde(flatten)]
@@ -148,7 +148,7 @@ pub struct Security {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SecurityResponseType {
 	/// Accept security proposal as is
 	#[serde(rename = "1")]
@@ -170,7 +170,7 @@ pub enum SecurityResponseType {
 	CanNotMatchSelectionCriteria,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum CorporateAction {
 	/// Ex-Dividend
 	#[serde(rename = "A")]
@@ -243,7 +243,7 @@ pub enum CorporateAction {
 	SuccessionEvent,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1447,7 +1447,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SecurityRequestResult {
 	/// Valid request
 	#[serde(rename = "0")]
@@ -1469,7 +1469,7 @@ pub enum SecurityRequestResult {
 	RequestForInstrumentDataNotSupported,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SecurityRejectReason {
 	/// Invalid instrument requested
 	#[serde(rename = "1")]

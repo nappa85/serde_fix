@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Security {
 	/// MsgType = y
 	#[serde(flatten)]
@@ -97,7 +97,7 @@ pub struct Security {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SecurityListType {
 	/// Industry Classification
 	#[serde(rename = "1")]
@@ -113,7 +113,7 @@ pub enum SecurityListType {
 	NewspaperList,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SecurityListTypeSource {
 	/// ICB (Industry Classification Benchmark) published by Dow Jones and FTSE - <a xmlns="http://www.b2bits.com/FIXProtocol" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://www.icbenchmark.com" target="_blank">www.icbenchmark.com</a> .
 	#[serde(rename = "1")]
@@ -126,7 +126,7 @@ pub enum SecurityListTypeSource {
 	GicsPublishedByStandardsAndPoor,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SecurityRequestResult {
 	/// Valid request
 	#[serde(rename = "0")]
@@ -148,7 +148,7 @@ pub enum SecurityRequestResult {
 	RequestForInstrumentDataNotSupported,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]
@@ -158,7 +158,7 @@ pub enum LastFragment {
 	LastMessage,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum SecurityRejectReason {
 	/// Invalid instrument requested
 	#[serde(rename = "1")]

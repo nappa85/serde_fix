@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Bid {
 	/// MsgType = k
 	#[serde(flatten)]
@@ -138,7 +138,7 @@ pub struct Bid {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum BidRequestTransType {
 	/// Cancel
 	#[serde(rename = "C")]
@@ -148,7 +148,7 @@ pub enum BidRequestTransType {
 	New,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum BidType {
 	/// "Non Disclosed" Style (e.g. US/European)
 	#[serde(rename = "1")]
@@ -161,7 +161,7 @@ pub enum BidType {
 	NoBiddingProcess,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1365,7 +1365,7 @@ pub enum Currency {
 	N999,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum LiquidityIndType {
 	/// 5-day moving average
 	#[serde(rename = "1")]
@@ -1381,7 +1381,7 @@ pub enum LiquidityIndType {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum ExchangeForPhysical {
 	/// False
 	#[serde(rename = "N")]
@@ -1391,7 +1391,7 @@ pub enum ExchangeForPhysical {
 	True,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum ProgRptReqs {
 	/// Buy-side explicitly requests status using Statue Request (default), the sell-side firm can, however, send a DONE status List
 	/// STatus Response in an unsolicited fashion
@@ -1405,7 +1405,7 @@ pub enum ProgRptReqs {
 	RealTimeExecutionReports,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum IncTaxInd {
 	/// Net
 	#[serde(rename = "1")]
@@ -1415,7 +1415,7 @@ pub enum IncTaxInd {
 	Gross,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum ForexReq {
 	/// Execute Forex after security trade
 	#[serde(rename = "Y")]
@@ -1425,7 +1425,7 @@ pub enum ForexReq {
 	DoNotExecuteForexAfterSecurityTrade,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum BidTradeType {
 	/// Agency
 	#[serde(rename = "A")]
@@ -1441,7 +1441,7 @@ pub enum BidTradeType {
 	RiskTrade,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum BasisPxType {
 	/// Closing Price at morning session
 	#[serde(rename = "2")]

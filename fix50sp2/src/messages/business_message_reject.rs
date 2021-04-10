@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Business {
 	/// MsgType = j
 	#[serde(flatten)]
@@ -56,7 +56,7 @@ pub struct Business {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RefMsgType {
 	/// Heartbeat
 	#[serde(rename = "0")]
@@ -534,7 +534,7 @@ pub enum RefMsgType {
 	TradeAggregationReport,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum BusinessRejectReason {
 	/// Other
 	#[serde(rename = "0")]

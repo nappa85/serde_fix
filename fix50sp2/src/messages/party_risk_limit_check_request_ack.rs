@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Party {
 	/// MsgType = DG
 	#[serde(flatten)]
@@ -126,7 +126,7 @@ pub struct Party {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RiskLimitCheckRequestStatus {
 	/// Approved
 	#[serde(rename = "0")]
@@ -145,7 +145,7 @@ pub enum RiskLimitCheckRequestStatus {
 	Cancelled,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RiskLimitCheckRequestResult {
 	/// Successful (default)
 	#[serde(rename = "0")]
@@ -167,7 +167,7 @@ pub enum RiskLimitCheckRequestResult {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RiskLimitCheckTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -180,7 +180,7 @@ pub enum RiskLimitCheckTransType {
 	Replace,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RiskLimitCheckType {
 	/// Submit
 	#[serde(rename = "0")]
@@ -190,7 +190,7 @@ pub enum RiskLimitCheckType {
 	LimitConsumed,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RefOrderIDSource {
 	/// Secondary order ID
 	#[serde(rename = "0")]
@@ -227,7 +227,7 @@ pub enum RefOrderIDSource {
 	ManualOrderIdentifier,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -282,7 +282,7 @@ pub enum Side {
 	SellUndisclosed,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]

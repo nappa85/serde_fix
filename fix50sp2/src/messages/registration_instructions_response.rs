@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Registration {
 	/// MsgType = p
 	#[serde(flatten)]
@@ -47,7 +47,7 @@ pub struct Registration {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RegistTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -60,7 +60,7 @@ pub enum RegistTransType {
 	Replace,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -85,7 +85,7 @@ pub enum AcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RegistStatus {
 	/// Accepted
 	#[serde(rename = "A")]
@@ -101,7 +101,7 @@ pub enum RegistStatus {
 	ReminderIERegistrationInstructionsAreStillOutstanding,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum RegistRejReasonCode {
 	/// Invalid/unacceptable Account Type
 	#[serde(rename = "1")]

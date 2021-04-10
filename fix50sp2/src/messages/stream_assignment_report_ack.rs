@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Stream {
 	/// MsgType = CE
 	#[serde(flatten)]
@@ -35,7 +35,7 @@ pub struct Stream {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum StreamAsgnAckType {
 	/// Assignment Accepted
 	#[serde(rename = "0")]
@@ -45,7 +45,7 @@ pub enum StreamAsgnAckType {
 	AssignmentRejected,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum StreamAsgnRejReason {
 	/// Unknown client
 	#[serde(rename = "0")]

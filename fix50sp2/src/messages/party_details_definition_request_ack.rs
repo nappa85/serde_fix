@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Party {
 	/// MsgType = CY
 	#[serde(flatten)]
@@ -41,7 +41,7 @@ pub struct Party {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum PartyDetailRequestStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -57,7 +57,7 @@ pub enum PartyDetailRequestStatus {
 	AcceptancePending,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum PartyDetailRequestResult {
 	/// Successful (default)
 	#[serde(rename = "0")]

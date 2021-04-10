@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Mass {
 	/// MsgType = b
 	#[serde(flatten)]
@@ -96,7 +96,7 @@ pub struct Mass {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum QuoteStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -172,7 +172,7 @@ pub enum QuoteStatus {
 	ContractTerminated,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum QuoteRejectReason {
 	/// Unknown symbol (security)
 	#[serde(rename = "1")]
@@ -242,7 +242,7 @@ pub enum QuoteRejectReason {
 	N21,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum QuoteResponseLevel {
 	/// No Acknowledgement (Default)
 	#[serde(rename = "0")]
@@ -258,7 +258,7 @@ pub enum QuoteResponseLevel {
 	SummaryAcknowledgement,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum QuoteType {
 	/// Indicative
 	#[serde(rename = "0")]
@@ -277,7 +277,7 @@ pub enum QuoteType {
 	InitiallyTradeable,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum QuoteCancelType {
 	/// Cancel for Symbol(s)
 	#[serde(rename = "1")]
@@ -305,7 +305,7 @@ pub enum QuoteCancelType {
 	CancelForIssuerOfUnderlyingSecurity,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -330,7 +330,7 @@ pub enum AcctIDSource {
 	Other,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]

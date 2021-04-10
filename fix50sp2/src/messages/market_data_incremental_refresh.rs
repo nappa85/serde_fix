@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Market {
 	/// MsgType = X
 	#[serde(flatten)]
@@ -58,7 +58,7 @@ pub struct Market {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum MDBookType {
 	/// Top of Book
 	#[serde(rename = "1")]
@@ -71,7 +71,7 @@ pub enum MDBookType {
 	OrderDepth,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum ApplQueueResolution {
 	/// No action taken
 	#[serde(rename = "0")]

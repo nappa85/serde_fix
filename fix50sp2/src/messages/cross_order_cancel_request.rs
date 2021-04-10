@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Cross {
 	/// MsgType = u
 	#[serde(flatten)]
@@ -60,7 +60,7 @@ pub struct Cross {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum CrossType {
 	/// Cross AON - cross tade which is executed complete or not. Both sides are treated in the same manner. This is equivalent to
 	/// an "All or None"."
@@ -101,7 +101,7 @@ pub enum CrossType {
 	CustomerToCustomerCross,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum CrossPrioritization {
 	/// None
 	#[serde(rename = "0")]

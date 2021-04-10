@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Confirmation {
 	/// MsgType = AU
 	#[serde(flatten)]
@@ -55,7 +55,7 @@ pub struct Confirmation {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AffirmStatus {
 	/// Received
 	#[serde(rename = "1")]
@@ -68,7 +68,7 @@ pub enum AffirmStatus {
 	Affirmed,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum ConfirmRejReason {
 	/// Mismatched account
 	#[serde(rename = "1")]
@@ -132,7 +132,7 @@ pub enum ConfirmRejReason {
 	IncorrectOrMissingCapacity,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
 	#[serde(rename = "0")]

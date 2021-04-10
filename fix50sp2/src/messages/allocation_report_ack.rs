@@ -1,7 +1,7 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub struct Allocation {
 	/// MsgType = AT
 	#[serde(flatten)]
@@ -137,7 +137,7 @@ pub struct Allocation {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AvgPxIndicator {
 	/// No Average Pricing
 	#[serde(rename = "0")]
@@ -156,7 +156,7 @@ pub enum AvgPxIndicator {
 	TradeIsAveragePriced,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AllocTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -181,7 +181,7 @@ pub enum AllocTransType {
 	Reversal,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AllocStatus {
 	/// accepted (successfully processed)
 	#[serde(rename = "0")]
@@ -230,7 +230,7 @@ pub enum AllocStatus {
 	ReversalPending,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AllocRejCode {
 	/// Unknown account(s)
 	#[serde(rename = "0")]
@@ -324,7 +324,7 @@ pub enum AllocRejCode {
 	N28,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AllocReportType {
 	/// Preliminary Request to Intermediary
 	#[serde(rename = "2")]
@@ -373,7 +373,7 @@ pub enum AllocReportType {
 	SubAllocationGiveup,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum AllocIntermedReqType {
 	/// Pending Accept
 	#[serde(rename = "1")]
@@ -395,7 +395,7 @@ pub enum AllocIntermedReqType {
 	AccountLevelReject,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
 	#[serde(rename = "0")]
@@ -412,7 +412,7 @@ pub enum MatchStatus {
 	MismatchedAndConfirmationAreMatchedButThereAreVariancesMatchExceptionGrpComponentMayBeUsedToDetailOnTheMisMatchedDataFields,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum CustOrderHandlingInst {
 	/// Add-on Order
 	#[serde(rename = "ADD")]
@@ -650,7 +650,7 @@ pub enum CustOrderHandlingInst {
 	WorkToTargetStrategy,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 pub enum OrderHandlingInstSource {
 	/// NASD OATS
 	#[serde(rename = "1")]
