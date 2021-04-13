@@ -300,3 +300,9 @@ pub enum ProvisionPartySubIDType {
 	#[serde(rename = "87")]
 	N87,
 }
+
+impl Default for ProvisionPartySubIDType {
+	fn default() -> Self {
+		ProvisionPartySubIDType::N1
+	}
+}

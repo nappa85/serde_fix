@@ -38,15 +38,11 @@ pub struct Attachment {
 	#[serde(rename = "2110")]
 	pub unencoded_attachment_len: Option<i32>,
 	/// Must be set if <a href="tag_2112_EncodedAttachment.html" target="bottom">EncodedAttachement(2112)&nbsp;(2112)</a> is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2111")]
-	pub encoded_attachment_len: Option<usize>,
 	/// Either <a href="tag_2108_AttachmentExternalURL.html" target="bottom">AttachementExternalURL(2108)&nbsp;(2108)</a> or <a href="tag_2112_EncodedAttachment.html" target="bottom">EncodedAttachment(2112)&nbsp;(2112)</a> must be specified if <a href="tag_2104_NoAttachments.html" target="bottom">NoAttachements(2104)&nbsp;(2104)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2112")]
-	pub encoded_attachment: Option<String>,
+	#[serde(alias = "2112")]
+	pub encoded_attachment: Option<fix_common::EncodedText<2112>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -57,4 +53,10 @@ pub enum AttachmentEncodingType {
 	/// Unencoded binary content
 	#[serde(rename = "1")]
 	UnencodedBinaryContent,
+}
+
+impl Default for AttachmentEncodingType {
+	fn default() -> Self {
+		AttachmentEncodingType::Base64Encoding
+	}
 }

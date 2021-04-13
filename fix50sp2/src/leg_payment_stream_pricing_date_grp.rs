@@ -30,3 +30,9 @@ pub enum LegPaymentStreamPricingDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for LegPaymentStreamPricingDateType {
+	fn default() -> Self {
+		LegPaymentStreamPricingDateType::Unadjusted
+	}
+}

@@ -82,6 +82,12 @@ pub enum PegPriceType {
 	ShortSaleMinimumPricePeg,
 }
 
+impl Default for PegPriceType {
+	fn default() -> Self {
+		PegPriceType::LastPeg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PegMoveType {
 	/// Floating (default)
@@ -90,6 +96,12 @@ pub enum PegMoveType {
 	/// Fixed
 	#[serde(rename = "1")]
 	Fixed,
+}
+
+impl Default for PegMoveType {
+	fn default() -> Self {
+		PegMoveType::Floating
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -111,6 +123,12 @@ pub enum PegOffsetType {
 	Percentage,
 }
 
+impl Default for PegOffsetType {
+	fn default() -> Self {
+		PegOffsetType::Price
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PegLimitType {
 	/// Or better (default) - price improvement allowed
@@ -125,6 +143,12 @@ pub enum PegLimitType {
 	OrWorseForABuyThePegLimitIsAMinimumAndForASellThePegLimitIsAMaximum,
 }
 
+impl Default for PegLimitType {
+	fn default() -> Self {
+		PegLimitType::OrBetterPriceImprovementAllowed
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PegRoundDirection {
 	/// More aggressive - on a buy order round the price up to the nearest tick; on a sell order round down to the nearest tick
@@ -133,6 +157,12 @@ pub enum PegRoundDirection {
 	/// More passive - on a buy order round down to the nearest tick; on a sell order round up to the nearest tick
 	#[serde(rename = "2")]
 	MorePassiveOnABuyOrderRoundDownToTheNearestTickOnASellOrderRoundUpToTheNearestTick,
+}
+
+impl Default for PegRoundDirection {
+	fn default() -> Self {
+		PegRoundDirection::MoreAggressiveOnABuyOrderRoundThePriceUpToTheNearestTickOnASellOrderRoundDownToTheNearestTick
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -149,6 +179,12 @@ pub enum PegScope {
 	/// National excluding local
 	#[serde(rename = "4")]
 	NationalExcludingLocal,
+}
+
+impl Default for PegScope {
+	fn default() -> Self {
+		PegScope::Local
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -249,4 +285,10 @@ pub enum PegSecurityIDSource {
 	/// Uniform Symbol (UMTF Symbol)
 	#[serde(rename = "X")]
 	UniformSymbol,
+}
+
+impl Default for PegSecurityIDSource {
+	fn default() -> Self {
+		PegSecurityIDSource::Cusip
+	}
 }

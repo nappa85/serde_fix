@@ -284,15 +284,11 @@ pub struct New {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// For use in derivatives omnibus accounting
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "77")]
@@ -454,16 +450,12 @@ pub struct New {
 	#[serde(rename = "2404")]
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2351")]
-	pub encoded_compliance_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ComplianceText(2404) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2352")]
-	pub encoded_compliance_text: Option<String>,
+	#[serde(alias = "2352")]
+	pub encoded_compliance_text: Option<fix_common::EncodedText<2352>>,
 	/// OrderRequestID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -531,6 +523,12 @@ pub enum AcctIDSource {
 	Other,
 }
 
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
@@ -571,6 +569,12 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DayBookingInst {
 	/// Can trigger booking without reference to the order initiator ("auto")
@@ -582,6 +586,12 @@ pub enum DayBookingInst {
 	/// Accumulate
 	#[serde(rename = "2")]
 	Accumulate,
+}
+
+impl Default for DayBookingInst {
+	fn default() -> Self {
+		DayBookingInst::CanTriggerBookingWithoutReferenceToTheOrderInitiator
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -597,6 +607,12 @@ pub enum BookingUnit {
 	AggregateExecutionsForThisSymbolSideAndSettlementDate,
 }
 
+impl Default for BookingUnit {
+	fn default() -> Self {
+		BookingUnit::EachPartialExecutionIsABookableUnit
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PreallocMethod {
 	/// Pro-rata
@@ -605,6 +621,12 @@ pub enum PreallocMethod {
 	/// Do not pro-rata - discuss first
 	#[serde(rename = "1")]
 	DoNotProRataDiscussFirst,
+}
+
+impl Default for PreallocMethod {
+	fn default() -> Self {
+		PreallocMethod::ProRata
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -647,6 +669,12 @@ pub enum SettlType {
 	FxSpotNextSettlement,
 }
 
+impl Default for SettlType {
+	fn default() -> Self {
+		SettlType::RegularFxSpotSettlement
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CashMargin {
 	/// Cash
@@ -658,6 +686,12 @@ pub enum CashMargin {
 	/// Margin Close
 	#[serde(rename = "3")]
 	MarginClose,
+}
+
+impl Default for CashMargin {
+	fn default() -> Self {
+		CashMargin::Cash
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -706,6 +740,12 @@ pub enum ClearingFeeIndicator {
 	AllOtherOwnershipTypes,
 }
 
+impl Default for ClearingFeeIndicator {
+	fn default() -> Self {
+		ClearingFeeIndicator::N1StYearDelegateTradingForOwnAccount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum HandlInst {
 	/// Automated execution order, private, no Broker intervention
@@ -717,6 +757,12 @@ pub enum HandlInst {
 	/// Manual order, best execution
 	#[serde(rename = "3")]
 	ManualOrderBestExecution,
+}
+
+impl Default for HandlInst {
+	fn default() -> Self {
+		HandlInst::AutomatedExecutionOrderPrivateNoBrokerIntervention
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -909,6 +955,12 @@ pub enum ExecInst {
 	AllowFacilitation,
 }
 
+impl Default for ExecInst {
+	fn default() -> Self {
+		ExecInst::StayOnOfferside
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExDestinationIDSource {
 	/// BIC (Bank Identification Code) (ISO 9362)
@@ -926,6 +978,12 @@ pub enum ExDestinationIDSource {
 	/// MIC (ISO 10383 - Market Identifier Code)
 	#[serde(rename = "G")]
 	Mic,
+}
+
+impl Default for ExDestinationIDSource {
+	fn default() -> Self {
+		ExDestinationIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -951,6 +1009,12 @@ pub enum ProcessCode {
 	/// Plan Sponsor
 	#[serde(rename = "6")]
 	PlanSponsor,
+}
+
+impl Default for ProcessCode {
+	fn default() -> Self {
+		ProcessCode::Regular
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1008,6 +1072,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LocateReqd {
 	/// Indicates the broker is responsible for locating the stock
@@ -1016,6 +1086,12 @@ pub enum LocateReqd {
 	/// Indicates the broker is not required to locate
 	#[serde(rename = "N")]
 	IndicatesTheBrokerIsNotRequiredToLocate,
+}
+
+impl Default for LocateReqd {
+	fn default() -> Self {
+		LocateReqd::IndicatesTheBrokerIsResponsibleForLocatingTheStock
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1029,6 +1105,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1117,6 +1199,12 @@ pub enum OrdType {
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
 }
 
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MultilegModel {
 	/// Predefined Multileg Security
@@ -1128,6 +1216,12 @@ pub enum MultilegModel {
 	/// User-defined, Non-Securitized, Multileg
 	#[serde(rename = "2")]
 	UserDefinedNonSecuritizedMultileg,
+}
+
+impl Default for MultilegModel {
+	fn default() -> Self {
+		MultilegModel::PredefinedMultilegSecurity
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1150,6 +1244,12 @@ pub enum MultilegPriceMethod {
 	/// Multiplied Price
 	#[serde(rename = "5")]
 	MultipliedPrice,
+}
+
+impl Default for MultilegPriceMethod {
+	fn default() -> Self {
+		MultilegPriceMethod::NetPrice
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1233,6 +1333,12 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceProtectionScope {
 	/// None
@@ -1244,6 +1350,12 @@ pub enum PriceProtectionScope {
 	/// National (Across all national markets)
 	#[serde(rename = "2")]
 	National,
+}
+
+impl Default for PriceProtectionScope {
+	fn default() -> Self {
+		PriceProtectionScope::None
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2450,6 +2562,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SolicitedFlag {
 	/// Was not solicited
@@ -2458,6 +2576,12 @@ pub enum SolicitedFlag {
 	/// Was solicited
 	#[serde(rename = "Y")]
 	WasSolicited,
+}
+
+impl Default for SolicitedFlag {
+	fn default() -> Self {
+		SolicitedFlag::WasNotSolicited
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2495,6 +2619,12 @@ pub enum RefOrderIDSource {
 	/// Manual order identifier
 	#[serde(rename = "10")]
 	ManualOrderIdentifier,
+}
+
+impl Default for RefOrderIDSource {
+	fn default() -> Self {
+		RefOrderIDSource::SecondaryOrderId
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2540,6 +2670,12 @@ pub enum TimeInForce {
 	GoodForThisMonth,
 }
 
+impl Default for TimeInForce {
+	fn default() -> Self {
+		TimeInForce::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum GTBookingInst {
 	/// Book out all trades on day of execution
@@ -2551,6 +2687,12 @@ pub enum GTBookingInst {
 	/// Accumulate until verbally notified otherwise
 	#[serde(rename = "2")]
 	AccumulateUntilVerballyNotifiedOtherwise,
+}
+
+impl Default for GTBookingInst {
+	fn default() -> Self {
+		GTBookingInst::BookOutAllTradesOnDayOfExecution
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2576,6 +2718,12 @@ pub enum OrderCapacity {
 	/// Mixed capacity
 	#[serde(rename = "M")]
 	MixedCapacity,
+}
+
+impl Default for OrderCapacity {
+	fn default() -> Self {
+		OrderCapacity::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2636,6 +2784,12 @@ pub enum OrderRestrictions {
 	NormalCourseIssuerBid,
 }
 
+impl Default for OrderRestrictions {
+	fn default() -> Self {
+		OrderRestrictions::ProgramTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CustOrderCapacity {
 	/// Member trading for their own account
@@ -2655,6 +2809,12 @@ pub enum CustOrderCapacity {
 	RetailCustomer,
 }
 
+impl Default for CustOrderCapacity {
+	fn default() -> Self {
+		CustOrderCapacity::MemberTradingForTheirOwnAccount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ForexReq {
 	/// Execute Forex after security trade
@@ -2663,6 +2823,12 @@ pub enum ForexReq {
 	/// Do not execute Forex after security trade
 	#[serde(rename = "N")]
 	DoNotExecuteForexAfterSecurityTrade,
+}
+
+impl Default for ForexReq {
+	fn default() -> Self {
+		ForexReq::ExecuteForexAfterSecurityTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3869,6 +4035,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BookingType {
 	/// Regular booking
@@ -3880,6 +4052,12 @@ pub enum BookingType {
 	/// Total Return Swap
 	#[serde(rename = "2")]
 	TotalReturnSwap,
+}
+
+impl Default for BookingType {
+	fn default() -> Self {
+		BookingType::RegularBooking
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3904,6 +4082,12 @@ pub enum PositionEffect {
 	Rolled,
 }
 
+impl Default for PositionEffect {
+	fn default() -> Self {
+		PositionEffect::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CoveredOrUncovered {
 	/// Covered
@@ -3912,6 +4096,12 @@ pub enum CoveredOrUncovered {
 	/// Uncovered
 	#[serde(rename = "1")]
 	Uncovered,
+}
+
+impl Default for CoveredOrUncovered {
+	fn default() -> Self {
+		CoveredOrUncovered::Covered
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3925,6 +4115,12 @@ pub enum TargetStrategy {
 	/// Mininize market impact
 	#[serde(rename = "3")]
 	MininizeMarketImpact,
+}
+
+impl Default for TargetStrategy {
+	fn default() -> Self {
+		TargetStrategy::Vwap
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3941,6 +4137,12 @@ pub enum CancellationRights {
 	/// No - institutional
 	#[serde(rename = "O")]
 	NoInstitutional,
+}
+
+impl Default for CancellationRights {
+	fn default() -> Self {
+		CancellationRights::Yes
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3962,6 +4164,12 @@ pub enum MoneyLaunderingStatus {
 	ExemptAuthorisedCreditOrFinancialInstitution,
 }
 
+impl Default for MoneyLaunderingStatus {
+	fn default() -> Self {
+		MoneyLaunderingStatus::Passed
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MultiLegRptTypeReq {
 	/// Report by mulitleg security only (Do not report legs)
@@ -3975,6 +4183,12 @@ pub enum MultiLegRptTypeReq {
 	ReportByInstrumentLegsBelongingToTheMultilegSecurityOnly,
 }
 
+impl Default for MultiLegRptTypeReq {
+	fn default() -> Self {
+		MultiLegRptTypeReq::ReportByMulitlegSecurityOnly
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
@@ -3983,6 +4197,12 @@ pub enum ThrottleInst {
 	/// Queue if throttle limit exceeded
 	#[serde(rename = "1")]
 	QueueIfThrottleLimitExceeded,
+}
+
+impl Default for ThrottleInst {
+	fn default() -> Self {
+		ThrottleInst::RejectIfThrottleLimitExceeded
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4010,6 +4230,12 @@ pub enum TradePriceNegotiationMethod {
 	UpfrontPointsAndUpfrontAmount,
 }
 
+impl Default for TradePriceNegotiationMethod {
+	fn default() -> Self {
+		TradePriceNegotiationMethod::PercentOfPar
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UpfrontPriceType {
 	/// Percentage (i.e. percent of par) (often called "dollar price" for fixed income)
@@ -4018,6 +4244,12 @@ pub enum UpfrontPriceType {
 	/// Fixed amount (absolute value)
 	#[serde(rename = "3")]
 	FixedAmount,
+}
+
+impl Default for UpfrontPriceType {
+	fn default() -> Self {
+		UpfrontPriceType::Percentage
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4030,6 +4262,12 @@ pub enum AuctionInstruction {
 	AutomatedAuctionNotPermitted,
 }
 
+impl Default for AuctionInstruction {
+	fn default() -> Self {
+		AuctionInstruction::AutomatedAuctionPremitted
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MinQtyMethod {
 	/// Once (applies only to first execution)
@@ -4038,6 +4276,12 @@ pub enum MinQtyMethod {
 	/// Multiple (applies to every execution)
 	#[serde(rename = "2")]
 	Multiple,
+}
+
+impl Default for MinQtyMethod {
+	fn default() -> Self {
+		MinQtyMethod::Once
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4068,6 +4312,12 @@ pub enum TradingCapacity {
 	SystematicInternaliser,
 }
 
+impl Default for TradingCapacity {
+	fn default() -> Self {
+		TradingCapacity::Customer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearingAccountType {
 	/// Customer
@@ -4079,6 +4329,12 @@ pub enum ClearingAccountType {
 	/// Market maker
 	#[serde(rename = "3")]
 	MarketMaker,
+}
+
+impl Default for ClearingAccountType {
+	fn default() -> Self {
+		ClearingAccountType::Customer
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4112,6 +4368,12 @@ pub enum AuctionType {
 	DirectedOrderPriceImprovementMechanism,
 }
 
+impl Default for AuctionType {
+	fn default() -> Self {
+		AuctionType::None
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RelatedPriceSource {
 	/// NBB (National Best Bid)
@@ -4120,6 +4382,12 @@ pub enum RelatedPriceSource {
 	/// NBO (National Best Offer)
 	#[serde(rename = "2")]
 	Nbo,
+}
+
+impl Default for RelatedPriceSource {
+	fn default() -> Self {
+		RelatedPriceSource::Nbb
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4162,6 +4430,12 @@ pub enum ExposureDurationUnit {
 	Years,
 }
 
+impl Default for ExposureDurationUnit {
+	fn default() -> Self {
+		ExposureDurationUnit::Seconds
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ShortMarkingExemptIndicator {
 	/// Account is not SME
@@ -4170,6 +4444,12 @@ pub enum ShortMarkingExemptIndicator {
 	/// Account is SME
 	#[serde(rename = "Y")]
 	AccountIsSme,
+}
+
+impl Default for ShortMarkingExemptIndicator {
+	fn default() -> Self {
+		ShortMarkingExemptIndicator::AccountIsNotSme
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4197,6 +4477,12 @@ pub enum OrderOrigination {
 	OrderReceivedFromAnExecutionOnlyService,
 }
 
+impl Default for OrderOrigination {
+	fn default() -> Self {
+		OrderOrigination::OrderReceivedFromACustomer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExDestinationType {
 	/// No restriction
@@ -4213,6 +4499,12 @@ pub enum ExDestinationType {
 	CanBeTradedOnATradingVenueOrSystematicInternaliser,
 }
 
+impl Default for ExDestinationType {
+	fn default() -> Self {
+		ExDestinationType::NoRestriction
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradePublishIndicator {
 	/// Do Not Publish Trade
@@ -4227,4 +4519,10 @@ pub enum TradePublishIndicator {
 	/// Published
 	#[serde(rename = "3")]
 	Published,
+}
+
+impl Default for TradePublishIndicator {
+	fn default() -> Self {
+		TradePublishIndicator::DoNotPublishTrade
+	}
 }

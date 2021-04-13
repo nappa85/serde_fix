@@ -83,6 +83,12 @@ pub enum UnderlyingOptionExerciseExpirationDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for UnderlyingOptionExerciseExpirationDateBusinessDayConvention {
+	fn default() -> Self {
+		UnderlyingOptionExerciseExpirationDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationDateRelativeTo {
 	/// Trade date
@@ -117,6 +123,12 @@ pub enum UnderlyingOptionExerciseExpirationDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for UnderlyingOptionExerciseExpirationDateRelativeTo {
+	fn default() -> Self {
+		UnderlyingOptionExerciseExpirationDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationDateOffsetUnit {
 	/// Day
@@ -133,6 +145,12 @@ pub enum UnderlyingOptionExerciseExpirationDateOffsetUnit {
 	Year,
 }
 
+impl Default for UnderlyingOptionExerciseExpirationDateOffsetUnit {
+	fn default() -> Self {
+		UnderlyingOptionExerciseExpirationDateOffsetUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationFrequencyUnit {
 	/// Day
@@ -147,6 +165,12 @@ pub enum UnderlyingOptionExerciseExpirationFrequencyUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for UnderlyingOptionExerciseExpirationFrequencyUnit {
+	fn default() -> Self {
+		UnderlyingOptionExerciseExpirationFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -291,6 +315,12 @@ pub enum UnderlyingOptionExerciseExpirationRollConvention {
 	Sunday,
 }
 
+impl Default for UnderlyingOptionExerciseExpirationRollConvention {
+	fn default() -> Self {
+		UnderlyingOptionExerciseExpirationRollConvention::N1StDayOfTheMonth
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationDateOffsetDayType {
 	/// Business
@@ -311,4 +341,10 @@ pub enum UnderlyingOptionExerciseExpirationDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for UnderlyingOptionExerciseExpirationDateOffsetDayType {
+	fn default() -> Self {
+		UnderlyingOptionExerciseExpirationDateOffsetDayType::Business
+	}
 }

@@ -157,15 +157,11 @@ pub struct Confirmation {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// EncodedTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// EncodedText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Used to identify whether the trade was a soft dollar trade, step in/out etc. Broker of credit, where relevant, can be specified
 	/// using the <a href="block_Parties.html" target="main">Parties</a> nested block above.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -344,16 +340,12 @@ pub struct Confirmation {
 	#[serde(rename = "2374")]
 	pub trade_continuation_text: Option<String>,
 	/// Must be set if EncodedTradeContinuationText(2371) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2372")]
-	pub encoded_trade_continuation_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the TradeContinuationText(2374) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2371")]
-	pub encoded_trade_continuation_text: Option<String>,
+	#[serde(alias = "2371")]
+	pub encoded_trade_continuation_text: Option<fix_common::EncodedText<2371>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -372,6 +364,12 @@ pub enum ConfirmTransType {
 	Cancel,
 }
 
+impl Default for ConfirmTransType {
+	fn default() -> Self {
+		ConfirmTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ConfirmType {
 	/// Status
@@ -385,6 +383,12 @@ pub enum ConfirmType {
 	ConfirmationRequestRejectedAField,
 }
 
+impl Default for ConfirmType {
+	fn default() -> Self {
+		ConfirmType::Status
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegalConfirm {
 	/// Does not constitute a legal confirm
@@ -393,6 +397,12 @@ pub enum LegalConfirm {
 	/// Legal Confirm
 	#[serde(rename = "Y")]
 	LegalConfirm,
+}
+
+impl Default for LegalConfirm {
+	fn default() -> Self {
+		LegalConfirm::DoesNotConstituteALegalConfirm
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -414,6 +424,12 @@ pub enum ConfirmStatus {
 	RequestRejected,
 }
 
+impl Default for ConfirmStatus {
+	fn default() -> Self {
+		ConfirmStatus::Received
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
@@ -431,6 +447,12 @@ pub enum MatchStatus {
 	MismatchedAndConfirmationAreMatchedButThereAreVariancesMatchExceptionGrpComponentMayBeUsedToDetailOnTheMisMatchedDataFields,
 }
 
+impl Default for MatchStatus {
+	fn default() -> Self {
+		MatchStatus::ComparedMatchedOrAffirmed
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
@@ -442,6 +464,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -497,6 +525,12 @@ pub enum Side {
 	/// Sell undisclosed
 	#[serde(rename = "H")]
 	SellUndisclosed,
+}
+
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1703,6 +1737,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocAcctIDSource {
 	/// BIC
@@ -1728,6 +1768,12 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
+impl Default for AllocAcctIDSource {
+	fn default() -> Self {
+		AllocAcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocAccountType {
 	/// Account is carried on customer Side of Books
@@ -1751,6 +1797,12 @@ pub enum AllocAccountType {
 	/// Joint Backoffice Account (JBO)
 	#[serde(rename = "8")]
 	JointBackofficeAccount,
+}
+
+impl Default for AllocAccountType {
+	fn default() -> Self {
+		AllocAccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1834,6 +1886,12 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProcessCode {
 	/// Regular
@@ -1857,6 +1915,12 @@ pub enum ProcessCode {
 	/// Plan Sponsor
 	#[serde(rename = "6")]
 	PlanSponsor,
+}
+
+impl Default for ProcessCode {
+	fn default() -> Self {
+		ProcessCode::Regular
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3063,6 +3127,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrFxRateCalc {
 	/// Multiply
@@ -3071,6 +3141,12 @@ pub enum SettlCurrFxRateCalc {
 	/// Divide
 	#[serde(rename = "D")]
 	Divide,
+}
+
+impl Default for SettlCurrFxRateCalc {
+	fn default() -> Self {
+		SettlCurrFxRateCalc::Multiply
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3113,6 +3189,12 @@ pub enum SettlType {
 	FxSpotNextSettlement,
 }
 
+impl Default for SettlType {
+	fn default() -> Self {
+		SettlType::RegularFxSpotSettlement
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearedIndicator {
 	/// Not cleared
@@ -3129,6 +3211,12 @@ pub enum ClearedIndicator {
 	Rejected,
 }
 
+impl Default for ClearedIndicator {
+	fn default() -> Self {
+		ClearedIndicator::NotCleared
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AffirmStatus {
 	/// Received
@@ -3140,6 +3228,12 @@ pub enum AffirmStatus {
 	/// Affirmed
 	#[serde(rename = "3")]
 	Affirmed,
+}
+
+impl Default for AffirmStatus {
+	fn default() -> Self {
+		AffirmStatus::Received
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3347,6 +3441,12 @@ pub enum TrdType {
 	N66,
 }
 
+impl Default for TrdType {
+	fn default() -> Self {
+		TrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdSubType {
 	/// CMTA
@@ -3512,6 +3612,12 @@ pub enum TrdSubType {
 	/// market
 	#[serde(rename = "52")]
 	TradeAtCashOpenTheMarketplaceNameGivenToTradingFuturesBasedOnAnOpeningQuoteOfTheUnderlyingCashMarket,
+}
+
+impl Default for TrdSubType {
+	fn default() -> Self {
+		TrdSubType::Cmta
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3719,6 +3825,12 @@ pub enum SecondaryTrdType {
 	N66,
 }
 
+impl Default for SecondaryTrdType {
+	fn default() -> Self {
+		SecondaryTrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeContinuation {
 	/// Novation
@@ -3825,6 +3937,12 @@ pub enum TradeContinuation {
 	Rerate,
 }
 
+impl Default for TradeContinuation {
+	fn default() -> Self {
+		TradeContinuation::Novation
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchType {
 	/// ACT Accepted Trade
@@ -3917,4 +4035,10 @@ pub enum MatchType {
 	/// Cross auction with last look
 	#[serde(rename = "11")]
 	CrossAuctionWithLastLook,
+}
+
+impl Default for MatchType {
+	fn default() -> Self {
+		MatchType::ActAcceptedTrade
+	}
 }

@@ -401,3 +401,9 @@ pub enum TrdRepPartyRole {
 	#[serde(rename = "127")]
 	ContraInvestmentDecisionMaker,
 }
+
+impl Default for TrdRepPartyRole {
+	fn default() -> Self {
+		TrdRepPartyRole::ExecutingFirm
+	}
+}

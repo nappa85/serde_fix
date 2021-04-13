@@ -84,6 +84,12 @@ pub enum DeliveryScheduleType {
 	PhysicalSettlementPeriod,
 }
 
+impl Default for DeliveryScheduleType {
+	fn default() -> Self {
+		DeliveryScheduleType::Notional
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryScheduleNotionalUnitOfMeasure {
 	/// Barrels
@@ -332,6 +338,12 @@ pub enum DeliveryScheduleNotionalUnitOfMeasure {
 	Yd,
 }
 
+impl Default for DeliveryScheduleNotionalUnitOfMeasure {
+	fn default() -> Self {
+		DeliveryScheduleNotionalUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryScheduleNotionalCommodityFrequency {
 	/// Term
@@ -355,6 +367,12 @@ pub enum DeliveryScheduleNotionalCommodityFrequency {
 	/// Per month
 	#[serde(rename = "6")]
 	PerMonth,
+}
+
+impl Default for DeliveryScheduleNotionalCommodityFrequency {
+	fn default() -> Self {
+		DeliveryScheduleNotionalCommodityFrequency::Term
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -605,6 +623,12 @@ pub enum DeliveryScheduleToleranceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for DeliveryScheduleToleranceUnitOfMeasure {
+	fn default() -> Self {
+		DeliveryScheduleToleranceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryScheduleToleranceType {
 	/// Absolute
@@ -613,6 +637,12 @@ pub enum DeliveryScheduleToleranceType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for DeliveryScheduleToleranceType {
+	fn default() -> Self {
+		DeliveryScheduleToleranceType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -637,6 +667,12 @@ pub enum DeliveryScheduleSettlFlowType {
 	Other,
 }
 
+impl Default for DeliveryScheduleSettlFlowType {
+	fn default() -> Self {
+		DeliveryScheduleSettlFlowType::AllTimes
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryScheduleSettlHolidaysProcessingInstruction {
 	/// Do not include holidays
@@ -645,4 +681,10 @@ pub enum DeliveryScheduleSettlHolidaysProcessingInstruction {
 	/// Include holidays
 	#[serde(rename = "1")]
 	IncludeHolidays,
+}
+
+impl Default for DeliveryScheduleSettlHolidaysProcessingInstruction {
+	fn default() -> Self {
+		DeliveryScheduleSettlHolidaysProcessingInstruction::DoNotIncludeHolidays
+	}
 }

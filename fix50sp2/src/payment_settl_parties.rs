@@ -123,6 +123,12 @@ pub enum PaymentSettlPartyIDSource {
 	MasterSpecialSegregatedAccountId,
 }
 
+impl Default for PaymentSettlPartyIDSource {
+	fn default() -> Self {
+		PaymentSettlPartyIDSource::BicCode
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentSettlPartyRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
@@ -504,6 +510,12 @@ pub enum PaymentSettlPartyRole {
 	ContraInvestmentDecisionMaker,
 }
 
+impl Default for PaymentSettlPartyRole {
+	fn default() -> Self {
+		PaymentSettlPartyRole::ExecutingFirm
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentSettlPartyRoleQualifier {
 	/// Agency
@@ -596,4 +608,10 @@ pub enum PaymentSettlPartyRoleQualifier {
 	/// Lender
 	#[serde(rename = "29")]
 	Lender,
+}
+
+impl Default for PaymentSettlPartyRoleQualifier {
+	fn default() -> Self {
+		PaymentSettlPartyRoleQualifier::Agency
+	}
 }

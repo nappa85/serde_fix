@@ -48,16 +48,12 @@ pub struct Event {
 	#[serde(rename = "2340")]
 	pub event_month_year: Option<fix_common::MonthYear>,
 	/// Must be set if EncodedEventText(1579) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1578")]
-	pub encoded_event_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the EventText(868) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1579")]
-	pub encoded_event_text: Option<String>,
+	#[serde(alias = "1579")]
+	pub encoded_event_text: Option<fix_common::EncodedText<1579>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -151,6 +147,12 @@ pub enum EventType {
 	TradeContinuationEffectiveDate,
 }
 
+impl Default for EventType {
+	fn default() -> Self {
+		EventType::Put
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EventTimeUnit {
 	/// Hour
@@ -177,4 +179,10 @@ pub enum EventTimeUnit {
 	/// Quarter
 	#[serde(rename = "Q")]
 	Quarter,
+}
+
+impl Default for EventTimeUnit {
+	fn default() -> Self {
+		EventTimeUnit::Hour
+	}
 }

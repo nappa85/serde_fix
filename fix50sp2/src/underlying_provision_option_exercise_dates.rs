@@ -121,6 +121,12 @@ pub enum UnderlyingProvisionOptionExerciseBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for UnderlyingProvisionOptionExerciseBusinessDayConvention {
+	fn default() -> Self {
+		UnderlyingProvisionOptionExerciseBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseFrequencyUnit {
 	/// Day
@@ -147,6 +153,12 @@ pub enum UnderlyingProvisionOptionExerciseFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for UnderlyingProvisionOptionExerciseFrequencyUnit {
+	fn default() -> Self {
+		UnderlyingProvisionOptionExerciseFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -183,6 +195,12 @@ pub enum UnderlyingProvisionOptionExerciseStartDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for UnderlyingProvisionOptionExerciseStartDateRelativeTo {
+	fn default() -> Self {
+		UnderlyingProvisionOptionExerciseStartDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseStartDateOffsetUnit {
 	/// Day
@@ -197,6 +215,12 @@ pub enum UnderlyingProvisionOptionExerciseStartDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for UnderlyingProvisionOptionExerciseStartDateOffsetUnit {
+	fn default() -> Self {
+		UnderlyingProvisionOptionExerciseStartDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -219,4 +243,10 @@ pub enum UnderlyingProvisionOptionExerciseStartDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for UnderlyingProvisionOptionExerciseStartDateOffsetDayType {
+	fn default() -> Self {
+		UnderlyingProvisionOptionExerciseStartDateOffsetDayType::Business
+	}
 }

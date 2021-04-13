@@ -70,6 +70,12 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
@@ -114,6 +120,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesMethod {
 	/// Electronic
@@ -130,6 +142,12 @@ pub enum TradSesMethod {
 	Voice,
 }
 
+impl Default for TradSesMethod {
+	fn default() -> Self {
+		TradSesMethod::Electronic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesMode {
 	/// Testing
@@ -143,6 +161,12 @@ pub enum TradSesMode {
 	Production,
 }
 
+impl Default for TradSesMode {
+	fn default() -> Self {
+		TradSesMode::Testing
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
@@ -154,4 +178,10 @@ pub enum SubscriptionRequestType {
 	/// Disable previous Snapshot + Update Request (Unsubscribe)
 	#[serde(rename = "2")]
 	DisablePreviousSnapshotUpdateRequest,
+}
+
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
 }

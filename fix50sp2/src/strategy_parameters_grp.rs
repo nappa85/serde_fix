@@ -115,3 +115,9 @@ pub enum StrategyParameterType {
 	#[serde(rename = "29")]
 	Tenor,
 }
+
+impl Default for StrategyParameterType {
+	fn default() -> Self {
+		StrategyParameterType::Int
+	}
+}

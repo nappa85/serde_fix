@@ -30,3 +30,9 @@ pub enum LegNonDeliverableFixingDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for LegNonDeliverableFixingDateType {
+	fn default() -> Self {
+		LegNonDeliverableFixingDateType::Unadjusted
+	}
+}

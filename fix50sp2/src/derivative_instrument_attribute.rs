@@ -150,3 +150,9 @@ pub enum DerivativeInstrAttribType {
 	#[serde(rename = "41")]
 	N41,
 }
+
+impl Default for DerivativeInstrAttribType {
+	fn default() -> Self {
+		DerivativeInstrAttribType::N1
+	}
+}

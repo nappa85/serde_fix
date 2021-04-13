@@ -64,16 +64,12 @@ pub struct AllocCommission {
 	#[serde(rename = "2664")]
 	pub alloc_commission_desc: Option<String>,
 	/// Must be set if EncodedAllocCommissionDesc(2666) is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2665")]
-	pub encoded_alloc_commission_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the AllocCommissionDesc(2664) field in the encoded format specified via the
 	/// MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2666")]
-	pub encoded_alloc_commission_desc: Option<String>,
+	#[serde(alias = "2666")]
+	pub encoded_alloc_commission_desc: Option<fix_common::EncodedText<2666>>,
 	/// AllocCommissionAmountSubType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2726")]
@@ -108,6 +104,12 @@ pub enum AllocCommissionAmountType {
 	ResearchPayment,
 }
 
+impl Default for AllocCommissionAmountType {
+	fn default() -> Self {
+		AllocCommissionAmountType::Unspecified
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocCommissionBasis {
 	/// Per unit
@@ -121,6 +123,12 @@ pub enum AllocCommissionBasis {
 	Absolute,
 }
 
+impl Default for AllocCommissionBasis {
+	fn default() -> Self {
+		AllocCommissionBasis::PerUnit
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocCommissionAmountSubType {
 	/// Research payment (RPA)
@@ -132,4 +140,10 @@ pub enum AllocCommissionAmountSubType {
 	/// Other
 	#[serde(rename = "2")]
 	Other,
+}
+
+impl Default for AllocCommissionAmountSubType {
+	fn default() -> Self {
+		AllocCommissionAmountSubType::ResearchPayment
+	}
 }

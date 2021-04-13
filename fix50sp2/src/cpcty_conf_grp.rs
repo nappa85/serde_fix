@@ -53,9 +53,9 @@ pub enum OrderCapacity {
 }
 
 impl Default for OrderCapacity {
-    fn default() -> Self {
-        OrderCapacity::Agency
-    }
+	fn default() -> Self {
+		OrderCapacity::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -114,4 +114,10 @@ pub enum OrderRestrictions {
 	/// Normal Course Issuer Bid (NCIB)
 	#[serde(rename = "I")]
 	NormalCourseIssuerBid,
+}
+
+impl Default for OrderRestrictions {
+	fn default() -> Self {
+		OrderRestrictions::ProgramTrade
+	}
 }

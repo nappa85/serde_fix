@@ -27,16 +27,12 @@ pub struct UnderlyingStreamCommodity {
 	#[serde(rename = "41968")]
 	pub underlying_stream_commodity_desc: Option<String>,
 	/// Must be set if EncodedUnderlyingStreamCommodityDesc(41970) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41969")]
-	pub encoded_underlying_stream_commodity_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the UnderlyingStreamCommodityDesc(41968) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41970")]
-	pub encoded_underlying_stream_commodity_desc: Option<String>,
+	#[serde(alias = "41970")]
+	pub encoded_underlying_stream_commodity_desc: Option<fix_common::EncodedText<41970>>,
 	/// UnderlyingStreamAssetAttributeGrp
 	#[serde(flatten)]
 	pub underlying_stream_asset_attribute_grp: Option<super::underlying_stream_asset_attribute_grp::UnderlyingStreamAssetAttributeGrp>,
@@ -238,6 +234,12 @@ pub enum UnderlyingStreamCommoditySecurityIDSource {
 	/// Uniform Symbol (UMTF Symbol)
 	#[serde(rename = "X")]
 	UniformSymbol,
+}
+
+impl Default for UnderlyingStreamCommoditySecurityIDSource {
+	fn default() -> Self {
+		UnderlyingStreamCommoditySecurityIDSource::Cusip
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -488,6 +490,12 @@ pub enum UnderlyingStreamCommodityUnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnderlyingStreamCommodityUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingStreamCommodityUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingStreamCommodityNearbySettlDayUnit {
 	/// Week
@@ -496,6 +504,12 @@ pub enum UnderlyingStreamCommodityNearbySettlDayUnit {
 	/// Month
 	#[serde(rename = "Mo")]
 	Month,
+}
+
+impl Default for UnderlyingStreamCommodityNearbySettlDayUnit {
+	fn default() -> Self {
+		UnderlyingStreamCommodityNearbySettlDayUnit::Week
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -526,11 +540,23 @@ pub enum UnderlyingStreamCommoditySettlDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for UnderlyingStreamCommoditySettlDateBusinessDayConvention {
+	fn default() -> Self {
+		UnderlyingStreamCommoditySettlDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingStreamCommoditySettlDateRollUnit {
 	/// Day
 	#[serde(rename = "D")]
 	Day,
+}
+
+impl Default for UnderlyingStreamCommoditySettlDateRollUnit {
+	fn default() -> Self {
+		UnderlyingStreamCommoditySettlDateRollUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -553,4 +579,10 @@ pub enum UnderlyingStreamCommoditySettlDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for UnderlyingStreamCommoditySettlDayType {
+	fn default() -> Self {
+		UnderlyingStreamCommoditySettlDayType::Business
+	}
 }

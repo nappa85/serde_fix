@@ -137,3 +137,9 @@ pub enum PartyRelationshipItem {
 	#[serde(rename = "38")]
 	SettlesThrough,
 }
+
+impl Default for PartyRelationshipItem {
+	fn default() -> Self {
+		PartyRelationshipItem::IsAlso
+	}
+}

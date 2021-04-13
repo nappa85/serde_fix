@@ -38,3 +38,9 @@ pub enum EntitlementStatus {
 	#[serde(rename = "5")]
 	N5,
 }
+
+impl Default for EntitlementStatus {
+	fn default() -> Self {
+		EntitlementStatus::N0
+	}
+}

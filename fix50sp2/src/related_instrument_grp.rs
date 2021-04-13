@@ -81,6 +81,12 @@ pub enum RelatedInstrumentType {
 	Leg,
 }
 
+impl Default for RelatedInstrumentType {
+	fn default() -> Self {
+		RelatedInstrumentType::HedgesForInstrument
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RelatedSecurityIDSource {
 	/// CUSIP
@@ -179,6 +185,12 @@ pub enum RelatedSecurityIDSource {
 	/// Uniform Symbol (UMTF Symbol)
 	#[serde(rename = "X")]
 	UniformSymbol,
+}
+
+impl Default for RelatedSecurityIDSource {
+	fn default() -> Self {
+		RelatedSecurityIDSource::Cusip
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -644,4 +656,10 @@ pub enum RelatedSecurityType {
 	/// Structured finance product
 	#[serde(rename = "SFP")]
 	Sfp,
+}
+
+impl Default for RelatedSecurityType {
+	fn default() -> Self {
+		RelatedSecurityType::Fut
+	}
 }

@@ -34,3 +34,9 @@ pub enum LegProtectionTermEventQualifierItem {
 	#[serde(rename = "C")]
 	FloatingRateInterestShortfall,
 }
+
+impl Default for LegProtectionTermEventQualifierItem {
+	fn default() -> Self {
+		LegProtectionTermEventQualifierItem::RetructuringMultipleHoldingObligations
+	}
+}

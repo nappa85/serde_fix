@@ -32,15 +32,11 @@ pub struct RelatedSy {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text field in the encoded format specified via the MessageEncoding field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -57,6 +53,12 @@ pub enum ListUpdateAction {
 	/// Snapshot
 	#[serde(rename = "S")]
 	Snapshot,
+}
+
+impl Default for ListUpdateAction {
+	fn default() -> Self {
+		ListUpdateAction::Add
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -130,6 +132,12 @@ pub enum CorporateAction {
 	/// Succession Event
 	#[serde(rename = "W")]
 	SuccessionEvent,
+}
+
+impl Default for CorporateAction {
+	fn default() -> Self {
+		CorporateAction::ExDividend
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1334,4 +1342,10 @@ pub enum Currency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
 }

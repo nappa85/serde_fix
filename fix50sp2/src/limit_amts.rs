@@ -73,6 +73,12 @@ pub enum LimitAmtType {
 	ShortPositionLimit,
 }
 
+impl Default for LimitAmtType {
+	fn default() -> Self {
+		LimitAmtType::CreditLimit
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LimitRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
@@ -452,4 +458,10 @@ pub enum LimitRole {
 	/// Contra Investment Decision Maker
 	#[serde(rename = "127")]
 	ContraInvestmentDecisionMaker,
+}
+
+impl Default for LimitRole {
+	fn default() -> Self {
+		LimitRole::ExecutingFirm
+	}
 }

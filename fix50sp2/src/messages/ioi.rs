@@ -86,15 +86,11 @@ pub struct IOI {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
@@ -141,6 +137,12 @@ pub enum IOITransType {
 	/// Replace
 	#[serde(rename = "R")]
 	Replace,
+}
+
+impl Default for IOITransType {
+	fn default() -> Self {
+		IOITransType::New
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -198,6 +200,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
@@ -209,6 +217,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -225,6 +239,12 @@ pub enum IOIQty {
 	/// Undisclosed Quantity
 	#[serde(rename = "U")]
 	UndisclosedQuantity,
+}
+
+impl Default for IOIQty {
+	fn default() -> Self {
+		IOIQty::Small
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1431,6 +1451,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
@@ -1512,6 +1538,12 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum IOIQltyInd {
 	/// High
@@ -1525,6 +1557,12 @@ pub enum IOIQltyInd {
 	Medium,
 }
 
+impl Default for IOIQltyInd {
+	fn default() -> Self {
+		IOIQltyInd::High
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum IOINaturalFlag {
 	/// Not Natural
@@ -1533,4 +1571,10 @@ pub enum IOINaturalFlag {
 	/// Natural
 	#[serde(rename = "Y")]
 	Natural,
+}
+
+impl Default for IOINaturalFlag {
+	fn default() -> Self {
+		IOINaturalFlag::NotNatural
+	}
 }

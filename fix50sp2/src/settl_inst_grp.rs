@@ -110,6 +110,12 @@ pub enum SettlInstTransType {
 	Restate,
 }
 
+impl Default for SettlInstTransType {
+	fn default() -> Self {
+		SettlInstTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -165,6 +171,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
@@ -206,6 +218,12 @@ pub enum Product {
 	/// FINANCING
 	#[serde(rename = "13")]
 	Financing,
+}
+
+impl Default for Product {
+	fn default() -> Self {
+		Product::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -671,6 +689,12 @@ pub enum SecurityType {
 	/// Structured finance product
 	#[serde(rename = "SFP")]
 	Sfp,
+}
+
+impl Default for SecurityType {
+	fn default() -> Self {
+		SecurityType::Fut
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1877,6 +1901,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentMethod {
 	/// CREST
@@ -1939,4 +1969,10 @@ pub enum PaymentMethod {
 	/// euroSIC
 	#[serde(rename = "20")]
 	EuroSic,
+}
+
+impl Default for PaymentMethod {
+	fn default() -> Self {
+		PaymentMethod::Crest
+	}
 }

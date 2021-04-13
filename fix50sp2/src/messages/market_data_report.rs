@@ -112,3 +112,9 @@ pub enum MDReportEvent {
 	#[serde(rename = "14")]
 	EndOfStatistics,
 }
+
+impl Default for MDReportEvent {
+	fn default() -> Self {
+		MDReportEvent::StartOfInstrumentReferenceData
+	}
+}

@@ -105,6 +105,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
@@ -128,6 +134,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -174,6 +186,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum NetGrossInd {
 	/// Net
@@ -182,6 +200,12 @@ pub enum NetGrossInd {
 	/// Gross
 	#[serde(rename = "2")]
 	Gross,
+}
+
+impl Default for NetGrossInd {
+	fn default() -> Self {
+		NetGrossInd::Net
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -224,6 +248,12 @@ pub enum SettlType {
 	FxSpotNextSettlement,
 }
 
+impl Default for SettlType {
+	fn default() -> Self {
+		SettlType::RegularFxSpotSettlement
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
@@ -247,4 +277,10 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }

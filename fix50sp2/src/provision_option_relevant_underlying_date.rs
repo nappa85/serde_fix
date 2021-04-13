@@ -68,6 +68,12 @@ pub enum ProvisionOptionRelevantUnderlyingDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for ProvisionOptionRelevantUnderlyingDateBusinessDayConvention {
+	fn default() -> Self {
+		ProvisionOptionRelevantUnderlyingDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionOptionRelevantUnderlyingDateRelativeTo {
 	/// Trade date
@@ -102,6 +108,12 @@ pub enum ProvisionOptionRelevantUnderlyingDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for ProvisionOptionRelevantUnderlyingDateRelativeTo {
+	fn default() -> Self {
+		ProvisionOptionRelevantUnderlyingDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionOptionRelevantUnderlyingDateOffsetUnit {
 	/// Day
@@ -116,6 +128,12 @@ pub enum ProvisionOptionRelevantUnderlyingDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for ProvisionOptionRelevantUnderlyingDateOffsetUnit {
+	fn default() -> Self {
+		ProvisionOptionRelevantUnderlyingDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -138,4 +156,10 @@ pub enum ProvisionOptionRelevantUnderlyingDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for ProvisionOptionRelevantUnderlyingDateOffsetDayType {
+	fn default() -> Self {
+		ProvisionOptionRelevantUnderlyingDateOffsetDayType::Business
+	}
 }

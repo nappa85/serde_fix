@@ -128,3 +128,9 @@ pub enum IOIQualifierItem {
 	#[serde(rename = "n")]
 	NegotiatedSpot,
 }
+
+impl Default for IOIQualifierItem {
+	fn default() -> Self {
+		IOIQualifierItem::AllOrNone
+	}
+}

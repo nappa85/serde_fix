@@ -29,3 +29,9 @@ pub enum CollAction {
 	#[serde(rename = "2")]
 	Remove,
 }
+
+impl Default for CollAction {
+	fn default() -> Self {
+		CollAction::Retain
+	}
+}

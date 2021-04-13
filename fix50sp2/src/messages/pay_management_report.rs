@@ -25,16 +25,12 @@ pub struct PayManagementReport {
 	#[serde(rename = "2805")]
 	pub replace_text: Option<String>,
 	/// Must be set if EncodedReplaceText(2801) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2802")]
-	pub encoded_replace_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ReplaceText(2805) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2801")]
-	pub encoded_replace_text: Option<String>,
+	#[serde(alias = "2801")]
+	pub encoded_replace_text: Option<fix_common::EncodedText<2801>>,
 	/// PayRequestStatus(2813)=0 (Received) is not applicable in this message.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2813")]
@@ -50,16 +46,12 @@ pub struct PayManagementReport {
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// Must be set if EncodedRejectText(1665) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the RejectText(1328) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// Echos back the business date of the PayRequest(35=EA) message if this report is responding to a request. When the report is
 	/// sent unsolicited, this is the business date of the report. This may carry the same date as the payment calculation date in
 	/// PostTradePaymentCalculationDate(2825).
@@ -74,16 +66,12 @@ pub struct PayManagementReport {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text(58) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// May be included with minimal detail to identify the security or contract for which payments are to be made.
 	#[serde(flatten)]
 	pub instrument: Option<super::super::instrument::Instrument>,
@@ -118,6 +106,12 @@ pub enum PayReportTransType {
 	Status,
 }
 
+impl Default for PayReportTransType {
+	fn default() -> Self {
+		PayReportTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PayRequestStatus {
 	/// Received, not yet processed
@@ -132,4 +126,10 @@ pub enum PayRequestStatus {
 	/// Disputed
 	#[serde(rename = "3")]
 	Disputed,
+}
+
+impl Default for PayRequestStatus {
+	fn default() -> Self {
+		PayRequestStatus::ReceivedNotYetProcessed
+	}
 }

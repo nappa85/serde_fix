@@ -81,6 +81,12 @@ pub enum OrderEventType {
 	Activated,
 }
 
+impl Default for OrderEventType {
+	fn default() -> Self {
+		OrderEventType::Added
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderEventReason {
 	/// Add order request
@@ -124,6 +130,12 @@ pub enum OrderEventReason {
 	EndOfDay,
 }
 
+impl Default for OrderEventReason {
+	fn default() -> Self {
+		OrderEventReason::AddOrderRequest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderEventLiquidityIndicator {
 	/// Added Liquidity
@@ -138,4 +150,10 @@ pub enum OrderEventLiquidityIndicator {
 	/// Auction
 	#[serde(rename = "4")]
 	Auction,
+}
+
+impl Default for OrderEventLiquidityIndicator {
+	fn default() -> Self {
+		OrderEventLiquidityIndicator::AddedLiquidity
+	}
 }

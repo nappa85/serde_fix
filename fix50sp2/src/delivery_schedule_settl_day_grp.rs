@@ -56,3 +56,9 @@ pub enum DeliveryScheduleSettlDayItem {
 	#[serde(rename = "10")]
 	AllWeekends,
 }
+
+impl Default for DeliveryScheduleSettlDayItem {
+	fn default() -> Self {
+		DeliveryScheduleSettlDayItem::Monday
+	}
+}

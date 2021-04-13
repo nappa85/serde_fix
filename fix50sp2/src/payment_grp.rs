@@ -87,16 +87,12 @@ pub struct Payment {
 	#[serde(rename = "40229")]
 	pub payment_text: Option<String>,
 	/// Must be set if EncodedPaymentText(40985) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "40984")]
-	pub encoded_payment_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the PaymentText(40229) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40985")]
-	pub encoded_payment_text: Option<String>,
+	#[serde(alias = "40985")]
+	pub encoded_payment_text: Option<fix_common::EncodedText<40985>>,
 	/// PaymentUnitOfMeasure
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41155")]
@@ -246,6 +242,12 @@ pub enum PaymentType {
 	Rebate,
 }
 
+impl Default for PaymentType {
+	fn default() -> Self {
+		PaymentType::Brokerage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentPaySide {
 	/// Buy
@@ -256,6 +258,12 @@ pub enum PaymentPaySide {
 	Sell,
 }
 
+impl Default for PaymentPaySide {
+	fn default() -> Self {
+		PaymentPaySide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentReceiveSide {
 	/// Buy
@@ -264,6 +272,12 @@ pub enum PaymentReceiveSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for PaymentReceiveSide {
+	fn default() -> Self {
+		PaymentReceiveSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -294,6 +308,12 @@ pub enum PaymentBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for PaymentBusinessDayConvention {
+	fn default() -> Self {
+		PaymentBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentSettlStyle {
 	/// Standard
@@ -305,6 +325,12 @@ pub enum PaymentSettlStyle {
 	/// Standard and net
 	#[serde(rename = "2")]
 	StandardAndNet,
+}
+
+impl Default for PaymentSettlStyle {
+	fn default() -> Self {
+		PaymentSettlStyle::Standard
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -369,6 +395,12 @@ pub enum PaymentMethod {
 	/// euroSIC
 	#[serde(rename = "20")]
 	EuroSic,
+}
+
+impl Default for PaymentMethod {
+	fn default() -> Self {
+		PaymentMethod::Crest
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -619,6 +651,12 @@ pub enum PaymentUnitOfMeasure {
 	Yd,
 }
 
+impl Default for PaymentUnitOfMeasure {
+	fn default() -> Self {
+		PaymentUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentDateRelativeTo {
 	/// Trade date
@@ -630,6 +668,12 @@ pub enum PaymentDateRelativeTo {
 	/// Effective date
 	#[serde(rename = "2")]
 	EffectiveDate,
+}
+
+impl Default for PaymentDateRelativeTo {
+	fn default() -> Self {
+		PaymentDateRelativeTo::TradeDate
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -646,6 +690,12 @@ pub enum PaymentDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for PaymentDateOffsetUnit {
+	fn default() -> Self {
+		PaymentDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -670,6 +720,12 @@ pub enum PaymentDateOffsetDayType {
 	ScheduledTradingDay,
 }
 
+impl Default for PaymentDateOffsetDayType {
+	fn default() -> Self {
+		PaymentDateOffsetDayType::Business
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentForwardStartType {
 	/// Prepaid
@@ -684,6 +740,12 @@ pub enum PaymentForwardStartType {
 	/// Fixed
 	#[serde(rename = "3")]
 	Fixed,
+}
+
+impl Default for PaymentForwardStartType {
+	fn default() -> Self {
+		PaymentForwardStartType::Prepaid
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -721,4 +783,10 @@ pub enum PaymentSubType {
 	/// Floating rate
 	#[serde(rename = "10")]
 	FloatingRate,
+}
+
+impl Default for PaymentSubType {
+	fn default() -> Self {
+		PaymentSubType::Initial
+	}
 }

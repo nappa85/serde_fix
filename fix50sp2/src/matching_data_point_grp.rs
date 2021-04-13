@@ -39,6 +39,12 @@ pub enum MatchingDataPointIndicator {
 	Optional,
 }
 
+impl Default for MatchingDataPointIndicator {
+	fn default() -> Self {
+		MatchingDataPointIndicator::Mandatory
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchingDataPointType {
 	/// Accrued interest
@@ -95,4 +101,10 @@ pub enum MatchingDataPointType {
 	/// Tax
 	#[serde(rename = "18")]
 	Tax,
+}
+
+impl Default for MatchingDataPointType {
+	fn default() -> Self {
+		MatchingDataPointType::AccruedInterest
+	}
 }

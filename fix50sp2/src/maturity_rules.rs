@@ -53,6 +53,12 @@ pub enum MaturityMonthYearFormat {
 	YearMonthWeek,
 }
 
+impl Default for MaturityMonthYearFormat {
+	fn default() -> Self {
+		MaturityMonthYearFormat::YearMonthOnly
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MaturityMonthYearIncrementUnits {
 	/// Months
@@ -67,4 +73,10 @@ pub enum MaturityMonthYearIncrementUnits {
 	/// Years
 	#[serde(rename = "3")]
 	Years,
+}
+
+impl Default for MaturityMonthYearIncrementUnits {
+	fn default() -> Self {
+		MaturityMonthYearIncrementUnits::Months
+	}
 }

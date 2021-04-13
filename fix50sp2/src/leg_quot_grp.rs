@@ -91,6 +91,12 @@ pub enum LegSwapType {
 	Proceeds,
 }
 
+impl Default for LegSwapType {
+	fn default() -> Self {
+		LegSwapType::ParForPar
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegSettlType {
 	/// Regular / FX Spot settlement (T+1 or T+2 depending on currency)
@@ -129,6 +135,12 @@ pub enum LegSettlType {
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
+}
+
+impl Default for LegSettlType {
+	fn default() -> Self {
+		LegSettlType::RegularFxSpotSettlement
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -210,4 +222,10 @@ pub enum LegPriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	PercentageOfNotional,
+}
+
+impl Default for LegPriceType {
+	fn default() -> Self {
+		LegPriceType::Percentage
+	}
 }

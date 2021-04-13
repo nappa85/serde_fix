@@ -24,16 +24,12 @@ pub struct UnderlyingAdditionalTermBondRef {
 	#[serde(rename = "41709")]
 	pub underlying_additional_term_bond_desc: Option<String>,
 	/// Must be set if EncodedUnderlyingAdditionalTermBondDesc(41709) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41710")]
-	pub encoded_underlying_additional_term_bond_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the UnderlyingAdditionalTermBondDesc(41709) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41711")]
-	pub encoded_underlying_additional_term_bond_desc: Option<String>,
+	#[serde(alias = "41711")]
+	pub encoded_underlying_additional_term_bond_desc: Option<fix_common::EncodedText<41711>>,
 	/// UnderlyingAdditionalTermBondCurrency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41712")]
@@ -43,16 +39,12 @@ pub struct UnderlyingAdditionalTermBondRef {
 	#[serde(rename = "42017")]
 	pub underlying_additional_term_bond_issuer: Option<String>,
 	/// Must be set if EncodedUnderlyingAdditionalTermBondIssuer(42017) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "42025")]
-	pub encoded_underlying_additional_term_bond_issuer_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the UnderlyingAdditionalTermBondIssuer(42017) field in the encoded format
 	/// specified via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "42026")]
-	pub encoded_underlying_additional_term_bond_issuer: Option<String>,
+	#[serde(alias = "42026")]
+	pub encoded_underlying_additional_term_bond_issuer: Option<fix_common::EncodedText<42026>>,
 	/// UnderlyingAdditionalTermBondSeniority
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42027")]
@@ -197,6 +189,12 @@ pub enum UnderlyingAdditionalTermBondSecurityIDSource {
 	/// Uniform Symbol (UMTF Symbol)
 	#[serde(rename = "X")]
 	UniformSymbol,
+}
+
+impl Default for UnderlyingAdditionalTermBondSecurityIDSource {
+	fn default() -> Self {
+		UnderlyingAdditionalTermBondSecurityIDSource::Cusip
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1403,6 +1401,12 @@ pub enum UnderlyingAdditionalTermBondCurrency {
 	N999,
 }
 
+impl Default for UnderlyingAdditionalTermBondCurrency {
+	fn default() -> Self {
+		UnderlyingAdditionalTermBondCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingAdditionalTermBondSeniority {
 	/// Senior Secured
@@ -1425,6 +1429,12 @@ pub enum UnderlyingAdditionalTermBondSeniority {
 	SeniorNonPreferred,
 }
 
+impl Default for UnderlyingAdditionalTermBondSeniority {
+	fn default() -> Self {
+		UnderlyingAdditionalTermBondSeniority::SeniorSecured
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingAdditionalTermBondCouponType {
 	/// Zero
@@ -1439,6 +1449,12 @@ pub enum UnderlyingAdditionalTermBondCouponType {
 	/// Structured
 	#[serde(rename = "3")]
 	Structured,
+}
+
+impl Default for UnderlyingAdditionalTermBondCouponType {
+	fn default() -> Self {
+		UnderlyingAdditionalTermBondCouponType::Zero
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1467,6 +1483,12 @@ pub enum UnderlyingAdditionalTermBondCouponFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for UnderlyingAdditionalTermBondCouponFrequencyUnit {
+	fn default() -> Self {
+		UnderlyingAdditionalTermBondCouponFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1561,4 +1583,10 @@ pub enum UnderlyingAdditionalTermBondDayCount {
 	/// Other
 	#[serde(rename = "99")]
 	N99,
+}
+
+impl Default for UnderlyingAdditionalTermBondDayCount {
+	fn default() -> Self {
+		UnderlyingAdditionalTermBondDayCount::N0
+	}
 }

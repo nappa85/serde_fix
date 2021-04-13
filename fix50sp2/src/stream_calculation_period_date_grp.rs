@@ -30,3 +30,9 @@ pub enum StreamCalculationPeriodDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for StreamCalculationPeriodDateType {
+	fn default() -> Self {
+		StreamCalculationPeriodDateType::Unadjusted
+	}
+}

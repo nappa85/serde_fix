@@ -1,7 +1,10 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::entities::{ApplVerID, Boolean, Currency, EncodedText, LocalMktDate, RepeatingValues, SeparatedValues, UTCTimestamp, fix50::underlying::Underlying, fix50sp2::{commission_data::CommissionData, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, financing_details::FinancingDetails, instrument::Instrument, order_qty_data::OrderQtyData, parties::Parties, peg_instructions::PegInstructions, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, trd_reg_timestamps::TrdRegTimestamps, triggering_instruction::TriggeringInstruction, yield_data::YieldData}, fixt11::{Trailer, header::{HasHeader, Header, MsgType}}, version::FixVersion};
+use fix_common::{ApplVerID, Boolean, Currency, EncodedText, LocalMktDate, RepeatingValues, SeparatedValues, UTCTimestamp, FixVersion};
+use crate::underlying::Underlying;
+use fix50sp2::{commission_data::CommissionData, discretion_instructions::DiscretionInstructions, display_instruction::DisplayInstruction, financing_details::FinancingDetails, instrument::Instrument, order_qty_data::OrderQtyData, parties::Parties, peg_instructions::PegInstructions, spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData, stipulations::Stipulations, trd_reg_timestamps::TrdRegTimestamps, triggering_instruction::TriggeringInstruction, yield_data::YieldData};
+use fixt11::{Trailer, header::{HasHeader, Header, MsgType}};
 
 //// MsgType = 8
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

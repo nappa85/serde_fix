@@ -21,16 +21,12 @@ pub struct PayManagementRequest {
 	#[serde(rename = "2807")]
 	pub cancel_text: Option<String>,
 	/// Must be set if EncodedCancelText(2808) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2809")]
-	pub encoded_cancel_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the CancelText(2807) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2808")]
-	pub encoded_cancel_text: Option<String>,
+	#[serde(alias = "2808")]
+	pub encoded_cancel_text: Option<fix_common::EncodedText<2808>>,
 	/// The business date of the request. This may carry the same date as the payment calculation date in PostTradePaymentCalculationDate(2825).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "715")]
@@ -44,16 +40,12 @@ pub struct PayManagementRequest {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text(58) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// May be included with minimal detail to identify the security or contract for which payments are to be made.
 	#[serde(flatten)]
 	pub instrument: Option<super::super::instrument::Instrument>,
@@ -83,4 +75,10 @@ pub enum PyRequestTransType {
 	/// Cancel
 	#[serde(rename = "1")]
 	Cancel,
+}
+
+impl Default for PyRequestTransType {
+	fn default() -> Self {
+		PyRequestTransType::New
+	}
 }

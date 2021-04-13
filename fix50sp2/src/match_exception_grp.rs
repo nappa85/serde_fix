@@ -46,16 +46,12 @@ pub struct MatchException {
 	#[serde(rename = "2780")]
 	pub match_exception_text: Option<String>,
 	/// Must be set if EncodedMatchExceptio nText(2780) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2797")]
-	pub encoded_match_exception_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the MatchExceptionText(2780) field in the encoded format specified via the
 	/// MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2798")]
-	pub encoded_match_exception_text: Option<String>,
+	#[serde(alias = "2798")]
+	pub encoded_match_exception_text: Option<fix_common::EncodedText<2798>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -81,6 +77,12 @@ pub enum MatchExceptionType {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for MatchExceptionType {
+	fn default() -> Self {
+		MatchExceptionType::NoMatchingConfirmation
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -138,6 +140,12 @@ pub enum MatchExceptionElementType {
 	Tax,
 }
 
+impl Default for MatchExceptionElementType {
+	fn default() -> Self {
+		MatchExceptionElementType::AccruedInterest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchExceptionToleranceValueType {
 	/// Fixed amount (Default if not specified)
@@ -146,4 +154,10 @@ pub enum MatchExceptionToleranceValueType {
 	/// Percentage
 	#[serde(rename = "2")]
 	Percentage,
+}
+
+impl Default for MatchExceptionToleranceValueType {
+	fn default() -> Self {
+		MatchExceptionToleranceValueType::FixedAmount
+	}
 }

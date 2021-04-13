@@ -61,6 +61,12 @@ pub enum CommType {
 	AmountPerContract,
 }
 
+impl Default for CommType {
+	fn default() -> Self {
+		CommType::AmountPerUnit
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CommCurrency {
 	/// Afghani
@@ -1265,6 +1271,12 @@ pub enum CommCurrency {
 	N999,
 }
 
+impl Default for CommCurrency {
+	fn default() -> Self {
+		CommCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum FundRenewWaiv {
 	/// No
@@ -1273,4 +1285,10 @@ pub enum FundRenewWaiv {
 	/// Yes
 	#[serde(rename = "Y")]
 	Yes,
+}
+
+impl Default for FundRenewWaiv {
+	fn default() -> Self {
+		FundRenewWaiv::No
+	}
 }

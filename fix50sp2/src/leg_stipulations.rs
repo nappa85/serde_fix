@@ -322,3 +322,9 @@ pub enum LegStipulationType {
 	#[serde(rename = "PAYOFF")]
 	InterestPayoffOfRollingOrAmendingTrade,
 }
+
+impl Default for LegStipulationType {
+	fn default() -> Self {
+		LegStipulationType::AlternativeMinimumTax
+	}
+}

@@ -42,16 +42,12 @@ pub struct LegStream {
 	#[serde(rename = "40248")]
 	pub leg_stream_text: Option<String>,
 	/// Must be set if EncodedLegStreamText(40979) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "40978")]
-	pub encoded_leg_stream_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegStreamText(40248) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40979")]
-	pub encoded_leg_stream_text: Option<String>,
+	#[serde(alias = "40979")]
+	pub encoded_leg_stream_text: Option<fix_common::EncodedText<40979>>,
 	/// LegStreamXID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41700")]
@@ -118,6 +114,12 @@ pub enum LegStreamType {
 	PhysicalDelivery,
 }
 
+impl Default for LegStreamType {
+	fn default() -> Self {
+		LegStreamType::PaymentCashSettlement
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamPaySide {
 	/// Buy
@@ -128,6 +130,12 @@ pub enum LegStreamPaySide {
 	Sell,
 }
 
+impl Default for LegStreamPaySide {
+	fn default() -> Self {
+		LegStreamPaySide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamReceiveSide {
 	/// Buy
@@ -136,6 +144,12 @@ pub enum LegStreamReceiveSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for LegStreamReceiveSide {
+	fn default() -> Self {
+		LegStreamReceiveSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -166,6 +180,12 @@ pub enum LegStreamNotionalFrequencyUnit {
 	Quarter,
 }
 
+impl Default for LegStreamNotionalFrequencyUnit {
+	fn default() -> Self {
+		LegStreamNotionalFrequencyUnit::Hour
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamNotionalCommodityFrequency {
 	/// Term
@@ -189,6 +209,12 @@ pub enum LegStreamNotionalCommodityFrequency {
 	/// Per month
 	#[serde(rename = "6")]
 	PerMonth,
+}
+
+impl Default for LegStreamNotionalCommodityFrequency {
+	fn default() -> Self {
+		LegStreamNotionalCommodityFrequency::Term
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -439,6 +465,12 @@ pub enum LegStreamNotionalUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegStreamNotionalUnitOfMeasure {
+	fn default() -> Self {
+		LegStreamNotionalUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamTotalNotionalUnitOfMeasure {
 	/// Barrels
@@ -685,4 +717,10 @@ pub enum LegStreamTotalNotionalUnitOfMeasure {
 	/// Yard
 	#[serde(rename = "yd")]
 	Yd,
+}
+
+impl Default for LegStreamTotalNotionalUnitOfMeasure {
+	fn default() -> Self {
+		LegStreamTotalNotionalUnitOfMeasure::Bbl
+	}
 }

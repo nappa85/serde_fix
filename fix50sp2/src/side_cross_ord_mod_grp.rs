@@ -103,15 +103,11 @@ pub struct NoSide {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text field in the encoded format specified via the MessageEncoding field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// For use in derivatives omnibus accounting
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "77")]
@@ -181,9 +177,9 @@ pub enum NoSides {
 }
 
 impl Default for NoSides {
-    fn default() -> Self {
-        NoSides::OneSide
-    }
+	fn default() -> Self {
+		NoSides::OneSide
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -242,9 +238,9 @@ pub enum Side {
 }
 
 impl Default for Side {
-    fn default() -> Self {
-        Side::Buy
-    }
+	fn default() -> Self {
+		Side::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -270,6 +266,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -312,6 +314,12 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DayBookingInst {
 	/// Can trigger booking without reference to the order initiator ("auto")
@@ -323,6 +331,12 @@ pub enum DayBookingInst {
 	/// Accumulate
 	#[serde(rename = "2")]
 	Accumulate,
+}
+
+impl Default for DayBookingInst {
+	fn default() -> Self {
+		DayBookingInst::CanTriggerBookingWithoutReferenceToTheOrderInitiator
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -338,6 +352,12 @@ pub enum BookingUnit {
 	AggregateExecutionsForThisSymbolSideAndSettlementDate,
 }
 
+impl Default for BookingUnit {
+	fn default() -> Self {
+		BookingUnit::EachPartialExecutionIsABookableUnit
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PreallocMethod {
 	/// Pro-rata
@@ -346,6 +366,12 @@ pub enum PreallocMethod {
 	/// Do not pro-rata - discuss first
 	#[serde(rename = "1")]
 	DoNotProRataDiscussFirst,
+}
+
+impl Default for PreallocMethod {
+	fn default() -> Self {
+		PreallocMethod::ProRata
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -359,6 +385,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -384,6 +416,12 @@ pub enum OrderCapacity {
 	/// Mixed capacity
 	#[serde(rename = "M")]
 	MixedCapacity,
+}
+
+impl Default for OrderCapacity {
+	fn default() -> Self {
+		OrderCapacity::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -444,6 +482,12 @@ pub enum OrderRestrictions {
 	NormalCourseIssuerBid,
 }
 
+impl Default for OrderRestrictions {
+	fn default() -> Self {
+		OrderRestrictions::ProgramTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CustOrderCapacity {
 	/// Member trading for their own account
@@ -463,6 +507,12 @@ pub enum CustOrderCapacity {
 	RetailCustomer,
 }
 
+impl Default for CustOrderCapacity {
+	fn default() -> Self {
+		CustOrderCapacity::MemberTradingForTheirOwnAccount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ForexReq {
 	/// Execute Forex after security trade
@@ -471,6 +521,12 @@ pub enum ForexReq {
 	/// Do not execute Forex after security trade
 	#[serde(rename = "N")]
 	DoNotExecuteForexAfterSecurityTrade,
+}
+
+impl Default for ForexReq {
+	fn default() -> Self {
+		ForexReq::ExecuteForexAfterSecurityTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1677,6 +1733,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BookingType {
 	/// Regular booking
@@ -1688,6 +1750,12 @@ pub enum BookingType {
 	/// Total Return Swap
 	#[serde(rename = "2")]
 	TotalReturnSwap,
+}
+
+impl Default for BookingType {
+	fn default() -> Self {
+		BookingType::RegularBooking
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1712,6 +1780,12 @@ pub enum PositionEffect {
 	Rolled,
 }
 
+impl Default for PositionEffect {
+	fn default() -> Self {
+		PositionEffect::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CoveredOrUncovered {
 	/// Covered
@@ -1720,6 +1794,12 @@ pub enum CoveredOrUncovered {
 	/// Uncovered
 	#[serde(rename = "1")]
 	Uncovered,
+}
+
+impl Default for CoveredOrUncovered {
+	fn default() -> Self {
+		CoveredOrUncovered::Covered
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1733,6 +1813,12 @@ pub enum CashMargin {
 	/// Margin Close
 	#[serde(rename = "3")]
 	MarginClose,
+}
+
+impl Default for CashMargin {
+	fn default() -> Self {
+		CashMargin::Cash
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1781,6 +1867,12 @@ pub enum ClearingFeeIndicator {
 	AllOtherOwnershipTypes,
 }
 
+impl Default for ClearingFeeIndicator {
+	fn default() -> Self {
+		ClearingFeeIndicator::N1StYearDelegateTradingForOwnAccount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SolicitedFlag {
 	/// Was not solicited
@@ -1789,6 +1881,12 @@ pub enum SolicitedFlag {
 	/// Was solicited
 	#[serde(rename = "Y")]
 	WasSolicited,
+}
+
+impl Default for SolicitedFlag {
+	fn default() -> Self {
+		SolicitedFlag::WasNotSolicited
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1825,6 +1923,12 @@ pub enum SideShortSaleExemptionReason {
 	Vwap,
 }
 
+impl Default for SideShortSaleExemptionReason {
+	fn default() -> Self {
+		SideShortSaleExemptionReason::ExemptionReasonUnknown
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearingAccountType {
 	/// Customer
@@ -1838,6 +1942,12 @@ pub enum ClearingAccountType {
 	MarketMaker,
 }
 
+impl Default for ClearingAccountType {
+	fn default() -> Self {
+		ClearingAccountType::Customer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ShortMarkingExemptIndicator {
 	/// Account is not SME
@@ -1846,6 +1956,12 @@ pub enum ShortMarkingExemptIndicator {
 	/// Account is SME
 	#[serde(rename = "Y")]
 	AccountIsSme,
+}
+
+impl Default for ShortMarkingExemptIndicator {
+	fn default() -> Self {
+		ShortMarkingExemptIndicator::AccountIsNotSme
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1873,6 +1989,12 @@ pub enum OrderOrigination {
 	OrderReceivedFromAnExecutionOnlyService,
 }
 
+impl Default for OrderOrigination {
+	fn default() -> Self {
+		OrderOrigination::OrderReceivedFromACustomer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RoutingArrangmentIndicator {
 	/// No routing arrangement in place
@@ -1881,4 +2003,10 @@ pub enum RoutingArrangmentIndicator {
 	/// Routing arrangement in place
 	#[serde(rename = "1")]
 	RoutingArrangementInPlace,
+}
+
+impl Default for RoutingArrangmentIndicator {
+	fn default() -> Self {
+		RoutingArrangmentIndicator::NoRoutingArrangementInPlace
+	}
 }

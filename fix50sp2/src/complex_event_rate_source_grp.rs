@@ -49,6 +49,12 @@ pub enum ComplexEventRateSourceItem {
 	Other,
 }
 
+impl Default for ComplexEventRateSourceItem {
+	fn default() -> Self {
+		ComplexEventRateSourceItem::Bloomberg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ComplexEventRateSourceType {
 	/// Primary
@@ -57,4 +63,10 @@ pub enum ComplexEventRateSourceType {
 	/// Secondary
 	#[serde(rename = "1")]
 	Secondary,
+}
+
+impl Default for ComplexEventRateSourceType {
+	fn default() -> Self {
+		ComplexEventRateSourceType::Primary
+	}
 }

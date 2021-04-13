@@ -137,6 +137,12 @@ pub enum OrdStatus {
 	PendingReplace,
 }
 
+impl Default for OrdStatus {
+	fn default() -> Self {
+		OrdStatus::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExecType {
 	/// New
@@ -207,6 +213,12 @@ pub enum ExecType {
 	Released,
 }
 
+impl Default for ExecType {
+	fn default() -> Self {
+		ExecType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExecTypeReason {
 	/// Order added upon request
@@ -256,6 +268,12 @@ pub enum ExecTypeReason {
 	OrderExpired,
 }
 
+impl Default for ExecTypeReason {
+	fn default() -> Self {
+		ExecTypeReason::OrderAddedUponRequest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderEntryAction {
 	/// Add
@@ -273,6 +291,12 @@ pub enum OrderEntryAction {
 	/// Release
 	#[serde(rename = "5")]
 	Release,
+}
+
+impl Default for OrderEntryAction {
+	fn default() -> Self {
+		OrderEntryAction::Add
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -371,6 +395,12 @@ pub enum OrdRejReason {
 	ExceededCs01Limit,
 }
 
+impl Default for OrdRejReason {
+	fn default() -> Self {
+		OrdRejReason::BrokerExchangeOption
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrdType {
 	/// Market
@@ -457,6 +487,12 @@ pub enum OrdType {
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
 }
 
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -512,6 +548,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
@@ -553,4 +595,10 @@ pub enum TimeInForce {
 	/// Good for this Month (GFM)
 	#[serde(rename = "C")]
 	GoodForThisMonth,
+}
+
+impl Default for TimeInForce {
+	fn default() -> Self {
+		TimeInForce::Day
+	}
 }

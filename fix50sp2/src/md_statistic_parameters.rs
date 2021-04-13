@@ -26,15 +26,11 @@ pub struct MDStatisticParameters {
 	#[serde(rename = "2455")]
 	pub md_statistic_desc: Option<String>,
 	/// Must be set if <a href="tag_2482_EncodedMDStatisticDesc.html" target="bottom">EncodedMDStatisticDesc(2482)&nbsp;(2482)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2481")]
-	pub encoded_md_statistic_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_2455_MDStatisticDesc.html" target="bottom">MDStatisticDesc(2455)&nbsp;(2455)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2482")]
-	pub encoded_md_statistic_desc: Option<String>,
+	#[serde(alias = "2482")]
+	pub encoded_md_statistic_desc: Option<fix_common::EncodedText<2482>>,
 	/// <p>May be used to specify the market depth up to specified level</p>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "264")]
@@ -279,9 +275,9 @@ pub enum MDStatisticType {
 }
 
 impl Default for MDStatisticType {
-    fn default() -> Self {
-        MDStatisticType::Count
-    }
+	fn default() -> Self {
+		MDStatisticType::Count
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -397,9 +393,9 @@ pub enum MDStatisticScope {
 }
 
 impl Default for MDStatisticScope {
-    fn default() -> Self {
-        MDStatisticScope::BidPrices
-    }
+	fn default() -> Self {
+		MDStatisticScope::BidPrices
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -505,6 +501,12 @@ pub enum MDStatisticSubScope {
 	Directed,
 }
 
+impl Default for MDStatisticSubScope {
+	fn default() -> Self {
+		MDStatisticSubScope::Visible
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDStatisticScopeType {
 	/// Entry rate
@@ -524,6 +526,12 @@ pub enum MDStatisticScopeType {
 	UpwardMove,
 }
 
+impl Default for MDStatisticScopeType {
+	fn default() -> Self {
+		MDStatisticScopeType::EntryRate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
@@ -532,6 +540,12 @@ pub enum MarketDepth {
 	/// top of book
 	#[serde(rename = "1")]
 	TopOfBook,
+}
+
+impl Default for MarketDepth {
+	fn default() -> Self {
+		MarketDepth::FullBookDepth
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -574,6 +588,12 @@ pub enum MDStatisticFrequencyUnit {
 	Years,
 }
 
+impl Default for MDStatisticFrequencyUnit {
+	fn default() -> Self {
+		MDStatisticFrequencyUnit::Seconds
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDStatisticDelayUnit {
 	/// Seconds (default if not specified)
@@ -614,6 +634,12 @@ pub enum MDStatisticDelayUnit {
 	Years,
 }
 
+impl Default for MDStatisticDelayUnit {
+	fn default() -> Self {
+		MDStatisticDelayUnit::Seconds
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDStatisticIntervalType {
 	/// Sliding window (Window is defined as an interval period up to the current time of dissemination, see MDStatisticIntervalPeriod
@@ -629,10 +655,10 @@ pub enum MDStatisticIntervalType {
 	/// with MDStatisticStartTime(2470) and MDStatisticEndTime(2471) and applies to every business day within date range, i.e. to
 	/// define an identical time slice across days.)
 	#[serde(rename = "3")]
-	FixedDateRange,
+	FixedDateRangeAndMdStatisticEndDateStartingEndingTimeOfDateFieldsOnlyApplyToTheFirstLastDayOfTheDateRangeAdditionalTimeRangeMayBeDefinedWithMdStatisticStartTimeAndMdStatisticEndTimeAndAppliesToEveryBusinessDayWithinDateRangeIEToDefineAnIdenticalTimeSliceAcrossDays,
 	/// Fixed time range (Interval may be open ended on either side, see MDStatisticStartTime(2470) and MDStatisticEndTime(2471).)
 	#[serde(rename = "4")]
-	FixedTimeRange,
+	FixedTimeRangeAndMdStatisticEndTime,
 	/// Current time unit (Relative time unit which has not ended yet, e.g. current day. Interval ends with the time of dissemination
 	/// of the statistic. Requires the definition of an actual unit, see MDStatisticIntervalTypeUnit(2465))
 	#[serde(rename = "5")]
@@ -650,9 +676,9 @@ pub enum MDStatisticIntervalType {
 }
 
 impl Default for MDStatisticIntervalType {
-    fn default() -> Self {
-        MDStatisticIntervalType::SlidingWindow
-    }
+	fn default() -> Self {
+		MDStatisticIntervalType::SlidingWindow
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -695,6 +721,12 @@ pub enum MDStatisticIntervalTypeUnit {
 	Years,
 }
 
+impl Default for MDStatisticIntervalTypeUnit {
+	fn default() -> Self {
+		MDStatisticIntervalTypeUnit::Seconds
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDStatisticIntervalUnit {
 	/// Seconds (default if not specified)
@@ -733,6 +765,12 @@ pub enum MDStatisticIntervalUnit {
 	/// years
 	#[serde(rename = "15")]
 	Years,
+}
+
+impl Default for MDStatisticIntervalUnit {
+	fn default() -> Self {
+		MDStatisticIntervalUnit::Seconds
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -775,6 +813,12 @@ pub enum MDStatisticRatioType {
 	OrdersToTotalNumberOfOrders,
 }
 
+impl Default for MDStatisticRatioType {
+	fn default() -> Self {
+		MDStatisticRatioType::BuyersToSellers
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingCapacity {
 	/// Customer
@@ -801,6 +845,12 @@ pub enum TradingCapacity {
 	/// Systematic internaliser
 	#[serde(rename = "8")]
 	SystematicInternaliser,
+}
+
+impl Default for TradingCapacity {
+	fn default() -> Self {
+		TradingCapacity::Customer
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -889,6 +939,12 @@ pub enum OrdType {
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
 }
 
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
@@ -930,6 +986,12 @@ pub enum TimeInForce {
 	/// Good for this Month (GFM)
 	#[serde(rename = "C")]
 	GoodForThisMonth,
+}
+
+impl Default for TimeInForce {
+	fn default() -> Self {
+		TimeInForce::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1114,6 +1176,12 @@ pub enum QuoteCondition {
 	/// Flat Curve
 	#[serde(rename = "7")]
 	FlatCurve,
+}
+
+impl Default for QuoteCondition {
+	fn default() -> Self {
+		QuoteCondition::OpenActive
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1388,6 +1456,12 @@ pub enum TradeCondition {
 	Be,
 }
 
+impl Default for TradeCondition {
+	fn default() -> Self {
+		TradeCondition::N1
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -1443,6 +1517,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
@@ -1466,6 +1546,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1512,6 +1598,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDOriginType {
 	/// Book
@@ -1543,6 +1635,12 @@ pub enum MDOriginType {
 	HybridMarket,
 }
 
+impl Default for MDOriginType {
+	fn default() -> Self {
+		MDOriginType::Book
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDValueTier {
 	/// Range 1
@@ -1554,6 +1652,12 @@ pub enum MDValueTier {
 	/// Range 3
 	#[serde(rename = "3")]
 	Range3,
+}
+
+impl Default for MDValueTier {
+	fn default() -> Self {
+		MDValueTier::Range1
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1570,6 +1674,12 @@ pub enum TradSesMethod {
 	/// Voice
 	#[serde(rename = "4")]
 	Voice,
+}
+
+impl Default for TradSesMethod {
+	fn default() -> Self {
+		TradSesMethod::Electronic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1612,6 +1722,12 @@ pub enum ExposureDurationUnit {
 	Years,
 }
 
+impl Default for ExposureDurationUnit {
+	fn default() -> Self {
+		ExposureDurationUnit::Seconds
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AggressorIndicator {
 	/// Order initiator is aggressor
@@ -1620,4 +1736,10 @@ pub enum AggressorIndicator {
 	/// Order initiator is passive
 	#[serde(rename = "N")]
 	OrderInitiatorIsPassive,
+}
+
+impl Default for AggressorIndicator {
+	fn default() -> Self {
+		AggressorIndicator::OrderInitiatorIsAggressor
+	}
 }

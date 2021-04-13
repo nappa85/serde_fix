@@ -123,6 +123,12 @@ pub enum LegOptionExerciseBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegOptionExerciseBusinessDayConvention {
+	fn default() -> Self {
+		LegOptionExerciseBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegOptionExerciseEarliestDateOffsetDayType {
 	/// Business
@@ -143,6 +149,12 @@ pub enum LegOptionExerciseEarliestDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegOptionExerciseEarliestDateOffsetDayType {
+	fn default() -> Self {
+		LegOptionExerciseEarliestDateOffsetDayType::Business
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -173,6 +185,12 @@ pub enum LegOptionExerciseEarliestDateUnit {
 	Term,
 }
 
+impl Default for LegOptionExerciseEarliestDateUnit {
+	fn default() -> Self {
+		LegOptionExerciseEarliestDateUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegOptionExerciseFrequencyUnit {
 	/// Day
@@ -187,6 +205,12 @@ pub enum LegOptionExerciseFrequencyUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegOptionExerciseFrequencyUnit {
+	fn default() -> Self {
+		LegOptionExerciseFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -223,6 +247,12 @@ pub enum LegOptionExerciseStartDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegOptionExerciseStartDateRelativeTo {
+	fn default() -> Self {
+		LegOptionExerciseStartDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegOptionExerciseStartDateOffsetUnit {
 	/// Day
@@ -237,6 +267,12 @@ pub enum LegOptionExerciseStartDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegOptionExerciseStartDateOffsetUnit {
+	fn default() -> Self {
+		LegOptionExerciseStartDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -259,4 +295,10 @@ pub enum LegOptionExerciseStartDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegOptionExerciseStartDateOffsetDayType {
+	fn default() -> Self {
+		LegOptionExerciseStartDateOffsetDayType::Business
+	}
 }

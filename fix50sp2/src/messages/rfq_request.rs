@@ -42,6 +42,12 @@ pub enum SubscriptionRequestType {
 	DisablePreviousSnapshotUpdateRequest,
 }
 
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PrivateQuote {
 	/// Private Quote
@@ -50,4 +56,10 @@ pub enum PrivateQuote {
 	/// Public Quote
 	#[serde(rename = "N")]
 	PublicQuote,
+}
+
+impl Default for PrivateQuote {
+	fn default() -> Self {
+		PrivateQuote::PrivateQuote
+	}
 }

@@ -156,15 +156,11 @@ pub struct Trade {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// EncodedTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// EncodedText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// MessageEventSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1011")]
@@ -201,6 +197,12 @@ pub enum TradeRequestType {
 	AdvisoriesThatMatchCriteria,
 }
 
+impl Default for TradeRequestType {
+	fn default() -> Self {
+		TradeRequestType::AllTrades
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
@@ -212,6 +214,12 @@ pub enum SubscriptionRequestType {
 	/// Disable previous Snapshot + Update Request (Unsubscribe)
 	#[serde(rename = "2")]
 	DisablePreviousSnapshotUpdateRequest,
+}
+
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -284,6 +292,12 @@ pub enum ExecType {
 	Released,
 }
 
+impl Default for ExecType {
+	fn default() -> Self {
+		ExecType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
@@ -299,6 +313,12 @@ pub enum MatchStatus {
 	/// are variances. MatchExceptionGrp component may be used to detail on the mis-matched data fields)
 	#[serde(rename = "3")]
 	MismatchedAndConfirmationAreMatchedButThereAreVariancesMatchExceptionGrpComponentMayBeUsedToDetailOnTheMisMatchedDataFields,
+}
+
+impl Default for MatchStatus {
+	fn default() -> Self {
+		MatchStatus::ComparedMatchedOrAffirmed
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -506,6 +526,12 @@ pub enum TrdType {
 	N66,
 }
 
+impl Default for TrdType {
+	fn default() -> Self {
+		TrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdSubType {
 	/// CMTA
@@ -673,6 +699,12 @@ pub enum TrdSubType {
 	TradeAtCashOpenTheMarketplaceNameGivenToTradingFuturesBasedOnAnOpeningQuoteOfTheUnderlyingCashMarket,
 }
 
+impl Default for TrdSubType {
+	fn default() -> Self {
+		TrdSubType::Cmta
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeHandlingInstr {
 	/// Trade Confirmation
@@ -702,6 +734,12 @@ pub enum TradeHandlingInstr {
 	/// One-party report for auto-match
 	#[serde(rename = "8")]
 	OnePartyReportForAutoMatch,
+}
+
+impl Default for TradeHandlingInstr {
+	fn default() -> Self {
+		TradeHandlingInstr::TradeConfirmation
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -909,6 +947,12 @@ pub enum SecondaryTrdType {
 	N66,
 }
 
+impl Default for SecondaryTrdType {
+	fn default() -> Self {
+		SecondaryTrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
@@ -932,6 +976,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -976,6 +1026,12 @@ pub enum TradingSessionSubID {
 	/// Group auction
 	#[serde(rename = "13")]
 	GroupAuction,
+}
+
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1033,6 +1089,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MultiLegReportingType {
 	/// Single Security (default if not specified)
@@ -1046,6 +1108,12 @@ pub enum MultiLegReportingType {
 	MultiLegSecurity,
 }
 
+impl Default for MultiLegReportingType {
+	fn default() -> Self {
+		MultiLegReportingType::SingleSecurity
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ResponseTransportType {
 	/// In-band (default)
@@ -1056,6 +1124,12 @@ pub enum ResponseTransportType {
 	OutOfBand,
 }
 
+impl Default for ResponseTransportType {
+	fn default() -> Self {
+		ResponseTransportType::InBand
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OffsetInstruction {
 	/// Offset
@@ -1064,4 +1138,10 @@ pub enum OffsetInstruction {
 	/// Onset
 	#[serde(rename = "1")]
 	Onset,
+}
+
+impl Default for OffsetInstruction {
+	fn default() -> Self {
+		OffsetInstruction::Offset
+	}
 }

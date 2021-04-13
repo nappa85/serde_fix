@@ -42,3 +42,9 @@ pub enum RoutingType {
 	#[serde(rename = "6")]
 	BlockPerson,
 }
+
+impl Default for RoutingType {
+	fn default() -> Self {
+		RoutingType::TargetFirm
+	}
+}

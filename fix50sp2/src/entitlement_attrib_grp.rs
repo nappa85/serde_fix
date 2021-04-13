@@ -154,6 +154,12 @@ pub enum EntitlementAttribDatatype {
 	TdTrTrValignTopTdClassValCharTdTdClassValDescr,
 }
 
+impl Default for EntitlementAttribDatatype {
+	fn default() -> Self {
+		EntitlementAttribDatatype::Int
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EntitlementAttribCurrency {
 	/// Afghani
@@ -1356,4 +1362,10 @@ pub enum EntitlementAttribCurrency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for EntitlementAttribCurrency {
+	fn default() -> Self {
+		EntitlementAttribCurrency::Afa
+	}
 }

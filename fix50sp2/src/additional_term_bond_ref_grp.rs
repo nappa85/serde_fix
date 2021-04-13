@@ -24,16 +24,12 @@ pub struct AdditionalTermBondRef {
 	#[serde(rename = "40003")]
 	pub additional_term_bond_desc: Option<String>,
 	/// Must be set if EncodedAdditionalTermBondDesc(40005) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "40004")]
-	pub encoded_additional_term_bond_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the AdditionalTermBondDesc(40003) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40005")]
-	pub encoded_additional_term_bond_desc: Option<String>,
+	#[serde(alias = "40005")]
+	pub encoded_additional_term_bond_desc: Option<fix_common::EncodedText<40005>>,
 	/// AdditionalTermBondCurrency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40006")]
@@ -43,16 +39,12 @@ pub struct AdditionalTermBondRef {
 	#[serde(rename = "40007")]
 	pub additional_term_bond_issuer: Option<String>,
 	/// Must be set if EncodedAdditionalTermBondIssuer(40009) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "40008")]
-	pub encoded_additional_term_bond_issuer_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the AdditionalTermBondIssuer(40007) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40009")]
-	pub encoded_additional_term_bond_issuer: Option<String>,
+	#[serde(alias = "40009")]
+	pub encoded_additional_term_bond_issuer: Option<fix_common::EncodedText<40009>>,
 	/// AdditionalTermBondSeniority
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40010")]
@@ -199,6 +191,12 @@ pub enum AdditionalTermBondSecurityIDSource {
 	UniformSymbol,
 }
 
+impl Default for AdditionalTermBondSecurityIDSource {
+	fn default() -> Self {
+		AdditionalTermBondSecurityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AdditionalTermBondSeniority {
 	/// Senior Secured
@@ -221,6 +219,12 @@ pub enum AdditionalTermBondSeniority {
 	SeniorNonPreferred,
 }
 
+impl Default for AdditionalTermBondSeniority {
+	fn default() -> Self {
+		AdditionalTermBondSeniority::SeniorSecured
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AdditionalTermBondCouponType {
 	/// Zero
@@ -235,6 +239,12 @@ pub enum AdditionalTermBondCouponType {
 	/// Structured
 	#[serde(rename = "3")]
 	Structured,
+}
+
+impl Default for AdditionalTermBondCouponType {
+	fn default() -> Self {
+		AdditionalTermBondCouponType::Zero
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -263,6 +273,12 @@ pub enum AdditionalTermBondCouponFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for AdditionalTermBondCouponFrequencyUnit {
+	fn default() -> Self {
+		AdditionalTermBondCouponFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -357,4 +373,10 @@ pub enum AdditionalTermBondDayCount {
 	/// Other
 	#[serde(rename = "99")]
 	N99,
+}
+
+impl Default for AdditionalTermBondDayCount {
+	fn default() -> Self {
+		AdditionalTermBondDayCount::N0
+	}
 }

@@ -50,3 +50,9 @@ pub enum LegPaymentScheduleFixingDayOfWeek {
 	#[serde(rename = "7")]
 	Sunday,
 }
+
+impl Default for LegPaymentScheduleFixingDayOfWeek {
+	fn default() -> Self {
+		LegPaymentScheduleFixingDayOfWeek::EveryDay
+	}
+}

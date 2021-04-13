@@ -189,6 +189,12 @@ pub enum PaymentStubType {
 	CompoundingFinal,
 }
 
+impl Default for PaymentStubType {
+	fn default() -> Self {
+		PaymentStubType::Initial
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStubLength {
 	/// Short
@@ -197,4 +203,10 @@ pub enum PaymentStubLength {
 	/// Long
 	#[serde(rename = "1")]
 	Long,
+}
+
+impl Default for PaymentStubLength {
+	fn default() -> Self {
+		PaymentStubLength::Short
+	}
 }

@@ -130,3 +130,9 @@ pub enum ReturnRateDateMode {
 	#[serde(rename = "1")]
 	DividendValuation,
 }
+
+impl Default for ReturnRateDateMode {
+	fn default() -> Self {
+		ReturnRateDateMode::PriceValuation
+	}
+}

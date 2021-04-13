@@ -24,16 +24,12 @@ pub struct LegAdditionalTermBondRef {
 	#[serde(rename = "41319")]
 	pub leg_additional_term_bond_desc: Option<String>,
 	/// Must be set if EncodedLegAdditionalTermBondDesc(41321) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41320")]
-	pub encoded_leg_additional_term_bond_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegAdditionalTermBondDesc(41319) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41321")]
-	pub encoded_leg_additional_term_bond_desc: Option<String>,
+	#[serde(alias = "41321")]
+	pub encoded_leg_additional_term_bond_desc: Option<fix_common::EncodedText<41321>>,
 	/// LegAdditionalTermBondCurrency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41322")]
@@ -43,16 +39,12 @@ pub struct LegAdditionalTermBondRef {
 	#[serde(rename = "41323")]
 	pub leg_additional_term_bond_issuer: Option<String>,
 	/// Must be set if EncodedLegAdditionalTermBondIssuer(41325) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41324")]
-	pub encoded_leg_additional_term_bond_issuer_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegAdditionalTermBondIssuer(41323) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41325")]
-	pub encoded_leg_additional_term_bond_issuer: Option<String>,
+	#[serde(alias = "41325")]
+	pub encoded_leg_additional_term_bond_issuer: Option<fix_common::EncodedText<41325>>,
 	/// LegAdditionalTermBondSeniority
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41326")]
@@ -199,6 +191,12 @@ pub enum LegAdditionalTermBondSecurityIDSource {
 	UniformSymbol,
 }
 
+impl Default for LegAdditionalTermBondSecurityIDSource {
+	fn default() -> Self {
+		LegAdditionalTermBondSecurityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegAdditionalTermBondSeniority {
 	/// Senior Secured
@@ -221,6 +219,12 @@ pub enum LegAdditionalTermBondSeniority {
 	SeniorNonPreferred,
 }
 
+impl Default for LegAdditionalTermBondSeniority {
+	fn default() -> Self {
+		LegAdditionalTermBondSeniority::SeniorSecured
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegAdditionalTermBondCouponType {
 	/// Zero
@@ -235,6 +239,12 @@ pub enum LegAdditionalTermBondCouponType {
 	/// Structured
 	#[serde(rename = "3")]
 	Structured,
+}
+
+impl Default for LegAdditionalTermBondCouponType {
+	fn default() -> Self {
+		LegAdditionalTermBondCouponType::Zero
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -263,6 +273,12 @@ pub enum LegAdditionalTermBondCouponFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for LegAdditionalTermBondCouponFrequencyUnit {
+	fn default() -> Self {
+		LegAdditionalTermBondCouponFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -357,4 +373,10 @@ pub enum LegAdditionalTermBondDayCount {
 	/// Other
 	#[serde(rename = "99")]
 	N99,
+}
+
+impl Default for LegAdditionalTermBondDayCount {
+	fn default() -> Self {
+		LegAdditionalTermBondDayCount::N0
+	}
 }

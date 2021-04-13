@@ -31,3 +31,9 @@ pub enum NoStreamAssetAttributes {
 	#[serde(rename = "D")]
 	Day,
 }
+
+impl Default for NoStreamAssetAttributes {
+	fn default() -> Self {
+		NoStreamAssetAttributes::Day
+	}
+}

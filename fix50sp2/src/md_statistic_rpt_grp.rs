@@ -50,6 +50,12 @@ pub enum MDStatisticStatus {
 	Inactive,
 }
 
+impl Default for MDStatisticStatus {
+	fn default() -> Self {
+		MDStatisticStatus::Active
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDStatisticValueType {
 	/// Absolute
@@ -58,6 +64,12 @@ pub enum MDStatisticValueType {
 	/// Percentage
 	#[serde(rename = "2")]
 	Percentage,
+}
+
+impl Default for MDStatisticValueType {
+	fn default() -> Self {
+		MDStatisticValueType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -98,4 +110,10 @@ pub enum MDStatisticValueUnit {
 	/// years
 	#[serde(rename = "15")]
 	Years,
+}
+
+impl Default for MDStatisticValueUnit {
+	fn default() -> Self {
+		MDStatisticValueUnit::Seconds
+	}
 }

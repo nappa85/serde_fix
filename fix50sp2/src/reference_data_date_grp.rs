@@ -36,3 +36,9 @@ pub enum ReferenceDataDateType {
 	#[serde(rename = "3")]
 	TerminationDate,
 }
+
+impl Default for ReferenceDataDateType {
+	fn default() -> Self {
+		ReferenceDataDateType::DateOfRequestForAdmissionToTrading
+	}
+}

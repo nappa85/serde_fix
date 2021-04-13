@@ -55,15 +55,11 @@ pub struct New {
 	#[serde(rename = "1385")]
 	pub contingency_type: Option<ContingencyType>,
 	/// Must be set if <a href="tag_353_EncodedListExecInst.html" target="bottom">EncodedListExecInst&nbsp;(353)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "352")]
-	pub encoded_list_exec_inst_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_69_ListExecInst.html" target="bottom">ListExecInst&nbsp;(69)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "353")]
-	pub encoded_list_exec_inst: Option<String>,
+	#[serde(alias = "353")]
+	pub encoded_list_exec_inst: Option<fix_common::EncodedText<353>>,
 	/// The maximum percentage that execution of one side of a program trade can exceed execution of the other.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -122,6 +118,12 @@ pub enum ProgRptReqs {
 	RealTimeExecutionReports,
 }
 
+impl Default for ProgRptReqs {
+	fn default() -> Self {
+		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatueRequestTheSellSideFirmCanHoweverSendADoneStatusListSTatusResponseInAnUnsolicitedFashion
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BidType {
 	/// "Non Disclosed" Style (e.g. US/European)
@@ -133,6 +135,12 @@ pub enum BidType {
 	/// No Bidding Process
 	#[serde(rename = "3")]
 	NoBiddingProcess,
+}
+
+impl Default for BidType {
+	fn default() -> Self {
+		BidType::NonDisclosedStyle
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -149,6 +157,12 @@ pub enum CancellationRights {
 	/// No - institutional
 	#[serde(rename = "O")]
 	NoInstitutional,
+}
+
+impl Default for CancellationRights {
+	fn default() -> Self {
+		CancellationRights::Yes
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -170,6 +184,12 @@ pub enum MoneyLaunderingStatus {
 	ExemptAuthorisedCreditOrFinancialInstitution,
 }
 
+impl Default for MoneyLaunderingStatus {
+	fn default() -> Self {
+		MoneyLaunderingStatus::Passed
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ListExecInstType {
 	/// Immediate
@@ -187,6 +207,12 @@ pub enum ListExecInstType {
 	/// Exchange/switch CIV order - Buy driven, cash withdraw (i.e. additional cash will not be provided to fulfil the order)
 	#[serde(rename = "5")]
 	ExchangeSwitchCivOrderBuyDrivenCashWithdraw,
+}
+
+impl Default for ListExecInstType {
+	fn default() -> Self {
+		ListExecInstType::Immediate
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -210,6 +236,12 @@ pub enum ContingencyType {
 	/// other side is fully traded away)
 	#[serde(rename = "6")]
 	BidAndOfferOco,
+}
+
+impl Default for ContingencyType {
+	fn default() -> Self {
+		ContingencyType::OneCancelsTheOther
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1416,6 +1448,12 @@ pub enum AllowableOneSidednessCurr {
 	N999,
 }
 
+impl Default for AllowableOneSidednessCurr {
+	fn default() -> Self {
+		AllowableOneSidednessCurr::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
@@ -1426,6 +1464,12 @@ pub enum LastFragment {
 	LastMessage,
 }
 
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
@@ -1434,4 +1478,10 @@ pub enum ThrottleInst {
 	/// Queue if throttle limit exceeded
 	#[serde(rename = "1")]
 	QueueIfThrottleLimitExceeded,
+}
+
+impl Default for ThrottleInst {
+	fn default() -> Self {
+		ThrottleInst::RejectIfThrottleLimitExceeded
+	}
 }

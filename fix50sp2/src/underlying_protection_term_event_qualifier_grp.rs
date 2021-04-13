@@ -34,3 +34,9 @@ pub enum UnderlyingProtectionTermEventQualifierItem {
 	#[serde(rename = "C")]
 	FloatingRateInterestShortfall,
 }
+
+impl Default for UnderlyingProtectionTermEventQualifierItem {
+	fn default() -> Self {
+		UnderlyingProtectionTermEventQualifierItem::RetructuringMultipleHoldingObligations
+	}
+}

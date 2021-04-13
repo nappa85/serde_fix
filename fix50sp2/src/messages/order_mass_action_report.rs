@@ -83,15 +83,11 @@ pub struct Order {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// List of market segments affected by the Order Mass Action Request. Should only be used when request uses "TargetMarketSegmentGrp"
 	#[serde(flatten)]
 	pub affected_market_segment_grp: Option<super::super::affected_market_segment_grp::AffectedMarketSegmentGrp>,
@@ -110,16 +106,12 @@ pub struct Order {
 	#[serde(rename = "2404")]
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2351")]
-	pub encoded_compliance_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ComplianceText(2404) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2352")]
-	pub encoded_compliance_text: Option<String>,
+	#[serde(alias = "2352")]
+	pub encoded_compliance_text: Option<fix_common::EncodedText<2352>>,
 	/// Specifies the reason for the action taken.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2675")]
@@ -156,6 +148,12 @@ pub enum MassActionType {
 	/// Cancel orders
 	#[serde(rename = "2")]
 	CancelOrders,
+}
+
+impl Default for MassActionType {
+	fn default() -> Self {
+		MassActionType::TSuspendOrders
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -198,6 +196,12 @@ pub enum MassActionScope {
 	CancelForIssuerOfUnderlyingSecurity,
 }
 
+impl Default for MassActionScope {
+	fn default() -> Self {
+		MassActionScope::AllOrdersForASecurity
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MassActionResponse {
 	/// Rejected - See <a href="tag_1376_MassActionRejectReason.html" target="bottom">MassActionRejectReason&nbsp;(1376)</a>
@@ -209,6 +213,12 @@ pub enum MassActionResponse {
 	/// Completed
 	#[serde(rename = "2")]
 	Completed,
+}
+
+impl Default for MassActionResponse {
+	fn default() -> Self {
+		MassActionResponse::RejectedSeeAHrefTag1376MassActionRejectReasonHtmlTargetBottomMassActionRejectReasonNbspA
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -254,6 +264,12 @@ pub enum MassActionRejectReason {
 	Other,
 }
 
+impl Default for MassActionRejectReason {
+	fn default() -> Self {
+		MassActionRejectReason::MassActionNotSupported
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
@@ -277,6 +293,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -321,6 +343,12 @@ pub enum TradingSessionSubID {
 	/// Group auction
 	#[serde(rename = "13")]
 	GroupAuction,
+}
+
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -378,6 +406,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MassActionReason {
 	/// No special reason (default)
@@ -421,6 +455,12 @@ pub enum MassActionReason {
 	Other,
 }
 
+impl Default for MassActionReason {
+	fn default() -> Self {
+		MassActionReason::NoSpecialReason
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
@@ -429,4 +469,10 @@ pub enum LastFragment {
 	/// Last Message
 	#[serde(rename = "Y")]
 	LastMessage,
+}
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
 }

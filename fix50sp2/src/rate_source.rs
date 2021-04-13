@@ -49,6 +49,12 @@ pub enum RateSourceItem {
 	Other,
 }
 
+impl Default for RateSourceItem {
+	fn default() -> Self {
+		RateSourceItem::Bloomberg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RateSourceType {
 	/// Primary
@@ -57,4 +63,10 @@ pub enum RateSourceType {
 	/// Secondary
 	#[serde(rename = "1")]
 	Secondary,
+}
+
+impl Default for RateSourceType {
+	fn default() -> Self {
+		RateSourceType::Primary
+	}
 }

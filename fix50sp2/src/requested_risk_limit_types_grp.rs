@@ -75,3 +75,9 @@ pub enum RiskLimitType {
 	#[serde(rename = "17")]
 	TransactionExecutionLimitPerTimePeriod,
 }
+
+impl Default for RiskLimitType {
+	fn default() -> Self {
+		RiskLimitType::GrossLimit
+	}
+}

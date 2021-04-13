@@ -110,6 +110,12 @@ pub enum StreamCalculationPeriodBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for StreamCalculationPeriodBusinessDayConvention {
+	fn default() -> Self {
+		StreamCalculationPeriodBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamFirstPeriodStartDateBusinessDayConvention {
 	/// Not applicable
@@ -138,6 +144,12 @@ pub enum StreamFirstPeriodStartDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for StreamFirstPeriodStartDateBusinessDayConvention {
+	fn default() -> Self {
+		StreamFirstPeriodStartDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamCalculationFrequencyUnit {
 	/// Day
@@ -164,6 +176,12 @@ pub enum StreamCalculationFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for StreamCalculationFrequencyUnit {
+	fn default() -> Self {
+		StreamCalculationFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -308,6 +326,12 @@ pub enum StreamCalculationRollConvention {
 	Sunday,
 }
 
+impl Default for StreamCalculationRollConvention {
+	fn default() -> Self {
+		StreamCalculationRollConvention::N1StDayOfTheMonth
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamCalculationCorrectionUnit {
 	/// Day
@@ -322,4 +346,10 @@ pub enum StreamCalculationCorrectionUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for StreamCalculationCorrectionUnit {
+	fn default() -> Self {
+		StreamCalculationCorrectionUnit::Day
+	}
 }

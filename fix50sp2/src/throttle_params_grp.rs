@@ -56,6 +56,12 @@ pub enum ThrottleAction {
 	Warning,
 }
 
+impl Default for ThrottleAction {
+	fn default() -> Self {
+		ThrottleAction::QueueInbound
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleType {
 	/// Inbound Rate
@@ -64,6 +70,12 @@ pub enum ThrottleType {
 	/// Outstanding Requests
 	#[serde(rename = "1")]
 	OutstandingRequests,
+}
+
+impl Default for ThrottleType {
+	fn default() -> Self {
+		ThrottleType::InboundRate
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -104,4 +116,10 @@ pub enum ThrottleTimeUnit {
 	/// Years
 	#[serde(rename = "15")]
 	Years,
+}
+
+impl Default for ThrottleTimeUnit {
+	fn default() -> Self {
+		ThrottleTimeUnit::Seconds
+	}
 }

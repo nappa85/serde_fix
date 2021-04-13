@@ -32,3 +32,9 @@ pub enum LegSettlRateFallbackRateSourceItem {
 	#[serde(rename = "99")]
 	Other,
 }
+
+impl Default for LegSettlRateFallbackRateSourceItem {
+	fn default() -> Self {
+		LegSettlRateFallbackRateSourceItem::Bloomberg
+	}
+}

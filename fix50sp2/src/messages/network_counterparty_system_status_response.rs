@@ -37,3 +37,9 @@ pub enum NetworkStatusResponseType {
 	#[serde(rename = "2")]
 	IncrementalUpdate,
 }
+
+impl Default for NetworkStatusResponseType {
+	fn default() -> Self {
+		NetworkStatusResponseType::Full
+	}
+}

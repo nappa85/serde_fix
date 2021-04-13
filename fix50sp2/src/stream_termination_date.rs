@@ -68,6 +68,12 @@ pub enum StreamTerminationDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for StreamTerminationDateBusinessDayConvention {
+	fn default() -> Self {
+		StreamTerminationDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamTerminationDateRelativeTo {
 	/// Trade date
@@ -102,6 +108,12 @@ pub enum StreamTerminationDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for StreamTerminationDateRelativeTo {
+	fn default() -> Self {
+		StreamTerminationDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamTerminationDateOffsetUnit {
 	/// Day
@@ -116,6 +128,12 @@ pub enum StreamTerminationDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for StreamTerminationDateOffsetUnit {
+	fn default() -> Self {
+		StreamTerminationDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -138,4 +156,10 @@ pub enum StreamTerminationDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for StreamTerminationDateOffsetDayType {
+	fn default() -> Self {
+		StreamTerminationDateOffsetDayType::Business
+	}
 }

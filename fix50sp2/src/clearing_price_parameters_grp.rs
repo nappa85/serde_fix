@@ -116,3 +116,9 @@ pub enum CalculationMethod {
 	#[serde(rename = "1")]
 	Manual,
 }
+
+impl Default for CalculationMethod {
+	fn default() -> Self {
+		CalculationMethod::Automatic
+	}
+}

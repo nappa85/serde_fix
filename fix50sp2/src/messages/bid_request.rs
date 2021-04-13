@@ -124,15 +124,11 @@ pub struct Bid {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -148,6 +144,12 @@ pub enum BidRequestTransType {
 	New,
 }
 
+impl Default for BidRequestTransType {
+	fn default() -> Self {
+		BidRequestTransType::Cancel
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BidType {
 	/// "Non Disclosed" Style (e.g. US/European)
@@ -159,6 +161,12 @@ pub enum BidType {
 	/// No Bidding Process
 	#[serde(rename = "3")]
 	NoBiddingProcess,
+}
+
+impl Default for BidType {
+	fn default() -> Self {
+		BidType::NonDisclosedStyle
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1365,6 +1373,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LiquidityIndType {
 	/// 5-day moving average
@@ -1381,6 +1395,12 @@ pub enum LiquidityIndType {
 	Other,
 }
 
+impl Default for LiquidityIndType {
+	fn default() -> Self {
+		LiquidityIndType::N5DayMovingAverage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExchangeForPhysical {
 	/// False
@@ -1389,6 +1409,12 @@ pub enum ExchangeForPhysical {
 	/// True
 	#[serde(rename = "Y")]
 	True,
+}
+
+impl Default for ExchangeForPhysical {
+	fn default() -> Self {
+		ExchangeForPhysical::False
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1405,6 +1431,12 @@ pub enum ProgRptReqs {
 	RealTimeExecutionReports,
 }
 
+impl Default for ProgRptReqs {
+	fn default() -> Self {
+		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatueRequestTheSellSideFirmCanHoweverSendADoneStatusListSTatusResponseInAnUnsolicitedFashion
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum IncTaxInd {
 	/// Net
@@ -1415,6 +1447,12 @@ pub enum IncTaxInd {
 	Gross,
 }
 
+impl Default for IncTaxInd {
+	fn default() -> Self {
+		IncTaxInd::Net
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ForexReq {
 	/// Execute Forex after security trade
@@ -1423,6 +1461,12 @@ pub enum ForexReq {
 	/// Do not execute Forex after security trade
 	#[serde(rename = "N")]
 	DoNotExecuteForexAfterSecurityTrade,
+}
+
+impl Default for ForexReq {
+	fn default() -> Self {
+		ForexReq::ExecuteForexAfterSecurityTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1439,6 +1483,12 @@ pub enum BidTradeType {
 	/// Risk Trade
 	#[serde(rename = "R")]
 	RiskTrade,
+}
+
+impl Default for BidTradeType {
+	fn default() -> Self {
+		BidTradeType::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1482,4 +1532,10 @@ pub enum BasisPxType {
 	/// Others
 	#[serde(rename = "Z")]
 	Others,
+}
+
+impl Default for BasisPxType {
+	fn default() -> Self {
+		BasisPxType::ClosingPriceAtMorningSession
+	}
 }

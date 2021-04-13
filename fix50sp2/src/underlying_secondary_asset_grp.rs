@@ -66,6 +66,12 @@ pub enum UnderlyingSecondaryAssetClass {
 	Index,
 }
 
+impl Default for UnderlyingSecondaryAssetClass {
+	fn default() -> Self {
+		UnderlyingSecondaryAssetClass::InterestRate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingSecondaryAssetSubClass {
 	/// Single currency
@@ -212,4 +218,10 @@ pub enum UnderlyingSecondaryAssetSubClass {
 	/// Other
 	#[serde(rename = "48")]
 	Other,
+}
+
+impl Default for UnderlyingSecondaryAssetSubClass {
+	fn default() -> Self {
+		UnderlyingSecondaryAssetSubClass::SingleCurrency
+	}
 }

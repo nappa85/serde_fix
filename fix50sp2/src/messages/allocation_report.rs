@@ -263,15 +263,11 @@ pub struct AllocationReport {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Applicable for Convertible Bonds and fixed income
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -436,16 +432,12 @@ pub struct AllocationReport {
 	#[serde(rename = "2374")]
 	pub trade_continuation_text: Option<String>,
 	/// Must be set if EncodedTradeContinuationText(2371) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2372")]
-	pub encoded_trade_continuation_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the TradeContinuationText(2374) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2371")]
-	pub encoded_trade_continuation_text: Option<String>,
+	#[serde(alias = "2371")]
+	pub encoded_trade_continuation_text: Option<fix_common::EncodedText<2371>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -476,6 +468,12 @@ pub enum AllocTransType {
 	Reversal,
 }
 
+impl Default for AllocTransType {
+	fn default() -> Self {
+		AllocTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocCancReplaceReason {
 	/// Original details incomplete/incorrect
@@ -490,6 +488,12 @@ pub enum AllocCancReplaceReason {
 	/// Cancelled by give-up firm
 	#[serde(rename = "3")]
 	CancelledByGiveUpFirm,
+}
+
+impl Default for AllocCancReplaceReason {
+	fn default() -> Self {
+		AllocCancReplaceReason::OriginalDetailsIncompleteIncorrect
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -541,6 +545,12 @@ pub enum AllocReportType {
 	SubAllocationGiveup,
 }
 
+impl Default for AllocReportType {
+	fn default() -> Self {
+		AllocReportType::PreliminaryRequestToIntermediary
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocStatus {
 	/// accepted (successfully processed)
@@ -588,6 +598,12 @@ pub enum AllocStatus {
 	/// Reversal pending
 	#[serde(rename = "14")]
 	ReversalPending,
+}
+
+impl Default for AllocStatus {
+	fn default() -> Self {
+		AllocStatus::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -684,6 +700,12 @@ pub enum AllocRejCode {
 	N28,
 }
 
+impl Default for AllocRejCode {
+	fn default() -> Self {
+		AllocRejCode::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocIntermedReqType {
 	/// Pending Accept
@@ -706,6 +728,12 @@ pub enum AllocIntermedReqType {
 	AccountLevelReject,
 }
 
+impl Default for AllocIntermedReqType {
+	fn default() -> Self {
+		AllocIntermedReqType::PendingAccept
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocLinkType {
 	/// F/X Netting
@@ -714,6 +742,12 @@ pub enum AllocLinkType {
 	/// F/X Swap
 	#[serde(rename = "1")]
 	FXSwap,
+}
+
+impl Default for AllocLinkType {
+	fn default() -> Self {
+		AllocLinkType::FXNetting
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -921,6 +955,12 @@ pub enum TrdType {
 	N66,
 }
 
+impl Default for TrdType {
+	fn default() -> Self {
+		TrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdSubType {
 	/// CMTA
@@ -1088,6 +1128,12 @@ pub enum TrdSubType {
 	TradeAtCashOpenTheMarketplaceNameGivenToTradingFuturesBasedOnAnOpeningQuoteOfTheUnderlyingCashMarket,
 }
 
+impl Default for TrdSubType {
+	fn default() -> Self {
+		TrdSubType::Cmta
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MultiLegReportingType {
 	/// Single Security (default if not specified)
@@ -1099,6 +1145,12 @@ pub enum MultiLegReportingType {
 	/// Multi-leg security
 	#[serde(rename = "3")]
 	MultiLegSecurity,
+}
+
+impl Default for MultiLegReportingType {
+	fn default() -> Self {
+		MultiLegReportingType::SingleSecurity
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1120,6 +1172,12 @@ pub enum CustOrderCapacity {
 	RetailCustomer,
 }
 
+impl Default for CustOrderCapacity {
+	fn default() -> Self {
+		CustOrderCapacity::MemberTradingForTheirOwnAccount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AvgPxIndicator {
 	/// No Average Pricing
@@ -1139,6 +1197,12 @@ pub enum AvgPxIndicator {
 	TradeIsAveragePriced,
 }
 
+impl Default for AvgPxIndicator {
+	fn default() -> Self {
+		AvgPxIndicator::NoAveragePricing
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocNoOrdersType {
 	/// Not Specified
@@ -1149,6 +1213,12 @@ pub enum AllocNoOrdersType {
 	ExplicitListProvided,
 }
 
+impl Default for AllocNoOrdersType {
+	fn default() -> Self {
+		AllocNoOrdersType::NotSpecified
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PreviouslyReported {
 	/// Not reported to counterparty or market
@@ -1157,6 +1227,12 @@ pub enum PreviouslyReported {
 	/// Previously reported to counterparty or market
 	#[serde(rename = "Y")]
 	PreviouslyReportedToCounterpartyOrMarket,
+}
+
+impl Default for PreviouslyReported {
+	fn default() -> Self {
+		PreviouslyReported::NotReportedToCounterpartyOrMarket
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1253,6 +1329,12 @@ pub enum MatchType {
 	CrossAuctionWithLastLook,
 }
 
+impl Default for MatchType {
+	fn default() -> Self {
+		MatchType::ActAcceptedTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -1308,6 +1390,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
@@ -1319,6 +1407,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1344,6 +1438,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1388,6 +1488,12 @@ pub enum TradingSessionSubID {
 	/// Group auction
 	#[serde(rename = "13")]
 	GroupAuction,
+}
+
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1469,6 +1575,12 @@ pub enum PriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	PercentageOfNotional,
+}
+
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2675,6 +2787,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlType {
 	/// Regular / FX Spot settlement (T+1 or T+2 depending on currency)
@@ -2715,6 +2833,12 @@ pub enum SettlType {
 	FxSpotNextSettlement,
 }
 
+impl Default for SettlType {
+	fn default() -> Self {
+		SettlType::RegularFxSpotSettlement
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BookingType {
 	/// Regular booking
@@ -2726,6 +2850,12 @@ pub enum BookingType {
 	/// Total Return Swap
 	#[serde(rename = "2")]
 	TotalReturnSwap,
+}
+
+impl Default for BookingType {
+	fn default() -> Self {
+		BookingType::RegularBooking
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2750,6 +2880,12 @@ pub enum PositionEffect {
 	Rolled,
 }
 
+impl Default for PositionEffect {
+	fn default() -> Self {
+		PositionEffect::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegalConfirm {
 	/// Does not constitute a legal confirm
@@ -2760,6 +2896,12 @@ pub enum LegalConfirm {
 	LegalConfirm,
 }
 
+impl Default for LegalConfirm {
+	fn default() -> Self {
+		LegalConfirm::DoesNotConstituteALegalConfirm
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
@@ -2768,6 +2910,12 @@ pub enum LastFragment {
 	/// Last Message
 	#[serde(rename = "Y")]
 	LastMessage,
+}
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2789,6 +2937,12 @@ pub enum AllocGroupStatus {
 	N4,
 }
 
+impl Default for AllocGroupStatus {
+	fn default() -> Self {
+		AllocGroupStatus::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocReversalStatus {
 	/// Completed
@@ -2800,6 +2954,12 @@ pub enum AllocReversalStatus {
 	/// Cancelled
 	#[serde(rename = "2")]
 	Cancelled,
+}
+
+impl Default for AllocReversalStatus {
+	fn default() -> Self {
+		AllocReversalStatus::Completed
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3040,6 +3200,12 @@ pub enum CustOrderHandlingInst {
 	WorkToTargetStrategy,
 }
 
+impl Default for CustOrderHandlingInst {
+	fn default() -> Self {
+		CustOrderHandlingInst::AddOnOrder
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderHandlingInstSource {
 	/// NASD OATS
@@ -3048,6 +3214,12 @@ pub enum OrderHandlingInstSource {
 	/// FIA Execution Source Code
 	#[serde(rename = "2")]
 	FiaExecutionSourceCode,
+}
+
+impl Default for OrderHandlingInstSource {
+	fn default() -> Self {
+		OrderHandlingInstSource::NasdOats
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3064,6 +3236,12 @@ pub enum RefRiskLimitCheckIDType {
 	/// Out of band identifier
 	#[serde(rename = "2")]
 	N2,
+}
+
+impl Default for RefRiskLimitCheckIDType {
+	fn default() -> Self {
+		RefRiskLimitCheckIDType::N0
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3107,6 +3285,12 @@ pub enum VenueType {
 	/// Hybrid market
 	#[serde(rename = "H")]
 	HybridMarket,
+}
+
+impl Default for VenueType {
+	fn default() -> Self {
+		VenueType::Electronic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3157,6 +3341,12 @@ pub enum RiskLimitCheckStatus {
 	/// Rejected by execution venue (Indicates that the trade was rejected by an execution venue, such as a SEF.)
 	#[serde(rename = "14")]
 	RejectedByExecutionVenue,
+}
+
+impl Default for RiskLimitCheckStatus {
+	fn default() -> Self {
+		RiskLimitCheckStatus::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3364,6 +3554,12 @@ pub enum SecondaryTrdType {
 	N66,
 }
 
+impl Default for SecondaryTrdType {
+	fn default() -> Self {
+		SecondaryTrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeContinuation {
 	/// Novation
@@ -3468,4 +3664,10 @@ pub enum TradeContinuation {
 	/// Rerate
 	#[serde(rename = "32")]
 	Rerate,
+}
+
+impl Default for TradeContinuation {
+	fn default() -> Self {
+		TradeContinuation::Novation
+	}
 }

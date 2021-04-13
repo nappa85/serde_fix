@@ -416,15 +416,11 @@ pub struct TradeCaptureReport {
 	#[serde(rename = "549")]
 	pub cross_type: Option<CrossType>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText.html" target="bottom">EncodedRejectTextLen(1665)&nbsp;(1665)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1328_RejectText.html" target="bottom">RejectedText(1328)&nbsp;(1328)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// Used to specify the differential price when reporting the individual leg of a spread trade.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -640,16 +636,12 @@ pub struct TradeCaptureReport {
 	#[serde(rename = "2374")]
 	pub trade_continuation_text: Option<String>,
 	/// Must be set if EncodedTradeContinuationText(2371) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2372")]
-	pub encoded_trade_continuation_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the TradeContinuationText(2374) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2371")]
-	pub encoded_trade_continuation_text: Option<String>,
+	#[serde(alias = "2371")]
+	pub encoded_trade_continuation_text: Option<fix_common::EncodedText<2371>>,
 	/// IntraFirmTradeIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2373")]
@@ -772,6 +764,12 @@ pub enum TradeReportTransType {
 	CancelDueToBackOutOfTrade,
 }
 
+impl Default for TradeReportTransType {
+	fn default() -> Self {
+		TradeReportTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeReportType {
 	/// Submit
@@ -833,6 +831,12 @@ pub enum TradeReportType {
 	NonMaterialUpdate,
 }
 
+impl Default for TradeReportType {
+	fn default() -> Self {
+		TradeReportType::Submit
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdRptStatus {
 	/// Accepted
@@ -875,6 +879,12 @@ pub enum TrdRptStatus {
 	/// disputed by a trading party)
 	#[serde(rename = "11")]
 	Disputed,
+}
+
+impl Default for TrdRptStatus {
+	fn default() -> Self {
+		TrdRptStatus::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1082,6 +1092,12 @@ pub enum TrdType {
 	N66,
 }
 
+impl Default for TrdType {
+	fn default() -> Self {
+		TrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdSubType {
 	/// CMTA
@@ -1247,6 +1263,12 @@ pub enum TrdSubType {
 	/// market
 	#[serde(rename = "52")]
 	TradeAtCashOpenTheMarketplaceNameGivenToTradingFuturesBasedOnAnOpeningQuoteOfTheUnderlyingCashMarket,
+}
+
+impl Default for TrdSubType {
+	fn default() -> Self {
+		TrdSubType::Cmta
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1454,6 +1476,12 @@ pub enum SecondaryTrdType {
 	N66,
 }
 
+impl Default for SecondaryTrdType {
+	fn default() -> Self {
+		SecondaryTrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeHandlingInstr {
 	/// Trade Confirmation
@@ -1485,6 +1513,12 @@ pub enum TradeHandlingInstr {
 	OnePartyReportForAutoMatch,
 }
 
+impl Default for TradeHandlingInstr {
+	fn default() -> Self {
+		TradeHandlingInstr::TradeConfirmation
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrigTradeHandlingInstr {
 	/// Trade Confirmation
@@ -1505,6 +1539,12 @@ pub enum OrigTradeHandlingInstr {
 	/// Two party report for claim
 	#[serde(rename = "5")]
 	TwoPartyReportForClaim,
+}
+
+impl Default for OrigTradeHandlingInstr {
+	fn default() -> Self {
+		OrigTradeHandlingInstr::TradeConfirmation
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1577,6 +1617,12 @@ pub enum ExecType {
 	Released,
 }
 
+impl Default for ExecType {
+	fn default() -> Self {
+		ExecType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastRptRequested {
 	/// Not last message
@@ -1587,6 +1633,12 @@ pub enum LastRptRequested {
 	LastMessage,
 }
 
+impl Default for LastRptRequested {
+	fn default() -> Self {
+		LastRptRequested::NotLastMessage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
@@ -1595,6 +1647,12 @@ pub enum UnsolicitedIndicator {
 	/// Message is being sent unsolicited
 	#[serde(rename = "Y")]
 	MessageIsBeingSentUnsolicited,
+}
+
+impl Default for UnsolicitedIndicator {
+	fn default() -> Self {
+		UnsolicitedIndicator::MessageIsBeingSentAsAResultOfAPriorRequest
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1608,6 +1666,12 @@ pub enum SubscriptionRequestType {
 	/// Disable previous Snapshot + Update Request (Unsubscribe)
 	#[serde(rename = "2")]
 	DisablePreviousSnapshotUpdateRequest,
+}
+
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1668,6 +1732,12 @@ pub enum ExecRestatementReason {
 	CanceledCrossImbalance,
 }
 
+impl Default for ExecRestatementReason {
+	fn default() -> Self {
+		ExecRestatementReason::GtCorporateAction
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PreviouslyReported {
 	/// Not reported to counterparty or market
@@ -1676,6 +1746,12 @@ pub enum PreviouslyReported {
 	/// Previously reported to counterparty or market
 	#[serde(rename = "Y")]
 	PreviouslyReportedToCounterpartyOrMarket,
+}
+
+impl Default for PreviouslyReported {
+	fn default() -> Self {
+		PreviouslyReported::NotReportedToCounterpartyOrMarket
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1759,6 +1835,12 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AsOfIndicator {
 	/// false - trade is not an AsOf trade
@@ -1767,6 +1849,12 @@ pub enum AsOfIndicator {
 	/// true - trade is an AsOf trade
 	#[serde(rename = "1")]
 	TrueTradeIsAnAsOfTrade,
+}
+
+impl Default for AsOfIndicator {
+	fn default() -> Self {
+		AsOfIndicator::FalseTradeIsNotAnAsOfTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1783,6 +1871,12 @@ pub enum SettlSessID {
 	/// End Of Day
 	#[serde(rename = "EOD")]
 	EndOfDay,
+}
+
+impl Default for SettlSessID {
+	fn default() -> Self {
+		SettlSessID::Intraday
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1828,6 +1922,12 @@ pub enum VenueType {
 	HybridMarket,
 }
 
+impl Default for VenueType {
+	fn default() -> Self {
+		VenueType::Electronic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
@@ -1839,6 +1939,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3045,6 +3151,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
@@ -4249,6 +4361,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AvgPxIndicator {
 	/// No Average Pricing
@@ -4268,6 +4386,12 @@ pub enum AvgPxIndicator {
 	TradeIsAveragePriced,
 }
 
+impl Default for AvgPxIndicator {
+	fn default() -> Self {
+		AvgPxIndicator::NoAveragePricing
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MultiLegReportingType {
 	/// Single Security (default if not specified)
@@ -4279,6 +4403,12 @@ pub enum MultiLegReportingType {
 	/// Multi-leg security
 	#[serde(rename = "3")]
 	MultiLegSecurity,
+}
+
+impl Default for MultiLegReportingType {
+	fn default() -> Self {
+		MultiLegReportingType::SingleSecurity
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4321,6 +4451,12 @@ pub enum SettlType {
 	FxSpotNextSettlement,
 }
 
+impl Default for SettlType {
+	fn default() -> Self {
+		SettlType::RegularFxSpotSettlement
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
@@ -4336,6 +4472,12 @@ pub enum MatchStatus {
 	/// are variances. MatchExceptionGrp component may be used to detail on the mis-matched data fields)
 	#[serde(rename = "3")]
 	MismatchedAndConfirmationAreMatchedButThereAreVariancesMatchExceptionGrpComponentMayBeUsedToDetailOnTheMisMatchedDataFields,
+}
+
+impl Default for MatchStatus {
+	fn default() -> Self {
+		MatchStatus::ComparedMatchedOrAffirmed
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4432,6 +4574,12 @@ pub enum MatchType {
 	CrossAuctionWithLastLook,
 }
 
+impl Default for MatchType {
+	fn default() -> Self {
+		MatchType::ActAcceptedTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PublishTrdIndicator {
 	/// Do Not Report Trade
@@ -4440,6 +4588,12 @@ pub enum PublishTrdIndicator {
 	/// Report Trade
 	#[serde(rename = "Y")]
 	ReportTrade,
+}
+
+impl Default for PublishTrdIndicator {
+	fn default() -> Self {
+		PublishTrdIndicator::DoNotReportTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4456,6 +4610,12 @@ pub enum TradePublishIndicator {
 	/// Published
 	#[serde(rename = "3")]
 	Published,
+}
+
+impl Default for TradePublishIndicator {
+	fn default() -> Self {
+		TradePublishIndicator::DoNotPublishTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4478,6 +4638,12 @@ pub enum ShortSaleReason {
 	/// QSR or AGU Contra Side Sold Short Exempt
 	#[serde(rename = "5")]
 	QsrOrAguContraSideSoldShortExempt,
+}
+
+impl Default for ShortSaleReason {
+	fn default() -> Self {
+		ShortSaleReason::DealerSoldShort
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4521,6 +4687,12 @@ pub enum CrossType {
 	CustomerToCustomerCross,
 }
 
+impl Default for CrossType {
+	fn default() -> Self {
+		CrossType::CrossAonCrossTadeWhichIsExecutedCompleteOrNotBothSidesAreTreatedInTheSameMannerThisIsEquivalentToAnAllOrNone
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeReportRejectReason {
 	/// Successful (default)
@@ -4552,6 +4724,12 @@ pub enum TradeReportRejectReason {
 	NotionalValueExceedsThreshold,
 }
 
+impl Default for TradeReportRejectReason {
+	fn default() -> Self {
+		TradeReportRejectReason::Successful
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradePriceNegotiationMethod {
 	/// Percent of par
@@ -4577,6 +4755,12 @@ pub enum TradePriceNegotiationMethod {
 	UpfrontPointsAndUpfrontAmount,
 }
 
+impl Default for TradePriceNegotiationMethod {
+	fn default() -> Self {
+		TradePriceNegotiationMethod::PercentOfPar
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UpfrontPriceType {
 	/// Percentage (i.e. percent of par) (often called "dollar price" for fixed income)
@@ -4587,6 +4771,12 @@ pub enum UpfrontPriceType {
 	FixedAmount,
 }
 
+impl Default for UpfrontPriceType {
+	fn default() -> Self {
+		UpfrontPriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OffsetInstruction {
 	/// Offset
@@ -4595,6 +4785,12 @@ pub enum OffsetInstruction {
 	/// Onset
 	#[serde(rename = "1")]
 	Onset,
+}
+
+impl Default for OffsetInstruction {
+	fn default() -> Self {
+		OffsetInstruction::Offset
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4613,6 +4809,12 @@ pub enum ClearedIndicator {
 	Rejected,
 }
 
+impl Default for ClearedIndicator {
+	fn default() -> Self {
+		ClearedIndicator::NotCleared
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearingIntention {
 	/// Do not intend to clear
@@ -4621,6 +4823,12 @@ pub enum ClearingIntention {
 	/// Intend to clear
 	#[serde(rename = "1")]
 	IntendToClear,
+}
+
+impl Default for ClearingIntention {
+	fn default() -> Self {
+		ClearingIntention::DoNotIntendToClear
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4672,6 +4880,12 @@ pub enum TradeClearingInstruction {
 	BuyIn,
 }
 
+impl Default for TradeClearingInstruction {
+	fn default() -> Self {
+		TradeClearingInstruction::ProcessNormally
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ConfirmationMethod {
 	/// Non-electronic
@@ -4685,6 +4899,12 @@ pub enum ConfirmationMethod {
 	Unconfirmed,
 }
 
+impl Default for ConfirmationMethod {
+	fn default() -> Self {
+		ConfirmationMethod::NonElectronic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum VerificationMethod {
 	/// Non-electronic
@@ -4693,6 +4913,12 @@ pub enum VerificationMethod {
 	/// Electronic
 	#[serde(rename = "1")]
 	Electronic,
+}
+
+impl Default for VerificationMethod {
+	fn default() -> Self {
+		VerificationMethod::NonElectronic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4721,6 +4947,12 @@ pub enum ClearingRequirementException {
 	CooperativeExceptionDefinitionOfExemptCooperativeAXmlnsHttpWwwB2BitsComFixProtocolXmlnsXsiHttpWwwW3Org2001XmlSchemaInstanceHrefHttpsWwwFederalregisterGovArticles20130822201319945ClearingexemptionForCertainSwapsEnteredintoByCooperativesTargetBlankHttpsWwwFederalregisterGovArticles20130822201319945ClearingexemptionForCertainSwapsEnteredintoByCooperativesA,
 }
 
+impl Default for ClearingRequirementException {
+	fn default() -> Self {
+		ClearingRequirementException::NoException
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum IRSDirection {
 	/// Principal is paying fixed rate
@@ -4732,6 +4964,12 @@ pub enum IRSDirection {
 	/// Swap is float/float or fixed/fixed
 	#[serde(rename = "NA")]
 	SwapIsFloatFloatOrFixedFixed,
+}
+
+impl Default for IRSDirection {
+	fn default() -> Self {
+		IRSDirection::PrincipalIsPayingFixedRate
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4846,6 +5084,12 @@ pub enum RegulatoryReportType {
 	TerminationEarlyTermination,
 }
 
+impl Default for RegulatoryReportType {
+	fn default() -> Self {
+		RegulatoryReportType::RealTime
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeCollateralization {
 	/// Uncollateralized
@@ -4863,6 +5107,12 @@ pub enum TradeCollateralization {
 	/// Net exposure
 	#[serde(rename = "4")]
 	NetExposure,
+}
+
+impl Default for TradeCollateralization {
+	fn default() -> Self {
+		TradeCollateralization::Uncollateralized
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4971,6 +5221,12 @@ pub enum TradeContinuation {
 	Rerate,
 }
 
+impl Default for TradeContinuation {
+	fn default() -> Self {
+		TradeContinuation::Novation
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitCheckStatus {
 	/// Accepted
@@ -5021,6 +5277,12 @@ pub enum RiskLimitCheckStatus {
 	RejectedByExecutionVenue,
 }
 
+impl Default for RiskLimitCheckStatus {
+	fn default() -> Self {
+		RiskLimitCheckStatus::Accepted
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RegulatoryTransactionType {
 	/// None (Default if not specified) (Elaboration: The transaction does not fall under any special regulatory rule or mandate.)
@@ -5038,6 +5300,12 @@ pub enum RegulatoryTransactionType {
 	SwapExecutionFacilityPermittedTransaction,
 }
 
+impl Default for RegulatoryTransactionType {
+	fn default() -> Self {
+		RegulatoryTransactionType::None
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TaxonomyType {
 	/// ISIN or Alternate instrument identifier plus CFI
@@ -5046,6 +5314,12 @@ pub enum TaxonomyType {
 	/// Interim taxonomy
 	#[serde(rename = "E")]
 	InterimTaxonomy,
+}
+
+impl Default for TaxonomyType {
+	fn default() -> Self {
+		TaxonomyType::IsinOrAlternateInstrumentIdentifierPlusCfi
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -5058,6 +5332,12 @@ pub enum SettlPriceFxRateCalc {
 	Divide,
 }
 
+impl Default for SettlPriceFxRateCalc {
+	fn default() -> Self {
+		SettlPriceFxRateCalc::Multiply
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum IntraFirmTradeIndicator {
 	/// Trade or position is not an intra-firm transaction
@@ -5066,6 +5346,12 @@ pub enum IntraFirmTradeIndicator {
 	/// Trade or position is an intra-firm transaction
 	#[serde(rename = "Y")]
 	TradeOrPositionIsAnIntraFirmTransaction,
+}
+
+impl Default for IntraFirmTradeIndicator {
+	fn default() -> Self {
+		IntraFirmTradeIndicator::TradeOrPositionIsNotAnIntraFirmTransaction
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -5087,6 +5373,12 @@ pub enum ExecMethod {
 	VoiceBrokered,
 }
 
+impl Default for ExecMethod {
+	fn default() -> Self {
+		ExecMethod::UndefinedUnspecified
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeContingency {
 	/// Does not apply (default if not specified) (The trade is for an asset classes that areis not traded with contingency)
@@ -5100,6 +5392,12 @@ pub enum TradeContingency {
 	NonContingentTrade,
 }
 
+impl Default for TradeContingency {
+	fn default() -> Self {
+		TradeContingency::DoesNotApply
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MultiAssetSwapIndicator {
 	/// Not multi-asset swap
@@ -5108,6 +5406,12 @@ pub enum MultiAssetSwapIndicator {
 	/// Multi-asset swap
 	#[serde(rename = "Y")]
 	MultiAssetSwap,
+}
+
+impl Default for MultiAssetSwapIndicator {
+	fn default() -> Self {
+		MultiAssetSwapIndicator::NotMultiAssetSwap
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -5120,6 +5424,12 @@ pub enum InternationalSwapIndicator {
 	InternationalSwap,
 }
 
+impl Default for InternationalSwapIndicator {
+	fn default() -> Self {
+		InternationalSwapIndicator::NotInternationalSwap
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AffiliatedFirmsTradeIndicator {
 	/// Transaction or position is not between two affiliated firms
@@ -5130,6 +5440,12 @@ pub enum AffiliatedFirmsTradeIndicator {
 	TransactionOrPositionIsBetweenTwoAffiliatedFirms,
 }
 
+impl Default for AffiliatedFirmsTradeIndicator {
+	fn default() -> Self {
+		AffiliatedFirmsTradeIndicator::TransactionOrPositionIsNotBetweenTwoAffiliatedFirms
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AlgorithmicTradeIndicator {
 	/// Non-algorithmic trade
@@ -5138,6 +5454,12 @@ pub enum AlgorithmicTradeIndicator {
 	/// Algorithmic trade
 	#[serde(rename = "1")]
 	AlgorithmicTrade,
+}
+
+impl Default for AlgorithmicTradeIndicator {
+	fn default() -> Self {
+		AlgorithmicTradeIndicator::NonAlgorithmicTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -5173,4 +5495,10 @@ pub enum TradeReportingIndicator {
 	/// Trade is not reportable
 	#[serde(rename = "9")]
 	TradeIsNotReportable,
+}
+
+impl Default for TradeReportingIndicator {
+	fn default() -> Self {
+		TradeReportingIndicator::TradeHasNotBeenReported
+	}
 }

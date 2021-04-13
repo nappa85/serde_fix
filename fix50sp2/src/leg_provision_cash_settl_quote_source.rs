@@ -28,3 +28,9 @@ pub enum LegProvisionCashSettlQuoteSourceItem {
 	#[serde(rename = "99")]
 	Other,
 }
+
+impl Default for LegProvisionCashSettlQuoteSourceItem {
+	fn default() -> Self {
+		LegProvisionCashSettlQuoteSourceItem::Bloomberg
+	}
+}

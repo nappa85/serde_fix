@@ -190,6 +190,12 @@ pub enum LegPaymentStreamType {
 	Correlation,
 }
 
+impl Default for LegPaymentStreamType {
+	fn default() -> Self {
+		LegPaymentStreamType::Periodic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamSettlCurrency {
 	/// 1/1 (If parties specify the Day Count Fraction to be 1/1 then in calculating the applicable amount, 1 is simply input into
@@ -284,6 +290,12 @@ pub enum LegPaymentStreamSettlCurrency {
 	N99,
 }
 
+impl Default for LegPaymentStreamSettlCurrency {
+	fn default() -> Self {
+		LegPaymentStreamSettlCurrency::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamDiscountType {
 	/// Standard
@@ -292,6 +304,12 @@ pub enum LegPaymentStreamDiscountType {
 	/// Forward Rate Agreement (FRA)
 	#[serde(rename = "1")]
 	ForwardRateAgreement,
+}
+
+impl Default for LegPaymentStreamDiscountType {
+	fn default() -> Self {
+		LegPaymentStreamDiscountType::Standard
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -388,6 +406,12 @@ pub enum LegPaymentStreamDiscountRateDayCount {
 	N99,
 }
 
+impl Default for LegPaymentStreamDiscountRateDayCount {
+	fn default() -> Self {
+		LegPaymentStreamDiscountRateDayCount::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamCompoundingMethod {
 	/// None
@@ -402,4 +426,10 @@ pub enum LegPaymentStreamCompoundingMethod {
 	/// Spread exclusive
 	#[serde(rename = "3")]
 	SpreadExclusive,
+}
+
+impl Default for LegPaymentStreamCompoundingMethod {
+	fn default() -> Self {
+		LegPaymentStreamCompoundingMethod::None
+	}
 }

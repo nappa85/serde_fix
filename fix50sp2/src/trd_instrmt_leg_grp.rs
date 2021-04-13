@@ -193,6 +193,12 @@ pub enum LegSwapType {
 	Proceeds,
 }
 
+impl Default for LegSwapType {
+	fn default() -> Self {
+		LegSwapType::ParForPar
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPositionEffect {
 	/// Close
@@ -215,6 +221,12 @@ pub enum LegPositionEffect {
 	Default,
 }
 
+impl Default for LegPositionEffect {
+	fn default() -> Self {
+		LegPositionEffect::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegCoveredOrUncovered {
 	/// Covered
@@ -223,6 +235,12 @@ pub enum LegCoveredOrUncovered {
 	/// Uncovered
 	#[serde(rename = "1")]
 	Uncovered,
+}
+
+impl Default for LegCoveredOrUncovered {
+	fn default() -> Self {
+		LegCoveredOrUncovered::Covered
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -263,6 +281,12 @@ pub enum LegSettlType {
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
+}
+
+impl Default for LegSettlType {
+	fn default() -> Self {
+		LegSettlType::RegularFxSpotSettlement
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1469,6 +1493,12 @@ pub enum LegSettlCurrency {
 	N999,
 }
 
+impl Default for LegSettlCurrency {
+	fn default() -> Self {
+		LegSettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegExecInst {
 	/// Stay on offerside
@@ -1656,6 +1686,12 @@ pub enum LegExecInst {
 	TradeAtReferencePrice,
 }
 
+impl Default for LegExecInst {
+	fn default() -> Self {
+		LegExecInst::StayOnOfferside
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
@@ -1737,6 +1773,12 @@ pub enum LegPriceType {
 	PercentageOfNotional,
 }
 
+impl Default for LegPriceType {
+	fn default() -> Self {
+		LegPriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegShortSaleExemptionReason {
 	/// Exemption reason unknown
@@ -1771,6 +1813,12 @@ pub enum LegShortSaleExemptionReason {
 	Vwap,
 }
 
+impl Default for LegShortSaleExemptionReason {
+	fn default() -> Self {
+		LegShortSaleExemptionReason::ExemptionReasonUnknown
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegClearingAccountType {
 	/// Customer
@@ -1782,4 +1830,10 @@ pub enum LegClearingAccountType {
 	/// Market maker
 	#[serde(rename = "3")]
 	MarketMaker,
+}
+
+impl Default for LegClearingAccountType {
+	fn default() -> Self {
+		LegClearingAccountType::Customer
+	}
 }

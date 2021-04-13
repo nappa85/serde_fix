@@ -139,6 +139,12 @@ pub enum YieldType {
 	YieldToWorst,
 }
 
+impl Default for YieldType {
+	fn default() -> Self {
+		YieldType::AfterTaxYield
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum YieldRedemptionPriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
@@ -218,4 +224,10 @@ pub enum YieldRedemptionPriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	PercentageOfNotional,
+}
+
+impl Default for YieldRedemptionPriceType {
+	fn default() -> Self {
+		YieldRedemptionPriceType::Percentage
+	}
 }

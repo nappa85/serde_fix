@@ -148,6 +148,12 @@ pub enum MDBookType {
 	OrderDepth,
 }
 
+impl Default for MDBookType {
+	fn default() -> Self {
+		MDBookType::TopOfBook
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
@@ -158,6 +164,12 @@ pub enum MarketDepth {
 	TopOfBook,
 }
 
+impl Default for MarketDepth {
+	fn default() -> Self {
+		MarketDepth::FullBookDepth
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RefreshIndicator {
 	/// Mandatory refresh by all participants
@@ -166,6 +178,12 @@ pub enum RefreshIndicator {
 	/// Process as required
 	#[serde(rename = "N")]
 	ProcessAsRequired,
+}
+
+impl Default for RefreshIndicator {
+	fn default() -> Self {
+		RefreshIndicator::MandatoryRefreshByAllParticipants
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -179,6 +197,12 @@ pub enum FinancialStatus {
 	/// Restricted
 	#[serde(rename = "3")]
 	Restricted,
+}
+
+impl Default for FinancialStatus {
+	fn default() -> Self {
+		FinancialStatus::Bankrupt
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -254,6 +278,12 @@ pub enum CorporateAction {
 	SuccessionEvent,
 }
 
+impl Default for CorporateAction {
+	fn default() -> Self {
+		CorporateAction::ExDividend
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplQueueResolution {
 	/// No action taken
@@ -268,6 +298,12 @@ pub enum ApplQueueResolution {
 	/// End Session
 	#[serde(rename = "3")]
 	EndSession,
+}
+
+impl Default for ApplQueueResolution {
+	fn default() -> Self {
+		ApplQueueResolution::NoActionTaken
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -352,6 +388,12 @@ pub enum MDSecurityTradingStatus {
 	PostClose,
 }
 
+impl Default for MDSecurityTradingStatus {
+	fn default() -> Self {
+		MDSecurityTradingStatus::OpeningDelay
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDHaltReason {
 	/// News Dissemination
@@ -372,4 +414,10 @@ pub enum MDHaltReason {
 	/// Equipment Changeover
 	#[serde(rename = "5")]
 	EquipmentChangeover,
+}
+
+impl Default for MDHaltReason {
+	fn default() -> Self {
+		MDHaltReason::NewsDissemination
+	}
 }

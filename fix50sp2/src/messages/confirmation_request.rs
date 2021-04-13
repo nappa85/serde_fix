@@ -47,15 +47,11 @@ pub struct Confirmation {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// EncodedTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// EncodedText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -72,6 +68,12 @@ pub enum ConfirmType {
 	/// Confirmation Request Rejected (reason can be stated in <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field)
 	#[serde(rename = "3")]
 	ConfirmationRequestRejectedAField,
+}
+
+impl Default for ConfirmType {
+	fn default() -> Self {
+		ConfirmType::Status
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -99,6 +101,12 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
+impl Default for AllocAcctIDSource {
+	fn default() -> Self {
+		AllocAcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocAccountType {
 	/// Account is carried on customer Side of Books
@@ -122,4 +130,10 @@ pub enum AllocAccountType {
 	/// Joint Backoffice Account (JBO)
 	#[serde(rename = "8")]
 	JointBackofficeAccount,
+}
+
+impl Default for AllocAccountType {
+	fn default() -> Self {
+		AllocAccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
 }

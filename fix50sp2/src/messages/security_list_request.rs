@@ -57,15 +57,11 @@ pub struct Security {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Optional Trading Session Identifier to specify a particular trading session for which you want to obtain a list of securities
 	/// that are tradeable.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -109,6 +105,12 @@ pub enum SecurityListRequestType {
 	MarketIdOrMarketIdMarketSegmentId,
 }
 
+impl Default for SecurityListRequestType {
+	fn default() -> Self {
+		SecurityListRequestType::AHrefTag55SymbolHtmlTargetBottomSymbolNbspA
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityListType {
 	/// Industry Classification
@@ -125,6 +127,12 @@ pub enum SecurityListType {
 	NewspaperList,
 }
 
+impl Default for SecurityListType {
+	fn default() -> Self {
+		SecurityListType::IndustryClassification
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityListTypeSource {
 	/// ICB (Industry Classification Benchmark) published by Dow Jones and FTSE - <a xmlns="http://www.b2bits.com/FIXProtocol" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://www.icbenchmark.com" target="_blank">www.icbenchmark.com</a> .
@@ -136,6 +144,12 @@ pub enum SecurityListTypeSource {
 	/// GICS (Global Industry Classification Standard) published by Standards and Poor.
 	#[serde(rename = "3")]
 	GicsPublishedByStandardsAndPoor,
+}
+
+impl Default for SecurityListTypeSource {
+	fn default() -> Self {
+		SecurityListTypeSource::IcbPublishedByDowJonesAndFtseAXmlnsHttpWwwB2BitsComFixProtocolXmlnsXsiHttpWwwW3Org2001XmlSchemaInstanceHrefHttpWwwIcbenchmarkComTargetBlankWwwIcbenchmarkComA
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1342,6 +1356,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
@@ -1365,6 +1385,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1411,6 +1437,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
@@ -1422,4 +1454,10 @@ pub enum SubscriptionRequestType {
 	/// Disable previous Snapshot + Update Request (Unsubscribe)
 	#[serde(rename = "2")]
 	DisablePreviousSnapshotUpdateRequest,
+}
+
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
 }

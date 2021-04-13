@@ -300,3 +300,9 @@ pub enum RootPartySubIDType {
 	#[serde(rename = "87")]
 	N87,
 }
+
+impl Default for RootPartySubIDType {
+	fn default() -> Self {
+		RootPartySubIDType::N1
+	}
+}

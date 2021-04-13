@@ -1226,3 +1226,9 @@ pub enum SettlementAmountCurrency {
 	#[serde(rename = "999")]
 	N999,
 }
+
+impl Default for SettlementAmountCurrency {
+	fn default() -> Self {
+		SettlementAmountCurrency::Afa
+	}
+}

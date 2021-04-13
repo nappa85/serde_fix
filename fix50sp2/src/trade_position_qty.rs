@@ -161,6 +161,12 @@ pub enum PosType {
 	LoanOrBorrowedQuantity,
 }
 
+impl Default for PosType {
+	fn default() -> Self {
+		PosType::AllocationTradeQty
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosQtyStatus {
 	/// Submitted
@@ -172,4 +178,10 @@ pub enum PosQtyStatus {
 	/// Rejected
 	#[serde(rename = "2")]
 	Rejected,
+}
+
+impl Default for PosQtyStatus {
+	fn default() -> Self {
+		PosQtyStatus::Submitted
+	}
 }

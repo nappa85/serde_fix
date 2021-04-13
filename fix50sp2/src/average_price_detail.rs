@@ -32,3 +32,9 @@ pub enum AveragePriceType {
 	#[serde(rename = "3")]
 	LimitOrderAveragePrice,
 }
+
+impl Default for AveragePriceType {
+	fn default() -> Self {
+		AveragePriceType::TimeWeightedAveragePrice
+	}
+}

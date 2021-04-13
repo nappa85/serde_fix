@@ -1255,6 +1255,12 @@ pub enum PayCollectCurrency {
 	N999,
 }
 
+impl Default for PayCollectCurrency {
+	fn default() -> Self {
+		PayCollectCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PayCollectFXRateCalc {
 	/// Divided
@@ -1263,4 +1269,10 @@ pub enum PayCollectFXRateCalc {
 	/// Multiply
 	#[serde(rename = "M")]
 	Multiply,
+}
+
+impl Default for PayCollectFXRateCalc {
+	fn default() -> Self {
+		PayCollectFXRateCalc::Divided
+	}
 }

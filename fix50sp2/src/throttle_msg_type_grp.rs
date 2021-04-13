@@ -494,3 +494,9 @@ pub enum ThrottleMsgType {
 	#[serde(rename = "DX")]
 	TradeAggregationReport,
 }
+
+impl Default for ThrottleMsgType {
+	fn default() -> Self {
+		ThrottleMsgType::Heartbeat
+	}
+}

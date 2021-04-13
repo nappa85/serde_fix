@@ -30,3 +30,9 @@ pub enum LegStreamCalculationPeriodDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for LegStreamCalculationPeriodDateType {
+	fn default() -> Self {
+		LegStreamCalculationPeriodDateType::Unadjusted
+	}
+}

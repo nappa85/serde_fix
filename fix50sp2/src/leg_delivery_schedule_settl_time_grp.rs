@@ -37,3 +37,9 @@ pub enum LegDeliveryScheduleSettlTimeType {
 	#[serde(rename = "1")]
 	HhMmTimeFormat,
 }
+
+impl Default for LegDeliveryScheduleSettlTimeType {
+	fn default() -> Self {
+		LegDeliveryScheduleSettlTimeType::HourOfTheDayTheDeliveryStartEndHourIsSpecifiedAsTheEndOfTheIncludedHourForExampleAStartHourOf4BeginsAt3AMAnEndHourOf20EndsAt8PMAStartHourOf1AndAnEndHourOf24IndicatesMidnightToMidnightDelivery
+	}
+}

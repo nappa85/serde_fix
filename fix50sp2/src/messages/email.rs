@@ -20,15 +20,11 @@ pub struct Email {
 	#[serde(rename = "147")]
 	pub subject: String,
 	/// Must be set if <a href="tag_357_EncodedSubject.html" target="bottom">EncodedSubject&nbsp;(357)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "356")]
-	pub encoded_subject_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_147_Subject.html" target="bottom">Subject&nbsp;(147)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "357")]
-	pub encoded_subject: Option<String>,
+	#[serde(alias = "357")]
+	pub encoded_subject: Option<fix_common::EncodedText<357>>,
 	/// Required if any RoutingType and RoutingIDs are specified. Indicates the number within repeating group.
 	#[serde(flatten)]
 	pub routing_grp: Option<super::super::routing_grp::RoutingGrp>,
@@ -53,15 +49,11 @@ pub struct Email {
 	#[serde(flatten)]
 	pub lines_of_text_grp: super::super::lines_of_text_grp::LinesOfTextGrp,
 	/// RawDataLength
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "95")]
-	pub raw_data_length: Option<usize>,
 	/// RawData
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "96")]
-	pub raw_data: Option<String>,
+	#[serde(alias = "96")]
+	pub raw_data: Option<fix_common::EncodedText<96>>,
 	/// AttachmentGrp
 	#[serde(flatten)]
 	pub attachment_grp: Option<super::super::attachment_grp::AttachmentGrp>,
@@ -81,4 +73,10 @@ pub enum EmailType {
 	/// Admin Reply
 	#[serde(rename = "2")]
 	AdminReply,
+}
+
+impl Default for EmailType {
+	fn default() -> Self {
+		EmailType::New
+	}
 }

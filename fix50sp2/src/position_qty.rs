@@ -169,6 +169,12 @@ pub enum PosType {
 	LoanOrBorrowedQuantity,
 }
 
+impl Default for PosType {
+	fn default() -> Self {
+		PosType::AllocationTradeQty
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosQtyStatus {
 	/// Submitted
@@ -180,6 +186,12 @@ pub enum PosQtyStatus {
 	/// Rejected
 	#[serde(rename = "2")]
 	Rejected,
+}
+
+impl Default for PosQtyStatus {
+	fn default() -> Self {
+		PosQtyStatus::Submitted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -428,6 +440,12 @@ pub enum PosQtyUnitOfMeasure {
 	/// Yard
 	#[serde(rename = "yd")]
 	Yd,
+}
+
+impl Default for PosQtyUnitOfMeasure {
+	fn default() -> Self {
+		PosQtyUnitOfMeasure::Bbl
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1632,4 +1650,10 @@ pub enum PosQtyUnitOfMeasureCurrency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for PosQtyUnitOfMeasureCurrency {
+	fn default() -> Self {
+		PosQtyUnitOfMeasureCurrency::Afa
+	}
 }

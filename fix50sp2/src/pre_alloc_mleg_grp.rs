@@ -87,6 +87,12 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
+impl Default for AllocAcctIDSource {
+	fn default() -> Self {
+		AllocAcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocSettlCurrency {
 	/// Afghani
@@ -1289,4 +1295,10 @@ pub enum AllocSettlCurrency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for AllocSettlCurrency {
+	fn default() -> Self {
+		AllocSettlCurrency::Afa
+	}
 }

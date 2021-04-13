@@ -71,6 +71,12 @@ pub enum DisplayWhen {
 	Exhaust,
 }
 
+impl Default for DisplayWhen {
+	fn default() -> Self {
+		DisplayWhen::Immediate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DisplayMethod {
 	/// Initial (use original DisplayQty)
@@ -85,4 +91,10 @@ pub enum DisplayMethod {
 	/// Undisclosed (invisible order)
 	#[serde(rename = "4")]
 	Undisclosed,
+}
+
+impl Default for DisplayMethod {
+	fn default() -> Self {
+		DisplayMethod::Initial
+	}
 }

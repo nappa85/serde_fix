@@ -498,6 +498,12 @@ pub enum SecurityTypeItem {
 	Sfp,
 }
 
+impl Default for SecurityTypeItem {
+	fn default() -> Self {
+		SecurityTypeItem::Fut
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
@@ -539,4 +545,10 @@ pub enum Product {
 	/// FINANCING
 	#[serde(rename = "13")]
 	Financing,
+}
+
+impl Default for Product {
+	fn default() -> Self {
+		Product::Agency
+	}
 }

@@ -109,16 +109,12 @@ pub struct LegProvision {
 	#[serde(rename = "40472")]
 	pub leg_provision_text: Option<String>,
 	/// Must be set if EncodedLegProvisionText(40981) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "40980")]
-	pub encoded_leg_provision_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegProvisionText(40472) field in the encoded format specified via the
 	/// MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40981")]
-	pub encoded_leg_provision_text: Option<String>,
+	#[serde(alias = "40981")]
+	pub encoded_leg_provision_text: Option<fix_common::EncodedText<40981>>,
 	/// LegProvisionBreakFeeElection
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -161,6 +157,12 @@ pub enum LegProvisionType {
 	Puttable,
 }
 
+impl Default for LegProvisionType {
+	fn default() -> Self {
+		LegProvisionType::MandatoryEarlyTermination
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionDateBusinessDayConvention {
 	/// Not applicable
@@ -189,6 +191,12 @@ pub enum LegProvisionDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegProvisionDateBusinessDayConvention {
+	fn default() -> Self {
+		LegProvisionDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionDateTenorUnit {
 	/// Day
@@ -203,6 +211,12 @@ pub enum LegProvisionDateTenorUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegProvisionDateTenorUnit {
+	fn default() -> Self {
+		LegProvisionDateTenorUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -221,6 +235,12 @@ pub enum LegProvisionCalculationAgent {
 	AsSpecifiedInTheStandardTermsSupplement,
 }
 
+impl Default for LegProvisionCalculationAgent {
+	fn default() -> Self {
+		LegProvisionCalculationAgent::ExercisingParty
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionOptionSinglePartyBuyerSide {
 	/// Buy
@@ -231,6 +251,12 @@ pub enum LegProvisionOptionSinglePartyBuyerSide {
 	Sell,
 }
 
+impl Default for LegProvisionOptionSinglePartyBuyerSide {
+	fn default() -> Self {
+		LegProvisionOptionSinglePartyBuyerSide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionOptionSinglePartySellerSide {
 	/// Buy
@@ -239,6 +265,12 @@ pub enum LegProvisionOptionSinglePartySellerSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for LegProvisionOptionSinglePartySellerSide {
+	fn default() -> Self {
+		LegProvisionOptionSinglePartySellerSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -255,6 +287,12 @@ pub enum LegProvisionOptionExerciseStyle {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for LegProvisionOptionExerciseStyle {
+	fn default() -> Self {
+		LegProvisionOptionExerciseStyle::European
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -282,6 +320,12 @@ pub enum LegProvisionCashSettlMethod {
 	CollateralizedPrice,
 }
 
+impl Default for LegProvisionCashSettlMethod {
+	fn default() -> Self {
+		LegProvisionCashSettlMethod::CashPrice
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionCashSettlQuoteType {
 	/// Bid
@@ -297,4 +341,10 @@ pub enum LegProvisionCashSettlQuoteType {
 	/// (j) for definition of "exercising party pays")
 	#[serde(rename = "3")]
 	ExercisingPartyPaysForDefinitionOfExercisingPartyPays,
+}
+
+impl Default for LegProvisionCashSettlQuoteType {
+	fn default() -> Self {
+		LegProvisionCashSettlQuoteType::Bid
+	}
 }

@@ -197,16 +197,12 @@ pub struct RelatedSy {
 	#[serde(rename = "2374")]
 	pub trade_continuation_text: Option<String>,
 	/// Must be set if EncodedTradeContinuationText(2371) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2372")]
-	pub encoded_trade_continuation_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the TradeContinuationText(2374) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2371")]
-	pub encoded_trade_continuation_text: Option<String>,
+	#[serde(alias = "2371")]
+	pub encoded_trade_continuation_text: Option<fix_common::EncodedText<2371>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -414,6 +410,12 @@ pub enum TrdType {
 	N66,
 }
 
+impl Default for TrdType {
+	fn default() -> Self {
+		TrdType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RegulatoryTransactionType {
 	/// None (Default if not specified) (Elaboration: The transaction does not fall under any special regulatory rule or mandate.)
@@ -431,6 +433,12 @@ pub enum RegulatoryTransactionType {
 	SwapExecutionFacilityPermittedTransaction,
 }
 
+impl Default for RegulatoryTransactionType {
+	fn default() -> Self {
+		RegulatoryTransactionType::None
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteRequestType {
 	/// Manual
@@ -442,6 +450,12 @@ pub enum QuoteRequestType {
 	/// ConfirmQuote
 	#[serde(rename = "3")]
 	ConfirmQuote,
+}
+
+impl Default for QuoteRequestType {
+	fn default() -> Self {
+		QuoteRequestType::Manual
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -461,6 +475,12 @@ pub enum QuoteType {
 	/// Initially tradeable
 	#[serde(rename = "4")]
 	InitiallyTradeable,
+}
+
+impl Default for QuoteType {
+	fn default() -> Self {
+		QuoteType::Indicative
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -486,6 +506,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -530,6 +556,12 @@ pub enum TradingSessionSubID {
 	/// Group auction
 	#[serde(rename = "13")]
 	GroupAuction,
+}
+
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -587,6 +619,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
@@ -598,6 +636,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -638,6 +682,12 @@ pub enum SettlType {
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
+}
+
+impl Default for SettlType {
+	fn default() -> Self {
+		SettlType::RegularFxSpotSettlement
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1844,6 +1894,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
@@ -3048,6 +3104,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
@@ -3071,6 +3133,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3111,6 +3179,12 @@ pub enum AccountType {
 	/// Account for orders from multiple customers
 	#[serde(rename = "13")]
 	AccountForOrdersFromMultipleCustomers,
+}
+
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3187,6 +3261,12 @@ pub enum QuotePriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	N25,
+}
+
+impl Default for QuotePriceType {
+	fn default() -> Self {
+		QuotePriceType::N1
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3275,6 +3355,12 @@ pub enum OrdType {
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
 }
 
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
@@ -3356,6 +3442,12 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExposureDurationUnit {
 	/// Seconds (default if not specified)
@@ -3396,6 +3488,12 @@ pub enum ExposureDurationUnit {
 	Years,
 }
 
+impl Default for ExposureDurationUnit {
+	fn default() -> Self {
+		ExposureDurationUnit::Seconds
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum NegotiationMethod {
 	/// Auto spot
@@ -3407,6 +3505,12 @@ pub enum NegotiationMethod {
 	/// The spot price for the reference or benchmark security is to be negotiated via phone or voice.
 	#[serde(rename = "2")]
 	TheSpotPriceForTheReferenceOrBenchmarkSecurityIsToBeNegotiatedViaPhoneOrVoice,
+}
+
+impl Default for NegotiationMethod {
+	fn default() -> Self {
+		NegotiationMethod::AutoSpot
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3513,4 +3617,10 @@ pub enum TradeContinuation {
 	/// Rerate
 	#[serde(rename = "32")]
 	Rerate,
+}
+
+impl Default for TradeContinuation {
+	fn default() -> Self {
+		TradeContinuation::Novation
+	}
 }

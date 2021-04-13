@@ -125,6 +125,12 @@ pub enum Nested3PartyIDSource {
 	MasterSpecialSegregatedAccountId,
 }
 
+impl Default for Nested3PartyIDSource {
+	fn default() -> Self {
+		Nested3PartyIDSource::BicCode
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Nested3PartyRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
@@ -504,4 +510,10 @@ pub enum Nested3PartyRole {
 	/// Contra Investment Decision Maker
 	#[serde(rename = "127")]
 	ContraInvestmentDecisionMaker,
+}
+
+impl Default for Nested3PartyRole {
+	fn default() -> Self {
+		Nested3PartyRole::ExecutingFirm
+	}
 }

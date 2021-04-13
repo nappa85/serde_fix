@@ -322,3 +322,9 @@ pub enum UnderlyingStipType {
 	#[serde(rename = "PAYOFF")]
 	InterestPayoffOfRollingOrAmendingTrade,
 }
+
+impl Default for UnderlyingStipType {
+	fn default() -> Self {
+		UnderlyingStipType::AlternativeMinimumTax
+	}
+}

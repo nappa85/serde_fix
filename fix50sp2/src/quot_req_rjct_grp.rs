@@ -139,6 +139,12 @@ pub enum QuoteRequestType {
 	ConfirmQuote,
 }
 
+impl Default for QuoteRequestType {
+	fn default() -> Self {
+		QuoteRequestType::Manual
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteType {
 	/// Indicative
@@ -156,6 +162,12 @@ pub enum QuoteType {
 	/// Initially tradeable
 	#[serde(rename = "4")]
 	InitiallyTradeable,
+}
+
+impl Default for QuoteType {
+	fn default() -> Self {
+		QuoteType::Indicative
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -181,6 +193,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -225,6 +243,12 @@ pub enum TradingSessionSubID {
 	/// Group auction
 	#[serde(rename = "13")]
 	GroupAuction,
+}
+
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -282,6 +306,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
@@ -293,6 +323,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -333,6 +369,12 @@ pub enum SettlType {
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
+}
+
+impl Default for SettlType {
+	fn default() -> Self {
+		SettlType::RegularFxSpotSettlement
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1539,6 +1581,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
@@ -1562,6 +1610,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1602,6 +1656,12 @@ pub enum AccountType {
 	/// Account for orders from multiple customers
 	#[serde(rename = "13")]
 	AccountForOrdersFromMultipleCustomers,
+}
+
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1678,6 +1738,12 @@ pub enum QuotePriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	N25,
+}
+
+impl Default for QuotePriceType {
+	fn default() -> Self {
+		QuotePriceType::N1
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1766,6 +1832,12 @@ pub enum OrdType {
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
 }
 
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
@@ -1847,6 +1919,12 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum NegotiationMethod {
 	/// Auto spot
@@ -1858,4 +1936,10 @@ pub enum NegotiationMethod {
 	/// The spot price for the reference or benchmark security is to be negotiated via phone or voice.
 	#[serde(rename = "2")]
 	TheSpotPriceForTheReferenceOrBenchmarkSecurityIsToBeNegotiatedViaPhoneOrVoice,
+}
+
+impl Default for NegotiationMethod {
+	fn default() -> Self {
+		NegotiationMethod::AutoSpot
+	}
 }

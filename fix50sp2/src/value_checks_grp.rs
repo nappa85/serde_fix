@@ -34,6 +34,12 @@ pub enum ValueCheckType {
 	QuantityCheck,
 }
 
+impl Default for ValueCheckType {
+	fn default() -> Self {
+		ValueCheckType::PriceCheck
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ValueCheckAction {
 	/// Do not check (checks will not be done for the specified ValueCheckType (1869))
@@ -46,4 +52,10 @@ pub enum ValueCheckAction {
 	/// data)
 	#[serde(rename = "2")]
 	BestEffortCheckDependingOnAvailabilityOfReferenceData,
+}
+
+impl Default for ValueCheckAction {
+	fn default() -> Self {
+		ValueCheckAction::DoNotCheck
+	}
 }

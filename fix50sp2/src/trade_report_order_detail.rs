@@ -199,6 +199,12 @@ pub enum RefOrderIDSource {
 	ManualOrderIdentifier,
 }
 
+impl Default for RefOrderIDSource {
+	fn default() -> Self {
+		RefOrderIDSource::SecondaryOrderId
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RefOrdIDReason {
 	/// GTC from previous day
@@ -210,6 +216,12 @@ pub enum RefOrdIDReason {
 	/// Order Changed
 	#[serde(rename = "2")]
 	OrderChanged,
+}
+
+impl Default for RefOrdIDReason {
+	fn default() -> Self {
+		RefOrdIDReason::GtcFromPreviousDay
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -296,6 +308,12 @@ pub enum OrdType {
 	/// it is common to trigger a stop off the National Best Bid or Offer (NBBO)
 	#[serde(rename = "S")]
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
+}
+
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -488,6 +506,12 @@ pub enum ExecInst {
 	AllowFacilitation,
 }
 
+impl Default for ExecInst {
+	fn default() -> Self {
+		ExecInst::StayOnOfferside
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrdStatus {
 	/// New
@@ -537,6 +561,12 @@ pub enum OrdStatus {
 	PendingReplace,
 }
 
+impl Default for OrdStatus {
+	fn default() -> Self {
+		OrdStatus::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
@@ -580,6 +610,12 @@ pub enum TimeInForce {
 	GoodForThisMonth,
 }
 
+impl Default for TimeInForce {
+	fn default() -> Self {
+		TimeInForce::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderCapacity {
 	/// Agency
@@ -603,6 +639,12 @@ pub enum OrderCapacity {
 	/// Mixed capacity
 	#[serde(rename = "M")]
 	MixedCapacity,
+}
+
+impl Default for OrderCapacity {
+	fn default() -> Self {
+		OrderCapacity::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -663,6 +705,12 @@ pub enum OrderRestrictions {
 	NormalCourseIssuerBid,
 }
 
+impl Default for OrderRestrictions {
+	fn default() -> Self {
+		OrderRestrictions::ProgramTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BookingType {
 	/// Regular booking
@@ -674,6 +722,12 @@ pub enum BookingType {
 	/// Total Return Swap
 	#[serde(rename = "2")]
 	TotalReturnSwap,
+}
+
+impl Default for BookingType {
+	fn default() -> Self {
+		BookingType::RegularBooking
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -692,6 +746,12 @@ pub enum OrigCustOrderCapacity {
 	AllOther,
 }
 
+impl Default for OrigCustOrderCapacity {
+	fn default() -> Self {
+		OrigCustOrderCapacity::MemberTradingForTheirOwnAccount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LotType {
 	/// Odd Lot
@@ -706,6 +766,12 @@ pub enum LotType {
 	/// Round lot based upon <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitOfMeasure&nbsp;(996)</a>
 	#[serde(rename = "4")]
 	RoundLotBasedUponAHrefTag996UnitOfMeasureHtmlTargetBottomUnitOfMeasureNbspA,
+}
+
+impl Default for LotType {
+	fn default() -> Self {
+		LotType::OddLot
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -748,6 +814,12 @@ pub enum ExposureDurationUnit {
 	Years,
 }
 
+impl Default for ExposureDurationUnit {
+	fn default() -> Self {
+		ExposureDurationUnit::Seconds
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderOrigination {
 	/// Order received from a customer
@@ -773,6 +845,12 @@ pub enum OrderOrigination {
 	OrderReceivedFromAnExecutionOnlyService,
 }
 
+impl Default for OrderOrigination {
+	fn default() -> Self {
+		OrderOrigination::OrderReceivedFromACustomer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExDestinationType {
 	/// No restriction
@@ -787,4 +865,10 @@ pub enum ExDestinationType {
 	/// Can be traded on a trading venue or Systematic internaliser (SI)
 	#[serde(rename = "3")]
 	CanBeTradedOnATradingVenueOrSystematicInternaliser,
+}
+
+impl Default for ExDestinationType {
+	fn default() -> Self {
+		ExDestinationType::NoRestriction
+	}
 }

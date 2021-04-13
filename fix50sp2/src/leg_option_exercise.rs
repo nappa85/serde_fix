@@ -8,16 +8,12 @@ pub struct LegOptionExercise {
 	#[serde(rename = "41481")]
 	pub leg_exercise_desc: Option<String>,
 	/// Must be set if EncodedLegExerciseDesc (41483) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41482")]
-	pub encoded_leg_exercise_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegExerciseDesc(41481) field in the encoded format specified via the
 	/// MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41483")]
-	pub encoded_leg_exercise_desc: Option<String>,
+	#[serde(alias = "41483")]
+	pub encoded_leg_exercise_desc: Option<fix_common::EncodedText<41483>>,
 	/// LegAutomaticExerciseIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41484")]
@@ -82,4 +78,10 @@ pub enum LegExerciseConfirmationMethod {
 	/// Unknown at time of report
 	#[serde(rename = "3")]
 	UnknownAtTimeOfReport,
+}
+
+impl Default for LegExerciseConfirmationMethod {
+	fn default() -> Self {
+		LegExerciseConfirmationMethod::NotRequired
+	}
 }

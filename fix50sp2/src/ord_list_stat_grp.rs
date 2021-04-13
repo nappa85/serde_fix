@@ -55,15 +55,11 @@ pub struct Order {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text field in the encoded format specified via the MessageEncoding field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -116,9 +112,9 @@ pub enum OrdStatus {
 }
 
 impl Default for OrdStatus {
-    fn default() -> Self {
-        OrdStatus::New
-    }
+	fn default() -> Self {
+		OrdStatus::New
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -129,6 +125,12 @@ pub enum WorkingIndicator {
 	/// Order is currently being worked
 	#[serde(rename = "Y")]
 	OrderIsCurrentlyBeingWorked,
+}
+
+impl Default for WorkingIndicator {
+	fn default() -> Self {
+		WorkingIndicator::OrderHasBeenAcceptedButNotYetInAWorkingState
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -225,4 +227,10 @@ pub enum OrdRejReason {
 	/// Exceeded CS01 limit
 	#[serde(rename = "29")]
 	ExceededCs01Limit,
+}
+
+impl Default for OrdRejReason {
+	fn default() -> Self {
+		OrdRejReason::BrokerExchangeOption
+	}
 }

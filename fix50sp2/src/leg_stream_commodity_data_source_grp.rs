@@ -36,3 +36,9 @@ pub enum LegStreamCommodityDataSourceIDType {
 	#[serde(rename = "3")]
 	WeatherIndexWmo,
 }
+
+impl Default for LegStreamCommodityDataSourceIDType {
+	fn default() -> Self {
+		LegStreamCommodityDataSourceIDType::City
+	}
+}

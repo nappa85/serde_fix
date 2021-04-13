@@ -34,6 +34,12 @@ pub enum SettlInstSource {
 	Investor,
 }
 
+impl Default for SettlInstSource {
+	fn default() -> Self {
+		SettlInstSource::BrokerSInstructions
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DlvyInstType {
 	/// Cash
@@ -42,4 +48,10 @@ pub enum DlvyInstType {
 	/// Securities
 	#[serde(rename = "S")]
 	Securities,
+}
+
+impl Default for DlvyInstType {
+	fn default() -> Self {
+		DlvyInstType::Cash
+	}
 }

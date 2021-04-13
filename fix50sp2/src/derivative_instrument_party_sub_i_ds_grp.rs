@@ -300,3 +300,9 @@ pub enum DerivativeInstrumentPartySubIDType {
 	#[serde(rename = "87")]
 	N87,
 }
+
+impl Default for DerivativeInstrumentPartySubIDType {
+	fn default() -> Self {
+		DerivativeInstrumentPartySubIDType::N1
+	}
+}

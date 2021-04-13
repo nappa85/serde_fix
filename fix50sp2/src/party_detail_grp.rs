@@ -127,6 +127,12 @@ pub enum PartyDetailIDSource {
 	MasterSpecialSegregatedAccountId,
 }
 
+impl Default for PartyDetailIDSource {
+	fn default() -> Self {
+		PartyDetailIDSource::BicCode
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PartyDetailRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
@@ -508,6 +514,12 @@ pub enum PartyDetailRole {
 	ContraInvestmentDecisionMaker,
 }
 
+impl Default for PartyDetailRole {
+	fn default() -> Self {
+		PartyDetailRole::ExecutingFirm
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PartyDetailRoleQualifier {
 	/// Agency
@@ -602,6 +614,12 @@ pub enum PartyDetailRoleQualifier {
 	Lender,
 }
 
+impl Default for PartyDetailRoleQualifier {
+	fn default() -> Self {
+		PartyDetailRoleQualifier::Agency
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PartyDetailStatus {
 	/// Active (default if not specified)
@@ -613,4 +631,10 @@ pub enum PartyDetailStatus {
 	/// Halted
 	#[serde(rename = "2")]
 	Halted,
+}
+
+impl Default for PartyDetailStatus {
+	fn default() -> Self {
+		PartyDetailStatus::Active
+	}
 }

@@ -80,6 +80,12 @@ pub enum LegComplexEventDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegComplexEventDateRelativeTo {
+	fn default() -> Self {
+		LegComplexEventDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventDateOffsetUnit {
 	/// Day
@@ -94,6 +100,12 @@ pub enum LegComplexEventDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegComplexEventDateOffsetUnit {
+	fn default() -> Self {
+		LegComplexEventDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -116,6 +128,12 @@ pub enum LegComplexEventDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegComplexEventDayType {
+	fn default() -> Self {
+		LegComplexEventDayType::Business
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -144,4 +162,10 @@ pub enum LegComplexEventDateBusinessDayConvention {
 	/// Nearest day
 	#[serde(rename = "7")]
 	NearestDay,
+}
+
+impl Default for LegComplexEventDateBusinessDayConvention {
+	fn default() -> Self {
+		LegComplexEventDateBusinessDayConvention::NotApplicable
+	}
 }

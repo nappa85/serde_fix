@@ -121,6 +121,12 @@ pub enum ProvisionOptionExerciseBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for ProvisionOptionExerciseBusinessDayConvention {
+	fn default() -> Self {
+		ProvisionOptionExerciseBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionOptionExerciseEarliestDateUnit {
 	/// Day
@@ -149,6 +155,12 @@ pub enum ProvisionOptionExerciseEarliestDateUnit {
 	Term,
 }
 
+impl Default for ProvisionOptionExerciseEarliestDateUnit {
+	fn default() -> Self {
+		ProvisionOptionExerciseEarliestDateUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionOptionExerciseFrequencyUnit {
 	/// Day
@@ -175,6 +187,12 @@ pub enum ProvisionOptionExerciseFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for ProvisionOptionExerciseFrequencyUnit {
+	fn default() -> Self {
+		ProvisionOptionExerciseFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -211,6 +229,12 @@ pub enum ProvisionOptionExerciseStartDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for ProvisionOptionExerciseStartDateRelativeTo {
+	fn default() -> Self {
+		ProvisionOptionExerciseStartDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionOptionExerciseStartDateOffsetUnit {
 	/// Day
@@ -225,6 +249,12 @@ pub enum ProvisionOptionExerciseStartDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for ProvisionOptionExerciseStartDateOffsetUnit {
+	fn default() -> Self {
+		ProvisionOptionExerciseStartDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -247,4 +277,10 @@ pub enum ProvisionOptionExerciseStartDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for ProvisionOptionExerciseStartDateOffsetDayType {
+	fn default() -> Self {
+		ProvisionOptionExerciseStartDateOffsetDayType::Business
+	}
 }

@@ -41,6 +41,12 @@ pub enum RiskLimitCheckModelType {
 	PushModel,
 }
 
+impl Default for RiskLimitCheckModelType {
+	fn default() -> Self {
+		RiskLimitCheckModelType::None
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PartyRiskLimitStatus {
 	/// Disabled
@@ -49,4 +55,10 @@ pub enum PartyRiskLimitStatus {
 	/// Enabled
 	#[serde(rename = "1")]
 	Enabled,
+}
+
+impl Default for PartyRiskLimitStatus {
+	fn default() -> Self {
+		PartyRiskLimitStatus::Disabled
+	}
 }

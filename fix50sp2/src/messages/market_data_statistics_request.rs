@@ -32,15 +32,11 @@ pub struct Market {
 	#[serde(rename = "1396")]
 	pub market_segment_desc: Option<String>,
 	/// Must be set if <a href="tag_1398_EncodedMktSegmDesc.html" target="bottom">EncodedMktSegmDesc(1398)&nbsp;(1398)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1397")]
-	pub encoded_mkt_segm_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1396_MarketSegmentDesc.html" target="bottom">MarketSegmentDesc(1396)&nbsp;(1396)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1398")]
-	pub encoded_mkt_segm_desc: Option<String>,
+	#[serde(alias = "1398")]
+	pub encoded_mkt_segm_desc: Option<fix_common::EncodedText<1398>>,
 	/// Used to reference an entire group of instruments for which a single set of statistics is to be calculated.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1465")]
@@ -66,15 +62,11 @@ pub struct Market {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text field in the encoded format specified via the MessageEncoding field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// InstrumentExtension
 	#[serde(flatten)]
 	pub instrument_extension: Option<super::super::instrument_extension::InstrumentExtension>,
@@ -100,4 +92,10 @@ pub enum SubscriptionRequestType {
 	/// Disable previous Snapshot + Update Request (Unsubscribe)
 	#[serde(rename = "2")]
 	DisablePreviousSnapshotUpdateRequest,
+}
+
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
 }

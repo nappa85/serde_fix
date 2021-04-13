@@ -301,16 +301,12 @@ pub struct NoSide {
 	#[serde(rename = "2404")]
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2351")]
-	pub encoded_compliance_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ComplianceText(2404) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2352")]
-	pub encoded_compliance_text: Option<String>,
+	#[serde(alias = "2352")]
+	pub encoded_compliance_text: Option<fix_common::EncodedText<2352>>,
 	/// SideTradeReportingIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2671")]
@@ -328,9 +324,9 @@ pub enum NoSides {
 }
 
 impl Default for NoSides {
-    fn default() -> Self {
-        NoSides::OneSide
-    }
+	fn default() -> Self {
+		NoSides::OneSide
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -389,9 +385,9 @@ pub enum Side {
 }
 
 impl Default for Side {
-    fn default() -> Self {
-        Side::Buy
-    }
+	fn default() -> Self {
+		Side::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -434,6 +430,12 @@ pub enum OrderDelayUnit {
 	Years,
 }
 
+impl Default for OrderDelayUnit {
+	fn default() -> Self {
+		OrderDelayUnit::Seconds
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
@@ -457,6 +459,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -499,6 +507,12 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProcessCode {
 	/// Regular
@@ -524,6 +538,12 @@ pub enum ProcessCode {
 	PlanSponsor,
 }
 
+impl Default for ProcessCode {
+	fn default() -> Self {
+		ProcessCode::Regular
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OddLot {
 	/// Treat as round lot (default)
@@ -534,6 +554,12 @@ pub enum OddLot {
 	TreatAsOddLot,
 }
 
+impl Default for OddLot {
+	fn default() -> Self {
+		OddLot::TreatAsRoundLot
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SolicitedFlag {
 	/// Was not solicited
@@ -542,6 +568,12 @@ pub enum SolicitedFlag {
 	/// Was solicited
 	#[serde(rename = "Y")]
 	WasSolicited,
+}
+
+impl Default for SolicitedFlag {
+	fn default() -> Self {
+		SolicitedFlag::WasNotSolicited
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -561,6 +593,12 @@ pub enum CustOrderCapacity {
 	/// Retail customer
 	#[serde(rename = "5")]
 	RetailCustomer,
+}
+
+impl Default for CustOrderCapacity {
+	fn default() -> Self {
+		CustOrderCapacity::MemberTradingForTheirOwnAccount
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -586,6 +624,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -632,6 +676,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum NetGrossInd {
 	/// Net
@@ -640,6 +690,12 @@ pub enum NetGrossInd {
 	/// Gross
 	#[serde(rename = "2")]
 	Gross,
+}
+
+impl Default for NetGrossInd {
+	fn default() -> Self {
+		NetGrossInd::Net
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1846,6 +1902,12 @@ pub enum SideCurrency {
 	N999,
 }
 
+impl Default for SideCurrency {
+	fn default() -> Self {
+		SideCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SideSettlCurrency {
 	/// Afghani
@@ -3050,6 +3112,12 @@ pub enum SideSettlCurrency {
 	N999,
 }
 
+impl Default for SideSettlCurrency {
+	fn default() -> Self {
+		SideSettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrFxRateCalc {
 	/// Multiply
@@ -3058,6 +3126,12 @@ pub enum SettlCurrFxRateCalc {
 	/// Divide
 	#[serde(rename = "D")]
 	Divide,
+}
+
+impl Default for SettlCurrFxRateCalc {
+	fn default() -> Self {
+		SettlCurrFxRateCalc::Multiply
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3082,6 +3156,12 @@ pub enum PositionEffect {
 	Rolled,
 }
 
+impl Default for PositionEffect {
+	fn default() -> Self {
+		PositionEffect::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SideMultiLegReportingType {
 	/// Single Security (default if not specified)
@@ -3093,6 +3173,12 @@ pub enum SideMultiLegReportingType {
 	/// Multileg Security
 	#[serde(rename = "3")]
 	MultilegSecurity,
+}
+
+impl Default for SideMultiLegReportingType {
+	fn default() -> Self {
+		SideMultiLegReportingType::SingleSecurity
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3120,6 +3206,12 @@ pub enum TradeAllocIndicator {
 	TradeSplit,
 }
 
+impl Default for TradeAllocIndicator {
+	fn default() -> Self {
+		TradeAllocIndicator::AllocationNotRequired
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocGroupStatus {
 	/// Added
@@ -3139,6 +3231,12 @@ pub enum AllocGroupStatus {
 	N4,
 }
 
+impl Default for AllocGroupStatus {
+	fn default() -> Self {
+		AllocGroupStatus::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PreallocMethod {
 	/// Pro-rata
@@ -3149,6 +3247,12 @@ pub enum PreallocMethod {
 	DoNotProRataDiscussFirst,
 }
 
+impl Default for PreallocMethod {
+	fn default() -> Self {
+		PreallocMethod::ProRata
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AggressorIndicator {
 	/// Order initiator is aggressor
@@ -3157,6 +3261,12 @@ pub enum AggressorIndicator {
 	/// Order initiator is passive
 	#[serde(rename = "N")]
 	OrderInitiatorIsPassive,
+}
+
+impl Default for AggressorIndicator {
+	fn default() -> Self {
+		AggressorIndicator::OrderInitiatorIsAggressor
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3326,6 +3436,12 @@ pub enum SideTrdSubTyp {
 	TradeAtCashOpenTheMarketplaceNameGivenToTradingFuturesBasedOnAnOpeningQuoteOfTheUnderlyingCashMarket,
 }
 
+impl Default for SideTrdSubTyp {
+	fn default() -> Self {
+		SideTrdSubTyp::Cmta
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderCategory {
 	/// Order
@@ -3358,6 +3474,12 @@ pub enum OrderCategory {
 	/// Internal Cross Order
 	#[serde(rename = "A")]
 	InternalCrossOrder,
+}
+
+impl Default for OrderCategory {
+	fn default() -> Self {
+		OrderCategory::Order
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3598,6 +3720,12 @@ pub enum CustOrderHandlingInst {
 	WorkToTargetStrategy,
 }
 
+impl Default for CustOrderHandlingInst {
+	fn default() -> Self {
+		CustOrderHandlingInst::AddOnOrder
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderHandlingInstSource {
 	/// NASD OATS
@@ -3606,6 +3734,12 @@ pub enum OrderHandlingInstSource {
 	/// FIA Execution Source Code
 	#[serde(rename = "2")]
 	FiaExecutionSourceCode,
+}
+
+impl Default for OrderHandlingInstSource {
+	fn default() -> Self {
+		OrderHandlingInstSource::NasdOats
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3619,6 +3753,12 @@ pub enum SideAvgPxIndicator {
 	/// Last trade is the average price group identified by the <a href="tag_1854_SideAvgPxGroupID.html" target="bottom">SideAvgPxGroupID&nbsp;(1854)</a>
 	#[serde(rename = "2")]
 	LastTradeIsTheAveragePriceGroupIdentifiedByTheAHrefTag1854SideAvgPxGroupIdHtmlTargetBottomSideAvgPxGroupIdNbspA,
+}
+
+impl Default for SideAvgPxIndicator {
+	fn default() -> Self {
+		SideAvgPxIndicator::NoAveragePricing
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3654,4 +3794,10 @@ pub enum SideTradeReportingIndicator {
 	/// Trade is not reportable
 	#[serde(rename = "9")]
 	TradeIsNotReportable,
+}
+
+impl Default for SideTradeReportingIndicator {
+	fn default() -> Self {
+		SideTradeReportingIndicator::TradeHasNotBeenReported
+	}
 }

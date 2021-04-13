@@ -45,6 +45,12 @@ pub enum LegPaymentScheduleRateSourceItem {
 	Other,
 }
 
+impl Default for LegPaymentScheduleRateSourceItem {
+	fn default() -> Self {
+		LegPaymentScheduleRateSourceItem::Bloomberg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateSourceType {
 	/// Primary
@@ -53,4 +59,10 @@ pub enum LegPaymentScheduleRateSourceType {
 	/// Secondary
 	#[serde(rename = "1")]
 	Secondary,
+}
+
+impl Default for LegPaymentScheduleRateSourceType {
+	fn default() -> Self {
+		LegPaymentScheduleRateSourceType::Primary
+	}
 }

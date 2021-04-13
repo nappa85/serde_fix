@@ -75,6 +75,12 @@ pub enum OrderEntryAction {
 	Release,
 }
 
+impl Default for OrderEntryAction {
+	fn default() -> Self {
+		OrderEntryAction::Add
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrdType {
 	/// Market
@@ -161,6 +167,12 @@ pub enum OrdType {
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
 }
 
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -216,6 +228,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
@@ -257,4 +275,10 @@ pub enum TimeInForce {
 	/// Good for this Month (GFM)
 	#[serde(rename = "C")]
 	GoodForThisMonth,
+}
+
+impl Default for TimeInForce {
+	fn default() -> Self {
+		TimeInForce::Day
+	}
 }

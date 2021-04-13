@@ -142,6 +142,12 @@ pub enum UnderlyingDeliveryStreamType {
 	Single,
 }
 
+impl Default for UnderlyingDeliveryStreamType {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamType::Periodic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamDeliveryRestriction {
 	/// Firm (Never excused of delivery obligations)
@@ -162,6 +168,12 @@ pub enum UnderlyingDeliveryStreamDeliveryRestriction {
 	UnitFirm,
 }
 
+impl Default for UnderlyingDeliveryStreamDeliveryRestriction {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamDeliveryRestriction::Firm
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamDeliveryContingentPartySide {
 	/// Buyer
@@ -172,6 +184,12 @@ pub enum UnderlyingDeliveryStreamDeliveryContingentPartySide {
 	Seller,
 }
 
+impl Default for UnderlyingDeliveryStreamDeliveryContingentPartySide {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamDeliveryContingentPartySide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamTitleTransferCondition {
 	/// Transfers with risk of loss
@@ -180,6 +198,12 @@ pub enum UnderlyingDeliveryStreamTitleTransferCondition {
 	/// Does not transfer with risk of loss
 	#[serde(rename = "1")]
 	DoesNotTransferWithRiskOfLoss,
+}
+
+impl Default for UnderlyingDeliveryStreamTitleTransferCondition {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamTitleTransferCondition::TransfersWithRiskOfLoss
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -430,6 +454,12 @@ pub enum UnderlyingDeliveryStreamToleranceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnderlyingDeliveryStreamToleranceUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamToleranceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamToleranceType {
 	/// Absolute
@@ -438,6 +468,12 @@ pub enum UnderlyingDeliveryStreamToleranceType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for UnderlyingDeliveryStreamToleranceType {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamToleranceType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -450,6 +486,12 @@ pub enum UnderlyingDeliveryStreamToleranceOptionSide {
 	Seller,
 }
 
+impl Default for UnderlyingDeliveryStreamToleranceOptionSide {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamToleranceOptionSide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamElectingPartySide {
 	/// Buyer
@@ -460,6 +502,12 @@ pub enum UnderlyingDeliveryStreamElectingPartySide {
 	Seller,
 }
 
+impl Default for UnderlyingDeliveryStreamElectingPartySide {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamElectingPartySide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamDeliveryPointSource {
 	/// Proprietary
@@ -468,4 +516,10 @@ pub enum UnderlyingDeliveryStreamDeliveryPointSource {
 	/// Energy Identification Code
 	#[serde(rename = "1")]
 	EnergyIdentificationCode,
+}
+
+impl Default for UnderlyingDeliveryStreamDeliveryPointSource {
+	fn default() -> Self {
+		UnderlyingDeliveryStreamDeliveryPointSource::Proprietary
+	}
 }

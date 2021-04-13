@@ -1247,6 +1247,12 @@ pub enum UnderlyingProtectionTermEventCurrency {
 	N999,
 }
 
+impl Default for UnderlyingProtectionTermEventCurrency {
+	fn default() -> Self {
+		UnderlyingProtectionTermEventCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProtectionTermEventDayType {
 	/// Business
@@ -1267,4 +1273,10 @@ pub enum UnderlyingProtectionTermEventDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for UnderlyingProtectionTermEventDayType {
+	fn default() -> Self {
+		UnderlyingProtectionTermEventDayType::Business
+	}
 }

@@ -51,31 +51,23 @@ pub struct Position {
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText.html" target="bottom">EncodedRejectTextLen&nbsp;(1665)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1328_RejectText.html" target="bottom">RejectedText&nbsp;(1328)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// <p>Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
 	/// </p>
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// <p>Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	/// </p>
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -94,6 +86,12 @@ pub enum TransferTransType {
 	Cancel,
 }
 
+impl Default for TransferTransType {
+	fn default() -> Self {
+		TransferTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TransferType {
 	/// Request transfer
@@ -105,6 +103,12 @@ pub enum TransferType {
 	/// Decline transfer
 	#[serde(rename = "2")]
 	DeclineTransfer,
+}
+
+impl Default for TransferType {
+	fn default() -> Self {
+		TransferType::RequestTransfer
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -129,6 +133,12 @@ pub enum TransferStatus {
 	Cancelled,
 }
 
+impl Default for TransferStatus {
+	fn default() -> Self {
+		TransferStatus::Received
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TransferRejectReason {
 	/// Success
@@ -151,6 +161,12 @@ pub enum TransferRejectReason {
 	Other,
 }
 
+impl Default for TransferRejectReason {
+	fn default() -> Self {
+		TransferRejectReason::Success
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TransferScope {
 	/// Inter-firm transfer
@@ -162,4 +178,10 @@ pub enum TransferScope {
 	/// Clearing Member Trade Assignment (CMTA)
 	#[serde(rename = "2")]
 	ClearingMemberTradeAssignment,
+}
+
+impl Default for TransferScope {
+	fn default() -> Self {
+		TransferScope::InterFirmTransfer
+	}
 }

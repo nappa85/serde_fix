@@ -1236,3 +1236,9 @@ pub enum UnderlyingPhysicalSettlCurrency {
 	#[serde(rename = "999")]
 	N999,
 }
+
+impl Default for UnderlyingPhysicalSettlCurrency {
+	fn default() -> Self {
+		UnderlyingPhysicalSettlCurrency::Afa
+	}
+}

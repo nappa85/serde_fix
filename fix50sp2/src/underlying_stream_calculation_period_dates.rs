@@ -101,3 +101,9 @@ pub enum UnderlyingStreamCalculationCorrectionUnit {
 	#[serde(rename = "Yr")]
 	Year,
 }
+
+impl Default for UnderlyingStreamCalculationCorrectionUnit {
+	fn default() -> Self {
+		UnderlyingStreamCalculationCorrectionUnit::Day
+	}
+}

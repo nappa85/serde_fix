@@ -39,3 +39,9 @@ pub enum QuoteAttributeType {
 	#[serde(rename = "4")]
 	BidOrAskRequest,
 }
+
+impl Default for QuoteAttributeType {
+	fn default() -> Self {
+		QuoteAttributeType::QuoteIsAboveStandardMarketSize
+	}
+}

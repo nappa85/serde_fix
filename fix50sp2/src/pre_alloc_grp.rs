@@ -92,6 +92,12 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
+impl Default for AllocAcctIDSource {
+	fn default() -> Self {
+		AllocAcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocSettlCurrency {
 	/// Afghani
@@ -1296,6 +1302,12 @@ pub enum AllocSettlCurrency {
 	N999,
 }
 
+impl Default for AllocSettlCurrency {
+	fn default() -> Self {
+		AllocSettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocHandlInst {
 	/// Match
@@ -1310,4 +1322,10 @@ pub enum AllocHandlInst {
 	/// Auto claim give-up (Indicates that the give-up and take-up party are the same and that trade give-up is to be claimed automatically)
 	#[serde(rename = "4")]
 	AutoClaimGiveUp,
+}
+
+impl Default for AllocHandlInst {
+	fn default() -> Self {
+		AllocHandlInst::Match
+	}
 }

@@ -32,3 +32,9 @@ pub enum PayRequestStatus {
 	#[serde(rename = "3")]
 	Disputed,
 }
+
+impl Default for PayRequestStatus {
+	fn default() -> Self {
+		PayRequestStatus::ReceivedNotYetProcessed
+	}
+}

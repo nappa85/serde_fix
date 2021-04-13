@@ -34,3 +34,9 @@ pub enum LegComplexEventCreditEventQualifierItem {
 	#[serde(rename = "C")]
 	FloatingRateInterestShortfall,
 }
+
+impl Default for LegComplexEventCreditEventQualifierItem {
+	fn default() -> Self {
+		LegComplexEventCreditEventQualifierItem::RetructuringMultipleHoldingObligations
+	}
+}

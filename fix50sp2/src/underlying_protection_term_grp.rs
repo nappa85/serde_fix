@@ -1252,3 +1252,9 @@ pub enum UnderlyingProtectionTermCurrency {
 	#[serde(rename = "999")]
 	N999,
 }
+
+impl Default for UnderlyingProtectionTermCurrency {
+	fn default() -> Self {
+		UnderlyingProtectionTermCurrency::Afa
+	}
+}

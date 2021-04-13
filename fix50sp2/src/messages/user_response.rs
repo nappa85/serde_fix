@@ -58,3 +58,9 @@ pub enum UserStatus {
 	#[serde(rename = "9")]
 	ThrottleParametersChanged,
 }
+
+impl Default for UserStatus {
+	fn default() -> Self {
+		UserStatus::LoggedIn
+	}
+}

@@ -71,6 +71,12 @@ pub enum MDBookType {
 	OrderDepth,
 }
 
+impl Default for MDBookType {
+	fn default() -> Self {
+		MDBookType::TopOfBook
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplQueueResolution {
 	/// No action taken
@@ -85,4 +91,10 @@ pub enum ApplQueueResolution {
 	/// End Session
 	#[serde(rename = "3")]
 	EndSession,
+}
+
+impl Default for ApplQueueResolution {
+	fn default() -> Self {
+		ApplQueueResolution::NoActionTaken
+	}
 }

@@ -122,3 +122,9 @@ pub enum InstrumentScopeSecurityAltIDSource {
 	#[serde(rename = "X")]
 	UniformSymbol,
 }
+
+impl Default for InstrumentScopeSecurityAltIDSource {
+	fn default() -> Self {
+		InstrumentScopeSecurityAltIDSource::Cusip
+	}
+}

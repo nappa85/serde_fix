@@ -51,6 +51,12 @@ pub enum ComplexEventScheduleFrequencyUnit {
 	Year,
 }
 
+impl Default for ComplexEventScheduleFrequencyUnit {
+	fn default() -> Self {
+		ComplexEventScheduleFrequencyUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ComplexEventScheduleRollConvention {
 	/// 1st day of the month
@@ -191,4 +197,10 @@ pub enum ComplexEventScheduleRollConvention {
 	/// Sunday
 	#[serde(rename = "SUN")]
 	Sunday,
+}
+
+impl Default for ComplexEventScheduleRollConvention {
+	fn default() -> Self {
+		ComplexEventScheduleRollConvention::N1StDayOfTheMonth
+	}
 }

@@ -28,3 +28,9 @@ pub enum UnderlyingProvisionCashSettlQuoteSourceItem {
 	#[serde(rename = "99")]
 	Other,
 }
+
+impl Default for UnderlyingProvisionCashSettlQuoteSourceItem {
+	fn default() -> Self {
+		UnderlyingProvisionCashSettlQuoteSourceItem::Bloomberg
+	}
+}

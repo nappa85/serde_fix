@@ -57,15 +57,11 @@ pub struct Mass {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// EncodedTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// EncodedText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// The number of sets of quotes in the message
 	#[serde(flatten)]
 	pub quot_set_ack_grp: Option<super::super::quot_set_ack_grp::QuotSetAckGrp>,
@@ -81,16 +77,12 @@ pub struct Mass {
 	#[serde(rename = "2404")]
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2351")]
-	pub encoded_compliance_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ComplianceText(2404) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2352")]
-	pub encoded_compliance_text: Option<String>,
+	#[serde(alias = "2352")]
+	pub encoded_compliance_text: Option<fix_common::EncodedText<2352>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -172,6 +164,12 @@ pub enum QuoteStatus {
 	ContractTerminated,
 }
 
+impl Default for QuoteStatus {
+	fn default() -> Self {
+		QuoteStatus::Accepted
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteRejectReason {
 	/// Unknown symbol (security)
@@ -242,6 +240,12 @@ pub enum QuoteRejectReason {
 	N21,
 }
 
+impl Default for QuoteRejectReason {
+	fn default() -> Self {
+		QuoteRejectReason::N1
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteResponseLevel {
 	/// No Acknowledgement (Default)
@@ -256,6 +260,12 @@ pub enum QuoteResponseLevel {
 	/// Summary Acknowledgement
 	#[serde(rename = "3")]
 	SummaryAcknowledgement,
+}
+
+impl Default for QuoteResponseLevel {
+	fn default() -> Self {
+		QuoteResponseLevel::NoAcknowledgement
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -275,6 +285,12 @@ pub enum QuoteType {
 	/// Initially tradeable
 	#[serde(rename = "4")]
 	InitiallyTradeable,
+}
+
+impl Default for QuoteType {
+	fn default() -> Self {
+		QuoteType::Indicative
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -305,6 +321,12 @@ pub enum QuoteCancelType {
 	CancelForIssuerOfUnderlyingSecurity,
 }
 
+impl Default for QuoteCancelType {
+	fn default() -> Self {
+		QuoteCancelType::CancelForSymbol
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
@@ -328,6 +350,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -368,4 +396,10 @@ pub enum AccountType {
 	/// Account for orders from multiple customers
 	#[serde(rename = "13")]
 	AccountForOrdersFromMultipleCustomers,
+}
+
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
 }

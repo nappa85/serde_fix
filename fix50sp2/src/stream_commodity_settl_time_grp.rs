@@ -37,3 +37,9 @@ pub enum StreamCommoditySettlTimeType {
 	#[serde(rename = "1")]
 	HhMmTimeFormat,
 }
+
+impl Default for StreamCommoditySettlTimeType {
+	fn default() -> Self {
+		StreamCommoditySettlTimeType::HourOfTheDayTheDeliveryStartEndHourIsSpecifiedAsTheEndOfTheIncludedHourForExampleAStartHourOf4BeginsAt3AMAnEndHourOf20EndsAt8PMAStartHourOf1AndAnEndHourOf24IndicatesMidnightToMidnightDelivery
+	}
+}

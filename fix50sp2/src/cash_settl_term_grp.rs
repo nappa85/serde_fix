@@ -122,6 +122,12 @@ pub enum CashSettlQuoteMethod {
 	Offer,
 }
 
+impl Default for CashSettlQuoteMethod {
+	fn default() -> Self {
+		CashSettlQuoteMethod::Bid
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CashSettlValuationMethod {
 	/// Market
@@ -150,6 +156,12 @@ pub enum CashSettlValuationMethod {
 	AverageBlendedHighest,
 }
 
+impl Default for CashSettlValuationMethod {
+	fn default() -> Self {
+		CashSettlValuationMethod::Market
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CashSettlPriceDefault {
 	/// Close
@@ -158,4 +170,10 @@ pub enum CashSettlPriceDefault {
 	/// Hedge
 	#[serde(rename = "1")]
 	Hedge,
+}
+
+impl Default for CashSettlPriceDefault {
+	fn default() -> Self {
+		CashSettlPriceDefault::Close
+	}
 }

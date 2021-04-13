@@ -73,16 +73,12 @@ pub struct Mass {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text(58) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// ThrottleInst
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1685")]
@@ -123,6 +119,12 @@ pub enum OrderResponseLevel {
 	SummaryAcknowledgementWithoutEntriesAndOneOrMoreExecutionReportMessages,
 }
 
+impl Default for OrderResponseLevel {
+	fn default() -> Self {
+		OrderResponseLevel::NoAcknowledgementMessages
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingCapacity {
 	/// Customer
@@ -151,6 +153,12 @@ pub enum TradingCapacity {
 	SystematicInternaliser,
 }
 
+impl Default for TradingCapacity {
+	fn default() -> Self {
+		TradingCapacity::Customer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearingAccountType {
 	/// Customer
@@ -162,6 +170,12 @@ pub enum ClearingAccountType {
 	/// Market maker
 	#[serde(rename = "3")]
 	MarketMaker,
+}
+
+impl Default for ClearingAccountType {
+	fn default() -> Self {
+		ClearingAccountType::Customer
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -187,6 +201,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -229,6 +249,12 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderCapacity {
 	/// Agency
@@ -252,6 +278,12 @@ pub enum OrderCapacity {
 	/// Mixed capacity
 	#[serde(rename = "M")]
 	MixedCapacity,
+}
+
+impl Default for OrderCapacity {
+	fn default() -> Self {
+		OrderCapacity::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -312,6 +344,12 @@ pub enum OrderRestrictions {
 	NormalCourseIssuerBid,
 }
 
+impl Default for OrderRestrictions {
+	fn default() -> Self {
+		OrderRestrictions::ProgramTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CustOrderCapacity {
 	/// Member trading for their own account
@@ -329,6 +367,12 @@ pub enum CustOrderCapacity {
 	/// Retail customer
 	#[serde(rename = "5")]
 	RetailCustomer,
+}
+
+impl Default for CustOrderCapacity {
+	fn default() -> Self {
+		CustOrderCapacity::MemberTradingForTheirOwnAccount
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -569,6 +613,12 @@ pub enum CustOrderHandlingInst {
 	WorkToTargetStrategy,
 }
 
+impl Default for CustOrderHandlingInst {
+	fn default() -> Self {
+		CustOrderHandlingInst::AddOnOrder
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
@@ -579,6 +629,12 @@ pub enum ThrottleInst {
 	QueueIfThrottleLimitExceeded,
 }
 
+impl Default for ThrottleInst {
+	fn default() -> Self {
+		ThrottleInst::RejectIfThrottleLimitExceeded
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
@@ -587,4 +643,10 @@ pub enum LastFragment {
 	/// Last Message
 	#[serde(rename = "Y")]
 	LastMessage,
+}
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
 }

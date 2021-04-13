@@ -77,6 +77,12 @@ pub enum MarketDepth {
 	TopOfBook,
 }
 
+impl Default for MarketDepth {
+	fn default() -> Self {
+		MarketDepth::FullBookDepth
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDBookType {
 	/// Top of Book
@@ -88,4 +94,10 @@ pub enum MDBookType {
 	/// Order Depth
 	#[serde(rename = "3")]
 	OrderDepth,
+}
+
+impl Default for MDBookType {
+	fn default() -> Self {
+		MDBookType::TopOfBook
+	}
 }

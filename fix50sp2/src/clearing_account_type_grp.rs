@@ -29,3 +29,9 @@ pub enum ClearingAccountTypeItem {
 	#[serde(rename = "3")]
 	MarketMaker,
 }
+
+impl Default for ClearingAccountTypeItem {
+	fn default() -> Self {
+		ClearingAccountTypeItem::Customer
+	}
+}

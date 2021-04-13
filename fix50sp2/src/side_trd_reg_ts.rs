@@ -49,3 +49,9 @@ pub enum SideTrdRegTimestampType {
 	#[serde(rename = "7")]
 	SubmissionToClearing,
 }
+
+impl Default for SideTrdRegTimestampType {
+	fn default() -> Self {
+		SideTrdRegTimestampType::ExecutionTime
+	}
+}

@@ -62,3 +62,9 @@ pub enum ComplexEventCreditEventUnit {
 	#[serde(rename = "Yr")]
 	Year,
 }
+
+impl Default for ComplexEventCreditEventUnit {
+	fn default() -> Self {
+		ComplexEventCreditEventUnit::Day
+	}
+}

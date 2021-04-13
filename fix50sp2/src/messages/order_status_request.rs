@@ -84,6 +84,12 @@ pub enum AcctIDSource {
 	Other,
 }
 
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -137,4 +143,10 @@ pub enum Side {
 	/// Sell undisclosed
 	#[serde(rename = "H")]
 	SellUndisclosed,
+}
+
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
 }

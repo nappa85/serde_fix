@@ -249,6 +249,12 @@ pub enum LegComplexEventType {
 	StrikeSchedule,
 }
 
+impl Default for LegComplexEventType {
+	fn default() -> Self {
+		LegComplexEventType::Capped
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexOptPayoutPaySide {
 	/// Buy
@@ -259,6 +265,12 @@ pub enum LegComplexOptPayoutPaySide {
 	Sell,
 }
 
+impl Default for LegComplexOptPayoutPaySide {
+	fn default() -> Self {
+		LegComplexOptPayoutPaySide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexOptPayoutReceiveSide {
 	/// Buy
@@ -267,6 +279,12 @@ pub enum LegComplexOptPayoutReceiveSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for LegComplexOptPayoutReceiveSide {
+	fn default() -> Self {
+		LegComplexOptPayoutReceiveSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -294,6 +312,12 @@ pub enum LegComplexOptPayoutTime {
 	AsSpecifiedInMasterConfirmation,
 }
 
+impl Default for LegComplexOptPayoutTime {
+	fn default() -> Self {
+		LegComplexOptPayoutTime::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventPriceBoundaryMethod {
 	/// Less than ComplexEventPrice(1486)
@@ -313,6 +337,12 @@ pub enum LegComplexEventPriceBoundaryMethod {
 	GreaterThanComplexEventPrice,
 }
 
+impl Default for LegComplexEventPriceBoundaryMethod {
+	fn default() -> Self {
+		LegComplexEventPriceBoundaryMethod::LessThanComplexEventPrice
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventPriceTimeType {
 	/// Expiration
@@ -326,6 +356,12 @@ pub enum LegComplexEventPriceTimeType {
 	SpecifiedDateTime,
 }
 
+impl Default for LegComplexEventPriceTimeType {
+	fn default() -> Self {
+		LegComplexEventPriceTimeType::Expiration
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventCondition {
 	/// And
@@ -336,6 +372,12 @@ pub enum LegComplexEventCondition {
 	Or,
 }
 
+impl Default for LegComplexEventCondition {
+	fn default() -> Self {
+		LegComplexEventCondition::And
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventQuoteBasis {
 	/// Currency 1 per currency 2
@@ -344,6 +386,12 @@ pub enum LegComplexEventQuoteBasis {
 	/// Currency 2 per currency 1
 	#[serde(rename = "1")]
 	Currency2PerCurrency1,
+}
+
+impl Default for LegComplexEventQuoteBasis {
+	fn default() -> Self {
+		LegComplexEventQuoteBasis::Currency1PerCurrency2
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -362,6 +410,12 @@ pub enum LegComplexEventCalculationAgent {
 	AsSpecifiedInTheStandardTermsSupplement,
 }
 
+impl Default for LegComplexEventCalculationAgent {
+	fn default() -> Self {
+		LegComplexEventCalculationAgent::ExercisingParty
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventCreditEventNotifyingParty {
 	/// Seller notifies
@@ -373,4 +427,10 @@ pub enum LegComplexEventCreditEventNotifyingParty {
 	/// Seller or buyer notifies
 	#[serde(rename = "2")]
 	SellerOrBuyerNotifies,
+}
+
+impl Default for LegComplexEventCreditEventNotifyingParty {
+	fn default() -> Self {
+		LegComplexEventCreditEventNotifyingParty::SellerNotifies
+	}
 }

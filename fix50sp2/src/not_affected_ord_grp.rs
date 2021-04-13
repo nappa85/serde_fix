@@ -42,3 +42,9 @@ pub enum NotAffectedReason {
 	#[serde(rename = "1")]
 	InstrumentSuspended,
 }
+
+impl Default for NotAffectedReason {
+	fn default() -> Self {
+		NotAffectedReason::OrderSuspended
+	}
+}

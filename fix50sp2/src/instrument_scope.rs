@@ -85,15 +85,11 @@ pub struct InstrumentScope {
 	#[serde(rename = "1556")]
 	pub instrument_scope_security_desc: Option<String>,
 	/// InstrumentScopeEncodedSecurityDescLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1620")]
-	pub instrument_scope_encoded_security_desc_len: Option<usize>,
 	/// InstrumentScopeEncodedSecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1621")]
-	pub instrument_scope_encoded_security_desc: Option<String>,
+	#[serde(alias = "1621")]
+	pub instrument_scope_encoded_security_desc: Option<fix_common::EncodedText<1621>>,
 	/// InstrumentScopeSettlType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1557")]
@@ -200,6 +196,12 @@ pub enum InstrumentScopeSecurityIDSource {
 	UniformSymbol,
 }
 
+impl Default for InstrumentScopeSecurityIDSource {
+	fn default() -> Self {
+		InstrumentScopeSecurityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum InstrumentScopeProduct {
 	/// AGENCY
@@ -241,6 +243,12 @@ pub enum InstrumentScopeProduct {
 	/// FINANCING
 	#[serde(rename = "13")]
 	Financing,
+}
+
+impl Default for InstrumentScopeProduct {
+	fn default() -> Self {
+		InstrumentScopeProduct::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -708,6 +716,12 @@ pub enum InstrumentScopeSecurityType {
 	Sfp,
 }
 
+impl Default for InstrumentScopeSecurityType {
+	fn default() -> Self {
+		InstrumentScopeSecurityType::Fut
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum InstrumentScopePutOrCall {
 	/// Put
@@ -716,6 +730,12 @@ pub enum InstrumentScopePutOrCall {
 	/// Call
 	#[serde(rename = "1")]
 	Call,
+}
+
+impl Default for InstrumentScopePutOrCall {
+	fn default() -> Self {
+		InstrumentScopePutOrCall::Put
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -756,4 +776,10 @@ pub enum InstrumentScopeSettlType {
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
+}
+
+impl Default for InstrumentScopeSettlType {
+	fn default() -> Self {
+		InstrumentScopeSettlType::RegularFxSpotSettlement
+	}
 }

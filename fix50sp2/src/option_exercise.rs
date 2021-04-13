@@ -8,16 +8,12 @@ pub struct OptionExercise {
 	#[serde(rename = "41106")]
 	pub exercise_desc: Option<String>,
 	/// Must be set if EncodedExerciseDesc(41108) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41107")]
-	pub encoded_exercise_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ExerciseDesc(41106) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41108")]
-	pub encoded_exercise_desc: Option<String>,
+	#[serde(alias = "41108")]
+	pub encoded_exercise_desc: Option<fix_common::EncodedText<41108>>,
 	/// AutomaticExerciseIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41109")]
@@ -82,4 +78,10 @@ pub enum ExerciseConfirmationMethod {
 	/// Unknown at time of report
 	#[serde(rename = "3")]
 	UnknownAtTimeOfReport,
+}
+
+impl Default for ExerciseConfirmationMethod {
+	fn default() -> Self {
+		ExerciseConfirmationMethod::NotRequired
+	}
 }

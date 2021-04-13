@@ -184,15 +184,11 @@ pub struct Collateral {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// CollateralAmountGrp
 	#[serde(flatten)]
 	pub collateral_amount_grp: Option<super::super::collateral_amount_grp::CollateralAmountGrp>,
@@ -217,15 +213,11 @@ pub struct Collateral {
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText.html" target="bottom">EncodedRejectTextLen(1665)&nbsp;(1665)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1328_RejectText.html" target="bottom">RejectedText(1328)&nbsp;(1328)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// CollateralRequestLinkID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2517")]
@@ -251,16 +243,12 @@ pub struct Collateral {
 	#[serde(rename = "2520")]
 	pub warning_text: Option<String>,
 	/// Must be set if EncodedWarningText(2521) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2522")]
-	pub encoded_warning_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the WarningText(2520) field in the encoded format specified via the MessageEncoding
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2521")]
-	pub encoded_warning_text: Option<String>,
+	#[serde(alias = "2521")]
+	pub encoded_warning_text: Option<fix_common::EncodedText<2521>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -303,6 +291,12 @@ pub enum CollAsgnReason {
 	Pledge,
 }
 
+impl Default for CollAsgnReason {
+	fn default() -> Self {
+		CollAsgnReason::Initial
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollAsgnTransType {
 	/// New
@@ -320,6 +314,12 @@ pub enum CollAsgnTransType {
 	/// Reverse
 	#[serde(rename = "4")]
 	Reverse,
+}
+
+impl Default for CollAsgnTransType {
+	fn default() -> Self {
+		CollAsgnTransType::New
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -342,6 +342,12 @@ pub enum CollAsgnRespType {
 	/// Transaction completed with warning - see <a href="tag_58_Text.html" target="bottom">Text(58)&nbsp;(58)</a> for further information
 	#[serde(rename = "5")]
 	TransactionCompletedWithWarningSeeAHrefTag58TextHtmlTargetBottomTextNbspAForFurtherInformation,
+}
+
+impl Default for CollAsgnRespType {
+	fn default() -> Self {
+		CollAsgnRespType::Received
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -369,6 +375,12 @@ pub enum CollAsgnRejectReason {
 	Other,
 }
 
+impl Default for CollAsgnRejectReason {
+	fn default() -> Self {
+		CollAsgnRejectReason::UnknownDeal
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollApplType {
 	/// Specific Deposit
@@ -377,6 +389,12 @@ pub enum CollApplType {
 	/// General
 	#[serde(rename = "1")]
 	General,
+}
+
+impl Default for CollApplType {
+	fn default() -> Self {
+		CollApplType::SpecificDeposit
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -390,6 +408,12 @@ pub enum FinancialStatus {
 	/// Restricted
 	#[serde(rename = "3")]
 	Restricted,
+}
+
+impl Default for FinancialStatus {
+	fn default() -> Self {
+		FinancialStatus::Bankrupt
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -432,6 +456,12 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
@@ -443,6 +473,12 @@ pub enum QtyType {
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
 	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+}
+
+impl Default for QtyType {
+	fn default() -> Self {
+		QtyType::Units
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1649,6 +1685,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -1702,6 +1744,12 @@ pub enum Side {
 	/// Sell undisclosed
 	#[serde(rename = "H")]
 	SellUndisclosed,
+}
+
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1783,4 +1831,10 @@ pub enum PriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	PercentageOfNotional,
+}
+
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
 }

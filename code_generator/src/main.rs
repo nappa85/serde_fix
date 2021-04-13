@@ -211,6 +211,7 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
     out.write_all(format!("\nuse serde::{{Deserialize, Serialize}};\n\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{\n", name).as_bytes())
         .await
         .map_err(|e| error!("{}", e))?;
+    let mut next_encoded = None;
     for tr_match in tr.captures_iter(&captures["body"]) {
         let tr_body = &tr_match["body"];
 
@@ -220,11 +221,13 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
             out.write_all(format!("\t/// {}\n\t#[serde(flatten)]\n\tpub {}: {},\n", clean_comment(&b["comment"], &b["name"]), to_snake_case(&name), maybe_option(&name, &b["req"], if is_message { 2 } else { 1 })).as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
+            next_encoded = None;
         }
         // a normal tagvalue
         else if let Some(t) = tag.captures(tr_body) {
             let is_array = tr_match.name("rows").is_some();
-            let name = tag_processor(&t, &client, &base_url, tr_body, &name, is_array, &mut enums, &vartype, &enum_body, out).await?;
+            let (name, is_encoded) = tag_processor(&t, &client, &base_url, tr_body, &name, is_array, next_encoded, &mut enums, &vartype, &enum_body, out).await?;
+            next_encoded = is_encoded;
             if is_array {
                 arrays.push(((&name[0..(name.len() - 1)]).to_owned(), (&tr_match["rows"]).to_owned()));
             }
@@ -244,8 +247,10 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
             out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{\n", name).as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
+            let mut next_encoded = None;
             for t in tag.captures_iter(&list) {
-                tag_processor(&t, &client, &base_url, &list, &name, false, &mut enums, &vartype, &enum_body, out).await?;
+                let (_, is_encoded) = tag_processor(&t, &client, &base_url, &list, &name, false, next_encoded, &mut enums, &vartype, &enum_body, out).await?;
+                next_encoded = is_encoded;
             }
             out.write_all("}\n".as_bytes())
                 .await
@@ -269,8 +274,9 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
             out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]\npub enum {} {{\n", name).as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
+            let mut first = None;
             for (comment, val, name) in items {
-                let label = if has_duplicates {
+                let mut label = if has_duplicates {
                     let temp = clean_enum_name(&val);
                     if temp.is_empty() {
                         name
@@ -286,16 +292,20 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
                 else {
                     name
                 };
+                label = if label.chars().next().map(char::is_numeric) == Some(true) {
+                    format!("N{}", label)
+                }
+                else {
+                    label
+                };
+                if first.is_none() {
+                    first = Some(label.clone());
+                }
                 out.write_all(format!(
                         "\t/// {}\n\t#[serde(rename = \"{}\")]\n\t{},\n",
                         comment,
                         val,
-                        if label.chars().next().map(char::is_numeric) == Some(true) {
-                            format!("N{}", label)
-                        }
-                        else {
-                            label
-                        }
+                        label
                     ).as_bytes())
                     .await
                     .map_err(|e| error!("{}", e))?;
@@ -303,13 +313,20 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
             out.write_all("}\n".as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
+
+            // impl Default
+            if let Some(v) = &first {
+                out.write_all(format!("\nimpl Default for {} {{\n\tfn default() -> Self {{\n\t\t{}::{}\n\t}}\n}}\n", name, name, v).as_bytes())
+                    .await
+                    .map_err(|e| error!("{}", e))?;
+            }
         }
     }
 
     Ok(())
 }
 
-async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client, base_url: &str, tr_body: &str, parent: &str, is_array: bool, enums: &mut Vec<(String, String)>, vartype: &Regex, enum_body: &Regex, out: &mut W) -> Result<String, ()> {
+async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client, base_url: &str, tr_body: &str, parent: &str, is_array: bool, next_encoded: Option<String>, enums: &mut Vec<(String, String)>, vartype: &Regex, enum_body: &Regex, out: &mut W) -> Result<(String, Option<String>), ()> {
     let mut name = clean_name(&t["name"]);
     let descr = client.get(format!("{}{}", base_url, &t["url"]))
         .send()
@@ -320,6 +337,7 @@ async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client,
         .map_err(|e| error!("Child body {} load error: {}", &t["url"], e))?;
     let t_type = vartype.captures(&descr).ok_or_else(|| error!("Unrecognized vartype on {}", &t["url"]))?;
     let mut workaround = false;
+    let mut is_encoded = None;
     let type_name: Cow<'_, str> = if let Some(list) = enum_body.captures(&descr) {
         if name.as_str() == parent {
             name += "Item";
@@ -345,16 +363,60 @@ async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client,
             }
         }
         else {
+            if temp.as_ref() == "usize" {
+                if name.ends_with("Len") {
+                    is_encoded = Some((&name[0..name.len() - 3]).to_owned());
+                }
+                if name.ends_with("Length") {
+                    is_encoded = Some((&name[0..name.len() - 6]).to_owned());
+                }
+            }
             workaround = needs_workaround(temp.as_ref());
         }
         temp
     };
 
-    out.write_all(format!("\t/// {}{}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},\n", clean_comment(&t["comment"], &t["name"]), option_check(&t["req"], workaround), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"], 0)).as_bytes())
-        .await
-        .map_err(|e| error!("{}", e))?;
+    if is_encoded.is_some() {
+        out.write_all(format!(
+                "\t/// {}\n\t#[serde(rename = \"{}\")]\n",
+                clean_comment(&t["comment"], &t["name"]),
+                &t["id"]
+            ).as_bytes())
+            .await
+            .map_err(|e| error!("{}", e))?;
+    }
+    else if let Some(s) = next_encoded {
+        if name == s && type_name.as_ref() == "String" {
+        out.write_all(format!(
+                "\t/// {}{}\n\t#[serde(alias = \"{}\")]\n\tpub {}: {},\n",
+                clean_comment(&t["comment"], &t["name"]),
+                option_check(&t["req"], workaround),
+                &t["id"],
+                to_snake_case(&name),
+                maybe_option(&format!("fix_common::EncodedText<{}>", &t["id"]), &t["req"], 0)
+            ).as_bytes())
+            .await
+            .map_err(|e| error!("{}", e))?;
+        }
+        else {
+            error!("Expected {} of type String, found {} of type {}", s, name, type_name);
+            return Err(());
+        }
+    }
+    else {
+        out.write_all(format!(
+                "\t/// {}{}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},\n",
+                clean_comment(&t["comment"], &t["name"]),
+                option_check(&t["req"], workaround),
+                &t["id"],
+                to_snake_case(&name),
+                maybe_option(&type_name, &t["req"], 0)
+            ).as_bytes())
+            .await
+            .map_err(|e| error!("{}", e))?;
+    }
 
-    Ok(name)
+    Ok((name, is_encoded))
 }
 
 // prepare base_url for future relative calls

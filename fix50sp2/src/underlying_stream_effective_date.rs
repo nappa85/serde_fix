@@ -68,6 +68,12 @@ pub enum UnderlyingStreamEffectiveDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for UnderlyingStreamEffectiveDateBusinessDayConvention {
+	fn default() -> Self {
+		UnderlyingStreamEffectiveDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingStreamEffectiveDateRelativeTo {
 	/// Trade date
@@ -102,6 +108,12 @@ pub enum UnderlyingStreamEffectiveDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for UnderlyingStreamEffectiveDateRelativeTo {
+	fn default() -> Self {
+		UnderlyingStreamEffectiveDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingStreamEffectiveDateOffsetUnit {
 	/// Day
@@ -116,6 +128,12 @@ pub enum UnderlyingStreamEffectiveDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for UnderlyingStreamEffectiveDateOffsetUnit {
+	fn default() -> Self {
+		UnderlyingStreamEffectiveDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -138,4 +156,10 @@ pub enum UnderlyingStreamEffectiveDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for UnderlyingStreamEffectiveDateOffsetDayType {
+	fn default() -> Self {
+		UnderlyingStreamEffectiveDateOffsetDayType::Business
+	}
 }

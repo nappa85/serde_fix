@@ -59,3 +59,9 @@ pub enum LastFragment {
 	#[serde(rename = "Y")]
 	LastMessage,
 }
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
+}

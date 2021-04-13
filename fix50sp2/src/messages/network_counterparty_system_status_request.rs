@@ -37,3 +37,9 @@ pub enum NetworkRequestType {
 	#[serde(rename = "8")]
 	LevelOfDetailThenAHrefTag936NoCompIDsHtmlTargetBottomNoCompIDsNbspABecomesRequired,
 }
+
+impl Default for NetworkRequestType {
+	fn default() -> Self {
+		NetworkRequestType::Snapshot
+	}
+}

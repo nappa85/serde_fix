@@ -56,6 +56,12 @@ pub enum UnderlyingMarketDisruptionProvision {
 	AsSpecifiedInConfirmation,
 }
 
+impl Default for UnderlyingMarketDisruptionProvision {
+	fn default() -> Self {
+		UnderlyingMarketDisruptionProvision::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingMarketDisruptionFallbackProvision {
 	/// As specified in master agreement
@@ -64,4 +70,10 @@ pub enum UnderlyingMarketDisruptionFallbackProvision {
 	/// As specified in confirmation
 	#[serde(rename = "1")]
 	AsSpecifiedInConfirmation,
+}
+
+impl Default for UnderlyingMarketDisruptionFallbackProvision {
+	fn default() -> Self {
+		UnderlyingMarketDisruptionFallbackProvision::AsSpecifiedInMasterAgreement
+	}
 }

@@ -188,3 +188,9 @@ pub enum ExecInstValue {
 	#[serde(rename = "t")]
 	ExecuteAsFxNeutral,
 }
+
+impl Default for ExecInstValue {
+	fn default() -> Self {
+		ExecInstValue::StayOnOfferside
+	}
+}

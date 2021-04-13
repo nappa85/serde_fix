@@ -1315,6 +1315,12 @@ pub enum UnderlyingCashSettlCurrency {
 	N999,
 }
 
+impl Default for UnderlyingCashSettlCurrency {
+	fn default() -> Self {
+		UnderlyingCashSettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingCashSettlQuoteMethod {
 	/// Bid
@@ -1326,6 +1332,12 @@ pub enum UnderlyingCashSettlQuoteMethod {
 	/// Offer
 	#[serde(rename = "2")]
 	Offer,
+}
+
+impl Default for UnderlyingCashSettlQuoteMethod {
+	fn default() -> Self {
+		UnderlyingCashSettlQuoteMethod::Bid
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2532,6 +2544,12 @@ pub enum UnderlyingCashSettlQuoteCurrency {
 	N999,
 }
 
+impl Default for UnderlyingCashSettlQuoteCurrency {
+	fn default() -> Self {
+		UnderlyingCashSettlQuoteCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingCashSettlMinimumQuoteCurrency {
 	/// Afghani
@@ -3736,6 +3754,12 @@ pub enum UnderlyingCashSettlMinimumQuoteCurrency {
 	N999,
 }
 
+impl Default for UnderlyingCashSettlMinimumQuoteCurrency {
+	fn default() -> Self {
+		UnderlyingCashSettlMinimumQuoteCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingCashSettlValuationMethod {
 	/// Market
@@ -3762,4 +3786,10 @@ pub enum UnderlyingCashSettlValuationMethod {
 	/// Average blended highest
 	#[serde(rename = "7")]
 	AverageBlendedHighest,
+}
+
+impl Default for UnderlyingCashSettlValuationMethod {
+	fn default() -> Self {
+		UnderlyingCashSettlValuationMethod::Market
+	}
 }

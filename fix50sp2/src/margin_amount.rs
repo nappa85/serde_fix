@@ -163,6 +163,12 @@ pub enum MarginAmtType {
 	OtherRiskMargin,
 }
 
+impl Default for MarginAmtType {
+	fn default() -> Self {
+		MarginAmtType::AdditionalMargin
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarginAmtCcy {
 	/// Afghani
@@ -1367,6 +1373,12 @@ pub enum MarginAmtCcy {
 	N999,
 }
 
+impl Default for MarginAmtCcy {
+	fn default() -> Self {
+		MarginAmtCcy::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarginAmtFXRateCalc {
 	/// Divided
@@ -1377,6 +1389,12 @@ pub enum MarginAmtFXRateCalc {
 	Multiply,
 }
 
+impl Default for MarginAmtFXRateCalc {
+	fn default() -> Self {
+		MarginAmtFXRateCalc::Divided
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarginDirection {
 	/// Posted
@@ -1385,4 +1403,10 @@ pub enum MarginDirection {
 	/// Received
 	#[serde(rename = "1")]
 	Received,
+}
+
+impl Default for MarginDirection {
+	fn default() -> Self {
+		MarginDirection::Posted
+	}
 }

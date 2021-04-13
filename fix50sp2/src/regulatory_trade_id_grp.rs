@@ -63,6 +63,12 @@ pub enum RegulatoryTradeIDEvent {
 	PostTradeValuation,
 }
 
+impl Default for RegulatoryTradeIDEvent {
+	fn default() -> Self {
+		RegulatoryTradeIDEvent::InitialBlockTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RegulatoryTradeIDType {
 	/// Current
@@ -86,6 +92,12 @@ pub enum RegulatoryTradeIDType {
 	TradingVenueTransactionIdentifier,
 }
 
+impl Default for RegulatoryTradeIDType {
+	fn default() -> Self {
+		RegulatoryTradeIDType::Current
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RegulatoryTradeIDScope {
 	/// Clearing member
@@ -94,4 +106,10 @@ pub enum RegulatoryTradeIDScope {
 	/// Client
 	#[serde(rename = "2")]
 	Client,
+}
+
+impl Default for RegulatoryTradeIDScope {
+	fn default() -> Self {
+		RegulatoryTradeIDScope::ClearingMember
+	}
 }

@@ -110,6 +110,12 @@ pub enum LegStreamCalculationPeriodBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegStreamCalculationPeriodBusinessDayConvention {
+	fn default() -> Self {
+		LegStreamCalculationPeriodBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamFirstPeriodStartDateBusinessDayConvention {
 	/// Not applicable
@@ -138,6 +144,12 @@ pub enum LegStreamFirstPeriodStartDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegStreamFirstPeriodStartDateBusinessDayConvention {
+	fn default() -> Self {
+		LegStreamFirstPeriodStartDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamCalculationFrequencyUnit {
 	/// Day
@@ -164,6 +176,12 @@ pub enum LegStreamCalculationFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for LegStreamCalculationFrequencyUnit {
+	fn default() -> Self {
+		LegStreamCalculationFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -308,6 +326,12 @@ pub enum LegStreamCalculationRollConvention {
 	Sunday,
 }
 
+impl Default for LegStreamCalculationRollConvention {
+	fn default() -> Self {
+		LegStreamCalculationRollConvention::N1StDayOfTheMonth
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamCalculationCorrectionUnit {
 	/// Day
@@ -322,4 +346,10 @@ pub enum LegStreamCalculationCorrectionUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegStreamCalculationCorrectionUnit {
+	fn default() -> Self {
+		LegStreamCalculationCorrectionUnit::Day
+	}
 }

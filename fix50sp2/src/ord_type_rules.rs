@@ -102,3 +102,9 @@ pub enum OrdType {
 	#[serde(rename = "S")]
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
 }
+
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
+}

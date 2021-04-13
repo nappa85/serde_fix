@@ -190,6 +190,12 @@ pub enum PaymentStreamType {
 	Correlation,
 }
 
+impl Default for PaymentStreamType {
+	fn default() -> Self {
+		PaymentStreamType::Periodic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamDiscountType {
 	/// Standard
@@ -198,6 +204,12 @@ pub enum PaymentStreamDiscountType {
 	/// Forward Rate Agreement (FRA)
 	#[serde(rename = "1")]
 	ForwardRateAgreement,
+}
+
+impl Default for PaymentStreamDiscountType {
+	fn default() -> Self {
+		PaymentStreamDiscountType::Standard
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -216,6 +228,12 @@ pub enum PaymentStreamCompoundingMethod {
 	SpreadExclusive,
 }
 
+impl Default for PaymentStreamCompoundingMethod {
+	fn default() -> Self {
+		PaymentStreamCompoundingMethod::None
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamInterpolationPeriod {
 	/// Initial
@@ -230,4 +248,10 @@ pub enum PaymentStreamInterpolationPeriod {
 	/// Any period
 	#[serde(rename = "3")]
 	AnyPeriod,
+}
+
+impl Default for PaymentStreamInterpolationPeriod {
+	fn default() -> Self {
+		PaymentStreamInterpolationPeriod::Initial
+	}
 }

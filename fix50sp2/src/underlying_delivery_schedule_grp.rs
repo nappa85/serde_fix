@@ -85,6 +85,12 @@ pub enum UnderlyingDeliveryScheduleType {
 	PhysicalSettlementPeriod,
 }
 
+impl Default for UnderlyingDeliveryScheduleType {
+	fn default() -> Self {
+		UnderlyingDeliveryScheduleType::Notional
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryScheduleNotionalUnitOfMeasure {
 	/// Barrels
@@ -333,6 +339,12 @@ pub enum UnderlyingDeliveryScheduleNotionalUnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnderlyingDeliveryScheduleNotionalUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingDeliveryScheduleNotionalUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryScheduleNotionalCommodityFrequency {
 	/// Term
@@ -356,6 +368,12 @@ pub enum UnderlyingDeliveryScheduleNotionalCommodityFrequency {
 	/// Per month
 	#[serde(rename = "6")]
 	PerMonth,
+}
+
+impl Default for UnderlyingDeliveryScheduleNotionalCommodityFrequency {
+	fn default() -> Self {
+		UnderlyingDeliveryScheduleNotionalCommodityFrequency::Term
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -606,6 +624,12 @@ pub enum UnderlyingDeliveryScheduleToleranceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnderlyingDeliveryScheduleToleranceUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingDeliveryScheduleToleranceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryScheduleToleranceType {
 	/// Absolute
@@ -614,6 +638,12 @@ pub enum UnderlyingDeliveryScheduleToleranceType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for UnderlyingDeliveryScheduleToleranceType {
+	fn default() -> Self {
+		UnderlyingDeliveryScheduleToleranceType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -638,6 +668,12 @@ pub enum UnderlyingDeliveryScheduleSettlFlowType {
 	Other,
 }
 
+impl Default for UnderlyingDeliveryScheduleSettlFlowType {
+	fn default() -> Self {
+		UnderlyingDeliveryScheduleSettlFlowType::AllTimes
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingDeliveryScheduleSettlHolidaysProcessingInstruction {
 	/// Do not include holidays
@@ -646,4 +682,10 @@ pub enum UnderlyingDeliveryScheduleSettlHolidaysProcessingInstruction {
 	/// Include holidays
 	#[serde(rename = "1")]
 	IncludeHolidays,
+}
+
+impl Default for UnderlyingDeliveryScheduleSettlHolidaysProcessingInstruction {
+	fn default() -> Self {
+		UnderlyingDeliveryScheduleSettlHolidaysProcessingInstruction::DoNotIncludeHolidays
+	}
 }

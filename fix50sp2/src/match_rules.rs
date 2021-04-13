@@ -123,6 +123,12 @@ pub enum MatchType {
 	CrossAuctionWithLastLook,
 }
 
+impl Default for MatchType {
+	fn default() -> Self {
+		MatchType::ActAcceptedTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CustomerPriority {
 	/// No priority
@@ -131,4 +137,10 @@ pub enum CustomerPriority {
 	/// Unconditional priority
 	#[serde(rename = "1")]
 	UnconditionalPriority,
+}
+
+impl Default for CustomerPriority {
+	fn default() -> Self {
+		CustomerPriority::NoPriority
+	}
 }

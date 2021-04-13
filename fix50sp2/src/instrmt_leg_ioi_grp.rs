@@ -32,3 +32,9 @@ pub enum LegIOIQty {
 	#[serde(rename = "U")]
 	UndisclosedQuantity,
 }
+
+impl Default for LegIOIQty {
+	fn default() -> Self {
+		LegIOIQty::Small
+	}
+}

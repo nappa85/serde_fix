@@ -34,3 +34,9 @@ pub enum ComplexEventCreditEventQualifierItem {
 	#[serde(rename = "C")]
 	FloatingRateInterestShortfall,
 }
+
+impl Default for ComplexEventCreditEventQualifierItem {
+	fn default() -> Self {
+		ComplexEventCreditEventQualifierItem::RetructuringMultipleHoldingObligations
+	}
+}

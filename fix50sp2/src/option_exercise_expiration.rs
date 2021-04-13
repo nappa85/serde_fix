@@ -83,6 +83,12 @@ pub enum OptionExerciseExpirationDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for OptionExerciseExpirationDateBusinessDayConvention {
+	fn default() -> Self {
+		OptionExerciseExpirationDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OptionExerciseExpirationDateRelativeTo {
 	/// Trade date
@@ -117,6 +123,12 @@ pub enum OptionExerciseExpirationDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for OptionExerciseExpirationDateRelativeTo {
+	fn default() -> Self {
+		OptionExerciseExpirationDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OptionExerciseExpirationDateOffsetUnit {
 	/// Day
@@ -133,6 +145,12 @@ pub enum OptionExerciseExpirationDateOffsetUnit {
 	Year,
 }
 
+impl Default for OptionExerciseExpirationDateOffsetUnit {
+	fn default() -> Self {
+		OptionExerciseExpirationDateOffsetUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OptionExerciseExpirationFrequencyUnit {
 	/// Day
@@ -147,6 +165,12 @@ pub enum OptionExerciseExpirationFrequencyUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for OptionExerciseExpirationFrequencyUnit {
+	fn default() -> Self {
+		OptionExerciseExpirationFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -291,6 +315,12 @@ pub enum OptionExerciseExpirationRollConvention {
 	Sunday,
 }
 
+impl Default for OptionExerciseExpirationRollConvention {
+	fn default() -> Self {
+		OptionExerciseExpirationRollConvention::N1StDayOfTheMonth
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OptionExerciseExpirationDateOffsetDayType {
 	/// Business
@@ -311,4 +341,10 @@ pub enum OptionExerciseExpirationDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for OptionExerciseExpirationDateOffsetDayType {
+	fn default() -> Self {
+		OptionExerciseExpirationDateOffsetDayType::Business
+	}
 }

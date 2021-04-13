@@ -300,3 +300,9 @@ pub enum PaymentSettlPartySubIDType {
 	#[serde(rename = "87")]
 	N87,
 }
+
+impl Default for PaymentSettlPartySubIDType {
+	fn default() -> Self {
+		PaymentSettlPartySubIDType::N1
+	}
+}

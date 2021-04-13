@@ -25,15 +25,11 @@ pub struct Settlement {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// EncodedTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// EncodedText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode(160)&nbsp;(160)</a> = 4 and when referring to orders that where electronically submitted over FIX or otherwise assigned a ClOrdID.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "11")]
@@ -71,6 +67,12 @@ pub enum SettlInstMode {
 	RequestReject,
 }
 
+impl Default for SettlInstMode {
+	fn default() -> Self {
+		SettlInstMode::Default
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlInstReqRejCode {
 	/// Unable to process request
@@ -85,4 +87,10 @@ pub enum SettlInstReqRejCode {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for SettlInstReqRejCode {
+	fn default() -> Self {
+		SettlInstReqRejCode::UnableToProcessRequest
+	}
 }

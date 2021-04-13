@@ -59,6 +59,12 @@ pub enum LegProtectionTermEventUnit {
 	Year,
 }
 
+impl Default for LegProtectionTermEventUnit {
+	fn default() -> Self {
+		LegProtectionTermEventUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProtectionTermEventDayType {
 	/// Business
@@ -79,4 +85,10 @@ pub enum LegProtectionTermEventDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegProtectionTermEventDayType {
+	fn default() -> Self {
+		LegProtectionTermEventDayType::Business
+	}
 }

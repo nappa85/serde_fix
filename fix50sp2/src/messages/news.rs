@@ -36,15 +36,11 @@ pub struct News {
 	#[serde(rename = "148")]
 	pub headline: String,
 	/// Must be set if <a href="tag_359_EncodedHeadline.html" target="bottom">EncodedHeadline&nbsp;(359)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "358")]
-	pub encoded_headline_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_148_Headline.html" target="bottom">Headline&nbsp;(148)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "359")]
-	pub encoded_headline: Option<String>,
+	#[serde(alias = "359")]
+	pub encoded_headline: Option<fix_common::EncodedText<359>>,
 	/// Required if any <a href="tag_216_RoutingType.html" target="bottom">RoutingType&nbsp;(216)</a> and <a href="tag_217_RoutingID.html" target="bottom">RoutingIDs&nbsp;(217)</a> are specified. Indicates the number within repeating group.
 	#[serde(flatten)]
 	pub routing_grp: Option<super::super::routing_grp::RoutingGrp>,
@@ -73,15 +69,11 @@ pub struct News {
 	#[serde(rename = "149")]
 	pub url_link: Option<String>,
 	/// RawDataLength
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "95")]
-	pub raw_data_length: Option<usize>,
 	/// RawData
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "96")]
-	pub raw_data: Option<String>,
+	#[serde(alias = "96")]
+	pub raw_data: Option<fix_common::EncodedText<96>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -98,6 +90,12 @@ pub enum NewsID {
 	/// GICS (Global Industry Classification Standard) published by Standards and Poor.
 	#[serde(rename = "3")]
 	GicsPublishedByStandardsAndPoor,
+}
+
+impl Default for NewsID {
+	fn default() -> Self {
+		NewsID::IcbPublishedByDowJonesAndFtseAXmlnsHttpWwwB2BitsComFixProtocolXmlnsXsiHttpWwwW3Org2001XmlSchemaInstanceHrefHttpWwwIcbenchmarkComTargetBlankWwwIcbenchmarkComA
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -117,6 +115,12 @@ pub enum NewsCategory {
 	/// Other News
 	#[serde(rename = "99")]
 	OtherNews,
+}
+
+impl Default for NewsCategory {
+	fn default() -> Self {
+		NewsCategory::CompanyNews
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -675,6 +679,12 @@ pub enum LanguageCode {
 	Zulu,
 }
 
+impl Default for LanguageCode {
+	fn default() -> Self {
+		LanguageCode::Abkhaz
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Urgency {
 	/// Normal
@@ -686,4 +696,10 @@ pub enum Urgency {
 	/// Background
 	#[serde(rename = "2")]
 	Background,
+}
+
+impl Default for Urgency {
+	fn default() -> Self {
+		Urgency::Normal
+	}
 }

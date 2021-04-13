@@ -96,16 +96,12 @@ pub struct FinancingDetails {
 	#[serde(rename = "1513")]
 	pub documentation_text: Option<String>,
 	/// Must be set if EncodedDocuentationText(1527) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1525")]
-	pub encoded_documentation_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the DocuemtnationText(1513) field in the encoded format specified via the
 	/// MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1527")]
-	pub encoded_documentation_text: Option<String>,
+	#[serde(alias = "1527")]
+	pub encoded_documentation_text: Option<fix_common::EncodedText<1527>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1312,6 +1308,12 @@ pub enum AgreementCurrency {
 	N999,
 }
 
+impl Default for AgreementCurrency {
+	fn default() -> Self {
+		AgreementCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TerminationType {
 	/// Overnight
@@ -1326,6 +1328,12 @@ pub enum TerminationType {
 	/// Open
 	#[serde(rename = "4")]
 	Open,
+}
+
+impl Default for TerminationType {
+	fn default() -> Self {
+		TerminationType::Overnight
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1345,4 +1353,10 @@ pub enum DeliveryType {
 	/// Deliver-by-Value
 	#[serde(rename = "4")]
 	DeliverByValue,
+}
+
+impl Default for DeliveryType {
+	fn default() -> Self {
+		DeliveryType::VersusPaymentDeliverOrReceiveVsPayment
+	}
 }

@@ -126,6 +126,12 @@ pub enum RelatedPartyDetailIDSource {
 	MasterSpecialSegregatedAccountId,
 }
 
+impl Default for RelatedPartyDetailIDSource {
+	fn default() -> Self {
+		RelatedPartyDetailIDSource::BicCode
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RelatedPartyDetailRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
@@ -507,6 +513,12 @@ pub enum RelatedPartyDetailRole {
 	ContraInvestmentDecisionMaker,
 }
 
+impl Default for RelatedPartyDetailRole {
+	fn default() -> Self {
+		RelatedPartyDetailRole::ExecutingFirm
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RelatedPartyDetailRoleQualifier {
 	/// Agency
@@ -599,4 +611,10 @@ pub enum RelatedPartyDetailRoleQualifier {
 	/// Lender
 	#[serde(rename = "29")]
 	Lender,
+}
+
+impl Default for RelatedPartyDetailRoleQualifier {
+	fn default() -> Self {
+		RelatedPartyDetailRoleQualifier::Agency
+	}
 }

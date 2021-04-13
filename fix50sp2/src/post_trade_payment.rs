@@ -39,16 +39,12 @@ pub struct PostTradePayment {
 	#[serde(rename = "2820")]
 	pub post_trade_payment_desc: Option<String>,
 	/// Must be set if EncodedPostTradePaymentDesc(2814) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2815")]
-	pub encoded_post_trade_payment_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the PostTradePaymentDesc(2820) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2814")]
-	pub encoded_post_trade_payment_desc: Option<String>,
+	#[serde(alias = "2814")]
+	pub encoded_post_trade_payment_desc: Option<fix_common::EncodedText<2814>>,
 	/// PostTradePaymentLinkID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2822")]
@@ -71,9 +67,9 @@ pub enum PostTradePaymentDebitOrCredit {
 }
 
 impl Default for PostTradePaymentDebitOrCredit {
-    fn default() -> Self {
-        PostTradePaymentDebitOrCredit::DebitPay
-    }
+	fn default() -> Self {
+		PostTradePaymentDebitOrCredit::DebitPay
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -93,4 +89,10 @@ pub enum PostTradePaymentStatus {
 	/// Rejected
 	#[serde(rename = "4")]
 	Rejected,
+}
+
+impl Default for PostTradePaymentStatus {
+	fn default() -> Self {
+		PostTradePaymentStatus::New
+	}
 }

@@ -37,3 +37,9 @@ pub enum MatchInst {
 	#[serde(rename = "2")]
 	DoNotMatch,
 }
+
+impl Default for MatchInst {
+	fn default() -> Self {
+		MatchInst::Match
+	}
+}

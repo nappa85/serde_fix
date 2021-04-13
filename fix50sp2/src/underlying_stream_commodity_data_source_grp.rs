@@ -36,3 +36,9 @@ pub enum UnderlyingStreamCommodityDataSourceIDType {
 	#[serde(rename = "3")]
 	WeatherIndexWmo,
 }
+
+impl Default for UnderlyingStreamCommodityDataSourceIDType {
+	fn default() -> Self {
+		UnderlyingStreamCommodityDataSourceIDType::City
+	}
+}

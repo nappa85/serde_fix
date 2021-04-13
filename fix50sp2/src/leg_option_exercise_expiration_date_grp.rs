@@ -30,3 +30,9 @@ pub enum LegOptionExerciseExpirationDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for LegOptionExerciseExpirationDateType {
+	fn default() -> Self {
+		LegOptionExerciseExpirationDateType::Unadjusted
+	}
+}

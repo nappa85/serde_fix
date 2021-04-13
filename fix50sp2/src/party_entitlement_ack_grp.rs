@@ -28,15 +28,11 @@ pub struct PartyEntitlement {
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// EncodedRejectTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// EncodedRejectText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// Optional when PartyDetailGrp is provided or <a href="tag_1324_ListUpdateAction.html" target="bottom">ListUpdateAction&nbsp;(1324)</a> = A(Add).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1885")]
@@ -59,6 +55,12 @@ pub enum ListUpdateAction {
 	Snapshot,
 }
 
+impl Default for ListUpdateAction {
+	fn default() -> Self {
+		ListUpdateAction::Add
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EntitlementStatus {
 	/// Accepted
@@ -79,6 +81,12 @@ pub enum EntitlementStatus {
 	/// Deferred (Entitlement definition request is being postponed or delayed)
 	#[serde(rename = "5")]
 	N5,
+}
+
+impl Default for EntitlementStatus {
+	fn default() -> Self {
+		EntitlementStatus::N0
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -134,4 +142,10 @@ pub enum EntitlementResult {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for EntitlementResult {
+	fn default() -> Self {
+		EntitlementResult::Successful
+	}
 }

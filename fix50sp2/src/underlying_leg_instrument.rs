@@ -170,6 +170,12 @@ pub enum UnderlyingLegSecurityIDSource {
 	UniformSymbol,
 }
 
+impl Default for UnderlyingLegSecurityIDSource {
+	fn default() -> Self {
+		UnderlyingLegSecurityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingLegSecurityType {
 	/// Future
@@ -635,6 +641,12 @@ pub enum UnderlyingLegSecurityType {
 	Sfp,
 }
 
+impl Default for UnderlyingLegSecurityType {
+	fn default() -> Self {
+		UnderlyingLegSecurityType::Fut
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingLegPutOrCall {
 	/// Put
@@ -643,4 +655,10 @@ pub enum UnderlyingLegPutOrCall {
 	/// Call
 	#[serde(rename = "1")]
 	Call,
+}
+
+impl Default for UnderlyingLegPutOrCall {
+	fn default() -> Self {
+		UnderlyingLegPutOrCall::Put
+	}
 }

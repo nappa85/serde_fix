@@ -32,3 +32,9 @@ pub enum PaymentStreamNonDeliverableSettlRateSourceItem {
 	#[serde(rename = "99")]
 	Other,
 }
+
+impl Default for PaymentStreamNonDeliverableSettlRateSourceItem {
+	fn default() -> Self {
+		PaymentStreamNonDeliverableSettlRateSourceItem::Bloomberg
+	}
+}

@@ -30,3 +30,9 @@ pub enum UnderlyingOptionExerciseExpirationDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for UnderlyingOptionExerciseExpirationDateType {
+	fn default() -> Self {
+		UnderlyingOptionExerciseExpirationDateType::Unadjusted
+	}
+}

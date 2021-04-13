@@ -87,6 +87,12 @@ pub enum PaymentStreamPaymentFrequencyUnit {
 	Term,
 }
 
+impl Default for PaymentStreamPaymentFrequencyUnit {
+	fn default() -> Self {
+		PaymentStreamPaymentFrequencyUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamPaymentDateOffsetUnit {
 	/// Day
@@ -101,6 +107,12 @@ pub enum PaymentStreamPaymentDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for PaymentStreamPaymentDateOffsetUnit {
+	fn default() -> Self {
+		PaymentStreamPaymentDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -123,4 +135,10 @@ pub enum PaymentStreamPaymentDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for PaymentStreamPaymentDateOffsetDayType {
+	fn default() -> Self {
+		PaymentStreamPaymentDateOffsetDayType::Business
+	}
 }

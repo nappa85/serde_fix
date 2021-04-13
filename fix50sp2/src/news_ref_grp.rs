@@ -36,3 +36,9 @@ pub enum NewsRefType {
 	#[serde(rename = "3")]
 	Withdrawal,
 }
+
+impl Default for NewsRefType {
+	fn default() -> Self {
+		NewsRefType::Replacement
+	}
+}

@@ -42,3 +42,9 @@ pub enum LegComplexEventPeriodType {
 	#[serde(rename = "5")]
 	KnockIn,
 }
+
+impl Default for LegComplexEventPeriodType {
+	fn default() -> Self {
+		LegComplexEventPeriodType::AsianOut
+	}
+}

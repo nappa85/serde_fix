@@ -38,3 +38,9 @@ pub enum PriceMovementType {
 	#[serde(rename = "1")]
 	Percentage,
 }
+
+impl Default for PriceMovementType {
+	fn default() -> Self {
+		PriceMovementType::Amount
+	}
+}

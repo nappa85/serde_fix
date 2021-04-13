@@ -45,6 +45,12 @@ pub enum DeliveryForm {
 	Bearer,
 }
 
+impl Default for DeliveryForm {
+	fn default() -> Self {
+		DeliveryForm::BookEntry
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CommodityFinalPriceType {
 	/// Argus McCloskey
@@ -68,4 +74,10 @@ pub enum CommodityFinalPriceType {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for CommodityFinalPriceType {
+	fn default() -> Self {
+		CommodityFinalPriceType::ArgusMcCloskey
+	}
 }

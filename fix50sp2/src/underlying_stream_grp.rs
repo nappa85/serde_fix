@@ -48,16 +48,12 @@ pub struct UnderlyingStream {
 	#[serde(rename = "40547")]
 	pub underlying_stream_text: Option<String>,
 	/// Must be set if EncodedUnderlyingStreamText(40989) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "40988")]
-	pub encoded_underlying_stream_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the UnderlyingStreamText(40547) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40989")]
-	pub encoded_underlying_stream_text: Option<String>,
+	#[serde(alias = "40989")]
+	pub encoded_underlying_stream_text: Option<fix_common::EncodedText<40989>>,
 	/// UnderlyingStreamXID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42016")]
@@ -142,6 +138,12 @@ pub enum UnderlyingStreamNotionalFrequencyUnit {
 	Quarter,
 }
 
+impl Default for UnderlyingStreamNotionalFrequencyUnit {
+	fn default() -> Self {
+		UnderlyingStreamNotionalFrequencyUnit::Hour
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingStreamNotionalCommodityFrequency {
 	/// Term
@@ -165,6 +167,12 @@ pub enum UnderlyingStreamNotionalCommodityFrequency {
 	/// Per month
 	#[serde(rename = "6")]
 	PerMonth,
+}
+
+impl Default for UnderlyingStreamNotionalCommodityFrequency {
+	fn default() -> Self {
+		UnderlyingStreamNotionalCommodityFrequency::Term
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -415,6 +423,12 @@ pub enum UnderlyingStreamNotionalUnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnderlyingStreamNotionalUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingStreamNotionalUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingStreamTotalNotionalUnitOfMeasure {
 	/// Barrels
@@ -661,4 +675,10 @@ pub enum UnderlyingStreamTotalNotionalUnitOfMeasure {
 	/// Yard
 	#[serde(rename = "yd")]
 	Yd,
+}
+
+impl Default for UnderlyingStreamTotalNotionalUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingStreamTotalNotionalUnitOfMeasure::Bbl
+	}
 }

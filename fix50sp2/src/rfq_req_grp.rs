@@ -47,6 +47,12 @@ pub enum QuoteRequestType {
 	ConfirmQuote,
 }
 
+impl Default for QuoteRequestType {
+	fn default() -> Self {
+		QuoteRequestType::Manual
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteType {
 	/// Indicative
@@ -64,6 +70,12 @@ pub enum QuoteType {
 	/// Initially tradeable
 	#[serde(rename = "4")]
 	InitiallyTradeable,
+}
+
+impl Default for QuoteType {
+	fn default() -> Self {
+		QuoteType::Indicative
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -89,6 +101,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -133,4 +151,10 @@ pub enum TradingSessionSubID {
 	/// Group auction
 	#[serde(rename = "13")]
 	GroupAuction,
+}
+
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
 }

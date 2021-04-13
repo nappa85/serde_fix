@@ -300,3 +300,9 @@ pub enum SettlPartySubIDType {
 	#[serde(rename = "87")]
 	N87,
 }
+
+impl Default for SettlPartySubIDType {
+	fn default() -> Self {
+		SettlPartySubIDType::N1
+	}
+}

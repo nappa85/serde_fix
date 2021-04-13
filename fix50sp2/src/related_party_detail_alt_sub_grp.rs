@@ -302,3 +302,9 @@ pub enum RelatedPartyDetailAltSubIDType {
 	#[serde(rename = "87")]
 	N87,
 }
+
+impl Default for RelatedPartyDetailAltSubIDType {
+	fn default() -> Self {
+		RelatedPartyDetailAltSubIDType::N1
+	}
+}

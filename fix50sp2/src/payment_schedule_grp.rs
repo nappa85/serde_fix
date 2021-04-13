@@ -359,6 +359,12 @@ pub enum PaymentScheduleType {
 	CompoundingFloorRate,
 }
 
+impl Default for PaymentScheduleType {
+	fn default() -> Self {
+		PaymentScheduleType::Notional
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentScheduleStepRelativeTo {
 	/// Initial
@@ -367,6 +373,12 @@ pub enum PaymentScheduleStepRelativeTo {
 	/// Previous
 	#[serde(rename = "1")]
 	Previous,
+}
+
+impl Default for PaymentScheduleStepRelativeTo {
+	fn default() -> Self {
+		PaymentScheduleStepRelativeTo::Initial
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -617,6 +629,12 @@ pub enum PaymentScheduleRateUnitOfMeasure {
 	Yd,
 }
 
+impl Default for PaymentScheduleRateUnitOfMeasure {
+	fn default() -> Self {
+		PaymentScheduleRateUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentScheduleRateSpreadType {
 	/// Absolute
@@ -625,6 +643,12 @@ pub enum PaymentScheduleRateSpreadType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for PaymentScheduleRateSpreadType {
+	fn default() -> Self {
+		PaymentScheduleRateSpreadType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -875,6 +899,12 @@ pub enum PaymentScheduleSettlPeriodPriceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for PaymentScheduleSettlPeriodPriceUnitOfMeasure {
+	fn default() -> Self {
+		PaymentScheduleSettlPeriodPriceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentScheduleStepUnitOfMeasure {
 	/// Barrels
@@ -1123,6 +1153,12 @@ pub enum PaymentScheduleStepUnitOfMeasure {
 	Yd,
 }
 
+impl Default for PaymentScheduleStepUnitOfMeasure {
+	fn default() -> Self {
+		PaymentScheduleStepUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentScheduleFixingDayDistribution {
 	/// All
@@ -1137,6 +1173,12 @@ pub enum PaymentScheduleFixingDayDistribution {
 	/// Penultimate
 	#[serde(rename = "3")]
 	Penultimate,
+}
+
+impl Default for PaymentScheduleFixingDayDistribution {
+	fn default() -> Self {
+		PaymentScheduleFixingDayDistribution::All
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1155,6 +1197,12 @@ pub enum PaymentScheduleFixingLagUnit {
 	Year,
 }
 
+impl Default for PaymentScheduleFixingLagUnit {
+	fn default() -> Self {
+		PaymentScheduleFixingLagUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentScheduleFixingFirstObservationDateOffsetUnit {
 	/// Day
@@ -1169,4 +1217,10 @@ pub enum PaymentScheduleFixingFirstObservationDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for PaymentScheduleFixingFirstObservationDateOffsetUnit {
+	fn default() -> Self {
+		PaymentScheduleFixingFirstObservationDateOffsetUnit::Day
+	}
 }

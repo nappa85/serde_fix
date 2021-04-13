@@ -51,7 +51,7 @@ pub enum StatusValue {
 }
 
 impl Default for StatusValue {
-    fn default() -> Self {
-        StatusValue::Connected
-    }
+	fn default() -> Self {
+		StatusValue::Connected
+	}
 }

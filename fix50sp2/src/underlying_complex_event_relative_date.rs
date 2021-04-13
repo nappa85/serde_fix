@@ -80,6 +80,12 @@ pub enum UnderlyingComplexEventDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for UnderlyingComplexEventDateRelativeTo {
+	fn default() -> Self {
+		UnderlyingComplexEventDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingComplexEventDateOffsetUnit {
 	/// Day
@@ -94,6 +100,12 @@ pub enum UnderlyingComplexEventDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for UnderlyingComplexEventDateOffsetUnit {
+	fn default() -> Self {
+		UnderlyingComplexEventDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -116,6 +128,12 @@ pub enum UnderlyingComplexEventDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for UnderlyingComplexEventDayType {
+	fn default() -> Self {
+		UnderlyingComplexEventDayType::Business
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -144,4 +162,10 @@ pub enum UnderlyingComplexEventDateBusinessDayConvention {
 	/// Nearest day
 	#[serde(rename = "7")]
 	NearestDay,
+}
+
+impl Default for UnderlyingComplexEventDateBusinessDayConvention {
+	fn default() -> Self {
+		UnderlyingComplexEventDateBusinessDayConvention::NotApplicable
+	}
 }

@@ -33,3 +33,9 @@ pub enum TransactionAttributeType {
 	#[serde(rename = "2")]
 	CollateralArrangementType,
 }
+
+impl Default for TransactionAttributeType {
+	fn default() -> Self {
+		TransactionAttributeType::ExclusiveArrangement
+	}
+}

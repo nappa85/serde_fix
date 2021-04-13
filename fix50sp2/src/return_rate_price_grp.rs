@@ -48,3 +48,9 @@ pub enum ReturnRatePriceBasis {
 	#[serde(rename = "3")]
 	CleanNet,
 }
+
+impl Default for ReturnRatePriceBasis {
+	fn default() -> Self {
+		ReturnRatePriceBasis::Gross
+	}
+}

@@ -55,3 +55,9 @@ pub enum StrikeExerciseStyle {
 	#[serde(rename = "99")]
 	Other,
 }
+
+impl Default for StrikeExerciseStyle {
+	fn default() -> Self {
+		StrikeExerciseStyle::European
+	}
+}

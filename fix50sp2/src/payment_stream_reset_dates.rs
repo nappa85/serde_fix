@@ -153,3 +153,9 @@ pub enum PaymentStreamResetWeeklyRollConvention {
 	#[serde(rename = "SUN")]
 	Sunday,
 }
+
+impl Default for PaymentStreamResetWeeklyRollConvention {
+	fn default() -> Self {
+		PaymentStreamResetWeeklyRollConvention::Monday
+	}
+}

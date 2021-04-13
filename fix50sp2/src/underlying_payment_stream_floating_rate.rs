@@ -421,6 +421,12 @@ pub enum UnderlyingPaymentStreamRateIndexCurveUnit2 {
 	Year,
 }
 
+impl Default for UnderlyingPaymentStreamRateIndexCurveUnit2 {
+	fn default() -> Self {
+		UnderlyingPaymentStreamRateIndexCurveUnit2::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamRateIndexUnitOfMeasure {
 	/// Barrels
@@ -669,6 +675,12 @@ pub enum UnderlyingPaymentStreamRateIndexUnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnderlyingPaymentStreamRateIndexUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingPaymentStreamRateIndexUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamSettlLevel {
 	/// Average (The cumulative number of weather index units for each day in the calculation period divided by the number of days
@@ -684,6 +696,12 @@ pub enum UnderlyingPaymentStreamSettlLevel {
 	/// Cumulative (The cumulative number of weather index units for each day in the calculaiton period)
 	#[serde(rename = "3")]
 	Cumulative,
+}
+
+impl Default for UnderlyingPaymentStreamSettlLevel {
+	fn default() -> Self {
+		UnderlyingPaymentStreamSettlLevel::Average
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -934,6 +952,12 @@ pub enum UnderlyingPaymentStreamReferenceLevelUnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnderlyingPaymentStreamReferenceLevelUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingPaymentStreamReferenceLevelUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamRateSpreadUnitOfMeasure {
 	/// Barrels
@@ -1182,6 +1206,12 @@ pub enum UnderlyingPaymentStreamRateSpreadUnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnderlyingPaymentStreamRateSpreadUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingPaymentStreamRateSpreadUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamRateSpreadType {
 	/// Absolute
@@ -1190,6 +1220,12 @@ pub enum UnderlyingPaymentStreamRateSpreadType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for UnderlyingPaymentStreamRateSpreadType {
+	fn default() -> Self {
+		UnderlyingPaymentStreamRateSpreadType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1208,6 +1244,12 @@ pub enum UnderlyingPaymentStreamCalculationLagUnit {
 	Year,
 }
 
+impl Default for UnderlyingPaymentStreamCalculationLagUnit {
+	fn default() -> Self {
+		UnderlyingPaymentStreamCalculationLagUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamFirstObservationDateOffsetUnit {
 	/// Day
@@ -1222,6 +1264,12 @@ pub enum UnderlyingPaymentStreamFirstObservationDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for UnderlyingPaymentStreamFirstObservationDateOffsetUnit {
+	fn default() -> Self {
+		UnderlyingPaymentStreamFirstObservationDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1246,6 +1294,12 @@ pub enum UnderlyingPaymentStreamPricingDayType {
 	ScheduledTradingDay,
 }
 
+impl Default for UnderlyingPaymentStreamPricingDayType {
+	fn default() -> Self {
+		UnderlyingPaymentStreamPricingDayType::Business
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamPricingDayDistribution {
 	/// All
@@ -1260,6 +1314,12 @@ pub enum UnderlyingPaymentStreamPricingDayDistribution {
 	/// Penultimate
 	#[serde(rename = "3")]
 	Penultimate,
+}
+
+impl Default for UnderlyingPaymentStreamPricingDayDistribution {
+	fn default() -> Self {
+		UnderlyingPaymentStreamPricingDayDistribution::All
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1288,4 +1348,10 @@ pub enum UnderlyingPaymentStreamPricingBusinessDayConvention {
 	/// Nearest day
 	#[serde(rename = "7")]
 	NearestDay,
+}
+
+impl Default for UnderlyingPaymentStreamPricingBusinessDayConvention {
+	fn default() -> Self {
+		UnderlyingPaymentStreamPricingBusinessDayConvention::NotApplicable
+	}
 }

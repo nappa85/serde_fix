@@ -252,6 +252,12 @@ pub enum ComplexEventType {
 	DividendValuation,
 }
 
+impl Default for ComplexEventType {
+	fn default() -> Self {
+		ComplexEventType::Capped
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ComplexEventPriceBoundaryMethod {
 	/// Less than <a href="tag_1486_ComplexEventPrice.html" target="bottom">ComplexEventPrice&nbsp;(1486)</a>
@@ -269,6 +275,12 @@ pub enum ComplexEventPriceBoundaryMethod {
 	/// Greater than <a href="tag_1486_ComplexEventPrice.html" target="bottom">ComplexEventPrice&nbsp;(1486)</a>
 	#[serde(rename = "5")]
 	GreaterThanAHrefTag1486ComplexEventPriceHtmlTargetBottomComplexEventPriceNbspA,
+}
+
+impl Default for ComplexEventPriceBoundaryMethod {
+	fn default() -> Self {
+		ComplexEventPriceBoundaryMethod::LessThanAHrefTag1486ComplexEventPriceHtmlTargetBottomComplexEventPriceNbspA
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -299,6 +311,12 @@ pub enum ComplexEventPriceTimeType {
 	AsSpecifiedInMasterConfirmation,
 }
 
+impl Default for ComplexEventPriceTimeType {
+	fn default() -> Self {
+		ComplexEventPriceTimeType::Expiration
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ComplexEventCondition {
 	/// And
@@ -307,6 +325,12 @@ pub enum ComplexEventCondition {
 	/// Or
 	#[serde(rename = "2")]
 	Or,
+}
+
+impl Default for ComplexEventCondition {
+	fn default() -> Self {
+		ComplexEventCondition::And
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -319,6 +343,12 @@ pub enum ComplexOptPayoutPaySide {
 	Sell,
 }
 
+impl Default for ComplexOptPayoutPaySide {
+	fn default() -> Self {
+		ComplexOptPayoutPaySide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ComplexOptPayoutReceiveSide {
 	/// Buy
@@ -327,6 +357,12 @@ pub enum ComplexOptPayoutReceiveSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for ComplexOptPayoutReceiveSide {
+	fn default() -> Self {
+		ComplexOptPayoutReceiveSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -354,6 +390,12 @@ pub enum ComplexOptPayoutTime {
 	AsSpecifiedInMasterConfirmation,
 }
 
+impl Default for ComplexOptPayoutTime {
+	fn default() -> Self {
+		ComplexOptPayoutTime::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ComplexEventQuoteBasis {
 	/// Currency 1 per currency 2
@@ -362,6 +404,12 @@ pub enum ComplexEventQuoteBasis {
 	/// Currency 2 per currency 1
 	#[serde(rename = "1")]
 	Currency2PerCurrency1,
+}
+
+impl Default for ComplexEventQuoteBasis {
+	fn default() -> Self {
+		ComplexEventQuoteBasis::Currency1PerCurrency2
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -380,6 +428,12 @@ pub enum ComplexEventCalculationAgent {
 	AsSpecifiedInTheStandardTermsSupplement,
 }
 
+impl Default for ComplexEventCalculationAgent {
+	fn default() -> Self {
+		ComplexEventCalculationAgent::ExercisingParty
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ComplexEventCreditEventNotifyingParty {
 	/// Seller notifies
@@ -393,6 +447,12 @@ pub enum ComplexEventCreditEventNotifyingParty {
 	SellerOrBuyerNotifies,
 }
 
+impl Default for ComplexEventCreditEventNotifyingParty {
+	fn default() -> Self {
+		ComplexEventCreditEventNotifyingParty::SellerNotifies
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ComplexEventPVFinalPriceElectionFallback {
 	/// Close
@@ -401,4 +461,10 @@ pub enum ComplexEventPVFinalPriceElectionFallback {
 	/// Hedge election
 	#[serde(rename = "1")]
 	HedgeElection,
+}
+
+impl Default for ComplexEventPVFinalPriceElectionFallback {
+	fn default() -> Self {
+		ComplexEventPVFinalPriceElectionFallback::Close
+	}
 }

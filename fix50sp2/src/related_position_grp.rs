@@ -37,3 +37,9 @@ pub enum RelatedPositionIDSource {
 	#[serde(rename = "3")]
 	PositionEntityIdPositionId,
 }
+
+impl Default for RelatedPositionIDSource {
+	fn default() -> Self {
+		RelatedPositionIDSource::PositionMaintenanceReportId
+	}
+}

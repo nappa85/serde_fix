@@ -142,6 +142,12 @@ pub enum DeliveryStreamType {
 	Single,
 }
 
+impl Default for DeliveryStreamType {
+	fn default() -> Self {
+		DeliveryStreamType::Periodic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryStreamDeliveryRestriction {
 	/// Firm (Never excused of delivery obligations)
@@ -162,6 +168,12 @@ pub enum DeliveryStreamDeliveryRestriction {
 	UnitFirm,
 }
 
+impl Default for DeliveryStreamDeliveryRestriction {
+	fn default() -> Self {
+		DeliveryStreamDeliveryRestriction::Firm
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryStreamDeliveryContingentPartySide {
 	/// Buyer
@@ -172,6 +184,12 @@ pub enum DeliveryStreamDeliveryContingentPartySide {
 	Seller,
 }
 
+impl Default for DeliveryStreamDeliveryContingentPartySide {
+	fn default() -> Self {
+		DeliveryStreamDeliveryContingentPartySide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryStreamTitleTransferCondition {
 	/// Transfers with risk of loss
@@ -180,6 +198,12 @@ pub enum DeliveryStreamTitleTransferCondition {
 	/// Does not transfer with risk of loss
 	#[serde(rename = "1")]
 	DoesNotTransferWithRiskOfLoss,
+}
+
+impl Default for DeliveryStreamTitleTransferCondition {
+	fn default() -> Self {
+		DeliveryStreamTitleTransferCondition::TransfersWithRiskOfLoss
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -430,6 +454,12 @@ pub enum DeliveryStreamToleranceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for DeliveryStreamToleranceUnitOfMeasure {
+	fn default() -> Self {
+		DeliveryStreamToleranceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryStreamToleranceType {
 	/// Absolute
@@ -438,6 +468,12 @@ pub enum DeliveryStreamToleranceType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for DeliveryStreamToleranceType {
+	fn default() -> Self {
+		DeliveryStreamToleranceType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -450,6 +486,12 @@ pub enum DeliveryStreamToleranceOptionSide {
 	Seller,
 }
 
+impl Default for DeliveryStreamToleranceOptionSide {
+	fn default() -> Self {
+		DeliveryStreamToleranceOptionSide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryStreamElectingPartySide {
 	/// Buyer
@@ -460,6 +502,12 @@ pub enum DeliveryStreamElectingPartySide {
 	Seller,
 }
 
+impl Default for DeliveryStreamElectingPartySide {
+	fn default() -> Self {
+		DeliveryStreamElectingPartySide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeliveryStreamDeliveryPointSource {
 	/// Proprietary
@@ -468,4 +516,10 @@ pub enum DeliveryStreamDeliveryPointSource {
 	/// Energy Identification Code
 	#[serde(rename = "1")]
 	EnergyIdentificationCode,
+}
+
+impl Default for DeliveryStreamDeliveryPointSource {
+	fn default() -> Self {
+		DeliveryStreamDeliveryPointSource::Proprietary
+	}
 }

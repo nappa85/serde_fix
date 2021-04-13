@@ -60,6 +60,12 @@ pub enum AllocRegulatoryTradeIDEvent {
 	Termination,
 }
 
+impl Default for AllocRegulatoryTradeIDEvent {
+	fn default() -> Self {
+		AllocRegulatoryTradeIDEvent::InitialBlockTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocRegulatoryTradeIDType {
 	/// Current
@@ -76,6 +82,12 @@ pub enum AllocRegulatoryTradeIDType {
 	Related,
 }
 
+impl Default for AllocRegulatoryTradeIDType {
+	fn default() -> Self {
+		AllocRegulatoryTradeIDType::Current
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocRegulatoryTradeIDScope {
 	/// Clearing member
@@ -84,4 +96,10 @@ pub enum AllocRegulatoryTradeIDScope {
 	/// Client
 	#[serde(rename = "2")]
 	Client,
+}
+
+impl Default for AllocRegulatoryTradeIDScope {
+	fn default() -> Self {
+		AllocRegulatoryTradeIDScope::ClearingMember
+	}
 }

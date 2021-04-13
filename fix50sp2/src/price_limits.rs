@@ -42,3 +42,9 @@ pub enum PriceLimitType {
 	#[serde(rename = "2")]
 	Percentage,
 }
+
+impl Default for PriceLimitType {
+	fn default() -> Self {
+		PriceLimitType::Price
+	}
+}

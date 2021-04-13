@@ -46,6 +46,12 @@ pub enum DisclosureType {
 	CmtaAccount,
 }
 
+impl Default for DisclosureType {
+	fn default() -> Self {
+		DisclosureType::Volume
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DisclosureInstructionItem {
 	/// No
@@ -57,4 +63,10 @@ pub enum DisclosureInstructionItem {
 	/// Use default setting
 	#[serde(rename = "2")]
 	UseDefaultSetting,
+}
+
+impl Default for DisclosureInstructionItem {
+	fn default() -> Self {
+		DisclosureInstructionItem::No
+	}
 }

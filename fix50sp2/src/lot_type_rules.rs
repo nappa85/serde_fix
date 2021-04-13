@@ -38,3 +38,9 @@ pub enum LotType {
 	#[serde(rename = "4")]
 	RoundLotBasedUponAHrefTag996UnitOfMeasureHtmlTargetBottomUnitOfMeasureNbspA,
 }
+
+impl Default for LotType {
+	fn default() -> Self {
+		LotType::OddLot
+	}
+}

@@ -1245,6 +1245,12 @@ pub enum BenchmarkCurveCurrency {
 	N999,
 }
 
+impl Default for BenchmarkCurveCurrency {
+	fn default() -> Self {
+		BenchmarkCurveCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BenchmarkCurveName {
 	/// EONIA
@@ -1351,6 +1357,12 @@ pub enum BenchmarkCurveName {
 	WarsawInterbankOfferedRate,
 }
 
+impl Default for BenchmarkCurveName {
+	fn default() -> Self {
+		BenchmarkCurveName::Eonia
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BenchmarkPriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
@@ -1430,6 +1442,12 @@ pub enum BenchmarkPriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	PercentageOfNotional,
+}
+
+impl Default for BenchmarkPriceType {
+	fn default() -> Self {
+		BenchmarkPriceType::Percentage
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1530,4 +1548,10 @@ pub enum BenchmarkSecurityIDSource {
 	/// Uniform Symbol (UMTF Symbol)
 	#[serde(rename = "X")]
 	UniformSymbol,
+}
+
+impl Default for BenchmarkSecurityIDSource {
+	fn default() -> Self {
+		BenchmarkSecurityIDSource::Cusip
+	}
 }

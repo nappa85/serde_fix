@@ -8,16 +8,12 @@ pub struct UnderlyingOptionExercise {
 	#[serde(rename = "41810")]
 	pub underlying_exercise_desc: Option<String>,
 	/// Must be set if EncodedUnderlyingExerciseDesc(41812) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41811")]
-	pub encoded_underlying_exercise_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the UnderlyingExerciseDesc(41810) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41812")]
-	pub encoded_underlying_exercise_desc: Option<String>,
+	#[serde(alias = "41812")]
+	pub encoded_underlying_exercise_desc: Option<fix_common::EncodedText<41812>>,
 	/// UnderlyingAutomaticExerciseIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41813")]
@@ -82,4 +78,10 @@ pub enum UnderlyingExerciseConfirmationMethod {
 	/// Unknown at time of report
 	#[serde(rename = "3")]
 	UnknownAtTimeOfReport,
+}
+
+impl Default for UnderlyingExerciseConfirmationMethod {
+	fn default() -> Self {
+		UnderlyingExerciseConfirmationMethod::NotRequired
+	}
 }

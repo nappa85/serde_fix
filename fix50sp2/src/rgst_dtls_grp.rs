@@ -111,6 +111,12 @@ pub enum OwnerType {
 	FirmAgencyAveragePriceAccount,
 }
 
+impl Default for OwnerType {
+	fn default() -> Self {
+		OwnerType::IndividualInvestor
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum InvestorCountryOfResidence {
 	/// AFGHANISTAN
@@ -830,4 +836,10 @@ pub enum InvestorCountryOfResidence {
 	/// ZIMBABWE
 	#[serde(rename = "ZW")]
 	Zimbabwe,
+}
+
+impl Default for InvestorCountryOfResidence {
+	fn default() -> Self {
+		InvestorCountryOfResidence::Afghanistan
+	}
 }

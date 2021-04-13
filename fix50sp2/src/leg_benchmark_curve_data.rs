@@ -1231,6 +1231,12 @@ pub enum LegBenchmarkCurveCurrency {
 	N999,
 }
 
+impl Default for LegBenchmarkCurveCurrency {
+	fn default() -> Self {
+		LegBenchmarkCurveCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegBenchmarkCurveName {
 	/// EONIA
@@ -1337,6 +1343,12 @@ pub enum LegBenchmarkCurveName {
 	WarsawInterbankOfferedRate,
 }
 
+impl Default for LegBenchmarkCurveName {
+	fn default() -> Self {
+		LegBenchmarkCurveName::Eonia
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegBenchmarkPriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
@@ -1416,4 +1428,10 @@ pub enum LegBenchmarkPriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	PercentageOfNotional,
+}
+
+impl Default for LegBenchmarkPriceType {
+	fn default() -> Self {
+		LegBenchmarkPriceType::Percentage
+	}
 }

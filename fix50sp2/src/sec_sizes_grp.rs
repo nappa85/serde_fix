@@ -35,3 +35,9 @@ pub enum MDSecSizeType {
 	#[serde(rename = "3")]
 	DoNotTradeThrough,
 }
+
+impl Default for MDSecSizeType {
+	fn default() -> Self {
+		MDSecSizeType::Customer
+	}
+}

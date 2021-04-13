@@ -33,3 +33,9 @@ pub enum StatsType {
 	#[serde(rename = "4")]
 	Turnover,
 }
+
+impl Default for StatsType {
+	fn default() -> Self {
+		StatsType::ExchangeLast
+	}
+}

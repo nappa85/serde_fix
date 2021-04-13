@@ -109,16 +109,12 @@ pub struct Provision {
 	#[serde(rename = "40113")]
 	pub provision_text: Option<String>,
 	/// Must be set if EncodedProvisionText(40987) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "40986")]
-	pub encoded_provision_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ProvisionText(40113) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40987")]
-	pub encoded_provision_text: Option<String>,
+	#[serde(alias = "40987")]
+	pub encoded_provision_text: Option<fix_common::EncodedText<40987>>,
 	/// ProvisionBreakFeeElection
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42707")]
@@ -159,6 +155,12 @@ pub enum ProvisionType {
 	Puttable,
 }
 
+impl Default for ProvisionType {
+	fn default() -> Self {
+		ProvisionType::MandatoryEarlyTermination
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionDateBusinessDayConvention {
 	/// Not applicable
@@ -187,6 +189,12 @@ pub enum ProvisionDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for ProvisionDateBusinessDayConvention {
+	fn default() -> Self {
+		ProvisionDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionDateTenorUnit {
 	/// Day
@@ -201,6 +209,12 @@ pub enum ProvisionDateTenorUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for ProvisionDateTenorUnit {
+	fn default() -> Self {
+		ProvisionDateTenorUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -219,6 +233,12 @@ pub enum ProvisionCalculationAgent {
 	AsSpecifiedInTheStandardTermsSupplement,
 }
 
+impl Default for ProvisionCalculationAgent {
+	fn default() -> Self {
+		ProvisionCalculationAgent::ExercisingParty
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionOptionSinglePartyBuyerSide {
 	/// Buy
@@ -229,6 +249,12 @@ pub enum ProvisionOptionSinglePartyBuyerSide {
 	Sell,
 }
 
+impl Default for ProvisionOptionSinglePartyBuyerSide {
+	fn default() -> Self {
+		ProvisionOptionSinglePartyBuyerSide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionOptionSinglePartySellerSide {
 	/// Buy
@@ -237,6 +263,12 @@ pub enum ProvisionOptionSinglePartySellerSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for ProvisionOptionSinglePartySellerSide {
+	fn default() -> Self {
+		ProvisionOptionSinglePartySellerSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -253,6 +285,12 @@ pub enum ProvisionOptionExerciseStyle {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for ProvisionOptionExerciseStyle {
+	fn default() -> Self {
+		ProvisionOptionExerciseStyle::European
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -280,6 +318,12 @@ pub enum ProvisionCashSettlMethod {
 	CollateralizedPrice,
 }
 
+impl Default for ProvisionCashSettlMethod {
+	fn default() -> Self {
+		ProvisionCashSettlMethod::CashPrice
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionCashSettlQuoteType {
 	/// Bid
@@ -295,6 +339,12 @@ pub enum ProvisionCashSettlQuoteType {
 	/// (j) for definition of "exercising party pays")
 	#[serde(rename = "3")]
 	ExercisingPartyPaysForDefinitionOfExercisingPartyPays,
+}
+
+impl Default for ProvisionCashSettlQuoteType {
+	fn default() -> Self {
+		ProvisionCashSettlQuoteType::Bid
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -314,4 +364,10 @@ pub enum ProvisionBreakFeeElection {
 	/// Amortized fee and funding fee
 	#[serde(rename = "4")]
 	AmortizedFeeAndFundingFee,
+}
+
+impl Default for ProvisionBreakFeeElection {
+	fn default() -> Self {
+		ProvisionBreakFeeElection::FlatFee
+	}
 }

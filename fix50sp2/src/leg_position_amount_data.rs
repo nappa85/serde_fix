@@ -89,6 +89,12 @@ pub enum LegPosAmtType {
 	TotalCollateralizedAmount,
 }
 
+impl Default for LegPosAmtType {
+	fn default() -> Self {
+		LegPosAmtType::FinalMarkToMarketAmount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPosCurrency {
 	/// Afghani
@@ -1293,6 +1299,12 @@ pub enum LegPosCurrency {
 	N999,
 }
 
+impl Default for LegPosCurrency {
+	fn default() -> Self {
+		LegPosCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPosAmtReason {
 	/// Options settlement
@@ -1316,4 +1328,10 @@ pub enum LegPosAmtReason {
 	/// Delivery storage charges
 	#[serde(rename = "6")]
 	DeliveryStorageCharges,
+}
+
+impl Default for LegPosAmtReason {
+	fn default() -> Self {
+		LegPosAmtReason::OptionsSettlement
+	}
 }

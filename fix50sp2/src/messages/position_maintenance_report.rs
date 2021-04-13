@@ -116,15 +116,11 @@ pub struct Position {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Used by CCP to send a reason for rejection
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1328")]
@@ -133,15 +129,11 @@ pub struct Position {
 	#[serde(flatten)]
 	pub related_instrument_grp: Option<super::super::related_instrument_grp::RelatedInstrumentGrp>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText.html" target="bottom">EncodedRejectTextLen(1665)&nbsp;(1665)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1328_RejectText.html" target="bottom">RejectedText(1328)&nbsp;(1328)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// ClearedIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1832")]
@@ -259,6 +251,12 @@ pub enum PosTransType {
 	Reopen,
 }
 
+impl Default for PosTransType {
+	fn default() -> Self {
+		PosTransType::Exercise
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosMaintAction {
 	/// New
@@ -273,6 +271,12 @@ pub enum PosMaintAction {
 	/// Reverse
 	#[serde(rename = "4")]
 	Reverse,
+}
+
+impl Default for PosMaintAction {
+	fn default() -> Self {
+		PosMaintAction::New
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -294,6 +298,12 @@ pub enum PosMaintStatus {
 	CompletedWithWarnings,
 }
 
+impl Default for PosMaintStatus {
+	fn default() -> Self {
+		PosMaintStatus::Accepted
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosMaintResult {
 	/// Successful completion - no warnings or errors
@@ -305,6 +315,12 @@ pub enum PosMaintResult {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for PosMaintResult {
+	fn default() -> Self {
+		PosMaintResult::SuccessfulCompletionNoWarningsOrErrors
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -321,6 +337,12 @@ pub enum SettlSessID {
 	/// End Of Day
 	#[serde(rename = "EOD")]
 	EndOfDay,
+}
+
+impl Default for SettlSessID {
+	fn default() -> Self {
+		SettlSessID::Intraday
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -346,6 +368,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -386,6 +414,12 @@ pub enum AccountType {
 	/// Account for orders from multiple customers
 	#[serde(rename = "13")]
 	AccountForOrdersFromMultipleCustomers,
+}
+
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1592,6 +1626,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
@@ -2796,6 +2836,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AdjustmentType {
 	/// Process request as Margin Disposition
@@ -2815,6 +2861,12 @@ pub enum AdjustmentType {
 	CustomerSpecificPosition,
 }
 
+impl Default for AdjustmentType {
+	fn default() -> Self {
+		AdjustmentType::ProcessRequestAsMarginDisposition
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearedIndicator {
 	/// Not cleared
@@ -2829,6 +2881,12 @@ pub enum ClearedIndicator {
 	/// Rejected
 	#[serde(rename = "3")]
 	Rejected,
+}
+
+impl Default for ClearedIndicator {
+	fn default() -> Self {
+		ClearedIndicator::NotCleared
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2847,6 +2905,12 @@ pub enum ContractRefPosType {
 	Other,
 }
 
+impl Default for ContractRefPosType {
+	fn default() -> Self {
+		ContractRefPosType::TwoComponentIntercommoditySpread
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PositionCapacity {
 	/// Principal
@@ -2861,4 +2925,10 @@ pub enum PositionCapacity {
 	/// Counterparty
 	#[serde(rename = "3")]
 	Counterparty,
+}
+
+impl Default for PositionCapacity {
+	fn default() -> Self {
+		PositionCapacity::Principal
+	}
 }

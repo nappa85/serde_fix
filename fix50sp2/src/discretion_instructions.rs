@@ -63,6 +63,12 @@ pub enum DiscretionInst {
 	AveragePriceGuarantee,
 }
 
+impl Default for DiscretionInst {
+	fn default() -> Self {
+		DiscretionInst::RelatedToDisplayedPrice
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DiscretionMoveType {
 	/// Floating (default)
@@ -71,6 +77,12 @@ pub enum DiscretionMoveType {
 	/// Fixed
 	#[serde(rename = "1")]
 	Fixed,
+}
+
+impl Default for DiscretionMoveType {
+	fn default() -> Self {
+		DiscretionMoveType::Floating
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -89,6 +101,12 @@ pub enum DiscretionOffsetType {
 	PriceTierLevel,
 }
 
+impl Default for DiscretionOffsetType {
+	fn default() -> Self {
+		DiscretionOffsetType::Price
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DiscretionLimitType {
 	/// Or better (default) - price improvement allowed
@@ -103,6 +121,12 @@ pub enum DiscretionLimitType {
 	OrWorseForABuyTheDiscretionPriceIsAMinimumAndForASellTheDiscretionPriceIsAMaximum,
 }
 
+impl Default for DiscretionLimitType {
+	fn default() -> Self {
+		DiscretionLimitType::OrBetterPriceImprovementAllowed
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DiscretionRoundDirection {
 	/// More aggressive - on a buy order round the price up to the nearest tick; on a sell round down to the nearest tick
@@ -111,6 +135,12 @@ pub enum DiscretionRoundDirection {
 	/// More passive - on a buy order round down to the nearest tick; on a sell order round up to the nearest tick
 	#[serde(rename = "2")]
 	MorePassiveOnABuyOrderRoundDownToTheNearestTickOnASellOrderRoundUpToTheNearestTick,
+}
+
+impl Default for DiscretionRoundDirection {
+	fn default() -> Self {
+		DiscretionRoundDirection::MoreAggressiveOnABuyOrderRoundThePriceUpToTheNearestTickOnASellRoundDownToTheNearestTick
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -127,4 +157,10 @@ pub enum DiscretionScope {
 	/// National excluding local
 	#[serde(rename = "4")]
 	NationalExcludingLocal,
+}
+
+impl Default for DiscretionScope {
+	fn default() -> Self {
+		DiscretionScope::Local
+	}
 }

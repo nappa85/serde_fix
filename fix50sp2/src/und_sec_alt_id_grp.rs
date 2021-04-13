@@ -120,3 +120,9 @@ pub enum UnderlyingSecurityAltIDSource {
 	#[serde(rename = "X")]
 	UniformSymbol,
 }
+
+impl Default for UnderlyingSecurityAltIDSource {
+	fn default() -> Self {
+		UnderlyingSecurityAltIDSource::Cusip
+	}
+}

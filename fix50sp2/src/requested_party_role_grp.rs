@@ -403,3 +403,9 @@ pub enum RequestedPartyRoleItem {
 	#[serde(rename = "127")]
 	ContraInvestmentDecisionMaker,
 }
+
+impl Default for RequestedPartyRoleItem {
+	fn default() -> Self {
+		RequestedPartyRoleItem::ExecutingFirm
+	}
+}

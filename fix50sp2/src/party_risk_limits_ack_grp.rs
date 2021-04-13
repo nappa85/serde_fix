@@ -32,16 +32,12 @@ pub struct PartyRiskLimit {
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// Must be set if EncodedRejectText(1665) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the RejectText(1328) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// RiskLimitCheckModelType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2339")]
@@ -68,6 +64,12 @@ pub enum ListUpdateAction {
 	Snapshot,
 }
 
+impl Default for ListUpdateAction {
+	fn default() -> Self {
+		ListUpdateAction::Add
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitStatus {
 	/// Accepted
@@ -79,6 +81,12 @@ pub enum RiskLimitStatus {
 	/// Rejected
 	#[serde(rename = "2")]
 	Rejected,
+}
+
+impl Default for RiskLimitStatus {
+	fn default() -> Self {
+		RiskLimitStatus::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -136,6 +144,12 @@ pub enum RiskLimitResult {
 	Other,
 }
 
+impl Default for RiskLimitResult {
+	fn default() -> Self {
+		RiskLimitResult::Successful
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitCheckModelType {
 	/// None (default if not specified)
@@ -152,6 +166,12 @@ pub enum RiskLimitCheckModelType {
 	PushModel,
 }
 
+impl Default for RiskLimitCheckModelType {
+	fn default() -> Self {
+		RiskLimitCheckModelType::None
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PartyRiskLimitStatus {
 	/// Disabled
@@ -160,4 +180,10 @@ pub enum PartyRiskLimitStatus {
 	/// Enabled
 	#[serde(rename = "1")]
 	Enabled,
+}
+
+impl Default for PartyRiskLimitStatus {
+	fn default() -> Self {
+		PartyRiskLimitStatus::Disabled
+	}
 }

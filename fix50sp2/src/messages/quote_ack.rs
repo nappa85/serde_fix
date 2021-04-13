@@ -42,15 +42,11 @@ pub struct QuoteAck {
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// EncodedRejectTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// EncodedRejectText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// Parties
 	#[serde(flatten)]
 	pub parties: Option<super::super::parties::Parties>,
@@ -59,15 +55,11 @@ pub struct QuoteAck {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// EncodedTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// EncodedText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// May be used by the quote receiver to inform quote provider of pre-trade transparency waiver determination in the context of
 	/// MiFID II.
 	#[serde(flatten)]
@@ -94,6 +86,12 @@ pub enum QuoteType {
 	/// Initially tradeable
 	#[serde(rename = "4")]
 	InitiallyTradeable,
+}
+
+impl Default for QuoteType {
+	fn default() -> Self {
+		QuoteType::Indicative
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -124,6 +122,12 @@ pub enum QuoteCancelType {
 	CancelForIssuerOfUnderlyingSecurity,
 }
 
+impl Default for QuoteCancelType {
+	fn default() -> Self {
+		QuoteCancelType::CancelForSymbol
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteAckStatus {
 	/// Received, not yet processed
@@ -135,6 +139,12 @@ pub enum QuoteAckStatus {
 	/// Rejected
 	#[serde(rename = "2")]
 	Rejected,
+}
+
+impl Default for QuoteAckStatus {
+	fn default() -> Self {
+		QuoteAckStatus::ReceivedNotYetProcessed
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -205,4 +215,10 @@ pub enum QuoteRejectReason {
 	/// Exceeded CS01 limit
 	#[serde(rename = "21")]
 	N21,
+}
+
+impl Default for QuoteRejectReason {
+	fn default() -> Self {
+		QuoteRejectReason::N1
+	}
 }

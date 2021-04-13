@@ -141,7 +141,7 @@ pub enum MDEntryTypeItem {
 }
 
 impl Default for MDEntryTypeItem {
-    fn default() -> Self {
-        MDEntryTypeItem::Bid
-    }
+	fn default() -> Self {
+		MDEntryTypeItem::Bid
+	}
 }

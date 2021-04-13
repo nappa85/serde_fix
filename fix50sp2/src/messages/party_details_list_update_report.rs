@@ -38,16 +38,12 @@ pub struct PartyDetailsListUpdateReport {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text(58) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// May be used to specify the requesting party in the event the request was made verbally or via other means.
 	#[serde(flatten)]
 	pub requesting_party_grp: Option<super::super::requesting_party_grp::RequestingPartyGrp>,
@@ -64,4 +60,10 @@ pub enum LastFragment {
 	/// Last Message
 	#[serde(rename = "Y")]
 	LastMessage,
+}
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
 }

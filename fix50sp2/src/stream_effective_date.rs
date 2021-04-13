@@ -77,3 +77,9 @@ pub enum StreamEffectiveDateRelativeTo {
 	#[serde(rename = "9")]
 	OptionExerciseStartDate,
 }
+
+impl Default for StreamEffectiveDateRelativeTo {
+	fn default() -> Self {
+		StreamEffectiveDateRelativeTo::TradeDate
+	}
+}

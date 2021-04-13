@@ -92,6 +92,12 @@ pub enum LegPaymentStreamPaymentDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegPaymentStreamPaymentDateBusinessDayConvention {
+	fn default() -> Self {
+		LegPaymentStreamPaymentDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentFrequencyUnit {
 	/// Day
@@ -109,6 +115,12 @@ pub enum LegPaymentStreamPaymentFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for LegPaymentStreamPaymentFrequencyUnit {
+	fn default() -> Self {
+		LegPaymentStreamPaymentFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -253,6 +265,12 @@ pub enum LegPaymentStreamPaymentRollConvention {
 	Sunday,
 }
 
+impl Default for LegPaymentStreamPaymentRollConvention {
+	fn default() -> Self {
+		LegPaymentStreamPaymentRollConvention::N1StDayOfTheMonth
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentDateRelativeTo {
 	/// Trade date
@@ -287,6 +305,12 @@ pub enum LegPaymentStreamPaymentDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegPaymentStreamPaymentDateRelativeTo {
+	fn default() -> Self {
+		LegPaymentStreamPaymentDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentDateOffsetUnit {
 	/// Day
@@ -301,6 +325,12 @@ pub enum LegPaymentStreamPaymentDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentStreamPaymentDateOffsetUnit {
+	fn default() -> Self {
+		LegPaymentStreamPaymentDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -323,4 +353,10 @@ pub enum LegPaymentStreamPaymentDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegPaymentStreamPaymentDateOffsetDayType {
+	fn default() -> Self {
+		LegPaymentStreamPaymentDateOffsetDayType::Business
+	}
 }

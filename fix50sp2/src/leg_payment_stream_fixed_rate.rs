@@ -304,3 +304,9 @@ pub enum LegPaymentStreamFixedAmountUnitOfMeasure {
 	#[serde(rename = "yd")]
 	Yd,
 }
+
+impl Default for LegPaymentStreamFixedAmountUnitOfMeasure {
+	fn default() -> Self {
+		LegPaymentStreamFixedAmountUnitOfMeasure::Bbl
+	}
+}

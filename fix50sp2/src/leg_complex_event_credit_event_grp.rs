@@ -61,6 +61,12 @@ pub enum LegComplexEventCreditEventUnit {
 	Year,
 }
 
+impl Default for LegComplexEventCreditEventUnit {
+	fn default() -> Self {
+		LegComplexEventCreditEventUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventCreditEventDayType {
 	/// Business
@@ -81,4 +87,10 @@ pub enum LegComplexEventCreditEventDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegComplexEventCreditEventDayType {
+	fn default() -> Self {
+		LegComplexEventCreditEventDayType::Business
+	}
 }

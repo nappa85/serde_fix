@@ -96,6 +96,12 @@ pub enum QuoteCancelType {
 	CancelForIssuerOfUnderlyingSecurity,
 }
 
+impl Default for QuoteCancelType {
+	fn default() -> Self {
+		QuoteCancelType::CancelForSymbol
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteType {
 	/// Indicative
@@ -115,6 +121,12 @@ pub enum QuoteType {
 	InitiallyTradeable,
 }
 
+impl Default for QuoteType {
+	fn default() -> Self {
+		QuoteType::Indicative
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteResponseLevel {
 	/// No Acknowledgement (Default)
@@ -129,6 +141,12 @@ pub enum QuoteResponseLevel {
 	/// Summary Acknowledgement
 	#[serde(rename = "3")]
 	SummaryAcknowledgement,
+}
+
+impl Default for QuoteResponseLevel {
+	fn default() -> Self {
+		QuoteResponseLevel::NoAcknowledgement
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -154,6 +172,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -196,6 +220,12 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
@@ -219,6 +249,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -263,4 +299,10 @@ pub enum TradingSessionSubID {
 	/// Group auction
 	#[serde(rename = "13")]
 	GroupAuction,
+}
+
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
 }

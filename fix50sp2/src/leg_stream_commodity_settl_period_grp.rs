@@ -93,6 +93,12 @@ pub enum LegStreamCommoditySettlFlowType {
 	Other,
 }
 
+impl Default for LegStreamCommoditySettlFlowType {
+	fn default() -> Self {
+		LegStreamCommoditySettlFlowType::AllTimes
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlPeriodNotionalUnitOfMeasure {
 	/// Barrels
@@ -341,6 +347,12 @@ pub enum LegStreamCommoditySettlPeriodNotionalUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegStreamCommoditySettlPeriodNotionalUnitOfMeasure {
+	fn default() -> Self {
+		LegStreamCommoditySettlPeriodNotionalUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlPeriodFrequencyUnit {
 	/// Day
@@ -355,6 +367,12 @@ pub enum LegStreamCommoditySettlPeriodFrequencyUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegStreamCommoditySettlPeriodFrequencyUnit {
+	fn default() -> Self {
+		LegStreamCommoditySettlPeriodFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -605,6 +623,12 @@ pub enum LegStreamCommoditySettlPeriodPriceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegStreamCommoditySettlPeriodPriceUnitOfMeasure {
+	fn default() -> Self {
+		LegStreamCommoditySettlPeriodPriceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlHolidaysProcessingInstruction {
 	/// Do not include holidays
@@ -613,4 +637,10 @@ pub enum LegStreamCommoditySettlHolidaysProcessingInstruction {
 	/// Include holidays
 	#[serde(rename = "1")]
 	IncludeHolidays,
+}
+
+impl Default for LegStreamCommoditySettlHolidaysProcessingInstruction {
+	fn default() -> Self {
+		LegStreamCommoditySettlHolidaysProcessingInstruction::DoNotIncludeHolidays
+	}
 }

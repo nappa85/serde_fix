@@ -51,6 +51,12 @@ pub enum LegComplexEventScheduleFrequencyUnit {
 	Year,
 }
 
+impl Default for LegComplexEventScheduleFrequencyUnit {
+	fn default() -> Self {
+		LegComplexEventScheduleFrequencyUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventScheduleRollConvention {
 	/// 1st day of the month
@@ -191,4 +197,10 @@ pub enum LegComplexEventScheduleRollConvention {
 	/// Sunday
 	#[serde(rename = "SUN")]
 	Sunday,
+}
+
+impl Default for LegComplexEventScheduleRollConvention {
+	fn default() -> Self {
+		LegComplexEventScheduleRollConvention::N1StDayOfTheMonth
+	}
 }

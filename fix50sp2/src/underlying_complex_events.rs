@@ -213,6 +213,12 @@ pub enum UnderlyingComplexEventType {
 	RollingBarrier,
 }
 
+impl Default for UnderlyingComplexEventType {
+	fn default() -> Self {
+		UnderlyingComplexEventType::Capped
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingComplexEventPriceBoundaryMethod {
 	/// Less than UnderlyingComplexEventPrice(2048)
@@ -232,6 +238,12 @@ pub enum UnderlyingComplexEventPriceBoundaryMethod {
 	GreaterThanUnderlyingComplexEventPrice,
 }
 
+impl Default for UnderlyingComplexEventPriceBoundaryMethod {
+	fn default() -> Self {
+		UnderlyingComplexEventPriceBoundaryMethod::LessThanUnderlyingComplexEventPrice
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingComplexEventPriceTimeType {
 	/// Expiration
@@ -245,6 +257,12 @@ pub enum UnderlyingComplexEventPriceTimeType {
 	SpecifiedDateAndTime,
 }
 
+impl Default for UnderlyingComplexEventPriceTimeType {
+	fn default() -> Self {
+		UnderlyingComplexEventPriceTimeType::Expiration
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingComplexEventCondition {
 	/// And
@@ -253,6 +271,12 @@ pub enum UnderlyingComplexEventCondition {
 	/// Or
 	#[serde(rename = "2")]
 	Or,
+}
+
+impl Default for UnderlyingComplexEventCondition {
+	fn default() -> Self {
+		UnderlyingComplexEventCondition::And
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -265,6 +289,12 @@ pub enum UnderlyingComplexOptPayoutPaySide {
 	Sell,
 }
 
+impl Default for UnderlyingComplexOptPayoutPaySide {
+	fn default() -> Self {
+		UnderlyingComplexOptPayoutPaySide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingComplexOptPayoutReceiveSide {
 	/// Buy
@@ -273,6 +303,12 @@ pub enum UnderlyingComplexOptPayoutReceiveSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for UnderlyingComplexOptPayoutReceiveSide {
+	fn default() -> Self {
+		UnderlyingComplexOptPayoutReceiveSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -300,6 +336,12 @@ pub enum UnderlyingComplexOptPayoutTime {
 	AsSpecifiedInMasterConfirmation,
 }
 
+impl Default for UnderlyingComplexOptPayoutTime {
+	fn default() -> Self {
+		UnderlyingComplexOptPayoutTime::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingComplexEventQuoteBasis {
 	/// Currency 1 per currency 2
@@ -308,6 +350,12 @@ pub enum UnderlyingComplexEventQuoteBasis {
 	/// Currency 2 per currency 1
 	#[serde(rename = "1")]
 	Currency2PerCurrency1,
+}
+
+impl Default for UnderlyingComplexEventQuoteBasis {
+	fn default() -> Self {
+		UnderlyingComplexEventQuoteBasis::Currency1PerCurrency2
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -326,6 +374,12 @@ pub enum UnderlyingComplexEventCalculationAgent {
 	AsSpecifiedInTheStandardTermsSupplement,
 }
 
+impl Default for UnderlyingComplexEventCalculationAgent {
+	fn default() -> Self {
+		UnderlyingComplexEventCalculationAgent::ExercisingParty
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingComplexEventCreditEventNotifyingParty {
 	/// Seller notifies
@@ -337,4 +391,10 @@ pub enum UnderlyingComplexEventCreditEventNotifyingParty {
 	/// Seller or buyer notifies
 	#[serde(rename = "2")]
 	SellerOrBuyerNotifies,
+}
+
+impl Default for UnderlyingComplexEventCreditEventNotifyingParty {
+	fn default() -> Self {
+		UnderlyingComplexEventCreditEventNotifyingParty::SellerNotifies
+	}
 }

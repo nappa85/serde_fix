@@ -51,3 +51,9 @@ pub enum FundingSourceItem {
 	#[serde(rename = "99")]
 	Other,
 }
+
+impl Default for FundingSourceItem {
+	fn default() -> Self {
+		FundingSourceItem::RepurchaseAgreement
+	}
+}

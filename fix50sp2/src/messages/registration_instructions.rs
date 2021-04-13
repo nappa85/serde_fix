@@ -71,6 +71,12 @@ pub enum RegistTransType {
 	Replace,
 }
 
+impl Default for RegistTransType {
+	fn default() -> Self {
+		RegistTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
@@ -94,6 +100,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -193,6 +205,12 @@ pub enum TaxAdvantageType {
 	N999,
 }
 
+impl Default for TaxAdvantageType {
+	fn default() -> Self {
+		TaxAdvantageType::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OwnershipType {
 	/// Joint Investors
@@ -204,4 +222,10 @@ pub enum OwnershipType {
 	/// Joint Trustees
 	#[serde(rename = "2")]
 	JointTrustees,
+}
+
+impl Default for OwnershipType {
+	fn default() -> Self {
+		OwnershipType::JointInvestors
+	}
 }

@@ -56,3 +56,9 @@ pub enum LegStreamCommoditySettlDayItem {
 	#[serde(rename = "10")]
 	AllWeekends,
 }
+
+impl Default for LegStreamCommoditySettlDayItem {
+	fn default() -> Self {
+		LegStreamCommoditySettlDayItem::Monday
+	}
+}

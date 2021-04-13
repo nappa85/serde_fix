@@ -101,6 +101,12 @@ pub enum CrossType {
 	CustomerToCustomerCross,
 }
 
+impl Default for CrossType {
+	fn default() -> Self {
+		CrossType::CrossAonCrossTadeWhichIsExecutedCompleteOrNotBothSidesAreTreatedInTheSameMannerThisIsEquivalentToAnAllOrNone
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CrossPrioritization {
 	/// None
@@ -112,4 +118,10 @@ pub enum CrossPrioritization {
 	/// Sell side is prioritized
 	#[serde(rename = "2")]
 	SellSideIsPrioritized,
+}
+
+impl Default for CrossPrioritization {
+	fn default() -> Self {
+		CrossPrioritization::None
+	}
 }

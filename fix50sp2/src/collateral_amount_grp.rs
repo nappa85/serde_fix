@@ -1284,6 +1284,12 @@ pub enum CollateralCurrency {
 	N999,
 }
 
+impl Default for CollateralCurrency {
+	fn default() -> Self {
+		CollateralCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CollateralFXRateCalc {
 	/// Divided
@@ -1292,6 +1298,12 @@ pub enum CollateralFXRateCalc {
 	/// Multiply
 	#[serde(rename = "M")]
 	Multiply,
+}
+
+impl Default for CollateralFXRateCalc {
+	fn default() -> Self {
+		CollateralFXRateCalc::Divided
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1314,4 +1326,10 @@ pub enum CollateralAmountType {
 	/// Estimated market valuation
 	#[serde(rename = "5")]
 	EstimatedMarketValuation,
+}
+
+impl Default for CollateralAmountType {
+	fn default() -> Self {
+		CollateralAmountType::MarketValuation
+	}
 }

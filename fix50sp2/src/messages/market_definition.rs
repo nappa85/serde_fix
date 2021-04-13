@@ -29,16 +29,12 @@ pub struct MarketDefinition {
 	#[serde(rename = "1396")]
 	pub market_segment_desc: Option<String>,
 	/// Must be set if EncodedMktSegmDesc(1398) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1397")]
-	pub encoded_mkt_segm_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the MarketSegmDesc(1396) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1398")]
-	pub encoded_mkt_segm_desc: Option<String>,
+	#[serde(alias = "1398")]
+	pub encoded_mkt_segm_desc: Option<fix_common::EncodedText<1398>>,
 	/// Specifies that the market segment specified in this message is a sub-segment of the market segment defined in this field.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1325")]
@@ -68,16 +64,12 @@ pub struct MarketDefinition {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text(58) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// MarketSegmentStatus
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2542")]
@@ -1328,6 +1320,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketSegmentStatus {
 	/// Active
@@ -1339,6 +1337,12 @@ pub enum MarketSegmentStatus {
 	/// Published
 	#[serde(rename = "3")]
 	Published,
+}
+
+impl Default for MarketSegmentStatus {
+	fn default() -> Self {
+		MarketSegmentStatus::Active
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1354,9 +1358,21 @@ pub enum MarketSegmentType {
 	Wholesale,
 }
 
+impl Default for MarketSegmentType {
+	fn default() -> Self {
+		MarketSegmentType::Pool
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketSegmentSubType {
 	/// Inter-product spread
 	#[serde(rename = "1")]
 	InterProductSpread,
+}
+
+impl Default for MarketSegmentSubType {
+	fn default() -> Self {
+		MarketSegmentSubType::InterProductSpread
+	}
 }

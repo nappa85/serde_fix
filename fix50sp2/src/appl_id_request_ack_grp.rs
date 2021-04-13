@@ -55,3 +55,9 @@ pub enum ApplResponseError {
 	#[serde(rename = "2")]
 	UserNotAuthorizedForApplication,
 }
+
+impl Default for ApplResponseError {
+	fn default() -> Self {
+		ApplResponseError::ApplicationDoesNotExist
+	}
+}

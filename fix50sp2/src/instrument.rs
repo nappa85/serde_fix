@@ -347,31 +347,23 @@ pub struct Instrument {
 	#[serde(rename = "106")]
 	pub issuer: Option<String>,
 	/// Must be set if EncodedIssuer(349) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "348")]
-	pub encoded_issuer_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Issuer(106) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "349")]
-	pub encoded_issuer: Option<String>,
+	#[serde(alias = "349")]
+	pub encoded_issuer: Option<fix_common::EncodedText<349>>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
 	pub security_desc: Option<String>,
 	/// Must be set if EncodedSecurityDesc(351) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "350")]
-	pub encoded_security_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the SecurityDesc(107) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "351")]
-	pub encoded_security_desc: Option<String>,
+	#[serde(alias = "351")]
+	pub encoded_security_desc: Option<fix_common::EncodedText<351>>,
 	/// Embedded XML document describing the instrument.
 	#[serde(flatten)]
 	pub security_xml: Option<super::security_xml::SecurityXML>,
@@ -582,16 +574,12 @@ pub struct Instrument {
 	#[serde(rename = "1581")]
 	pub option_expiration_desc: Option<String>,
 	/// Must be set if EncodedOptionExpirationDesc(1697) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1678")]
-	pub encoded_option_expiration_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the OptionExpirationDesc(1581) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1697")]
-	pub encoded_option_expiration_desc: Option<String>,
+	#[serde(alias = "1697")]
+	pub encoded_option_expiration_desc: Option<fix_common::EncodedText<1697>>,
 	/// StrikeUnitOfMeasure
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1698")]
@@ -717,16 +705,12 @@ pub struct Instrument {
 	#[serde(rename = "2714")]
 	pub financial_instrument_full_name: Option<String>,
 	/// Must be set if EncodedFinancialInstrumentFullName(2716) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2715")]
-	pub encoded_financial_instrument_full_name_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the FinancialInstrumentFullName(2714) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2716")]
-	pub encoded_financial_instrument_full_name: Option<String>,
+	#[serde(alias = "2716")]
+	pub encoded_financial_instrument_full_name: Option<fix_common::EncodedText<2716>>,
 	/// AssetSubType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2735")]
@@ -849,6 +833,12 @@ pub enum SecurityIDSource {
 	UniformSymbol,
 }
 
+impl Default for SecurityIDSource {
+	fn default() -> Self {
+		SecurityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
@@ -890,6 +880,12 @@ pub enum Product {
 	/// FINANCING
 	#[serde(rename = "13")]
 	Financing,
+}
+
+impl Default for Product {
+	fn default() -> Self {
+		Product::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1357,6 +1353,12 @@ pub enum SecurityType {
 	Sfp,
 }
 
+impl Default for SecurityType {
+	fn default() -> Self {
+		SecurityType::Fut
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum InstrmtAssignmentMethod {
 	/// Random
@@ -1365,6 +1367,12 @@ pub enum InstrmtAssignmentMethod {
 	/// ProRata
 	#[serde(rename = "P")]
 	ProRata,
+}
+
+impl Default for InstrmtAssignmentMethod {
+	fn default() -> Self {
+		InstrmtAssignmentMethod::Random
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1404,6 +1412,12 @@ pub enum SecurityStatus {
 	PendingDeletion,
 }
 
+impl Default for SecurityStatus {
+	fn default() -> Self {
+		SecurityStatus::Active
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RestructuringType {
 	/// Full Restructuring
@@ -1418,6 +1432,12 @@ pub enum RestructuringType {
 	/// No Restructuring specified
 	#[serde(rename = "XR")]
 	NoRestructuringSpecified,
+}
+
+impl Default for RestructuringType {
+	fn default() -> Self {
+		RestructuringType::FullRestructuring
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1440,6 +1460,12 @@ pub enum Seniority {
 	/// Senior Non-Preferred
 	#[serde(rename = "SN")]
 	SeniorNonPreferred,
+}
+
+impl Default for Seniority {
+	fn default() -> Self {
+		Seniority::SeniorSecured
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1905,6 +1931,12 @@ pub enum RepoCollateralSecurityType {
 	/// Structured finance product
 	#[serde(rename = "SFP")]
 	Sfp,
+}
+
+impl Default for RepoCollateralSecurityType {
+	fn default() -> Self {
+		RepoCollateralSecurityType::Fut
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2626,6 +2658,12 @@ pub enum CountryOfIssue {
 	/// ZIMBABWE
 	#[serde(rename = "ZW")]
 	Zimbabwe,
+}
+
+impl Default for CountryOfIssue {
+	fn default() -> Self {
+		CountryOfIssue::Afghanistan
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3832,6 +3870,12 @@ pub enum StrikeCurrency {
 	N999,
 }
 
+impl Default for StrikeCurrency {
+	fn default() -> Self {
+		StrikeCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StrikePriceDeterminationMethod {
 	/// Fixed Strike
@@ -3846,6 +3890,12 @@ pub enum StrikePriceDeterminationMethod {
 	/// Strike set to optimal value
 	#[serde(rename = "4")]
 	StrikeSetToOptimalValue,
+}
+
+impl Default for StrikePriceDeterminationMethod {
+	fn default() -> Self {
+		StrikePriceDeterminationMethod::FixedStrike
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3867,6 +3917,12 @@ pub enum StrikePriceBoundaryMethod {
 	GreaterThanUnderlyingIsInTheMoney,
 }
 
+impl Default for StrikePriceBoundaryMethod {
+	fn default() -> Self {
+		StrikePriceBoundaryMethod::LessThanUnderlyingPriceIsInTheMoney
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingPriceDeterminationMethod {
 	/// Regular
@@ -3883,6 +3939,12 @@ pub enum UnderlyingPriceDeterminationMethod {
 	AverageValue,
 }
 
+impl Default for UnderlyingPriceDeterminationMethod {
+	fn default() -> Self {
+		UnderlyingPriceDeterminationMethod::Regular
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ContractMultiplierUnit {
 	/// Shares
@@ -3894,6 +3956,12 @@ pub enum ContractMultiplierUnit {
 	/// Days
 	#[serde(rename = "2")]
 	Days,
+}
+
+impl Default for ContractMultiplierUnit {
+	fn default() -> Self {
+		ContractMultiplierUnit::Shares
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3931,6 +3999,12 @@ pub enum FlowScheduleType {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for FlowScheduleType {
+	fn default() -> Self {
+		FlowScheduleType::NercEasternOffPeak
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4181,6 +4255,12 @@ pub enum UnitOfMeasure {
 	Yd,
 }
 
+impl Default for UnitOfMeasure {
+	fn default() -> Self {
+		UnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceUnitOfMeasure {
 	/// Barrels
@@ -4429,6 +4509,12 @@ pub enum PriceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for PriceUnitOfMeasure {
+	fn default() -> Self {
+		PriceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlMethod {
 	/// Election at exercise (The settlement method will be elected at the time of contract exercise)
@@ -4440,6 +4526,12 @@ pub enum SettlMethod {
 	/// Physical settlement required
 	#[serde(rename = "P")]
 	PhysicalSettlementRequired,
+}
+
+impl Default for SettlMethod {
+	fn default() -> Self {
+		SettlMethod::ElectionAtExercise
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4456,6 +4548,12 @@ pub enum ExerciseStyle {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for ExerciseStyle {
+	fn default() -> Self {
+		ExerciseStyle::European
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4489,6 +4587,12 @@ pub enum OptPayoutType {
 	Other,
 }
 
+impl Default for OptPayoutType {
+	fn default() -> Self {
+		OptPayoutType::Vanilla
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceQuoteMethod {
 	/// Standard, money per unit of a physical
@@ -4503,6 +4607,12 @@ pub enum PriceQuoteMethod {
 	/// Percent of Par
 	#[serde(rename = "PCTPAR")]
 	PercentOfPar,
+}
+
+impl Default for PriceQuoteMethod {
+	fn default() -> Self {
+		PriceQuoteMethod::StandardMoneyPerUnitOfAPhysical
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4524,6 +4634,12 @@ pub enum ValuationMethod {
 	CdsInDeliveryUseRecoveryRateToCalculateObligation,
 }
 
+impl Default for ValuationMethod {
+	fn default() -> Self {
+		ValuationMethod::PremiumStyle
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ListMethod {
 	/// pre-listed only
@@ -4532,6 +4648,12 @@ pub enum ListMethod {
 	/// user requested
 	#[serde(rename = "1")]
 	UserRequested,
+}
+
+impl Default for ListMethod {
+	fn default() -> Self {
+		ListMethod::PreListedOnly
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4548,6 +4670,12 @@ pub enum PutOrCall {
 	/// Chooser
 	#[serde(rename = "3")]
 	Chooser,
+}
+
+impl Default for PutOrCall {
+	fn default() -> Self {
+		PutOrCall::Put
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4576,6 +4704,12 @@ pub enum TimeUnit {
 	/// Quarter
 	#[serde(rename = "Q")]
 	Quarter,
+}
+
+impl Default for TimeUnit {
+	fn default() -> Self {
+		TimeUnit::Hour
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4607,6 +4741,12 @@ pub enum CPProgram {
 	/// 3(c)(7)
 	#[serde(rename = "8")]
 	N8,
+}
+
+impl Default for CPProgram {
+	fn default() -> Self {
+		CPProgram::N1
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -5813,6 +5953,12 @@ pub enum PriceQuoteCurrency {
 	N999,
 }
 
+impl Default for PriceQuoteCurrency {
+	fn default() -> Self {
+		PriceQuoteCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ObligationType {
 	/// Bond
@@ -5829,6 +5975,12 @@ pub enum ObligationType {
 	Loan,
 }
 
+impl Default for ObligationType {
+	fn default() -> Self {
+		ObligationType::Bond
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ShortSaleRestriction {
 	/// No restrictions
@@ -5843,6 +5995,12 @@ pub enum ShortSaleRestriction {
 	/// Security is not shortable without pre-borrow
 	#[serde(rename = "3")]
 	SecurityIsNotShortableWithoutPreBorrow,
+}
+
+impl Default for ShortSaleRestriction {
+	fn default() -> Self {
+		ShortSaleRestriction::NoRestrictions
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -7049,6 +7207,12 @@ pub enum UnitOfMeasureCurrency {
 	N999,
 }
 
+impl Default for UnitOfMeasureCurrency {
+	fn default() -> Self {
+		UnitOfMeasureCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PriceUnitOfMeasureCurrency {
 	/// Afghani
@@ -8253,6 +8417,12 @@ pub enum PriceUnitOfMeasureCurrency {
 	N999,
 }
 
+impl Default for PriceUnitOfMeasureCurrency {
+	fn default() -> Self {
+		PriceUnitOfMeasureCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AssetClass {
 	/// Interest rate
@@ -8288,6 +8458,12 @@ pub enum AssetClass {
 	/// Index
 	#[serde(rename = "11")]
 	Index,
+}
+
+impl Default for AssetClass {
+	fn default() -> Self {
+		AssetClass::InterestRate
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -8438,6 +8614,12 @@ pub enum AssetSubClass {
 	Other,
 }
 
+impl Default for AssetSubClass {
+	fn default() -> Self {
+		AssetSubClass::SingleCurrency
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SwapClass {
 	/// Basis swap
@@ -8454,6 +8636,12 @@ pub enum SwapClass {
 	BasketSwap,
 }
 
+impl Default for SwapClass {
+	fn default() -> Self {
+		SwapClass::BasisSwap
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CouponType {
 	/// Zero
@@ -8468,6 +8656,12 @@ pub enum CouponType {
 	/// Structured
 	#[serde(rename = "3")]
 	Structured,
+}
+
+impl Default for CouponType {
+	fn default() -> Self {
+		CouponType::Zero
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -8496,6 +8690,12 @@ pub enum CouponFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for CouponFrequencyUnit {
+	fn default() -> Self {
+		CouponFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -8590,6 +8790,12 @@ pub enum CouponDayCount {
 	/// Other
 	#[serde(rename = "99")]
 	N99,
+}
+
+impl Default for CouponDayCount {
+	fn default() -> Self {
+		CouponDayCount::N0
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -8692,6 +8898,12 @@ pub enum ConvertibleBondEquityIDSource {
 	UniformSymbol,
 }
 
+impl Default for ConvertibleBondEquityIDSource {
+	fn default() -> Self {
+		ConvertibleBondEquityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LienSeniority {
 	/// Unknown
@@ -8706,6 +8918,12 @@ pub enum LienSeniority {
 	/// Third lien
 	#[serde(rename = "3")]
 	ThirdLien,
+}
+
+impl Default for LienSeniority {
+	fn default() -> Self {
+		LienSeniority::Unknown
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -8728,6 +8946,12 @@ pub enum LoanFacility {
 	/// Trade claim
 	#[serde(rename = "5")]
 	TradeClaim,
+}
+
+impl Default for LoanFacility {
+	fn default() -> Self {
+		LoanFacility::BridgeLoan
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -8764,6 +8988,12 @@ pub enum ReferenceEntityType {
 	WesternEuropeanInsurance,
 }
 
+impl Default for ReferenceEntityType {
+	fn default() -> Self {
+		ReferenceEntityType::Asian
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SwapSubClass {
 	/// Amortizing notional schedule
@@ -8781,6 +9011,12 @@ pub enum SwapSubClass {
 	/// Custom notional schedule
 	#[serde(rename = "CUST")]
 	CustomNotionalSchedule,
+}
+
+impl Default for SwapSubClass {
+	fn default() -> Self {
+		SwapSubClass::AmortizingNotionalSchedule
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9031,6 +9267,12 @@ pub enum StrikeUnitOfMeasure {
 	Yd,
 }
 
+impl Default for StrikeUnitOfMeasure {
+	fn default() -> Self {
+		StrikeUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StrategyType {
 	/// Straddle
@@ -9053,6 +9295,12 @@ pub enum StrategyType {
 	Other,
 }
 
+impl Default for StrategyType {
+	fn default() -> Self {
+		StrategyType::Straddle
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlDisruptionProvision {
 	/// Negotiation
@@ -9061,6 +9309,12 @@ pub enum SettlDisruptionProvision {
 	/// Cancellation and payment
 	#[serde(rename = "2")]
 	CancellationAndPayment,
+}
+
+impl Default for SettlDisruptionProvision {
+	fn default() -> Self {
+		SettlDisruptionProvision::Negotiation
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9076,6 +9330,12 @@ pub enum InstrumentRoundingDirection {
 	RoundUp,
 }
 
+impl Default for InstrumentRoundingDirection {
+	fn default() -> Self {
+		InstrumentRoundingDirection::RoundToNearest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AssetGroup {
 	/// Financials (A categorization which usually includes rates, foreign exchange, credit, bonds and equity products or assets)
@@ -9088,6 +9348,12 @@ pub enum AssetGroup {
 	/// Alternative investments (A categorization which usually includes weather, housing, and commodity indices products or assets.)
 	#[serde(rename = "3")]
 	AlternativeInvestments,
+}
+
+impl Default for AssetGroup {
+	fn default() -> Self {
+		AssetGroup::Financials
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9115,6 +9381,12 @@ pub enum SettlSubMethod {
 	Other,
 }
 
+impl Default for SettlSubMethod {
+	fn default() -> Self {
+		SettlSubMethod::Shares
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StrikeIndexQuote {
 	/// Bid
@@ -9128,6 +9400,12 @@ pub enum StrikeIndexQuote {
 	Offer,
 }
 
+impl Default for StrikeIndexQuote {
+	fn default() -> Self {
+		StrikeIndexQuote::Bid
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ExtraordinaryEventAdjustmentMethod {
 	/// Calculation agent
@@ -9136,6 +9414,12 @@ pub enum ExtraordinaryEventAdjustmentMethod {
 	/// Options exchange
 	#[serde(rename = "1")]
 	OptionsExchange,
+}
+
+impl Default for ExtraordinaryEventAdjustmentMethod {
+	fn default() -> Self {
+		ExtraordinaryEventAdjustmentMethod::CalculationAgent
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9152,6 +9436,12 @@ pub enum InTheMoneyCondition {
 	/// At-the-money put is in-the-money
 	#[serde(rename = "3")]
 	AtTheMoneyPutIsInTheMoney,
+}
+
+impl Default for InTheMoneyCondition {
+	fn default() -> Self {
+		InTheMoneyCondition::StandardInTheMoney
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9186,4 +9476,10 @@ pub enum ReturnTrigger {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for ReturnTrigger {
+	fn default() -> Self {
+		ReturnTrigger::Dividend
+	}
 }

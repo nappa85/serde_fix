@@ -171,6 +171,12 @@ pub enum LegPaymentStubType {
 	CompoundingFinal,
 }
 
+impl Default for LegPaymentStubType {
+	fn default() -> Self {
+		LegPaymentStubType::Initial
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStubLength {
 	/// Short
@@ -179,6 +185,12 @@ pub enum LegPaymentStubLength {
 	/// Long
 	#[serde(rename = "1")]
 	Long,
+}
+
+impl Default for LegPaymentStubLength {
+	fn default() -> Self {
+		LegPaymentStubLength::Short
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -197,6 +209,12 @@ pub enum LegPaymentStubIndexSource {
 	Other,
 }
 
+impl Default for LegPaymentStubIndexSource {
+	fn default() -> Self {
+		LegPaymentStubIndexSource::Bloomberg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStubIndexCurveUnit {
 	/// Day
@@ -213,6 +231,12 @@ pub enum LegPaymentStubIndexCurveUnit {
 	Year,
 }
 
+impl Default for LegPaymentStubIndexCurveUnit {
+	fn default() -> Self {
+		LegPaymentStubIndexCurveUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStubIndexRateSpreadPositionType {
 	/// Short
@@ -221,6 +245,12 @@ pub enum LegPaymentStubIndexRateSpreadPositionType {
 	/// Long
 	#[serde(rename = "1")]
 	Long,
+}
+
+impl Default for LegPaymentStubIndexRateSpreadPositionType {
+	fn default() -> Self {
+		LegPaymentStubIndexRateSpreadPositionType::Short
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -233,6 +263,12 @@ pub enum LegPaymentStubIndexRateTreatment {
 	MoneyMarketYield,
 }
 
+impl Default for LegPaymentStubIndexRateTreatment {
+	fn default() -> Self {
+		LegPaymentStubIndexRateTreatment::BondEquivalentYield
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStubIndexCapRateBuySide {
 	/// Buyer of the trade
@@ -241,6 +277,12 @@ pub enum LegPaymentStubIndexCapRateBuySide {
 	/// Seller of the trade
 	#[serde(rename = "2")]
 	SellerOfTheTrade,
+}
+
+impl Default for LegPaymentStubIndexCapRateBuySide {
+	fn default() -> Self {
+		LegPaymentStubIndexCapRateBuySide::BuyerOfTheTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -253,6 +295,12 @@ pub enum LegPaymentStubIndexCapRateSellSide {
 	SellerOfTheTrade,
 }
 
+impl Default for LegPaymentStubIndexCapRateSellSide {
+	fn default() -> Self {
+		LegPaymentStubIndexCapRateSellSide::BuyerOfTheTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStubIndexFloorRateBuySide {
 	/// Buyer of the trade
@@ -263,6 +311,12 @@ pub enum LegPaymentStubIndexFloorRateBuySide {
 	SellerOfTheTrade,
 }
 
+impl Default for LegPaymentStubIndexFloorRateBuySide {
+	fn default() -> Self {
+		LegPaymentStubIndexFloorRateBuySide::BuyerOfTheTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStubIndexFloorRateSellSide {
 	/// Buyer of the trade
@@ -271,6 +325,12 @@ pub enum LegPaymentStubIndexFloorRateSellSide {
 	/// Seller of the trade
 	#[serde(rename = "2")]
 	SellerOfTheTrade,
+}
+
+impl Default for LegPaymentStubIndexFloorRateSellSide {
+	fn default() -> Self {
+		LegPaymentStubIndexFloorRateSellSide::BuyerOfTheTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -289,6 +349,12 @@ pub enum LegPaymentStubIndex2CurveUnit {
 	Year,
 }
 
+impl Default for LegPaymentStubIndex2CurveUnit {
+	fn default() -> Self {
+		LegPaymentStubIndex2CurveUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStubIndex2RateSpreadPositionType {
 	/// Short
@@ -299,6 +365,12 @@ pub enum LegPaymentStubIndex2RateSpreadPositionType {
 	Long,
 }
 
+impl Default for LegPaymentStubIndex2RateSpreadPositionType {
+	fn default() -> Self {
+		LegPaymentStubIndex2RateSpreadPositionType::Short
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStubIndex2RateTreatment {
 	/// Bond equivalent yield
@@ -307,4 +379,10 @@ pub enum LegPaymentStubIndex2RateTreatment {
 	/// Money market yield
 	#[serde(rename = "1")]
 	MoneyMarketYield,
+}
+
+impl Default for LegPaymentStubIndex2RateTreatment {
+	fn default() -> Self {
+		LegPaymentStubIndex2RateTreatment::BondEquivalentYield
+	}
 }

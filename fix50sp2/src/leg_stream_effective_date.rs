@@ -68,6 +68,12 @@ pub enum LegStreamEffectiveDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegStreamEffectiveDateBusinessDayConvention {
+	fn default() -> Self {
+		LegStreamEffectiveDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamEffectiveDateRelativeTo {
 	/// Trade date
@@ -102,6 +108,12 @@ pub enum LegStreamEffectiveDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegStreamEffectiveDateRelativeTo {
+	fn default() -> Self {
+		LegStreamEffectiveDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamEffectiveDateOffsetUnit {
 	/// Day
@@ -116,6 +128,12 @@ pub enum LegStreamEffectiveDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegStreamEffectiveDateOffsetUnit {
+	fn default() -> Self {
+		LegStreamEffectiveDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -138,4 +156,10 @@ pub enum LegStreamEffectiveDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegStreamEffectiveDateOffsetDayType {
+	fn default() -> Self {
+		LegStreamEffectiveDateOffsetDayType::Business
+	}
 }

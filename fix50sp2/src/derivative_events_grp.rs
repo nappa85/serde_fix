@@ -98,3 +98,9 @@ pub enum DerivativeEventType {
 	#[serde(rename = "99")]
 	Other,
 }
+
+impl Default for DerivativeEventType {
+	fn default() -> Self {
+		DerivativeEventType::Put
+	}
+}

@@ -38,3 +38,9 @@ pub enum UnderlyingSettlPriceType {
 	#[serde(rename = "2")]
 	Theoretical,
 }
+
+impl Default for UnderlyingSettlPriceType {
+	fn default() -> Self {
+		UnderlyingSettlPriceType::Final
+	}
+}

@@ -45,3 +45,9 @@ pub enum CollateralReinvestmentType {
 	#[serde(rename = "4")]
 	OtherInvestments,
 }
+
+impl Default for CollateralReinvestmentType {
+	fn default() -> Self {
+		CollateralReinvestmentType::MoneyMarketFund
+	}
+}

@@ -128,3 +128,9 @@ pub enum QuoteQualifierItem {
 	#[serde(rename = "n")]
 	NegotiatedSpot,
 }
+
+impl Default for QuoteQualifierItem {
+	fn default() -> Self {
+		QuoteQualifierItem::AllOrNone
+	}
+}

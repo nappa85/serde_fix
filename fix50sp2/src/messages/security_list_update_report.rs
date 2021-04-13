@@ -28,15 +28,11 @@ pub struct Security {
 	#[serde(rename = "1467")]
 	pub security_list_desc: Option<String>,
 	/// EncodedSecurityListDescLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1468")]
-	pub encoded_security_list_desc_len: Option<usize>,
 	/// EncodedSecurityListDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1469")]
-	pub encoded_security_list_desc: Option<String>,
+	#[serde(alias = "1469")]
+	pub encoded_security_list_desc: Option<fix_common::EncodedText<1469>>,
 	/// Identifies a list type
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1470")]
@@ -116,6 +112,12 @@ pub enum SecurityListType {
 	NewspaperList,
 }
 
+impl Default for SecurityListType {
+	fn default() -> Self {
+		SecurityListType::IndustryClassification
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityListTypeSource {
 	/// ICB (Industry Classification Benchmark) published by Dow Jones and FTSE - <a xmlns="http://www.b2bits.com/FIXProtocol" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://www.icbenchmark.com" target="_blank">www.icbenchmark.com</a> .
@@ -127,6 +129,12 @@ pub enum SecurityListTypeSource {
 	/// GICS (Global Industry Classification Standard) published by Standards and Poor.
 	#[serde(rename = "3")]
 	GicsPublishedByStandardsAndPoor,
+}
+
+impl Default for SecurityListTypeSource {
+	fn default() -> Self {
+		SecurityListTypeSource::IcbPublishedByDowJonesAndFtseAXmlnsHttpWwwB2BitsComFixProtocolXmlnsXsiHttpWwwW3Org2001XmlSchemaInstanceHrefHttpWwwIcbenchmarkComTargetBlankWwwIcbenchmarkComA
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -151,6 +159,12 @@ pub enum SecurityRequestResult {
 	RequestForInstrumentDataNotSupported,
 }
 
+impl Default for SecurityRequestResult {
+	fn default() -> Self {
+		SecurityRequestResult::ValidRequest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityUpdateAction {
 	/// Add
@@ -162,6 +176,12 @@ pub enum SecurityUpdateAction {
 	/// Modify
 	#[serde(rename = "M")]
 	Modify,
+}
+
+impl Default for SecurityUpdateAction {
+	fn default() -> Self {
+		SecurityUpdateAction::Add
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -237,6 +257,12 @@ pub enum CorporateAction {
 	SuccessionEvent,
 }
 
+impl Default for CorporateAction {
+	fn default() -> Self {
+		CorporateAction::ExDividend
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
@@ -245,4 +271,10 @@ pub enum LastFragment {
 	/// Last Message
 	#[serde(rename = "Y")]
 	LastMessage,
+}
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
 }

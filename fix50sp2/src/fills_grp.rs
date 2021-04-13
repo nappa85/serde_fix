@@ -68,6 +68,12 @@ pub enum FillLiquidityInd {
 	Auction,
 }
 
+impl Default for FillLiquidityInd {
+	fn default() -> Self {
+		FillLiquidityInd::AddedLiquidity
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum FillYieldType {
 	/// After Tax Yield (Municipals)
@@ -172,4 +178,10 @@ pub enum FillYieldType {
 	/// Yield To Worst
 	#[serde(rename = "WORST")]
 	YieldToWorst,
+}
+
+impl Default for FillYieldType {
+	fn default() -> Self {
+		FillYieldType::AfterTaxYield
+	}
 }

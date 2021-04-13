@@ -30,3 +30,9 @@ pub enum LegProvisionOptionExerciseFixedDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for LegProvisionOptionExerciseFixedDateType {
+	fn default() -> Self {
+		LegProvisionOptionExerciseFixedDateType::Unadjusted
+	}
+}

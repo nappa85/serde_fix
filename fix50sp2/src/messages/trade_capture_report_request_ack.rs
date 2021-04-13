@@ -70,15 +70,11 @@ pub struct Trade {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Used to identify the event or source which gave rise to a message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1011")]
@@ -110,6 +106,12 @@ pub enum TradeRequestType {
 	AdvisoriesThatMatchCriteria,
 }
 
+impl Default for TradeRequestType {
+	fn default() -> Self {
+		TradeRequestType::AllTrades
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
@@ -121,6 +123,12 @@ pub enum SubscriptionRequestType {
 	/// Disable previous Snapshot + Update Request (Unsubscribe)
 	#[serde(rename = "2")]
 	DisablePreviousSnapshotUpdateRequest,
+}
+
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -154,6 +162,12 @@ pub enum TradeRequestResult {
 	Other,
 }
 
+impl Default for TradeRequestResult {
+	fn default() -> Self {
+		TradeRequestResult::Successful
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeRequestStatus {
 	/// Accepted
@@ -165,6 +179,12 @@ pub enum TradeRequestStatus {
 	/// Rejected
 	#[serde(rename = "2")]
 	Rejected,
+}
+
+impl Default for TradeRequestStatus {
+	fn default() -> Self {
+		TradeRequestStatus::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -180,6 +200,12 @@ pub enum MultiLegReportingType {
 	MultiLegSecurity,
 }
 
+impl Default for MultiLegReportingType {
+	fn default() -> Self {
+		MultiLegReportingType::SingleSecurity
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ResponseTransportType {
 	/// In-band (default)
@@ -188,4 +214,10 @@ pub enum ResponseTransportType {
 	/// Out of band
 	#[serde(rename = "1")]
 	OutOfBand,
+}
+
+impl Default for ResponseTransportType {
+	fn default() -> Self {
+		ResponseTransportType::InBand
+	}
 }

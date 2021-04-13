@@ -91,15 +91,11 @@ pub struct TradingSession {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text field in the encoded format specified via the MessageEncoding field
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -128,9 +124,9 @@ pub enum TradingSessionID {
 }
 
 impl Default for TradingSessionID {
-    fn default() -> Self {
-        TradingSessionID::Day
-    }
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -177,6 +173,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesUpdateAction {
 	/// Add
@@ -188,6 +190,12 @@ pub enum TradSesUpdateAction {
 	/// Modify
 	#[serde(rename = "M")]
 	Modify,
+}
+
+impl Default for TradSesUpdateAction {
+	fn default() -> Self {
+		TradSesUpdateAction::Add
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -206,6 +214,12 @@ pub enum TradSesMethod {
 	Voice,
 }
 
+impl Default for TradSesMethod {
+	fn default() -> Self {
+		TradSesMethod::Electronic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesMode {
 	/// Testing
@@ -219,6 +233,12 @@ pub enum TradSesMode {
 	Production,
 }
 
+impl Default for TradSesMode {
+	fn default() -> Self {
+		TradSesMode::Testing
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
@@ -227,6 +247,12 @@ pub enum UnsolicitedIndicator {
 	/// Message is being sent unsolicited
 	#[serde(rename = "Y")]
 	MessageIsBeingSentUnsolicited,
+}
+
+impl Default for UnsolicitedIndicator {
+	fn default() -> Self {
+		UnsolicitedIndicator::MessageIsBeingSentAsAResultOfAPriorRequest
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -255,9 +281,9 @@ pub enum TradSesStatus {
 }
 
 impl Default for TradSesStatus {
-    fn default() -> Self {
-        TradSesStatus::Unknown
-    }
+	fn default() -> Self {
+		TradSesStatus::Unknown
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -268,4 +294,10 @@ pub enum TradSesStatusRejReason {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for TradSesStatusRejReason {
+	fn default() -> Self {
+		TradSesStatusRejReason::UnknownOrInvalidTradingSessionId
+	}
 }

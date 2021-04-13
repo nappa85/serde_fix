@@ -85,6 +85,12 @@ pub enum LegDeliveryScheduleType {
 	PhysicalSettlementPeriod,
 }
 
+impl Default for LegDeliveryScheduleType {
+	fn default() -> Self {
+		LegDeliveryScheduleType::Notional
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryScheduleNotionalUnitOfMeasure {
 	/// Barrels
@@ -333,6 +339,12 @@ pub enum LegDeliveryScheduleNotionalUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegDeliveryScheduleNotionalUnitOfMeasure {
+	fn default() -> Self {
+		LegDeliveryScheduleNotionalUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryScheduleNotionalCommodityFrequency {
 	/// Term
@@ -356,6 +368,12 @@ pub enum LegDeliveryScheduleNotionalCommodityFrequency {
 	/// Per month
 	#[serde(rename = "6")]
 	PerMonth,
+}
+
+impl Default for LegDeliveryScheduleNotionalCommodityFrequency {
+	fn default() -> Self {
+		LegDeliveryScheduleNotionalCommodityFrequency::Term
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -606,6 +624,12 @@ pub enum LegDeliveryScheduleToleranceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegDeliveryScheduleToleranceUnitOfMeasure {
+	fn default() -> Self {
+		LegDeliveryScheduleToleranceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryScheduleToleranceType {
 	/// Absolute
@@ -614,6 +638,12 @@ pub enum LegDeliveryScheduleToleranceType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for LegDeliveryScheduleToleranceType {
+	fn default() -> Self {
+		LegDeliveryScheduleToleranceType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -638,6 +668,12 @@ pub enum LegDeliveryScheduleSettlFlowType {
 	Other,
 }
 
+impl Default for LegDeliveryScheduleSettlFlowType {
+	fn default() -> Self {
+		LegDeliveryScheduleSettlFlowType::AllTimes
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryScheduleSettlHolidaysProcessingInstruction {
 	/// Do not include holidays
@@ -646,4 +682,10 @@ pub enum LegDeliveryScheduleSettlHolidaysProcessingInstruction {
 	/// Include holidays
 	#[serde(rename = "1")]
 	IncludeHolidays,
+}
+
+impl Default for LegDeliveryScheduleSettlHolidaysProcessingInstruction {
+	fn default() -> Self {
+		LegDeliveryScheduleSettlHolidaysProcessingInstruction::DoNotIncludeHolidays
+	}
 }

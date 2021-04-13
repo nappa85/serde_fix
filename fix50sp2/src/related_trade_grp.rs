@@ -64,3 +64,9 @@ pub enum RelatedTradeIDSource {
 	#[serde(rename = "6")]
 	RegulatoryTradeId,
 }
+
+impl Default for RelatedTradeIDSource {
+	fn default() -> Self {
+		RelatedTradeIDSource::NonFixSource
+	}
+}

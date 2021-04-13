@@ -42,3 +42,9 @@ pub enum SubscriptionRequestType {
 	#[serde(rename = "2")]
 	DisablePreviousSnapshotUpdateRequest,
 }
+
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
+}

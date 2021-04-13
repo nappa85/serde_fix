@@ -99,6 +99,12 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
+impl Default for AllocAcctIDSource {
+	fn default() -> Self {
+		AllocAcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -154,6 +160,12 @@ pub enum Side {
 	SellUndisclosed,
 }
 
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
@@ -195,6 +207,12 @@ pub enum Product {
 	/// FINANCING
 	#[serde(rename = "13")]
 	Financing,
+}
+
+impl Default for Product {
+	fn default() -> Self {
+		Product::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -660,6 +678,12 @@ pub enum SecurityType {
 	/// Structured finance product
 	#[serde(rename = "SFP")]
 	Sfp,
+}
+
+impl Default for SecurityType {
+	fn default() -> Self {
+		SecurityType::Fut
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1866,6 +1890,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StandInstDbType {
 	/// Other
@@ -1883,4 +1913,10 @@ pub enum StandInstDbType {
 	/// AccountNet
 	#[serde(rename = "4")]
 	AccountNet,
+}
+
+impl Default for StandInstDbType {
+	fn default() -> Self {
+		StandInstDbType::Other
+	}
 }

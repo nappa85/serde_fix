@@ -81,6 +81,12 @@ pub enum NetGrossInd {
 	Gross,
 }
 
+impl Default for NetGrossInd {
+	fn default() -> Self {
+		NetGrossInd::Net
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlObligTransType {
 	/// Cancel
@@ -95,6 +101,12 @@ pub enum SettlObligTransType {
 	/// Restate
 	#[serde(rename = "T")]
 	Restate,
+}
+
+impl Default for SettlObligTransType {
+	fn default() -> Self {
+		SettlObligTransType::Cancel
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1301,6 +1313,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
@@ -2503,4 +2521,10 @@ pub enum SettlCurrency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
 }

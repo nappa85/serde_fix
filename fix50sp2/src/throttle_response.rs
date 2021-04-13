@@ -27,6 +27,12 @@ pub enum ThrottleInst {
 	QueueIfThrottleLimitExceeded,
 }
 
+impl Default for ThrottleInst {
+	fn default() -> Self {
+		ThrottleInst::RejectIfThrottleLimitExceeded
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleStatus {
 	/// Throttle limit not exceeded, not queued
@@ -37,6 +43,12 @@ pub enum ThrottleStatus {
 	QueuedDueToThrottleLimitExceeded,
 }
 
+impl Default for ThrottleStatus {
+	fn default() -> Self {
+		ThrottleStatus::ThrottleLimitNotExceededNotQueued
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleCountIndicator {
 	/// Outstanding requests unchanged
@@ -45,4 +57,10 @@ pub enum ThrottleCountIndicator {
 	/// Outstanding requests decreased
 	#[serde(rename = "1")]
 	OutstandingRequestsDecreased,
+}
+
+impl Default for ThrottleCountIndicator {
+	fn default() -> Self {
+		ThrottleCountIndicator::OutstandingRequestsUnchanged
+	}
 }

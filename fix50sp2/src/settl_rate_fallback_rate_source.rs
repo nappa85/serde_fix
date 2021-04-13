@@ -32,3 +32,9 @@ pub enum SettlRateFallbackRateSourceItem {
 	#[serde(rename = "99")]
 	Other,
 }
+
+impl Default for SettlRateFallbackRateSourceItem {
+	fn default() -> Self {
+		SettlRateFallbackRateSourceItem::Bloomberg
+	}
+}

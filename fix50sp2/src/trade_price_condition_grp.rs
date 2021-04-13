@@ -77,3 +77,9 @@ pub enum TradePriceConditionItem {
 	#[serde(rename = "18")]
 	PriceIsNotApplicable,
 }
+
+impl Default for TradePriceConditionItem {
+	fn default() -> Self {
+		TradePriceConditionItem::SpecialCumDividend
+	}
+}

@@ -58,6 +58,12 @@ pub enum RelativeValueType {
 	CdsInterpolatedBasis,
 }
 
+impl Default for RelativeValueType {
+	fn default() -> Self {
+		RelativeValueType::AssetSwapSpread
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RelativeValueSide {
 	/// Bid
@@ -69,4 +75,10 @@ pub enum RelativeValueSide {
 	/// Offer
 	#[serde(rename = "3")]
 	Offer,
+}
+
+impl Default for RelativeValueSide {
+	fn default() -> Self {
+		RelativeValueSide::Bid
+	}
 }

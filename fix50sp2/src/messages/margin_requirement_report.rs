@@ -72,15 +72,11 @@ pub struct MarginRequirementReport {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text field in the encoded format specified via the MessageEncoding field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// RegulatoryReportType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1934")]
@@ -115,6 +111,12 @@ pub enum MarginReqmtRptType {
 	ExcessDeficit,
 }
 
+impl Default for MarginReqmtRptType {
+	fn default() -> Self {
+		MarginReqmtRptType::Summary
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastRptRequested {
 	/// Not last message
@@ -125,6 +127,12 @@ pub enum LastRptRequested {
 	LastMessage,
 }
 
+impl Default for LastRptRequested {
+	fn default() -> Self {
+		LastRptRequested::NotLastMessage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
@@ -133,6 +141,12 @@ pub enum UnsolicitedIndicator {
 	/// Message is being sent unsolicited
 	#[serde(rename = "Y")]
 	MessageIsBeingSentUnsolicited,
+}
+
+impl Default for UnsolicitedIndicator {
+	fn default() -> Self {
+		UnsolicitedIndicator::MessageIsBeingSentAsAResultOfAPriorRequest
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -149,6 +163,12 @@ pub enum SettlSessID {
 	/// End Of Day
 	#[serde(rename = "EOD")]
 	EndOfDay,
+}
+
+impl Default for SettlSessID {
+	fn default() -> Self {
+		SettlSessID::Intraday
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1355,6 +1375,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RegulatoryReportType {
 	/// Real-time (RT)
@@ -1465,4 +1491,10 @@ pub enum RegulatoryReportType {
 	/// Termination / Early termination
 	#[serde(rename = "34")]
 	TerminationEarlyTermination,
+}
+
+impl Default for RegulatoryReportType {
+	fn default() -> Self {
+		RegulatoryReportType::RealTime
+	}
 }

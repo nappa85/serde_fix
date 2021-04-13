@@ -66,6 +66,12 @@ pub enum LegSecondaryAssetClass {
 	Index,
 }
 
+impl Default for LegSecondaryAssetClass {
+	fn default() -> Self {
+		LegSecondaryAssetClass::InterestRate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegSecondaryAssetSubClass {
 	/// Single currency
@@ -212,4 +218,10 @@ pub enum LegSecondaryAssetSubClass {
 	/// Other
 	#[serde(rename = "48")]
 	Other,
+}
+
+impl Default for LegSecondaryAssetSubClass {
+	fn default() -> Self {
+		LegSecondaryAssetSubClass::SingleCurrency
+	}
 }

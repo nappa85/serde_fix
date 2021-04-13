@@ -46,3 +46,9 @@ pub enum RoundingDirection {
 	#[serde(rename = "2")]
 	RoundUp,
 }
+
+impl Default for RoundingDirection {
+	fn default() -> Self {
+		RoundingDirection::RoundToNearest
+	}
+}

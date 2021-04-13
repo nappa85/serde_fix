@@ -395,6 +395,12 @@ pub enum LegPaymentStreamRateIndexSource {
 	Other,
 }
 
+impl Default for LegPaymentStreamRateIndexSource {
+	fn default() -> Self {
+		LegPaymentStreamRateIndexSource::Bloomberg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamRateIndexCurveUnit {
 	/// Day
@@ -411,6 +417,12 @@ pub enum LegPaymentStreamRateIndexCurveUnit {
 	Year,
 }
 
+impl Default for LegPaymentStreamRateIndexCurveUnit {
+	fn default() -> Self {
+		LegPaymentStreamRateIndexCurveUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamRateSpreadPositionType {
 	/// Short
@@ -419,6 +431,12 @@ pub enum LegPaymentStreamRateSpreadPositionType {
 	/// Long
 	#[serde(rename = "1")]
 	Long,
+}
+
+impl Default for LegPaymentStreamRateSpreadPositionType {
+	fn default() -> Self {
+		LegPaymentStreamRateSpreadPositionType::Short
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -431,6 +449,12 @@ pub enum LegPaymentStreamRateTreatment {
 	MoneyMarketYield,
 }
 
+impl Default for LegPaymentStreamRateTreatment {
+	fn default() -> Self {
+		LegPaymentStreamRateTreatment::BondEquivalentYield
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamCapRateBuySide {
 	/// Buyer of the trade
@@ -439,6 +463,12 @@ pub enum LegPaymentStreamCapRateBuySide {
 	/// Seller of the trade
 	#[serde(rename = "2")]
 	SellerOfTheTrade,
+}
+
+impl Default for LegPaymentStreamCapRateBuySide {
+	fn default() -> Self {
+		LegPaymentStreamCapRateBuySide::BuyerOfTheTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -451,6 +481,12 @@ pub enum LegPaymentStreamCapRateSellSide {
 	SellerOfTheTrade,
 }
 
+impl Default for LegPaymentStreamCapRateSellSide {
+	fn default() -> Self {
+		LegPaymentStreamCapRateSellSide::BuyerOfTheTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamFloorRateBuySide {
 	/// Buyer of the trade
@@ -461,6 +497,12 @@ pub enum LegPaymentStreamFloorRateBuySide {
 	SellerOfTheTrade,
 }
 
+impl Default for LegPaymentStreamFloorRateBuySide {
+	fn default() -> Self {
+		LegPaymentStreamFloorRateBuySide::BuyerOfTheTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamFloorRateSellSide {
 	/// Buyer of the trade
@@ -469,6 +511,12 @@ pub enum LegPaymentStreamFloorRateSellSide {
 	/// Seller of the trade
 	#[serde(rename = "2")]
 	SellerOfTheTrade,
+}
+
+impl Default for LegPaymentStreamFloorRateSellSide {
+	fn default() -> Self {
+		LegPaymentStreamFloorRateSellSide::BuyerOfTheTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -484,6 +532,12 @@ pub enum LegPaymentStreamFinalRateRoundingDirection {
 	RoundUp,
 }
 
+impl Default for LegPaymentStreamFinalRateRoundingDirection {
+	fn default() -> Self {
+		LegPaymentStreamFinalRateRoundingDirection::RoundToNearest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamAveragingMethod {
 	/// Unweighted
@@ -494,6 +548,12 @@ pub enum LegPaymentStreamAveragingMethod {
 	Weighted,
 }
 
+impl Default for LegPaymentStreamAveragingMethod {
+	fn default() -> Self {
+		LegPaymentStreamAveragingMethod::Unweighted
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamNegativeRateTreatment {
 	/// Zero interest rate method
@@ -502,6 +562,12 @@ pub enum LegPaymentStreamNegativeRateTreatment {
 	/// Negative interest rate method
 	#[serde(rename = "1")]
 	NegativeInterestRateMethod,
+}
+
+impl Default for LegPaymentStreamNegativeRateTreatment {
+	fn default() -> Self {
+		LegPaymentStreamNegativeRateTreatment::ZeroInterestRateMethod
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -518,6 +584,12 @@ pub enum LegPaymentStreamInflationLagUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentStreamInflationLagUnit {
+	fn default() -> Self {
+		LegPaymentStreamInflationLagUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -542,6 +614,12 @@ pub enum LegPaymentStreamInflationLagDayType {
 	ScheduledTradingDay,
 }
 
+impl Default for LegPaymentStreamInflationLagDayType {
+	fn default() -> Self {
+		LegPaymentStreamInflationLagDayType::Business
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamInflationInterpolationMethod {
 	/// None
@@ -550,6 +628,12 @@ pub enum LegPaymentStreamInflationInterpolationMethod {
 	/// Linear zero yield
 	#[serde(rename = "1")]
 	LinearZeroYield,
+}
+
+impl Default for LegPaymentStreamInflationInterpolationMethod {
+	fn default() -> Self {
+		LegPaymentStreamInflationInterpolationMethod::None
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -568,6 +652,12 @@ pub enum LegPaymentStreamInflationIndexSource {
 	Other,
 }
 
+impl Default for LegPaymentStreamInflationIndexSource {
+	fn default() -> Self {
+		LegPaymentStreamInflationIndexSource::Bloomberg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamFRADiscounting {
 	/// None
@@ -579,6 +669,12 @@ pub enum LegPaymentStreamFRADiscounting {
 	/// Australian Financial Markets Association (AFMA)
 	#[serde(rename = "2")]
 	AustralianFinancialMarketsAssociation,
+}
+
+impl Default for LegPaymentStreamFRADiscounting {
+	fn default() -> Self {
+		LegPaymentStreamFRADiscounting::None
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -595,6 +691,12 @@ pub enum LegPaymentStreamRateIndexCurveUnit2 {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentStreamRateIndexCurveUnit2 {
+	fn default() -> Self {
+		LegPaymentStreamRateIndexCurveUnit2::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -845,6 +947,12 @@ pub enum LegPaymentStreamRateIndexUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegPaymentStreamRateIndexUnitOfMeasure {
+	fn default() -> Self {
+		LegPaymentStreamRateIndexUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamSettlLevel {
 	/// Average (The cumulative number of weather index units for each day in the calculation period divided by the number of days
@@ -860,6 +968,12 @@ pub enum LegPaymentStreamSettlLevel {
 	/// Cumulative (The cumulative number of weather index units for each day in the calculaiton period)
 	#[serde(rename = "3")]
 	Cumulative,
+}
+
+impl Default for LegPaymentStreamSettlLevel {
+	fn default() -> Self {
+		LegPaymentStreamSettlLevel::Average
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1108,6 +1222,12 @@ pub enum LegPaymentStreamReferenceLevelUnitOfMeasure {
 	/// Yard
 	#[serde(rename = "yd")]
 	Yd,
+}
+
+impl Default for LegPaymentStreamReferenceLevelUnitOfMeasure {
+	fn default() -> Self {
+		LegPaymentStreamReferenceLevelUnitOfMeasure::Bbl
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2314,6 +2434,12 @@ pub enum LegPaymentStreamRateSpreadCurrency {
 	N999,
 }
 
+impl Default for LegPaymentStreamRateSpreadCurrency {
+	fn default() -> Self {
+		LegPaymentStreamRateSpreadCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamRateSpreadUnitOfMeasure {
 	/// Barrels
@@ -2562,6 +2688,12 @@ pub enum LegPaymentStreamRateSpreadUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegPaymentStreamRateSpreadUnitOfMeasure {
+	fn default() -> Self {
+		LegPaymentStreamRateSpreadUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamRateSpreadType {
 	/// Absolute
@@ -2570,6 +2702,12 @@ pub enum LegPaymentStreamRateSpreadType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for LegPaymentStreamRateSpreadType {
+	fn default() -> Self {
+		LegPaymentStreamRateSpreadType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2588,6 +2726,12 @@ pub enum LegPaymentStreamCalculationLagUnit {
 	Year,
 }
 
+impl Default for LegPaymentStreamCalculationLagUnit {
+	fn default() -> Self {
+		LegPaymentStreamCalculationLagUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamFirstObservationDateOffsetUnit {
 	/// Day
@@ -2602,6 +2746,12 @@ pub enum LegPaymentStreamFirstObservationDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentStreamFirstObservationDateOffsetUnit {
+	fn default() -> Self {
+		LegPaymentStreamFirstObservationDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2626,6 +2776,12 @@ pub enum LegPaymentStreamPricingDayType {
 	ScheduledTradingDay,
 }
 
+impl Default for LegPaymentStreamPricingDayType {
+	fn default() -> Self {
+		LegPaymentStreamPricingDayType::Business
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamPricingDayDistribution {
 	/// All
@@ -2640,6 +2796,12 @@ pub enum LegPaymentStreamPricingDayDistribution {
 	/// Penultimate
 	#[serde(rename = "3")]
 	Penultimate,
+}
+
+impl Default for LegPaymentStreamPricingDayDistribution {
+	fn default() -> Self {
+		LegPaymentStreamPricingDayDistribution::All
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2668,4 +2830,10 @@ pub enum LegPaymentStreamPricingBusinessDayConvention {
 	/// Nearest day
 	#[serde(rename = "7")]
 	NearestDay,
+}
+
+impl Default for LegPaymentStreamPricingBusinessDayConvention {
+	fn default() -> Self {
+		LegPaymentStreamPricingBusinessDayConvention::NotApplicable
+	}
 }

@@ -72,6 +72,12 @@ pub enum ProvisionCashSettlValueDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for ProvisionCashSettlValueDateBusinessDayConvention {
+	fn default() -> Self {
+		ProvisionCashSettlValueDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionCashSettlValueDateRelativeTo {
 	/// Trade date
@@ -106,6 +112,12 @@ pub enum ProvisionCashSettlValueDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for ProvisionCashSettlValueDateRelativeTo {
+	fn default() -> Self {
+		ProvisionCashSettlValueDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProvisionCashSettlValueDateOffsetUnit {
 	/// Day
@@ -120,6 +132,12 @@ pub enum ProvisionCashSettlValueDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for ProvisionCashSettlValueDateOffsetUnit {
+	fn default() -> Self {
+		ProvisionCashSettlValueDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -142,4 +160,10 @@ pub enum ProvisionCashSettlValueDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for ProvisionCashSettlValueDateOffsetDayType {
+	fn default() -> Self {
+		ProvisionCashSettlValueDateOffsetDayType::Business
+	}
 }

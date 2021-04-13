@@ -53,15 +53,11 @@ pub struct Allocation {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// This repeating group is optionally used for messages with <a href="tag_87_AllocStatus.html" target="bottom">AllocStatus (87)&nbsp;(87)</a> = 2 (account level reject) to provide details of the individual accounts that caused the rejection, together with reject reasons.
 	/// This group should not be populated when AllocStatus has any other value. Indicates number of allocation groups to follow
 	#[serde(flatten)]
@@ -86,15 +82,11 @@ pub struct Allocation {
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// Must be set if <a href="tag_1665_EncodedRejectText.html" target="bottom">EncodedRejectTextLen(1665)&nbsp;(1665)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1328_RejectText.html" target="bottom">RejectedText(1328)&nbsp;(1328)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// RegulatoryTradeIDGrp
 	#[serde(flatten)]
 	pub regulatory_trade_id_grp: Option<super::super::regulatory_trade_id_grp::RegulatoryTradeIDGrp>,
@@ -150,6 +142,12 @@ pub enum AllocStatus {
 	/// Reversal pending
 	#[serde(rename = "14")]
 	ReversalPending,
+}
+
+impl Default for AllocStatus {
+	fn default() -> Self {
+		AllocStatus::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -246,6 +244,12 @@ pub enum AllocRejCode {
 	N28,
 }
 
+impl Default for AllocRejCode {
+	fn default() -> Self {
+		AllocRejCode::N0
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocType {
 	/// Calculated (includes MiscFees and NetMoney)
@@ -328,6 +332,12 @@ pub enum AllocType {
 	NotionalValueAveragePriceGroupAllocation,
 }
 
+impl Default for AllocType {
+	fn default() -> Self {
+		AllocType::Calculated
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocIntermedReqType {
 	/// Pending Accept
@@ -350,6 +360,12 @@ pub enum AllocIntermedReqType {
 	AccountLevelReject,
 }
 
+impl Default for AllocIntermedReqType {
+	fn default() -> Self {
+		AllocIntermedReqType::PendingAccept
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
@@ -365,4 +381,10 @@ pub enum MatchStatus {
 	/// are variances. MatchExceptionGrp component may be used to detail on the mis-matched data fields)
 	#[serde(rename = "3")]
 	MismatchedAndConfirmationAreMatchedButThereAreVariancesMatchExceptionGrpComponentMayBeUsedToDetailOnTheMisMatchedDataFields,
+}
+
+impl Default for MatchStatus {
+	fn default() -> Self {
+		MatchStatus::ComparedMatchedOrAffirmed
+	}
 }

@@ -84,6 +84,12 @@ pub enum LegAllocAcctIDSource {
 	Other,
 }
 
+impl Default for LegAllocAcctIDSource {
+	fn default() -> Self {
+		LegAllocAcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegAllocSettlCurrency {
 	/// Afghani
@@ -1286,4 +1292,10 @@ pub enum LegAllocSettlCurrency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for LegAllocSettlCurrency {
+	fn default() -> Self {
+		LegAllocSettlCurrency::Afa
+	}
 }

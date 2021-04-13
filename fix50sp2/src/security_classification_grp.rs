@@ -48,3 +48,9 @@ pub enum SecurityClassificationReason {
 	#[serde(rename = "7")]
 	Sector,
 }
+
+impl Default for SecurityClassificationReason {
+	fn default() -> Self {
+		SecurityClassificationReason::Fee
+	}
+}

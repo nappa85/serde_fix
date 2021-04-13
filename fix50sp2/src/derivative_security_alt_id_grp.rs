@@ -120,3 +120,9 @@ pub enum DerivativeSecurityAltIDSource {
 	#[serde(rename = "X")]
 	UniformSymbol,
 }
+
+impl Default for DerivativeSecurityAltIDSource {
+	fn default() -> Self {
+		DerivativeSecurityAltIDSource::Cusip
+	}
+}

@@ -175,6 +175,12 @@ pub enum PosAmtType {
 	LoanValue,
 }
 
+impl Default for PosAmtType {
+	fn default() -> Self {
+		PosAmtType::FinalMarkToMarketAmount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PosAmtReason {
 	/// Options settlement
@@ -200,6 +206,12 @@ pub enum PosAmtReason {
 	DeliveryStorageCharges,
 }
 
+impl Default for PosAmtReason {
+	fn default() -> Self {
+		PosAmtReason::OptionsSettlement
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PositionFXRateCalc {
 	/// Divided
@@ -208,4 +220,10 @@ pub enum PositionFXRateCalc {
 	/// Multiply
 	#[serde(rename = "M")]
 	Multiply,
+}
+
+impl Default for PositionFXRateCalc {
+	fn default() -> Self {
+		PositionFXRateCalc::Divided
+	}
 }

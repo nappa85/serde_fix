@@ -48,6 +48,12 @@ pub enum TrdRegPublicationType {
 	TdTrTrValignTopTdClassVal6TdTdClassValDescr,
 }
 
+impl Default for TrdRegPublicationType {
+	fn default() -> Self {
+		TrdRegPublicationType::PreTradeTransparencyWaiver
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdRegPublicationReason {
 	/// No preceding order in book as transaction price set within average spread of a liquid instrument
@@ -98,4 +104,10 @@ pub enum TrdRegPublicationReason {
 	/// Exception due to intra-firm order
 	#[serde(rename = "15")]
 	ExceptionDueToIntraFirmOrder,
+}
+
+impl Default for TrdRegPublicationReason {
+	fn default() -> Self {
+		TrdRegPublicationReason::NoPrecedingOrderInBookAsTransactionPriceSetWithinAverageSpreadOfALiquidInstrument
+	}
 }

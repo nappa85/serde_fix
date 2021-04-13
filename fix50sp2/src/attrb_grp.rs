@@ -150,3 +150,9 @@ pub enum InstrAttribType {
 	#[serde(rename = "41")]
 	N41,
 }
+
+impl Default for InstrAttribType {
+	fn default() -> Self {
+		InstrAttribType::N1
+	}
+}

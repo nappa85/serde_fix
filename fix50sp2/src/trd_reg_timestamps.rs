@@ -171,6 +171,12 @@ pub enum TrdRegTimestampType {
 	ReferenceTimeForNbbo,
 }
 
+impl Default for TrdRegTimestampType {
+	fn default() -> Self {
+		TrdRegTimestampType::ExecutionTime
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeskType {
 	/// Agency
@@ -229,11 +235,23 @@ pub enum DeskType {
 	FloorBroker,
 }
 
+impl Default for DeskType {
+	fn default() -> Self {
+		DeskType::Agency
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DeskTypeSource {
 	/// NASD OATS
 	#[serde(rename = "1")]
 	NasdOats,
+}
+
+impl Default for DeskTypeSource {
+	fn default() -> Self {
+		DeskTypeSource::NasdOats
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -438,6 +456,12 @@ pub enum DeskOrderHandlingInst {
 	WorkToTargetStrategy,
 }
 
+impl Default for DeskOrderHandlingInst {
+	fn default() -> Self {
+		DeskOrderHandlingInst::AddOnOrder
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TrdRegTimestampManualIndicator {
 	/// Not manually captured
@@ -446,6 +470,12 @@ pub enum TrdRegTimestampManualIndicator {
 	/// Manually captured
 	#[serde(rename = "Y")]
 	ManuallyCaptured,
+}
+
+impl Default for TrdRegTimestampManualIndicator {
+	fn default() -> Self {
+		TrdRegTimestampManualIndicator::NotManuallyCaptured
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -459,6 +489,12 @@ pub enum NBBOEntryType {
 	/// Mid-price
 	#[serde(rename = "2")]
 	MidPrice,
+}
+
+impl Default for NBBOEntryType {
+	fn default() -> Self {
+		NBBOEntryType::Bid
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -475,4 +511,10 @@ pub enum NBBOSource {
 	/// Hybrid
 	#[serde(rename = "3")]
 	Hybrid,
+}
+
+impl Default for NBBOSource {
+	fn default() -> Self {
+		NBBOSource::NotApplicable
+	}
 }

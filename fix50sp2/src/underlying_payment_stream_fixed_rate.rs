@@ -304,3 +304,9 @@ pub enum UnderlyingPaymentStreamFixedAmountUnitOfMeasure {
 	#[serde(rename = "yd")]
 	Yd,
 }
+
+impl Default for UnderlyingPaymentStreamFixedAmountUnitOfMeasure {
+	fn default() -> Self {
+		UnderlyingPaymentStreamFixedAmountUnitOfMeasure::Bbl
+	}
+}

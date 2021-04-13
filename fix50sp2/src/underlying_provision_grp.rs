@@ -109,16 +109,12 @@ pub struct UnderlyingProvision {
 	#[serde(rename = "42170")]
 	pub underlying_provision_text: Option<String>,
 	/// Must be set if EncodedProvisionText(40987) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "42171")]
-	pub encoded_underlying_provision_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the UnderlyingProvisionText(42170) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "42172")]
-	pub encoded_underlying_provision_text: Option<String>,
+	#[serde(alias = "42172")]
+	pub encoded_underlying_provision_text: Option<fix_common::EncodedText<42172>>,
 	/// UnderlyingProvisionBreakFeeElection
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -161,6 +157,12 @@ pub enum UnderlyingProvisionType {
 	Puttable,
 }
 
+impl Default for UnderlyingProvisionType {
+	fn default() -> Self {
+		UnderlyingProvisionType::MandatoryEarlyTermination
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProvisionDateBusinessDayConvention {
 	/// Not applicable
@@ -189,6 +191,12 @@ pub enum UnderlyingProvisionDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for UnderlyingProvisionDateBusinessDayConvention {
+	fn default() -> Self {
+		UnderlyingProvisionDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProvisionDateTenorUnit {
 	/// Day
@@ -203,6 +211,12 @@ pub enum UnderlyingProvisionDateTenorUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for UnderlyingProvisionDateTenorUnit {
+	fn default() -> Self {
+		UnderlyingProvisionDateTenorUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -221,6 +235,12 @@ pub enum UnderlyingProvisionCalculationAgent {
 	AsSpecifiedInTheStandardTermsSupplement,
 }
 
+impl Default for UnderlyingProvisionCalculationAgent {
+	fn default() -> Self {
+		UnderlyingProvisionCalculationAgent::ExercisingParty
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionSinglePartyBuyerSide {
 	/// Buy
@@ -231,6 +251,12 @@ pub enum UnderlyingProvisionOptionSinglePartyBuyerSide {
 	Sell,
 }
 
+impl Default for UnderlyingProvisionOptionSinglePartyBuyerSide {
+	fn default() -> Self {
+		UnderlyingProvisionOptionSinglePartyBuyerSide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionSinglePartySellerSide {
 	/// Buy
@@ -239,6 +265,12 @@ pub enum UnderlyingProvisionOptionSinglePartySellerSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for UnderlyingProvisionOptionSinglePartySellerSide {
+	fn default() -> Self {
+		UnderlyingProvisionOptionSinglePartySellerSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -255,6 +287,12 @@ pub enum UnderlyingProvisionOptionExerciseStyle {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for UnderlyingProvisionOptionExerciseStyle {
+	fn default() -> Self {
+		UnderlyingProvisionOptionExerciseStyle::European
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -280,6 +318,12 @@ pub enum UnderlyingProvisionCashSettlMethod {
 	/// Collateralized price
 	#[serde(rename = "6")]
 	CollateralizedPrice,
+}
+
+impl Default for UnderlyingProvisionCashSettlMethod {
+	fn default() -> Self {
+		UnderlyingProvisionCashSettlMethod::CashPrice
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1486,6 +1530,12 @@ pub enum UnderlyingProvisionCashSettlCurrency {
 	N999,
 }
 
+impl Default for UnderlyingProvisionCashSettlCurrency {
+	fn default() -> Self {
+		UnderlyingProvisionCashSettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlCurrency2 {
 	/// Afghani
@@ -2690,6 +2740,12 @@ pub enum UnderlyingProvisionCashSettlCurrency2 {
 	N999,
 }
 
+impl Default for UnderlyingProvisionCashSettlCurrency2 {
+	fn default() -> Self {
+		UnderlyingProvisionCashSettlCurrency2::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlQuoteType {
 	/// Bid
@@ -2705,4 +2761,10 @@ pub enum UnderlyingProvisionCashSettlQuoteType {
 	/// (j) for definition of "exercising party pays")
 	#[serde(rename = "3")]
 	ExercisingPartyPaysForDefinitionOfExercisingPartyPays,
+}
+
+impl Default for UnderlyingProvisionCashSettlQuoteType {
+	fn default() -> Self {
+		UnderlyingProvisionCashSettlQuoteType::Bid
+	}
 }

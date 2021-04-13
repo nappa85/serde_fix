@@ -138,6 +138,12 @@ pub enum ReturnRatePriceSequence {
 	Final,
 }
 
+impl Default for ReturnRatePriceSequence {
+	fn default() -> Self {
+		ReturnRatePriceSequence::Initial
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ReturnRateQuoteTimeType {
 	/// Open
@@ -166,6 +172,12 @@ pub enum ReturnRateQuoteTimeType {
 	AsSpecifiedInTheMasterConfirmation,
 }
 
+impl Default for ReturnRateQuoteTimeType {
+	fn default() -> Self {
+		ReturnRateQuoteTimeType::Open
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ReturnRateValuationPriceOption {
 	/// None (the default)
@@ -177,4 +189,10 @@ pub enum ReturnRateValuationPriceOption {
 	/// Options price
 	#[serde(rename = "2")]
 	OptionsPrice,
+}
+
+impl Default for ReturnRateValuationPriceOption {
+	fn default() -> Self {
+		ReturnRateValuationPriceOption::None
+	}
 }

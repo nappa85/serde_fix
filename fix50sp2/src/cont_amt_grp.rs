@@ -76,6 +76,12 @@ pub enum ContAmtType {
 	N15,
 }
 
+impl Default for ContAmtType {
+	fn default() -> Self {
+		ContAmtType::N1
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ContAmtCurr {
 	/// Afghani
@@ -1278,4 +1284,10 @@ pub enum ContAmtCurr {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for ContAmtCurr {
+	fn default() -> Self {
+		ContAmtCurr::Afa
+	}
 }

@@ -300,3 +300,9 @@ pub enum InstrumentPartySubIDType {
 	#[serde(rename = "87")]
 	N87,
 }
+
+impl Default for InstrumentPartySubIDType {
+	fn default() -> Self {
+		InstrumentPartySubIDType::N1
+	}
+}

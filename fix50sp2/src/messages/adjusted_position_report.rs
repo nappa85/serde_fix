@@ -87,6 +87,12 @@ pub enum PosReqType {
 	PositionLimitReportingSubmission,
 }
 
+impl Default for PosReqType {
+	fn default() -> Self {
+		PosReqType::Positions
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlSessID {
 	/// Intraday
@@ -101,4 +107,10 @@ pub enum SettlSessID {
 	/// End Of Day
 	#[serde(rename = "EOD")]
 	EndOfDay,
+}
+
+impl Default for SettlSessID {
+	fn default() -> Self {
+		SettlSessID::Intraday
+	}
 }

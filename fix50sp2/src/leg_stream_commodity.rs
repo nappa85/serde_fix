@@ -27,16 +27,12 @@ pub struct LegStreamCommodity {
 	#[serde(rename = "41652")]
 	pub leg_stream_commodity_desc: Option<String>,
 	/// Must be set if EncodedLegStreamCommodityDesc(41654) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41653")]
-	pub encoded_leg_stream_commodity_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegStreamCommodityDesc(41652) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41654")]
-	pub encoded_leg_stream_commodity_desc: Option<String>,
+	#[serde(alias = "41654")]
+	pub encoded_leg_stream_commodity_desc: Option<fix_common::EncodedText<41654>>,
 	/// LegStreamAssetAttributeGrp
 	#[serde(flatten)]
 	pub leg_stream_asset_attribute_grp: Option<super::leg_stream_asset_attribute_grp::LegStreamAssetAttributeGrp>,
@@ -238,6 +234,12 @@ pub enum LegStreamCommoditySecurityIDSource {
 	/// Uniform Symbol (UMTF Symbol)
 	#[serde(rename = "X")]
 	UniformSymbol,
+}
+
+impl Default for LegStreamCommoditySecurityIDSource {
+	fn default() -> Self {
+		LegStreamCommoditySecurityIDSource::Cusip
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -488,6 +490,12 @@ pub enum LegStreamCommodityUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegStreamCommodityUnitOfMeasure {
+	fn default() -> Self {
+		LegStreamCommodityUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamCommodityNearbySettlDayUnit {
 	/// Week
@@ -496,6 +504,12 @@ pub enum LegStreamCommodityNearbySettlDayUnit {
 	/// Month
 	#[serde(rename = "Mo")]
 	Month,
+}
+
+impl Default for LegStreamCommodityNearbySettlDayUnit {
+	fn default() -> Self {
+		LegStreamCommodityNearbySettlDayUnit::Week
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -526,11 +540,23 @@ pub enum LegStreamCommoditySettlDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegStreamCommoditySettlDateBusinessDayConvention {
+	fn default() -> Self {
+		LegStreamCommoditySettlDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlDateRollUnit {
 	/// Day
 	#[serde(rename = "D")]
 	Day,
+}
+
+impl Default for LegStreamCommoditySettlDateRollUnit {
+	fn default() -> Self {
+		LegStreamCommoditySettlDateRollUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -553,4 +579,10 @@ pub enum LegStreamCommoditySettlDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegStreamCommoditySettlDayType {
+	fn default() -> Self {
+		LegStreamCommoditySettlDayType::Business
+	}
 }

@@ -176,31 +176,23 @@ pub struct InstrumentLeg {
 	#[serde(rename = "617")]
 	pub leg_issuer: Option<String>,
 	/// Must be set if EncodedLegIssuer(618) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "618")]
-	pub encoded_leg_issuer_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegIssuer(617) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "619")]
-	pub encoded_leg_issuer: Option<String>,
+	#[serde(alias = "619")]
+	pub encoded_leg_issuer: Option<fix_common::EncodedText<619>>,
 	/// LegSecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "620")]
 	pub leg_security_desc: Option<String>,
 	/// Must be set if LegEncodedSecurityDesc(622) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "621")]
-	pub encoded_leg_security_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegSecurityDesc(620) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "622")]
-	pub encoded_leg_security_desc: Option<String>,
+	#[serde(alias = "622")]
+	pub encoded_leg_security_desc: Option<fix_common::EncodedText<622>>,
 	/// Specific to the &lt;InstrumentLeg&gt; (not in &lt;Instrument&gt;)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -456,16 +448,12 @@ pub struct InstrumentLeg {
 	#[serde(rename = "2178")]
 	pub leg_option_expiration_desc: Option<String>,
 	/// Must be set if EncodedLegOptionExpirationDesc(2180) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2179")]
-	pub encoded_leg_option_expiration_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegOptionExpirationDesc(2178) field in the encoded format specified via
 	/// the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2180")]
-	pub encoded_leg_option_expiration_desc: Option<String>,
+	#[serde(alias = "2180")]
+	pub encoded_leg_option_expiration_desc: Option<fix_common::EncodedText<2180>>,
 	/// LegStrikeMultiplier
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -697,16 +685,12 @@ pub struct InstrumentLeg {
 	#[serde(rename = "2717")]
 	pub leg_financial_instrument_full_name: Option<String>,
 	/// Must be set if EncodedLegFinancialInstrumentFullName(2719) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2718")]
-	pub encoded_leg_financial_instrument_full_name_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegFinancialInstrumentFullName(2717) field in the encoded format specified
 	/// via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2719")]
-	pub encoded_leg_financial_instrument_full_name: Option<String>,
+	#[serde(alias = "2719")]
+	pub encoded_leg_financial_instrument_full_name: Option<fix_common::EncodedText<2719>>,
 	/// LegAssetSubType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2739")]
@@ -831,6 +815,12 @@ pub enum LegSecurityIDSource {
 	UniformSymbol,
 }
 
+impl Default for LegSecurityIDSource {
+	fn default() -> Self {
+		LegSecurityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProduct {
 	/// AGENCY
@@ -872,6 +862,12 @@ pub enum LegProduct {
 	/// FINANCING
 	#[serde(rename = "13")]
 	Financing,
+}
+
+impl Default for LegProduct {
+	fn default() -> Self {
+		LegProduct::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1339,6 +1335,12 @@ pub enum LegSecurityType {
 	Sfp,
 }
 
+impl Default for LegSecurityType {
+	fn default() -> Self {
+		LegSecurityType::Fut
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegRepoCollateralSecurityType {
 	/// Future
@@ -1802,6 +1804,12 @@ pub enum LegRepoCollateralSecurityType {
 	/// Structured finance product
 	#[serde(rename = "SFP")]
 	Sfp,
+}
+
+impl Default for LegRepoCollateralSecurityType {
+	fn default() -> Self {
+		LegRepoCollateralSecurityType::Fut
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2523,6 +2531,12 @@ pub enum LegCountryOfIssue {
 	/// ZIMBABWE
 	#[serde(rename = "ZW")]
 	Zimbabwe,
+}
+
+impl Default for LegCountryOfIssue {
+	fn default() -> Self {
+		LegCountryOfIssue::Afghanistan
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3729,6 +3743,12 @@ pub enum LegStrikeCurrency {
 	N999,
 }
 
+impl Default for LegStrikeCurrency {
+	fn default() -> Self {
+		LegStrikeCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegContractMultiplierUnit {
 	/// Shares
@@ -3740,6 +3760,12 @@ pub enum LegContractMultiplierUnit {
 	/// Days
 	#[serde(rename = "2")]
 	Days,
+}
+
+impl Default for LegContractMultiplierUnit {
+	fn default() -> Self {
+		LegContractMultiplierUnit::Shares
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3777,6 +3803,12 @@ pub enum LegFlowScheduleType {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for LegFlowScheduleType {
+	fn default() -> Self {
+		LegFlowScheduleType::NercEasternOffPeak
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4027,6 +4059,12 @@ pub enum LegUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegUnitOfMeasure {
+	fn default() -> Self {
+		LegUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPriceUnitOfMeasure {
 	/// Barrels
@@ -4275,6 +4313,12 @@ pub enum LegPriceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegPriceUnitOfMeasure {
+	fn default() -> Self {
+		LegPriceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegTimeUnit {
 	/// Hour
@@ -4303,6 +4347,12 @@ pub enum LegTimeUnit {
 	Quarter,
 }
 
+impl Default for LegTimeUnit {
+	fn default() -> Self {
+		LegTimeUnit::Hour
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegExerciseStyle {
 	/// European
@@ -4317,6 +4367,12 @@ pub enum LegExerciseStyle {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for LegExerciseStyle {
+	fn default() -> Self {
+		LegExerciseStyle::European
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4372,6 +4428,12 @@ pub enum LegSide {
 	/// Sell undisclosed
 	#[serde(rename = "H")]
 	SellUndisclosed,
+}
+
+impl Default for LegSide {
+	fn default() -> Self {
+		LegSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -5578,6 +5640,12 @@ pub enum LegCurrency {
 	N999,
 }
 
+impl Default for LegCurrency {
+	fn default() -> Self {
+		LegCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPutOrCall {
 	/// Put
@@ -5592,6 +5660,12 @@ pub enum LegPutOrCall {
 	/// Chooser
 	#[serde(rename = "3")]
 	Chooser,
+}
+
+impl Default for LegPutOrCall {
+	fn default() -> Self {
+		LegPutOrCall::Put
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -6802,6 +6876,12 @@ pub enum LegPriceQuoteCurrency {
 	N999,
 }
 
+impl Default for LegPriceQuoteCurrency {
+	fn default() -> Self {
+		LegPriceQuoteCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegUnitOfMeasureCurrency {
 	/// Afghani
@@ -8004,6 +8084,12 @@ pub enum LegUnitOfMeasureCurrency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for LegUnitOfMeasureCurrency {
+	fn default() -> Self {
+		LegUnitOfMeasureCurrency::Afa
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9210,6 +9296,12 @@ pub enum LegPriceUnitOfMeasureCurrency {
 	N999,
 }
 
+impl Default for LegPriceUnitOfMeasureCurrency {
+	fn default() -> Self {
+		LegPriceUnitOfMeasureCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegAssetClass {
 	/// Interest rate
@@ -9245,6 +9337,12 @@ pub enum LegAssetClass {
 	/// Index
 	#[serde(rename = "11")]
 	Index,
+}
+
+impl Default for LegAssetClass {
+	fn default() -> Self {
+		LegAssetClass::InterestRate
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9395,6 +9493,12 @@ pub enum LegAssetSubClass {
 	Other,
 }
 
+impl Default for LegAssetSubClass {
+	fn default() -> Self {
+		LegAssetSubClass::SingleCurrency
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegSwapClass {
 	/// Basis swap
@@ -9411,6 +9515,12 @@ pub enum LegSwapClass {
 	BasketSwap,
 }
 
+impl Default for LegSwapClass {
+	fn default() -> Self {
+		LegSwapClass::BasisSwap
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegInstrmtAssignmentMethod {
 	/// Pro rata
@@ -9421,6 +9531,12 @@ pub enum LegInstrmtAssignmentMethod {
 	Random,
 }
 
+impl Default for LegInstrmtAssignmentMethod {
+	fn default() -> Self {
+		LegInstrmtAssignmentMethod::ProRata
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegSecurityStatus {
 	/// Active
@@ -9429,6 +9545,12 @@ pub enum LegSecurityStatus {
 	/// Inactive
 	#[serde(rename = "2")]
 	Inactive,
+}
+
+impl Default for LegSecurityStatus {
+	fn default() -> Self {
+		LegSecurityStatus::Active
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9447,6 +9569,12 @@ pub enum LegRestructuringType {
 	NoRestructuringSpecified,
 }
 
+impl Default for LegRestructuringType {
+	fn default() -> Self {
+		LegRestructuringType::FullRestructuring
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegSeniority {
 	/// Senior Secured
@@ -9458,6 +9586,12 @@ pub enum LegSeniority {
 	/// Subordinated
 	#[serde(rename = "SB")]
 	Subordinated,
+}
+
+impl Default for LegSeniority {
+	fn default() -> Self {
+		LegSeniority::SeniorSecured
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9474,6 +9608,12 @@ pub enum LegObligationType {
 	/// Loan
 	#[serde(rename = "3")]
 	Loan,
+}
+
+impl Default for LegObligationType {
+	fn default() -> Self {
+		LegObligationType::Bond
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9495,6 +9635,12 @@ pub enum LegSwapSubClass {
 	CustomNotionalSchedule,
 }
 
+impl Default for LegSwapSubClass {
+	fn default() -> Self {
+		LegSwapSubClass::AmortizingNotionalSchedule
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegCouponType {
 	/// Zero
@@ -9509,6 +9655,12 @@ pub enum LegCouponType {
 	/// Structured
 	#[serde(rename = "3")]
 	Structured,
+}
+
+impl Default for LegCouponType {
+	fn default() -> Self {
+		LegCouponType::Zero
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9537,6 +9689,12 @@ pub enum LegCouponFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for LegCouponFrequencyUnit {
+	fn default() -> Self {
+		LegCouponFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9631,6 +9789,12 @@ pub enum LegCouponDayCount {
 	/// Other
 	#[serde(rename = "99")]
 	N99,
+}
+
+impl Default for LegCouponDayCount {
+	fn default() -> Self {
+		LegCouponDayCount::N0
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9733,6 +9897,12 @@ pub enum LegConvertibleBondEquityIDSource {
 	UniformSymbol,
 }
 
+impl Default for LegConvertibleBondEquityIDSource {
+	fn default() -> Self {
+		LegConvertibleBondEquityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegLienSeniority {
 	/// Unknown
@@ -9747,6 +9917,12 @@ pub enum LegLienSeniority {
 	/// Third lien
 	#[serde(rename = "3")]
 	ThirdLien,
+}
+
+impl Default for LegLienSeniority {
+	fn default() -> Self {
+		LegLienSeniority::Unknown
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9769,6 +9945,12 @@ pub enum LegLoanFacility {
 	/// Trade claim
 	#[serde(rename = "5")]
 	TradeClaim,
+}
+
+impl Default for LegLoanFacility {
+	fn default() -> Self {
+		LegLoanFacility::BridgeLoan
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -9803,6 +9985,12 @@ pub enum LegReferenceEntityType {
 	/// Western European insurance
 	#[serde(rename = "10")]
 	WesternEuropeanInsurance,
+}
+
+impl Default for LegReferenceEntityType {
+	fn default() -> Self {
+		LegReferenceEntityType::Asian
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -10053,6 +10241,12 @@ pub enum LegStrikeUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegStrikeUnitOfMeasure {
+	fn default() -> Self {
+		LegStrikeUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegStrikePriceDeterminationMethod {
 	/// Fixed Strike
@@ -10067,6 +10261,12 @@ pub enum LegStrikePriceDeterminationMethod {
 	/// Strike set to optimal value
 	#[serde(rename = "4")]
 	StrikeSetToOptimalValue,
+}
+
+impl Default for LegStrikePriceDeterminationMethod {
+	fn default() -> Self {
+		LegStrikePriceDeterminationMethod::FixedStrike
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -10088,6 +10288,12 @@ pub enum LegStrikePriceBoundaryMethod {
 	GreaterThanUnderlyingIsInTheMoney,
 }
 
+impl Default for LegStrikePriceBoundaryMethod {
+	fn default() -> Self {
+		LegStrikePriceBoundaryMethod::LessThanUnderlyingPriceIsInTheMoney
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegUnderlyingPriceDeterminationMethod {
 	/// Regular
@@ -10104,6 +10310,12 @@ pub enum LegUnderlyingPriceDeterminationMethod {
 	AverageValue,
 }
 
+impl Default for LegUnderlyingPriceDeterminationMethod {
+	fn default() -> Self {
+		LegUnderlyingPriceDeterminationMethod::Regular
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegSettlMethod {
 	/// Election at exercise (The settlement method will be elected at the time of contract exercise)
@@ -10117,6 +10329,12 @@ pub enum LegSettlMethod {
 	PhysicalSettlementRequired,
 }
 
+impl Default for LegSettlMethod {
+	fn default() -> Self {
+		LegSettlMethod::ElectionAtExercise
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegOptPayoutType {
 	/// Vanilla
@@ -10128,6 +10346,12 @@ pub enum LegOptPayoutType {
 	/// Binary
 	#[serde(rename = "3")]
 	Binary,
+}
+
+impl Default for LegOptPayoutType {
+	fn default() -> Self {
+		LegOptPayoutType::Vanilla
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -10144,6 +10368,12 @@ pub enum LegPriceQuoteMethod {
 	/// Percent of Par
 	#[serde(rename = "PCTPAR")]
 	PercentOfPar,
+}
+
+impl Default for LegPriceQuoteMethod {
+	fn default() -> Self {
+		LegPriceQuoteMethod::StandardMoneyPerUnitOfAPhysical
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -10165,6 +10395,12 @@ pub enum LegValuationMethod {
 	CdsInDeliveryUseRecoveryRateToCalculateObligation,
 }
 
+impl Default for LegValuationMethod {
+	fn default() -> Self {
+		LegValuationMethod::PremiumStyle
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegListMethod {
 	/// pre-listed only
@@ -10173,6 +10409,12 @@ pub enum LegListMethod {
 	/// user requested
 	#[serde(rename = "2")]
 	UserRequested,
+}
+
+impl Default for LegListMethod {
+	fn default() -> Self {
+		LegListMethod::PreListedOnly
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -10188,6 +10430,12 @@ pub enum LegCPProgram {
 	Other,
 }
 
+impl Default for LegCPProgram {
+	fn default() -> Self {
+		LegCPProgram::N3
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegShortSaleRestriction {
 	/// No restrictions
@@ -10199,6 +10447,12 @@ pub enum LegShortSaleRestriction {
 	/// Security not shortable at or below best bid
 	#[serde(rename = "2")]
 	SecurityNotShortableAtOrBelowBestBid,
+}
+
+impl Default for LegShortSaleRestriction {
+	fn default() -> Self {
+		LegShortSaleRestriction::NoRestrictions
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -10223,6 +10477,12 @@ pub enum LegStrategyType {
 	Other,
 }
 
+impl Default for LegStrategyType {
+	fn default() -> Self {
+		LegStrategyType::Straddle
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegSettlDisruptionProvision {
 	/// Negotiation
@@ -10231,6 +10491,12 @@ pub enum LegSettlDisruptionProvision {
 	/// Cancellation and payment
 	#[serde(rename = "2")]
 	CancellationAndPayment,
+}
+
+impl Default for LegSettlDisruptionProvision {
+	fn default() -> Self {
+		LegSettlDisruptionProvision::Negotiation
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -10246,6 +10512,12 @@ pub enum LegInstrumentRoundingDirection {
 	RoundUp,
 }
 
+impl Default for LegInstrumentRoundingDirection {
+	fn default() -> Self {
+		LegInstrumentRoundingDirection::RoundToNearest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegAssetGroup {
 	/// Financials (A categorization which usually includes rates, foreign exchange, credit, bonds and equity products or assets)
@@ -10258,4 +10530,10 @@ pub enum LegAssetGroup {
 	/// Alternative investments (A categorization which usually includes weather, housing, and commodity indices products or assets.)
 	#[serde(rename = "3")]
 	AlternativeInvestments,
+}
+
+impl Default for LegAssetGroup {
+	fn default() -> Self {
+		LegAssetGroup::Financials
+	}
 }

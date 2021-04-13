@@ -123,6 +123,12 @@ pub enum OptionExerciseBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for OptionExerciseBusinessDayConvention {
+	fn default() -> Self {
+		OptionExerciseBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OptionExerciseEarliestDateOffsetDayType {
 	/// Business
@@ -143,6 +149,12 @@ pub enum OptionExerciseEarliestDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for OptionExerciseEarliestDateOffsetDayType {
+	fn default() -> Self {
+		OptionExerciseEarliestDateOffsetDayType::Business
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -173,6 +185,12 @@ pub enum OptionExerciseEarliestDateUnit {
 	Term,
 }
 
+impl Default for OptionExerciseEarliestDateUnit {
+	fn default() -> Self {
+		OptionExerciseEarliestDateUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OptionExerciseFrequencyUnit {
 	/// Day
@@ -187,6 +205,12 @@ pub enum OptionExerciseFrequencyUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for OptionExerciseFrequencyUnit {
+	fn default() -> Self {
+		OptionExerciseFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -223,6 +247,12 @@ pub enum OptionExerciseStartDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for OptionExerciseStartDateRelativeTo {
+	fn default() -> Self {
+		OptionExerciseStartDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OptionExerciseStartDateOffsetUnit {
 	/// Day
@@ -237,6 +267,12 @@ pub enum OptionExerciseStartDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for OptionExerciseStartDateOffsetUnit {
+	fn default() -> Self {
+		OptionExerciseStartDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -259,4 +295,10 @@ pub enum OptionExerciseStartDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for OptionExerciseStartDateOffsetDayType {
+	fn default() -> Self {
+		OptionExerciseStartDateOffsetDayType::Business
+	}
 }

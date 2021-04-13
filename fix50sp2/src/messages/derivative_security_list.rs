@@ -91,6 +91,12 @@ pub enum SecurityRequestResult {
 	RequestForInstrumentDataNotSupported,
 }
 
+impl Default for SecurityRequestResult {
+	fn default() -> Self {
+		SecurityRequestResult::ValidRequest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
@@ -99,6 +105,12 @@ pub enum LastFragment {
 	/// Last Message
 	#[serde(rename = "Y")]
 	LastMessage,
+}
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -136,4 +148,10 @@ pub enum SecurityRejectReason {
 	/// Invalid instrument structure specified
 	#[serde(rename = "12")]
 	InvalidInstrumentStructureSpecified,
+}
+
+impl Default for SecurityRejectReason {
+	fn default() -> Self {
+		SecurityRejectReason::InvalidInstrumentRequested
+	}
 }

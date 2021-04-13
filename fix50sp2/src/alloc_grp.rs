@@ -81,16 +81,12 @@ pub struct Alloc {
 	#[serde(rename = "161")]
 	pub alloc_text: Option<String>,
 	/// Must be set if EncodedAllocText field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "360")]
-	pub encoded_alloc_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the AllocText field in the encoded format specified via the MessageEncoding
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "361")]
-	pub encoded_alloc_text: Option<String>,
+	#[serde(alias = "361")]
+	pub encoded_alloc_text: Option<fix_common::EncodedText<361>>,
 	/// AvgPx for this AllocAccount. For F/X orders, should be the "all-in" rate (spot rate adjusted for forward points) for this
 	/// allocation, expressed in terms of <a href="tag_15_Currency.html" target="bottom">Currency(15)&nbsp;(15)</a> . For Fixed Income always express value as "percent of par".
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -173,15 +169,11 @@ pub struct Alloc {
 	#[serde(rename = "1732")]
 	pub firm_alloc_text: Option<String>,
 	/// EncodedFirmAllocTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1733")]
-	pub encoded_firm_alloc_text_len: Option<usize>,
 	/// EncodedFirmAllocText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1734")]
-	pub encoded_firm_alloc_text: Option<String>,
+	#[serde(alias = "1734")]
+	pub encoded_firm_alloc_text: Option<fix_common::EncodedText<1734>>,
 	/// AllocationRollupInstruction
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1735")]
@@ -278,6 +270,12 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
+impl Default for AllocAcctIDSource {
+	fn default() -> Self {
+		AllocAcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
@@ -293,6 +291,12 @@ pub enum MatchStatus {
 	/// are variances. MatchExceptionGrp component may be used to detail on the mis-matched data fields)
 	#[serde(rename = "3")]
 	MismatchedAndConfirmationAreMatchedButThereAreVariancesMatchExceptionGrpComponentMayBeUsedToDetailOnTheMisMatchedDataFields,
+}
+
+impl Default for MatchStatus {
+	fn default() -> Self {
+		MatchStatus::ComparedMatchedOrAffirmed
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -320,6 +324,12 @@ pub enum ProcessCode {
 	PlanSponsor,
 }
 
+impl Default for ProcessCode {
+	fn default() -> Self {
+		ProcessCode::Regular
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocMethod {
 	/// Automatic
@@ -334,6 +344,12 @@ pub enum AllocMethod {
 	/// BrokerAssigned
 	#[serde(rename = "4")]
 	BrokerAssigned,
+}
+
+impl Default for AllocMethod {
+	fn default() -> Self {
+		AllocMethod::Automatic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -352,6 +368,12 @@ pub enum AllocPositionEffect {
 	Fifo,
 }
 
+impl Default for AllocPositionEffect {
+	fn default() -> Self {
+		AllocPositionEffect::Open
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum IndividualAllocType {
 	/// Sub Allocate
@@ -362,6 +384,12 @@ pub enum IndividualAllocType {
 	ThirdPartyAllocation,
 }
 
+impl Default for IndividualAllocType {
+	fn default() -> Self {
+		IndividualAllocType::SubAllocate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum NotifyBrokerOfCredit {
 	/// Details should not be communicated
@@ -370,6 +398,12 @@ pub enum NotifyBrokerOfCredit {
 	/// Details should be communicated
 	#[serde(rename = "Y")]
 	DetailsShouldBeCommunicated,
+}
+
+impl Default for NotifyBrokerOfCredit {
+	fn default() -> Self {
+		NotifyBrokerOfCredit::DetailsShouldNotBeCommunicated
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -386,6 +420,12 @@ pub enum AllocHandlInst {
 	/// Auto claim give-up (Indicates that the give-up and take-up party are the same and that trade give-up is to be claimed automatically)
 	#[serde(rename = "4")]
 	AutoClaimGiveUp,
+}
+
+impl Default for AllocHandlInst {
+	fn default() -> Self {
+		AllocHandlInst::Match
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1592,6 +1632,12 @@ pub enum SettlCurrency {
 	N999,
 }
 
+impl Default for SettlCurrency {
+	fn default() -> Self {
+		SettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocSettlCurrency {
 	/// Afghani
@@ -2796,6 +2842,12 @@ pub enum AllocSettlCurrency {
 	N999,
 }
 
+impl Default for AllocSettlCurrency {
+	fn default() -> Self {
+		AllocSettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SettlCurrFxRateCalc {
 	/// Multiply
@@ -2804,6 +2856,12 @@ pub enum SettlCurrFxRateCalc {
 	/// Divide
 	#[serde(rename = "D")]
 	Divide,
+}
+
+impl Default for SettlCurrFxRateCalc {
+	fn default() -> Self {
+		SettlCurrFxRateCalc::Multiply
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2852,6 +2910,12 @@ pub enum ClearingFeeIndicator {
 	AllOtherOwnershipTypes,
 }
 
+impl Default for ClearingFeeIndicator {
+	fn default() -> Self {
+		ClearingFeeIndicator::N1StYearDelegateTradingForOwnAccount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocSettlInstType {
 	/// use default instructions
@@ -2871,6 +2935,12 @@ pub enum AllocSettlInstType {
 	PhoneForInstructions,
 }
 
+impl Default for AllocSettlInstType {
+	fn default() -> Self {
+		AllocSettlInstType::UseDefaultInstructions
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocationRollupInstruction {
 	/// Roll up
@@ -2879,6 +2949,12 @@ pub enum AllocationRollupInstruction {
 	/// Do not roll up
 	#[serde(rename = "1")]
 	DoNotRollUp,
+}
+
+impl Default for AllocationRollupInstruction {
+	fn default() -> Self {
+		AllocationRollupInstruction::RollUp
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2892,6 +2968,12 @@ pub enum AllocRefRiskLimitCheckIDType {
 	/// Out of band identifier
 	#[serde(rename = "2")]
 	OutOfBandIdentifier,
+}
+
+impl Default for AllocRefRiskLimitCheckIDType {
+	fn default() -> Self {
+		AllocRefRiskLimitCheckIDType::RiskLimitRequestId
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2944,6 +3026,12 @@ pub enum AllocRiskLimitCheckStatus {
 	RejectedByExecutionVenue,
 }
 
+impl Default for AllocRiskLimitCheckStatus {
+	fn default() -> Self {
+		AllocRiskLimitCheckStatus::Accepted
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocAvgPxIndicator {
 	/// No Average Pricing
@@ -2961,4 +3049,10 @@ pub enum AllocAvgPxIndicator {
 	/// Trade is average priced
 	#[serde(rename = "4")]
 	TradeIsAveragePriced,
+}
+
+impl Default for AllocAvgPxIndicator {
+	fn default() -> Self {
+		AllocAvgPxIndicator::NoAveragePricing
+	}
 }

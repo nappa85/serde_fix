@@ -59,6 +59,12 @@ pub enum ProtectionTermEventUnit {
 	Year,
 }
 
+impl Default for ProtectionTermEventUnit {
+	fn default() -> Self {
+		ProtectionTermEventUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ProtectionTermEventDayType {
 	/// Business
@@ -79,4 +85,10 @@ pub enum ProtectionTermEventDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for ProtectionTermEventDayType {
+	fn default() -> Self {
+		ProtectionTermEventDayType::Business
+	}
 }

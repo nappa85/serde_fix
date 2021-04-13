@@ -337,6 +337,12 @@ pub enum LegPaymentScheduleType {
 	CompoundingFloorRate,
 }
 
+impl Default for LegPaymentScheduleType {
+	fn default() -> Self {
+		LegPaymentScheduleType::Notional
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleStubType {
 	/// Initial
@@ -353,6 +359,12 @@ pub enum LegPaymentScheduleStubType {
 	CompoundingFinal,
 }
 
+impl Default for LegPaymentScheduleStubType {
+	fn default() -> Self {
+		LegPaymentScheduleStubType::Initial
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentSchedulePaySide {
 	/// Buy
@@ -361,6 +373,12 @@ pub enum LegPaymentSchedulePaySide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for LegPaymentSchedulePaySide {
+	fn default() -> Self {
+		LegPaymentSchedulePaySide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -373,6 +391,12 @@ pub enum LegPaymentScheduleReceiveSide {
 	Sell,
 }
 
+impl Default for LegPaymentScheduleReceiveSide {
+	fn default() -> Self {
+		LegPaymentScheduleReceiveSide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateSpreadPositionType {
 	/// Short
@@ -383,6 +407,12 @@ pub enum LegPaymentScheduleRateSpreadPositionType {
 	Long,
 }
 
+impl Default for LegPaymentScheduleRateSpreadPositionType {
+	fn default() -> Self {
+		LegPaymentScheduleRateSpreadPositionType::Short
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateTreatment {
 	/// Bond equivalent yield
@@ -391,6 +421,12 @@ pub enum LegPaymentScheduleRateTreatment {
 	/// Money market yield
 	#[serde(rename = "1")]
 	MoneyMarketYield,
+}
+
+impl Default for LegPaymentScheduleRateTreatment {
+	fn default() -> Self {
+		LegPaymentScheduleRateTreatment::BondEquivalentYield
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -421,6 +457,12 @@ pub enum LegPaymentScheduleStepFrequencyUnit {
 	Term,
 }
 
+impl Default for LegPaymentScheduleStepFrequencyUnit {
+	fn default() -> Self {
+		LegPaymentScheduleStepFrequencyUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleStepRelativeTo {
 	/// Initial
@@ -429,6 +471,12 @@ pub enum LegPaymentScheduleStepRelativeTo {
 	/// Previous
 	#[serde(rename = "1")]
 	Previous,
+}
+
+impl Default for LegPaymentScheduleStepRelativeTo {
+	fn default() -> Self {
+		LegPaymentScheduleStepRelativeTo::Initial
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -465,6 +513,12 @@ pub enum LegPaymentScheduleFixingDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegPaymentScheduleFixingDateRelativeTo {
+	fn default() -> Self {
+		LegPaymentScheduleFixingDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingDateBusinessDayConvention {
 	/// Not applicable
@@ -493,6 +547,12 @@ pub enum LegPaymentScheduleFixingDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegPaymentScheduleFixingDateBusinessDayConvention {
+	fn default() -> Self {
+		LegPaymentScheduleFixingDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingDateOffsetUnit {
 	/// Day
@@ -507,6 +567,12 @@ pub enum LegPaymentScheduleFixingDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentScheduleFixingDateOffsetUnit {
+	fn default() -> Self {
+		LegPaymentScheduleFixingDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -529,6 +595,12 @@ pub enum LegPaymentScheduleFixingDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegPaymentScheduleFixingDateOffsetDayType {
+	fn default() -> Self {
+		LegPaymentScheduleFixingDateOffsetDayType::Business
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -565,6 +637,12 @@ pub enum LegPaymentScheduleInterimExchangePaymentDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegPaymentScheduleInterimExchangePaymentDateRelativeTo {
+	fn default() -> Self {
+		LegPaymentScheduleInterimExchangePaymentDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleInterimExchangeDatesBusinessDayConvention {
 	/// Not applicable
@@ -593,6 +671,12 @@ pub enum LegPaymentScheduleInterimExchangeDatesBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegPaymentScheduleInterimExchangeDatesBusinessDayConvention {
+	fn default() -> Self {
+		LegPaymentScheduleInterimExchangeDatesBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleInterimExchangeDatesOffsetUnit {
 	/// Day
@@ -607,6 +691,12 @@ pub enum LegPaymentScheduleInterimExchangeDatesOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentScheduleInterimExchangeDatesOffsetUnit {
+	fn default() -> Self {
+		LegPaymentScheduleInterimExchangeDatesOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -629,6 +719,12 @@ pub enum LegPaymentScheduleInterimExchangeDatesOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegPaymentScheduleInterimExchangeDatesOffsetDayType {
+	fn default() -> Self {
+		LegPaymentScheduleInterimExchangeDatesOffsetDayType::Business
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -879,6 +975,12 @@ pub enum LegPaymentScheduleRateUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegPaymentScheduleRateUnitOfMeasure {
+	fn default() -> Self {
+		LegPaymentScheduleRateUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateSpreadType {
 	/// Absolute
@@ -887,6 +989,12 @@ pub enum LegPaymentScheduleRateSpreadType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for LegPaymentScheduleRateSpreadType {
+	fn default() -> Self {
+		LegPaymentScheduleRateSpreadType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1137,6 +1245,12 @@ pub enum LegPaymentScheduleSettlPeriodPriceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegPaymentScheduleSettlPeriodPriceUnitOfMeasure {
+	fn default() -> Self {
+		LegPaymentScheduleSettlPeriodPriceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleStepUnitOfMeasure {
 	/// Barrels
@@ -1385,6 +1499,12 @@ pub enum LegPaymentScheduleStepUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegPaymentScheduleStepUnitOfMeasure {
+	fn default() -> Self {
+		LegPaymentScheduleStepUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingDayDistribution {
 	/// All
@@ -1399,6 +1519,12 @@ pub enum LegPaymentScheduleFixingDayDistribution {
 	/// Penultimate
 	#[serde(rename = "3")]
 	Penultimate,
+}
+
+impl Default for LegPaymentScheduleFixingDayDistribution {
+	fn default() -> Self {
+		LegPaymentScheduleFixingDayDistribution::All
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1417,6 +1543,12 @@ pub enum LegPaymentScheduleFixingLagUnit {
 	Year,
 }
 
+impl Default for LegPaymentScheduleFixingLagUnit {
+	fn default() -> Self {
+		LegPaymentScheduleFixingLagUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingFirstObservationDateOffsetUnit {
 	/// Day
@@ -1431,4 +1563,10 @@ pub enum LegPaymentScheduleFixingFirstObservationDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentScheduleFixingFirstObservationDateOffsetUnit {
+	fn default() -> Self {
+		LegPaymentScheduleFixingFirstObservationDateOffsetUnit::Day
+	}
 }

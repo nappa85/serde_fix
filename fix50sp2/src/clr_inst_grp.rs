@@ -65,3 +65,9 @@ pub enum ClearingInstructionItem {
 	#[serde(rename = "14")]
 	BuyIn,
 }
+
+impl Default for ClearingInstructionItem {
+	fn default() -> Self {
+		ClearingInstructionItem::ProcessNormally
+	}
+}

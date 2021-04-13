@@ -30,35 +30,23 @@ pub struct User {
 	#[serde(rename = "1400")]
 	pub encrypted_password_method: Option<i32>,
 	/// EncryptedPasswordLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1401")]
-	pub encrypted_password_len: Option<usize>,
 	/// EncryptedPassword
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1402")]
-	pub encrypted_password: Option<String>,
+	#[serde(alias = "1402")]
+	pub encrypted_password: Option<fix_common::EncodedText<1402>>,
 	/// EncryptedNewPasswordLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1403")]
-	pub encrypted_new_password_len: Option<usize>,
 	/// EncryptedNewPassword
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1404")]
-	pub encrypted_new_password: Option<String>,
+	#[serde(alias = "1404")]
+	pub encrypted_new_password: Option<fix_common::EncodedText<1404>>,
 	/// RawDataLength
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "95")]
-	pub raw_data_length: Option<usize>,
 	/// Can be used to hand structures etc to other APIs etc
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "96")]
-	pub raw_data: Option<String>,
+	#[serde(alias = "96")]
+	pub raw_data: Option<fix_common::EncodedText<96>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -81,4 +69,10 @@ pub enum UserRequestType {
 	/// RequestThrottleLimit
 	#[serde(rename = "5")]
 	RequestThrottleLimit,
+}
+
+impl Default for UserRequestType {
+	fn default() -> Self {
+		UserRequestType::LogOnUser
+	}
 }

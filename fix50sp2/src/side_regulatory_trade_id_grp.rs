@@ -60,6 +60,12 @@ pub enum SideRegulatoryTradeIDEvent {
 	Termination,
 }
 
+impl Default for SideRegulatoryTradeIDEvent {
+	fn default() -> Self {
+		SideRegulatoryTradeIDEvent::InitialBlockTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SideRegulatoryTradeIDType {
 	/// Current
@@ -76,6 +82,12 @@ pub enum SideRegulatoryTradeIDType {
 	Related,
 }
 
+impl Default for SideRegulatoryTradeIDType {
+	fn default() -> Self {
+		SideRegulatoryTradeIDType::Current
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SideRegulatoryTradeIDScope {
 	/// Clearing member
@@ -84,4 +96,10 @@ pub enum SideRegulatoryTradeIDScope {
 	/// Client
 	#[serde(rename = "2")]
 	Client,
+}
+
+impl Default for SideRegulatoryTradeIDScope {
+	fn default() -> Self {
+		SideRegulatoryTradeIDScope::ClearingMember
+	}
 }

@@ -30,3 +30,9 @@ pub enum OptionExerciseDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for OptionExerciseDateType {
+	fn default() -> Self {
+		OptionExerciseDateType::Unadjusted
+	}
+}

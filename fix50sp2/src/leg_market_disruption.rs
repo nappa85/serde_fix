@@ -56,6 +56,12 @@ pub enum LegMarketDisruptionProvision {
 	AsSpecifiedInConfirmation,
 }
 
+impl Default for LegMarketDisruptionProvision {
+	fn default() -> Self {
+		LegMarketDisruptionProvision::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegMarketDisruptionFallbackProvision {
 	/// As specified in master agreement
@@ -64,4 +70,10 @@ pub enum LegMarketDisruptionFallbackProvision {
 	/// As specified in confirmation
 	#[serde(rename = "1")]
 	AsSpecifiedInConfirmation,
+}
+
+impl Default for LegMarketDisruptionFallbackProvision {
+	fn default() -> Self {
+		LegMarketDisruptionFallbackProvision::AsSpecifiedInMasterAgreement
+	}
 }

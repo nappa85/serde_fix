@@ -109,6 +109,12 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
@@ -153,6 +159,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
@@ -161,6 +173,12 @@ pub enum UnsolicitedIndicator {
 	/// Message is being sent unsolicited
 	#[serde(rename = "Y")]
 	MessageIsBeingSentUnsolicited,
+}
+
+impl Default for UnsolicitedIndicator {
+	fn default() -> Self {
+		UnsolicitedIndicator::MessageIsBeingSentAsAResultOfAPriorRequest
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -245,6 +263,12 @@ pub enum SecurityMassTradingStatus {
 	PostClose,
 }
 
+impl Default for SecurityMassTradingStatus {
+	fn default() -> Self {
+		SecurityMassTradingStatus::OpeningDelay
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityMassTradingEvent {
 	/// Order imbalance, auction is extended
@@ -273,6 +297,12 @@ pub enum SecurityMassTradingEvent {
 	ChangeOfMarketDepth,
 }
 
+impl Default for SecurityMassTradingEvent {
+	fn default() -> Self {
+		SecurityMassTradingEvent::OrderImbalanceAuctionIsExtended
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MassHaltReason {
 	/// News Dissemination
@@ -295,6 +325,12 @@ pub enum MassHaltReason {
 	EquipmentChangeover,
 }
 
+impl Default for MassHaltReason {
+	fn default() -> Self {
+		MassHaltReason::NewsDissemination
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDBookType {
 	/// Top of Book
@@ -308,6 +344,12 @@ pub enum MDBookType {
 	OrderDepth,
 }
 
+impl Default for MDBookType {
+	fn default() -> Self {
+		MDBookType::TopOfBook
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
@@ -316,6 +358,12 @@ pub enum MarketDepth {
 	/// top of book
 	#[serde(rename = "1")]
 	TopOfBook,
+}
+
+impl Default for MarketDepth {
+	fn default() -> Self {
+		MarketDepth::FullBookDepth
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -329,4 +377,10 @@ pub enum Adjustment {
 	/// Correction
 	#[serde(rename = "3")]
 	Correction,
+}
+
+impl Default for Adjustment {
+	fn default() -> Self {
+		Adjustment::Cancel
+	}
 }

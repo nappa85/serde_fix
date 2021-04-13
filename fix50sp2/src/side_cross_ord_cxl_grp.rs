@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SideCrossOrdCxlGrp {
 	/// Must be 1 or 2
 	#[serde(rename = "552")]
-	pub sides: fix_common::RepeatingValues<NoSide>,
+	pub no_sides: NoSides,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -50,41 +50,39 @@ pub struct NoSide {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text field in the encoded format specified via the MessageEncoding field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// ComplianceText
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2404")]
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2351")]
-	pub encoded_compliance_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ComplianceText(2404) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2352")]
-	pub encoded_compliance_text: Option<String>,
+	#[serde(alias = "2352")]
+	pub encoded_compliance_text: Option<fix_common::EncodedText<2352>>,
 }
 
-// #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-// pub enum NoSides {
-// 	/// One Side
-// 	#[serde(rename = "1")]
-// 	OneSide,
-// 	/// Both Sides
-// 	#[serde(rename = "2")]
-// 	BothSides,
-// }
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub enum NoSides {
+	/// One Side
+	#[serde(rename = "1")]
+	OneSide,
+	/// Both Sides
+	#[serde(rename = "2")]
+	BothSides,
+}
+
+impl Default for NoSides {
+	fn default() -> Self {
+		NoSides::OneSide
+	}
+}
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {

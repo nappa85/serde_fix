@@ -60,6 +60,12 @@ pub enum RegistTransType {
 	Replace,
 }
 
+impl Default for RegistTransType {
+	fn default() -> Self {
+		RegistTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
@@ -85,6 +91,12 @@ pub enum AcctIDSource {
 	Other,
 }
 
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RegistStatus {
 	/// Accepted
@@ -99,6 +111,12 @@ pub enum RegistStatus {
 	/// Reminder - i.e. Registration Instructions are still outstanding
 	#[serde(rename = "N")]
 	ReminderIERegistrationInstructionsAreStillOutstanding,
+}
+
+impl Default for RegistStatus {
+	fn default() -> Self {
+		RegistStatus::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -160,4 +178,10 @@ pub enum RegistRejReasonCode {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for RegistRejReasonCode {
+	fn default() -> Self {
+		RegistRejReasonCode::InvalidUnacceptableAccountType
+	}
 }

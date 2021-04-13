@@ -41,6 +41,12 @@ pub enum ListUpdateAction {
 	Snapshot,
 }
 
+impl Default for ListUpdateAction {
+	fn default() -> Self {
+		ListUpdateAction::Add
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EntitlementStatus {
 	/// Accepted
@@ -61,4 +67,10 @@ pub enum EntitlementStatus {
 	/// Deferred (Entitlement definition request is being postponed or delayed)
 	#[serde(rename = "5")]
 	N5,
+}
+
+impl Default for EntitlementStatus {
+	fn default() -> Self {
+		EntitlementStatus::N0
+	}
 }

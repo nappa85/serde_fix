@@ -83,6 +83,12 @@ pub enum LegOptionExerciseExpirationDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegOptionExerciseExpirationDateBusinessDayConvention {
+	fn default() -> Self {
+		LegOptionExerciseExpirationDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationDateRelativeTo {
 	/// Trade date
@@ -117,6 +123,12 @@ pub enum LegOptionExerciseExpirationDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegOptionExerciseExpirationDateRelativeTo {
+	fn default() -> Self {
+		LegOptionExerciseExpirationDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationDateOffsetUnit {
 	/// Day
@@ -133,6 +145,12 @@ pub enum LegOptionExerciseExpirationDateOffsetUnit {
 	Year,
 }
 
+impl Default for LegOptionExerciseExpirationDateOffsetUnit {
+	fn default() -> Self {
+		LegOptionExerciseExpirationDateOffsetUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationFrequencyUnit {
 	/// Day
@@ -147,6 +165,12 @@ pub enum LegOptionExerciseExpirationFrequencyUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegOptionExerciseExpirationFrequencyUnit {
+	fn default() -> Self {
+		LegOptionExerciseExpirationFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -291,6 +315,12 @@ pub enum LegOptionExerciseExpirationRollConvention {
 	Sunday,
 }
 
+impl Default for LegOptionExerciseExpirationRollConvention {
+	fn default() -> Self {
+		LegOptionExerciseExpirationRollConvention::N1StDayOfTheMonth
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationDateOffsetDayType {
 	/// Business
@@ -311,4 +341,10 @@ pub enum LegOptionExerciseExpirationDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegOptionExerciseExpirationDateOffsetDayType {
+	fn default() -> Self {
+		LegOptionExerciseExpirationDateOffsetDayType::Business
+	}
 }

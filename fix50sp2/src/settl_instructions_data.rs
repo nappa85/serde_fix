@@ -40,6 +40,12 @@ pub enum SettlDeliveryType {
 	HoldInCustody,
 }
 
+impl Default for SettlDeliveryType {
+	fn default() -> Self {
+		SettlDeliveryType::VersusPaymentDeliverOrReceiveVsPayment
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StandInstDbType {
 	/// Other
@@ -57,4 +63,10 @@ pub enum StandInstDbType {
 	/// AccountNet
 	#[serde(rename = "4")]
 	AccountNet,
+}
+
+impl Default for StandInstDbType {
+	fn default() -> Self {
+		StandInstDbType::Other
+	}
 }

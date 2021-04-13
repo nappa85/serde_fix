@@ -121,6 +121,12 @@ pub enum DividendEntitlementEvent {
 	RecordDate,
 }
 
+impl Default for DividendEntitlementEvent {
+	fn default() -> Self {
+		DividendEntitlementEvent::ExDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DividendAmountType {
 	/// Record amount
@@ -137,6 +143,12 @@ pub enum DividendAmountType {
 	AsSpecifiedInMasterConfirmation,
 }
 
+impl Default for DividendAmountType {
+	fn default() -> Self {
+		DividendAmountType::RecordAmount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum NonCashDividendTreatment {
 	/// Potential adjustment event
@@ -147,6 +159,12 @@ pub enum NonCashDividendTreatment {
 	CashEquivalent,
 }
 
+impl Default for NonCashDividendTreatment {
+	fn default() -> Self {
+		NonCashDividendTreatment::PotentialAdjustmentEvent
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DividendComposition {
 	/// Equity amount receiver election
@@ -155,4 +173,10 @@ pub enum DividendComposition {
 	/// Calculation agent election
 	#[serde(rename = "1")]
 	CalculationAgentElection,
+}
+
+impl Default for DividendComposition {
+	fn default() -> Self {
+		DividendComposition::EquityAmountReceiverElection
+	}
 }

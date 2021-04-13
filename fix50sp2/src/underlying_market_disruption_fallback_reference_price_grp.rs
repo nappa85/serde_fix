@@ -29,16 +29,12 @@ pub struct UnderlyingMarketDisruptionFallbackReferencePrice {
 	pub underlying_market_disruption_fallback_underlier_security_desc: Option<String>,
 	/// Must be set if EncodedUnderlyingMarketDisruptionFallbackUnderlierSecurityDesc(41874) field is specified and must immediately
 	/// precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "41873")]
-	pub encoded_underlying_market_disruption_fallback_underlier_security_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the UnderlyingMarketDisruptionFallbackUnderlierSecurityDesc(41872) field
 	/// in the encoded format specified via the MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "41874")]
-	pub encoded_underlying_market_disruption_fallback_underlier_security_desc: Option<String>,
+	#[serde(alias = "41874")]
+	pub encoded_underlying_market_disruption_fallback_underlier_security_desc: Option<fix_common::EncodedText<41874>>,
 	/// UnderlyingMarketDisruptionFallbackOpenUnits
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -95,6 +91,12 @@ pub enum UnderlyingMarketDisruptionFallbackUnderlierType {
 	/// Mutual fund
 	#[serde(rename = "11")]
 	MutualFund,
+}
+
+impl Default for UnderlyingMarketDisruptionFallbackUnderlierType {
+	fn default() -> Self {
+		UnderlyingMarketDisruptionFallbackUnderlierType::Basket
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -195,4 +197,10 @@ pub enum UnderlyingMarketDisruptionFallbackUnderlierSecurityIDSource {
 	/// Uniform Symbol (UMTF Symbol)
 	#[serde(rename = "X")]
 	UniformSymbol,
+}
+
+impl Default for UnderlyingMarketDisruptionFallbackUnderlierSecurityIDSource {
+	fn default() -> Self {
+		UnderlyingMarketDisruptionFallbackUnderlierSecurityIDSource::Cusip
+	}
 }

@@ -73,3 +73,9 @@ pub enum TickRuleType {
 	#[serde(rename = "5")]
 	TradedAsSpread,
 }
+
+impl Default for TickRuleType {
+	fn default() -> Self {
+		TickRuleType::Regular
+	}
+}

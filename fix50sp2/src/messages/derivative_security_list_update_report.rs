@@ -82,6 +82,12 @@ pub enum SecurityRequestResult {
 	RequestForInstrumentDataNotSupported,
 }
 
+impl Default for SecurityRequestResult {
+	fn default() -> Self {
+		SecurityRequestResult::ValidRequest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityUpdateAction {
 	/// Add
@@ -95,6 +101,12 @@ pub enum SecurityUpdateAction {
 	Modify,
 }
 
+impl Default for SecurityUpdateAction {
+	fn default() -> Self {
+		SecurityUpdateAction::Add
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
@@ -103,4 +115,10 @@ pub enum LastFragment {
 	/// Last Message
 	#[serde(rename = "Y")]
 	LastMessage,
+}
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
 }

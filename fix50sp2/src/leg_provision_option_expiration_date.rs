@@ -76,6 +76,12 @@ pub enum LegProvisionOptionExpirationDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegProvisionOptionExpirationDateBusinessDayConvention {
+	fn default() -> Self {
+		LegProvisionOptionExpirationDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionOptionExpirationDateRelativeTo {
 	/// Trade date
@@ -110,6 +116,12 @@ pub enum LegProvisionOptionExpirationDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegProvisionOptionExpirationDateRelativeTo {
+	fn default() -> Self {
+		LegProvisionOptionExpirationDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionOptionExpirationDateOffsetUnit {
 	/// Day
@@ -124,6 +136,12 @@ pub enum LegProvisionOptionExpirationDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegProvisionOptionExpirationDateOffsetUnit {
+	fn default() -> Self {
+		LegProvisionOptionExpirationDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -146,4 +164,10 @@ pub enum LegProvisionOptionExpirationDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegProvisionOptionExpirationDateOffsetDayType {
+	fn default() -> Self {
+		LegProvisionOptionExpirationDateOffsetDayType::Business
+	}
 }

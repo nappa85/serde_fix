@@ -114,3 +114,9 @@ pub enum PartyDetailAltIDSource {
 	#[serde(rename = "U")]
 	MasterSpecialSegregatedAccountId,
 }
+
+impl Default for PartyDetailAltIDSource {
+	fn default() -> Self {
+		PartyDetailAltIDSource::BicCode
+	}
+}

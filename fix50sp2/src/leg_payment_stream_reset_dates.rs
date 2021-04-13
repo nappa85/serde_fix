@@ -145,6 +145,12 @@ pub enum LegPaymentStreamResetDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegPaymentStreamResetDateRelativeTo {
+	fn default() -> Self {
+		LegPaymentStreamResetDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamResetDateBusinessDayConvention {
 	/// Not applicable
@@ -171,6 +177,12 @@ pub enum LegPaymentStreamResetDateBusinessDayConvention {
 	/// Nearest day
 	#[serde(rename = "7")]
 	NearestDay,
+}
+
+impl Default for LegPaymentStreamResetDateBusinessDayConvention {
+	fn default() -> Self {
+		LegPaymentStreamResetDateBusinessDayConvention::NotApplicable
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -201,6 +213,12 @@ pub enum LegPaymentStreamResetFrequencyUnit {
 	Term,
 }
 
+impl Default for LegPaymentStreamResetFrequencyUnit {
+	fn default() -> Self {
+		LegPaymentStreamResetFrequencyUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamResetWeeklyRollConvention {
 	/// Monday
@@ -224,6 +242,12 @@ pub enum LegPaymentStreamResetWeeklyRollConvention {
 	/// Sunday
 	#[serde(rename = "SUN")]
 	Sunday,
+}
+
+impl Default for LegPaymentStreamResetWeeklyRollConvention {
+	fn default() -> Self {
+		LegPaymentStreamResetWeeklyRollConvention::Monday
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -260,6 +284,12 @@ pub enum LegPaymentStreamInitialFixingDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegPaymentStreamInitialFixingDateRelativeTo {
+	fn default() -> Self {
+		LegPaymentStreamInitialFixingDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamInitialFixingDateBusinessDayConvention {
 	/// Not applicable
@@ -288,6 +318,12 @@ pub enum LegPaymentStreamInitialFixingDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegPaymentStreamInitialFixingDateBusinessDayConvention {
+	fn default() -> Self {
+		LegPaymentStreamInitialFixingDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamInitialFixingDateOffsetUnit {
 	/// Day
@@ -302,6 +338,12 @@ pub enum LegPaymentStreamInitialFixingDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentStreamInitialFixingDateOffsetUnit {
+	fn default() -> Self {
+		LegPaymentStreamInitialFixingDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -324,6 +366,12 @@ pub enum LegPaymentStreamInitialFixingDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegPaymentStreamInitialFixingDateOffsetDayType {
+	fn default() -> Self {
+		LegPaymentStreamInitialFixingDateOffsetDayType::Business
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -360,6 +408,12 @@ pub enum LegPaymentStreamFixingDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegPaymentStreamFixingDateRelativeTo {
+	fn default() -> Self {
+		LegPaymentStreamFixingDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamFixingDateBusinessDayConvention {
 	/// Not applicable
@@ -388,6 +442,12 @@ pub enum LegPaymentStreamFixingDateBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegPaymentStreamFixingDateBusinessDayConvention {
+	fn default() -> Self {
+		LegPaymentStreamFixingDateBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamFixingDateOffsetUnit {
 	/// Day
@@ -402,6 +462,12 @@ pub enum LegPaymentStreamFixingDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentStreamFixingDateOffsetUnit {
+	fn default() -> Self {
+		LegPaymentStreamFixingDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -426,6 +492,12 @@ pub enum LegPaymentStreamFixingDateOffsetDayType {
 	ScheduledTradingDay,
 }
 
+impl Default for LegPaymentStreamFixingDateOffsetDayType {
+	fn default() -> Self {
+		LegPaymentStreamFixingDateOffsetDayType::Business
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegPaymentStreamRateCutoffDateOffsetUnit {
 	/// Day
@@ -440,6 +512,12 @@ pub enum LegPaymentStreamRateCutoffDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegPaymentStreamRateCutoffDateOffsetUnit {
+	fn default() -> Self {
+		LegPaymentStreamRateCutoffDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -462,4 +540,10 @@ pub enum LegPaymentStreamRateCutoffDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegPaymentStreamRateCutoffDateOffsetDayType {
+	fn default() -> Self {
+		LegPaymentStreamRateCutoffDateOffsetDayType::Business
+	}
 }

@@ -30,3 +30,9 @@ pub enum UnderlyingProvisionCashSettlPaymentDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for UnderlyingProvisionCashSettlPaymentDateType {
+	fn default() -> Self {
+		UnderlyingProvisionCashSettlPaymentDateType::Unadjusted
+	}
+}

@@ -33,3 +33,9 @@ pub enum ListUpdateAction {
 	#[serde(rename = "S")]
 	Snapshot,
 }
+
+impl Default for ListUpdateAction {
+	fn default() -> Self {
+		ListUpdateAction::Add
+	}
+}

@@ -42,3 +42,9 @@ pub enum SettlRatePostponementCalculationAgent {
 	#[serde(rename = "3")]
 	AsSpecifiedInTheStandardTermsSupplement,
 }
+
+impl Default for SettlRatePostponementCalculationAgent {
+	fn default() -> Self {
+		SettlRatePostponementCalculationAgent::ExercisingParty
+	}
+}

@@ -36,15 +36,11 @@ pub struct List {
 	#[serde(rename = "444")]
 	pub list_status_text: Option<String>,
 	/// Must be set if <a href="tag_446_EncodedListStatusText.html" target="bottom">EncodedListStatusText&nbsp;(446)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "445")]
-	pub encoded_list_status_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_444_ListStatusText.html" target="bottom">ListStatusText&nbsp;(444)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "446")]
-	pub encoded_list_status_text: Option<String>,
+	#[serde(alias = "446")]
+	pub encoded_list_status_text: Option<fix_common::EncodedText<446>>,
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
@@ -87,6 +83,12 @@ pub enum ListStatusType {
 	Alert,
 }
 
+impl Default for ListStatusType {
+	fn default() -> Self {
+		ListStatusType::Ack
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ListOrderStatus {
 	/// In bidding process
@@ -112,6 +114,12 @@ pub enum ListOrderStatus {
 	Reject,
 }
 
+impl Default for ListOrderStatus {
+	fn default() -> Self {
+		ListOrderStatus::InBiddingProcess
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ContingencyType {
 	/// One Cancels the Other (OCO)
@@ -133,6 +141,12 @@ pub enum ContingencyType {
 	/// other side is fully traded away)
 	#[serde(rename = "6")]
 	BidAndOfferOco,
+}
+
+impl Default for ContingencyType {
+	fn default() -> Self {
+		ContingencyType::OneCancelsTheOther
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -160,6 +174,12 @@ pub enum ListRejectReason {
 	Other,
 }
 
+impl Default for ListRejectReason {
+	fn default() -> Self {
+		ListRejectReason::BrokerExchangeOption
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
@@ -168,4 +188,10 @@ pub enum LastFragment {
 	/// Last Message
 	#[serde(rename = "Y")]
 	LastMessage,
+}
+
+impl Default for LastFragment {
+	fn default() -> Self {
+		LastFragment::NotLastMessage
+	}
 }

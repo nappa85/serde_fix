@@ -72,6 +72,12 @@ pub enum EntitlementType {
 	RespondToQuoteRequests,
 }
 
+impl Default for EntitlementType {
+	fn default() -> Self {
+		EntitlementType::Trade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum EntitlementSubType {
 	/// Order Entry(Entitle to enter new orders)
@@ -98,4 +104,10 @@ pub enum EntitlementSubType {
 	/// Multi brokers (Entitle to submit quote request for multiple brokers)
 	#[serde(rename = "8")]
 	MultiBrokers,
+}
+
+impl Default for EntitlementSubType {
+	fn default() -> Self {
+		EntitlementSubType::OrderEntry
+	}
 }

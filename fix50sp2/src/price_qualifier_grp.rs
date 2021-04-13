@@ -29,3 +29,9 @@ pub enum PriceQualifierItem {
 	#[serde(rename = "2")]
 	TheEffectOfBondAmortizationOrTheFloatingRateIndexOffsetIsFactoredIntoThePrice,
 }
+
+impl Default for PriceQualifierItem {
+	fn default() -> Self {
+		PriceQualifierItem::AccruedInterestIsFactoredIntoThePrice
+	}
+}

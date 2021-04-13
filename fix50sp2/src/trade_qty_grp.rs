@@ -53,3 +53,9 @@ pub enum TradeQtyType {
 	#[serde(rename = "8")]
 	PreviousRemainingTradeQuantity,
 }
+
+impl Default for TradeQtyType {
+	fn default() -> Self {
+		TradeQtyType::ClearedQuantity
+	}
+}

@@ -86,16 +86,12 @@ pub struct Party {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text(58) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -114,6 +110,12 @@ pub enum RiskLimitCheckTransType {
 	Replace,
 }
 
+impl Default for RiskLimitCheckTransType {
+	fn default() -> Self {
+		RiskLimitCheckTransType::New
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitCheckType {
 	/// Submit
@@ -122,6 +124,12 @@ pub enum RiskLimitCheckType {
 	/// Limit consumed
 	#[serde(rename = "1")]
 	LimitConsumed,
+}
+
+impl Default for RiskLimitCheckType {
+	fn default() -> Self {
+		RiskLimitCheckType::Submit
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -161,6 +169,12 @@ pub enum RefOrderIDSource {
 	ManualOrderIdentifier,
 }
 
+impl Default for RefOrderIDSource {
+	fn default() -> Self {
+		RefOrderIDSource::SecondaryOrderId
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitCheckRequestType {
 	/// All or none (default if not specified).
@@ -169,6 +183,12 @@ pub enum RiskLimitCheckRequestType {
 	/// Partial
 	#[serde(rename = "1")]
 	Partial,
+}
+
+impl Default for RiskLimitCheckRequestType {
+	fn default() -> Self {
+		RiskLimitCheckRequestType::AllOrNone
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1375,6 +1395,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
@@ -1428,4 +1454,10 @@ pub enum Side {
 	/// Sell undisclosed
 	#[serde(rename = "H")]
 	SellUndisclosed,
+}
+
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
 }

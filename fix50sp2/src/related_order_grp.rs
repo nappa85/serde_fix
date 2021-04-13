@@ -58,6 +58,12 @@ pub enum RelatedOrderIDSource {
 	SecondaryClientOrderIdentifier,
 }
 
+impl Default for RelatedOrderIDSource {
+	fn default() -> Self {
+		RelatedOrderIDSource::NonFixSource
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum OrderRelationship {
 	/// Not specified
@@ -69,4 +75,10 @@ pub enum OrderRelationship {
 	/// Order split
 	#[serde(rename = "2")]
 	OrderSplit,
+}
+
+impl Default for OrderRelationship {
+	fn default() -> Self {
+		OrderRelationship::NotSpecified
+	}
 }

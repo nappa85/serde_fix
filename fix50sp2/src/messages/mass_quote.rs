@@ -68,16 +68,12 @@ pub struct Mass {
 	#[serde(rename = "2404")]
 	pub compliance_text: Option<String>,
 	/// Must be set if EncodedComplianceText(2352) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2351")]
-	pub encoded_compliance_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the ComplianceText(2404) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2352")]
-	pub encoded_compliance_text: Option<String>,
+	#[serde(alias = "2352")]
+	pub encoded_compliance_text: Option<fix_common::EncodedText<2352>>,
 	/// SelfMatchPreventionID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2362")]
@@ -106,6 +102,12 @@ pub enum QuoteType {
 	InitiallyTradeable,
 }
 
+impl Default for QuoteType {
+	fn default() -> Self {
+		QuoteType::Indicative
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteResponseLevel {
 	/// No Acknowledgement (Default)
@@ -120,6 +122,12 @@ pub enum QuoteResponseLevel {
 	/// Summary Acknowledgement
 	#[serde(rename = "3")]
 	SummaryAcknowledgement,
+}
+
+impl Default for QuoteResponseLevel {
+	fn default() -> Self {
+		QuoteResponseLevel::NoAcknowledgement
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -145,6 +153,12 @@ pub enum AcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AcctIDSource {
+	fn default() -> Self {
+		AcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -187,6 +201,12 @@ pub enum AccountType {
 	AccountForOrdersFromMultipleCustomers,
 }
 
+impl Default for AccountType {
+	fn default() -> Self {
+		AccountType::AccountIsCarriedOnCustomerSideOfBooks
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
@@ -195,6 +215,12 @@ pub enum ThrottleInst {
 	/// Queue if throttle limit exceeded
 	#[serde(rename = "1")]
 	QueueIfThrottleLimitExceeded,
+}
+
+impl Default for ThrottleInst {
+	fn default() -> Self {
+		ThrottleInst::RejectIfThrottleLimitExceeded
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -207,4 +233,10 @@ pub enum QuoteModelType {
 	/// executed when a subsequent quote (e.g. with the same QuoteID reference) is received by the Recipient of the quote message.)
 	#[serde(rename = "2")]
 	QuoteModificationIsReceivedByTheRecipientOfTheQuoteMessage,
+}
+
+impl Default for QuoteModelType {
+	fn default() -> Self {
+		QuoteModelType::QuoteEntryIsReceivedByTheRecipientOfTheQuoteMessage
+	}
 }

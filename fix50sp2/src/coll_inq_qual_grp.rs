@@ -44,3 +44,9 @@ pub enum CollInquiryQualifier {
 	#[serde(rename = "7")]
 	OutstandingTrades,
 }
+
+impl Default for CollInquiryQualifier {
+	fn default() -> Self {
+		CollInquiryQualifier::TradeDate
+	}
+}

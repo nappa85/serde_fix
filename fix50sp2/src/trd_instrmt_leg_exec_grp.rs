@@ -99,6 +99,12 @@ pub enum LegPositionEffect {
 	Default,
 }
 
+impl Default for LegPositionEffect {
+	fn default() -> Self {
+		LegPositionEffect::Close
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegCoveredOrUncovered {
 	/// Covered
@@ -107,6 +113,12 @@ pub enum LegCoveredOrUncovered {
 	/// Uncovered
 	#[serde(rename = "1")]
 	Uncovered,
+}
+
+impl Default for LegCoveredOrUncovered {
+	fn default() -> Self {
+		LegCoveredOrUncovered::Covered
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -188,6 +200,12 @@ pub enum LegPriceType {
 	/// Percentage of notional
 	#[serde(rename = "25")]
 	PercentageOfNotional,
+}
+
+impl Default for LegPriceType {
+	fn default() -> Self {
+		LegPriceType::Percentage
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1394,6 +1412,12 @@ pub enum LegSettlCurrency {
 	N999,
 }
 
+impl Default for LegSettlCurrency {
+	fn default() -> Self {
+		LegSettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegShortSaleExemptionReason {
 	/// Exemption reason unknown
@@ -1426,4 +1450,10 @@ pub enum LegShortSaleExemptionReason {
 	/// VWAP
 	#[serde(rename = "9")]
 	Vwap,
+}
+
+impl Default for LegShortSaleExemptionReason {
+	fn default() -> Self {
+		LegShortSaleExemptionReason::ExemptionReasonUnknown
+	}
 }

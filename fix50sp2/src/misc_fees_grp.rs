@@ -1255,6 +1255,12 @@ pub enum MiscFeeCurr {
 	N999,
 }
 
+impl Default for MiscFeeCurr {
+	fn default() -> Self {
+		MiscFeeCurr::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MiscFeeType {
 	/// Regulatory (e.g. SEC)
@@ -1367,6 +1373,12 @@ pub enum MiscFeeType {
 	NonMonetaryPayments,
 }
 
+impl Default for MiscFeeType {
+	fn default() -> Self {
+		MiscFeeType::Regulatory
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MiscFeeBasis {
 	/// Absolute
@@ -1380,6 +1392,12 @@ pub enum MiscFeeBasis {
 	Percentage,
 }
 
+impl Default for MiscFeeBasis {
+	fn default() -> Self {
+		MiscFeeBasis::Absolute
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MiscFeeQualifier {
 	/// Contributes (default)
@@ -1388,4 +1406,10 @@ pub enum MiscFeeQualifier {
 	/// Does not contribute
 	#[serde(rename = "1")]
 	DoesNotContribute,
+}
+
+impl Default for MiscFeeQualifier {
+	fn default() -> Self {
+		MiscFeeQualifier::Contributes
+	}
 }

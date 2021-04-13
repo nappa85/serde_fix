@@ -67,15 +67,11 @@ pub struct LegFinancingDetails {
 	#[serde(rename = "2505")]
 	pub leg_documentation_text: Option<String>,
 	/// Must be set if <a href="tag_2493_EncodedLegDocumentationText.html" target="bottom">EncodedLegDocumentationText&nbsp;(2493)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2494")]
-	pub encoded_leg_documentation_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_2505_LegDocumentationText.html" target="bottom">LegDocumentationText&nbsp;(2505)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2493")]
-	pub encoded_leg_documentation_text: Option<String>,
+	#[serde(alias = "2493")]
+	pub encoded_leg_documentation_text: Option<fix_common::EncodedText<2493>>,
 	/// LegTerminationType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2514")]
@@ -1310,6 +1306,12 @@ pub enum LegAgreementCurrency {
 	N999,
 }
 
+impl Default for LegAgreementCurrency {
+	fn default() -> Self {
+		LegAgreementCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegTerminationType {
 	/// Overnight
@@ -1326,6 +1328,12 @@ pub enum LegTerminationType {
 	Open,
 }
 
+impl Default for LegTerminationType {
+	fn default() -> Self {
+		LegTerminationType::Overnight
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryType {
 	/// "Versus Payment": Deliver (if sell) or Receive (if buy) vs. (against) Payment
@@ -1340,4 +1348,10 @@ pub enum LegDeliveryType {
 	/// Hold In Custody
 	#[serde(rename = "3")]
 	HoldInCustody,
+}
+
+impl Default for LegDeliveryType {
+	fn default() -> Self {
+		LegDeliveryType::VersusPaymentDeliverOrReceiveVsPayment
+	}
 }

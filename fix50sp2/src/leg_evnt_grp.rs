@@ -48,16 +48,12 @@ pub struct LegEvent {
 	#[serde(rename = "2066")]
 	pub leg_event_text: Option<String>,
 	/// Must be set if EncodedLegEventText(2075) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2074")]
-	pub encoded_leg_event_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the LegEventText(2066) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2075")]
-	pub encoded_leg_event_text: Option<String>,
+	#[serde(alias = "2075")]
+	pub encoded_leg_event_text: Option<fix_common::EncodedText<2075>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -124,6 +120,12 @@ pub enum LegEventType {
 	Other,
 }
 
+impl Default for LegEventType {
+	fn default() -> Self {
+		LegEventType::Put
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegEventTimeUnit {
 	/// Hour
@@ -150,4 +152,10 @@ pub enum LegEventTimeUnit {
 	/// Quarter
 	#[serde(rename = "Q")]
 	Quarter,
+}
+
+impl Default for LegEventTimeUnit {
+	fn default() -> Self {
+		LegEventTimeUnit::Hour
+	}
 }

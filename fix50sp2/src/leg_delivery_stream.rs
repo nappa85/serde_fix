@@ -142,6 +142,12 @@ pub enum LegDeliveryStreamType {
 	Single,
 }
 
+impl Default for LegDeliveryStreamType {
+	fn default() -> Self {
+		LegDeliveryStreamType::Periodic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryStreamDeliveryRestriction {
 	/// Firm (Never excused of delivery obligations)
@@ -162,6 +168,12 @@ pub enum LegDeliveryStreamDeliveryRestriction {
 	UnitFirm,
 }
 
+impl Default for LegDeliveryStreamDeliveryRestriction {
+	fn default() -> Self {
+		LegDeliveryStreamDeliveryRestriction::Firm
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryStreamDeliveryContingentPartySide {
 	/// Buyer
@@ -172,6 +184,12 @@ pub enum LegDeliveryStreamDeliveryContingentPartySide {
 	Seller,
 }
 
+impl Default for LegDeliveryStreamDeliveryContingentPartySide {
+	fn default() -> Self {
+		LegDeliveryStreamDeliveryContingentPartySide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryStreamTitleTransferCondition {
 	/// Transfers with risk of loss
@@ -180,6 +198,12 @@ pub enum LegDeliveryStreamTitleTransferCondition {
 	/// Does not transfer with risk of loss
 	#[serde(rename = "1")]
 	DoesNotTransferWithRiskOfLoss,
+}
+
+impl Default for LegDeliveryStreamTitleTransferCondition {
+	fn default() -> Self {
+		LegDeliveryStreamTitleTransferCondition::TransfersWithRiskOfLoss
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -430,6 +454,12 @@ pub enum LegDeliveryStreamToleranceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for LegDeliveryStreamToleranceUnitOfMeasure {
+	fn default() -> Self {
+		LegDeliveryStreamToleranceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryStreamToleranceType {
 	/// Absolute
@@ -438,6 +468,12 @@ pub enum LegDeliveryStreamToleranceType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for LegDeliveryStreamToleranceType {
+	fn default() -> Self {
+		LegDeliveryStreamToleranceType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -450,6 +486,12 @@ pub enum LegDeliveryStreamToleranceOptionSide {
 	Seller,
 }
 
+impl Default for LegDeliveryStreamToleranceOptionSide {
+	fn default() -> Self {
+		LegDeliveryStreamToleranceOptionSide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryStreamElectingPartySide {
 	/// Buyer
@@ -460,6 +502,12 @@ pub enum LegDeliveryStreamElectingPartySide {
 	Seller,
 }
 
+impl Default for LegDeliveryStreamElectingPartySide {
+	fn default() -> Self {
+		LegDeliveryStreamElectingPartySide::Buyer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegDeliveryStreamDeliveryPointSource {
 	/// Proprietary
@@ -468,4 +516,10 @@ pub enum LegDeliveryStreamDeliveryPointSource {
 	/// Energy Identification Code
 	#[serde(rename = "1")]
 	EnergyIdentificationCode,
+}
+
+impl Default for LegDeliveryStreamDeliveryPointSource {
+	fn default() -> Self {
+		LegDeliveryStreamDeliveryPointSource::Proprietary
+	}
 }

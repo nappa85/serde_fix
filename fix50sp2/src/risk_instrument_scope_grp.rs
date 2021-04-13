@@ -33,3 +33,9 @@ pub enum InstrumentScopeOperator {
 	#[serde(rename = "2")]
 	Exclude,
 }
+
+impl Default for InstrumentScopeOperator {
+	fn default() -> Self {
+		InstrumentScopeOperator::Include
+	}
+}

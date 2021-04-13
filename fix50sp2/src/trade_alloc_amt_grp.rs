@@ -89,6 +89,12 @@ pub enum TradeAllocAmtType {
 	TotalCollateralizedAmount,
 }
 
+impl Default for TradeAllocAmtType {
+	fn default() -> Self {
+		TradeAllocAmtType::CashAmount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeAllocAmtReason {
 	/// Options settlement
@@ -112,4 +118,10 @@ pub enum TradeAllocAmtReason {
 	/// Delivery storage charges
 	#[serde(rename = "6")]
 	DeliveryStorageCharges,
+}
+
+impl Default for TradeAllocAmtReason {
+	fn default() -> Self {
+		TradeAllocAmtReason::OptionsSettlement
+	}
 }

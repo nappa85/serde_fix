@@ -61,6 +61,12 @@ pub enum UnderlyingComplexEventCreditEventUnit {
 	Year,
 }
 
+impl Default for UnderlyingComplexEventCreditEventUnit {
+	fn default() -> Self {
+		UnderlyingComplexEventCreditEventUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnderlyingComplexEventCreditEventDayType {
 	/// Business
@@ -81,4 +87,10 @@ pub enum UnderlyingComplexEventCreditEventDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for UnderlyingComplexEventCreditEventDayType {
+	fn default() -> Self {
+		UnderlyingComplexEventCreditEventDayType::Business
+	}
 }

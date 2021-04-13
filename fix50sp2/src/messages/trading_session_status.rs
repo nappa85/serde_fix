@@ -82,15 +82,11 @@ pub struct Trading {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Use if status information applies only to a subset of all instruments. Use SecurityStatus(35=f) message instead for status
 	/// on a single instrument.
 	#[serde(flatten)]
@@ -141,6 +137,12 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
@@ -185,6 +187,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesMethod {
 	/// Electronic
@@ -201,6 +209,12 @@ pub enum TradSesMethod {
 	Voice,
 }
 
+impl Default for TradSesMethod {
+	fn default() -> Self {
+		TradSesMethod::Electronic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesMode {
 	/// Testing
@@ -214,6 +228,12 @@ pub enum TradSesMode {
 	Production,
 }
 
+impl Default for TradSesMode {
+	fn default() -> Self {
+		TradSesMode::Testing
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
@@ -222,6 +242,12 @@ pub enum UnsolicitedIndicator {
 	/// Message is being sent unsolicited
 	#[serde(rename = "Y")]
 	MessageIsBeingSentUnsolicited,
+}
+
+impl Default for UnsolicitedIndicator {
+	fn default() -> Self {
+		UnsolicitedIndicator::MessageIsBeingSentAsAResultOfAPriorRequest
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -249,6 +275,12 @@ pub enum TradSesStatus {
 	RequestRejected,
 }
 
+impl Default for TradSesStatus {
+	fn default() -> Self {
+		TradSesStatus::Unknown
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesEvent {
 	/// Trading resumes (after Halt)
@@ -265,6 +297,12 @@ pub enum TradSesEvent {
 	ChangeOfTradingStatus,
 }
 
+impl Default for TradSesEvent {
+	fn default() -> Self {
+		TradSesEvent::TradingResumes
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesStatusRejReason {
 	/// Unknown or invalid TradingSessionID
@@ -275,6 +313,12 @@ pub enum TradSesStatusRejReason {
 	Other,
 }
 
+impl Default for TradSesStatusRejReason {
+	fn default() -> Self {
+		TradSesStatusRejReason::UnknownOrInvalidTradingSessionId
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradSesControl {
 	/// Automatic
@@ -283,4 +327,10 @@ pub enum TradSesControl {
 	/// Manual
 	#[serde(rename = "1")]
 	Manual,
+}
+
+impl Default for TradSesControl {
+	fn default() -> Self {
+		TradSesControl::Automatic
+	}
 }

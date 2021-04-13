@@ -53,3 +53,9 @@ pub enum AuctionType {
 	#[serde(rename = "8")]
 	DirectedOrderPriceImprovementMechanism,
 }
+
+impl Default for AuctionType {
+	fn default() -> Self {
+		AuctionType::None
+	}
+}

@@ -118,6 +118,12 @@ pub enum RiskLimitTypeItem {
 	TransactionExecutionLimitPerTimePeriod,
 }
 
+impl Default for RiskLimitTypeItem {
+	fn default() -> Self {
+		RiskLimitTypeItem::GrossLimit
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitCurrency {
 	/// Afghani
@@ -1322,6 +1328,12 @@ pub enum RiskLimitCurrency {
 	N999,
 }
 
+impl Default for RiskLimitCurrency {
+	fn default() -> Self {
+		RiskLimitCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum RiskLimitAction {
 	/// Queue inbound
@@ -1357,4 +1369,10 @@ pub enum RiskLimitAction {
 	/// Halt trading
 	#[serde(rename = "10")]
 	N10,
+}
+
+impl Default for RiskLimitAction {
+	fn default() -> Self {
+		RiskLimitAction::N0
+	}
 }

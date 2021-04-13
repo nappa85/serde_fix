@@ -30,3 +30,9 @@ pub enum UnderlyingProvisionOptionExerciseFixedDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for UnderlyingProvisionOptionExerciseFixedDateType {
+	fn default() -> Self {
+		UnderlyingProvisionOptionExerciseFixedDateType::Unadjusted
+	}
+}

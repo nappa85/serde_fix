@@ -50,3 +50,9 @@ pub enum UnderlyingPaymentScheduleFixingDayOfWeek {
 	#[serde(rename = "7")]
 	Sunday,
 }
+
+impl Default for UnderlyingPaymentScheduleFixingDayOfWeek {
+	fn default() -> Self {
+		UnderlyingPaymentScheduleFixingDayOfWeek::EveryDay
+	}
+}

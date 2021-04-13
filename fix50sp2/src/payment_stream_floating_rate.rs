@@ -397,6 +397,12 @@ pub enum PaymentStreamRateIndexSource {
 	Other,
 }
 
+impl Default for PaymentStreamRateIndexSource {
+	fn default() -> Self {
+		PaymentStreamRateIndexSource::Bloomberg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamRateIndexCurveUnit {
 	/// Day
@@ -413,6 +419,12 @@ pub enum PaymentStreamRateIndexCurveUnit {
 	Year,
 }
 
+impl Default for PaymentStreamRateIndexCurveUnit {
+	fn default() -> Self {
+		PaymentStreamRateIndexCurveUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamRateSpreadPositionType {
 	/// Short
@@ -421,6 +433,12 @@ pub enum PaymentStreamRateSpreadPositionType {
 	/// Long
 	#[serde(rename = "1")]
 	Long,
+}
+
+impl Default for PaymentStreamRateSpreadPositionType {
+	fn default() -> Self {
+		PaymentStreamRateSpreadPositionType::Short
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -433,6 +451,12 @@ pub enum PaymentStreamRateTreatment {
 	MoneyMarketYield,
 }
 
+impl Default for PaymentStreamRateTreatment {
+	fn default() -> Self {
+		PaymentStreamRateTreatment::BondEquivalentYield
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamCapRateBuySide {
 	/// Buyer of the trade
@@ -441,6 +465,12 @@ pub enum PaymentStreamCapRateBuySide {
 	/// Seller of the trade
 	#[serde(rename = "2")]
 	SellerOfTheTrade,
+}
+
+impl Default for PaymentStreamCapRateBuySide {
+	fn default() -> Self {
+		PaymentStreamCapRateBuySide::BuyerOfTheTrade
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -453,6 +483,12 @@ pub enum PaymentStreamFloorRateBuySide {
 	SellerOfTheTrade,
 }
 
+impl Default for PaymentStreamFloorRateBuySide {
+	fn default() -> Self {
+		PaymentStreamFloorRateBuySide::BuyerOfTheTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamAveragingMethod {
 	/// Unweighted
@@ -463,6 +499,12 @@ pub enum PaymentStreamAveragingMethod {
 	Weighted,
 }
 
+impl Default for PaymentStreamAveragingMethod {
+	fn default() -> Self {
+		PaymentStreamAveragingMethod::Unweighted
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamNegativeRateTreatment {
 	/// Zero interest rate method
@@ -471,6 +513,12 @@ pub enum PaymentStreamNegativeRateTreatment {
 	/// Negative interest rate method
 	#[serde(rename = "1")]
 	NegativeInterestRateMethod,
+}
+
+impl Default for PaymentStreamNegativeRateTreatment {
+	fn default() -> Self {
+		PaymentStreamNegativeRateTreatment::ZeroInterestRateMethod
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -487,6 +535,12 @@ pub enum PaymentStreamInflationLagUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for PaymentStreamInflationLagUnit {
+	fn default() -> Self {
+		PaymentStreamInflationLagUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -511,6 +565,12 @@ pub enum PaymentStreamInflationLagDayType {
 	ScheduledTradingDay,
 }
 
+impl Default for PaymentStreamInflationLagDayType {
+	fn default() -> Self {
+		PaymentStreamInflationLagDayType::Business
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamInflationInterpolationMethod {
 	/// None
@@ -519,6 +579,12 @@ pub enum PaymentStreamInflationInterpolationMethod {
 	/// Linear zero yield
 	#[serde(rename = "1")]
 	LinearZeroYield,
+}
+
+impl Default for PaymentStreamInflationInterpolationMethod {
+	fn default() -> Self {
+		PaymentStreamInflationInterpolationMethod::None
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -532,6 +598,12 @@ pub enum PaymentStreamFRADiscounting {
 	/// Australian Financial Markets Association (AFMA)
 	#[serde(rename = "2")]
 	AustralianFinancialMarketsAssociation,
+}
+
+impl Default for PaymentStreamFRADiscounting {
+	fn default() -> Self {
+		PaymentStreamFRADiscounting::None
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -548,6 +620,12 @@ pub enum PaymentStreamRateIndexCurveUnit2 {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for PaymentStreamRateIndexCurveUnit2 {
+	fn default() -> Self {
+		PaymentStreamRateIndexCurveUnit2::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -798,6 +876,12 @@ pub enum PaymentStreamRateIndexUnitOfMeasure {
 	Yd,
 }
 
+impl Default for PaymentStreamRateIndexUnitOfMeasure {
+	fn default() -> Self {
+		PaymentStreamRateIndexUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamSettlLevel {
 	/// Average (The cumulative number of weather index units for each day in the calculation period divided by the number of days
@@ -813,6 +897,12 @@ pub enum PaymentStreamSettlLevel {
 	/// Cumulative (The cumulative number of weather index units for each day in the calculaiton period)
 	#[serde(rename = "3")]
 	Cumulative,
+}
+
+impl Default for PaymentStreamSettlLevel {
+	fn default() -> Self {
+		PaymentStreamSettlLevel::Average
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1061,6 +1151,12 @@ pub enum PaymentStreamReferenceLevelUnitOfMeasure {
 	/// Yard
 	#[serde(rename = "yd")]
 	Yd,
+}
+
+impl Default for PaymentStreamReferenceLevelUnitOfMeasure {
+	fn default() -> Self {
+		PaymentStreamReferenceLevelUnitOfMeasure::Bbl
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2267,6 +2363,12 @@ pub enum PaymentStreamRateSpreadCurrency {
 	N999,
 }
 
+impl Default for PaymentStreamRateSpreadCurrency {
+	fn default() -> Self {
+		PaymentStreamRateSpreadCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamRateSpreadUnitOfMeasure {
 	/// Barrels
@@ -2515,6 +2617,12 @@ pub enum PaymentStreamRateSpreadUnitOfMeasure {
 	Yd,
 }
 
+impl Default for PaymentStreamRateSpreadUnitOfMeasure {
+	fn default() -> Self {
+		PaymentStreamRateSpreadUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamRateSpreadType {
 	/// Absolute
@@ -2523,6 +2631,12 @@ pub enum PaymentStreamRateSpreadType {
 	/// Percentage
 	#[serde(rename = "1")]
 	Percentage,
+}
+
+impl Default for PaymentStreamRateSpreadType {
+	fn default() -> Self {
+		PaymentStreamRateSpreadType::Absolute
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2541,6 +2655,12 @@ pub enum PaymentStreamCalculationLagUnit {
 	Year,
 }
 
+impl Default for PaymentStreamCalculationLagUnit {
+	fn default() -> Self {
+		PaymentStreamCalculationLagUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamFirstObservationDateOffsetUnit {
 	/// Day
@@ -2555,6 +2675,12 @@ pub enum PaymentStreamFirstObservationDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for PaymentStreamFirstObservationDateOffsetUnit {
+	fn default() -> Self {
+		PaymentStreamFirstObservationDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2579,6 +2705,12 @@ pub enum PaymentStreamPricingDayType {
 	ScheduledTradingDay,
 }
 
+impl Default for PaymentStreamPricingDayType {
+	fn default() -> Self {
+		PaymentStreamPricingDayType::Business
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamPricingDayDistribution {
 	/// All
@@ -2593,6 +2725,12 @@ pub enum PaymentStreamPricingDayDistribution {
 	/// Penultimate
 	#[serde(rename = "3")]
 	Penultimate,
+}
+
+impl Default for PaymentStreamPricingDayDistribution {
+	fn default() -> Self {
+		PaymentStreamPricingDayDistribution::All
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2623,6 +2761,12 @@ pub enum PaymentStreamPricingBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for PaymentStreamPricingBusinessDayConvention {
+	fn default() -> Self {
+		PaymentStreamPricingBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PaymentStreamLinkStrikePriceType {
 	/// Volatility
@@ -2631,6 +2775,12 @@ pub enum PaymentStreamLinkStrikePriceType {
 	/// Variance
 	#[serde(rename = "1")]
 	Variance,
+}
+
+impl Default for PaymentStreamLinkStrikePriceType {
+	fn default() -> Self {
+		PaymentStreamLinkStrikePriceType::Volatility
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2644,4 +2794,10 @@ pub enum PaymentStreamRealizedVarianceMethod {
 	/// Both
 	#[serde(rename = "2")]
 	Both,
+}
+
+impl Default for PaymentStreamRealizedVarianceMethod {
+	fn default() -> Self {
+		PaymentStreamRealizedVarianceMethod::Previous
+	}
 }

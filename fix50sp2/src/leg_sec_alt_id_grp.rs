@@ -120,3 +120,9 @@ pub enum LegSecurityAltIDSource {
 	#[serde(rename = "X")]
 	UniformSymbol,
 }
+
+impl Default for LegSecurityAltIDSource {
+	fn default() -> Self {
+		LegSecurityAltIDSource::Cusip
+	}
+}

@@ -246,31 +246,23 @@ pub struct DerivativeInstrument {
 	#[serde(rename = "1275")]
 	pub derivative_issuer: Option<String>,
 	/// Must be set if EncodedIssuer field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1277")]
-	pub derivative_encoded_issuer_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Issuer field in the encoded format specified via the MessageEncoding
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1278")]
-	pub derivative_encoded_issuer: Option<String>,
+	#[serde(alias = "1278")]
+	pub derivative_encoded_issuer: Option<fix_common::EncodedText<1278>>,
 	/// DerivativeSecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1279")]
 	pub derivative_security_desc: Option<String>,
 	/// Must be set if EncodedSecurityDesc field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1280")]
-	pub derivative_encoded_security_desc_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the SecurityDesc field in the encoded format specified via the MessageEncoding
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1281")]
-	pub derivative_encoded_security_desc: Option<String>,
+	#[serde(alias = "1281")]
+	pub derivative_encoded_security_desc: Option<fix_common::EncodedText<1281>>,
 	/// Embedded XML document describing security.
 	#[serde(flatten)]
 	pub derivative_security_xml: Option<super::derivative_security_xml::DerivativeSecurityXML>,
@@ -409,6 +401,12 @@ pub enum DerivativeSecurityIDSource {
 	UniformSymbol,
 }
 
+impl Default for DerivativeSecurityIDSource {
+	fn default() -> Self {
+		DerivativeSecurityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativeProduct {
 	/// AGENCY
@@ -450,6 +448,12 @@ pub enum DerivativeProduct {
 	/// FINANCING
 	#[serde(rename = "13")]
 	Financing,
+}
+
+impl Default for DerivativeProduct {
+	fn default() -> Self {
+		DerivativeProduct::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -917,6 +921,12 @@ pub enum DerivativeSecurityType {
 	Sfp,
 }
 
+impl Default for DerivativeSecurityType {
+	fn default() -> Self {
+		DerivativeSecurityType::Fut
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativeSecurityStatus {
 	/// Active
@@ -925,6 +935,12 @@ pub enum DerivativeSecurityStatus {
 	/// Inactive
 	#[serde(rename = "2")]
 	Inactive,
+}
+
+impl Default for DerivativeSecurityStatus {
+	fn default() -> Self {
+		DerivativeSecurityStatus::Active
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1646,6 +1662,12 @@ pub enum DerivativeCountryOfIssue {
 	/// ZIMBABWE
 	#[serde(rename = "ZW")]
 	Zimbabwe,
+}
+
+impl Default for DerivativeCountryOfIssue {
+	fn default() -> Self {
+		DerivativeCountryOfIssue::Afghanistan
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2852,6 +2874,12 @@ pub enum DerivativeStrikeCurrency {
 	N999,
 }
 
+impl Default for DerivativeStrikeCurrency {
+	fn default() -> Self {
+		DerivativeStrikeCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativeContractMultiplierUnit {
 	/// Shares
@@ -2863,6 +2891,12 @@ pub enum DerivativeContractMultiplierUnit {
 	/// Days
 	#[serde(rename = "2")]
 	Days,
+}
+
+impl Default for DerivativeContractMultiplierUnit {
+	fn default() -> Self {
+		DerivativeContractMultiplierUnit::Shares
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -2900,6 +2934,12 @@ pub enum DerivativeFlowScheduleType {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for DerivativeFlowScheduleType {
+	fn default() -> Self {
+		DerivativeFlowScheduleType::NercEasternOffPeak
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3150,6 +3190,12 @@ pub enum DerivativeUnitOfMeasure {
 	Yd,
 }
 
+impl Default for DerivativeUnitOfMeasure {
+	fn default() -> Self {
+		DerivativeUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativePriceUnitOfMeasure {
 	/// Barrels
@@ -3398,6 +3444,12 @@ pub enum DerivativePriceUnitOfMeasure {
 	Yd,
 }
 
+impl Default for DerivativePriceUnitOfMeasure {
+	fn default() -> Self {
+		DerivativePriceUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativeSettlMethod {
 	/// Cash settlement required
@@ -3406,6 +3458,12 @@ pub enum DerivativeSettlMethod {
 	/// Physical settlement required
 	#[serde(rename = "P")]
 	PhysicalSettlementRequired,
+}
+
+impl Default for DerivativeSettlMethod {
+	fn default() -> Self {
+		DerivativeSettlMethod::CashSettlementRequired
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3422,6 +3480,12 @@ pub enum DerivativePriceQuoteMethod {
 	/// Percent of Par
 	#[serde(rename = "PCTPAR")]
 	PercentOfPar,
+}
+
+impl Default for DerivativePriceQuoteMethod {
+	fn default() -> Self {
+		DerivativePriceQuoteMethod::StandardMoneyPerUnitOfAPhysical
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3443,6 +3507,12 @@ pub enum DerivativeValuationMethod {
 	CdsInDeliveryUseRecoveryRateToCalculateObligation,
 }
 
+impl Default for DerivativeValuationMethod {
+	fn default() -> Self {
+		DerivativeValuationMethod::PremiumStyle
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativeListMethod {
 	/// pre-listed only
@@ -3451,6 +3521,12 @@ pub enum DerivativeListMethod {
 	/// user requested
 	#[serde(rename = "1")]
 	UserRequested,
+}
+
+impl Default for DerivativeListMethod {
+	fn default() -> Self {
+		DerivativeListMethod::PreListedOnly
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3469,6 +3545,12 @@ pub enum DerivativePutOrCall {
 	Chooser,
 }
 
+impl Default for DerivativePutOrCall {
+	fn default() -> Self {
+		DerivativePutOrCall::Put
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativeExerciseStyle {
 	/// European
@@ -3483,6 +3565,12 @@ pub enum DerivativeExerciseStyle {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for DerivativeExerciseStyle {
+	fn default() -> Self {
+		DerivativeExerciseStyle::European
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -3511,6 +3599,12 @@ pub enum DerivativeTimeUnit {
 	/// Quarter
 	#[serde(rename = "Q")]
 	Quarter,
+}
+
+impl Default for DerivativeTimeUnit {
+	fn default() -> Self {
+		DerivativeTimeUnit::Hour
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -4717,6 +4811,12 @@ pub enum DerivativePriceQuoteCurrency {
 	N999,
 }
 
+impl Default for DerivativePriceQuoteCurrency {
+	fn default() -> Self {
+		DerivativePriceQuoteCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativeUnitOfMeasureCurrency {
 	/// Afghani
@@ -5921,6 +6021,12 @@ pub enum DerivativeUnitOfMeasureCurrency {
 	N999,
 }
 
+impl Default for DerivativeUnitOfMeasureCurrency {
+	fn default() -> Self {
+		DerivativeUnitOfMeasureCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DerivativePriceUnitOfMeasureCurrency {
 	/// Afghani
@@ -7123,4 +7229,10 @@ pub enum DerivativePriceUnitOfMeasureCurrency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for DerivativePriceUnitOfMeasureCurrency {
+	fn default() -> Self {
+		DerivativePriceUnitOfMeasureCurrency::Afa
+	}
 }

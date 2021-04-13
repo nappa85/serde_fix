@@ -125,6 +125,12 @@ pub enum InstrumentPartyIDSource {
 	MasterSpecialSegregatedAccountId,
 }
 
+impl Default for InstrumentPartyIDSource {
+	fn default() -> Self {
+		InstrumentPartyIDSource::BicCode
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum InstrumentPartyRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
@@ -504,4 +510,10 @@ pub enum InstrumentPartyRole {
 	/// Contra Investment Decision Maker
 	#[serde(rename = "127")]
 	ContraInvestmentDecisionMaker,
+}
+
+impl Default for InstrumentPartyRole {
+	fn default() -> Self {
+		InstrumentPartyRole::ExecutingFirm
+	}
 }

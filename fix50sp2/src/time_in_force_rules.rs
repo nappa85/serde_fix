@@ -59,3 +59,9 @@ pub enum TimeInForce {
 	#[serde(rename = "C")]
 	GoodForThisMonth,
 }
+
+impl Default for TimeInForce {
+	fn default() -> Self {
+		TimeInForce::Day
+	}
+}

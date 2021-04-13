@@ -32,16 +32,12 @@ pub struct Party {
 	#[serde(rename = "1328")]
 	pub reject_text: Option<String>,
 	/// Must be set if EncodedRejectText(1665) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1664")]
-	pub encoded_reject_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the RejectText(1328) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1665")]
-	pub encoded_reject_text: Option<String>,
+	#[serde(alias = "1665")]
+	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 	/// RequestingPartyGrp
 	#[serde(flatten)]
 	pub requesting_party_grp: Option<super::super::requesting_party_grp::RequestingPartyGrp>,
@@ -60,16 +56,12 @@ pub struct Party {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text(58) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// CopyMsgIndicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "797")]
@@ -107,6 +99,12 @@ pub enum PartyActionType {
 	Reinstate,
 }
 
+impl Default for PartyActionType {
+	fn default() -> Self {
+		PartyActionType::Suspend
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum PartyActionResponse {
 	/// Accepted
@@ -118,6 +116,12 @@ pub enum PartyActionResponse {
 	/// Rejected
 	#[serde(rename = "2")]
 	Rejected,
+}
+
+impl Default for PartyActionResponse {
+	fn default() -> Self {
+		PartyActionResponse::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -136,6 +140,12 @@ pub enum PartyActionRejectReason {
 	Other,
 }
 
+impl Default for PartyActionRejectReason {
+	fn default() -> Self {
+		PartyActionRejectReason::InvalidPartyOrParties
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ApplTestMessageIndicator {
 	/// Not a test message
@@ -144,4 +154,10 @@ pub enum ApplTestMessageIndicator {
 	/// Test message
 	#[serde(rename = "Y")]
 	TestMessage,
+}
+
+impl Default for ApplTestMessageIndicator {
+	fn default() -> Self {
+		ApplTestMessageIndicator::NotATestMessage
+	}
 }

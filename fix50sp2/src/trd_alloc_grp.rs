@@ -97,29 +97,21 @@ pub struct Alloc {
 	#[serde(rename = "161")]
 	pub alloc_text: Option<String>,
 	/// EncodedAllocTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "360")]
-	pub encoded_alloc_text_len: Option<usize>,
 	/// EncodedAllocText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "361")]
-	pub encoded_alloc_text: Option<String>,
+	#[serde(alias = "361")]
+	pub encoded_alloc_text: Option<fix_common::EncodedText<361>>,
 	/// FirmAllocText
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1732")]
 	pub firm_alloc_text: Option<String>,
 	/// EncodedFirmAllocTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1733")]
-	pub encoded_firm_alloc_text_len: Option<usize>,
 	/// EncodedFirmAllocText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1734")]
-	pub encoded_firm_alloc_text: Option<String>,
+	#[serde(alias = "1734")]
+	pub encoded_firm_alloc_text: Option<fix_common::EncodedText<1734>>,
 	/// AllocRefRiskLimitCheckID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2392")]
@@ -163,6 +155,12 @@ pub enum AllocAcctIDSource {
 	/// Other (custom or proprietary)
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for AllocAcctIDSource {
+	fn default() -> Self {
+		AllocAcctIDSource::Bic
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1369,6 +1367,12 @@ pub enum AllocSettlCurrency {
 	N999,
 }
 
+impl Default for AllocSettlCurrency {
+	fn default() -> Self {
+		AllocSettlCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocHandlInst {
 	/// Match
@@ -1383,6 +1387,12 @@ pub enum AllocHandlInst {
 	/// Auto claim give-up (Indicates that the give-up and take-up party are the same and that trade give-up is to be claimed automatically)
 	#[serde(rename = "4")]
 	AutoClaimGiveUp,
+}
+
+impl Default for AllocHandlInst {
+	fn default() -> Self {
+		AllocHandlInst::Match
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1401,6 +1411,12 @@ pub enum AllocMethod {
 	BrokerAssigned,
 }
 
+impl Default for AllocMethod {
+	fn default() -> Self {
+		AllocMethod::Automatic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeAllocStatus {
 	/// Pending clear
@@ -1417,6 +1433,12 @@ pub enum TradeAllocStatus {
 	Rejected,
 }
 
+impl Default for TradeAllocStatus {
+	fn default() -> Self {
+		TradeAllocStatus::PendingClear
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocationRollupInstruction {
 	/// Roll up
@@ -1425,6 +1447,12 @@ pub enum AllocationRollupInstruction {
 	/// Do not roll up
 	#[serde(rename = "1")]
 	DoNotRollUp,
+}
+
+impl Default for AllocationRollupInstruction {
+	fn default() -> Self {
+		AllocationRollupInstruction::RollUp
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1438,4 +1466,10 @@ pub enum AllocRefRiskLimitCheckIDType {
 	/// Out of band identifier
 	#[serde(rename = "2")]
 	OutOfBandIdentifier,
+}
+
+impl Default for AllocRefRiskLimitCheckIDType {
+	fn default() -> Self {
+		AllocRefRiskLimitCheckIDType::RiskLimitRequestId
+	}
 }

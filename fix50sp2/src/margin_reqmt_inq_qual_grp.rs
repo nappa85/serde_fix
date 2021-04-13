@@ -32,3 +32,9 @@ pub enum MarginReqmtInqQualifier {
 	#[serde(rename = "3")]
 	NetPosition,
 }
+
+impl Default for MarginReqmtInqQualifier {
+	fn default() -> Self {
+		MarginReqmtInqQualifier::Summary
+	}
+}

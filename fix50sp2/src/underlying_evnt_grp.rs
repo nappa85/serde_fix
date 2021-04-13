@@ -48,16 +48,12 @@ pub struct UnderlyingEvent {
 	#[serde(rename = "2071")]
 	pub underlying_event_text: Option<String>,
 	/// Must be set if EncodedUnderlyingEventText(2073) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "2072")]
-	pub encoded_underlying_event_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the UnderlyingEventText(2071) field in the encoded format specified via the
 	/// MessageEncoding(347) field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "2073")]
-	pub encoded_underlying_event_text: Option<String>,
+	#[serde(alias = "2073")]
+	pub encoded_underlying_event_text: Option<fix_common::EncodedText<2073>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -143,4 +139,10 @@ pub enum UnderlyingEventType {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for UnderlyingEventType {
+	fn default() -> Self {
+		UnderlyingEventType::Put
+	}
 }

@@ -88,6 +88,12 @@ pub enum SubscriptionRequestType {
 	DisablePreviousSnapshotUpdateRequest,
 }
 
+impl Default for SubscriptionRequestType {
+	fn default() -> Self {
+		SubscriptionRequestType::Snapshot
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
@@ -96,6 +102,12 @@ pub enum MarketDepth {
 	/// top of book
 	#[serde(rename = "1")]
 	TopOfBook,
+}
+
+impl Default for MarketDepth {
+	fn default() -> Self {
+		MarketDepth::FullBookDepth
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -108,6 +120,12 @@ pub enum MDUpdateType {
 	IncrementalRefresh,
 }
 
+impl Default for MDUpdateType {
+	fn default() -> Self {
+		MDUpdateType::FullRefresh
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AggregatedBook {
 	/// book entries to be aggregated
@@ -116,6 +134,12 @@ pub enum AggregatedBook {
 	/// book entries should not be aggregated
 	#[serde(rename = "N")]
 	BookEntriesShouldNotBeAggregated,
+}
+
+impl Default for AggregatedBook {
+	fn default() -> Self {
+		AggregatedBook::BookEntriesToBeAggregated
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -140,6 +164,12 @@ pub enum OpenCloseSettlFlag {
 	TheoreticalPriceValue,
 }
 
+impl Default for OpenCloseSettlFlag {
+	fn default() -> Self {
+		OpenCloseSettlFlag::DailyOpenCloseSettlementEntry
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Scope {
 	/// Local (Exchange, ECN, ATS)
@@ -153,6 +183,12 @@ pub enum Scope {
 	Global,
 }
 
+impl Default for Scope {
+	fn default() -> Self {
+		Scope::Local
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MDImplicitDelete {
 	/// Server must send an explicit delete for bids or offers falling outside the requested MarketDepth of the request
@@ -161,6 +197,12 @@ pub enum MDImplicitDelete {
 	/// Client has responsibility for implicitly deleting bids or offers falling outside the MarketDepth of the request
 	#[serde(rename = "Y")]
 	ClientHasResponsibilityForImplicitlyDeletingBidsOrOffersFallingOutsideTheMarketDepthOfTheRequest,
+}
+
+impl Default for MDImplicitDelete {
+	fn default() -> Self {
+		MDImplicitDelete::ServerMustSendAnExplicitDeleteForBidsOrOffersFallingOutsideTheRequestedMarketDepthOfTheRequest
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -177,6 +219,12 @@ pub enum ApplQueueAction {
 	/// End Session
 	#[serde(rename = "3")]
 	EndSession,
+}
+
+impl Default for ApplQueueAction {
+	fn default() -> Self {
+		ApplQueueAction::NoActionTaken
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -196,4 +244,10 @@ pub enum MDQuoteType {
 	/// Indicative and Tradeable
 	#[serde(rename = "4")]
 	IndicativeAndTradeable,
+}
+
+impl Default for MDQuoteType {
+	fn default() -> Self {
+		MDQuoteType::Indicative
+	}
 }

@@ -191,6 +191,12 @@ pub enum TradingSessionID {
 	Holiday,
 }
 
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
@@ -233,6 +239,12 @@ pub enum TradingSessionSubID {
 	/// Group auction
 	#[serde(rename = "13")]
 	GroupAuction,
+}
+
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -319,6 +331,12 @@ pub enum OrdType {
 	/// it is common to trigger a stop off the National Best Bid or Offer (NBBO)
 	#[serde(rename = "S")]
 	StopLimitOnBidOrOfferAtWhichPonitTheStoppedOrderBecomesALimitOrderAlsoKnownAsStopLimitOnQuoteInSomeMarketsInTheUsEquitiesMarketItIsCommonToTriggerAStopOffTheNationalBestBidOrOffer,
+}
+
+impl Default for OrdType {
+	fn default() -> Self {
+		OrdType::Market
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1525,6 +1543,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum BookingType {
 	/// Regular booking
@@ -1536,6 +1560,12 @@ pub enum BookingType {
 	/// Total Return Swap
 	#[serde(rename = "2")]
 	TotalReturnSwap,
+}
+
+impl Default for BookingType {
+	fn default() -> Self {
+		BookingType::RegularBooking
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1561,6 +1591,12 @@ pub enum OrderCapacity {
 	/// Mixed capacity
 	#[serde(rename = "M")]
 	MixedCapacity,
+}
+
+impl Default for OrderCapacity {
+	fn default() -> Self {
+		OrderCapacity::Agency
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1621,6 +1657,12 @@ pub enum OrderRestrictions {
 	NormalCourseIssuerBid,
 }
 
+impl Default for OrderRestrictions {
+	fn default() -> Self {
+		OrderRestrictions::ProgramTrade
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteEntryStatus {
 	/// Accepted
@@ -1650,6 +1692,12 @@ pub enum QuoteEntryStatus {
 	/// Active
 	#[serde(rename = "16")]
 	Active,
+}
+
+impl Default for QuoteEntryStatus {
+	fn default() -> Self {
+		QuoteEntryStatus::Accepted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1696,4 +1744,10 @@ pub enum QuoteEntryRejectReason {
 	/// Other
 	#[serde(rename = "99")]
 	Other,
+}
+
+impl Default for QuoteEntryRejectReason {
+	fn default() -> Self {
+		QuoteEntryRejectReason::UnknownSymbol
+	}
 }

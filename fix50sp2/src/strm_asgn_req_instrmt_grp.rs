@@ -66,3 +66,9 @@ pub enum SettlType {
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
 }
+
+impl Default for SettlType {
+	fn default() -> Self {
+		SettlType::RegularFxSpotSettlement
+	}
+}

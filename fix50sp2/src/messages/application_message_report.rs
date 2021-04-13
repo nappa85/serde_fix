@@ -24,15 +24,11 @@ pub struct Application {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// EncodedTextLen
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// EncodedText
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -52,4 +48,10 @@ pub enum ApplReportType {
 	/// Application message re-send completed
 	#[serde(rename = "3")]
 	ApplicationMessageReSendCompleted,
+}
+
+impl Default for ApplReportType {
+	fn default() -> Self {
+		ApplReportType::ResetApplSeqNumToNewValueSpecifiedInAHrefTag1399ApplNewSeqNumHtmlTargetBottomApplNewSeqNumNbspA
+	}
 }

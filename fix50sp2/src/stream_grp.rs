@@ -42,16 +42,12 @@ pub struct Stream {
 	#[serde(rename = "40056")]
 	pub stream_text: Option<String>,
 	/// Must be set if EncodedStreamText(40983) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "40982")]
-	pub encoded_stream_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the StreamText(40056) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40983")]
-	pub encoded_stream_text: Option<String>,
+	#[serde(alias = "40983")]
+	pub encoded_stream_text: Option<fix_common::EncodedText<40983>>,
 	/// StreamXID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41303")]
@@ -116,6 +112,12 @@ pub enum StreamType {
 	PhysicalDelivery,
 }
 
+impl Default for StreamType {
+	fn default() -> Self {
+		StreamType::PaymentCashSettlement
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamPaySide {
 	/// Buy
@@ -126,6 +128,12 @@ pub enum StreamPaySide {
 	Sell,
 }
 
+impl Default for StreamPaySide {
+	fn default() -> Self {
+		StreamPaySide::Buy
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamReceiveSide {
 	/// Buy
@@ -134,6 +142,12 @@ pub enum StreamReceiveSide {
 	/// Sell
 	#[serde(rename = "2")]
 	Sell,
+}
+
+impl Default for StreamReceiveSide {
+	fn default() -> Self {
+		StreamReceiveSide::Buy
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -164,6 +178,12 @@ pub enum StreamNotionalFrequencyUnit {
 	Quarter,
 }
 
+impl Default for StreamNotionalFrequencyUnit {
+	fn default() -> Self {
+		StreamNotionalFrequencyUnit::Hour
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamNotionalCommodityFrequency {
 	/// Term
@@ -187,6 +207,12 @@ pub enum StreamNotionalCommodityFrequency {
 	/// Per month
 	#[serde(rename = "6")]
 	PerMonth,
+}
+
+impl Default for StreamNotionalCommodityFrequency {
+	fn default() -> Self {
+		StreamNotionalCommodityFrequency::Term
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -437,6 +463,12 @@ pub enum StreamNotionalUnitOfMeasure {
 	Yd,
 }
 
+impl Default for StreamNotionalUnitOfMeasure {
+	fn default() -> Self {
+		StreamNotionalUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamTotalNotionalUnitOfMeasure {
 	/// Barrels
@@ -685,6 +717,12 @@ pub enum StreamTotalNotionalUnitOfMeasure {
 	Yd,
 }
 
+impl Default for StreamTotalNotionalUnitOfMeasure {
+	fn default() -> Self {
+		StreamTotalNotionalUnitOfMeasure::Bbl
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum StreamNotionalAdjustments {
 	/// Execution
@@ -696,4 +734,10 @@ pub enum StreamNotionalAdjustments {
 	/// Standard
 	#[serde(rename = "2")]
 	Standard,
+}
+
+impl Default for StreamNotionalAdjustments {
+	fn default() -> Self {
+		StreamNotionalAdjustments::Execution
+	}
 }

@@ -69,3 +69,9 @@ pub enum OrderAttributeType {
 	#[serde(rename = "14")]
 	ExemptFromShareTradingObligation,
 }
+
+impl Default for OrderAttributeType {
+	fn default() -> Self {
+		OrderAttributeType::AggregatedOrder
+	}
+}

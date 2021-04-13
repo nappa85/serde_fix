@@ -135,16 +135,12 @@ pub struct Security {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if EncodedText(355) field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the Text(58) field in the encoded format specified via the MessageEncoding(347)
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// MarketMakerActivity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1655")]
@@ -1387,6 +1383,12 @@ pub enum Currency {
 	N999,
 }
 
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
@@ -1410,6 +1412,12 @@ pub enum TradingSessionID {
 	/// Holiday
 	#[serde(rename = "7")]
 	Holiday,
+}
+
+impl Default for TradingSessionID {
+	fn default() -> Self {
+		TradingSessionID::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1456,6 +1464,12 @@ pub enum TradingSessionSubID {
 	GroupAuction,
 }
 
+impl Default for TradingSessionSubID {
+	fn default() -> Self {
+		TradingSessionSubID::PreTrading
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
@@ -1464,6 +1478,12 @@ pub enum UnsolicitedIndicator {
 	/// Message is being sent unsolicited
 	#[serde(rename = "Y")]
 	MessageIsBeingSentUnsolicited,
+}
+
+impl Default for UnsolicitedIndicator {
+	fn default() -> Self {
+		UnsolicitedIndicator::MessageIsBeingSentAsAResultOfAPriorRequest
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1548,6 +1568,12 @@ pub enum SecurityTradingStatus {
 	NoCancel,
 }
 
+impl Default for SecurityTradingStatus {
+	fn default() -> Self {
+		SecurityTradingStatus::OpeningDelay
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SecurityTradingEvent {
 	/// Order imbalance, auction is extended
@@ -1579,6 +1605,12 @@ pub enum SecurityTradingEvent {
 	CorporateAction,
 }
 
+impl Default for SecurityTradingEvent {
+	fn default() -> Self {
+		SecurityTradingEvent::OrderImbalanceAuctionIsExtended
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum FinancialStatus {
 	/// Bankrupt
@@ -1590,6 +1622,12 @@ pub enum FinancialStatus {
 	/// Restricted
 	#[serde(rename = "3")]
 	Restricted,
+}
+
+impl Default for FinancialStatus {
+	fn default() -> Self {
+		FinancialStatus::Bankrupt
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1665,6 +1703,12 @@ pub enum CorporateAction {
 	SuccessionEvent,
 }
 
+impl Default for CorporateAction {
+	fn default() -> Self {
+		CorporateAction::ExDividend
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum HaltReason {
 	/// News Dissemination
@@ -1687,6 +1731,12 @@ pub enum HaltReason {
 	EquipmentChangeover,
 }
 
+impl Default for HaltReason {
+	fn default() -> Self {
+		HaltReason::NewsDissemination
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum InViewOfCommon {
 	/// Halt was due to common stock being halted
@@ -1697,6 +1747,12 @@ pub enum InViewOfCommon {
 	HaltWasNotRelatedToAHaltOfTheCommonStock,
 }
 
+impl Default for InViewOfCommon {
+	fn default() -> Self {
+		InViewOfCommon::HaltWasDueToCommonStockBeingHalted
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DueToRelated {
 	/// Halt was due to related security being halted
@@ -1705,6 +1761,12 @@ pub enum DueToRelated {
 	/// Halt was not related to a halt of the related security
 	#[serde(rename = "N")]
 	HaltWasNotRelatedToAHaltOfTheRelatedSecurity,
+}
+
+impl Default for DueToRelated {
+	fn default() -> Self {
+		DueToRelated::HaltWasDueToRelatedSecurityBeingHalted
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1720,6 +1782,12 @@ pub enum MDBookType {
 	OrderDepth,
 }
 
+impl Default for MDBookType {
+	fn default() -> Self {
+		MDBookType::TopOfBook
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
@@ -1728,6 +1796,12 @@ pub enum MarketDepth {
 	/// top of book
 	#[serde(rename = "1")]
 	TopOfBook,
+}
+
+impl Default for MarketDepth {
+	fn default() -> Self {
+		MarketDepth::FullBookDepth
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1741,6 +1815,12 @@ pub enum Adjustment {
 	/// Correction
 	#[serde(rename = "3")]
 	Correction,
+}
+
+impl Default for Adjustment {
+	fn default() -> Self {
+		Adjustment::Cancel
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1757,6 +1837,12 @@ pub enum MarketMakerActivity {
 	/// Both buy and sell participation
 	#[serde(rename = "3")]
 	BothBuyAndSellParticipation,
+}
+
+impl Default for MarketMakerActivity {
+	fn default() -> Self {
+		MarketMakerActivity::NoParticipation
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1791,4 +1877,10 @@ pub enum SettlPriceDeterminationMethod {
 	/// Manual price (Manually entered price)
 	#[serde(rename = "9")]
 	ManualPrice,
+}
+
+impl Default for SettlPriceDeterminationMethod {
+	fn default() -> Self {
+		SettlPriceDeterminationMethod::Unknown
+	}
 }

@@ -51,3 +51,9 @@ pub enum RiskWarningLevelAction {
 	#[serde(rename = "4")]
 	Warning,
 }
+
+impl Default for RiskWarningLevelAction {
+	fn default() -> Self {
+		RiskWarningLevelAction::QueueInbound
+	}
+}

@@ -124,6 +124,12 @@ pub enum LegCashSettlQuoteMethod {
 	Offer,
 }
 
+impl Default for LegCashSettlQuoteMethod {
+	fn default() -> Self {
+		LegCashSettlQuoteMethod::Bid
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegCashSettlValuationMethod {
 	/// Market
@@ -150,4 +156,10 @@ pub enum LegCashSettlValuationMethod {
 	/// Average blended highest
 	#[serde(rename = "7")]
 	AverageBlendedHighest,
+}
+
+impl Default for LegCashSettlValuationMethod {
+	fn default() -> Self {
+		LegCashSettlValuationMethod::Market
+	}
 }

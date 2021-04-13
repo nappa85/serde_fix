@@ -86,6 +86,12 @@ pub enum BidDescriptorType {
 	Index,
 }
 
+impl Default for BidDescriptorType {
+	fn default() -> Self {
+		BidDescriptorType::Sector
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum SideValueInd {
 	/// Side Value 1
@@ -94,4 +100,10 @@ pub enum SideValueInd {
 	/// Side Value 2
 	#[serde(rename = "2")]
 	SideValue2,
+}
+
+impl Default for SideValueInd {
+	fn default() -> Self {
+		SideValueInd::SideValue1
+	}
 }

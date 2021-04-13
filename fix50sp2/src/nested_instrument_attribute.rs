@@ -150,3 +150,9 @@ pub enum NestedInstrAttribType {
 	#[serde(rename = "41")]
 	N41,
 }
+
+impl Default for NestedInstrAttribType {
+	fn default() -> Self {
+		NestedInstrAttribType::N1
+	}
+}

@@ -322,3 +322,9 @@ pub enum StipulationType {
 	#[serde(rename = "PAYOFF")]
 	InterestPayoffOfRollingOrAmendingTrade,
 }
+
+impl Default for StipulationType {
+	fn default() -> Self {
+		StipulationType::AlternativeMinimumTax
+	}
+}

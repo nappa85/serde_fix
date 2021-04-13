@@ -121,6 +121,12 @@ pub enum LegProvisionOptionExerciseBusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for LegProvisionOptionExerciseBusinessDayConvention {
+	fn default() -> Self {
+		LegProvisionOptionExerciseBusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseEarliestDateUnit {
 	/// Day
@@ -149,6 +155,12 @@ pub enum LegProvisionOptionExerciseEarliestDateUnit {
 	Term,
 }
 
+impl Default for LegProvisionOptionExerciseEarliestDateUnit {
+	fn default() -> Self {
+		LegProvisionOptionExerciseEarliestDateUnit::Day
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseFrequencyUnit {
 	/// Day
@@ -175,6 +187,12 @@ pub enum LegProvisionOptionExerciseFrequencyUnit {
 	/// Term
 	#[serde(rename = "T")]
 	Term,
+}
+
+impl Default for LegProvisionOptionExerciseFrequencyUnit {
+	fn default() -> Self {
+		LegProvisionOptionExerciseFrequencyUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -211,6 +229,12 @@ pub enum LegProvisionOptionExerciseStartDateRelativeTo {
 	OptionExerciseStartDate,
 }
 
+impl Default for LegProvisionOptionExerciseStartDateRelativeTo {
+	fn default() -> Self {
+		LegProvisionOptionExerciseStartDateRelativeTo::TradeDate
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseStartDateOffsetUnit {
 	/// Day
@@ -225,6 +249,12 @@ pub enum LegProvisionOptionExerciseStartDateOffsetUnit {
 	/// Year
 	#[serde(rename = "Yr")]
 	Year,
+}
+
+impl Default for LegProvisionOptionExerciseStartDateOffsetUnit {
+	fn default() -> Self {
+		LegProvisionOptionExerciseStartDateOffsetUnit::Day
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -247,4 +277,10 @@ pub enum LegProvisionOptionExerciseStartDateOffsetDayType {
 	/// Scheduled trading day
 	#[serde(rename = "5")]
 	ScheduledTradingDay,
+}
+
+impl Default for LegProvisionOptionExerciseStartDateOffsetDayType {
+	fn default() -> Self {
+		LegProvisionOptionExerciseStartDateOffsetDayType::Business
+	}
 }

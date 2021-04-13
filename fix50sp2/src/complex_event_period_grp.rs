@@ -42,3 +42,9 @@ pub enum ComplexEventPeriodType {
 	#[serde(rename = "5")]
 	KnockIn,
 }
+
+impl Default for ComplexEventPeriodType {
+	fn default() -> Self {
+		ComplexEventPeriodType::AsianOut
+	}
+}

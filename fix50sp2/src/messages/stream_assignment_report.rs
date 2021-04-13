@@ -36,3 +36,9 @@ pub enum StreamAsgnReqType {
 	#[serde(rename = "2")]
 	StreamAssignmentForExistingCustomer,
 }
+
+impl Default for StreamAsgnReqType {
+	fn default() -> Self {
+		StreamAsgnReqType::StreamAssignmentForNewCustomer
+	}
+}

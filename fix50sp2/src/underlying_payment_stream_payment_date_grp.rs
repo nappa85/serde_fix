@@ -30,3 +30,9 @@ pub enum UnderlyingPaymentStreamPaymentDateType {
 	#[serde(rename = "1")]
 	Adjusted,
 }
+
+impl Default for UnderlyingPaymentStreamPaymentDateType {
+	fn default() -> Self {
+		UnderlyingPaymentStreamPaymentDateType::Unadjusted
+	}
+}

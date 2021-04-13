@@ -87,6 +87,12 @@ pub enum DistribPaymentMethod {
 	ReinvestInFund,
 }
 
+impl Default for DistribPaymentMethod {
+	fn default() -> Self {
+		DistribPaymentMethod::Crest
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum CashDistribCurr {
 	/// Afghani
@@ -1289,4 +1295,10 @@ pub enum CashDistribCurr {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for CashDistribCurr {
+	fn default() -> Self {
+		CashDistribCurr::Afa
+	}
 }

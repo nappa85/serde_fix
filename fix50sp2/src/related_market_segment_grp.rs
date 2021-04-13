@@ -33,3 +33,9 @@ pub enum MarketSegmentRelationship {
 	#[serde(rename = "3")]
 	WholesaleSegment,
 }
+
+impl Default for MarketSegmentRelationship {
+	fn default() -> Self {
+		MarketSegmentRelationship::MarketSegmentPoolMember
+	}
+}

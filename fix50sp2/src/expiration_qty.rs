@@ -41,3 +41,9 @@ pub enum ExpirationQtyType {
 	#[serde(rename = "5")]
 	Difference,
 }
+
+impl Default for ExpirationQtyType {
+	fn default() -> Self {
+		ExpirationQtyType::AutoExercise
+	}
+}

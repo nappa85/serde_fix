@@ -49,6 +49,12 @@ pub enum LegComplexEventRateSourceItem {
 	Other,
 }
 
+impl Default for LegComplexEventRateSourceItem {
+	fn default() -> Self {
+		LegComplexEventRateSourceItem::Bloomberg
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum LegComplexEventRateSourceType {
 	/// Primary
@@ -57,4 +63,10 @@ pub enum LegComplexEventRateSourceType {
 	/// Secondary
 	#[serde(rename = "1")]
 	Secondary,
+}
+
+impl Default for LegComplexEventRateSourceType {
+	fn default() -> Self {
+		LegComplexEventRateSourceType::Primary
+	}
 }

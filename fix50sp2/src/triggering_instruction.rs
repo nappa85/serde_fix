@@ -94,6 +94,12 @@ pub enum TriggerType {
 	OnOrderEntryOrOrderModificationEntry,
 }
 
+impl Default for TriggerType {
+	fn default() -> Self {
+		TriggerType::PartialExecution
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TriggerAction {
 	/// Activate
@@ -105,6 +111,12 @@ pub enum TriggerAction {
 	/// Cancel
 	#[serde(rename = "3")]
 	Cancel,
+}
+
+impl Default for TriggerAction {
+	fn default() -> Self {
+		TriggerAction::Activate
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -207,6 +219,12 @@ pub enum TriggerSecurityIDSource {
 	UniformSymbol,
 }
 
+impl Default for TriggerSecurityIDSource {
+	fn default() -> Self {
+		TriggerSecurityIDSource::Cusip
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TriggerPriceType {
 	/// Best Offer
@@ -229,6 +247,12 @@ pub enum TriggerPriceType {
 	BestMid,
 }
 
+impl Default for TriggerPriceType {
+	fn default() -> Self {
+		TriggerPriceType::BestOffer
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TriggerPriceTypeScope {
 	/// None
@@ -245,6 +269,12 @@ pub enum TriggerPriceTypeScope {
 	Global,
 }
 
+impl Default for TriggerPriceTypeScope {
+	fn default() -> Self {
+		TriggerPriceTypeScope::None
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TriggerPriceDirection {
 	/// Trigger if the price of the specified type goes UP to or through the specified Trigger Price.
@@ -255,6 +285,12 @@ pub enum TriggerPriceDirection {
 	TriggerIfThePriceOfTheSpecifiedTypeGoesDownToOrThroughTheSpecifiedTriggerPrice,
 }
 
+impl Default for TriggerPriceDirection {
+	fn default() -> Self {
+		TriggerPriceDirection::TriggerIfThePriceOfTheSpecifiedTypeGoesUpToOrThroughTheSpecifiedTriggerPrice
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TriggerOrderType {
 	/// Market
@@ -263,6 +299,12 @@ pub enum TriggerOrderType {
 	/// Limit
 	#[serde(rename = "2")]
 	Limit,
+}
+
+impl Default for TriggerOrderType {
+	fn default() -> Self {
+		TriggerOrderType::Market
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -285,4 +327,10 @@ pub enum TriggerScope {
 	/// All other orders for the given security, price and side
 	#[serde(rename = "5")]
 	AllOtherOrdersForTheGivenSecurityPriceAndSide,
+}
+
+impl Default for TriggerScope {
+	fn default() -> Self {
+		TriggerScope::ThisOrder
+	}
 }

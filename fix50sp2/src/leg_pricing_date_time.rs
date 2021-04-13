@@ -55,3 +55,9 @@ pub enum LegPricingDateBusinessDayConvention {
 	#[serde(rename = "7")]
 	NearestDay,
 }
+
+impl Default for LegPricingDateBusinessDayConvention {
+	fn default() -> Self {
+		LegPricingDateBusinessDayConvention::NotApplicable
+	}
+}

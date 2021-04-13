@@ -82,6 +82,12 @@ pub enum SettlSessID {
 	EndOfDay,
 }
 
+impl Default for SettlSessID {
+	fn default() -> Self {
+		SettlSessID::Intraday
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
@@ -1284,4 +1290,10 @@ pub enum Currency {
 	/// Codes assigned for transactions where no currency is involved
 	#[serde(rename = "999")]
 	N999,
+}
+
+impl Default for Currency {
+	fn default() -> Self {
+		Currency::Afa
+	}
 }

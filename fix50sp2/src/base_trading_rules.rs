@@ -96,6 +96,12 @@ pub enum ExpirationCycle {
 	ExpiresAtSpecifiedExpirationAsTheEligibility,
 }
 
+impl Default for ExpirationCycle {
+	fn default() -> Self {
+		ExpirationCycle::ExpireOnTradingSessionClose
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ImpliedMarketIndicator {
 	/// Not implied
@@ -110,6 +116,12 @@ pub enum ImpliedMarketIndicator {
 	/// Both Implied-in and Implied-out
 	#[serde(rename = "3")]
 	BothImpliedInAndImpliedOut,
+}
+
+impl Default for ImpliedMarketIndicator {
+	fn default() -> Self {
+		ImpliedMarketIndicator::NotImplied
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1316,6 +1328,12 @@ pub enum TradingCurrency {
 	N999,
 }
 
+impl Default for TradingCurrency {
+	fn default() -> Self {
+		TradingCurrency::Afa
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MultilegModel {
 	/// Predefined Multileg Security
@@ -1327,6 +1345,12 @@ pub enum MultilegModel {
 	/// User-defined, Non-Securitized, Multileg
 	#[serde(rename = "2")]
 	UserDefinedNonSecuritizedMultileg,
+}
+
+impl Default for MultilegModel {
+	fn default() -> Self {
+		MultilegModel::PredefinedMultilegSecurity
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1349,6 +1373,12 @@ pub enum MultilegPriceMethod {
 	/// Multiplied Price
 	#[serde(rename = "5")]
 	MultipliedPrice,
+}
+
+impl Default for MultilegPriceMethod {
+	fn default() -> Self {
+		MultilegPriceMethod::NetPrice
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -1432,6 +1462,12 @@ pub enum PriceType {
 	PercentageOfNotional,
 }
 
+impl Default for PriceType {
+	fn default() -> Self {
+		PriceType::Percentage
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeVolType {
 	/// Number of units (e.g. share, par, currency, contracts) (default)
@@ -1442,6 +1478,12 @@ pub enum TradeVolType {
 	NumberOfRoundLots,
 }
 
+impl Default for TradeVolType {
+	fn default() -> Self {
+		TradeVolType::NumberOfUnits
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum QuoteSideIndicator {
 	/// Single sided quotes are not allowed
@@ -1450,4 +1492,10 @@ pub enum QuoteSideIndicator {
 	/// Single sided quotes are allowed
 	#[serde(rename = "Y")]
 	SingleSidedQuotesAreAllowed,
+}
+
+impl Default for QuoteSideIndicator {
+	fn default() -> Self {
+		QuoteSideIndicator::SingleSidedQuotesAreNotAllowed
+	}
 }

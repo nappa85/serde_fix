@@ -44,6 +44,12 @@ pub enum BusinessDayConvention {
 	NearestDay,
 }
 
+impl Default for BusinessDayConvention {
+	fn default() -> Self {
+		BusinessDayConvention::NotApplicable
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum DateRollConvention {
 	/// 1st day of the month
@@ -184,4 +190,10 @@ pub enum DateRollConvention {
 	/// Sunday
 	#[serde(rename = "SUN")]
 	Sunday,
+}
+
+impl Default for DateRollConvention {
+	fn default() -> Self {
+		DateRollConvention::N1StDayOfTheMonth
+	}
 }

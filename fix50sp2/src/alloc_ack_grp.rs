@@ -47,16 +47,12 @@ pub struct Alloc {
 	#[serde(rename = "161")]
 	pub alloc_text: Option<String>,
 	/// Must be set if <a href="tag_361_EncodedAllocText.html" target="bottom">EncodedAllocText&nbsp;(361)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "360")]
-	pub encoded_alloc_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the AllocText field in the encoded format specified via the MessageEncoding
 	/// field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "361")]
-	pub encoded_alloc_text: Option<String>,
+	#[serde(alias = "361")]
+	pub encoded_alloc_text: Option<fix_common::EncodedText<361>>,
 	/// SecondaryIndividualAllocID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "989")]
@@ -84,15 +80,11 @@ pub struct Alloc {
 	#[serde(rename = "1732")]
 	pub firm_alloc_text: Option<String>,
 	/// Must be set if <a href="tag_1734_EncodedFirmAllocText.html" target="bottom">EncodedFirmAllocText (1734)&nbsp;(1734)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "1733")]
-	pub encoded_firm_alloc_text_len: Option<usize>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_1732_FirmAllocText.html" target="bottom">FirmAllocText(1732)&nbsp;(1732)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding(347)&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1734")]
-	pub encoded_firm_alloc_text: Option<String>,
+	#[serde(alias = "1734")]
+	pub encoded_firm_alloc_text: Option<fix_common::EncodedText<1734>>,
 	/// Only used for specific lot trades.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1752")]
@@ -166,6 +158,12 @@ pub enum AllocAcctIDSource {
 	Other,
 }
 
+impl Default for AllocAcctIDSource {
+	fn default() -> Self {
+		AllocAcctIDSource::Bic
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocPositionEffect {
 	/// Open
@@ -180,6 +178,12 @@ pub enum AllocPositionEffect {
 	/// FIFO
 	#[serde(rename = "F")]
 	Fifo,
+}
+
+impl Default for AllocPositionEffect {
+	fn default() -> Self {
+		AllocPositionEffect::Open
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -228,6 +232,12 @@ pub enum IndividualAllocRejCode {
 	WarehouseRequestRejected,
 }
 
+impl Default for IndividualAllocRejCode {
+	fn default() -> Self {
+		IndividualAllocRejCode::UnknownAccount
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum AllocHandlInst {
 	/// Match
@@ -244,6 +254,12 @@ pub enum AllocHandlInst {
 	AutoClaimGiveUp,
 }
 
+impl Default for AllocHandlInst {
+	fn default() -> Self {
+		AllocHandlInst::Match
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum IndividualAllocType {
 	/// Sub Allocate
@@ -252,6 +268,12 @@ pub enum IndividualAllocType {
 	/// Third Party Allocation
 	#[serde(rename = "2")]
 	ThirdPartyAllocation,
+}
+
+impl Default for IndividualAllocType {
+	fn default() -> Self {
+		IndividualAllocType::SubAllocate
+	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -273,6 +295,12 @@ pub enum AllocAvgPxIndicator {
 	TradeIsAveragePriced,
 }
 
+impl Default for AllocAvgPxIndicator {
+	fn default() -> Self {
+		AllocAvgPxIndicator::NoAveragePricing
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum ClearedIndicator {
 	/// Not cleared
@@ -287,4 +315,10 @@ pub enum ClearedIndicator {
 	/// Rejected
 	#[serde(rename = "3")]
 	Rejected,
+}
+
+impl Default for ClearedIndicator {
+	fn default() -> Self {
+		ClearedIndicator::NotCleared
+	}
 }

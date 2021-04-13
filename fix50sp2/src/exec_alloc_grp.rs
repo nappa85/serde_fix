@@ -80,6 +80,12 @@ pub enum LastCapacity {
 	RisklessPrincipal,
 }
 
+impl Default for LastCapacity {
+	fn default() -> Self {
+		LastCapacity::Agent
+	}
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum TradeReportingIndicator {
 	/// Trade has not (yet) been reported
@@ -113,4 +119,10 @@ pub enum TradeReportingIndicator {
 	/// Trade is not reportable
 	#[serde(rename = "9")]
 	TradeIsNotReportable,
+}
+
+impl Default for TradeReportingIndicator {
+	fn default() -> Self {
+		TradeReportingIndicator::TradeHasNotBeenReported
+	}
 }
