@@ -145,7 +145,7 @@ async fn main() -> Result<(), ()> {
         let lock = block_mod.lock().await;
         if !lock.is_empty() {
             let mut file = base_dir.clone();
-            file.push("mod.rs");
+            file.push("lib.rs");
             if !file.as_path().exists() {
                 let mut f = File::create(&file)
                     .await
