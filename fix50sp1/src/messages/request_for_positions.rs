@@ -2,7 +2,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Request {
+pub struct RequestForPositions {
 	/// MsgType = AN
 	#[serde(flatten)]
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,

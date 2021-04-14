@@ -189,7 +189,7 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
     let base_url = get_base_url(url);
 
     // prepare regexs
-    let table = Regex::new(r#"<h1>(&lt;)?(?P<name>\w+)(&gt;)?[\s\S]+?<table[^>]+>[\n\s]+<tr class="tbl-hdr">([\n\s]+<th[^>]*>[^<]+</th>)+[\n\s]+</tr>(?P<body>[\s\S]+?)</table>"#)
+    let table = Regex::new(r#"<h1>(&lt;)?(?P<name>[^&<]+)(&gt;)?[\s\S]+?<table[^>]+>[\n\s]+<tr class="tbl-hdr">([\n\s]+<th[^>]*>[^<]+</th>)+[\n\s]+</tr>(?P<body>[\s\S]+?)</table>"#)
         .map_err(|e| error!("Error building table Regex: {}", e))?;
     let tr = Regex::new(r#"<tr[^>]+>(?P<body>[\s\S]+?)</tr>(?P<rows>([\n\s]+<tr[^>]+>[\n\s]+<td[^>]+>=&gt;</td>[\s\S]+?</tr>)+)?"#)
         .map_err(|e| error!("Error building tr Regex: {}", e))?;
@@ -363,7 +363,8 @@ async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client,
             }
         }
         else {
-            if temp.as_ref() == "usize" {
+            // skip header BodyLength(9)
+            if temp.as_ref() == "usize" && &t["id"] != "9" {
                 if name.ends_with("Len") {
                     is_encoded = Some((&name[0..name.len() - 3]).to_owned());
                 }

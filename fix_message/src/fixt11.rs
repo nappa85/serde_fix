@@ -307,7 +307,7 @@ pub enum Message {
     AllocationInstructionAlert(Box<AllocationInstructionAlert>),
     /// Execution Acknowledgement
     #[serde(rename = "BN")]
-    ExecutioNAcknowledgement(Box<ExecutioNAcknowledgement>),
+    ExecutionAcknowledgement(Box<ExecutionAcknowledgement>),
     /// Contrary Intention Report
     #[serde(rename = "BO")]
     ContraryIntentionReport(Box<ContraryIntentionReport>),
@@ -462,7 +462,7 @@ impl Serialize for Message {
             Message::SecurityListUpdateReport(m) => m.serialize(serializer),
             Message::AdjustedPositionReport(m) => m.serialize(serializer),
             Message::AllocationInstructionAlert(m) => m.serialize(serializer),
-            Message::ExecutioNAcknowledgement(m) => m.serialize(serializer),
+            Message::ExecutionAcknowledgement(m) => m.serialize(serializer),
             Message::ContraryIntentionReport(m) => m.serialize(serializer),
             Message::SecurityDefinitionUpdateReport(m) => m.serialize(serializer),
             Message::SettlementObligationReport(m) => m.serialize(serializer),
@@ -585,7 +585,7 @@ impl HasHeader for Message {
             Message::SecurityListUpdateReport(m) => m.get_header(),
             Message::AdjustedPositionReport(m) => m.get_header(),
             Message::AllocationInstructionAlert(m) => m.get_header(),
-            Message::ExecutioNAcknowledgement(m) => m.get_header(),
+            Message::ExecutionAcknowledgement(m) => m.get_header(),
             Message::ContraryIntentionReport(m) => m.get_header(),
             Message::SecurityDefinitionUpdateReport(m) => m.get_header(),
             Message::SettlementObligationReport(m) => m.get_header(),
@@ -705,7 +705,7 @@ impl HasHeader for Message {
             Message::SecurityListUpdateReport(m) => m.get_header_mut(),
             Message::AdjustedPositionReport(m) => m.get_header_mut(),
             Message::AllocationInstructionAlert(m) => m.get_header_mut(),
-            Message::ExecutioNAcknowledgement(m) => m.get_header_mut(),
+            Message::ExecutionAcknowledgement(m) => m.get_header_mut(),
             Message::ContraryIntentionReport(m) => m.get_header_mut(),
             Message::SecurityDefinitionUpdateReport(m) => m.get_header_mut(),
             Message::SettlementObligationReport(m) => m.get_header_mut(),
@@ -795,10 +795,10 @@ impl HasHeader for fixt11::messages::Logon {
 pub enum IndicationOfInterest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::indication_of_interest::Indication>),
+    FIX50(Box<fix50::messages::indication_of_interest::IndicationOfInterest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::indication_of_interest::Indication>),
+    FIX50SP1(Box<fix50sp1::messages::indication_of_interest::IndicationOfInterest>),
 }
 
 impl Serialize for IndicationOfInterest {
@@ -825,7 +825,7 @@ impl HasHeader for IndicationOfInterest {
     }
 }
 
-impl HasHeader for fix50::messages::indication_of_interest::Indication {
+impl HasHeader for fix50::messages::indication_of_interest::IndicationOfInterest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -834,7 +834,7 @@ impl HasHeader for fix50::messages::indication_of_interest::Indication {
     }
 }
 
-impl HasHeader for fix50sp1::messages::indication_of_interest::Indication {
+impl HasHeader for fix50sp1::messages::indication_of_interest::IndicationOfInterest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -916,10 +916,10 @@ impl HasHeader for fix50sp2::messages::advertisement::Advertisement {
 pub enum ExecutionReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::execution_report::Execution>),
+    FIX50(Box<fix50::messages::execution_report::ExecutionReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::execution_report::Execution>),
+    FIX50SP1(Box<fix50sp1::messages::execution_report::ExecutionReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::execution_report::ExecutionReport>),
@@ -952,7 +952,7 @@ impl HasHeader for ExecutionReport {
     }
 }
 
-impl HasHeader for fix50::messages::execution_report::Execution {
+impl HasHeader for fix50::messages::execution_report::ExecutionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -961,7 +961,7 @@ impl HasHeader for fix50::messages::execution_report::Execution {
     }
 }
 
-impl HasHeader for fix50sp1::messages::execution_report::Execution {
+impl HasHeader for fix50sp1::messages::execution_report::ExecutionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -984,13 +984,13 @@ impl HasHeader for fix50sp2::messages::execution_report::ExecutionReport {
 pub enum OrderCancelReject {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::order_cancel_reject::Order>),
+    FIX50(Box<fix50::messages::order_cancel_reject::OrderCancelReject>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_cancel_reject::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_cancel_reject::OrderCancelReject>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_cancel_reject::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_cancel_reject::OrderCancelReject>),
 }
 
 impl Serialize for OrderCancelReject {
@@ -1020,7 +1020,7 @@ impl HasHeader for OrderCancelReject {
     }
 }
 
-impl HasHeader for fix50::messages::order_cancel_reject::Order {
+impl HasHeader for fix50::messages::order_cancel_reject::OrderCancelReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1029,7 +1029,7 @@ impl HasHeader for fix50::messages::order_cancel_reject::Order {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_cancel_reject::Order {
+impl HasHeader for fix50sp1::messages::order_cancel_reject::OrderCancelReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1038,7 +1038,7 @@ impl HasHeader for fix50sp1::messages::order_cancel_reject::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_cancel_reject::Order {
+impl HasHeader for fix50sp2::messages::order_cancel_reject::OrderCancelReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1188,10 +1188,10 @@ impl HasHeader for fix50sp2::messages::email::Email {
 pub enum NewOrderSingle {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::new_order_single::New>),
+    FIX50(Box<fix50::messages::new_order_single::NewOrderSingle>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::new_order_single::New>),
+    FIX50SP1(Box<fix50sp1::messages::new_order_single::NewOrderSingle>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::new_order_single::NewOrderSingle>),
@@ -1224,7 +1224,7 @@ impl HasHeader for NewOrderSingle {
     }
 }
 
-impl HasHeader for fix50::messages::new_order_single::New {
+impl HasHeader for fix50::messages::new_order_single::NewOrderSingle {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1233,7 +1233,7 @@ impl HasHeader for fix50::messages::new_order_single::New {
     }
 }
 
-impl HasHeader for fix50sp1::messages::new_order_single::New {
+impl HasHeader for fix50sp1::messages::new_order_single::NewOrderSingle {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1256,13 +1256,13 @@ impl HasHeader for fix50sp2::messages::new_order_single::NewOrderSingle {
 pub enum NewOrderList {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::new_order_list::New>),
+    FIX50(Box<fix50::messages::new_order_list::NewOrderList>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::new_order_list::New>),
+    FIX50SP1(Box<fix50sp1::messages::new_order_list::NewOrderList>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::new_order_list::New>),
+    FIX50SP2(Box<fix50sp2::messages::new_order_list::NewOrderList>),
 }
 
 impl Serialize for NewOrderList {
@@ -1292,7 +1292,7 @@ impl HasHeader for NewOrderList {
     }
 }
 
-impl HasHeader for fix50::messages::new_order_list::New {
+impl HasHeader for fix50::messages::new_order_list::NewOrderList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1301,7 +1301,7 @@ impl HasHeader for fix50::messages::new_order_list::New {
     }
 }
 
-impl HasHeader for fix50sp1::messages::new_order_list::New {
+impl HasHeader for fix50sp1::messages::new_order_list::NewOrderList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1310,7 +1310,7 @@ impl HasHeader for fix50sp1::messages::new_order_list::New {
     }
 }
 
-impl HasHeader for fix50sp2::messages::new_order_list::New {
+impl HasHeader for fix50sp2::messages::new_order_list::NewOrderList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1324,13 +1324,13 @@ impl HasHeader for fix50sp2::messages::new_order_list::New {
 pub enum OrderCancelRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::order_cancel_request::Order>),
+    FIX50(Box<fix50::messages::order_cancel_request::OrderCancelRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_cancel_request::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_cancel_request::OrderCancelRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_cancel_request::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_cancel_request::OrderCancelRequest>),
 }
 
 impl Serialize for OrderCancelRequest {
@@ -1360,7 +1360,7 @@ impl HasHeader for OrderCancelRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_cancel_request::Order {
+impl HasHeader for fix50::messages::order_cancel_request::OrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1369,7 +1369,7 @@ impl HasHeader for fix50::messages::order_cancel_request::Order {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_cancel_request::Order {
+impl HasHeader for fix50sp1::messages::order_cancel_request::OrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1378,7 +1378,7 @@ impl HasHeader for fix50sp1::messages::order_cancel_request::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_cancel_request::Order {
+impl HasHeader for fix50sp2::messages::order_cancel_request::OrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1392,13 +1392,13 @@ impl HasHeader for fix50sp2::messages::order_cancel_request::Order {
 pub enum OrderCancelReplaceRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::order_cancel_replace_request::Order>),
+    FIX50(Box<fix50::messages::order_cancel_replace_request::OrderCancelReplaceRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_cancel_replace_request::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_cancel_replace_request::OrderCancelReplaceRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_cancel_replace_request::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_cancel_replace_request::OrderCancelReplaceRequest>),
 }
 
 impl Serialize for OrderCancelReplaceRequest {
@@ -1428,7 +1428,7 @@ impl HasHeader for OrderCancelReplaceRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_cancel_replace_request::Order {
+impl HasHeader for fix50::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1437,7 +1437,7 @@ impl HasHeader for fix50::messages::order_cancel_replace_request::Order {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_cancel_replace_request::Order {
+impl HasHeader for fix50sp1::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1446,7 +1446,7 @@ impl HasHeader for fix50sp1::messages::order_cancel_replace_request::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_cancel_replace_request::Order {
+impl HasHeader for fix50sp2::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1460,13 +1460,13 @@ impl HasHeader for fix50sp2::messages::order_cancel_replace_request::Order {
 pub enum OrderStatusRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::order_status_request::Order>),
+    FIX50(Box<fix50::messages::order_status_request::OrderStatusRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_status_request::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_status_request::OrderStatusRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_status_request::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_status_request::OrderStatusRequest>),
 }
 
 impl Serialize for OrderStatusRequest {
@@ -1496,7 +1496,7 @@ impl HasHeader for OrderStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_status_request::Order {
+impl HasHeader for fix50::messages::order_status_request::OrderStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1505,7 +1505,7 @@ impl HasHeader for fix50::messages::order_status_request::Order {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_status_request::Order {
+impl HasHeader for fix50sp1::messages::order_status_request::OrderStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1514,7 +1514,7 @@ impl HasHeader for fix50sp1::messages::order_status_request::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_status_request::Order {
+impl HasHeader for fix50sp2::messages::order_status_request::OrderStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1528,10 +1528,10 @@ impl HasHeader for fix50sp2::messages::order_status_request::Order {
 pub enum AllocationInstruction {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::allocation_instruction::Allocation>),
+    FIX50(Box<fix50::messages::allocation_instruction::AllocationInstruction>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::allocation_instruction::Allocation>),
+    FIX50SP1(Box<fix50sp1::messages::allocation_instruction::AllocationInstruction>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::allocation_instruction::AllocationInstruction>),
@@ -1564,7 +1564,7 @@ impl HasHeader for AllocationInstruction {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_instruction::Allocation {
+impl HasHeader for fix50::messages::allocation_instruction::AllocationInstruction {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1573,7 +1573,7 @@ impl HasHeader for fix50::messages::allocation_instruction::Allocation {
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_instruction::Allocation {
+impl HasHeader for fix50sp1::messages::allocation_instruction::AllocationInstruction {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1596,13 +1596,13 @@ impl HasHeader for fix50sp2::messages::allocation_instruction::AllocationInstruc
 pub enum ListCancelRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::list_cancel_request::List>),
+    FIX50(Box<fix50::messages::list_cancel_request::ListCancelRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::list_cancel_request::List>),
+    FIX50SP1(Box<fix50sp1::messages::list_cancel_request::ListCancelRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::list_cancel_request::List>),
+    FIX50SP2(Box<fix50sp2::messages::list_cancel_request::ListCancelRequest>),
 }
 
 impl Serialize for ListCancelRequest {
@@ -1632,7 +1632,7 @@ impl HasHeader for ListCancelRequest {
     }
 }
 
-impl HasHeader for fix50::messages::list_cancel_request::List {
+impl HasHeader for fix50::messages::list_cancel_request::ListCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1641,7 +1641,7 @@ impl HasHeader for fix50::messages::list_cancel_request::List {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_cancel_request::List {
+impl HasHeader for fix50sp1::messages::list_cancel_request::ListCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1650,7 +1650,7 @@ impl HasHeader for fix50sp1::messages::list_cancel_request::List {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_cancel_request::List {
+impl HasHeader for fix50sp2::messages::list_cancel_request::ListCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1664,13 +1664,13 @@ impl HasHeader for fix50sp2::messages::list_cancel_request::List {
 pub enum ListExecute {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::list_execute::List>),
+    FIX50(Box<fix50::messages::list_execute::ListExecute>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::list_execute::List>),
+    FIX50SP1(Box<fix50sp1::messages::list_execute::ListExecute>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::list_execute::List>),
+    FIX50SP2(Box<fix50sp2::messages::list_execute::ListExecute>),
 }
 
 impl Serialize for ListExecute {
@@ -1700,7 +1700,7 @@ impl HasHeader for ListExecute {
     }
 }
 
-impl HasHeader for fix50::messages::list_execute::List {
+impl HasHeader for fix50::messages::list_execute::ListExecute {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1709,7 +1709,7 @@ impl HasHeader for fix50::messages::list_execute::List {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_execute::List {
+impl HasHeader for fix50sp1::messages::list_execute::ListExecute {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1718,7 +1718,7 @@ impl HasHeader for fix50sp1::messages::list_execute::List {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_execute::List {
+impl HasHeader for fix50sp2::messages::list_execute::ListExecute {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1732,13 +1732,13 @@ impl HasHeader for fix50sp2::messages::list_execute::List {
 pub enum ListStatusRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::list_status_request::List>),
+    FIX50(Box<fix50::messages::list_status_request::ListStatusRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::list_status_request::List>),
+    FIX50SP1(Box<fix50sp1::messages::list_status_request::ListStatusRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::list_status_request::List>),
+    FIX50SP2(Box<fix50sp2::messages::list_status_request::ListStatusRequest>),
 }
 
 impl Serialize for ListStatusRequest {
@@ -1768,7 +1768,7 @@ impl HasHeader for ListStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::list_status_request::List {
+impl HasHeader for fix50::messages::list_status_request::ListStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1777,7 +1777,7 @@ impl HasHeader for fix50::messages::list_status_request::List {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_status_request::List {
+impl HasHeader for fix50sp1::messages::list_status_request::ListStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1786,7 +1786,7 @@ impl HasHeader for fix50sp1::messages::list_status_request::List {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_status_request::List {
+impl HasHeader for fix50sp2::messages::list_status_request::ListStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1800,13 +1800,13 @@ impl HasHeader for fix50sp2::messages::list_status_request::List {
 pub enum ListStatus {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::list_status::List>),
+    FIX50(Box<fix50::messages::list_status::ListStatus>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::list_status::List>),
+    FIX50SP1(Box<fix50sp1::messages::list_status::ListStatus>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::list_status::List>),
+    FIX50SP2(Box<fix50sp2::messages::list_status::ListStatus>),
 }
 
 impl Serialize for ListStatus {
@@ -1836,7 +1836,7 @@ impl HasHeader for ListStatus {
     }
 }
 
-impl HasHeader for fix50::messages::list_status::List {
+impl HasHeader for fix50::messages::list_status::ListStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1845,7 +1845,7 @@ impl HasHeader for fix50::messages::list_status::List {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_status::List {
+impl HasHeader for fix50sp1::messages::list_status::ListStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1854,7 +1854,7 @@ impl HasHeader for fix50sp1::messages::list_status::List {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_status::List {
+impl HasHeader for fix50sp2::messages::list_status::ListStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1868,13 +1868,13 @@ impl HasHeader for fix50sp2::messages::list_status::List {
 pub enum AllocationInstructionAck {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::allocation_instruction_ack::Allocation>),
+    FIX50(Box<fix50::messages::allocation_instruction_ack::AllocationInstructionAck>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::allocation_instruction_ack::Allocation>),
+    FIX50SP1(Box<fix50sp1::messages::allocation_instruction_ack::AllocationInstructionAck>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::allocation_instruction_ack::Allocation>),
+    FIX50SP2(Box<fix50sp2::messages::allocation_instruction_ack::AllocationInstructionAck>),
 }
 
 impl Serialize for AllocationInstructionAck {
@@ -1904,7 +1904,7 @@ impl HasHeader for AllocationInstructionAck {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_instruction_ack::Allocation {
+impl HasHeader for fix50::messages::allocation_instruction_ack::AllocationInstructionAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1913,7 +1913,7 @@ impl HasHeader for fix50::messages::allocation_instruction_ack::Allocation {
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_instruction_ack::Allocation {
+impl HasHeader for fix50sp1::messages::allocation_instruction_ack::AllocationInstructionAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1922,7 +1922,7 @@ impl HasHeader for fix50sp1::messages::allocation_instruction_ack::Allocation {
     }
 }
 
-impl HasHeader for fix50sp2::messages::allocation_instruction_ack::Allocation {
+impl HasHeader for fix50sp2::messages::allocation_instruction_ack::AllocationInstructionAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1936,13 +1936,13 @@ impl HasHeader for fix50sp2::messages::allocation_instruction_ack::Allocation {
 pub enum DontKnowTrade {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::dont_know_trade::Dont>),
+    FIX50(Box<fix50::messages::dont_know_trade::DontKnowTrade>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::dont_know_trade::Dont>),
+    FIX50SP1(Box<fix50sp1::messages::dont_know_trade::DontKnowTrade>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::dont_know_trade::Dont>),
+    FIX50SP2(Box<fix50sp2::messages::dont_know_trade::DontKnowTrade>),
 }
 
 impl Serialize for DontKnowTrade {
@@ -1972,7 +1972,7 @@ impl HasHeader for DontKnowTrade {
     }
 }
 
-impl HasHeader for fix50::messages::dont_know_trade::Dont {
+impl HasHeader for fix50::messages::dont_know_trade::DontKnowTrade {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1981,7 +1981,7 @@ impl HasHeader for fix50::messages::dont_know_trade::Dont {
     }
 }
 
-impl HasHeader for fix50sp1::messages::dont_know_trade::Dont {
+impl HasHeader for fix50sp1::messages::dont_know_trade::DontKnowTrade {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1990,7 +1990,7 @@ impl HasHeader for fix50sp1::messages::dont_know_trade::Dont {
     }
 }
 
-impl HasHeader for fix50sp2::messages::dont_know_trade::Dont {
+impl HasHeader for fix50sp2::messages::dont_know_trade::DontKnowTrade {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2004,13 +2004,13 @@ impl HasHeader for fix50sp2::messages::dont_know_trade::Dont {
 pub enum QuoteRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::quote_request::Quote>),
+    FIX50(Box<fix50::messages::quote_request::QuoteRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::quote_request::Quote>),
+    FIX50SP1(Box<fix50sp1::messages::quote_request::QuoteRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::quote_request::Quote>),
+    FIX50SP2(Box<fix50sp2::messages::quote_request::QuoteRequest>),
 }
 
 impl Serialize for QuoteRequest {
@@ -2040,7 +2040,7 @@ impl HasHeader for QuoteRequest {
     }
 }
 
-impl HasHeader for fix50::messages::quote_request::Quote {
+impl HasHeader for fix50::messages::quote_request::QuoteRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2049,7 +2049,7 @@ impl HasHeader for fix50::messages::quote_request::Quote {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_request::Quote {
+impl HasHeader for fix50sp1::messages::quote_request::QuoteRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2058,7 +2058,7 @@ impl HasHeader for fix50sp1::messages::quote_request::Quote {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_request::Quote {
+impl HasHeader for fix50sp2::messages::quote_request::QuoteRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2140,13 +2140,13 @@ impl HasHeader for fix50sp2::messages::quote::Quote {
 pub enum SettlementInstructions {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::settlement_instructions::Settlement>),
+    FIX50(Box<fix50::messages::settlement_instructions::SettlementInstructions>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::settlement_instructions::Settlement>),
+    FIX50SP1(Box<fix50sp1::messages::settlement_instructions::SettlementInstructions>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::settlement_instructions::Settlement>),
+    FIX50SP2(Box<fix50sp2::messages::settlement_instructions::SettlementInstructions>),
 }
 
 impl Serialize for SettlementInstructions {
@@ -2176,7 +2176,7 @@ impl HasHeader for SettlementInstructions {
     }
 }
 
-impl HasHeader for fix50::messages::settlement_instructions::Settlement {
+impl HasHeader for fix50::messages::settlement_instructions::SettlementInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2185,7 +2185,7 @@ impl HasHeader for fix50::messages::settlement_instructions::Settlement {
     }
 }
 
-impl HasHeader for fix50sp1::messages::settlement_instructions::Settlement {
+impl HasHeader for fix50sp1::messages::settlement_instructions::SettlementInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2194,7 +2194,7 @@ impl HasHeader for fix50sp1::messages::settlement_instructions::Settlement {
     }
 }
 
-impl HasHeader for fix50sp2::messages::settlement_instructions::Settlement {
+impl HasHeader for fix50sp2::messages::settlement_instructions::SettlementInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2208,13 +2208,13 @@ impl HasHeader for fix50sp2::messages::settlement_instructions::Settlement {
 pub enum MarketDataRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::market_data_request::Market>),
+    FIX50(Box<fix50::messages::market_data_request::MarketDataRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::market_data_request::Market>),
+    FIX50SP1(Box<fix50sp1::messages::market_data_request::MarketDataRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::market_data_request::Market>),
+    FIX50SP2(Box<fix50sp2::messages::market_data_request::MarketDataRequest>),
 }
 
 impl Serialize for MarketDataRequest {
@@ -2244,7 +2244,7 @@ impl HasHeader for MarketDataRequest {
     }
 }
 
-impl HasHeader for fix50::messages::market_data_request::Market {
+impl HasHeader for fix50::messages::market_data_request::MarketDataRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2253,7 +2253,7 @@ impl HasHeader for fix50::messages::market_data_request::Market {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_data_request::Market {
+impl HasHeader for fix50sp1::messages::market_data_request::MarketDataRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2262,7 +2262,7 @@ impl HasHeader for fix50sp1::messages::market_data_request::Market {
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_data_request::Market {
+impl HasHeader for fix50sp2::messages::market_data_request::MarketDataRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2276,13 +2276,13 @@ impl HasHeader for fix50sp2::messages::market_data_request::Market {
 pub enum MarketDataSnapshotFullRefresh {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::market_data_snapshot_full_refresh::Market>),
+    FIX50(Box<fix50::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::market_data_snapshot_full_refresh::Market>),
+    FIX50SP1(Box<fix50sp1::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::market_data_snapshot_full_refresh::Market>),
+    FIX50SP2(Box<fix50sp2::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh>),
 }
 
 impl Serialize for MarketDataSnapshotFullRefresh {
@@ -2312,7 +2312,7 @@ impl HasHeader for MarketDataSnapshotFullRefresh {
     }
 }
 
-impl HasHeader for fix50::messages::market_data_snapshot_full_refresh::Market {
+impl HasHeader for fix50::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2321,7 +2321,7 @@ impl HasHeader for fix50::messages::market_data_snapshot_full_refresh::Market {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_data_snapshot_full_refresh::Market {
+impl HasHeader for fix50sp1::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2330,7 +2330,7 @@ impl HasHeader for fix50sp1::messages::market_data_snapshot_full_refresh::Market
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_data_snapshot_full_refresh::Market {
+impl HasHeader for fix50sp2::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2344,13 +2344,13 @@ impl HasHeader for fix50sp2::messages::market_data_snapshot_full_refresh::Market
 pub enum MarketDataIncrementalRefresh {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::market_data_incremental_refresh::Market>),
+    FIX50(Box<fix50::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::market_data_incremental_refresh::Market>),
+    FIX50SP1(Box<fix50sp1::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::market_data_incremental_refresh::Market>),
+    FIX50SP2(Box<fix50sp2::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh>),
 }
 
 impl Serialize for MarketDataIncrementalRefresh {
@@ -2380,7 +2380,7 @@ impl HasHeader for MarketDataIncrementalRefresh {
     }
 }
 
-impl HasHeader for fix50::messages::market_data_incremental_refresh::Market {
+impl HasHeader for fix50::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2389,7 +2389,7 @@ impl HasHeader for fix50::messages::market_data_incremental_refresh::Market {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_data_incremental_refresh::Market {
+impl HasHeader for fix50sp1::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2398,7 +2398,7 @@ impl HasHeader for fix50sp1::messages::market_data_incremental_refresh::Market {
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_data_incremental_refresh::Market {
+impl HasHeader for fix50sp2::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2412,13 +2412,13 @@ impl HasHeader for fix50sp2::messages::market_data_incremental_refresh::Market {
 pub enum MarketDataRequestReject {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::market_data_request_reject::Market>),
+    FIX50(Box<fix50::messages::market_data_request_reject::MarketDataRequestReject>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::market_data_request_reject::Market>),
+    FIX50SP1(Box<fix50sp1::messages::market_data_request_reject::MarketDataRequestReject>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::market_data_request_reject::Market>),
+    FIX50SP2(Box<fix50sp2::messages::market_data_request_reject::MarketDataRequestReject>),
 }
 
 impl Serialize for MarketDataRequestReject {
@@ -2448,7 +2448,7 @@ impl HasHeader for MarketDataRequestReject {
     }
 }
 
-impl HasHeader for fix50::messages::market_data_request_reject::Market {
+impl HasHeader for fix50::messages::market_data_request_reject::MarketDataRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2457,7 +2457,7 @@ impl HasHeader for fix50::messages::market_data_request_reject::Market {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_data_request_reject::Market {
+impl HasHeader for fix50sp1::messages::market_data_request_reject::MarketDataRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2466,7 +2466,7 @@ impl HasHeader for fix50sp1::messages::market_data_request_reject::Market {
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_data_request_reject::Market {
+impl HasHeader for fix50sp2::messages::market_data_request_reject::MarketDataRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2480,13 +2480,13 @@ impl HasHeader for fix50sp2::messages::market_data_request_reject::Market {
 pub enum QuoteCancel {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::quote_cancel::Quote>),
+    FIX50(Box<fix50::messages::quote_cancel::QuoteCancel>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::quote_cancel::Quote>),
+    FIX50SP1(Box<fix50sp1::messages::quote_cancel::QuoteCancel>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::quote_cancel::Quote>),
+    FIX50SP2(Box<fix50sp2::messages::quote_cancel::QuoteCancel>),
 }
 
 impl Serialize for QuoteCancel {
@@ -2516,7 +2516,7 @@ impl HasHeader for QuoteCancel {
     }
 }
 
-impl HasHeader for fix50::messages::quote_cancel::Quote {
+impl HasHeader for fix50::messages::quote_cancel::QuoteCancel {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2525,7 +2525,7 @@ impl HasHeader for fix50::messages::quote_cancel::Quote {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_cancel::Quote {
+impl HasHeader for fix50sp1::messages::quote_cancel::QuoteCancel {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2534,7 +2534,7 @@ impl HasHeader for fix50sp1::messages::quote_cancel::Quote {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_cancel::Quote {
+impl HasHeader for fix50sp2::messages::quote_cancel::QuoteCancel {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2548,13 +2548,13 @@ impl HasHeader for fix50sp2::messages::quote_cancel::Quote {
 pub enum QuoteStatusRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::quote_status_request::Quote>),
+    FIX50(Box<fix50::messages::quote_status_request::QuoteStatusRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::quote_status_request::Quote>),
+    FIX50SP1(Box<fix50sp1::messages::quote_status_request::QuoteStatusRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::quote_status_request::Quote>),
+    FIX50SP2(Box<fix50sp2::messages::quote_status_request::QuoteStatusRequest>),
 }
 
 impl Serialize for QuoteStatusRequest {
@@ -2584,7 +2584,7 @@ impl HasHeader for QuoteStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::quote_status_request::Quote {
+impl HasHeader for fix50::messages::quote_status_request::QuoteStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2593,7 +2593,7 @@ impl HasHeader for fix50::messages::quote_status_request::Quote {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_status_request::Quote {
+impl HasHeader for fix50sp1::messages::quote_status_request::QuoteStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2602,7 +2602,7 @@ impl HasHeader for fix50sp1::messages::quote_status_request::Quote {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_status_request::Quote {
+impl HasHeader for fix50sp2::messages::quote_status_request::QuoteStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2616,10 +2616,10 @@ impl HasHeader for fix50sp2::messages::quote_status_request::Quote {
 pub enum MassQuoteAcknowledgement {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::mass_quote_acknowledgement::Mass>),
+    FIX50(Box<fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::mass_quote_acknowledgement::Mass>),
+    FIX50SP1(Box<fix50sp1::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement>),
 }
 
 impl Serialize for MassQuoteAcknowledgement {
@@ -2646,7 +2646,7 @@ impl HasHeader for MassQuoteAcknowledgement {
     }
 }
 
-impl HasHeader for fix50::messages::mass_quote_acknowledgement::Mass {
+impl HasHeader for fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2655,7 +2655,7 @@ impl HasHeader for fix50::messages::mass_quote_acknowledgement::Mass {
     }
 }
 
-impl HasHeader for fix50sp1::messages::mass_quote_acknowledgement::Mass {
+impl HasHeader for fix50sp1::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2669,13 +2669,13 @@ impl HasHeader for fix50sp1::messages::mass_quote_acknowledgement::Mass {
 pub enum SecurityDefinitionRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_definition_request::Security>),
+    FIX50(Box<fix50::messages::security_definition_request::SecurityDefinitionRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_definition_request::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_definition_request::SecurityDefinitionRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_definition_request::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_definition_request::SecurityDefinitionRequest>),
 }
 
 impl Serialize for SecurityDefinitionRequest {
@@ -2705,7 +2705,7 @@ impl HasHeader for SecurityDefinitionRequest {
     }
 }
 
-impl HasHeader for fix50::messages::security_definition_request::Security {
+impl HasHeader for fix50::messages::security_definition_request::SecurityDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2714,7 +2714,7 @@ impl HasHeader for fix50::messages::security_definition_request::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_definition_request::Security {
+impl HasHeader for fix50sp1::messages::security_definition_request::SecurityDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2723,7 +2723,7 @@ impl HasHeader for fix50sp1::messages::security_definition_request::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_definition_request::Security {
+impl HasHeader for fix50sp2::messages::security_definition_request::SecurityDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2737,13 +2737,13 @@ impl HasHeader for fix50sp2::messages::security_definition_request::Security {
 pub enum SecurityDefinition {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_definition::Security>),
+    FIX50(Box<fix50::messages::security_definition::SecurityDefinition>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_definition::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_definition::SecurityDefinition>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_definition::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_definition::SecurityDefinition>),
 }
 
 impl Serialize for SecurityDefinition {
@@ -2773,7 +2773,7 @@ impl HasHeader for SecurityDefinition {
     }
 }
 
-impl HasHeader for fix50::messages::security_definition::Security {
+impl HasHeader for fix50::messages::security_definition::SecurityDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2782,7 +2782,7 @@ impl HasHeader for fix50::messages::security_definition::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_definition::Security {
+impl HasHeader for fix50sp1::messages::security_definition::SecurityDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2791,7 +2791,7 @@ impl HasHeader for fix50sp1::messages::security_definition::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_definition::Security {
+impl HasHeader for fix50sp2::messages::security_definition::SecurityDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2805,13 +2805,13 @@ impl HasHeader for fix50sp2::messages::security_definition::Security {
 pub enum SecurityStatusRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_status_request::Security>),
+    FIX50(Box<fix50::messages::security_status_request::SecurityStatusRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_status_request::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_status_request::SecurityStatusRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_status_request::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_status_request::SecurityStatusRequest>),
 }
 
 impl Serialize for SecurityStatusRequest {
@@ -2841,7 +2841,7 @@ impl HasHeader for SecurityStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::security_status_request::Security {
+impl HasHeader for fix50::messages::security_status_request::SecurityStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2850,7 +2850,7 @@ impl HasHeader for fix50::messages::security_status_request::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_status_request::Security {
+impl HasHeader for fix50sp1::messages::security_status_request::SecurityStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2859,7 +2859,7 @@ impl HasHeader for fix50sp1::messages::security_status_request::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_status_request::Security {
+impl HasHeader for fix50sp2::messages::security_status_request::SecurityStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2873,13 +2873,13 @@ impl HasHeader for fix50sp2::messages::security_status_request::Security {
 pub enum SecurityStatus {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_status::Security>),
+    FIX50(Box<fix50::messages::security_status::SecurityStatus>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_status::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_status::SecurityStatus>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_status::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_status::SecurityStatus>),
 }
 
 impl Serialize for SecurityStatus {
@@ -2909,7 +2909,7 @@ impl HasHeader for SecurityStatus {
     }
 }
 
-impl HasHeader for fix50::messages::security_status::Security {
+impl HasHeader for fix50::messages::security_status::SecurityStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2918,7 +2918,7 @@ impl HasHeader for fix50::messages::security_status::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_status::Security {
+impl HasHeader for fix50sp1::messages::security_status::SecurityStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2927,7 +2927,7 @@ impl HasHeader for fix50sp1::messages::security_status::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_status::Security {
+impl HasHeader for fix50sp2::messages::security_status::SecurityStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2941,13 +2941,13 @@ impl HasHeader for fix50sp2::messages::security_status::Security {
 pub enum TradingSessionStatusRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::trading_session_status_request::Trading>),
+    FIX50(Box<fix50::messages::trading_session_status_request::TradingSessionStatusRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trading_session_status_request::Trading>),
+    FIX50SP1(Box<fix50sp1::messages::trading_session_status_request::TradingSessionStatusRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::trading_session_status_request::Trading>),
+    FIX50SP2(Box<fix50sp2::messages::trading_session_status_request::TradingSessionStatusRequest>),
 }
 
 impl Serialize for TradingSessionStatusRequest {
@@ -2977,7 +2977,7 @@ impl HasHeader for TradingSessionStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::trading_session_status_request::Trading {
+impl HasHeader for fix50::messages::trading_session_status_request::TradingSessionStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2986,7 +2986,7 @@ impl HasHeader for fix50::messages::trading_session_status_request::Trading {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_status_request::Trading {
+impl HasHeader for fix50sp1::messages::trading_session_status_request::TradingSessionStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2995,7 +2995,7 @@ impl HasHeader for fix50sp1::messages::trading_session_status_request::Trading {
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_status_request::Trading {
+impl HasHeader for fix50sp2::messages::trading_session_status_request::TradingSessionStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3009,13 +3009,13 @@ impl HasHeader for fix50sp2::messages::trading_session_status_request::Trading {
 pub enum TradingSessionStatus {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::trading_session_status::Trading>),
+    FIX50(Box<fix50::messages::trading_session_status::TradingSessionStatus>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trading_session_status::Trading>),
+    FIX50SP1(Box<fix50sp1::messages::trading_session_status::TradingSessionStatus>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::trading_session_status::Trading>),
+    FIX50SP2(Box<fix50sp2::messages::trading_session_status::TradingSessionStatus>),
 }
 
 impl Serialize for TradingSessionStatus {
@@ -3045,7 +3045,7 @@ impl HasHeader for TradingSessionStatus {
     }
 }
 
-impl HasHeader for fix50::messages::trading_session_status::Trading {
+impl HasHeader for fix50::messages::trading_session_status::TradingSessionStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3054,7 +3054,7 @@ impl HasHeader for fix50::messages::trading_session_status::Trading {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_status::Trading {
+impl HasHeader for fix50sp1::messages::trading_session_status::TradingSessionStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3063,7 +3063,7 @@ impl HasHeader for fix50sp1::messages::trading_session_status::Trading {
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_status::Trading {
+impl HasHeader for fix50sp2::messages::trading_session_status::TradingSessionStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3077,13 +3077,13 @@ impl HasHeader for fix50sp2::messages::trading_session_status::Trading {
 pub enum MassQuote {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::mass_quote::Mass>),
+    FIX50(Box<fix50::messages::mass_quote::MassQuote>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::mass_quote::Mass>),
+    FIX50SP1(Box<fix50sp1::messages::mass_quote::MassQuote>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::mass_quote::Mass>),
+    FIX50SP2(Box<fix50sp2::messages::mass_quote::MassQuote>),
 }
 
 impl Serialize for MassQuote {
@@ -3113,7 +3113,7 @@ impl HasHeader for MassQuote {
     }
 }
 
-impl HasHeader for fix50::messages::mass_quote::Mass {
+impl HasHeader for fix50::messages::mass_quote::MassQuote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3122,7 +3122,7 @@ impl HasHeader for fix50::messages::mass_quote::Mass {
     }
 }
 
-impl HasHeader for fix50sp1::messages::mass_quote::Mass {
+impl HasHeader for fix50sp1::messages::mass_quote::MassQuote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3131,7 +3131,7 @@ impl HasHeader for fix50sp1::messages::mass_quote::Mass {
     }
 }
 
-impl HasHeader for fix50sp2::messages::mass_quote::Mass {
+impl HasHeader for fix50sp2::messages::mass_quote::MassQuote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3145,13 +3145,13 @@ impl HasHeader for fix50sp2::messages::mass_quote::Mass {
 pub enum BusinessMessageReject {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::business_message_reject::Business>),
+    FIX50(Box<fix50::messages::business_message_reject::BusinessMessageReject>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::business_message_reject::Business>),
+    FIX50SP1(Box<fix50sp1::messages::business_message_reject::BusinessMessageReject>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::business_message_reject::Business>),
+    FIX50SP2(Box<fix50sp2::messages::business_message_reject::BusinessMessageReject>),
 }
 
 impl Serialize for BusinessMessageReject {
@@ -3181,7 +3181,7 @@ impl HasHeader for BusinessMessageReject {
     }
 }
 
-impl HasHeader for fix50::messages::business_message_reject::Business {
+impl HasHeader for fix50::messages::business_message_reject::BusinessMessageReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3190,7 +3190,7 @@ impl HasHeader for fix50::messages::business_message_reject::Business {
     }
 }
 
-impl HasHeader for fix50sp1::messages::business_message_reject::Business {
+impl HasHeader for fix50sp1::messages::business_message_reject::BusinessMessageReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3199,7 +3199,7 @@ impl HasHeader for fix50sp1::messages::business_message_reject::Business {
     }
 }
 
-impl HasHeader for fix50sp2::messages::business_message_reject::Business {
+impl HasHeader for fix50sp2::messages::business_message_reject::BusinessMessageReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3213,13 +3213,13 @@ impl HasHeader for fix50sp2::messages::business_message_reject::Business {
 pub enum BidRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::bid_request::Bid>),
+    FIX50(Box<fix50::messages::bid_request::BidRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::bid_request::Bid>),
+    FIX50SP1(Box<fix50sp1::messages::bid_request::BidRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::bid_request::Bid>),
+    FIX50SP2(Box<fix50sp2::messages::bid_request::BidRequest>),
 }
 
 impl Serialize for BidRequest {
@@ -3249,7 +3249,7 @@ impl HasHeader for BidRequest {
     }
 }
 
-impl HasHeader for fix50::messages::bid_request::Bid {
+impl HasHeader for fix50::messages::bid_request::BidRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3258,7 +3258,7 @@ impl HasHeader for fix50::messages::bid_request::Bid {
     }
 }
 
-impl HasHeader for fix50sp1::messages::bid_request::Bid {
+impl HasHeader for fix50sp1::messages::bid_request::BidRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3267,7 +3267,7 @@ impl HasHeader for fix50sp1::messages::bid_request::Bid {
     }
 }
 
-impl HasHeader for fix50sp2::messages::bid_request::Bid {
+impl HasHeader for fix50sp2::messages::bid_request::BidRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3281,13 +3281,13 @@ impl HasHeader for fix50sp2::messages::bid_request::Bid {
 pub enum BidResponse {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::bid_response::Bid>),
+    FIX50(Box<fix50::messages::bid_response::BidResponse>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::bid_response::Bid>),
+    FIX50SP1(Box<fix50sp1::messages::bid_response::BidResponse>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::bid_response::Bid>),
+    FIX50SP2(Box<fix50sp2::messages::bid_response::BidResponse>),
 }
 
 impl Serialize for BidResponse {
@@ -3317,7 +3317,7 @@ impl HasHeader for BidResponse {
     }
 }
 
-impl HasHeader for fix50::messages::bid_response::Bid {
+impl HasHeader for fix50::messages::bid_response::BidResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3326,7 +3326,7 @@ impl HasHeader for fix50::messages::bid_response::Bid {
     }
 }
 
-impl HasHeader for fix50sp1::messages::bid_response::Bid {
+impl HasHeader for fix50sp1::messages::bid_response::BidResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3335,7 +3335,7 @@ impl HasHeader for fix50sp1::messages::bid_response::Bid {
     }
 }
 
-impl HasHeader for fix50sp2::messages::bid_response::Bid {
+impl HasHeader for fix50sp2::messages::bid_response::BidResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3349,13 +3349,13 @@ impl HasHeader for fix50sp2::messages::bid_response::Bid {
 pub enum ListStrikePrice {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::list_strike_price::List>),
+    FIX50(Box<fix50::messages::list_strike_price::ListStrikePrice>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::list_strike_price::List>),
+    FIX50SP1(Box<fix50sp1::messages::list_strike_price::ListStrikePrice>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::list_strike_price::List>),
+    FIX50SP2(Box<fix50sp2::messages::list_strike_price::ListStrikePrice>),
 }
 
 impl Serialize for ListStrikePrice {
@@ -3385,7 +3385,7 @@ impl HasHeader for ListStrikePrice {
     }
 }
 
-impl HasHeader for fix50::messages::list_strike_price::List {
+impl HasHeader for fix50::messages::list_strike_price::ListStrikePrice {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3394,7 +3394,7 @@ impl HasHeader for fix50::messages::list_strike_price::List {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_strike_price::List {
+impl HasHeader for fix50sp1::messages::list_strike_price::ListStrikePrice {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3403,7 +3403,7 @@ impl HasHeader for fix50sp1::messages::list_strike_price::List {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_strike_price::List {
+impl HasHeader for fix50sp2::messages::list_strike_price::ListStrikePrice {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3417,13 +3417,13 @@ impl HasHeader for fix50sp2::messages::list_strike_price::List {
 pub enum XMLMessage {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::xml_message::XML>),
+    FIX50(Box<fix50::messages::xml_message::XMLMessage>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::xml_message::XML>),
+    FIX50SP1(Box<fix50sp1::messages::xml_message::XMLMessage>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::xml_message::XML>),
+    FIX50SP2(Box<fix50sp2::messages::xml_message::XMLMessage>),
 }
 
 impl Serialize for XMLMessage {
@@ -3453,7 +3453,7 @@ impl HasHeader for XMLMessage {
     }
 }
 
-impl HasHeader for fix50::messages::xml_message::XML {
+impl HasHeader for fix50::messages::xml_message::XMLMessage {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3462,7 +3462,7 @@ impl HasHeader for fix50::messages::xml_message::XML {
     }
 }
 
-impl HasHeader for fix50sp1::messages::xml_message::XML {
+impl HasHeader for fix50sp1::messages::xml_message::XMLMessage {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3471,7 +3471,7 @@ impl HasHeader for fix50sp1::messages::xml_message::XML {
     }
 }
 
-impl HasHeader for fix50sp2::messages::xml_message::XML {
+impl HasHeader for fix50sp2::messages::xml_message::XMLMessage {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3485,13 +3485,13 @@ impl HasHeader for fix50sp2::messages::xml_message::XML {
 pub enum RegistrationInstructions {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::registration_instructions::Registration>),
+    FIX50(Box<fix50::messages::registration_instructions::RegistrationInstructions>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::registration_instructions::Registration>),
+    FIX50SP1(Box<fix50sp1::messages::registration_instructions::RegistrationInstructions>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::registration_instructions::Registration>),
+    FIX50SP2(Box<fix50sp2::messages::registration_instructions::RegistrationInstructions>),
 }
 
 impl Serialize for RegistrationInstructions {
@@ -3521,7 +3521,7 @@ impl HasHeader for RegistrationInstructions {
     }
 }
 
-impl HasHeader for fix50::messages::registration_instructions::Registration {
+impl HasHeader for fix50::messages::registration_instructions::RegistrationInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3530,7 +3530,7 @@ impl HasHeader for fix50::messages::registration_instructions::Registration {
     }
 }
 
-impl HasHeader for fix50sp1::messages::registration_instructions::Registration {
+impl HasHeader for fix50sp1::messages::registration_instructions::RegistrationInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3539,7 +3539,7 @@ impl HasHeader for fix50sp1::messages::registration_instructions::Registration {
     }
 }
 
-impl HasHeader for fix50sp2::messages::registration_instructions::Registration {
+impl HasHeader for fix50sp2::messages::registration_instructions::RegistrationInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3553,13 +3553,13 @@ impl HasHeader for fix50sp2::messages::registration_instructions::Registration {
 pub enum RegistrationInstructionsResponse {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::registration_instructions_response::Registration>),
+    FIX50(Box<fix50::messages::registration_instructions_response::RegistrationInstructionsResponse>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::registration_instructions_response::Registration>),
+    FIX50SP1(Box<fix50sp1::messages::registration_instructions_response::RegistrationInstructionsResponse>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::registration_instructions_response::Registration>),
+    FIX50SP2(Box<fix50sp2::messages::registration_instructions_response::RegistrationInstructionsResponse>),
 }
 
 impl Serialize for RegistrationInstructionsResponse {
@@ -3589,7 +3589,7 @@ impl HasHeader for RegistrationInstructionsResponse {
     }
 }
 
-impl HasHeader for fix50::messages::registration_instructions_response::Registration {
+impl HasHeader for fix50::messages::registration_instructions_response::RegistrationInstructionsResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3598,7 +3598,7 @@ impl HasHeader for fix50::messages::registration_instructions_response::Registra
     }
 }
 
-impl HasHeader for fix50sp1::messages::registration_instructions_response::Registration {
+impl HasHeader for fix50sp1::messages::registration_instructions_response::RegistrationInstructionsResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3607,7 +3607,7 @@ impl HasHeader for fix50sp1::messages::registration_instructions_response::Regis
     }
 }
 
-impl HasHeader for fix50sp2::messages::registration_instructions_response::Registration {
+impl HasHeader for fix50sp2::messages::registration_instructions_response::RegistrationInstructionsResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3621,13 +3621,13 @@ impl HasHeader for fix50sp2::messages::registration_instructions_response::Regis
 pub enum OrderMassCancelRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::order_mass_cancel_request::Order>),
+    FIX50(Box<fix50::messages::order_mass_cancel_request::OrderMassCancelRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_mass_cancel_request::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_mass_cancel_request::OrderMassCancelRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_mass_cancel_request::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_mass_cancel_request::OrderMassCancelRequest>),
 }
 
 impl Serialize for OrderMassCancelRequest {
@@ -3657,7 +3657,7 @@ impl HasHeader for OrderMassCancelRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_mass_cancel_request::Order {
+impl HasHeader for fix50::messages::order_mass_cancel_request::OrderMassCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3666,7 +3666,7 @@ impl HasHeader for fix50::messages::order_mass_cancel_request::Order {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_cancel_request::Order {
+impl HasHeader for fix50sp1::messages::order_mass_cancel_request::OrderMassCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3675,7 +3675,7 @@ impl HasHeader for fix50sp1::messages::order_mass_cancel_request::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_cancel_request::Order {
+impl HasHeader for fix50sp2::messages::order_mass_cancel_request::OrderMassCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3689,13 +3689,13 @@ impl HasHeader for fix50sp2::messages::order_mass_cancel_request::Order {
 pub enum OrderMassCancelReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::order_mass_cancel_report::Order>),
+    FIX50(Box<fix50::messages::order_mass_cancel_report::OrderMassCancelReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_mass_cancel_report::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_mass_cancel_report::OrderMassCancelReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_mass_cancel_report::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_mass_cancel_report::OrderMassCancelReport>),
 }
 
 impl Serialize for OrderMassCancelReport {
@@ -3725,7 +3725,7 @@ impl HasHeader for OrderMassCancelReport {
     }
 }
 
-impl HasHeader for fix50::messages::order_mass_cancel_report::Order {
+impl HasHeader for fix50::messages::order_mass_cancel_report::OrderMassCancelReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3734,7 +3734,7 @@ impl HasHeader for fix50::messages::order_mass_cancel_report::Order {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_cancel_report::Order {
+impl HasHeader for fix50sp1::messages::order_mass_cancel_report::OrderMassCancelReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3743,7 +3743,7 @@ impl HasHeader for fix50sp1::messages::order_mass_cancel_report::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_cancel_report::Order {
+impl HasHeader for fix50sp2::messages::order_mass_cancel_report::OrderMassCancelReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3757,13 +3757,13 @@ impl HasHeader for fix50sp2::messages::order_mass_cancel_report::Order {
 pub enum NewOrderCross {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::new_order_cross::New>),
+    FIX50(Box<fix50::messages::new_order_cross::NewOrderCross>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::new_order_cross::New>),
+    FIX50SP1(Box<fix50sp1::messages::new_order_cross::NewOrderCross>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::new_order_cross::New>),
+    FIX50SP2(Box<fix50sp2::messages::new_order_cross::NewOrderCross>),
 }
 
 impl Serialize for NewOrderCross {
@@ -3793,7 +3793,7 @@ impl HasHeader for NewOrderCross {
     }
 }
 
-impl HasHeader for fix50::messages::new_order_cross::New {
+impl HasHeader for fix50::messages::new_order_cross::NewOrderCross {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3802,7 +3802,7 @@ impl HasHeader for fix50::messages::new_order_cross::New {
     }
 }
 
-impl HasHeader for fix50sp1::messages::new_order_cross::New {
+impl HasHeader for fix50sp1::messages::new_order_cross::NewOrderCross {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3811,7 +3811,7 @@ impl HasHeader for fix50sp1::messages::new_order_cross::New {
     }
 }
 
-impl HasHeader for fix50sp2::messages::new_order_cross::New {
+impl HasHeader for fix50sp2::messages::new_order_cross::NewOrderCross {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3825,13 +3825,13 @@ impl HasHeader for fix50sp2::messages::new_order_cross::New {
 pub enum CrossOrderCancelReplaceRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::cross_order_cancel_replace_request::Cross>),
+    FIX50(Box<fix50::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::cross_order_cancel_replace_request::Cross>),
+    FIX50SP1(Box<fix50sp1::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::cross_order_cancel_replace_request::Cross>),
+    FIX50SP2(Box<fix50sp2::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest>),
 }
 
 impl Serialize for CrossOrderCancelReplaceRequest {
@@ -3861,7 +3861,7 @@ impl HasHeader for CrossOrderCancelReplaceRequest {
     }
 }
 
-impl HasHeader for fix50::messages::cross_order_cancel_replace_request::Cross {
+impl HasHeader for fix50::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3870,7 +3870,7 @@ impl HasHeader for fix50::messages::cross_order_cancel_replace_request::Cross {
     }
 }
 
-impl HasHeader for fix50sp1::messages::cross_order_cancel_replace_request::Cross {
+impl HasHeader for fix50sp1::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3879,7 +3879,7 @@ impl HasHeader for fix50sp1::messages::cross_order_cancel_replace_request::Cross
     }
 }
 
-impl HasHeader for fix50sp2::messages::cross_order_cancel_replace_request::Cross {
+impl HasHeader for fix50sp2::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3893,13 +3893,13 @@ impl HasHeader for fix50sp2::messages::cross_order_cancel_replace_request::Cross
 pub enum CrossOrderCancelRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::cross_order_cancel_request::Cross>),
+    FIX50(Box<fix50::messages::cross_order_cancel_request::CrossOrderCancelRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::cross_order_cancel_request::Cross>),
+    FIX50SP1(Box<fix50sp1::messages::cross_order_cancel_request::CrossOrderCancelRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::cross_order_cancel_request::Cross>),
+    FIX50SP2(Box<fix50sp2::messages::cross_order_cancel_request::CrossOrderCancelRequest>),
 }
 
 impl Serialize for CrossOrderCancelRequest {
@@ -3929,7 +3929,7 @@ impl HasHeader for CrossOrderCancelRequest {
     }
 }
 
-impl HasHeader for fix50::messages::cross_order_cancel_request::Cross {
+impl HasHeader for fix50::messages::cross_order_cancel_request::CrossOrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3938,7 +3938,7 @@ impl HasHeader for fix50::messages::cross_order_cancel_request::Cross {
     }
 }
 
-impl HasHeader for fix50sp1::messages::cross_order_cancel_request::Cross {
+impl HasHeader for fix50sp1::messages::cross_order_cancel_request::CrossOrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3947,7 +3947,7 @@ impl HasHeader for fix50sp1::messages::cross_order_cancel_request::Cross {
     }
 }
 
-impl HasHeader for fix50sp2::messages::cross_order_cancel_request::Cross {
+impl HasHeader for fix50sp2::messages::cross_order_cancel_request::CrossOrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3961,13 +3961,13 @@ impl HasHeader for fix50sp2::messages::cross_order_cancel_request::Cross {
 pub enum SecurityTypeRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_type_request::Security>),
+    FIX50(Box<fix50::messages::security_type_request::SecurityTypeRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_type_request::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_type_request::SecurityTypeRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_type_request::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_type_request::SecurityTypeRequest>),
 }
 
 impl Serialize for SecurityTypeRequest {
@@ -3997,7 +3997,7 @@ impl HasHeader for SecurityTypeRequest {
     }
 }
 
-impl HasHeader for fix50::messages::security_type_request::Security {
+impl HasHeader for fix50::messages::security_type_request::SecurityTypeRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4006,7 +4006,7 @@ impl HasHeader for fix50::messages::security_type_request::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_type_request::Security {
+impl HasHeader for fix50sp1::messages::security_type_request::SecurityTypeRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4015,7 +4015,7 @@ impl HasHeader for fix50sp1::messages::security_type_request::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_type_request::Security {
+impl HasHeader for fix50sp2::messages::security_type_request::SecurityTypeRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4029,13 +4029,13 @@ impl HasHeader for fix50sp2::messages::security_type_request::Security {
 pub enum SecurityTypes {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_types::Security>),
+    FIX50(Box<fix50::messages::security_types::SecurityTypes>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_types::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_types::SecurityTypes>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_types::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_types::SecurityTypes>),
 }
 
 impl Serialize for SecurityTypes {
@@ -4065,7 +4065,7 @@ impl HasHeader for SecurityTypes {
     }
 }
 
-impl HasHeader for fix50::messages::security_types::Security {
+impl HasHeader for fix50::messages::security_types::SecurityTypes {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4074,7 +4074,7 @@ impl HasHeader for fix50::messages::security_types::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_types::Security {
+impl HasHeader for fix50sp1::messages::security_types::SecurityTypes {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4083,7 +4083,7 @@ impl HasHeader for fix50sp1::messages::security_types::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_types::Security {
+impl HasHeader for fix50sp2::messages::security_types::SecurityTypes {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4097,13 +4097,13 @@ impl HasHeader for fix50sp2::messages::security_types::Security {
 pub enum SecurityListRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_list_request::Security>),
+    FIX50(Box<fix50::messages::security_list_request::SecurityListRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_list_request::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_list_request::SecurityListRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_list_request::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_list_request::SecurityListRequest>),
 }
 
 impl Serialize for SecurityListRequest {
@@ -4133,7 +4133,7 @@ impl HasHeader for SecurityListRequest {
     }
 }
 
-impl HasHeader for fix50::messages::security_list_request::Security {
+impl HasHeader for fix50::messages::security_list_request::SecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4142,7 +4142,7 @@ impl HasHeader for fix50::messages::security_list_request::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_list_request::Security {
+impl HasHeader for fix50sp1::messages::security_list_request::SecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4151,7 +4151,7 @@ impl HasHeader for fix50sp1::messages::security_list_request::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_list_request::Security {
+impl HasHeader for fix50sp2::messages::security_list_request::SecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4165,13 +4165,13 @@ impl HasHeader for fix50sp2::messages::security_list_request::Security {
 pub enum SecurityList {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_list::Security>),
+    FIX50(Box<fix50::messages::security_list::SecurityList>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_list::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_list::SecurityList>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_list::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_list::SecurityList>),
 }
 
 impl Serialize for SecurityList {
@@ -4201,7 +4201,7 @@ impl HasHeader for SecurityList {
     }
 }
 
-impl HasHeader for fix50::messages::security_list::Security {
+impl HasHeader for fix50::messages::security_list::SecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4210,7 +4210,7 @@ impl HasHeader for fix50::messages::security_list::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_list::Security {
+impl HasHeader for fix50sp1::messages::security_list::SecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4219,7 +4219,7 @@ impl HasHeader for fix50sp1::messages::security_list::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_list::Security {
+impl HasHeader for fix50sp2::messages::security_list::SecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4233,13 +4233,13 @@ impl HasHeader for fix50sp2::messages::security_list::Security {
 pub enum DerivativeSecurityListRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::derivative_security_list_request::Derivative>),
+    FIX50(Box<fix50::messages::derivative_security_list_request::DerivativeSecurityListRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::derivative_security_list_request::Derivative>),
+    FIX50SP1(Box<fix50sp1::messages::derivative_security_list_request::DerivativeSecurityListRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::derivative_security_list_request::Derivative>),
+    FIX50SP2(Box<fix50sp2::messages::derivative_security_list_request::DerivativeSecurityListRequest>),
 }
 
 impl Serialize for DerivativeSecurityListRequest {
@@ -4269,7 +4269,7 @@ impl HasHeader for DerivativeSecurityListRequest {
     }
 }
 
-impl HasHeader for fix50::messages::derivative_security_list_request::Derivative {
+impl HasHeader for fix50::messages::derivative_security_list_request::DerivativeSecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4278,7 +4278,7 @@ impl HasHeader for fix50::messages::derivative_security_list_request::Derivative
     }
 }
 
-impl HasHeader for fix50sp1::messages::derivative_security_list_request::Derivative {
+impl HasHeader for fix50sp1::messages::derivative_security_list_request::DerivativeSecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4287,7 +4287,7 @@ impl HasHeader for fix50sp1::messages::derivative_security_list_request::Derivat
     }
 }
 
-impl HasHeader for fix50sp2::messages::derivative_security_list_request::Derivative {
+impl HasHeader for fix50sp2::messages::derivative_security_list_request::DerivativeSecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4301,13 +4301,13 @@ impl HasHeader for fix50sp2::messages::derivative_security_list_request::Derivat
 pub enum DerivativeSecurityList {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::derivative_security_list::Derivative>),
+    FIX50(Box<fix50::messages::derivative_security_list::DerivativeSecurityList>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::derivative_security_list::Derivative>),
+    FIX50SP1(Box<fix50sp1::messages::derivative_security_list::DerivativeSecurityList>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::derivative_security_list::Derivative>),
+    FIX50SP2(Box<fix50sp2::messages::derivative_security_list::DerivativeSecurityList>),
 }
 
 impl Serialize for DerivativeSecurityList {
@@ -4337,7 +4337,7 @@ impl HasHeader for DerivativeSecurityList {
     }
 }
 
-impl HasHeader for fix50::messages::derivative_security_list::Derivative {
+impl HasHeader for fix50::messages::derivative_security_list::DerivativeSecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4346,7 +4346,7 @@ impl HasHeader for fix50::messages::derivative_security_list::Derivative {
     }
 }
 
-impl HasHeader for fix50sp1::messages::derivative_security_list::Derivative {
+impl HasHeader for fix50sp1::messages::derivative_security_list::DerivativeSecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4355,7 +4355,7 @@ impl HasHeader for fix50sp1::messages::derivative_security_list::Derivative {
     }
 }
 
-impl HasHeader for fix50sp2::messages::derivative_security_list::Derivative {
+impl HasHeader for fix50sp2::messages::derivative_security_list::DerivativeSecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4369,13 +4369,13 @@ impl HasHeader for fix50sp2::messages::derivative_security_list::Derivative {
 pub enum NewOrderMultileg {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::new_order_multileg::New>),
+    FIX50(Box<fix50::messages::new_order_multileg::NewOrderMultileg>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::new_order_multileg::New>),
+    FIX50SP1(Box<fix50sp1::messages::new_order_multileg::NewOrderMultileg>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::new_order_multileg::New>),
+    FIX50SP2(Box<fix50sp2::messages::new_order_multileg::NewOrderMultileg>),
 }
 
 impl Serialize for NewOrderMultileg {
@@ -4405,7 +4405,7 @@ impl HasHeader for NewOrderMultileg {
     }
 }
 
-impl HasHeader for fix50::messages::new_order_multileg::New {
+impl HasHeader for fix50::messages::new_order_multileg::NewOrderMultileg {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4414,7 +4414,7 @@ impl HasHeader for fix50::messages::new_order_multileg::New {
     }
 }
 
-impl HasHeader for fix50sp1::messages::new_order_multileg::New {
+impl HasHeader for fix50sp1::messages::new_order_multileg::NewOrderMultileg {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4423,7 +4423,7 @@ impl HasHeader for fix50sp1::messages::new_order_multileg::New {
     }
 }
 
-impl HasHeader for fix50sp2::messages::new_order_multileg::New {
+impl HasHeader for fix50sp2::messages::new_order_multileg::NewOrderMultileg {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4435,22 +4435,14 @@ impl HasHeader for fix50sp2::messages::new_order_multileg::New {
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MultilegOrderCancelReplace {
-    /// FIX50
-    #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::multileg_order_cancel_replace_request::Multileg>),
-    /// FIX50SP1
-    #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::multileg_order_cancel_replace_request::Multileg>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::multileg_order_cancel_replace_request::Multileg>),
+    FIX50SP2(Box<fix50sp2::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest>),
 }
 
 impl Serialize for MultilegOrderCancelReplace {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MultilegOrderCancelReplace::FIX50(m) => m.serialize(serializer),
-            MultilegOrderCancelReplace::FIX50SP1(m) => m.serialize(serializer),
             MultilegOrderCancelReplace::FIX50SP2(m) => m.serialize(serializer),
         }
     }
@@ -4459,39 +4451,17 @@ impl Serialize for MultilegOrderCancelReplace {
 impl HasHeader for MultilegOrderCancelReplace {
     fn get_header(&self) -> &Header {
         match self {
-            MultilegOrderCancelReplace::FIX50(m) => m.get_header(),
-            MultilegOrderCancelReplace::FIX50SP1(m) => m.get_header(),
             MultilegOrderCancelReplace::FIX50SP2(m) => m.get_header(),
         }
     }
     fn get_header_mut(&mut self) -> &mut Header {
         match self {
-            MultilegOrderCancelReplace::FIX50(m) => m.get_header_mut(),
-            MultilegOrderCancelReplace::FIX50SP1(m) => m.get_header_mut(),
             MultilegOrderCancelReplace::FIX50SP2(m) => m.get_header_mut(),
         }
     }
 }
 
-impl HasHeader for fix50::messages::multileg_order_cancel_replace_request::Multileg {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader for fix50sp1::messages::multileg_order_cancel_replace_request::Multileg {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader for fix50sp2::messages::multileg_order_cancel_replace_request::Multileg {
+impl HasHeader for fix50sp2::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4505,13 +4475,13 @@ impl HasHeader for fix50sp2::messages::multileg_order_cancel_replace_request::Mu
 pub enum TradeCaptureReportRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::trade_capture_report_request::Trade>),
+    FIX50(Box<fix50::messages::trade_capture_report_request::TradeCaptureReportRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trade_capture_report_request::Trade>),
+    FIX50SP1(Box<fix50sp1::messages::trade_capture_report_request::TradeCaptureReportRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::trade_capture_report_request::Trade>),
+    FIX50SP2(Box<fix50sp2::messages::trade_capture_report_request::TradeCaptureReportRequest>),
 }
 
 impl Serialize for TradeCaptureReportRequest {
@@ -4541,7 +4511,7 @@ impl HasHeader for TradeCaptureReportRequest {
     }
 }
 
-impl HasHeader for fix50::messages::trade_capture_report_request::Trade {
+impl HasHeader for fix50::messages::trade_capture_report_request::TradeCaptureReportRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4550,7 +4520,7 @@ impl HasHeader for fix50::messages::trade_capture_report_request::Trade {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trade_capture_report_request::Trade {
+impl HasHeader for fix50sp1::messages::trade_capture_report_request::TradeCaptureReportRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4559,7 +4529,7 @@ impl HasHeader for fix50sp1::messages::trade_capture_report_request::Trade {
     }
 }
 
-impl HasHeader for fix50sp2::messages::trade_capture_report_request::Trade {
+impl HasHeader for fix50sp2::messages::trade_capture_report_request::TradeCaptureReportRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4573,10 +4543,10 @@ impl HasHeader for fix50sp2::messages::trade_capture_report_request::Trade {
 pub enum TradeCaptureReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::trade_capture_report::Trade>),
+    FIX50(Box<fix50::messages::trade_capture_report::TradeCaptureReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trade_capture_report::Trade>),
+    FIX50SP1(Box<fix50sp1::messages::trade_capture_report::TradeCaptureReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trade_capture_report::TradeCaptureReport>),
@@ -4609,7 +4579,7 @@ impl HasHeader for TradeCaptureReport {
     }
 }
 
-impl HasHeader for fix50::messages::trade_capture_report::Trade {
+impl HasHeader for fix50::messages::trade_capture_report::TradeCaptureReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4618,7 +4588,7 @@ impl HasHeader for fix50::messages::trade_capture_report::Trade {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trade_capture_report::Trade {
+impl HasHeader for fix50sp1::messages::trade_capture_report::TradeCaptureReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4641,13 +4611,13 @@ impl HasHeader for fix50sp2::messages::trade_capture_report::TradeCaptureReport 
 pub enum OrderMassStatusRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::order_mass_status_request::Order>),
+    FIX50(Box<fix50::messages::order_mass_status_request::OrderMassStatusRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_mass_status_request::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_mass_status_request::OrderMassStatusRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_mass_status_request::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_mass_status_request::OrderMassStatusRequest>),
 }
 
 impl Serialize for OrderMassStatusRequest {
@@ -4677,7 +4647,7 @@ impl HasHeader for OrderMassStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_mass_status_request::Order {
+impl HasHeader for fix50::messages::order_mass_status_request::OrderMassStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4686,7 +4656,7 @@ impl HasHeader for fix50::messages::order_mass_status_request::Order {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_status_request::Order {
+impl HasHeader for fix50sp1::messages::order_mass_status_request::OrderMassStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4695,7 +4665,7 @@ impl HasHeader for fix50sp1::messages::order_mass_status_request::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_status_request::Order {
+impl HasHeader for fix50sp2::messages::order_mass_status_request::OrderMassStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4709,13 +4679,13 @@ impl HasHeader for fix50sp2::messages::order_mass_status_request::Order {
 pub enum QuoteRequestReject {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::quote_request_reject::Quote>),
+    FIX50(Box<fix50::messages::quote_request_reject::QuoteRequestReject>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::quote_request_reject::Quote>),
+    FIX50SP1(Box<fix50sp1::messages::quote_request_reject::QuoteRequestReject>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::quote_request_reject::Quote>),
+    FIX50SP2(Box<fix50sp2::messages::quote_request_reject::QuoteRequestReject>),
 }
 
 impl Serialize for QuoteRequestReject {
@@ -4745,7 +4715,7 @@ impl HasHeader for QuoteRequestReject {
     }
 }
 
-impl HasHeader for fix50::messages::quote_request_reject::Quote {
+impl HasHeader for fix50::messages::quote_request_reject::QuoteRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4754,7 +4724,7 @@ impl HasHeader for fix50::messages::quote_request_reject::Quote {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_request_reject::Quote {
+impl HasHeader for fix50sp1::messages::quote_request_reject::QuoteRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4763,7 +4733,7 @@ impl HasHeader for fix50sp1::messages::quote_request_reject::Quote {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_request_reject::Quote {
+impl HasHeader for fix50sp2::messages::quote_request_reject::QuoteRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4777,13 +4747,13 @@ impl HasHeader for fix50sp2::messages::quote_request_reject::Quote {
 pub enum RFQRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::rfq_request::RFQ>),
+    FIX50(Box<fix50::messages::rfq_request::RFQRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::rfq_request::RFQ>),
+    FIX50SP1(Box<fix50sp1::messages::rfq_request::RFQRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::rfq_request::RFQ>),
+    FIX50SP2(Box<fix50sp2::messages::rfq_request::RFQRequest>),
 }
 
 impl Serialize for RFQRequest {
@@ -4813,7 +4783,7 @@ impl HasHeader for RFQRequest {
     }
 }
 
-impl HasHeader for fix50::messages::rfq_request::RFQ {
+impl HasHeader for fix50::messages::rfq_request::RFQRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4822,7 +4792,7 @@ impl HasHeader for fix50::messages::rfq_request::RFQ {
     }
 }
 
-impl HasHeader for fix50sp1::messages::rfq_request::RFQ {
+impl HasHeader for fix50sp1::messages::rfq_request::RFQRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4831,7 +4801,7 @@ impl HasHeader for fix50sp1::messages::rfq_request::RFQ {
     }
 }
 
-impl HasHeader for fix50sp2::messages::rfq_request::RFQ {
+impl HasHeader for fix50sp2::messages::rfq_request::RFQRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4845,10 +4815,10 @@ impl HasHeader for fix50sp2::messages::rfq_request::RFQ {
 pub enum QuoteStatusReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::quote_status_report::Quote>),
+    FIX50(Box<fix50::messages::quote_status_report::QuoteStatusReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::quote_status_report::Quote>),
+    FIX50SP1(Box<fix50sp1::messages::quote_status_report::QuoteStatusReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote_status_report::QuoteStatusReport>),
@@ -4881,7 +4851,7 @@ impl HasHeader for QuoteStatusReport {
     }
 }
 
-impl HasHeader for fix50::messages::quote_status_report::Quote {
+impl HasHeader for fix50::messages::quote_status_report::QuoteStatusReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4890,7 +4860,7 @@ impl HasHeader for fix50::messages::quote_status_report::Quote {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_status_report::Quote {
+impl HasHeader for fix50sp1::messages::quote_status_report::QuoteStatusReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4913,10 +4883,10 @@ impl HasHeader for fix50sp2::messages::quote_status_report::QuoteStatusReport {
 pub enum QuoteResponse {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::quote_response::Quote>),
+    FIX50(Box<fix50::messages::quote_response::QuoteResponse>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::quote_response::Quote>),
+    FIX50SP1(Box<fix50sp1::messages::quote_response::QuoteResponse>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote_response::QuoteResponse>),
@@ -4949,7 +4919,7 @@ impl HasHeader for QuoteResponse {
     }
 }
 
-impl HasHeader for fix50::messages::quote_response::Quote {
+impl HasHeader for fix50::messages::quote_response::QuoteResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4958,7 +4928,7 @@ impl HasHeader for fix50::messages::quote_response::Quote {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_response::Quote {
+impl HasHeader for fix50sp1::messages::quote_response::QuoteResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5049,13 +5019,13 @@ impl HasHeader for fix50sp2::messages::confirmation::Confirmation {
 pub enum PositionMaintenanceRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::position_maintenance_request::Position>),
+    FIX50(Box<fix50::messages::position_maintenance_request::PositionMaintenanceRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::position_maintenance_request::Position>),
+    FIX50SP1(Box<fix50sp1::messages::position_maintenance_request::PositionMaintenanceRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::position_maintenance_request::Position>),
+    FIX50SP2(Box<fix50sp2::messages::position_maintenance_request::PositionMaintenanceRequest>),
 }
 
 impl Serialize for PositionMaintenanceRequest {
@@ -5085,7 +5055,7 @@ impl HasHeader for PositionMaintenanceRequest {
     }
 }
 
-impl HasHeader for fix50::messages::position_maintenance_request::Position {
+impl HasHeader for fix50::messages::position_maintenance_request::PositionMaintenanceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5094,7 +5064,7 @@ impl HasHeader for fix50::messages::position_maintenance_request::Position {
     }
 }
 
-impl HasHeader for fix50sp1::messages::position_maintenance_request::Position {
+impl HasHeader for fix50sp1::messages::position_maintenance_request::PositionMaintenanceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5103,7 +5073,7 @@ impl HasHeader for fix50sp1::messages::position_maintenance_request::Position {
     }
 }
 
-impl HasHeader for fix50sp2::messages::position_maintenance_request::Position {
+impl HasHeader for fix50sp2::messages::position_maintenance_request::PositionMaintenanceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5117,13 +5087,13 @@ impl HasHeader for fix50sp2::messages::position_maintenance_request::Position {
 pub enum PositionMaintenanceReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::position_maintenance_report::Position>),
+    FIX50(Box<fix50::messages::position_maintenance_report::PositionMaintenanceReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::position_maintenance_report::Position>),
+    FIX50SP1(Box<fix50sp1::messages::position_maintenance_report::PositionMaintenanceReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::position_maintenance_report::Position>),
+    FIX50SP2(Box<fix50sp2::messages::position_maintenance_report::PositionMaintenanceReport>),
 }
 
 impl Serialize for PositionMaintenanceReport {
@@ -5153,7 +5123,7 @@ impl HasHeader for PositionMaintenanceReport {
     }
 }
 
-impl HasHeader for fix50::messages::position_maintenance_report::Position {
+impl HasHeader for fix50::messages::position_maintenance_report::PositionMaintenanceReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5162,7 +5132,7 @@ impl HasHeader for fix50::messages::position_maintenance_report::Position {
     }
 }
 
-impl HasHeader for fix50sp1::messages::position_maintenance_report::Position {
+impl HasHeader for fix50sp1::messages::position_maintenance_report::PositionMaintenanceReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5171,7 +5141,7 @@ impl HasHeader for fix50sp1::messages::position_maintenance_report::Position {
     }
 }
 
-impl HasHeader for fix50sp2::messages::position_maintenance_report::Position {
+impl HasHeader for fix50sp2::messages::position_maintenance_report::PositionMaintenanceReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5185,13 +5155,13 @@ impl HasHeader for fix50sp2::messages::position_maintenance_report::Position {
 pub enum RequestForPositions {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::request_for_positions::Request>),
+    FIX50(Box<fix50::messages::request_for_positions::RequestForPositions>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::request_for_positions::Request>),
+    FIX50SP1(Box<fix50sp1::messages::request_for_positions::RequestForPositions>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::request_for_positions::Request>),
+    FIX50SP2(Box<fix50sp2::messages::request_for_positions::RequestForPositions>),
 }
 
 impl Serialize for RequestForPositions {
@@ -5221,7 +5191,7 @@ impl HasHeader for RequestForPositions {
     }
 }
 
-impl HasHeader for fix50::messages::request_for_positions::Request {
+impl HasHeader for fix50::messages::request_for_positions::RequestForPositions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5230,7 +5200,7 @@ impl HasHeader for fix50::messages::request_for_positions::Request {
     }
 }
 
-impl HasHeader for fix50sp1::messages::request_for_positions::Request {
+impl HasHeader for fix50sp1::messages::request_for_positions::RequestForPositions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5239,7 +5209,7 @@ impl HasHeader for fix50sp1::messages::request_for_positions::Request {
     }
 }
 
-impl HasHeader for fix50sp2::messages::request_for_positions::Request {
+impl HasHeader for fix50sp2::messages::request_for_positions::RequestForPositions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5253,13 +5223,13 @@ impl HasHeader for fix50sp2::messages::request_for_positions::Request {
 pub enum RequestForPositionsAck {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::request_for_positions_ack::Request>),
+    FIX50(Box<fix50::messages::request_for_positions_ack::RequestForPositionsAck>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::request_for_positions_ack::Request>),
+    FIX50SP1(Box<fix50sp1::messages::request_for_positions_ack::RequestForPositionsAck>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::request_for_positions_ack::Request>),
+    FIX50SP2(Box<fix50sp2::messages::request_for_positions_ack::RequestForPositionsAck>),
 }
 
 impl Serialize for RequestForPositionsAck {
@@ -5289,7 +5259,7 @@ impl HasHeader for RequestForPositionsAck {
     }
 }
 
-impl HasHeader for fix50::messages::request_for_positions_ack::Request {
+impl HasHeader for fix50::messages::request_for_positions_ack::RequestForPositionsAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5298,7 +5268,7 @@ impl HasHeader for fix50::messages::request_for_positions_ack::Request {
     }
 }
 
-impl HasHeader for fix50sp1::messages::request_for_positions_ack::Request {
+impl HasHeader for fix50sp1::messages::request_for_positions_ack::RequestForPositionsAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5307,7 +5277,7 @@ impl HasHeader for fix50sp1::messages::request_for_positions_ack::Request {
     }
 }
 
-impl HasHeader for fix50sp2::messages::request_for_positions_ack::Request {
+impl HasHeader for fix50sp2::messages::request_for_positions_ack::RequestForPositionsAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5321,13 +5291,13 @@ impl HasHeader for fix50sp2::messages::request_for_positions_ack::Request {
 pub enum PositionReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::position_report::Position>),
+    FIX50(Box<fix50::messages::position_report::PositionReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::position_report::Position>),
+    FIX50SP1(Box<fix50sp1::messages::position_report::PositionReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::position_report::Position>),
+    FIX50SP2(Box<fix50sp2::messages::position_report::PositionReport>),
 }
 
 impl Serialize for PositionReport {
@@ -5357,7 +5327,7 @@ impl HasHeader for PositionReport {
     }
 }
 
-impl HasHeader for fix50::messages::position_report::Position {
+impl HasHeader for fix50::messages::position_report::PositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5366,7 +5336,7 @@ impl HasHeader for fix50::messages::position_report::Position {
     }
 }
 
-impl HasHeader for fix50sp1::messages::position_report::Position {
+impl HasHeader for fix50sp1::messages::position_report::PositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5375,7 +5345,7 @@ impl HasHeader for fix50sp1::messages::position_report::Position {
     }
 }
 
-impl HasHeader for fix50sp2::messages::position_report::Position {
+impl HasHeader for fix50sp2::messages::position_report::PositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5389,13 +5359,13 @@ impl HasHeader for fix50sp2::messages::position_report::Position {
 pub enum TradeCaptureReportRequestAck {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::trade_capture_report_request_ack::Trade>),
+    FIX50(Box<fix50::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trade_capture_report_request_ack::Trade>),
+    FIX50SP1(Box<fix50sp1::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::trade_capture_report_request_ack::Trade>),
+    FIX50SP2(Box<fix50sp2::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck>),
 }
 
 impl Serialize for TradeCaptureReportRequestAck {
@@ -5425,7 +5395,7 @@ impl HasHeader for TradeCaptureReportRequestAck {
     }
 }
 
-impl HasHeader for fix50::messages::trade_capture_report_request_ack::Trade {
+impl HasHeader for fix50::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5434,7 +5404,7 @@ impl HasHeader for fix50::messages::trade_capture_report_request_ack::Trade {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trade_capture_report_request_ack::Trade {
+impl HasHeader for fix50sp1::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5443,7 +5413,7 @@ impl HasHeader for fix50sp1::messages::trade_capture_report_request_ack::Trade {
     }
 }
 
-impl HasHeader for fix50sp2::messages::trade_capture_report_request_ack::Trade {
+impl HasHeader for fix50sp2::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5457,10 +5427,10 @@ impl HasHeader for fix50sp2::messages::trade_capture_report_request_ack::Trade {
 pub enum TradeCaptureReportAck {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::trade_capture_report_ack::Trade>),
+    FIX50(Box<fix50::messages::trade_capture_report_ack::TradeCaptureReportAck>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trade_capture_report_ack::Trade>),
+    FIX50SP1(Box<fix50sp1::messages::trade_capture_report_ack::TradeCaptureReportAck>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trade_capture_report_ack::TradeCaptureReportAck>),
@@ -5493,7 +5463,7 @@ impl HasHeader for TradeCaptureReportAck {
     }
 }
 
-impl HasHeader for fix50::messages::trade_capture_report_ack::Trade {
+impl HasHeader for fix50::messages::trade_capture_report_ack::TradeCaptureReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5502,7 +5472,7 @@ impl HasHeader for fix50::messages::trade_capture_report_ack::Trade {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trade_capture_report_ack::Trade {
+impl HasHeader for fix50sp1::messages::trade_capture_report_ack::TradeCaptureReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5525,10 +5495,10 @@ impl HasHeader for fix50sp2::messages::trade_capture_report_ack::TradeCaptureRep
 pub enum AllocationReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::allocation_report::Allocation>),
+    FIX50(Box<fix50::messages::allocation_report::AllocationReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::allocation_report::Allocation>),
+    FIX50SP1(Box<fix50sp1::messages::allocation_report::AllocationReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::allocation_report::AllocationReport>),
@@ -5561,7 +5531,7 @@ impl HasHeader for AllocationReport {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_report::Allocation {
+impl HasHeader for fix50::messages::allocation_report::AllocationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5570,7 +5540,7 @@ impl HasHeader for fix50::messages::allocation_report::Allocation {
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_report::Allocation {
+impl HasHeader for fix50sp1::messages::allocation_report::AllocationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5593,13 +5563,13 @@ impl HasHeader for fix50sp2::messages::allocation_report::AllocationReport {
 pub enum AllocationReportAck {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::allocation_report_ack::Allocation>),
+    FIX50(Box<fix50::messages::allocation_report_ack::AllocationReportAck>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::allocation_report_ack::Allocation>),
+    FIX50SP1(Box<fix50sp1::messages::allocation_report_ack::AllocationReportAck>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::allocation_report_ack::Allocation>),
+    FIX50SP2(Box<fix50sp2::messages::allocation_report_ack::AllocationReportAck>),
 }
 
 impl Serialize for AllocationReportAck {
@@ -5629,7 +5599,7 @@ impl HasHeader for AllocationReportAck {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_report_ack::Allocation {
+impl HasHeader for fix50::messages::allocation_report_ack::AllocationReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5638,7 +5608,7 @@ impl HasHeader for fix50::messages::allocation_report_ack::Allocation {
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_report_ack::Allocation {
+impl HasHeader for fix50sp1::messages::allocation_report_ack::AllocationReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5647,7 +5617,7 @@ impl HasHeader for fix50sp1::messages::allocation_report_ack::Allocation {
     }
 }
 
-impl HasHeader for fix50sp2::messages::allocation_report_ack::Allocation {
+impl HasHeader for fix50sp2::messages::allocation_report_ack::AllocationReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5661,13 +5631,13 @@ impl HasHeader for fix50sp2::messages::allocation_report_ack::Allocation {
 pub enum ConfirmationAck {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::confirmation_ack::Confirmation>),
+    FIX50(Box<fix50::messages::confirmation_ack::ConfirmationAck>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::confirmation_ack::Confirmation>),
+    FIX50SP1(Box<fix50sp1::messages::confirmation_ack::ConfirmationAck>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::confirmation_ack::Confirmation>),
+    FIX50SP2(Box<fix50sp2::messages::confirmation_ack::ConfirmationAck>),
 }
 
 impl Serialize for ConfirmationAck {
@@ -5697,7 +5667,7 @@ impl HasHeader for ConfirmationAck {
     }
 }
 
-impl HasHeader for fix50::messages::confirmation_ack::Confirmation {
+impl HasHeader for fix50::messages::confirmation_ack::ConfirmationAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5706,7 +5676,7 @@ impl HasHeader for fix50::messages::confirmation_ack::Confirmation {
     }
 }
 
-impl HasHeader for fix50sp1::messages::confirmation_ack::Confirmation {
+impl HasHeader for fix50sp1::messages::confirmation_ack::ConfirmationAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5715,7 +5685,7 @@ impl HasHeader for fix50sp1::messages::confirmation_ack::Confirmation {
     }
 }
 
-impl HasHeader for fix50sp2::messages::confirmation_ack::Confirmation {
+impl HasHeader for fix50sp2::messages::confirmation_ack::ConfirmationAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5729,13 +5699,13 @@ impl HasHeader for fix50sp2::messages::confirmation_ack::Confirmation {
 pub enum SettlementInstructionRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::settlement_instruction_request::Settlement>),
+    FIX50(Box<fix50::messages::settlement_instruction_request::SettlementInstructionRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::settlement_instruction_request::Settlement>),
+    FIX50SP1(Box<fix50sp1::messages::settlement_instruction_request::SettlementInstructionRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::settlement_instruction_request::Settlement>),
+    FIX50SP2(Box<fix50sp2::messages::settlement_instruction_request::SettlementInstructionRequest>),
 }
 
 impl Serialize for SettlementInstructionRequest {
@@ -5765,7 +5735,7 @@ impl HasHeader for SettlementInstructionRequest {
     }
 }
 
-impl HasHeader for fix50::messages::settlement_instruction_request::Settlement {
+impl HasHeader for fix50::messages::settlement_instruction_request::SettlementInstructionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5774,7 +5744,7 @@ impl HasHeader for fix50::messages::settlement_instruction_request::Settlement {
     }
 }
 
-impl HasHeader for fix50sp1::messages::settlement_instruction_request::Settlement {
+impl HasHeader for fix50sp1::messages::settlement_instruction_request::SettlementInstructionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5783,7 +5753,7 @@ impl HasHeader for fix50sp1::messages::settlement_instruction_request::Settlemen
     }
 }
 
-impl HasHeader for fix50sp2::messages::settlement_instruction_request::Settlement {
+impl HasHeader for fix50sp2::messages::settlement_instruction_request::SettlementInstructionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5797,13 +5767,13 @@ impl HasHeader for fix50sp2::messages::settlement_instruction_request::Settlemen
 pub enum AssignmentReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::assignment_report::Assignment>),
+    FIX50(Box<fix50::messages::assignment_report::AssignmentReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::assignment_report::Assignment>),
+    FIX50SP1(Box<fix50sp1::messages::assignment_report::AssignmentReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::assignment_report::Assignment>),
+    FIX50SP2(Box<fix50sp2::messages::assignment_report::AssignmentReport>),
 }
 
 impl Serialize for AssignmentReport {
@@ -5833,7 +5803,7 @@ impl HasHeader for AssignmentReport {
     }
 }
 
-impl HasHeader for fix50::messages::assignment_report::Assignment {
+impl HasHeader for fix50::messages::assignment_report::AssignmentReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5842,7 +5812,7 @@ impl HasHeader for fix50::messages::assignment_report::Assignment {
     }
 }
 
-impl HasHeader for fix50sp1::messages::assignment_report::Assignment {
+impl HasHeader for fix50sp1::messages::assignment_report::AssignmentReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5851,7 +5821,7 @@ impl HasHeader for fix50sp1::messages::assignment_report::Assignment {
     }
 }
 
-impl HasHeader for fix50sp2::messages::assignment_report::Assignment {
+impl HasHeader for fix50sp2::messages::assignment_report::AssignmentReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5865,13 +5835,13 @@ impl HasHeader for fix50sp2::messages::assignment_report::Assignment {
 pub enum CollateralRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::collateral_request::Collateral>),
+    FIX50(Box<fix50::messages::collateral_request::CollateralRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::collateral_request::Collateral>),
+    FIX50SP1(Box<fix50sp1::messages::collateral_request::CollateralRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::collateral_request::Collateral>),
+    FIX50SP2(Box<fix50sp2::messages::collateral_request::CollateralRequest>),
 }
 
 impl Serialize for CollateralRequest {
@@ -5901,7 +5871,7 @@ impl HasHeader for CollateralRequest {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_request::Collateral {
+impl HasHeader for fix50::messages::collateral_request::CollateralRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5910,7 +5880,7 @@ impl HasHeader for fix50::messages::collateral_request::Collateral {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_request::Collateral {
+impl HasHeader for fix50sp1::messages::collateral_request::CollateralRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5919,7 +5889,7 @@ impl HasHeader for fix50sp1::messages::collateral_request::Collateral {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_request::Collateral {
+impl HasHeader for fix50sp2::messages::collateral_request::CollateralRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5933,13 +5903,13 @@ impl HasHeader for fix50sp2::messages::collateral_request::Collateral {
 pub enum CollateralAssignment {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::collateral_assignment::Collateral>),
+    FIX50(Box<fix50::messages::collateral_assignment::CollateralAssignment>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::collateral_assignment::Collateral>),
+    FIX50SP1(Box<fix50sp1::messages::collateral_assignment::CollateralAssignment>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::collateral_assignment::Collateral>),
+    FIX50SP2(Box<fix50sp2::messages::collateral_assignment::CollateralAssignment>),
 }
 
 impl Serialize for CollateralAssignment {
@@ -5969,7 +5939,7 @@ impl HasHeader for CollateralAssignment {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_assignment::Collateral {
+impl HasHeader for fix50::messages::collateral_assignment::CollateralAssignment {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5978,7 +5948,7 @@ impl HasHeader for fix50::messages::collateral_assignment::Collateral {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_assignment::Collateral {
+impl HasHeader for fix50sp1::messages::collateral_assignment::CollateralAssignment {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5987,7 +5957,7 @@ impl HasHeader for fix50sp1::messages::collateral_assignment::Collateral {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_assignment::Collateral {
+impl HasHeader for fix50sp2::messages::collateral_assignment::CollateralAssignment {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6001,13 +5971,13 @@ impl HasHeader for fix50sp2::messages::collateral_assignment::Collateral {
 pub enum CollateralResponse {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::collateral_response::Collateral>),
+    FIX50(Box<fix50::messages::collateral_response::CollateralResponse>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::collateral_response::Collateral>),
+    FIX50SP1(Box<fix50sp1::messages::collateral_response::CollateralResponse>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::collateral_response::Collateral>),
+    FIX50SP2(Box<fix50sp2::messages::collateral_response::CollateralResponse>),
 }
 
 impl Serialize for CollateralResponse {
@@ -6037,7 +6007,7 @@ impl HasHeader for CollateralResponse {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_response::Collateral {
+impl HasHeader for fix50::messages::collateral_response::CollateralResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6046,7 +6016,7 @@ impl HasHeader for fix50::messages::collateral_response::Collateral {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_response::Collateral {
+impl HasHeader for fix50sp1::messages::collateral_response::CollateralResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6055,7 +6025,7 @@ impl HasHeader for fix50sp1::messages::collateral_response::Collateral {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_response::Collateral {
+impl HasHeader for fix50sp2::messages::collateral_response::CollateralResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6069,13 +6039,13 @@ impl HasHeader for fix50sp2::messages::collateral_response::Collateral {
 pub enum CollateralReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::collateral_report::Collateral>),
+    FIX50(Box<fix50::messages::collateral_report::CollateralReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::collateral_report::Collateral>),
+    FIX50SP1(Box<fix50sp1::messages::collateral_report::CollateralReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::collateral_report::Collateral>),
+    FIX50SP2(Box<fix50sp2::messages::collateral_report::CollateralReport>),
 }
 
 impl Serialize for CollateralReport {
@@ -6105,7 +6075,7 @@ impl HasHeader for CollateralReport {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_report::Collateral {
+impl HasHeader for fix50::messages::collateral_report::CollateralReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6114,7 +6084,7 @@ impl HasHeader for fix50::messages::collateral_report::Collateral {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_report::Collateral {
+impl HasHeader for fix50sp1::messages::collateral_report::CollateralReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6123,7 +6093,7 @@ impl HasHeader for fix50sp1::messages::collateral_report::Collateral {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_report::Collateral {
+impl HasHeader for fix50sp2::messages::collateral_report::CollateralReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6137,13 +6107,13 @@ impl HasHeader for fix50sp2::messages::collateral_report::Collateral {
 pub enum CollateralInquiry {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::collateral_inquiry::Collateral>),
+    FIX50(Box<fix50::messages::collateral_inquiry::CollateralInquiry>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::collateral_inquiry::Collateral>),
+    FIX50SP1(Box<fix50sp1::messages::collateral_inquiry::CollateralInquiry>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::collateral_inquiry::Collateral>),
+    FIX50SP2(Box<fix50sp2::messages::collateral_inquiry::CollateralInquiry>),
 }
 
 impl Serialize for CollateralInquiry {
@@ -6173,7 +6143,7 @@ impl HasHeader for CollateralInquiry {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_inquiry::Collateral {
+impl HasHeader for fix50::messages::collateral_inquiry::CollateralInquiry {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6182,7 +6152,7 @@ impl HasHeader for fix50::messages::collateral_inquiry::Collateral {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_inquiry::Collateral {
+impl HasHeader for fix50sp1::messages::collateral_inquiry::CollateralInquiry {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6191,7 +6161,7 @@ impl HasHeader for fix50sp1::messages::collateral_inquiry::Collateral {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_inquiry::Collateral {
+impl HasHeader for fix50sp2::messages::collateral_inquiry::CollateralInquiry {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6205,13 +6175,13 @@ impl HasHeader for fix50sp2::messages::collateral_inquiry::Collateral {
 pub enum NetworkCounterpartySystemStatusRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::network_counterparty_system_status_request::Network>),
+    FIX50(Box<fix50::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::network_counterparty_system_status_request::Network>),
+    FIX50SP1(Box<fix50sp1::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::network_counterparty_system_status_request::Network>),
+    FIX50SP2(Box<fix50sp2::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest>),
 }
 
 impl Serialize for NetworkCounterpartySystemStatusRequest {
@@ -6241,7 +6211,7 @@ impl HasHeader for NetworkCounterpartySystemStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::network_counterparty_system_status_request::Network {
+impl HasHeader for fix50::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6250,7 +6220,7 @@ impl HasHeader for fix50::messages::network_counterparty_system_status_request::
     }
 }
 
-impl HasHeader for fix50sp1::messages::network_counterparty_system_status_request::Network {
+impl HasHeader for fix50sp1::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6259,7 +6229,7 @@ impl HasHeader for fix50sp1::messages::network_counterparty_system_status_reques
     }
 }
 
-impl HasHeader for fix50sp2::messages::network_counterparty_system_status_request::Network {
+impl HasHeader for fix50sp2::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6273,13 +6243,13 @@ impl HasHeader for fix50sp2::messages::network_counterparty_system_status_reques
 pub enum NetworkCounterpartySystemStatusResponse {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::network_counterparty_system_status_response::Network>),
+    FIX50(Box<fix50::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::network_counterparty_system_status_response::Network>),
+    FIX50SP1(Box<fix50sp1::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::network_counterparty_system_status_response::Network>),
+    FIX50SP2(Box<fix50sp2::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse>),
 }
 
 impl Serialize for NetworkCounterpartySystemStatusResponse {
@@ -6309,7 +6279,7 @@ impl HasHeader for NetworkCounterpartySystemStatusResponse {
     }
 }
 
-impl HasHeader for fix50::messages::network_counterparty_system_status_response::Network {
+impl HasHeader for fix50::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6318,7 +6288,7 @@ impl HasHeader for fix50::messages::network_counterparty_system_status_response:
     }
 }
 
-impl HasHeader for fix50sp1::messages::network_counterparty_system_status_response::Network {
+impl HasHeader for fix50sp1::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6327,7 +6297,7 @@ impl HasHeader for fix50sp1::messages::network_counterparty_system_status_respon
     }
 }
 
-impl HasHeader for fix50sp2::messages::network_counterparty_system_status_response::Network {
+impl HasHeader for fix50sp2::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6341,13 +6311,13 @@ impl HasHeader for fix50sp2::messages::network_counterparty_system_status_respon
 pub enum UserRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::user_request::User>),
+    FIX50(Box<fix50::messages::user_request::UserRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::user_request::User>),
+    FIX50SP1(Box<fix50sp1::messages::user_request::UserRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::user_request::User>),
+    FIX50SP2(Box<fix50sp2::messages::user_request::UserRequest>),
 }
 
 impl Serialize for UserRequest {
@@ -6377,7 +6347,7 @@ impl HasHeader for UserRequest {
     }
 }
 
-impl HasHeader for fix50::messages::user_request::User {
+impl HasHeader for fix50::messages::user_request::UserRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6386,7 +6356,7 @@ impl HasHeader for fix50::messages::user_request::User {
     }
 }
 
-impl HasHeader for fix50sp1::messages::user_request::User {
+impl HasHeader for fix50sp1::messages::user_request::UserRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6395,7 +6365,7 @@ impl HasHeader for fix50sp1::messages::user_request::User {
     }
 }
 
-impl HasHeader for fix50sp2::messages::user_request::User {
+impl HasHeader for fix50sp2::messages::user_request::UserRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6409,13 +6379,13 @@ impl HasHeader for fix50sp2::messages::user_request::User {
 pub enum UserResponse {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::user_response::User>),
+    FIX50(Box<fix50::messages::user_response::UserResponse>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::user_response::User>),
+    FIX50SP1(Box<fix50sp1::messages::user_response::UserResponse>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::user_response::User>),
+    FIX50SP2(Box<fix50sp2::messages::user_response::UserResponse>),
 }
 
 impl Serialize for UserResponse {
@@ -6445,7 +6415,7 @@ impl HasHeader for UserResponse {
     }
 }
 
-impl HasHeader for fix50::messages::user_response::User {
+impl HasHeader for fix50::messages::user_response::UserResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6454,7 +6424,7 @@ impl HasHeader for fix50::messages::user_response::User {
     }
 }
 
-impl HasHeader for fix50sp1::messages::user_response::User {
+impl HasHeader for fix50sp1::messages::user_response::UserResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6463,7 +6433,7 @@ impl HasHeader for fix50sp1::messages::user_response::User {
     }
 }
 
-impl HasHeader for fix50sp2::messages::user_response::User {
+impl HasHeader for fix50sp2::messages::user_response::UserResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6477,13 +6447,13 @@ impl HasHeader for fix50sp2::messages::user_response::User {
 pub enum CollateralInquiryAck {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::collateral_inquiry_ack::Collateral>),
+    FIX50(Box<fix50::messages::collateral_inquiry_ack::CollateralInquiryAck>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::collateral_inquiry_ack::Collateral>),
+    FIX50SP1(Box<fix50sp1::messages::collateral_inquiry_ack::CollateralInquiryAck>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::collateral_inquiry_ack::Collateral>),
+    FIX50SP2(Box<fix50sp2::messages::collateral_inquiry_ack::CollateralInquiryAck>),
 }
 
 impl Serialize for CollateralInquiryAck {
@@ -6513,7 +6483,7 @@ impl HasHeader for CollateralInquiryAck {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_inquiry_ack::Collateral {
+impl HasHeader for fix50::messages::collateral_inquiry_ack::CollateralInquiryAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6522,7 +6492,7 @@ impl HasHeader for fix50::messages::collateral_inquiry_ack::Collateral {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_inquiry_ack::Collateral {
+impl HasHeader for fix50sp1::messages::collateral_inquiry_ack::CollateralInquiryAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6531,7 +6501,7 @@ impl HasHeader for fix50sp1::messages::collateral_inquiry_ack::Collateral {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_inquiry_ack::Collateral {
+impl HasHeader for fix50sp2::messages::collateral_inquiry_ack::CollateralInquiryAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6545,13 +6515,13 @@ impl HasHeader for fix50sp2::messages::collateral_inquiry_ack::Collateral {
 pub enum ConfirmationRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::confirmation_request::Confirmation>),
+    FIX50(Box<fix50::messages::confirmation_request::ConfirmationRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::confirmation_request::Confirmation>),
+    FIX50SP1(Box<fix50sp1::messages::confirmation_request::ConfirmationRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::confirmation_request::Confirmation>),
+    FIX50SP2(Box<fix50sp2::messages::confirmation_request::ConfirmationRequest>),
 }
 
 impl Serialize for ConfirmationRequest {
@@ -6581,7 +6551,7 @@ impl HasHeader for ConfirmationRequest {
     }
 }
 
-impl HasHeader for fix50::messages::confirmation_request::Confirmation {
+impl HasHeader for fix50::messages::confirmation_request::ConfirmationRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6590,7 +6560,7 @@ impl HasHeader for fix50::messages::confirmation_request::Confirmation {
     }
 }
 
-impl HasHeader for fix50sp1::messages::confirmation_request::Confirmation {
+impl HasHeader for fix50sp1::messages::confirmation_request::ConfirmationRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6599,7 +6569,7 @@ impl HasHeader for fix50sp1::messages::confirmation_request::Confirmation {
     }
 }
 
-impl HasHeader for fix50sp2::messages::confirmation_request::Confirmation {
+impl HasHeader for fix50sp2::messages::confirmation_request::ConfirmationRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6613,13 +6583,13 @@ impl HasHeader for fix50sp2::messages::confirmation_request::Confirmation {
 pub enum TradingSessionListRequest {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::trading_session_list_request::Trading>),
+    FIX50(Box<fix50::messages::trading_session_list_request::TradingSessionListRequest>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trading_session_list_request::Trading>),
+    FIX50SP1(Box<fix50sp1::messages::trading_session_list_request::TradingSessionListRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::trading_session_list_request::Trading>),
+    FIX50SP2(Box<fix50sp2::messages::trading_session_list_request::TradingSessionListRequest>),
 }
 
 impl Serialize for TradingSessionListRequest {
@@ -6649,7 +6619,7 @@ impl HasHeader for TradingSessionListRequest {
     }
 }
 
-impl HasHeader for fix50::messages::trading_session_list_request::Trading {
+impl HasHeader for fix50::messages::trading_session_list_request::TradingSessionListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6658,7 +6628,7 @@ impl HasHeader for fix50::messages::trading_session_list_request::Trading {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_list_request::Trading {
+impl HasHeader for fix50sp1::messages::trading_session_list_request::TradingSessionListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6667,7 +6637,7 @@ impl HasHeader for fix50sp1::messages::trading_session_list_request::Trading {
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_list_request::Trading {
+impl HasHeader for fix50sp2::messages::trading_session_list_request::TradingSessionListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6681,13 +6651,13 @@ impl HasHeader for fix50sp2::messages::trading_session_list_request::Trading {
 pub enum TradingSessionList {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::trading_session_list::Trading>),
+    FIX50(Box<fix50::messages::trading_session_list::TradingSessionList>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trading_session_list::Trading>),
+    FIX50SP1(Box<fix50sp1::messages::trading_session_list::TradingSessionList>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::trading_session_list::Trading>),
+    FIX50SP2(Box<fix50sp2::messages::trading_session_list::TradingSessionList>),
 }
 
 impl Serialize for TradingSessionList {
@@ -6717,7 +6687,7 @@ impl HasHeader for TradingSessionList {
     }
 }
 
-impl HasHeader for fix50::messages::trading_session_list::Trading {
+impl HasHeader for fix50::messages::trading_session_list::TradingSessionList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6726,7 +6696,7 @@ impl HasHeader for fix50::messages::trading_session_list::Trading {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_list::Trading {
+impl HasHeader for fix50sp1::messages::trading_session_list::TradingSessionList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6735,7 +6705,7 @@ impl HasHeader for fix50sp1::messages::trading_session_list::Trading {
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_list::Trading {
+impl HasHeader for fix50sp2::messages::trading_session_list::TradingSessionList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6749,13 +6719,13 @@ impl HasHeader for fix50sp2::messages::trading_session_list::Trading {
 pub enum SecurityListUpdateReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_list_update_report::Security>),
+    FIX50(Box<fix50::messages::security_list_update_report::SecurityListUpdateReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_list_update_report::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_list_update_report::SecurityListUpdateReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_list_update_report::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_list_update_report::SecurityListUpdateReport>),
 }
 
 impl Serialize for SecurityListUpdateReport {
@@ -6785,7 +6755,7 @@ impl HasHeader for SecurityListUpdateReport {
     }
 }
 
-impl HasHeader for fix50::messages::security_list_update_report::Security {
+impl HasHeader for fix50::messages::security_list_update_report::SecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6794,7 +6764,7 @@ impl HasHeader for fix50::messages::security_list_update_report::Security {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_list_update_report::Security {
+impl HasHeader for fix50sp1::messages::security_list_update_report::SecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6803,7 +6773,7 @@ impl HasHeader for fix50sp1::messages::security_list_update_report::Security {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_list_update_report::Security {
+impl HasHeader for fix50sp2::messages::security_list_update_report::SecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6817,13 +6787,13 @@ impl HasHeader for fix50sp2::messages::security_list_update_report::Security {
 pub enum AdjustedPositionReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::adjusted_position_report::Adjusted>),
+    FIX50(Box<fix50::messages::adjusted_position_report::AdjustedPositionReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::adjusted_position_report::Adjusted>),
+    FIX50SP1(Box<fix50sp1::messages::adjusted_position_report::AdjustedPositionReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::adjusted_position_report::Adjusted>),
+    FIX50SP2(Box<fix50sp2::messages::adjusted_position_report::AdjustedPositionReport>),
 }
 
 impl Serialize for AdjustedPositionReport {
@@ -6853,7 +6823,7 @@ impl HasHeader for AdjustedPositionReport {
     }
 }
 
-impl HasHeader for fix50::messages::adjusted_position_report::Adjusted {
+impl HasHeader for fix50::messages::adjusted_position_report::AdjustedPositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6862,7 +6832,7 @@ impl HasHeader for fix50::messages::adjusted_position_report::Adjusted {
     }
 }
 
-impl HasHeader for fix50sp1::messages::adjusted_position_report::Adjusted {
+impl HasHeader for fix50sp1::messages::adjusted_position_report::AdjustedPositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6871,7 +6841,7 @@ impl HasHeader for fix50sp1::messages::adjusted_position_report::Adjusted {
     }
 }
 
-impl HasHeader for fix50sp2::messages::adjusted_position_report::Adjusted {
+impl HasHeader for fix50sp2::messages::adjusted_position_report::AdjustedPositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6885,10 +6855,10 @@ impl HasHeader for fix50sp2::messages::adjusted_position_report::Adjusted {
 pub enum AllocationInstructionAlert {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::allocation_instruction_alert::Allocation>),
+    FIX50(Box<fix50::messages::allocation_instruction_alert::AllocationInstructionAlert>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::allocation_instruction_alert::Allocation>),
+    FIX50SP1(Box<fix50sp1::messages::allocation_instruction_alert::AllocationInstructionAlert>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::allocation_instruction_alert::AllocationInstructionAlert>),
@@ -6921,7 +6891,7 @@ impl HasHeader for AllocationInstructionAlert {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_instruction_alert::Allocation {
+impl HasHeader for fix50::messages::allocation_instruction_alert::AllocationInstructionAlert {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6930,7 +6900,7 @@ impl HasHeader for fix50::messages::allocation_instruction_alert::Allocation {
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_instruction_alert::Allocation {
+impl HasHeader for fix50sp1::messages::allocation_instruction_alert::AllocationInstructionAlert {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6950,29 +6920,29 @@ impl HasHeader for fix50sp2::messages::allocation_instruction_alert::AllocationI
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
-pub enum ExecutioNAcknowledgement {
+pub enum ExecutionAcknowledgement {
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::execution_ack::ExecutionAck>),
 }
 
-impl Serialize for ExecutioNAcknowledgement {
+impl Serialize for ExecutionAcknowledgement {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ExecutioNAcknowledgement::FIX50SP2(m) => m.serialize(serializer),
+            ExecutionAcknowledgement::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
 
-impl HasHeader for ExecutioNAcknowledgement {
+impl HasHeader for ExecutionAcknowledgement {
     fn get_header(&self) -> &Header {
         match self {
-            ExecutioNAcknowledgement::FIX50SP2(m) => m.get_header(),
+            ExecutionAcknowledgement::FIX50SP2(m) => m.get_header(),
         }
     }
     fn get_header_mut(&mut self) -> &mut Header {
         match self {
-            ExecutioNAcknowledgement::FIX50SP2(m) => m.get_header_mut(),
+            ExecutionAcknowledgement::FIX50SP2(m) => m.get_header_mut(),
         }
     }
 }
@@ -6991,13 +6961,13 @@ impl HasHeader for fix50sp2::messages::execution_ack::ExecutionAck {
 pub enum ContraryIntentionReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::contrary_intention_report::Contrary>),
+    FIX50(Box<fix50::messages::contrary_intention_report::ContraryIntentionReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::contrary_intention_report::Contrary>),
+    FIX50SP1(Box<fix50sp1::messages::contrary_intention_report::ContraryIntentionReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::contrary_intention_report::Contrary>),
+    FIX50SP2(Box<fix50sp2::messages::contrary_intention_report::ContraryIntentionReport>),
 }
 
 impl Serialize for ContraryIntentionReport {
@@ -7027,7 +6997,7 @@ impl HasHeader for ContraryIntentionReport {
     }
 }
 
-impl HasHeader for fix50::messages::contrary_intention_report::Contrary {
+impl HasHeader for fix50::messages::contrary_intention_report::ContraryIntentionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7036,7 +7006,7 @@ impl HasHeader for fix50::messages::contrary_intention_report::Contrary {
     }
 }
 
-impl HasHeader for fix50sp1::messages::contrary_intention_report::Contrary {
+impl HasHeader for fix50sp1::messages::contrary_intention_report::ContraryIntentionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7045,7 +7015,7 @@ impl HasHeader for fix50sp1::messages::contrary_intention_report::Contrary {
     }
 }
 
-impl HasHeader for fix50sp2::messages::contrary_intention_report::Contrary {
+impl HasHeader for fix50sp2::messages::contrary_intention_report::ContraryIntentionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7059,13 +7029,13 @@ impl HasHeader for fix50sp2::messages::contrary_intention_report::Contrary {
 pub enum SecurityDefinitionUpdateReport {
     /// FIX50
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::security_definition_update_report::Security>),
+    FIX50(Box<fix50::messages::security_definition_update_report::SecurityDefinitionUpdateReport>),
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::security_definition_update_report::Security>),
+    FIX50SP1(Box<fix50sp1::messages::security_definition_update_report::SecurityDefinitionUpdateReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::security_definition_update_report::Security>),
+    FIX50SP2(Box<fix50sp2::messages::security_definition_update_report::SecurityDefinitionUpdateReport>),
 }
 
 impl Serialize for SecurityDefinitionUpdateReport {
@@ -7095,7 +7065,7 @@ impl HasHeader for SecurityDefinitionUpdateReport {
     }
 }
 
-impl HasHeader for fix50::messages::security_definition_update_report::Security {
+impl HasHeader for fix50::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7104,7 +7074,7 @@ impl HasHeader for fix50::messages::security_definition_update_report::Security 
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_definition_update_report::Security {
+impl HasHeader for fix50sp1::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7113,7 +7083,7 @@ impl HasHeader for fix50sp1::messages::security_definition_update_report::Securi
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_definition_update_report::Security {
+impl HasHeader for fix50sp2::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7127,10 +7097,10 @@ impl HasHeader for fix50sp2::messages::security_definition_update_report::Securi
 pub enum SettlementObligationReport {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::settlement_obligation_report::Settlement>),
+    FIX50SP1(Box<fix50sp1::messages::settlement_obligation_report::SettlementObligationReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::settlement_obligation_report::Settlement>),
+    FIX50SP2(Box<fix50sp2::messages::settlement_obligation_report::SettlementObligationReport>),
 }
 
 impl Serialize for SettlementObligationReport {
@@ -7157,7 +7127,7 @@ impl HasHeader for SettlementObligationReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::settlement_obligation_report::Settlement {
+impl HasHeader for fix50sp1::messages::settlement_obligation_report::SettlementObligationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7166,7 +7136,7 @@ impl HasHeader for fix50sp1::messages::settlement_obligation_report::Settlement 
     }
 }
 
-impl HasHeader for fix50sp2::messages::settlement_obligation_report::Settlement {
+impl HasHeader for fix50sp2::messages::settlement_obligation_report::SettlementObligationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7180,10 +7150,10 @@ impl HasHeader for fix50sp2::messages::settlement_obligation_report::Settlement 
 pub enum DerivativeSecurityListUpdateReport {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::derivative_security_list_update_report::Derivative>),
+    FIX50SP1(Box<fix50sp1::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::derivative_security_list_update_report::Derivative>),
+    FIX50SP2(Box<fix50sp2::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport>),
 }
 
 impl Serialize for DerivativeSecurityListUpdateReport {
@@ -7210,7 +7180,7 @@ impl HasHeader for DerivativeSecurityListUpdateReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::derivative_security_list_update_report::Derivative {
+impl HasHeader for fix50sp1::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7219,7 +7189,7 @@ impl HasHeader for fix50sp1::messages::derivative_security_list_update_report::D
     }
 }
 
-impl HasHeader for fix50sp2::messages::derivative_security_list_update_report::Derivative {
+impl HasHeader for fix50sp2::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7233,10 +7203,10 @@ impl HasHeader for fix50sp2::messages::derivative_security_list_update_report::D
 pub enum TradingSessionListUpdateReport {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::trading_session_list_update_report::Trading>),
+    FIX50SP1(Box<fix50sp1::messages::trading_session_list_update_report::TradingSessionListUpdateReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::trading_session_list_update_report::Trading>),
+    FIX50SP2(Box<fix50sp2::messages::trading_session_list_update_report::TradingSessionListUpdateReport>),
 }
 
 impl Serialize for TradingSessionListUpdateReport {
@@ -7263,7 +7233,7 @@ impl HasHeader for TradingSessionListUpdateReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_list_update_report::Trading {
+impl HasHeader for fix50sp1::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7272,7 +7242,7 @@ impl HasHeader for fix50sp1::messages::trading_session_list_update_report::Tradi
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_list_update_report::Trading {
+impl HasHeader for fix50sp2::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7286,10 +7256,10 @@ impl HasHeader for fix50sp2::messages::trading_session_list_update_report::Tradi
 pub enum MarketDefinitionRequest {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::market_definition_request::Market>),
+    FIX50SP1(Box<fix50sp1::messages::market_definition_request::MarketDefinitionRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::market_definition_request::Market>),
+    FIX50SP2(Box<fix50sp2::messages::market_definition_request::MarketDefinitionRequest>),
 }
 
 impl Serialize for MarketDefinitionRequest {
@@ -7316,7 +7286,7 @@ impl HasHeader for MarketDefinitionRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_definition_request::Market {
+impl HasHeader for fix50sp1::messages::market_definition_request::MarketDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7325,7 +7295,7 @@ impl HasHeader for fix50sp1::messages::market_definition_request::Market {
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_definition_request::Market {
+impl HasHeader for fix50sp2::messages::market_definition_request::MarketDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7339,7 +7309,7 @@ impl HasHeader for fix50sp2::messages::market_definition_request::Market {
 pub enum MarketDefinition {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::market_definition::Market>),
+    FIX50SP1(Box<fix50sp1::messages::market_definition::MarketDefinition>),
     /// FIX50SP2
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::market_definition::MarketDefinition>),
@@ -7369,7 +7339,7 @@ impl HasHeader for MarketDefinition {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_definition::Market {
+impl HasHeader for fix50sp1::messages::market_definition::MarketDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7392,10 +7362,10 @@ impl HasHeader for fix50sp2::messages::market_definition::MarketDefinition {
 pub enum MarketDefinitionUpdateReport {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::market_definition_update_report::Market>),
+    FIX50SP1(Box<fix50sp1::messages::market_definition_update_report::MarketDefinitionUpdateReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::market_definition_update_report::Market>),
+    FIX50SP2(Box<fix50sp2::messages::market_definition_update_report::MarketDefinitionUpdateReport>),
 }
 
 impl Serialize for MarketDefinitionUpdateReport {
@@ -7422,7 +7392,7 @@ impl HasHeader for MarketDefinitionUpdateReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_definition_update_report::Market {
+impl HasHeader for fix50sp1::messages::market_definition_update_report::MarketDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7431,7 +7401,7 @@ impl HasHeader for fix50sp1::messages::market_definition_update_report::Market {
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_definition_update_report::Market {
+impl HasHeader for fix50sp2::messages::market_definition_update_report::MarketDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7445,10 +7415,10 @@ impl HasHeader for fix50sp2::messages::market_definition_update_report::Market {
 pub enum ApplicationMessageRequest {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::application_message_request::Application>),
+    FIX50SP1(Box<fix50sp1::messages::application_message_request::ApplicationMessageRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::application_message_request::Application>),
+    FIX50SP2(Box<fix50sp2::messages::application_message_request::ApplicationMessageRequest>),
 }
 
 impl Serialize for ApplicationMessageRequest {
@@ -7475,7 +7445,7 @@ impl HasHeader for ApplicationMessageRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::application_message_request::Application {
+impl HasHeader for fix50sp1::messages::application_message_request::ApplicationMessageRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7484,7 +7454,7 @@ impl HasHeader for fix50sp1::messages::application_message_request::Application 
     }
 }
 
-impl HasHeader for fix50sp2::messages::application_message_request::Application {
+impl HasHeader for fix50sp2::messages::application_message_request::ApplicationMessageRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7498,10 +7468,10 @@ impl HasHeader for fix50sp2::messages::application_message_request::Application 
 pub enum ApplicationMessageRequestAck {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::application_message_request_ack::Application>),
+    FIX50SP1(Box<fix50sp1::messages::application_message_request_ack::ApplicationMessageRequestAck>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::application_message_request_ack::Application>),
+    FIX50SP2(Box<fix50sp2::messages::application_message_request_ack::ApplicationMessageRequestAck>),
 }
 
 impl Serialize for ApplicationMessageRequestAck {
@@ -7528,7 +7498,7 @@ impl HasHeader for ApplicationMessageRequestAck {
     }
 }
 
-impl HasHeader for fix50sp1::messages::application_message_request_ack::Application {
+impl HasHeader for fix50sp1::messages::application_message_request_ack::ApplicationMessageRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7537,7 +7507,7 @@ impl HasHeader for fix50sp1::messages::application_message_request_ack::Applicat
     }
 }
 
-impl HasHeader for fix50sp2::messages::application_message_request_ack::Application {
+impl HasHeader for fix50sp2::messages::application_message_request_ack::ApplicationMessageRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7551,10 +7521,10 @@ impl HasHeader for fix50sp2::messages::application_message_request_ack::Applicat
 pub enum ApplicationMessageReport {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::application_message_report::Application>),
+    FIX50SP1(Box<fix50sp1::messages::application_message_report::ApplicationMessageReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::application_message_report::Application>),
+    FIX50SP2(Box<fix50sp2::messages::application_message_report::ApplicationMessageReport>),
 }
 
 impl Serialize for ApplicationMessageReport {
@@ -7581,7 +7551,7 @@ impl HasHeader for ApplicationMessageReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::application_message_report::Application {
+impl HasHeader for fix50sp1::messages::application_message_report::ApplicationMessageReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7590,7 +7560,7 @@ impl HasHeader for fix50sp1::messages::application_message_report::Application {
     }
 }
 
-impl HasHeader for fix50sp2::messages::application_message_report::Application {
+impl HasHeader for fix50sp2::messages::application_message_report::ApplicationMessageReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7604,10 +7574,10 @@ impl HasHeader for fix50sp2::messages::application_message_report::Application {
 pub enum OrderMassActionReport {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_mass_action_report::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_mass_action_report::OrderMassActionReport>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_mass_action_report::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_mass_action_report::OrderMassActionReport>),
 }
 
 impl Serialize for OrderMassActionReport {
@@ -7634,7 +7604,7 @@ impl HasHeader for OrderMassActionReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_action_report::Order {
+impl HasHeader for fix50sp1::messages::order_mass_action_report::OrderMassActionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7643,7 +7613,7 @@ impl HasHeader for fix50sp1::messages::order_mass_action_report::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_action_report::Order {
+impl HasHeader for fix50sp2::messages::order_mass_action_report::OrderMassActionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7657,10 +7627,10 @@ impl HasHeader for fix50sp2::messages::order_mass_action_report::Order {
 pub enum OrderMassActionRequest {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::order_mass_action_request::Order>),
+    FIX50SP1(Box<fix50sp1::messages::order_mass_action_request::OrderMassActionRequest>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::order_mass_action_request::Order>),
+    FIX50SP2(Box<fix50sp2::messages::order_mass_action_request::OrderMassActionRequest>),
 }
 
 impl Serialize for OrderMassActionRequest {
@@ -7687,7 +7657,7 @@ impl HasHeader for OrderMassActionRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_action_request::Order {
+impl HasHeader for fix50sp1::messages::order_mass_action_request::OrderMassActionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7696,7 +7666,7 @@ impl HasHeader for fix50sp1::messages::order_mass_action_request::Order {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_action_request::Order {
+impl HasHeader for fix50sp2::messages::order_mass_action_request::OrderMassActionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7710,10 +7680,10 @@ impl HasHeader for fix50sp2::messages::order_mass_action_request::Order {
 pub enum UserNotification {
     /// FIX50SP1
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::user_notification::User>),
+    FIX50SP1(Box<fix50sp1::messages::user_notification::UserNotification>),
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::user_notification::User>),
+    FIX50SP2(Box<fix50sp2::messages::user_notification::UserNotification>),
 }
 
 impl Serialize for UserNotification {
@@ -7740,7 +7710,7 @@ impl HasHeader for UserNotification {
     }
 }
 
-impl HasHeader for fix50sp1::messages::user_notification::User {
+impl HasHeader for fix50sp1::messages::user_notification::UserNotification {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7749,7 +7719,7 @@ impl HasHeader for fix50sp1::messages::user_notification::User {
     }
 }
 
-impl HasHeader for fix50sp2::messages::user_notification::User {
+impl HasHeader for fix50sp2::messages::user_notification::UserNotification {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7763,7 +7733,7 @@ impl HasHeader for fix50sp2::messages::user_notification::User {
 pub enum StreamAssignmentRequest {
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::stream_assignment_request::Stream>),
+    FIX50SP2(Box<fix50sp2::messages::stream_assignment_request::StreamAssignmentRequest>),
 }
 
 impl Serialize for StreamAssignmentRequest {
@@ -7787,7 +7757,7 @@ impl HasHeader for StreamAssignmentRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::stream_assignment_request::Stream {
+impl HasHeader for fix50sp2::messages::stream_assignment_request::StreamAssignmentRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7801,7 +7771,7 @@ impl HasHeader for fix50sp2::messages::stream_assignment_request::Stream {
 pub enum StreamAssignmentReport {
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::stream_assignment_report::Stream>),
+    FIX50SP2(Box<fix50sp2::messages::stream_assignment_report::StreamAssignmentReport>),
 }
 
 impl Serialize for StreamAssignmentReport {
@@ -7825,7 +7795,7 @@ impl HasHeader for StreamAssignmentReport {
     }
 }
 
-impl HasHeader for fix50sp2::messages::stream_assignment_report::Stream {
+impl HasHeader for fix50sp2::messages::stream_assignment_report::StreamAssignmentReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7839,7 +7809,7 @@ impl HasHeader for fix50sp2::messages::stream_assignment_report::Stream {
 pub enum StreamAssignmentReportACK {
     /// FIX50SP2
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::stream_assignment_report_ack::Stream>),
+    FIX50SP2(Box<fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportACK>),
 }
 
 impl Serialize for StreamAssignmentReportACK {
@@ -7863,7 +7833,7 @@ impl HasHeader for StreamAssignmentReportACK {
     }
 }
 
-impl HasHeader for fix50sp2::messages::stream_assignment_report_ack::Stream {
+impl HasHeader for fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportACK {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
