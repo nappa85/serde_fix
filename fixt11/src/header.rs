@@ -146,11 +146,6 @@ impl Header {
     }
 }
 
-pub trait HasHeader {
-    fn get_header(&self) -> &Header;
-    fn get_header_mut(&mut self) -> &mut Header;
-}
-
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum MsgType {
     /// Heartbeat

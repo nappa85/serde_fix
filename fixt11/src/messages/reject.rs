@@ -2,7 +2,7 @@
 use serde::{Serialize, Deserialize};
 
 use fix_common::{EncodedText, FixVersion};
-use crate::{header::{Header, HasHeader, MsgType}, Trailer};
+use crate::{header::{Header, MsgType}, Trailer};
 
 /// MsgType = 3
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -59,15 +59,6 @@ impl Reject {
             },
             ..Default::default()
         }
-    }
-}
-
-impl HasHeader for Reject {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
     }
 }
 

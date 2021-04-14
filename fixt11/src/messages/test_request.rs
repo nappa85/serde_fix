@@ -2,7 +2,7 @@
 use serde::{Serialize, Deserialize};
 
 use fix_common::FixVersion;
-use crate::{header::{Header, HasHeader, MsgType}, Trailer};
+use crate::{header::{Header, MsgType}, Trailer};
 
 /// MsgType = 1
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -26,14 +26,5 @@ impl TestRequest {
             },
             ..Default::default()
         }
-    }
-}
-
-impl HasHeader for TestRequest {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
     }
 }

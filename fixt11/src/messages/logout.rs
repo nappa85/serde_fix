@@ -2,7 +2,7 @@
 use serde::{Serialize, Deserialize};
 
 use fix_common::{EncodedText, FixVersion};
-use crate::{header::{Header, HasHeader, MsgType}, Trailer};
+use crate::{header::{Header, MsgType}, Trailer};
 
 /// MsgType = 5
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -37,14 +37,5 @@ impl Logout {
             },
             ..Default::default()
         }
-    }
-}
-
-impl HasHeader for Logout {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
     }
 }

@@ -2,7 +2,7 @@
 use serde::{Serialize, Deserialize};
 
 use fix_common::{ApplVerID, Boolean, EncodedText, RepeatingValues, FixVersion};
-use crate::{header::{Header, HasHeader, MsgType}, Trailer};
+use crate::{header::{Header, MsgType}, Trailer};
 
 /// MsgType = A
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -112,15 +112,6 @@ impl Logon {
             },
             ..Default::default()
         }
-    }
-}
-
-impl HasHeader for Logon {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
     }
 }
 

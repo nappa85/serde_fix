@@ -2,7 +2,7 @@
 use serde::{Serialize, Deserialize};
 
 use fix_common::FixVersion;
-use crate::{header::{Header, HasHeader, MsgType}, Trailer};
+use crate::{header::{Header, MsgType}, Trailer};
 
 /// MsgType = 2
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -31,14 +31,5 @@ impl ResendRequest {
             },
             ..Default::default()
         }
-    }
-}
-
-impl HasHeader for ResendRequest {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
     }
 }

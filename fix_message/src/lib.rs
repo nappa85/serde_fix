@@ -22,7 +22,7 @@ pub enum Message {
     // #[serde(rename = "FIX.4.4")]
     // FIX44,
     #[serde(rename = "FIXT.1.1")]
-    FIXT11(Fixt11Message)
+    FIXT11(fixt11::Message)
 }
 
 impl Serialize for Message {

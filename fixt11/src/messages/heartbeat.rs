@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-use crate::{header::{HasHeader, Header, MsgType}, Trailer};
+use crate::{header::{Header, MsgType}, Trailer};
 use fix_common::FixVersion;
 
 /// MsgType = 0
@@ -27,14 +27,5 @@ impl Heartbeat {
             },
             ..Default::default()
         }
-    }
-}
-
-impl HasHeader for Heartbeat {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
     }
 }
