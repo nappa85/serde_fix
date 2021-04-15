@@ -2,347 +2,272 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct MassQuote {
-	/// MsgType = i
+pub struct BidRequest {
+	/// MsgType = k
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'i', ' '>,
-	/// Required when quote is in response to a <a href="message_Quote_Request_R.html" target="main">Quote Request&nbsp;(R)</a> message
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'k'>,
+	/// Required to relate the bid response
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "131")]
-	pub quote_req_id: Option<String>,
-	/// QuoteID
-	#[serde(rename = "117")]
-	pub quote_id: String,
-	/// Type of Quote. Default is Indicative if not specified
+	#[serde(rename = "390")]
+	pub bid_id: Option<String>,
+	/// ClientBidID
+	#[serde(rename = "391")]
+	pub client_bid_id: String,
+	/// Identifies the <a href="message_Bid_Request_k.html" target="main">Bid Request&nbsp;(k)</a> message transaction type
+	#[serde(rename = "374")]
+	pub bid_request_trans_type: BidRequestTransType,
+	/// ListName
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "537")]
-	pub quote_type: Option<QuoteType>,
-	/// Level of Response requested from receiver of quote messages.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "301")]
-	pub quote_response_level: Option<QuoteResponseLevel>,
-	/// Parties
-	#[serde(flatten)]
-	pub parties: Option<super::super::parties::Parties>,
-	/// Account
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "1")]
-	pub account: Option<String>,
-	/// Type of account associated with the order (Origin)
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "581")]
-	pub account_type: Option<AccountType>,
-	/// Default Bid Size for quote contained within this quote message - if not explicitly provided.
+	#[serde(rename = "392")]
+	pub list_name: Option<String>,
+	/// TotalNumSecurities
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(rename = "393")]
+	pub total_num_securities: i32,
+	/// e.g. "Non Disclosed", "Disclosed", No Bidding Process
+	#[serde(rename = "394")]
+	pub bid_type: BidType,
+	/// Total number of tickets/allocations assuming fully executed
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
-	#[serde(rename = "293")]
-	pub def_bid_size: Option<f64>,
-	/// Default Offer Size for quotes contained within this quote message - if not explicitly provided.
+	#[serde(rename = "395")]
+	pub num_tickets: Option<i32>,
+	/// Used to represent the currency of monetary amounts.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "15")]
+	pub currency: Option<Currency>,
+	/// Expressed in <a href="tag_15_Currency.html" target="bottom">Currency&nbsp;(15)</a>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
-	#[serde(rename = "294")]
-	pub def_offer_size: Option<f64>,
-	/// The number of sets of quotes in the message
-	#[serde(rename = "296")]
-	pub quote_sets: fix_common::RepeatingValues<QuoteSet>,
+	#[serde(rename = "396")]
+	pub side_value_1: Option<f64>,
+	/// Expressed in <a href="tag_15_Currency.html" target="bottom">Currency&nbsp;(15)</a>
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "397")]
+	pub side_value_2: Option<f64>,
+	/// Used if <a href="tag_394_BidType.html" target="bottom">BidType&nbsp;(394)</a> ='Non Disclosed'
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "398")]
+	pub bid_descriptors: Option<fix_common::RepeatingValues<BidDescriptor>>,
+	/// Used if <a href="tag_394_BidType.html" target="bottom">BidType&nbsp;(394)</a> ="Disclosed"
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "420")]
+	pub bid_components: Option<fix_common::RepeatingValues<BidComponent>>,
+	/// LiquidityIndType
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "409")]
+	pub liquidity_ind_type: Option<LiquidityIndType>,
+	/// Overall weighted average liquidity expressed as a % of average daily volume
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "410")]
+	pub wt_average_liquidity: Option<f64>,
+	/// ExchangeForPhysical
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "411")]
+	pub exchange_for_physical: Option<ExchangeForPhysical>,
+	/// % value of stocks outside main country in <a href="tag_15_Currency.html" target="bottom">Currency&nbsp;(15)</a>
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "412")]
+	pub out_main_cntry_u_index: Option<f64>,
+	/// % of program that crosses in <a href="tag_15_Currency.html" target="bottom">Currency&nbsp;(15)</a>
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "413")]
+	pub cross_percent: Option<f64>,
+	/// ProgRptReqs
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "414")]
+	pub prog_rpt_reqs: Option<ProgRptReqs>,
+	/// Time in minutes between each <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> report sent by SellSide. Zero means don't send status.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "415")]
+	pub prog_period_interval: Option<i32>,
+	/// Net/Gross
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "416")]
+	pub inc_tax_ind: Option<IncTaxInd>,
+	/// Is foreign exchange required
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "121")]
+	pub forex_req: Option<ForexReq>,
+	/// Indicates the total number of bidders on the list
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "417")]
+	pub num_bidders: Option<i32>,
+	/// TradeDate
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "75")]
+	pub trade_date: Option<fix_common::LocalMktDate>,
+	/// TradeType
+	#[serde(rename = "418")]
+	pub trade_type: TradeType,
+	/// BasisPxType
+	#[serde(rename = "419")]
+	pub basis_px_type: BasisPxType,
+	/// Used when <a href="tag_419_BasisPxType.html" target="bottom">BasisPxType&nbsp;(419)</a> = 'C'
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "443")]
+	pub strike_time: Option<fix_common::UTCTimestamp>,
+	/// Text
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "58")]
+	pub text: Option<String>,
+	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "354")]
+	pub encoded_text_len: Option<i32>,
+	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "355")]
+	pub encoded_text: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct QuoteSet {
-	/// Sequential number for the Quote Set. For a given <a href="tag_117_QuoteID.html" target="bottom">QuoteID&nbsp;(117)</a> - assumed to start at 1. Must be the first field in the repeating group.
-	#[serde(rename = "302")]
-	pub quote_set_id: String,
-	/// QuoteSetValidUntilTime
+pub struct BidDescriptor {
+	/// Required if <a href="tag_398_NoBidDescriptors.html" target="bottom">NoBidDescriptors&nbsp;(398)</a> &gt; 0. Must be first field in repeating group.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "367")]
-	pub quote_set_valid_until_time: Option<fix_common::UTCTimestamp>,
-	/// Total number of quotes for the QuoteSet across all messages. Should be the sum of all <a href="tag_295_NoQuoteEntries.html" target="bottom">NoQuoteEntries&nbsp;(295)</a> in each message that has repeating quotes that are part of the same QuoteSet.
-	#[serde(rename = "304")]
-	pub tot_quote_entries: u32,
-	/// The number of quotes for this <a href="tag_55_Symbol.html" target="bottom">Symbol&nbsp;(55)</a> (instrument) (QuoteSet) that follow in this message. ** Nested Repeating Group follows **
-	#[serde(rename = "295")]
-	pub quote_entries: fix_common::RepeatingValues<QuoteEntry>,
+	#[serde(rename = "399")]
+	pub bid_descriptor_type: Option<BidDescriptorType>,
+	/// BidDescriptor
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "400")]
+	pub bid_descriptor: Option<String>,
+	/// Refers to the <a href="tag_396_SideValue1.html" target="bottom">SideValue1&nbsp;(396)</a> or <a href="tag_397_SideValue2.html" target="bottom">SideValue2&nbsp;(397)</a> . These are used as opposed to Buy or Sell so that the basket can be quoted either way as Buy or Sell.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "401")]
+	pub side_value_ind: Option<SideValueInd>,
+	/// Value between <a href="tag_402_LiquidityPctLow.html" target="bottom">LiquidityPctLow&nbsp;(402)</a> and <a href="tag_403_LiquidityPctHigh.html" target="bottom">LiquidityPctHigh&nbsp;(403)</a> in <a href="tag_15_Currency.html" target="bottom">Currency&nbsp;(15)</a>
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "404")]
+	pub liquidity_value: Option<f64>,
+	/// Number of Securites between <a href="tag_402_LiquidityPctLow.html" target="bottom">LiquidityPctLow&nbsp;(402)</a> and <a href="tag_403_LiquidityPctHigh.html" target="bottom">LiquidityPctHigh&nbsp;(403)</a> in <a href="tag_15_Currency.html" target="bottom">Currency&nbsp;(15)</a>
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "441")]
+	pub liquidity_num_securities: Option<i32>,
+	/// Liquidity indicator or lower limit if <a href="tag_441_LiquidityNumSecurities.html" target="bottom">LiquidityNumSecurities&nbsp;(441)</a> &gt; 1
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "402")]
+	pub liquidity_pct_low: Option<f64>,
+	/// Upper liquidity indicator if <a href="tag_441_LiquidityNumSecurities.html" target="bottom">LiquidityNumSecurities&nbsp;(441)</a> &gt; 1
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "403")]
+	pub liquidity_pct_high: Option<f64>,
+	/// Eg Used in EFP (Exchange For Physical) trades 12%
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "405")]
+	pub efp_tracking_error: Option<f64>,
+	/// Used in EFP trades
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "406")]
+	pub fair_value: Option<f64>,
+	/// Used in EFP trades
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "407")]
+	pub outside_index_pct: Option<f64>,
+	/// Used in EFP trades
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
+	#[serde(rename = "408")]
+	pub value_of_futures: Option<f64>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct QuoteEntry {
-	/// Uniquely identifies the quote as part of a QuoteSet. Must be used if NoQuoteEntries is used
-	#[serde(rename = "299")]
-	pub quote_entry_id: String,
-	/// If F/X quote, should be the "all-in" rate (spot rate adjusted for forward points). Note that either <a href="tag_132_BidPx.html" target="bottom">BidPx&nbsp;(132)</a> , <a href="tag_133_OfferPx.html" target="bottom">OfferPx&nbsp;(133)</a> or both must be specified.
+pub struct BidComponent {
+	/// Required if <a href="tag_420_NoBidComponents.html" target="bottom">NoBidComponents&nbsp;(420)</a> &gt; 0. Must be first field in repeating group.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "132")]
-	pub bid_px: Option<f64>,
-	/// If F/X quote, should be the "all-in" rate (spot rate adjusted for forward points). Note that either <a href="tag_132_BidPx.html" target="bottom">BidPx&nbsp;(132)</a> , <a href="tag_133_OfferPx.html" target="bottom">OfferPx&nbsp;(133)</a> or both must be specified.
+	#[serde(rename = "66")]
+	pub list_id: Option<String>,
+	/// When used in request for a "Disclosed" bid indicates that bid is required on assumption that <a href="tag_396_SideValue1.html" target="bottom">SideValue1&nbsp;(396)</a> is Buy or Sell. <a href="tag_397_SideValue2.html" target="bottom">SideValue2&nbsp;(397)</a> can be derived by inference.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "133")]
-	pub offer_px: Option<f64>,
-	/// BidSize
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "134")]
-	pub bid_size: Option<f64>,
-	/// OfferSize
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "135")]
-	pub offer_size: Option<f64>,
-	/// ValidUntilTime
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "62")]
-	pub valid_until_time: Option<fix_common::UTCTimestamp>,
-	/// May be applicable for F/X quotes
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "188")]
-	pub bid_spot_rate: Option<f64>,
-	/// May be applicable for F/X quotes
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "190")]
-	pub offer_spot_rate: Option<f64>,
-	/// May be applicable for F/X quotes
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "189")]
-	pub bid_forward_points: Option<f64>,
-	/// May be applicable for F/X quotes
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "191")]
-	pub offer_forward_points: Option<f64>,
-	/// MidPx
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "631")]
-	pub mid_px: Option<f64>,
-	/// BidYield
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "632")]
-	pub bid_yield: Option<f32>,
-	/// MidYield
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "633")]
-	pub mid_yield: Option<f32>,
-	/// OfferYield
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "634")]
-	pub offer_yield: Option<f32>,
-	/// TransactTime
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "60")]
-	pub transact_time: Option<fix_common::UTCTimestamp>,
-	/// TradingSessionID
+	#[serde(rename = "54")]
+	pub side: Option<Side>,
+	/// Indicates off-exchange type activities for Detail.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "336")]
 	pub trading_session_id: Option<String>,
-	/// TradingSessionSubID
+	/// Indicates Net or Gross for selling Detail.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "625")]
-	pub trading_session_sub_id: Option<String>,
-	/// Can be used with forex quotes to specify a specific "value date"
+	#[serde(rename = "430")]
+	pub net_gross_ind: Option<NetGrossInd>,
+	/// Indicates order settlement period for Detail.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(rename = "63")]
+	pub settlmnt_typ: Option<SettlmntTyp>,
+	/// FutSettDate
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "64")]
 	pub fut_sett_date: Option<fix_common::LocalMktDate>,
-	/// Can be used to specify the type of order the quote is for
+	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "40")]
-	pub ord_type: Option<OrdType>,
-	/// Can be used with <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the "value date" for the future portion of a F/X swap.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "193")]
-	pub fut_sett_date_2: Option<fix_common::LocalMktDate>,
-	/// Can be used with <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the order quantity for the future portion of a F/X swap.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "192")]
-	pub order_qty_2: Option<f64>,
-	/// Bid F/X forward points of the future portion of a F/X swap quote added to spot rate. May be a negative value
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "642")]
-	pub bid_forward_points_2: Option<f64>,
-	/// Offer F/X forward points of the future portion of a F/X swap quote added to spot rate. May be a negative value
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
-	#[serde(rename = "643")]
-	pub offer_forward_points_2: Option<f64>,
-	/// Can be used to specify the currency of the quoted price.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "15")]
-	pub currency: Option<Currency>,
+	#[serde(rename = "1")]
+	pub account: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum QuoteType {
-	/// Indicative
-	#[serde(rename = "0")]
-	Indicative,
-	/// Tradeable
-	#[serde(rename = "1")]
-	Tradeable,
-	/// Restricted Tradeable
-	#[serde(rename = "2")]
-	RestrictedTradeable,
-}
-
-impl Default for QuoteType {
-	fn default() -> Self {
-		QuoteType::Indicative
-	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum QuoteResponseLevel {
-	/// No Acknowledgement (Default)
-	#[serde(rename = "0")]
-	NoAcknowledgement,
-	/// Acknowledge only negative or erroneous quotes
-	#[serde(rename = "1")]
-	AcknowledgeOnlyNegativeOrErroneousQuotes,
-	/// Acknowledge each quote messages
-	#[serde(rename = "2")]
-	AcknowledgeEachQuoteMessages,
-}
-
-impl Default for QuoteResponseLevel {
-	fn default() -> Self {
-		QuoteResponseLevel::NoAcknowledgement
-	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum AccountType {
-	/// Account is carried on customer Side of Books
-	#[serde(rename = "1")]
-	AccountIsCarriedOnCustomerSideOfBooks,
-	/// Account is carried on non-Customer Side of books
-	#[serde(rename = "2")]
-	AccountIsCarriedOnNonCustomerSideOfBooks,
-	/// House Trader
-	#[serde(rename = "3")]
-	HouseTrader,
-	/// Floor Trader
-	#[serde(rename = "4")]
-	FloorTrader,
-	/// Account is carried on non-customer side of books and is cross margined
-	#[serde(rename = "6")]
-	AccountIsCarriedOnNonCustomerSideOfBooksAndIsCrossMargined,
-	/// Account is house trader and is cross margined
-	#[serde(rename = "7")]
-	AccountIsHouseTraderAndIsCrossMargined,
-	/// Joint Backoffice Account (JBO)
-	#[serde(rename = "8")]
-	JointBackofficeAccount,
-}
-
-impl Default for AccountType {
-	fn default() -> Self {
-		AccountType::AccountIsCarriedOnCustomerSideOfBooks
-	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum OrdType {
-	/// Market
-	#[serde(rename = "1")]
-	Market,
-	/// Limit
-	#[serde(rename = "2")]
-	Limit,
-	/// Stop
-	#[serde(rename = "3")]
-	Stop,
-	/// Stop limit
-	#[serde(rename = "4")]
-	StopLimit,
-	/// Market on close (Deprecated)
-	#[serde(rename = "5")]
-	MarketOnClose,
-	/// With or without
-	#[serde(rename = "6")]
-	WithOrWithout,
-	/// Limit or better
-	#[serde(rename = "7")]
-	LimitOrBetter,
-	/// Limit with or without
-	#[serde(rename = "8")]
-	LimitWithOrWithout,
-	/// On basis
-	#[serde(rename = "9")]
-	OnBasis,
-	/// On close (Deprecated)
-	#[serde(rename = "A")]
-	OnClose,
-	/// Limit on close (Deprecated)
-	#[serde(rename = "B")]
-	LimitOnClose,
-	/// Forex - Market (Deprecated)
+pub enum BidRequestTransType {
+	/// New
+	#[serde(rename = "N")]
+	New,
+	/// Cancel
 	#[serde(rename = "C")]
-	ForexMarket,
-	/// Previously quoted
-	#[serde(rename = "D")]
-	PreviouslyQuoted,
-	/// Previously indicated
-	#[serde(rename = "E")]
-	PreviouslyIndicated,
-	/// Forex - Limit (Deprecated)
-	#[serde(rename = "F")]
-	ForexLimit,
-	/// Forex - Swap
-	#[serde(rename = "G")]
-	ForexSwap,
-	/// Forex - Previously Quoted (Deprecated)
-	#[serde(rename = "H")]
-	ForexPreviouslyQuoted,
-	/// Funari (Limit Day Order with unexecuted portion handled as Market On Close. e.g. Japan)
-	#[serde(rename = "I")]
-	Funari,
-	/// Market If Touched (MIT)
-	#[serde(rename = "J")]
-	MarketIfTouched,
-	/// Market with Leftover as Limit (market order then unexecuted quantity becomes limit order at last price)
-	#[serde(rename = "K")]
-	MarketWithLeftoverAsLimit,
-	/// Previous Fund Valuation Point (Historic pricing) (for CIV)
-	#[serde(rename = "L")]
-	PreviousFundValuationPoint,
-	/// Next Fund Valuation Point (Forward pricing) (for CIV)
-	#[serde(rename = "M")]
-	NextFundValuationPoint,
-	/// Pegged
-	#[serde(rename = "P")]
-	Pegged,
+	Cancel,
 }
 
-impl Default for OrdType {
+impl Default for BidRequestTransType {
 	fn default() -> Self {
-		OrdType::Market
+		BidRequestTransType::New
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum BidType {
+	/// "Non Disclosed" Style (e.g. US/European)
+	#[serde(rename = "1")]
+	NonDisclosedStyle,
+	/// "Disclosed" Style (e.g. Japanese)
+	#[serde(rename = "2")]
+	DisclosedStyle,
+	/// No Bidding Process
+	#[serde(rename = "3")]
+	NoBiddingProcess,
+}
+
+impl Default for BidType {
+	fn default() -> Self {
+		BidType::NonDisclosedStyle
 	}
 }
 
@@ -1553,5 +1478,293 @@ pub enum Currency {
 impl Default for Currency {
 	fn default() -> Self {
 		Currency::Afa
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum LiquidityIndType {
+	/// 5day moving average
+	#[serde(rename = "1")]
+	N5DayMovingAverage,
+	/// 20 day moving average
+	#[serde(rename = "2")]
+	N20DayMovingAverage,
+	/// Normal Market Size
+	#[serde(rename = "3")]
+	NormalMarketSize,
+	/// Other
+	#[serde(rename = "4")]
+	Other,
+}
+
+impl Default for LiquidityIndType {
+	fn default() -> Self {
+		LiquidityIndType::N5DayMovingAverage
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum ExchangeForPhysical {
+	/// True
+	#[serde(rename = "Y")]
+	True,
+	/// False
+	#[serde(rename = "N")]
+	False,
+}
+
+impl Default for ExchangeForPhysical {
+	fn default() -> Self {
+		ExchangeForPhysical::True
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum ProgRptReqs {
+	/// BuySide explicitly requests status using StatusRequest (Default) The sell-side firm can however, send a DONE status <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> Response in an unsolicited fashion
+	#[serde(rename = "1")]
+	BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusAHrefMessageListStatusNHtmlTargetMainListStatusNbspAResponseInAnUnsolicitedFashion,
+	/// SellSide periodically sends status using <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> . Period optionally specified in ProgressPeriod
+	#[serde(rename = "2")]
+	SellSidePeriodicallySendsStatusUsingAHrefMessageListStatusNHtmlTargetMainListStatusNbspAPeriodOptionallySpecifiedInProgressPeriod,
+	/// Real-time execution reports (to be discouraged)
+	#[serde(rename = "3")]
+	RealTimeExecutionReports,
+}
+
+impl Default for ProgRptReqs {
+	fn default() -> Self {
+		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusAHrefMessageListStatusNHtmlTargetMainListStatusNbspAResponseInAnUnsolicitedFashion
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum IncTaxInd {
+	/// Net
+	#[serde(rename = "1")]
+	Net,
+	/// Gross
+	#[serde(rename = "2")]
+	Gross,
+}
+
+impl Default for IncTaxInd {
+	fn default() -> Self {
+		IncTaxInd::Net
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum ForexReq {
+	/// Execute Forex after security trade
+	#[serde(rename = "Y")]
+	ExecuteForexAfterSecurityTrade,
+	/// Do not execute Forex after security trade
+	#[serde(rename = "N")]
+	DoNotExecuteForexAfterSecurityTrade,
+}
+
+impl Default for ForexReq {
+	fn default() -> Self {
+		ForexReq::ExecuteForexAfterSecurityTrade
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum TradeType {
+	/// Risk Trade
+	#[serde(rename = "R")]
+	RiskTrade,
+	/// VWAP Guarantee
+	#[serde(rename = "G")]
+	VwapGuarantee,
+	/// Agency
+	#[serde(rename = "A")]
+	Agency,
+	/// Guaranteed Close
+	#[serde(rename = "J")]
+	GuaranteedClose,
+}
+
+impl Default for TradeType {
+	fn default() -> Self {
+		TradeType::RiskTrade
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum BasisPxType {
+	/// Closing Price at morning session
+	#[serde(rename = "2")]
+	ClosingPriceAtMorningSession,
+	/// Closing Price
+	#[serde(rename = "3")]
+	ClosingPrice,
+	/// Current price
+	#[serde(rename = "4")]
+	CurrentPrice,
+	/// SQ
+	#[serde(rename = "5")]
+	Sq,
+	/// VWAP through a day
+	#[serde(rename = "6")]
+	VwapThroughADay,
+	/// VWAP through a morning session
+	#[serde(rename = "7")]
+	VwapThroughAMorningSession,
+	/// VWAP through an afternoon session
+	#[serde(rename = "8")]
+	VwapThroughAnAfternoonSession,
+	/// VWAP through a day except YORI
+	#[serde(rename = "9")]
+	VwapThroughADayExceptYori,
+	/// VWAP through a morning session except YORI
+	#[serde(rename = "A")]
+	VwapThroughAMorningSessionExceptYori,
+	/// VWAP through an afternoon session except YORI
+	#[serde(rename = "B")]
+	VwapThroughAnAfternoonSessionExceptYori,
+	/// Strike
+	#[serde(rename = "C")]
+	Strike,
+	/// Open
+	#[serde(rename = "D")]
+	Open,
+	/// Others
+	#[serde(rename = "Z")]
+	Others,
+}
+
+impl Default for BasisPxType {
+	fn default() -> Self {
+		BasisPxType::ClosingPriceAtMorningSession
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum BidDescriptorType {
+	/// Sector
+	#[serde(rename = "1")]
+	Sector,
+	/// Country
+	#[serde(rename = "2")]
+	Country,
+	/// Index
+	#[serde(rename = "3")]
+	Index,
+}
+
+impl Default for BidDescriptorType {
+	fn default() -> Self {
+		BidDescriptorType::Sector
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum SideValueInd {
+	/// SideValue1
+	#[serde(rename = "1")]
+	SideValue1,
+	/// SideValue2
+	#[serde(rename = "2")]
+	SideValue2,
+}
+
+impl Default for SideValueInd {
+	fn default() -> Self {
+		SideValueInd::SideValue1
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum Side {
+	/// Buy
+	#[serde(rename = "1")]
+	Buy,
+	/// Sell
+	#[serde(rename = "2")]
+	Sell,
+	/// Buy minus
+	#[serde(rename = "3")]
+	BuyMinus,
+	/// Sell plus
+	#[serde(rename = "4")]
+	SellPlus,
+	/// Sell short
+	#[serde(rename = "5")]
+	SellShort,
+	/// Sell short exempt
+	#[serde(rename = "6")]
+	SellShortExempt,
+	/// Undisclosed (valid for <a href="message_Indication_of_Interest_6.html" target="main">Indication of Interest&nbsp;(6)</a> and <a href="message_New_Order_List_E.html" target="main">List Order&nbsp;(E)</a> messages only)
+	#[serde(rename = "7")]
+	UndisclosedAAndAHrefMessageNewOrderListEHtmlTargetMainListOrderNbspAMessagesOnly,
+	/// Cross (orders where counterparty is an exchange, valid for all messages except IOIs)
+	#[serde(rename = "8")]
+	Cross,
+	/// Cross short
+	#[serde(rename = "9")]
+	CrossShort,
+}
+
+impl Default for Side {
+	fn default() -> Self {
+		Side::Buy
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum NetGrossInd {
+	/// Net
+	#[serde(rename = "1")]
+	Net,
+	/// Gross
+	#[serde(rename = "2")]
+	Gross,
+}
+
+impl Default for NetGrossInd {
+	fn default() -> Self {
+		NetGrossInd::Net
+	}
+}
+
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub enum SettlmntTyp {
+	/// Regular
+	#[serde(rename = "0")]
+	Regular,
+	/// Cash
+	#[serde(rename = "1")]
+	Cash,
+	/// Next Day
+	#[serde(rename = "2")]
+	NextDay,
+	/// T+2
+	#[serde(rename = "3")]
+	T2,
+	/// T+3
+	#[serde(rename = "4")]
+	T3,
+	/// T+4
+	#[serde(rename = "5")]
+	T4,
+	/// Future
+	#[serde(rename = "6")]
+	Future,
+	/// When Issued
+	#[serde(rename = "7")]
+	WhenIssued,
+	/// Sellers Option
+	#[serde(rename = "8")]
+	SellersOption,
+	/// T+5
+	#[serde(rename = "9")]
+	T5,
+}
+
+impl Default for SettlmntTyp {
+	fn default() -> Self {
+		SettlmntTyp::Regular
 	}
 }

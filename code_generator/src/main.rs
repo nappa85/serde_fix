@@ -353,7 +353,8 @@ async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client,
     else {
         let mut temp: Cow<'_, str> = type_map(&t_type["type"]).map_err(|_| error!("Unmapped type {} in {}", &t_type["type"], &t["url"]))?.into();
         if is_array {
-            if temp.as_ref() == "usize" {
+            // on Fix 4.3 array length is simply an int
+            if temp.as_ref() == "usize" || temp.as_ref() == "i32" {
                 name = (&name[2..]).to_owned();
                 temp = format!("fix_common::RepeatingValues<{}>", &name[0..(name.len() - 1)]).into();
             }
@@ -528,6 +529,7 @@ fn type_map(t: &str) -> Result<&str, ()> {
         "SeqNum" => "usize",
         "XMLData" => "String",
         "TagNum" => "u16",
+        "day-of-month" => "u8",
         _ => return Err(()),
     })
 }
