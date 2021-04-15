@@ -2,7 +2,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct CrossOrderCancel {
+pub struct CrossOrderCancelReplaceRequest {
 	/// MsgType = t
 	#[serde(flatten)]
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
@@ -114,7 +114,7 @@ pub struct CrossOrderCancel {
 	pub stop_px: Option<f64>,
 	/// Spread or Benchmark Curve Data
 	#[serde(flatten)]
-	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadorBenchmarkCurveData>,
+	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData>,
 	/// Yield Data
 	#[serde(flatten)]
 	pub yield_data: Option<super::super::yield_data::YieldData>,

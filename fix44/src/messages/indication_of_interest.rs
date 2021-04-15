@@ -101,7 +101,7 @@ pub struct IndicationofInterest {
 	pub routing_i_ds: Option<fix_common::RepeatingValues<RoutingID>>,
 	/// Spread or Benchmark Curve Data
 	#[serde(flatten)]
-	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadorBenchmarkCurveData>,
+	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData>,
 	/// Yield Data
 	#[serde(flatten)]
 	pub yield_data: Option<super::super::yield_data::YieldData>,

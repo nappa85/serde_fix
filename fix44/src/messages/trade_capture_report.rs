@@ -177,7 +177,7 @@ pub struct TradeCaptureReport {
 	pub avg_px: Option<f64>,
 	/// Spread or Benchmark Curve Data
 	#[serde(flatten)]
-	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadorBenchmarkCurveData>,
+	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData>,
 	/// Average Pricing indicator
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "819")]

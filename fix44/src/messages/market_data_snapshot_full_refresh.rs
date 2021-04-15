@@ -2,7 +2,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct MarketData {
+pub struct MarketDataSnapshotFullRefresh {
 	/// MsgType = W
 	#[serde(flatten)]
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,

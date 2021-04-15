@@ -32,15 +32,15 @@ pub struct Email {
 	/// Specifies the number of repeating symbols (instruments) specified
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "146")]
-	pub related_sym: Option<fix_common::RepeatingValues<RelatedSy>>,
+	pub related_sym: Option<fix_common::RepeatingValues<super::super::instrument::Instrument>>,
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Number of legs Identifies a Multi-leg Execution if present and non-zero.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "555")]
-	pub legs: Option<fix_common::RepeatingValues<Leg>>,
+	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// OrderID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
@@ -51,7 +51,7 @@ pub struct Email {
 	pub cl_ord_id: Option<String>,
 	/// Specifies the number of repeating lines of text specified
 	#[serde(rename = "33")]
-	pub nes_of_text: fix_common::RepeatingValues<LinesOfTex>,
+	pub lines_of_text: fix_common::RepeatingValues<LinesOfTex>,
 	/// RawDataLength
 	#[serde(rename = "95")]
 	/// RawData
@@ -73,18 +73,6 @@ pub struct RoutingID {
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "217")]
 	pub routing_id: Option<String>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct RelatedSy {
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Leg {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

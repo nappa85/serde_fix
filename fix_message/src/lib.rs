@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 // pub use fix50sp1;
 // pub use fix50sp2;
 
+pub mod fix44;
 pub mod fixt11;
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
@@ -19,8 +20,8 @@ pub enum Message {
     // FIX42,
     // #[serde(rename = "FIX.4.3")]
     // FIX43,
-    // #[serde(rename = "FIX.4.4")]
-    // FIX44,
+    #[serde(rename = "FIX.4.4")]
+    FIX44(fix44::Message),
     #[serde(rename = "FIXT.1.1")]
     FIXT11(fixt11::Message)
 }

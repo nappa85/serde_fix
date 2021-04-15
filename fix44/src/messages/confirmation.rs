@@ -140,7 +140,7 @@ pub struct Confirmation {
 	pub avg_par_px: Option<f64>,
 	/// Spread or Benchmark Curve Data
 	#[serde(flatten)]
-	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadorBenchmarkCurveData>,
+	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData>,
 	/// Reported price (may be different to <a href="tag_6_AvgPx.html" target="bottom">AvgPx&nbsp;(6)</a> in the event of a marked-up or marked-down principal trade)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183

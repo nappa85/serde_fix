@@ -166,7 +166,7 @@ pub struct CollateralResponse {
 	pub end_cash: Option<f64>,
 	/// Spread or Benchmark Curve Data
 	#[serde(flatten)]
-	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadorBenchmarkCurveData>,
+	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData>,
 	/// Stipulations
 	#[serde(flatten)]
 	pub stipulations: Option<super::super::stipulations::Stipulations>,

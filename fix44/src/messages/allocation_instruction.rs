@@ -128,7 +128,7 @@ pub struct AllocationInstruction {
 	pub avg_par_px: Option<f64>,
 	/// Spread or Benchmark Curve Data
 	#[serde(flatten)]
-	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadorBenchmarkCurveData>,
+	pub spread_or_benchmark_curve_data: Option<super::super::spread_or_benchmark_curve_data::SpreadOrBenchmarkCurveData>,
 	/// Currency of <a href="tag_6_AvgPx.html" target="bottom">AvgPx&nbsp;(6)</a> . Should be the currency of the local market or exchange where the trade was conducted.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]

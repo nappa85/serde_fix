@@ -2,7 +2,7 @@
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub enum FixVersion {
+pub enum FixVersion<const V: u8> {
     #[serde(rename = "FIX.4.0")]
     FIX40,
     #[serde(rename = "FIX.4.1")]
@@ -17,8 +17,22 @@ pub enum FixVersion {
     FIXT11,
 }
 
+impl<const V: u8> Default for FixVersion<V> {
+    fn default() -> Self {
+        match V {
+            0 => FixVersion::FIX40,
+            1 => FixVersion::FIX41,
+            2 => FixVersion::FIX42,
+            3 => FixVersion::FIX43,
+            4 => FixVersion::FIX44,
+            5 => FixVersion::FIXT11,
+            _ => unimplemented!(),
+        }
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub enum ApplVerID {
+pub enum ApplVerID<const V: u8> {
     /// FIX27
     #[serde(rename = "0")]
     FIX27,
@@ -54,8 +68,21 @@ pub enum ApplVerID {
     FIXLatest,
 }
 
-impl ToString for ApplVerID {
-    fn to_string(&self) -> String {
-        serde_fix::to_string(self).expect("ApplVerID serialize failed")// should be safe
+impl<const V: u8> Default for ApplVerID<V> {
+    fn default() -> Self {
+        match V {
+            0 => ApplVerID::FIX27,
+            1 => ApplVerID::FIX30,
+            2 => ApplVerID::FIX40,
+            3 => ApplVerID::FIX41,
+            4 => ApplVerID::FIX42,
+            5 => ApplVerID::FIX43,
+            6 => ApplVerID::FIX44,
+            7 => ApplVerID::FIX50,
+            8 => ApplVerID::FIX50SP1,
+            9 => ApplVerID::FIX50SP2,
+            10 => ApplVerID::FIXLatest,
+            _ => unimplemented!(),
+        }
     }
 }

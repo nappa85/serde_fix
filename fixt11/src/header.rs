@@ -3,28 +3,25 @@ use serde::{Serialize, Deserialize};
 
 use fix_common::{ApplVerID, Boolean, EncodedText, RepeatingValues, UTCTimestamp, FixVersion};
 
-//regex: ^(=>\s+)?(\d+)\s+(\w+)(\s+@\w+)?\s+([YNC])(\s+.+)?$
-//replace: /// $6\n#[serde(rename = "$2")]\npub $3: $5,
 /// Standard Message Header
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Header {
+pub struct Header<const V: u8, const T1: char, const T2: char> {
     /// FIXT.1.1 (Always unencrypted, must be first field in message)
     #[serde(rename = "8")]
-    #[serde(serialize_with = "serialize_beginstring")]
-    pub begin_string: Option<FixVersion>,
+    #[serde(default)]
+    pub begin_string: FixVersion<5>,
     /// (Always unencrypted, must be second field in message)
     #[serde(rename = "9")]
     #[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
     pub body_length: usize,
     /// (Always unencrypted, must be third field in message)
     #[serde(rename = "35")]
-    #[serde(serialize_with = "serialize_msgtype")]
     #[serde(default)]
-    pub msg_type: Option<MsgType>,
+    pub msg_type: MsgType<T1, T2>,
     /// Indicates application version using a service pack identifier. The ApplVerID (1128) applies to a specific message occurrence.
     #[serde(rename = "1128")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub appl_ver_id: Option<ApplVerID>,
+    #[serde(deafult)]
+    pub appl_ver_id: ApplVerID<V>,
     /// Identifies the Extension Pack which is to be applied to the FIX version specified in the ApplVerID.
     #[serde(rename = "1156")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -128,16 +125,6 @@ pub struct Header {
     pub hops: Option<RepeatingValues<Hop>>,
 }
 
-fn serialize_beginstring<S: serde::Serializer>(value: &Option<FixVersion>, serializer: S) -> Result<S::Ok, S::Error> {
-    let temp = value.as_ref().ok_or_else(|| serde::ser::Error::custom("Missing field 8 (begin_string)"))?;
-    temp.serialize(serializer)
-}
-
-fn serialize_msgtype<S: serde::Serializer>(value: &Option<MsgType>, serializer: S) -> Result<S::Ok, S::Error> {
-    let temp = value.as_ref().ok_or_else(|| serde::ser::Error::custom("Missing field 35 (msg_type)"))?;
-    temp.serialize(serializer)
-}
-
 impl Header {
     pub fn reply(&mut self, headers: &Header) {
         self.sender_comp_id = headers.target_comp_id.clone();
@@ -147,7 +134,7 @@ impl Header {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub enum MsgType {
+pub enum MsgType<const T1: char, const T2: char> {
     /// Heartbeat
     #[serde(rename = "0")]
     Heartbeat,
@@ -496,6 +483,131 @@ pub enum MsgType {
     /// Stream Assignment Report ACK
     #[serde(rename = "CE")]
     StreamAssignmentReportACK,
+}
+
+impl<const T1: char, const T2: char> Default for MsgType<T1, T2> {
+	fn default() -> Self {
+		let temp = format!("{}{}", T1, T2).trim();
+        match temp.as_str() {
+            "0" => MsgType::Heartbeat,
+            "1" => MsgType::TestRequest,
+            "2" => MsgType::ResendRequest,
+            "3" => MsgType::Reject,
+            "4" => MsgType::SequenceReset,
+            "5" => MsgType::Logout,
+            "6" => MsgType::IndicationOfInterest,
+            "7" => MsgType::Advertisement,
+            "8" => MsgType::ExecutionReport,
+            "9" => MsgType::OrderCancelReject,
+            "A" => MsgType::Logon,
+            "B" => MsgType::News,
+            "C" => MsgType::Email,
+            "D" => MsgType::NewOrderSingle,
+            "E" => MsgType::NewOrderList,
+            "F" => MsgType::OrderCancelRequest,
+            "G" => MsgType::OrderCancelReplaceRequest,
+            "H" => MsgType::OrderStatusRequest,
+            "J" => MsgType::AllocationInstruction,
+            "K" => MsgType::ListCancelRequest,
+            "L" => MsgType::ListExecute,
+            "M" => MsgType::ListStatusRequest,
+            "N" => MsgType::ListStatus,
+            "P" => MsgType::AllocationInstructionAck,
+            "Q" => MsgType::DontKnowTrade,
+            "R" => MsgType::QuoteRequest,
+            "S" => MsgType::Quote,
+            "T" => MsgType::SettlementInstructions,
+            "V" => MsgType::MarketDataRequest,
+            "W" => MsgType::MarketDataSnapshotFullRefresh,
+            "X" => MsgType::MarketDataIncrementalRefresh,
+            "Y" => MsgType::MarketDataRequestReject,
+            "Z" => MsgType::QuoteCancel,
+            "a" => MsgType::QuoteStatusRequest,
+            "b" => MsgType::MassQuoteAcknowledgement,
+            "c" => MsgType::SecurityDefinitionRequest,
+            "d" => MsgType::SecurityDefinition,
+            "e" => MsgType::SecurityStatusRequest,
+            "f" => MsgType::SecurityStatus,
+            "g" => MsgType::TradingSessionStatusRequest,
+            "h" => MsgType::TradingSessionStatus,
+            "i" => MsgType::MassQuote,
+            "j" => MsgType::BusinessMessageReject,
+            "k" => MsgType::BidRequest,
+            "l" => MsgType::BidResponse,
+            "m" => MsgType::ListStrikePrice,
+            "n" => MsgType::XMLMessage,
+            "o" => MsgType::RegistrationInstructions,
+            "p" => MsgType::RegistrationInstructionsResponse,
+            "q" => MsgType::OrderMassCancelRequest,
+            "r" => MsgType::OrderMassCancelReport,
+            "s" => MsgType::NewOrderCross,
+            "t" => MsgType::CrossOrderCancelReplaceRequest,
+            "u" => MsgType::CrossOrderCancelRequest,
+            "v" => MsgType::SecurityTypeRequest,
+            "w" => MsgType::SecurityTypes,
+            "x" => MsgType::SecurityListRequest,
+            "y" => MsgType::SecurityList,
+            "z" => MsgType::DerivativeSecurityListRequest,
+            "AA" => MsgType::DerivativeSecurityList,
+            "AB" => MsgType::NewOrderMultileg,
+            "AC" => MsgType::MultilegOrderCancelReplace,
+            "AD" => MsgType::TradeCaptureReportRequest,
+            "AE" => MsgType::TradeCaptureReport,
+            "AF" => MsgType::OrderMassStatusRequest,
+            "AG" => MsgType::QuoteRequestReject,
+            "AH" => MsgType::RFQRequest,
+            "AI" => MsgType::QuoteStatusReport,
+            "AJ" => MsgType::QuoteResponse,
+            "AK" => MsgType::Confirmation,
+            "AL" => MsgType::PositionMaintenanceRequest,
+            "AM" => MsgType::PositionMaintenanceReport,
+            "AN" => MsgType::RequestForPositions,
+            "AO" => MsgType::RequestForPositionsAck,
+            "AP" => MsgType::PositionReport,
+            "AQ" => MsgType::TradeCaptureReportRequestAck,
+            "AR" => MsgType::TradeCaptureReportAck,
+            "AS" => MsgType::AllocationReport,
+            "AT" => MsgType::AllocationReportAck,
+            "AU" => MsgType::ConfirmationAck,
+            "AV" => MsgType::SettlementInstructionRequest,
+            "AW" => MsgType::AssignmentReport,
+            "AX" => MsgType::CollateralRequest,
+            "AY" => MsgType::CollateralAssignment,
+            "AZ" => MsgType::CollateralResponse,
+            "BA" => MsgType::CollateralReport,
+            "BB" => MsgType::CollateralInquiry,
+            "BC" => MsgType::NetworkCounterpartySystemStatusRequest,
+            "BD" => MsgType::NetworkCounterpartySystemStatusResponse,
+            "BE" => MsgType::UserRequest,
+            "BF" => MsgType::UserResponse,
+            "BG" => MsgType::CollateralInquiryAck,
+            "BH" => MsgType::ConfirmationRequest,
+            "BI" => MsgType::TradingSessionListRequest,
+            "BJ" => MsgType::TradingSessionList,
+            "BK" => MsgType::SecurityListUpdateReport,
+            "BL" => MsgType::AdjustedPositionReport,
+            "BM" => MsgType::AllocationInstructionAlert,
+            "BN" => MsgType::ExecutioNAcknowledgement,
+            "BO" => MsgType::ContraryIntentionReport,
+            "BP" => MsgType::SecurityDefinitionUpdateReport,
+            "BQ" => MsgType::SettlementObligationReport,
+            "BR" => MsgType::DerivativeSecurityListUpdateReport,
+            "BS" => MsgType::TradingSessionListUpdateReport,
+            "BT" => MsgType::MarketDefinitionRequest,
+            "BU" => MsgType::MarketDefinition,
+            "BV" => MsgType::MarketDefinitionUpdateReport,
+            "BW" => MsgType::ApplicationMessageRequest,
+            "BX" => MsgType::ApplicationMessageRequestAck,
+            "BY" => MsgType::ApplicationMessageReport,
+            "BZ" => MsgType::OrderMassActionReport,
+            "CA" => MsgType::OrderMassActionRequest,
+            "CB" => MsgType::UserNotification,
+            "CC" => MsgType::StreamAssignmentRequest,
+            "CD" => MsgType::StreamAssignmentReport,
+            "CE" => MsgType::StreamAssignmentReportACK,
+            _ => unimplemented!(),
+        }
+    }
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug, Default, PartialEq)]

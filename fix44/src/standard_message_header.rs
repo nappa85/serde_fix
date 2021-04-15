@@ -2,17 +2,19 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct StandardMessageHeader {
+pub struct StandardMessageHeader<const T1: char, const T2: char> {
 	/// FIX.4.4 (Always unencrypted, must be first field in message)
 	#[serde(rename = "8")]
-	pub begin_string: Option<fix_common::FixVersion>,
+	#[serde(default)]
+	pub begin_string: fix_common::FixVersion<4>,
 	/// (Always unencrypted, must be second field in message)
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "9")]
 	pub body_length: usize,
 	/// (Always unencrypted, must be third field in message)
 	#[serde(rename = "35")]
-	pub msg_type: MsgType,
+	#[serde(default)]
+	pub msg_type: MsgType<T1, T2>,
 	/// (Always unencrypted)
 	#[serde(rename = "49")]
 	pub sender_comp_id: String,
@@ -132,291 +134,387 @@ pub struct Hop {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub enum MsgType {
-	/// <a href="message_Heartbeat_0.html" target="main">Heartbeat&nbsp;(0)</a>
+pub enum MsgType<const T1: char, const T2: char> {
+	/// Heartbeat
 	#[serde(rename = "0")]
-	AHrefMessageHeartbeat0HtmlTargetMainHeartbeatNbspA,
-	/// <a href="message_Test_Request_1.html" target="main">Test Request&nbsp;(1)</a>
+	Heartbeat,
+	/// Test Request
 	#[serde(rename = "1")]
-	AHrefMessageTestRequest1HtmlTargetMainTestRequestNbspA,
-	/// <a href="message_Resend_Request_2.html" target="main">Resend Request&nbsp;(2)</a>
+	TestRequest,
+	/// Resend Request
 	#[serde(rename = "2")]
-	AHrefMessageResendRequest2HtmlTargetMainResendRequestNbspA,
-	/// <a href="message_Reject_3.html" target="main">Reject&nbsp;(3)</a>
+	ResendRequest,
+	/// Reject
 	#[serde(rename = "3")]
-	AHrefMessageReject3HtmlTargetMainRejectNbspA,
-	/// <a href="message_Sequence_Reset_4.html" target="main">Sequence Reset&nbsp;(4)</a>
+	Reject,
+	/// Sequence Reset
 	#[serde(rename = "4")]
-	AHrefMessageSequenceReset4HtmlTargetMainSequenceResetNbspA,
-	/// <a href="message_Logout_5.html" target="main">Logout&nbsp;(5)</a>
+	SequenceReset,
+	/// Logout
 	#[serde(rename = "5")]
-	AHrefMessageLogout5HtmlTargetMainLogoutNbspA,
-	/// <a href="message_Indication_of_Interest_6.html" target="main">Indication of Interest&nbsp;(6)</a>
+	Logout,
+	/// Indication of Interest
 	#[serde(rename = "6")]
-	AHrefMessageIndicationOfInterest6HtmlTargetMainIndicationOfInterestNbspA,
-	/// <a href="message_Advertisement_7.html" target="main">Advertisement&nbsp;(7)</a>
+	IndicationOfInterest,
+	/// Advertisement
 	#[serde(rename = "7")]
-	AHrefMessageAdvertisement7HtmlTargetMainAdvertisementNbspA,
-	/// <a href="message_Execution_Report_8.html" target="main">Execution Report&nbsp;(8)</a>
+	Advertisement,
+	/// Execution Report
 	#[serde(rename = "8")]
-	AHrefMessageExecutionReport8HtmlTargetMainExecutionReportNbspA,
-	/// <a href="message_Order_Cancel_Reject_9.html" target="main">Order Cancel Reject&nbsp;(9)</a>
+	ExecutionReport,
+	/// Order Cancel Reject
 	#[serde(rename = "9")]
-	AHrefMessageOrderCancelReject9HtmlTargetMainOrderCancelRejectNbspA,
-	/// <a href="message_Logon_A.html" target="main">Logon&nbsp;(A)</a>
+	OrderCancelReject,
+	/// Logon
 	#[serde(rename = "A")]
-	AHrefMessageLogonAHtmlTargetMainLogonNbspA,
-	/// <a href="message_News_B.html" target="main">News&nbsp;(B)</a>
+	Logon,
+	/// News
 	#[serde(rename = "B")]
-	AHrefMessageNewsBHtmlTargetMainNewsNbspA,
-	/// <a href="message_Email_C.html" target="main">Email&nbsp;(C)</a>
+	News,
+	/// Email
 	#[serde(rename = "C")]
-	AHrefMessageEmailCHtmlTargetMainEmailNbspA,
-	/// <a href="message_New_Order_Single_D.html" target="main">New Order - Single&nbsp;(D)</a>
+	Email,
+	/// New Order - Single
 	#[serde(rename = "D")]
-	AHrefMessageNewOrderSingleDHtmlTargetMainNewOrderSingleNbspA,
-	/// <a href="message_New_Order_List_E.html" target="main">New Order - List&nbsp;(E)</a>
+	NewOrderSingle,
+	/// New Order - List
 	#[serde(rename = "E")]
-	AHrefMessageNewOrderListEHtmlTargetMainNewOrderListNbspA,
-	/// <a href="message_Order_Cancel_Request_F.html" target="main">Order Cancel Request&nbsp;(F)</a>
+	NewOrderList,
+	/// Order Cancel Request
 	#[serde(rename = "F")]
-	AHrefMessageOrderCancelRequestFHtmlTargetMainOrderCancelRequestNbspA,
-	/// <a href="message_Order_Cancel_Replace_Request_G.html" target="main">Order Cancel/Replace Request&nbsp;(G)</a>
+	OrderCancelRequest,
+	/// Order Cancel/Replace Request
 	#[serde(rename = "G")]
-	AHrefMessageOrderCancelReplaceRequestGHtmlTargetMainOrderCancelReplaceRequestNbspA,
-	/// <a href="message_Order_Status_Request_H.html" target="main">Order Status Request&nbsp;(H)</a>
+	OrderCancelReplaceRequest,
+	/// Order Status Request
 	#[serde(rename = "H")]
-	AHrefMessageOrderStatusRequestHHtmlTargetMainOrderStatusRequestNbspA,
-	/// <a href="message_Allocation_Instruction_J.html" target="main">Allocation&nbsp;(J)</a>
+	OrderStatusRequest,
+	/// Allocation
 	#[serde(rename = "J")]
-	AHrefMessageAllocationInstructionJHtmlTargetMainAllocationNbspA,
-	/// <a href="message_List_Cancel_Request_K.html" target="main">List Cancel Request&nbsp;(K)</a>
+	AllocationInstruction,
+	/// List Cancel Request
 	#[serde(rename = "K")]
-	AHrefMessageListCancelRequestKHtmlTargetMainListCancelRequestNbspA,
-	/// <a href="message_List_Execute_L.html" target="main">List Execute&nbsp;(L)</a>
+	ListCancelRequest,
+	/// List Execute
 	#[serde(rename = "L")]
-	AHrefMessageListExecuteLHtmlTargetMainListExecuteNbspA,
-	/// <a href="message_List_Status_Request_M.html" target="main">List Status Request&nbsp;(M)</a>
+	ListExecute,
+	/// List Status Request
 	#[serde(rename = "M")]
-	AHrefMessageListStatusRequestMHtmlTargetMainListStatusRequestNbspA,
-	/// <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a>
+	ListStatusRequest,
+	/// List Status
 	#[serde(rename = "N")]
-	AHrefMessageListStatusNHtmlTargetMainListStatusNbspA,
-	/// <a href="message_Allocation_Instruction_Ack_P.html" target="main">Allocation ACK&nbsp;(P)</a>
+	ListStatus,
+	/// Allocation ACK
 	#[serde(rename = "P")]
-	AHrefMessageAllocationInstructionAckPHtmlTargetMainAllocationAckNbspA,
-	/// <a href="message_Dont_Know_Trade_Q.html" target="main">Don't Know Trade&nbsp;(Q)</a>
+	AllocationInstructionAck,
+	/// Don't Know Trade
 	#[serde(rename = "Q")]
-	AHrefMessageDontKnowTradeQHtmlTargetMainDonTKnowTradeNbspA,
-	/// <a href="message_Quote_Request_R.html" target="main">Quote Request&nbsp;(R)</a>
+	DontKnowTrade,
+	/// Quote Request
 	#[serde(rename = "R")]
-	AHrefMessageQuoteRequestRHtmlTargetMainQuoteRequestNbspA,
-	/// <a href="message_Quote_S.html" target="main">Quote&nbsp;(S)</a>
+	QuoteRequest,
+	/// Quote
 	#[serde(rename = "S")]
-	AHrefMessageQuoteSHtmlTargetMainQuoteNbspA,
-	/// <a href="message_Settlement_Instructions_T.html" target="main">Settlement Instructions&nbsp;(T)</a>
+	Quote,
+	/// Settlement Instructions
 	#[serde(rename = "T")]
-	AHrefMessageSettlementInstructionsTHtmlTargetMainSettlementInstructionsNbspA,
-	/// <a href="message_Market_Data_Request_V.html" target="main">Market Data Request&nbsp;(V)</a>
+	SettlementInstructions,
+	/// Market Data Request
 	#[serde(rename = "V")]
-	AHrefMessageMarketDataRequestVHtmlTargetMainMarketDataRequestNbspA,
-	/// <a href="message_Market_Data_Snapshot_Full_Refresh_W.html" target="main">Market Data - Snapshot/Full Refresh&nbsp;(W)</a>
+	MarketDataRequest,
+	/// Market Data - Snapshot/Full Refresh
 	#[serde(rename = "W")]
-	AHrefMessageMarketDataSnapshotFullRefreshWHtmlTargetMainMarketDataSnapshotFullRefreshNbspA,
-	/// <a href="message_Market_Data_Incremental_Refresh_X.html" target="main">Market Data - Incremental Refresh&nbsp;(X)</a>
+	MarketDataSnapshotFullRefresh,
+	/// Market Data - Incremental Refresh
 	#[serde(rename = "X")]
-	AHrefMessageMarketDataIncrementalRefreshXHtmlTargetMainMarketDataIncrementalRefreshNbspA,
-	/// <a href="message_Market_Data_Request_Reject_Y.html" target="main">Market Data Request Reject&nbsp;(Y)</a>
+	MarketDataIncrementalRefresh,
+	/// Market Data Request Reject
 	#[serde(rename = "Y")]
-	AHrefMessageMarketDataRequestRejectYHtmlTargetMainMarketDataRequestRejectNbspA,
-	/// <a href="message_Quote_Cancel_Z.html" target="main">Quote Cancel&nbsp;(Z)</a>
+	MarketDataRequestReject,
+	/// Quote Cancel
 	#[serde(rename = "Z")]
-	AHrefMessageQuoteCancelZHtmlTargetMainQuoteCancelNbspA,
-	/// <a href="message_Quote_Status_Request_a.html" target="main">Quote Status Request&nbsp;(a)</a>
+	QuoteCancel,
+	/// Quote Status Request
 	#[serde(rename = "a")]
-	AHrefMessageQuoteStatusRequestAHtmlTargetMainQuoteStatusRequestNbspA,
-	/// <a href="message_Mass_Quote_Acknowledgement_b.html" target="main">Quote Acknowledgement&nbsp;(b)</a>
+	QuoteStatusRequest,
+	/// Quote Acknowledgement
 	#[serde(rename = "b")]
-	AHrefMessageMassQuoteAcknowledgementBHtmlTargetMainQuoteAcknowledgementNbspA,
-	/// <a href="message_Security_Definition_Request_c.html" target="main">Security Definition Request&nbsp;(c)</a>
+	MassQuoteAcknowledgement,
+	/// Security Definition Request
 	#[serde(rename = "c")]
-	AHrefMessageSecurityDefinitionRequestCHtmlTargetMainSecurityDefinitionRequestNbspA,
-	/// <a href="message_Security_Definition_d.html" target="main">Security Definition&nbsp;(d)</a>
+	SecurityDefinitionRequest,
+	/// Security Definition
 	#[serde(rename = "d")]
-	AHrefMessageSecurityDefinitionDHtmlTargetMainSecurityDefinitionNbspA,
-	/// <a href="message_Security_Status_Request_e.html" target="main">Security Status Request&nbsp;(e)</a>
+	SecurityDefinition,
+	/// Security Status Request
 	#[serde(rename = "e")]
-	AHrefMessageSecurityStatusRequestEHtmlTargetMainSecurityStatusRequestNbspA,
-	/// <a href="message_Security_Status_f.html" target="main">Security Status&nbsp;(f)</a>
+	SecurityStatusRequest,
+	/// Security Status
 	#[serde(rename = "f")]
-	AHrefMessageSecurityStatusFHtmlTargetMainSecurityStatusNbspA,
-	/// <a href="message_Trading_Session_Status_Request_g.html" target="main">Trading Session Status Request&nbsp;(g)</a>
+	SecurityStatus,
+	/// Trading Session Status Request
 	#[serde(rename = "g")]
-	AHrefMessageTradingSessionStatusRequestGHtmlTargetMainTradingSessionStatusRequestNbspA,
-	/// <a href="message_Trading_Session_Status_h.html" target="main">Trading Session Status&nbsp;(h)</a>
+	TradingSessionStatusRequest,
+	/// Trading Session Status
 	#[serde(rename = "h")]
-	AHrefMessageTradingSessionStatusHHtmlTargetMainTradingSessionStatusNbspA,
-	/// <a href="message_Mass_Quote_i.html" target="main">Mass Quote&nbsp;(i)</a>
+	TradingSessionStatus,
+	/// Mass Quote
 	#[serde(rename = "i")]
-	AHrefMessageMassQuoteIHtmlTargetMainMassQuoteNbspA,
-	/// <a href="message_Business_Message_Reject_j.html" target="main">Business Message Reject&nbsp;(j)</a>
+	MassQuote,
+	/// Business Message Reject
 	#[serde(rename = "j")]
-	AHrefMessageBusinessMessageRejectJHtmlTargetMainBusinessMessageRejectNbspA,
-	/// <a href="message_Bid_Request_k.html" target="main">Bid Request&nbsp;(k)</a>
+	BusinessMessageReject,
+	/// Bid Request
 	#[serde(rename = "k")]
-	AHrefMessageBidRequestKHtmlTargetMainBidRequestNbspA,
-	/// <a href="message_Bid_Response_l.html" target="main">Bid Response&nbsp;(l)</a>
+	BidRequest,
+	/// Bid Response
 	#[serde(rename = "l")]
-	AHrefMessageBidResponseLHtmlTargetMainBidResponseNbspA,
-	/// <a href="message_List_Strike_Price_m.html" target="main">List Strike Price&nbsp;(m)</a>
+	BidResponse,
+	/// List Strike Price
 	#[serde(rename = "m")]
-	AHrefMessageListStrikePriceMHtmlTargetMainListStrikePriceNbspA,
-	/// <a href="message_XML_message_n.html" target="main">XML message&nbsp;(n)</a>
+	ListStrikePrice,
+	/// XML message
 	#[serde(rename = "n")]
-	AHrefMessageXmlMessageNHtmlTargetMainXmlMessageNbspA,
-	/// <a href="message_Registration_Instructions_o.html" target="main">Registration Instructions&nbsp;(o)</a>
+	XmlMessage,
+	/// Registration Instructions
 	#[serde(rename = "o")]
-	AHrefMessageRegistrationInstructionsOHtmlTargetMainRegistrationInstructionsNbspA,
-	/// <a href="message_Registration_Instructions_Response_p.html" target="main">Registration Instructions Response&nbsp;(p)</a>
+	RegistrationInstructions,
+	/// Registration Instructions Response
 	#[serde(rename = "p")]
-	AHrefMessageRegistrationInstructionsResponsePHtmlTargetMainRegistrationInstructionsResponseNbspA,
-	/// <a href="message_Order_Mass_Cancel_Request_q.html" target="main">Order Mass Cancel Request&nbsp;(q)</a>
+	RegistrationInstructionsResponse,
+	/// Order Mass Cancel Request
 	#[serde(rename = "q")]
-	AHrefMessageOrderMassCancelRequestQHtmlTargetMainOrderMassCancelRequestNbspA,
-	/// <a href="message_Order_Mass_Cancel_Report_r.html" target="main">Order Mass Cancel Report&nbsp;(r)</a>
+	OrderMassCancelRequest,
+	/// Order Mass Cancel Report
 	#[serde(rename = "r")]
-	AHrefMessageOrderMassCancelReportRHtmlTargetMainOrderMassCancelReportNbspA,
-	/// <a href="message_New_Order_Cross_s.html" target="main">New Order - Cross&nbsp;(s)</a>
+	OrderMassCancelReport,
+	/// New Order - Cross
 	#[serde(rename = "s")]
-	AHrefMessageNewOrderCrossSHtmlTargetMainNewOrderCrossNbspA,
-	/// <a href="message_Cross_Order_Cancel_Replace_Request_t.html" target="main">Cross Order Cancel/Replace Request&nbsp;(t)</a>
+	NewOrderCross,
+	/// Cross Order Cancel/Replace Request
 	#[serde(rename = "t")]
-	AHrefMessageCrossOrderCancelReplaceRequestTHtmlTargetMainCrossOrderCancelReplaceRequestNbspA,
-	/// <a href="message_Cross_Order_Cancel_Request_u.html" target="main">Cross Order Cancel Request&nbsp;(u)</a>
+	CrossOrderCancelReplaceRequest,
+	/// Cross Order Cancel Request
 	#[serde(rename = "u")]
-	AHrefMessageCrossOrderCancelRequestUHtmlTargetMainCrossOrderCancelRequestNbspA,
-	/// <a href="message_Security_Type_Request_v.html" target="main">Security Type Request&nbsp;(v)</a>
+	CrossOrderCancelRequest,
+	/// Security Type Request
 	#[serde(rename = "v")]
-	AHrefMessageSecurityTypeRequestVHtmlTargetMainSecurityTypeRequestNbspA,
-	/// <a href="message_Security_Types_w.html" target="main">Security Types&nbsp;(w)</a>
+	SecurityTypeRequest,
+	/// Security Types
 	#[serde(rename = "w")]
-	AHrefMessageSecurityTypesWHtmlTargetMainSecurityTypesNbspA,
-	/// <a href="message_Security_List_Request_x.html" target="main">Security List Request&nbsp;(x)</a>
+	SecurityTypes,
+	/// Security List Request
 	#[serde(rename = "x")]
-	AHrefMessageSecurityListRequestXHtmlTargetMainSecurityListRequestNbspA,
-	/// <a href="message_Security_List_y.html" target="main">Security List&nbsp;(y)</a>
+	SecurityListRequest,
+	/// Security List
 	#[serde(rename = "y")]
-	AHrefMessageSecurityListYHtmlTargetMainSecurityListNbspA,
-	/// <a href="message_Derivative_Security_List_Request_z.html" target="main">Derivative Security List Request&nbsp;(z)</a>
+	SecurityList,
+	/// Derivative Security List Request
 	#[serde(rename = "z")]
-	AHrefMessageDerivativeSecurityListRequestZHtmlTargetMainDerivativeSecurityListRequestNbspA,
-	/// <a href="message_Derivative_Security_List_AA.html" target="main">Derivative Security List&nbsp;(AA)</a>
+	DerivativeSecurityListRequest,
+	/// Derivative Security List
 	#[serde(rename = "AA")]
-	AHrefMessageDerivativeSecurityListAaHtmlTargetMainDerivativeSecurityListNbspA,
-	/// <a href="message_New_Order_Multileg_AB.html" target="main">New Order - Multileg&nbsp;(AB)</a>
+	DerivativeSecurityList,
+	/// New Order - Multileg
 	#[serde(rename = "AB")]
-	AHrefMessageNewOrderMultilegAbHtmlTargetMainNewOrderMultilegNbspA,
-	/// <a href="message_Multileg_Order_Cancel_Replace_Request_AC.html" target="main">Multileg Order Cancel/Replace Request&nbsp;(AC)</a>
+	NewOrderMultileg,
+	/// Multileg Order Cancel/Replace Request
 	#[serde(rename = "AC")]
-	AHrefMessageMultilegOrderCancelReplaceRequestAcHtmlTargetMainMultilegOrderCancelReplaceRequestNbspA,
-	/// <a href="message_Trade_Capture_Report_Request_AD.html" target="main">Trade Capture Report Request&nbsp;(AD)</a>
+	MultilegOrderCancelReplaceRequest,
+	/// Trade Capture Report Request
 	#[serde(rename = "AD")]
-	AHrefMessageTradeCaptureReportRequestAdHtmlTargetMainTradeCaptureReportRequestNbspA,
-	/// <a href="message_Trade_Capture_Report_AE.html" target="main">Trade Capture Report&nbsp;(AE)</a>
+	TradeCaptureReportRequest,
+	/// Trade Capture Report
 	#[serde(rename = "AE")]
-	AHrefMessageTradeCaptureReportAeHtmlTargetMainTradeCaptureReportNbspA,
-	/// <a href="message_Order_Mass_Status_Request_AF.html" target="main">Order Mass Status Request&nbsp;(AF)</a>
+	TradeCaptureReport,
+	/// Order Mass Status Request
 	#[serde(rename = "AF")]
-	AHrefMessageOrderMassStatusRequestAfHtmlTargetMainOrderMassStatusRequestNbspA,
-	/// <a href="message_Quote_Request_Reject_AG.html" target="main">Quote Request Reject&nbsp;(AG)</a>
+	OrderMassStatusRequest,
+	/// Quote Request Reject
 	#[serde(rename = "AG")]
-	AHrefMessageQuoteRequestRejectAgHtmlTargetMainQuoteRequestRejectNbspA,
-	/// <a href="message_RFQ_Request_AH.html" target="main">RFQ Request&nbsp;(AH)</a>
+	QuoteRequestReject,
+	/// RFQ Request
 	#[serde(rename = "AH")]
-	AHrefMessageRfqRequestAhHtmlTargetMainRfqRequestNbspA,
-	/// <a href="message_Quote_Status_Report_AI.html" target="main">Quote Status Report&nbsp;(AI)</a>
+	RfqRequest,
+	/// Quote Status Report
 	#[serde(rename = "AI")]
-	AHrefMessageQuoteStatusReportAiHtmlTargetMainQuoteStatusReportNbspA,
-	/// <a href="message_Quote_Response_AJ.html" target="main">Quote Response&nbsp;(AJ)</a>
+	QuoteStatusReport,
+	/// Quote Response
 	#[serde(rename = "AJ")]
-	AHrefMessageQuoteResponseAjHtmlTargetMainQuoteResponseNbspA,
-	/// <a href="message_Confirmation_AK.html" target="main">Confirmation&nbsp;(AK)</a>
+	QuoteResponse,
+	/// Confirmation
 	#[serde(rename = "AK")]
-	AHrefMessageConfirmationAkHtmlTargetMainConfirmationNbspA,
-	/// <a href="message_Position_Maintenance_Request_AL.html" target="main">Position Maintenance Request&nbsp;(AL)</a>
+	Confirmation,
+	/// Position Maintenance Request
 	#[serde(rename = "AL")]
-	AHrefMessagePositionMaintenanceRequestAlHtmlTargetMainPositionMaintenanceRequestNbspA,
-	/// <a href="message_Position_Maintenance_Report_AM.html" target="main">Position Maintenance Report&nbsp;(AM)</a>
+	PositionMaintenanceRequest,
+	/// Position Maintenance Report
 	#[serde(rename = "AM")]
-	AHrefMessagePositionMaintenanceReportAmHtmlTargetMainPositionMaintenanceReportNbspA,
-	/// <a href="message_Request_for_Positions_AN.html" target="main">Request for Positions&nbsp;(AN)</a>
+	PositionMaintenanceReport,
+	/// Request for Positions
 	#[serde(rename = "AN")]
-	AHrefMessageRequestForPositionsAnHtmlTargetMainRequestForPositionsNbspA,
-	/// <a href="message_Request_for_Positions_Ack_AO.html" target="main">Request for Positions Ack&nbsp;(AO)</a>
+	RequestForPositions,
+	/// Request for Positions Ack
 	#[serde(rename = "AO")]
-	AHrefMessageRequestForPositionsAckAoHtmlTargetMainRequestForPositionsAckNbspA,
-	/// <a href="message_Position_Report_AP.html" target="main">Position Report&nbsp;(AP)</a>
+	RequestForPositionsAck,
+	/// Position Report
 	#[serde(rename = "AP")]
-	AHrefMessagePositionReportApHtmlTargetMainPositionReportNbspA,
-	/// <a href="message_Trade_Capture_Report_Request_Ack_AQ.html" target="main">Trade Capture Report Request Ack&nbsp;(AQ)</a>
+	PositionReport,
+	/// Trade Capture Report Request Ack
 	#[serde(rename = "AQ")]
-	AHrefMessageTradeCaptureReportRequestAckAqHtmlTargetMainTradeCaptureReportRequestAckNbspA,
-	/// <a href="message_Trade_Capture_Report_Ack_AR.html" target="main">Trade Capture Report Ack&nbsp;(AR)</a>
+	TradeCaptureReportRequestAck,
+	/// Trade Capture Report Ack
 	#[serde(rename = "AR")]
-	AHrefMessageTradeCaptureReportAckArHtmlTargetMainTradeCaptureReportAckNbspA,
-	/// <a href="message_Allocation_Report_AS.html" target="main">Allocation Report&nbsp;(AS)</a>
+	TradeCaptureReportAck,
+	/// Allocation Report
 	#[serde(rename = "AS")]
-	AHrefMessageAllocationReportAsHtmlTargetMainAllocationReportNbspA,
-	/// <a href="message_Allocation_Report_Ack_AT.html" target="main">Allocation Report Ack&nbsp;(AT)</a>
+	AllocationReport,
+	/// Allocation Report Ack
 	#[serde(rename = "AT")]
-	AHrefMessageAllocationReportAckAtHtmlTargetMainAllocationReportAckNbspA,
-	/// <a href="message_Confirmation_Ack_AU.html" target="main">Confirmation Ack&nbsp;(AU)</a>
+	AllocationReportAck,
+	/// Confirmation Ack
 	#[serde(rename = "AU")]
-	AHrefMessageConfirmationAckAuHtmlTargetMainConfirmationAckNbspA,
-	/// <a href="message_Settlement_Instruction_Request_AV.html" target="main">Settlement Instruction Request&nbsp;(AV)</a>
+	ConfirmationAck,
+	/// Settlement Instruction Request
 	#[serde(rename = "AV")]
-	AHrefMessageSettlementInstructionRequestAvHtmlTargetMainSettlementInstructionRequestNbspA,
-	/// <a href="message_Assignment_Report_AW.html" target="main">Assignment Report&nbsp;(AW)</a>
+	SettlementInstructionRequest,
+	/// Assignment Report
 	#[serde(rename = "AW")]
-	AHrefMessageAssignmentReportAwHtmlTargetMainAssignmentReportNbspA,
-	/// <a href="message_Collateral_Request_AX.html" target="main">Collateral Request&nbsp;(AX)</a>
+	AssignmentReport,
+	/// Collateral Request
 	#[serde(rename = "AX")]
-	AHrefMessageCollateralRequestAxHtmlTargetMainCollateralRequestNbspA,
-	/// <a href="message_Collateral_Assignment_AY.html" target="main">Collateral Assignment&nbsp;(AY)</a>
+	CollateralRequest,
+	/// Collateral Assignment
 	#[serde(rename = "AY")]
-	AHrefMessageCollateralAssignmentAyHtmlTargetMainCollateralAssignmentNbspA,
-	/// <a href="message_Collateral_Response_AZ.html" target="main">Collateral Response&nbsp;(AZ)</a>
+	CollateralAssignment,
+	/// Collateral Response
 	#[serde(rename = "AZ")]
-	AHrefMessageCollateralResponseAzHtmlTargetMainCollateralResponseNbspA,
-	/// <a href="message_Collateral_Report_BA.html" target="main">Collateral Report&nbsp;(BA)</a>
+	CollateralResponse,
+	/// Collateral Report
 	#[serde(rename = "BA")]
-	AHrefMessageCollateralReportBaHtmlTargetMainCollateralReportNbspA,
-	/// <a href="message_Collateral_Inquiry_BB.html" target="main">Collateral Inquiry&nbsp;(BB)</a>
+	CollateralReport,
+	/// Collateral Inquiry
 	#[serde(rename = "BB")]
-	AHrefMessageCollateralInquiryBbHtmlTargetMainCollateralInquiryNbspA,
-	/// <a href="message_Network_Counterparty_System_Status_Request_BC.html" target="main">Network Status Request&nbsp;(BC)</a>
+	CollateralInquiry,
+	/// Network Status Request
 	#[serde(rename = "BC")]
-	AHrefMessageNetworkCounterpartySystemStatusRequestBcHtmlTargetMainNetworkStatusRequestNbspA,
-	/// <a href="message_Network_Counterparty_System_Status_Response_BD.html" target="main">Network Status Response&nbsp;(BD)</a>
+	NetworkCounterpartySystemStatusRequest,
+	/// Network Status Response
 	#[serde(rename = "BD")]
-	AHrefMessageNetworkCounterpartySystemStatusResponseBdHtmlTargetMainNetworkStatusResponseNbspA,
-	/// <a href="message_User_Request_BE.html" target="main">User Request&nbsp;(BE)</a>
+	NetworkCounterpartySystemStatusResponse,
+	/// User Request
 	#[serde(rename = "BE")]
-	AHrefMessageUserRequestBeHtmlTargetMainUserRequestNbspA,
-	/// <a href="message_User_Response_BF.html" target="main">User Response&nbsp;(BF)</a>
+	UserRequest,
+	/// User Response
 	#[serde(rename = "BF")]
-	AHrefMessageUserResponseBfHtmlTargetMainUserResponseNbspA,
-	/// <a href="message_Collateral_Inquiry_Ack_BG.html" target="main">Collateral Inquiry Ack&nbsp;(BG)</a>
+	UserResponse,
+	/// Collateral Inquiry Ack
 	#[serde(rename = "BG")]
-	AHrefMessageCollateralInquiryAckBgHtmlTargetMainCollateralInquiryAckNbspA,
-	/// <a href="message_Confirmation_Request_BH.html" target="main">Confirmation Request&nbsp;(BH)</a>
+	CollateralInquiryAck,
+	/// Confirmation Request
 	#[serde(rename = "BH")]
-	AHrefMessageConfirmationRequestBhHtmlTargetMainConfirmationRequestNbspA,
+	ConfirmationRequest,
 }
 
-impl Default for MsgType {
+impl<const T1: char, const T2: char> Default for MsgType<T1, T2> {
 	fn default() -> Self {
-		MsgType::AHrefMessageHeartbeat0HtmlTargetMainHeartbeatNbspA
+		let temp = format!("{}{}", T1, T2).trim();
+        match temp.as_str() {
+            "0" => MsgType::Heartbeat,
+            "1" => MsgType::TestRequest,
+            "2" => MsgType::ResendRequest,
+            "3" => MsgType::Reject,
+            "4" => MsgType::SequenceReset,
+            "5" => MsgType::Logout,
+            "6" => MsgType::IndicationOfInterest,
+            "7" => MsgType::Advertisement,
+            "8" => MsgType::ExecutionReport,
+            "9" => MsgType::OrderCancelReject,
+            "A" => MsgType::Logon,
+            "B" => MsgType::News,
+            "C" => MsgType::Email,
+            "D" => MsgType::NewOrderSingle,
+            "E" => MsgType::NewOrderList,
+            "F" => MsgType::OrderCancelRequest,
+            "G" => MsgType::OrderCancelReplaceRequest,
+            "H" => MsgType::OrderStatusRequest,
+            "J" => MsgType::AllocationInstruction,
+            "K" => MsgType::ListCancelRequest,
+            "L" => MsgType::ListExecute,
+            "M" => MsgType::ListStatusRequest,
+            "N" => MsgType::ListStatus,
+            "P" => MsgType::AllocationInstructionAck,
+            "Q" => MsgType::DontKnowTrade,
+            "R" => MsgType::QuoteRequest,
+            "S" => MsgType::Quote,
+            "T" => MsgType::SettlementInstructions,
+            "V" => MsgType::MarketDataRequest,
+            "W" => MsgType::MarketDataSnapshotFullRefresh,
+            "X" => MsgType::MarketDataIncrementalRefresh,
+            "Y" => MsgType::MarketDataRequestReject,
+            "Z" => MsgType::QuoteCancel,
+            "a" => MsgType::QuoteStatusRequest,
+            "b" => MsgType::MassQuoteAcknowledgement,
+            "c" => MsgType::SecurityDefinitionRequest,
+            "d" => MsgType::SecurityDefinition,
+            "e" => MsgType::SecurityStatusRequest,
+            "f" => MsgType::SecurityStatus,
+            "g" => MsgType::TradingSessionStatusRequest,
+            "h" => MsgType::TradingSessionStatus,
+            "i" => MsgType::MassQuote,
+            "j" => MsgType::BusinessMessageReject,
+            "k" => MsgType::BidRequest,
+            "l" => MsgType::BidResponse,
+            "m" => MsgType::ListStrikePrice,
+            "n" => MsgType::XmlMessage,
+            "o" => MsgType::RegistrationInstructions,
+            "p" => MsgType::RegistrationInstructionsResponse,
+            "q" => MsgType::OrderMassCancelRequest,
+            "r" => MsgType::OrderMassCancelReport,
+            "s" => MsgType::NewOrderCross,
+            "t" => MsgType::CrossOrderCancelReplaceRequest,
+            "u" => MsgType::CrossOrderCancelRequest,
+            "v" => MsgType::SecurityTypeRequest,
+            "w" => MsgType::SecurityTypes,
+            "x" => MsgType::SecurityListRequest,
+            "y" => MsgType::SecurityList,
+            "z" => MsgType::DerivativeSecurityListRequest,
+            "AA" => MsgType::DerivativeSecurityList,
+            "AB" => MsgType::NewOrderMultileg,
+            "AC" => MsgType::MultilegOrderCancelReplaceRequest,
+            "AD" => MsgType::TradeCaptureReportRequest,
+            "AE" => MsgType::TradeCaptureReport,
+            "AF" => MsgType::OrderMassStatusRequest,
+            "AG" => MsgType::QuoteRequestReject,
+            "AH" => MsgType::RfqRequest,
+            "AI" => MsgType::QuoteStatusReport,
+            "AJ" => MsgType::QuoteResponse,
+            "AK" => MsgType::Confirmation,
+            "AL" => MsgType::PositionMaintenanceRequest,
+            "AM" => MsgType::PositionMaintenanceReport,
+            "AN" => MsgType::RequestForPositions,
+            "AO" => MsgType::RequestForPositionsAck,
+            "AP" => MsgType::PositionReport,
+            "AQ" => MsgType::TradeCaptureReportRequestAck,
+            "AR" => MsgType::TradeCaptureReportAck,
+            "AS" => MsgType::AllocationReport,
+            "AT" => MsgType::AllocationReportAck,
+            "AU" => MsgType::ConfirmationAck,
+            "AV" => MsgType::SettlementInstructionRequest,
+            "AW" => MsgType::AssignmentReport,
+            "AX" => MsgType::CollateralRequest,
+            "AY" => MsgType::CollateralAssignment,
+            "AZ" => MsgType::CollateralResponse,
+            "BA" => MsgType::CollateralReport,
+            "BB" => MsgType::CollateralInquiry,
+            "BC" => MsgType::NetworkCounterpartySystemStatusRequest,
+            "BD" => MsgType::NetworkCounterpartySystemStatusResponse,
+            "BE" => MsgType::UserRequest,
+            "BF" => MsgType::UserResponse,
+            "BG" => MsgType::CollateralInquiryAck,
+            "BH" => MsgType::ConfirmationRequest,
+            _ => unimplemented!(),
+		}
 	}
 }
 
