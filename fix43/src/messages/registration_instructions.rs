@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct RegistrationInstructions {
 	/// MsgType = o
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'o', ' '>,
 	/// RegistID
 	#[serde(rename = "513")]
 	pub regist_id: String,

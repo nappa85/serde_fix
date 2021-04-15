@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct NewOrderList {
 	/// MsgType = E
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'E', ' '>,
 	/// Must be unique, by customer, for the day
 	#[serde(rename = "66")]
 	pub list_id: String,

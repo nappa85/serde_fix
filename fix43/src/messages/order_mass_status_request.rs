@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderMassStatusRequest {
 	/// MsgType = AF
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'F'>,
 	/// Unique ID of <a href="message_Order_Mass_Status_Request_AF.html" target="main">Order Mass Status Request&nbsp;(AF)</a> as assigned by the institution.
 	#[serde(rename = "584")]
 	pub mass_status_req_id: String,

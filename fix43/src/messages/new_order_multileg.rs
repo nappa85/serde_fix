@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct NewOrderMultileg {
 	/// MsgType = AB
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'B'>,
 	/// Unique identifier of the order as assigned by institution or by the intermediary with closest association with the investor.
 	#[serde(rename = "11")]
 	pub cl_ord_id: String,

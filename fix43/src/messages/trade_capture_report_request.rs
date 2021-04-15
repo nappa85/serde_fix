@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TradeCaptureReportRequest {
 	/// MsgType = AD
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'D'>,
 	/// Identifier for the trade request
 	#[serde(rename = "568")]
 	pub trade_request_id: String,

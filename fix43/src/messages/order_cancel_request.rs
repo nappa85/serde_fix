@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderCancelRequest {
 	/// MsgType = F
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'F', ' '>,
 	/// <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> of the previous non-rejected order (NOT the initial order of the day) when canceling or replacing an order.
 	#[serde(rename = "41")]
 	pub orig_cl_ord_id: String,

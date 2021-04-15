@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct CrossOrderCancelRequest {
 	/// MsgType = u
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'u', ' '>,
 	/// Unique identifier of most recent order as assigned by sell-side (broker, exchange, ECN).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]

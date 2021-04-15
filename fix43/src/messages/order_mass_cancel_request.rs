@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderMassCancelRequest {
 	/// MsgType = q
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'q', ' '>,
 	/// Unique ID of <a href="message_Order_Mass_Cancel_Request_q.html" target="main">Order Mass Cancel Request&nbsp;(q)</a> as assigned by the institution.
 	#[serde(rename = "11")]
 	pub cl_ord_id: String,

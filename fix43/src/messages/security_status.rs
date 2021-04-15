@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityStatus {
 	/// MsgType = f
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'f', ' '>,
 	/// SecurityStatusReqID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "324")]

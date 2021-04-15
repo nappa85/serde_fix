@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ResendRequest {
 	/// MsgType = 2
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'2', ' '>,
 	/// BeginSeqNo
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "7")]

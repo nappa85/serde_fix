@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SettlementInstructions {
 	/// MsgType = T
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'T', ' '>,
 	/// Unique message ID regardless of <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a>
 	#[serde(rename = "162")]
 	pub settl_inst_id: String,

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct NewOrderCross {
 	/// MsgType = s
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'s', ' '>,
 	/// CrossID
 	#[serde(rename = "548")]
 	pub cross_id: String,

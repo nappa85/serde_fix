@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TradingSessionStatus {
 	/// MsgType = h
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'h', ' '>,
 	/// Provided for a response to a specific <a href="message_Trading_Session_Status_Request_g.html" target="main">Trading Session Status Request&nbsp;(g)</a> message (snapshot).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "335")]

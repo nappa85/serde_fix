@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderMassCancelReport {
 	/// MsgType = r
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'r', ' '>,
 	/// <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> provided on the <a href="message_Order_Mass_Cancel_Request_q.html" target="main">Order Mass Cancel Request&nbsp;(q)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "11")]

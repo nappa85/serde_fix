@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TradeCaptureReport {
 	/// MsgType = AE
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'E'>,
 	/// Unique identifier for the <a href="message_Trade_Capture_Report_AE.html" target="main">Trade Capture Report&nbsp;(AE)</a>
 	#[serde(rename = "571")]
 	pub trade_report_id: String,

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityStatusRequest {
 	/// MsgType = e
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'e', ' '>,
 	/// Must be unique, or the ID of previous <a href="message_Security_Status_Request_e.html" target="main">Security Status Request&nbsp;(e)</a> to disable if <a href="tag_263_SubscriptionRequestType.html" target="bottom">SubscriptionRequestType&nbsp;(263)</a> = Disable previous Snapshot + Updates Request (2).
 	#[serde(rename = "324")]
 	pub security_status_req_id: String,

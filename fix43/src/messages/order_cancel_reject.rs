@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderCancelReject {
 	/// MsgType = 9
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'9', ' '>,
 	/// If <a href="tag_102_CxlRejReason.html" target="bottom">CxlRejReason&nbsp;(102)</a> ="Unknown order", specify "NONE".
 	#[serde(rename = "37")]
 	pub order_id: String,

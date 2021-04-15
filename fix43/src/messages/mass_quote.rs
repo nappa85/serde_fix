@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MassQuote {
 	/// MsgType = i
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'i', ' '>,
 	/// Required when quote is in response to a <a href="message_Quote_Request_R.html" target="main">Quote Request&nbsp;(R)</a> message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "131")]
@@ -63,11 +63,14 @@ pub struct QuoteSet {
 	pub quote_set_valid_until_time: Option<fix_common::UTCTimestamp>,
 	/// Total number of quotes for the QuoteSet across all messages. Should be the sum of all <a href="tag_295_NoQuoteEntries.html" target="bottom">NoQuoteEntries&nbsp;(295)</a> in each message that has repeating quotes that are part of the same QuoteSet.
 	#[serde(rename = "304")]
-	pub tot_quote_entries: TotQuoteEntries,
+	pub tot_quote_entries: usize,
 	/// The number of quotes for this <a href="tag_55_Symbol.html" target="bottom">Symbol&nbsp;(55)</a> (instrument) (QuoteSet) that follow in this message. ** Nested Repeating Group follows **
-	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "295")]
-	pub no_quote_entries: usize,
+	pub quote_entries: fix_common::RepeatingValues<QuoteEntry>,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+pub struct QuoteEntry {
 	/// Uniquely identifies the quote as part of a QuoteSet. Must be used if NoQuoteEntries is used
 	#[serde(rename = "299")]
 	pub quote_entry_id: String,
@@ -262,10 +265,6 @@ impl Default for AccountType {
 	fn default() -> Self {
 		AccountType::AccountIsCarriedOnCustomerSideOfBooks
 	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum TotQuoteEntries {
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

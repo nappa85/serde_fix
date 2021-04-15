@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Logon {
 	/// MsgType = A
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', ' '>,
 	/// (Always unencrypted)
 	#[serde(rename = "98")]
 	pub encrypt_method: EncryptMethod,

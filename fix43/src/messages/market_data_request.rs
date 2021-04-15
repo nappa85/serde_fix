@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MarketDataRequest {
 	/// MsgType = V
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'V', ' '>,
 	/// Must be unique, or the ID of previous <a href="message_Market_Data_Request_V.html" target="main">Market Data Request&nbsp;(V)</a> to disable if <a href="tag_263_SubscriptionRequestType.html" target="bottom">SubscriptionRequestType&nbsp;(263)</a> = Disable previous Snapshot + Updates Request (2).
 	#[serde(rename = "262")]
 	pub md_req_id: String,

@@ -2,10 +2,10 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct AllocationACK {
+pub struct AllocationAck {
 	/// MsgType = P
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'P', ' '>,
 	/// Parties
 	#[serde(flatten)]
 	pub parties: Option<super::super::parties::Parties>,

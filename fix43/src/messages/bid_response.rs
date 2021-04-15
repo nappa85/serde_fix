@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct BidResponse {
 	/// MsgType = l
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'l', ' '>,
 	/// BidID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "390")]

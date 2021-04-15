@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderCancelReplaceRequest {
 	/// MsgType = G
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'G', ' '>,
 	/// Unique identifier of most recent order as assigned by sell-side (broker, exchange, ECN).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]

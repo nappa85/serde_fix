@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityDefinitionRequest {
 	/// MsgType = c
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'c', ' '>,
 	/// SecurityReqID
 	#[serde(rename = "320")]
 	pub security_req_id: String,

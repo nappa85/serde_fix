@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Allocation {
 	/// MsgType = J
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'J', ' '>,
 	/// AllocID
 	#[serde(rename = "70")]
 	pub alloc_id: String,

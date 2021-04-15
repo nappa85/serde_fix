@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct DontKnowTrade {
 	/// MsgType = Q
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'Q', ' '>,
 	/// Broker Order ID as identified on problem execution
 	#[serde(rename = "37")]
 	pub order_id: String,

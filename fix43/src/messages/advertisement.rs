@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Advertisement {
 	/// MsgType = 7
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'7', ' '>,
 	/// AdvId
 	#[serde(rename = "2")]
 	pub adv_id: String,

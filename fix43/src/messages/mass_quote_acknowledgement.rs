@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MassQuoteAcknowledgement {
 	/// MsgType = b
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'b', ' '>,
 	/// Required when acknowledgment is in response to a <a href="message_Quote_Request_R.html" target="main">Quote Request&nbsp;(R)</a> message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "131")]

@@ -18,7 +18,7 @@ pub mod reject;
 pub mod business_message_reject;
 pub mod rfq_request;
 pub mod registration_instructions_response;
-pub mod don't_know_trade;
+pub mod dont_know_trade;
 pub mod allocation_ack;
 pub mod quote_cancel;
 pub mod order_mass_cancel_request;

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct QuoteRequestReject {
 	/// MsgType = AG
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'G'>,
 	/// QuoteReqID
 	#[serde(rename = "131")]
 	pub quote_req_id: String,

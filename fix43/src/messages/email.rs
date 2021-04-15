@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Email {
 	/// MsgType = C
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', ' '>,
 	/// Unique identifier for the email message thread
 	#[serde(rename = "164")]
 	pub email_thread_id: String,
@@ -28,11 +28,11 @@ pub struct Email {
 	/// Required if any <a href="tag_216_RoutingType.html" target="bottom">RoutingType&nbsp;(216)</a> and RoutingIDs are specified. Indicates the number within repeating group.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "215")]
-	pub routing_i_ds: Option<fix_common::RepeatingValues<RoutingID>>,
+	pub routing_ids: Option<fix_common::RepeatingValues<RoutingID>>,
 	/// Specifies the number of repeating symbols (instruments) specified
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "146")]
-	pub related_sym: Option<fix_common::RepeatingValues<RelatedSy>>,
+	pub related_sym: Option<fix_common::RepeatingValues<super::super::instrument::Instrument>>,
 	/// OrderID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
@@ -43,7 +43,7 @@ pub struct Email {
 	pub cl_ord_id: Option<String>,
 	/// Specifies the number of repeating lines of text specified
 	#[serde(rename = "33")]
-	pub nes_of_text: fix_common::RepeatingValues<nesOfTex>,
+	pub lines_of_text: fix_common::RepeatingValues<LinesOfTex>,
 	/// RawDataLength
 	#[serde(rename = "95")]
 	/// RawData
@@ -68,11 +68,7 @@ pub struct RoutingID {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct RelatedSy {
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct nesOfTex {
+pub struct LinesOfTex {
 	/// Repeating field, number of instances defined in <a href="tag_33_LinesOfText.html" target="bottom">LinesOfText&nbsp;(33)</a>
 	#[serde(rename = "58")]
 	pub text: String,

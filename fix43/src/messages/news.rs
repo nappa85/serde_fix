@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct News {
 	/// MsgType = B
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', ' '>,
 	/// OrigTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42")]
@@ -26,14 +26,14 @@ pub struct News {
 	/// Required if any <a href="tag_216_RoutingType.html" target="bottom">RoutingType&nbsp;(216)</a> and RoutingIDs are specified. Indicates the number within repeating group.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "215")]
-	pub routing_i_ds: Option<fix_common::RepeatingValues<RoutingID>>,
+	pub routing_ids: Option<fix_common::RepeatingValues<RoutingID>>,
 	/// Specifies the number of repeating symbols (instruments) specified
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "146")]
-	pub related_sym: Option<fix_common::RepeatingValues<RelatedSy>>,
+	pub related_sym: Option<fix_common::RepeatingValues<super::super::instrument::Instrument>>,
 	/// Specifies the number of repeating lines of text specified
 	#[serde(rename = "33")]
-	pub nes_of_text: fix_common::RepeatingValues<nesOfTex>,
+	pub lines_of_text: fix_common::RepeatingValues<LinesOfTex>,
 	/// A URL (Uniform Resource Locator) link to additional information (i.e. http://en.wikipedia.org/wiki/Uniform_Resource_Locator)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "149")]
@@ -62,11 +62,7 @@ pub struct RoutingID {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct RelatedSy {
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct nesOfTex {
+pub struct LinesOfTex {
 	/// Repeating field, number of instances defined in <a href="tag_33_LinesOfText.html" target="bottom">LinesOfText&nbsp;(33)</a>
 	#[serde(rename = "58")]
 	pub text: String,

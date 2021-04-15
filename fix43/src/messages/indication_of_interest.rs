@@ -2,10 +2,10 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct IndicationofInterest {
+pub struct IndicationOfInterest {
 	/// MsgType = 6
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'6', ' '>,
 	/// IOIid
 	#[serde(rename = "23")]
 	pub io_iid: String,
