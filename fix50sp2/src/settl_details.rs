@@ -29,7 +29,7 @@ pub struct SettlDetail {
 	pub stand_inst_db_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlObligSource {
 	/// Instructions of Broker
 	#[serde(rename = "1")]
@@ -54,7 +54,7 @@ impl Default for SettlObligSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StandInstDbType {
 	/// Other
 	#[serde(rename = "0")]

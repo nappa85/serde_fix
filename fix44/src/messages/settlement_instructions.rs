@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SettlementInstructions {
 	/// MsgType = T
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'T', ' '>,
 	/// Unique identifier for this message
 	#[serde(rename = "777")]
 	pub settl_inst_msg_id: String,
@@ -126,7 +126,7 @@ pub struct SettlIns {
 	pub payment_remitter_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlInstMode {
 	/// Standing Instructions Provided
 	#[serde(rename = "1")]
@@ -145,7 +145,7 @@ impl Default for SettlInstMode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlInstReqRejCode {
 	/// unable to process request (e.g. database unavailable)
 	#[serde(rename = "0")]
@@ -167,7 +167,7 @@ impl Default for SettlInstReqRejCode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlInstTransType {
 	/// New
 	#[serde(rename = "N")]
@@ -190,7 +190,7 @@ impl Default for SettlInstTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -248,7 +248,7 @@ impl Default for Side {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -297,7 +297,7 @@ impl Default for Product {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityType {
 	/// Federal government or treasury
 	#[serde(rename = "TREASURY")]
@@ -607,7 +607,7 @@ impl Default for SecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentMethod {
 	/// CREST
 	#[serde(rename = "1")]

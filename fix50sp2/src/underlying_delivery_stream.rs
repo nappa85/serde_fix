@@ -129,7 +129,7 @@ pub struct UnderlyingDeliveryStream {
 	pub underlying_delivery_stream_route_or_charter: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamType {
 	/// Periodic (default if not specified)
 	#[serde(rename = "0")]
@@ -148,7 +148,7 @@ impl Default for UnderlyingDeliveryStreamType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamDeliveryRestriction {
 	/// Firm (Never excused of delivery obligations)
 	#[serde(rename = "1")]
@@ -174,7 +174,7 @@ impl Default for UnderlyingDeliveryStreamDeliveryRestriction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamDeliveryContingentPartySide {
 	/// Buyer
 	#[serde(rename = "0")]
@@ -190,7 +190,7 @@ impl Default for UnderlyingDeliveryStreamDeliveryContingentPartySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamTitleTransferCondition {
 	/// Transfers with risk of loss
 	#[serde(rename = "0")]
@@ -206,7 +206,7 @@ impl Default for UnderlyingDeliveryStreamTitleTransferCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamToleranceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -460,7 +460,7 @@ impl Default for UnderlyingDeliveryStreamToleranceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamToleranceType {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -476,7 +476,7 @@ impl Default for UnderlyingDeliveryStreamToleranceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamToleranceOptionSide {
 	/// Buyer
 	#[serde(rename = "1")]
@@ -492,7 +492,7 @@ impl Default for UnderlyingDeliveryStreamToleranceOptionSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamElectingPartySide {
 	/// Buyer
 	#[serde(rename = "0")]
@@ -508,7 +508,7 @@ impl Default for UnderlyingDeliveryStreamElectingPartySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingDeliveryStreamDeliveryPointSource {
 	/// Proprietary
 	#[serde(rename = "0")]

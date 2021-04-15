@@ -71,7 +71,7 @@ pub struct DeliverySchedule {
 	pub delivery_schedule_settl_holidays_processing_instruction: Option<DeliveryScheduleSettlHolidaysProcessingInstruction>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryScheduleType {
 	/// Notional
 	#[serde(rename = "0")]
@@ -90,7 +90,7 @@ impl Default for DeliveryScheduleType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryScheduleNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -344,7 +344,7 @@ impl Default for DeliveryScheduleNotionalUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryScheduleNotionalCommodityFrequency {
 	/// Term
 	#[serde(rename = "0")]
@@ -375,7 +375,7 @@ impl Default for DeliveryScheduleNotionalCommodityFrequency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryScheduleToleranceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -629,7 +629,7 @@ impl Default for DeliveryScheduleToleranceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryScheduleToleranceType {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -645,7 +645,7 @@ impl Default for DeliveryScheduleToleranceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryScheduleSettlFlowType {
 	/// All times
 	#[serde(rename = "0")]
@@ -673,7 +673,7 @@ impl Default for DeliveryScheduleSettlFlowType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryScheduleSettlHolidaysProcessingInstruction {
 	/// Do not include holidays
 	#[serde(rename = "0")]

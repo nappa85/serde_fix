@@ -23,7 +23,7 @@ pub struct Expiratio {
 	pub exp_qty: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExpType {
 	/// Auto Exercise
 	#[serde(rename = "1")]

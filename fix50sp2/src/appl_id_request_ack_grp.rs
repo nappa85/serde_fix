@@ -43,7 +43,7 @@ pub struct ApplID {
 	pub appl_response_error: Option<ApplResponseError>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ApplResponseError {
 	/// Application does not exist
 	#[serde(rename = "0")]

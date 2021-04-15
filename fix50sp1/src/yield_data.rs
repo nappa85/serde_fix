@@ -33,7 +33,7 @@ pub struct YieldData {
 	pub yield_redemption_price_type: Option<YieldRedemptionPriceType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum YieldType {
 	/// After Tax Yield (Municipals)
 	#[serde(rename = "AFTERTAX")]
@@ -145,7 +145,7 @@ impl Default for YieldType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum YieldRedemptionPriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]

@@ -33,7 +33,7 @@ pub struct PartyDetail {
 	pub party_detail_status: Option<PartyDetailStatus>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailIDSource {
 	/// BIC (Bank Identification Code-Swift managed) code (ISO 9362)
 	#[serde(rename = "B")]
@@ -133,7 +133,7 @@ impl Default for PartyDetailIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
 	#[serde(rename = "1")]
@@ -520,7 +520,7 @@ impl Default for PartyDetailRole {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailRoleQualifier {
 	/// Agency
 	#[serde(rename = "0")]
@@ -620,7 +620,7 @@ impl Default for PartyDetailRoleQualifier {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailStatus {
 	/// Active (default if not specified)
 	#[serde(rename = "0")]

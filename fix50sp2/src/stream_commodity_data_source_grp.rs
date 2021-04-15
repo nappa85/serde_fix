@@ -21,7 +21,7 @@ pub struct StreamCommodityDataSource {
 	pub stream_commodity_data_source_id_type: Option<StreamCommodityDataSourceIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCommodityDataSourceIDType {
 	/// City (4 character business center code)
 	#[serde(rename = "0")]

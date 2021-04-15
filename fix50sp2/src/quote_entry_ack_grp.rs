@@ -166,7 +166,7 @@ pub struct QuoteEntrie {
 	pub quote_entry_reject_reason: Option<QuoteEntryRejectReason>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -197,7 +197,7 @@ impl Default for TradingSessionID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -247,7 +247,7 @@ impl Default for TradingSessionSubID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdType {
 	/// Market
 	#[serde(rename = "1")]
@@ -339,7 +339,7 @@ impl Default for OrdType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1549,7 +1549,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BookingType {
 	/// Regular booking
 	#[serde(rename = "0")]
@@ -1568,7 +1568,7 @@ impl Default for BookingType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderCapacity {
 	/// Agency
 	#[serde(rename = "A")]
@@ -1599,7 +1599,7 @@ impl Default for OrderCapacity {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderRestrictions {
 	/// Program Trade
 	#[serde(rename = "1")]
@@ -1663,7 +1663,7 @@ impl Default for OrderRestrictions {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteEntryStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -1700,7 +1700,7 @@ impl Default for QuoteEntryStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteEntryRejectReason {
 	/// Unknown symbol (security)
 	#[serde(rename = "1")]

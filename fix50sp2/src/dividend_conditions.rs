@@ -111,7 +111,7 @@ pub struct DividendConditions {
 	pub all_dividends_indicator: Option<fix_common::Boolean>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DividendEntitlementEvent {
 	/// Ex-date
 	#[serde(rename = "0")]
@@ -127,7 +127,7 @@ impl Default for DividendEntitlementEvent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DividendAmountType {
 	/// Record amount
 	#[serde(rename = "0")]
@@ -149,7 +149,7 @@ impl Default for DividendAmountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NonCashDividendTreatment {
 	/// Potential adjustment event
 	#[serde(rename = "0")]
@@ -165,7 +165,7 @@ impl Default for NonCashDividendTreatment {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DividendComposition {
 	/// Equity amount receiver election
 	#[serde(rename = "0")]

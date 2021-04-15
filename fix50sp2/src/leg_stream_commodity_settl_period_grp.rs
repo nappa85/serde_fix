@@ -71,7 +71,7 @@ pub struct LegStreamCommoditySettlPeriod {
 	pub leg_stream_commodity_settl_period_xid_ref: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlFlowType {
 	/// All times
 	#[serde(rename = "0")]
@@ -99,7 +99,7 @@ impl Default for LegStreamCommoditySettlFlowType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlPeriodNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -353,7 +353,7 @@ impl Default for LegStreamCommoditySettlPeriodNotionalUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlPeriodFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -375,7 +375,7 @@ impl Default for LegStreamCommoditySettlPeriodFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlPeriodPriceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -629,7 +629,7 @@ impl Default for LegStreamCommoditySettlPeriodPriceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlHolidaysProcessingInstruction {
 	/// Do not include holidays
 	#[serde(rename = "0")]

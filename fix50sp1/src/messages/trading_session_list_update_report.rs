@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TradingSessionListUpdateReport {
 	/// MsgType = BS
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'S'>,
 	/// ApplicationSequenceControl
 	#[serde(flatten)]
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
@@ -170,7 +170,7 @@ pub struct TradingSession {
 	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -189,7 +189,7 @@ impl Default for TradSesUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -217,7 +217,7 @@ impl Default for TradingSessionID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -248,7 +248,7 @@ impl Default for TradingSessionSubID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesMethod {
 	/// Electronic
 	#[serde(rename = "1")]
@@ -267,7 +267,7 @@ impl Default for TradSesMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesMode {
 	/// Testing
 	#[serde(rename = "1")]
@@ -286,7 +286,7 @@ impl Default for TradSesMode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
 	#[serde(rename = "N")]
@@ -302,7 +302,7 @@ impl Default for UnsolicitedIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesStatus {
 	/// Unknown
 	#[serde(rename = "0")]
@@ -333,7 +333,7 @@ impl Default for TradSesStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesStatusRejReason {
 	/// Unknown or invalid TradingSessionID
 	#[serde(rename = "1")]
@@ -349,7 +349,7 @@ impl Default for TradSesStatusRejReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdType {
 	/// Market
 	#[serde(rename = "1")]
@@ -431,7 +431,7 @@ impl Default for OrdType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
 	#[serde(rename = "0")]
@@ -471,7 +471,7 @@ impl Default for TimeInForce {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExecInstValue {
 	/// Stay on offerside
 	#[serde(rename = "0")]
@@ -649,7 +649,7 @@ impl Default for ExecInstValue {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchType {
 	/// ACT Accepted Trade
 	#[serde(rename = "M3")]
@@ -740,7 +740,7 @@ impl Default for MatchType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
 	#[serde(rename = "0")]
@@ -756,7 +756,7 @@ impl Default for MarketDepth {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDBookType {
 	/// Top of Book
 	#[serde(rename = "1")]

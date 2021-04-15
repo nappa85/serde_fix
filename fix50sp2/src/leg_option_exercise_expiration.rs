@@ -55,7 +55,7 @@ pub struct LegOptionExerciseExpiration {
 	pub leg_option_exercise_expiration_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -89,7 +89,7 @@ impl Default for LegOptionExerciseExpirationDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -129,7 +129,7 @@ impl Default for LegOptionExerciseExpirationDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -151,7 +151,7 @@ impl Default for LegOptionExerciseExpirationDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -173,7 +173,7 @@ impl Default for LegOptionExerciseExpirationFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationRollConvention {
 	/// 1st day of the month
 	#[serde(rename = "1")]
@@ -321,7 +321,7 @@ impl Default for LegOptionExerciseExpirationRollConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

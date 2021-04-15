@@ -733,7 +733,7 @@ pub struct Instrument {
 	pub coupon_other_day_count: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -839,7 +839,7 @@ impl Default for SecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -888,7 +888,7 @@ impl Default for Product {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -1359,7 +1359,7 @@ impl Default for SecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrmtAssignmentMethod {
 	/// Random
 	#[serde(rename = "R")]
@@ -1375,7 +1375,7 @@ impl Default for InstrmtAssignmentMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityStatus {
 	/// Active
 	#[serde(rename = "1")]
@@ -1418,7 +1418,7 @@ impl Default for SecurityStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RestructuringType {
 	/// Full Restructuring
 	#[serde(rename = "FR")]
@@ -1440,7 +1440,7 @@ impl Default for RestructuringType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Seniority {
 	/// Senior Secured
 	#[serde(rename = "SD")]
@@ -1468,7 +1468,7 @@ impl Default for Seniority {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RepoCollateralSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -1939,7 +1939,7 @@ impl Default for RepoCollateralSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CountryOfIssue {
 	/// AFGHANISTAN
 	#[serde(rename = "AF")]
@@ -2666,7 +2666,7 @@ impl Default for CountryOfIssue {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrikeCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -3876,7 +3876,7 @@ impl Default for StrikeCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrikePriceDeterminationMethod {
 	/// Fixed Strike
 	#[serde(rename = "1")]
@@ -3898,7 +3898,7 @@ impl Default for StrikePriceDeterminationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrikePriceBoundaryMethod {
 	/// Less than underlying price is in-the-money (ITM)
 	#[serde(rename = "1")]
@@ -3923,7 +3923,7 @@ impl Default for StrikePriceBoundaryMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPriceDeterminationMethod {
 	/// Regular
 	#[serde(rename = "1")]
@@ -3945,7 +3945,7 @@ impl Default for UnderlyingPriceDeterminationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ContractMultiplierUnit {
 	/// Shares
 	#[serde(rename = "0")]
@@ -3964,7 +3964,7 @@ impl Default for ContractMultiplierUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum FlowScheduleType {
 	/// NERC Eastern Off-Peak
 	#[serde(rename = "0")]
@@ -4007,7 +4007,7 @@ impl Default for FlowScheduleType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -4261,7 +4261,7 @@ impl Default for UnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -4515,7 +4515,7 @@ impl Default for PriceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlMethod {
 	/// Election at exercise (The settlement method will be elected at the time of contract exercise)
 	#[serde(rename = "E")]
@@ -4534,7 +4534,7 @@ impl Default for SettlMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExerciseStyle {
 	/// European
 	#[serde(rename = "0")]
@@ -4556,7 +4556,7 @@ impl Default for ExerciseStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptPayoutType {
 	/// Vanilla
 	#[serde(rename = "1")]
@@ -4593,7 +4593,7 @@ impl Default for OptPayoutType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceQuoteMethod {
 	/// Standard, money per unit of a physical
 	#[serde(rename = "STD")]
@@ -4615,7 +4615,7 @@ impl Default for PriceQuoteMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ValuationMethod {
 	/// premium style
 	#[serde(rename = "EQTY")]
@@ -4640,7 +4640,7 @@ impl Default for ValuationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListMethod {
 	/// pre-listed only
 	#[serde(rename = "0")]
@@ -4656,7 +4656,7 @@ impl Default for ListMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PutOrCall {
 	/// Put
 	#[serde(rename = "0")]
@@ -4678,7 +4678,7 @@ impl Default for PutOrCall {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TimeUnit {
 	/// Hour
 	#[serde(rename = "H")]
@@ -4712,7 +4712,7 @@ impl Default for TimeUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CPProgram {
 	/// 3(a)(3)
 	#[serde(rename = "1")]
@@ -4749,7 +4749,7 @@ impl Default for CPProgram {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceQuoteCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -5959,7 +5959,7 @@ impl Default for PriceQuoteCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ObligationType {
 	/// Bond
 	#[serde(rename = "0")]
@@ -5981,7 +5981,7 @@ impl Default for ObligationType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ShortSaleRestriction {
 	/// No restrictions
 	#[serde(rename = "0")]
@@ -6003,7 +6003,7 @@ impl Default for ShortSaleRestriction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnitOfMeasureCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -7213,7 +7213,7 @@ impl Default for UnitOfMeasureCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceUnitOfMeasureCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -8423,7 +8423,7 @@ impl Default for PriceUnitOfMeasureCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AssetClass {
 	/// Interest rate
 	#[serde(rename = "1")]
@@ -8466,7 +8466,7 @@ impl Default for AssetClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AssetSubClass {
 	/// Single currency
 	#[serde(rename = "1")]
@@ -8620,7 +8620,7 @@ impl Default for AssetSubClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SwapClass {
 	/// Basis swap
 	#[serde(rename = "BS")]
@@ -8642,7 +8642,7 @@ impl Default for SwapClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CouponType {
 	/// Zero
 	#[serde(rename = "0")]
@@ -8664,7 +8664,7 @@ impl Default for CouponType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CouponFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -8698,7 +8698,7 @@ impl Default for CouponFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CouponDayCount {
 	/// 1/1 (If parties specify the Day Count Fraction to be 1/1 then in calculating the applicable amount, 1 is simply input into
 	/// the calculation as the relevant Day Count Fraction.)
@@ -8798,7 +8798,7 @@ impl Default for CouponDayCount {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ConvertibleBondEquityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -8904,7 +8904,7 @@ impl Default for ConvertibleBondEquityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LienSeniority {
 	/// Unknown
 	#[serde(rename = "0")]
@@ -8926,7 +8926,7 @@ impl Default for LienSeniority {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LoanFacility {
 	/// Bridge loan
 	#[serde(rename = "0")]
@@ -8954,7 +8954,7 @@ impl Default for LoanFacility {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ReferenceEntityType {
 	/// Asian
 	#[serde(rename = "1")]
@@ -8994,7 +8994,7 @@ impl Default for ReferenceEntityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SwapSubClass {
 	/// Amortizing notional schedule
 	#[serde(rename = "AMTZ")]
@@ -9019,7 +9019,7 @@ impl Default for SwapSubClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrikeUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -9273,7 +9273,7 @@ impl Default for StrikeUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrategyType {
 	/// Straddle
 	#[serde(rename = "STD")]
@@ -9301,7 +9301,7 @@ impl Default for StrategyType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlDisruptionProvision {
 	/// Negotiation
 	#[serde(rename = "1")]
@@ -9317,7 +9317,7 @@ impl Default for SettlDisruptionProvision {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentRoundingDirection {
 	/// Round to nearest
 	#[serde(rename = "0")]
@@ -9336,7 +9336,7 @@ impl Default for InstrumentRoundingDirection {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AssetGroup {
 	/// Financials (A categorization which usually includes rates, foreign exchange, credit, bonds and equity products or assets)
 	#[serde(rename = "1")]
@@ -9356,7 +9356,7 @@ impl Default for AssetGroup {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlSubMethod {
 	/// Shares
 	#[serde(rename = "1")]
@@ -9387,7 +9387,7 @@ impl Default for SettlSubMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrikeIndexQuote {
 	/// Bid
 	#[serde(rename = "0")]
@@ -9406,7 +9406,7 @@ impl Default for StrikeIndexQuote {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExtraordinaryEventAdjustmentMethod {
 	/// Calculation agent
 	#[serde(rename = "0")]
@@ -9422,7 +9422,7 @@ impl Default for ExtraordinaryEventAdjustmentMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InTheMoneyCondition {
 	/// Standard in-the-money
 	#[serde(rename = "0")]
@@ -9444,7 +9444,7 @@ impl Default for InTheMoneyCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ReturnTrigger {
 	/// Dividend
 	#[serde(rename = "1")]

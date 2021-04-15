@@ -39,7 +39,7 @@ pub struct RootPartyID {
 	pub root_party_sub_id_type: Option<RootPartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RootPartyIDSource {
 	/// BIC (Bank Identification Code-Swift managed) code (ISO 9362)
 	#[serde(rename = "B")]
@@ -103,7 +103,7 @@ impl Default for RootPartyIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RootPartyRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
 	#[serde(rename = "1")]
@@ -344,7 +344,7 @@ impl Default for RootPartyRole {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RootPartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

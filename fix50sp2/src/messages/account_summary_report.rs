@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct AccountSummaryReport {
 	/// MsgType = CQ
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'Q'>,
 	/// ApplicationSequenceControl
 	#[serde(flatten)]
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
@@ -66,7 +66,7 @@ pub struct AccountSummaryReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlSessID {
 	/// Intraday
 	#[serde(rename = "ITD")]
@@ -88,7 +88,7 @@ impl Default for SettlSessID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]

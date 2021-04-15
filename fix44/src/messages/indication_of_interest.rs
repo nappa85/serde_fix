@@ -2,10 +2,10 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct IndicationofInterest {
+pub struct IndicationOfInterest {
 	/// MsgType = 6
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'6', ' '>,
 	/// IOIid
 	#[serde(rename = "23")]
 	pub io_iid: String,
@@ -142,7 +142,7 @@ pub struct RoutingID {
 	pub routing_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IOITransType {
 	/// New
 	#[serde(rename = "N")]
@@ -161,7 +161,7 @@ impl Default for IOITransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -219,7 +219,7 @@ impl Default for Side {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
 	#[serde(rename = "0")]
@@ -235,7 +235,7 @@ impl Default for QtyType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IOIQty {
 	/// Small
 	#[serde(rename = "S")]
@@ -254,7 +254,7 @@ impl Default for IOIQty {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1464,7 +1464,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]
@@ -1507,7 +1507,7 @@ impl Default for PriceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IOIQltyInd {
 	/// Low
 	#[serde(rename = "L")]
@@ -1526,7 +1526,7 @@ impl Default for IOIQltyInd {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IOINaturalFlag {
 	/// Natural
 	#[serde(rename = "Y")]
@@ -1542,7 +1542,7 @@ impl Default for IOINaturalFlag {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegIOIQty {
 	/// Small
 	#[serde(rename = "S")]
@@ -1561,7 +1561,7 @@ impl Default for LegIOIQty {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IOIQualifierItem {
 	/// All or none
 	#[serde(rename = "A")]
@@ -1625,7 +1625,7 @@ impl Default for IOIQualifierItem {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RoutingType {
 	/// Target Firm
 	#[serde(rename = "1")]

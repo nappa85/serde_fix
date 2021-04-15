@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct News {
 	/// MsgType = B
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', ' '>,
 	/// OrigTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "42")]
@@ -82,7 +82,7 @@ pub struct LinesOfTex {
 	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Urgency {
 	/// Normal
 	#[serde(rename = "0")]
@@ -101,7 +101,7 @@ impl Default for Urgency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RoutingType {
 	/// Target Firm
 	#[serde(rename = "1")]

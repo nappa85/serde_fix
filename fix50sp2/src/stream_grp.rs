@@ -102,7 +102,7 @@ pub struct Stream {
 	pub stream_notional_adjustments: Option<StreamNotionalAdjustments>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamType {
 	/// Payment / cash settlement
 	#[serde(rename = "0")]
@@ -118,7 +118,7 @@ impl Default for StreamType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamPaySide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -134,7 +134,7 @@ impl Default for StreamPaySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamReceiveSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -150,7 +150,7 @@ impl Default for StreamReceiveSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamNotionalFrequencyUnit {
 	/// Hour
 	#[serde(rename = "H")]
@@ -184,7 +184,7 @@ impl Default for StreamNotionalFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamNotionalCommodityFrequency {
 	/// Term
 	#[serde(rename = "0")]
@@ -215,7 +215,7 @@ impl Default for StreamNotionalCommodityFrequency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -469,7 +469,7 @@ impl Default for StreamNotionalUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamTotalNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -723,7 +723,7 @@ impl Default for StreamTotalNotionalUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamNotionalAdjustments {
 	/// Execution
 	#[serde(rename = "0")]

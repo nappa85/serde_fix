@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyRiskLimitsDefinitionRequestAck {
 	/// MsgType = CT
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'T'>,
 	/// RiskLimitRequestID
 	#[serde(rename = "1666")]
 	pub risk_limit_request_id: String,
@@ -37,7 +37,7 @@ pub struct PartyRiskLimitsDefinitionRequestAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitRequestResult {
 	/// Successful
 	#[serde(rename = "0")]
@@ -98,7 +98,7 @@ impl Default for RiskLimitRequestResult {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitRequestStatus {
 	/// Accepted
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct DerivativeSecurityListUpdateReport {
 	/// MsgType = BR
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'R'>,
 	/// ApplicationSequenceControl
 	#[serde(flatten)]
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
@@ -60,7 +60,7 @@ pub struct DerivativeSecurityListUpdateReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityRequestResult {
 	/// Valid request
 	#[serde(rename = "0")]
@@ -88,7 +88,7 @@ impl Default for SecurityRequestResult {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -107,7 +107,7 @@ impl Default for SecurityUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]

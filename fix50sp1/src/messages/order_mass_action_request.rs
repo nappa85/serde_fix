@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderMassActionRequest {
 	/// MsgType = CA
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'A'>,
 	/// Unique identifier of the order as assigned by institution or by the intermediary (CIV term, not a hub/service bureau) with
 	/// closest association with the investor.
 	#[serde(rename = "11")]
@@ -67,7 +67,7 @@ pub struct OrderMassActionRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MassActionType {
 	/// TSuspend orders
 	#[serde(rename = "0")]
@@ -86,7 +86,7 @@ impl Default for MassActionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MassActionScope {
 	/// All orders for a security
 	#[serde(rename = "1")]
@@ -126,7 +126,7 @@ impl Default for MassActionScope {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -154,7 +154,7 @@ impl Default for TradingSessionID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -185,7 +185,7 @@ impl Default for TradingSessionSubID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

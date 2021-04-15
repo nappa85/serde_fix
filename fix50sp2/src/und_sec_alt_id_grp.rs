@@ -21,7 +21,7 @@ pub struct UnderlyingSecurityAltI {
 	pub underlying_security_alt_id_source: Option<UnderlyingSecurityAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingSecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

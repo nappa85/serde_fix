@@ -261,7 +261,7 @@ pub struct LegPaymentSchedule {
 	pub leg_payment_schedule_fixing_first_observation_date_offset_unit: Option<LegPaymentScheduleFixingFirstObservationDateOffsetUnit>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleType {
 	/// Notional
 	#[serde(rename = "0")]
@@ -343,7 +343,7 @@ impl Default for LegPaymentScheduleType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleStubType {
 	/// Initial
 	#[serde(rename = "0")]
@@ -365,7 +365,7 @@ impl Default for LegPaymentScheduleStubType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentSchedulePaySide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -381,7 +381,7 @@ impl Default for LegPaymentSchedulePaySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleReceiveSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -397,7 +397,7 @@ impl Default for LegPaymentScheduleReceiveSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateSpreadPositionType {
 	/// Short
 	#[serde(rename = "0")]
@@ -413,7 +413,7 @@ impl Default for LegPaymentScheduleRateSpreadPositionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateTreatment {
 	/// Bond equivalent yield
 	#[serde(rename = "0")]
@@ -429,7 +429,7 @@ impl Default for LegPaymentScheduleRateTreatment {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleStepFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -463,7 +463,7 @@ impl Default for LegPaymentScheduleStepFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleStepRelativeTo {
 	/// Initial
 	#[serde(rename = "0")]
@@ -479,7 +479,7 @@ impl Default for LegPaymentScheduleStepRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -519,7 +519,7 @@ impl Default for LegPaymentScheduleFixingDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -553,7 +553,7 @@ impl Default for LegPaymentScheduleFixingDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -575,7 +575,7 @@ impl Default for LegPaymentScheduleFixingDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -603,7 +603,7 @@ impl Default for LegPaymentScheduleFixingDateOffsetDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleInterimExchangePaymentDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -643,7 +643,7 @@ impl Default for LegPaymentScheduleInterimExchangePaymentDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleInterimExchangeDatesBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -677,7 +677,7 @@ impl Default for LegPaymentScheduleInterimExchangeDatesBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleInterimExchangeDatesOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -699,7 +699,7 @@ impl Default for LegPaymentScheduleInterimExchangeDatesOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleInterimExchangeDatesOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -727,7 +727,7 @@ impl Default for LegPaymentScheduleInterimExchangeDatesOffsetDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -981,7 +981,7 @@ impl Default for LegPaymentScheduleRateUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateSpreadType {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -997,7 +997,7 @@ impl Default for LegPaymentScheduleRateSpreadType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleSettlPeriodPriceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -1251,7 +1251,7 @@ impl Default for LegPaymentScheduleSettlPeriodPriceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleStepUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -1505,7 +1505,7 @@ impl Default for LegPaymentScheduleStepUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingDayDistribution {
 	/// All
 	#[serde(rename = "0")]
@@ -1527,7 +1527,7 @@ impl Default for LegPaymentScheduleFixingDayDistribution {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingLagUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -1549,7 +1549,7 @@ impl Default for LegPaymentScheduleFixingLagUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleFixingFirstObservationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]

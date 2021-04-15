@@ -21,7 +21,7 @@ pub struct ReferenceDataDate {
 	pub reference_data_date_type: Option<ReferenceDataDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ReferenceDataDateType {
 	/// Date of request for admission to trading
 	#[serde(rename = "0")]

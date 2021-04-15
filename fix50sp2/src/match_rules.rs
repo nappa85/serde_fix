@@ -29,7 +29,7 @@ pub struct MatchRule {
 	pub customer_priority: Option<CustomerPriority>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchType {
 	/// ACT Accepted Trade
 	#[serde(rename = "M3")]
@@ -129,7 +129,7 @@ impl Default for MatchType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CustomerPriority {
 	/// No priority
 	#[serde(rename = "0")]

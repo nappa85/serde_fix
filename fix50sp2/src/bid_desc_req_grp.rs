@@ -73,7 +73,7 @@ pub struct BidDescriptor {
 	pub value_of_futures: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BidDescriptorType {
 	/// Sector
 	#[serde(rename = "1")]
@@ -92,7 +92,7 @@ impl Default for BidDescriptorType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SideValueInd {
 	/// Side Value 1
 	#[serde(rename = "1")]

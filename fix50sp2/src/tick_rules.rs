@@ -52,7 +52,7 @@ pub struct TickRule {
 	pub tick_rule_product_complex: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TickRuleType {
 	/// Regular
 	#[serde(rename = "0")]

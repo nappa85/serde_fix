@@ -39,7 +39,7 @@ pub struct Nested2PartyID {
 	pub nested_2_party_sub_id_type: Option<Nested2PartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Nested2PartyIDSource {
 	/// BIC (Bank Identification Code-Swift managed) code (ISO 9362)
 	#[serde(rename = "B")]
@@ -103,7 +103,7 @@ impl Default for Nested2PartyIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Nested2PartyRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
 	#[serde(rename = "1")]
@@ -224,7 +224,7 @@ impl Default for Nested2PartyRole {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Nested2PartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

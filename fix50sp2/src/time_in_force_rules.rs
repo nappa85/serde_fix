@@ -17,7 +17,7 @@ pub struct TimeInForceRule {
 	pub time_in_force: Option<TimeInForce>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
 	#[serde(rename = "0")]

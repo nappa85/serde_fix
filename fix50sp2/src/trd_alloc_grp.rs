@@ -132,7 +132,7 @@ pub struct Alloc {
 	pub alloc_leg_ref_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocAcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -163,7 +163,7 @@ impl Default for AllocAcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocSettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1373,7 +1373,7 @@ impl Default for AllocSettlCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocHandlInst {
 	/// Match
 	#[serde(rename = "1")]
@@ -1395,7 +1395,7 @@ impl Default for AllocHandlInst {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocMethod {
 	/// Automatic
 	#[serde(rename = "1")]
@@ -1417,7 +1417,7 @@ impl Default for AllocMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeAllocStatus {
 	/// Pending clear
 	#[serde(rename = "0")]
@@ -1439,7 +1439,7 @@ impl Default for TradeAllocStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocationRollupInstruction {
 	/// Roll up
 	#[serde(rename = "0")]
@@ -1455,7 +1455,7 @@ impl Default for AllocationRollupInstruction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocRefRiskLimitCheckIDType {
 	/// RiskLimitRequestID(1666)
 	#[serde(rename = "0")]

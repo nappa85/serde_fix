@@ -29,7 +29,7 @@ pub struct SecondaryAssetClasse {
 	pub secondary_asset_sub_type: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecondaryAssetClass {
 	/// Interest rate
 	#[serde(rename = "1")]
@@ -72,7 +72,7 @@ impl Default for SecondaryAssetClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecondaryAssetSubClass {
 	/// Single currency
 	#[serde(rename = "1")]

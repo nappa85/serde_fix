@@ -17,7 +17,7 @@ pub struct TradePriceCondition {
 	pub trade_price_condition_item: Option<TradePriceConditionItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradePriceConditionItem {
 	/// Special cum dividend(CD)
 	#[serde(rename = "0")]

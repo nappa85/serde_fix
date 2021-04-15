@@ -21,7 +21,7 @@ pub struct PartyDetailAltID {
 	pub party_detail_alt_id_source: Option<PartyDetailAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailAltIDSource {
 	/// BIC (Bank Identification Code-Swift managed) code (ISO 9362)
 	#[serde(rename = "B")]

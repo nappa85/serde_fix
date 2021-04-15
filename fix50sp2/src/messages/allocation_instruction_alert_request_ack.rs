@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct AllocationInstructionAlertRequestAck {
 	/// MsgType = DV
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'V'>,
 	/// Unique identifier for this message. If used, other allocation messages may link to the request through this field.
 	#[serde(rename = "2758")]
 	pub alloc_request_id: String,
@@ -28,7 +28,7 @@ pub struct AllocationInstructionAlertRequestAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocRequestStatus {
 	/// Accepted
 	#[serde(rename = "0")]

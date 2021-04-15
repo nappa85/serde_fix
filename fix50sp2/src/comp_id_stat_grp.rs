@@ -34,7 +34,7 @@ pub struct CompID {
 	pub status_text: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StatusValue {
 	/// Connected
 	#[serde(rename = "1")]

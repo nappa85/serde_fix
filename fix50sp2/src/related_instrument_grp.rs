@@ -59,7 +59,7 @@ pub struct RelatedInstrument {
 	pub related_to_dividend_period_xid_ref: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedInstrumentType {
 	/// "hedges for" instrument
 	#[serde(rename = "1")]
@@ -87,7 +87,7 @@ impl Default for RelatedInstrumentType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -193,7 +193,7 @@ impl Default for RelatedSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]

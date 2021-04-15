@@ -46,7 +46,7 @@ pub struct ComplexEventRelativeDate {
 	pub complex_event_fixing_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -86,7 +86,7 @@ impl Default for ComplexEventDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -108,7 +108,7 @@ impl Default for ComplexEventDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -136,7 +136,7 @@ impl Default for ComplexEventDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]

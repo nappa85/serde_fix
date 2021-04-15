@@ -21,7 +21,7 @@ pub struct LegStreamCommodityDataSource {
 	pub leg_stream_commodity_data_source_id_type: Option<LegStreamCommodityDataSourceIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCommodityDataSourceIDType {
 	/// City (4 character business center code)
 	#[serde(rename = "0")]

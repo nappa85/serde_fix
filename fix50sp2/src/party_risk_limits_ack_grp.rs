@@ -48,7 +48,7 @@ pub struct PartyRiskLimit {
 	pub party_risk_limit_status: Option<PartyRiskLimitStatus>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -70,7 +70,7 @@ impl Default for ListUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -89,7 +89,7 @@ impl Default for RiskLimitStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitResult {
 	/// Successful
 	#[serde(rename = "0")]
@@ -150,7 +150,7 @@ impl Default for RiskLimitResult {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitCheckModelType {
 	/// None (default if not specified)
 	#[serde(rename = "0")]
@@ -172,7 +172,7 @@ impl Default for RiskLimitCheckModelType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyRiskLimitStatus {
 	/// Disabled
 	#[serde(rename = "0")]

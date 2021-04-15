@@ -43,7 +43,7 @@ pub struct RelatedSy {
 	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityTradingStatus {
 	/// Opening delay
 	#[serde(rename = "1")]
@@ -131,7 +131,7 @@ impl Default for SecurityTradingStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityTradingEvent {
 	/// Order imbalance, auction is extended
 	#[serde(rename = "1")]
@@ -168,7 +168,7 @@ impl Default for SecurityTradingEvent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum HaltReason {
 	/// News Dissemination
 	#[serde(rename = "0")]
@@ -196,7 +196,7 @@ impl Default for HaltReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum FinancialStatus {
 	/// Bankrupt
 	#[serde(rename = "1")]
@@ -215,7 +215,7 @@ impl Default for FinancialStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CorporateAction {
 	/// Ex-Dividend
 	#[serde(rename = "A")]

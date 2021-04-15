@@ -93,7 +93,7 @@ pub struct UnderlyingProvisionOptionExerciseDates {
 	pub underlying_provision_option_exercise_latest_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -127,7 +127,7 @@ impl Default for UnderlyingProvisionOptionExerciseBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -161,7 +161,7 @@ impl Default for UnderlyingProvisionOptionExerciseFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseStartDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -201,7 +201,7 @@ impl Default for UnderlyingProvisionOptionExerciseStartDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseStartDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -223,7 +223,7 @@ impl Default for UnderlyingProvisionOptionExerciseStartDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseStartDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

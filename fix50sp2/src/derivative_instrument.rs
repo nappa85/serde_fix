@@ -301,7 +301,7 @@ pub struct DerivativeInstrument {
 	pub derivative_contrary_instruction_eligibility_indicator: Option<fix_common::Boolean>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -407,7 +407,7 @@ impl Default for DerivativeSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeProduct {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -456,7 +456,7 @@ impl Default for DerivativeProduct {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -927,7 +927,7 @@ impl Default for DerivativeSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSecurityStatus {
 	/// Active
 	#[serde(rename = "1")]
@@ -943,7 +943,7 @@ impl Default for DerivativeSecurityStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeCountryOfIssue {
 	/// AFGHANISTAN
 	#[serde(rename = "AF")]
@@ -1670,7 +1670,7 @@ impl Default for DerivativeCountryOfIssue {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeStrikeCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2880,7 +2880,7 @@ impl Default for DerivativeStrikeCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeContractMultiplierUnit {
 	/// Shares
 	#[serde(rename = "0")]
@@ -2899,7 +2899,7 @@ impl Default for DerivativeContractMultiplierUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeFlowScheduleType {
 	/// NERC Eastern Off-Peak
 	#[serde(rename = "0")]
@@ -2942,7 +2942,7 @@ impl Default for DerivativeFlowScheduleType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -3196,7 +3196,7 @@ impl Default for DerivativeUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativePriceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -3450,7 +3450,7 @@ impl Default for DerivativePriceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSettlMethod {
 	/// Cash settlement required
 	#[serde(rename = "C")]
@@ -3466,7 +3466,7 @@ impl Default for DerivativeSettlMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativePriceQuoteMethod {
 	/// Standard, money per unit of a physical
 	#[serde(rename = "STD")]
@@ -3488,7 +3488,7 @@ impl Default for DerivativePriceQuoteMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeValuationMethod {
 	/// premium style
 	#[serde(rename = "EQTY")]
@@ -3513,7 +3513,7 @@ impl Default for DerivativeValuationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeListMethod {
 	/// pre-listed only
 	#[serde(rename = "0")]
@@ -3529,7 +3529,7 @@ impl Default for DerivativeListMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativePutOrCall {
 	/// Put
 	#[serde(rename = "0")]
@@ -3551,7 +3551,7 @@ impl Default for DerivativePutOrCall {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeExerciseStyle {
 	/// European
 	#[serde(rename = "0")]
@@ -3573,7 +3573,7 @@ impl Default for DerivativeExerciseStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeTimeUnit {
 	/// Hour
 	#[serde(rename = "H")]
@@ -3607,7 +3607,7 @@ impl Default for DerivativeTimeUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativePriceQuoteCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -4817,7 +4817,7 @@ impl Default for DerivativePriceQuoteCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeUnitOfMeasureCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -6027,7 +6027,7 @@ impl Default for DerivativeUnitOfMeasureCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativePriceUnitOfMeasureCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]

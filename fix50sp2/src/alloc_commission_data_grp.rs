@@ -76,7 +76,7 @@ pub struct AllocCommission {
 	pub alloc_commission_amount_sub_type: Option<AllocCommissionAmountSubType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocCommissionAmountType {
 	/// Unspecified
 	#[serde(rename = "0")]
@@ -110,7 +110,7 @@ impl Default for AllocCommissionAmountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocCommissionBasis {
 	/// Per unit
 	#[serde(rename = "1")]
@@ -129,7 +129,7 @@ impl Default for AllocCommissionBasis {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocCommissionAmountSubType {
 	/// Research payment (RPA)
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyRiskLimitsRequest {
 	/// MsgType = CL
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'L'>,
 	/// ApplicationSequenceControl
 	#[serde(flatten)]
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
@@ -56,7 +56,7 @@ pub struct PartyRiskLimitsRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]
@@ -75,7 +75,7 @@ impl Default for SubscriptionRequestType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitRequestType {
 	/// Definitions (default)
 	#[serde(rename = "1")]

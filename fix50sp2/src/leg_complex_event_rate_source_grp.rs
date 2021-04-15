@@ -29,7 +29,7 @@ pub struct LegComplexEventRateSource {
 	pub leg_complex_even_reference_page_heading: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventRateSourceItem {
 	/// Bloomberg
 	#[serde(rename = "0")]
@@ -55,7 +55,7 @@ impl Default for LegComplexEventRateSourceItem {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventRateSourceType {
 	/// Primary
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SettlementObligationReport {
 	/// MsgType = BQ
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'Q'>,
 	/// ApplicationSequenceControl
 	#[serde(flatten)]
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
@@ -121,7 +121,7 @@ pub struct SettlObli {
 	pub settl_oblig_source: Option<SettlObligSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlObligMode {
 	/// Preliminary
 	#[serde(rename = "1")]
@@ -137,7 +137,7 @@ impl Default for SettlObligMode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NetGrossInd {
 	/// Net
 	#[serde(rename = "1")]
@@ -153,7 +153,7 @@ impl Default for NetGrossInd {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlObligTransType {
 	/// Cancel
 	#[serde(rename = "C")]
@@ -175,7 +175,7 @@ impl Default for SettlObligTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1385,7 +1385,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2595,7 +2595,7 @@ impl Default for SettlCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlObligSource {
 	/// Instructions of Broker
 	#[serde(rename = "1")]

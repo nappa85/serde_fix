@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct UserRequest {
 	/// MsgType = BE
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'E'>,
 	/// UserRequestID
 	#[serde(rename = "923")]
 	pub user_request_id: String,
@@ -34,7 +34,7 @@ pub struct UserRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UserRequestType {
 	/// Log On User
 	#[serde(rename = "1")]

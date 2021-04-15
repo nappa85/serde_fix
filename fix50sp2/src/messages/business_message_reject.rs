@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct BusinessMessageReject {
 	/// MsgType = j
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'j', ' '>,
 	/// MsgSeqNum of rejected message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -52,7 +52,7 @@ pub struct BusinessMessageReject {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RefMsgType {
 	/// Heartbeat
 	#[serde(rename = "0")]
@@ -536,7 +536,7 @@ impl Default for RefMsgType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BusinessRejectReason {
 	/// Other
 	#[serde(rename = "0")]

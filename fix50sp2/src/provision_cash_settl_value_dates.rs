@@ -44,7 +44,7 @@ pub struct ProvisionCashSettlValueDates {
 	pub provision_cash_settl_value_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlValueDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -78,7 +78,7 @@ impl Default for ProvisionCashSettlValueDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlValueDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -118,7 +118,7 @@ impl Default for ProvisionCashSettlValueDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlValueDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -140,7 +140,7 @@ impl Default for ProvisionCashSettlValueDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlValueDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

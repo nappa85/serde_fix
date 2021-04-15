@@ -47,7 +47,7 @@ pub struct ComplexEventCreditEvent {
 	pub complex_event_credit_event_rate_source: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventCreditEventUnit {
 	/// Day
 	#[serde(rename = "D")]

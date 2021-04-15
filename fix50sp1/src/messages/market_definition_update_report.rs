@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MarketDefinitionUpdateReport {
 	/// MsgType = BV
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'V'>,
 	/// ApplicationSequenceControl
 	#[serde(flatten)]
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
@@ -226,7 +226,7 @@ pub struct ExecInstRule {
 	pub exec_inst_value: Option<ExecInstValue>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarketUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -245,7 +245,7 @@ impl Default for MarketUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1455,7 +1455,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceLimitType {
 	/// Price
 	#[serde(rename = "0")]
@@ -1474,7 +1474,7 @@ impl Default for PriceLimitType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExpirationCycle {
 	/// Expire on trading session close (default)
 	#[serde(rename = "0")]
@@ -1493,7 +1493,7 @@ impl Default for ExpirationCycle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ImpliedMarketIndicator {
 	/// Not implied
 	#[serde(rename = "0")]
@@ -1515,7 +1515,7 @@ impl Default for ImpliedMarketIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2725,7 +2725,7 @@ impl Default for TradingCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MultilegModel {
 	/// Predefined Multileg Security
 	#[serde(rename = "0")]
@@ -2744,7 +2744,7 @@ impl Default for MultilegModel {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MultilegPriceMethod {
 	/// Net Price
 	#[serde(rename = "0")]
@@ -2772,7 +2772,7 @@ impl Default for MultilegPriceMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]
@@ -2836,7 +2836,7 @@ impl Default for PriceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TickRuleType {
 	/// Regular
 	#[serde(rename = "0")]
@@ -2861,7 +2861,7 @@ impl Default for TickRuleType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LotType {
 	/// Odd Lot
 	#[serde(rename = "1")]
@@ -2880,7 +2880,7 @@ impl Default for LotType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdType {
 	/// Market
 	#[serde(rename = "1")]
@@ -2962,7 +2962,7 @@ impl Default for OrdType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
 	#[serde(rename = "0")]
@@ -3002,7 +3002,7 @@ impl Default for TimeInForce {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExecInstValue {
 	/// Stay on offerside
 	#[serde(rename = "0")]

@@ -21,7 +21,7 @@ pub struct LegOptionExerciseExpirationDate {
 	pub leg_option_exercise_expiration_date_type: Option<LegOptionExerciseExpirationDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseExpirationDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

@@ -21,7 +21,7 @@ pub struct UnderlyingComplexEventPeriod {
 	pub underlying_complex_event_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventPeriodType {
 	/// Asian Out
 	#[serde(rename = "0")]

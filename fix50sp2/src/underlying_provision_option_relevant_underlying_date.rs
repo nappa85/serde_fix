@@ -40,7 +40,7 @@ pub struct UnderlyingProvisionOptionRelevantUnderlyingDate {
 	pub underlying_provision_option_relevant_underlying_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionRelevantUnderlyingDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -74,7 +74,7 @@ impl Default for UnderlyingProvisionOptionRelevantUnderlyingDateBusinessDayConve
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionRelevantUnderlyingDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -114,7 +114,7 @@ impl Default for UnderlyingProvisionOptionRelevantUnderlyingDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionRelevantUnderlyingDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -136,7 +136,7 @@ impl Default for UnderlyingProvisionOptionRelevantUnderlyingDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionRelevantUnderlyingDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

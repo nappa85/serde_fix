@@ -129,7 +129,7 @@ pub struct LegProvision {
 	pub leg_provision_break_fee_rate: Option<f32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionType {
 	/// Mandatory early termination
 	#[serde(rename = "0")]
@@ -163,7 +163,7 @@ impl Default for LegProvisionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -197,7 +197,7 @@ impl Default for LegProvisionDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionDateTenorUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -219,7 +219,7 @@ impl Default for LegProvisionDateTenorUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionCalculationAgent {
 	/// Exercising party
 	#[serde(rename = "0")]
@@ -241,7 +241,7 @@ impl Default for LegProvisionCalculationAgent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionSinglePartyBuyerSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -257,7 +257,7 @@ impl Default for LegProvisionOptionSinglePartyBuyerSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionSinglePartySellerSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -273,7 +273,7 @@ impl Default for LegProvisionOptionSinglePartySellerSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseStyle {
 	/// European
 	#[serde(rename = "0")]
@@ -295,7 +295,7 @@ impl Default for LegProvisionOptionExerciseStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionCashSettlMethod {
 	/// Cash price
 	#[serde(rename = "0")]
@@ -326,7 +326,7 @@ impl Default for LegProvisionCashSettlMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionCashSettlQuoteType {
 	/// Bid
 	#[serde(rename = "0")]

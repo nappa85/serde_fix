@@ -21,7 +21,7 @@ pub struct DisclosureInstruction {
 	pub disclosure_instruction_item: Option<DisclosureInstructionItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DisclosureType {
 	/// Volume
 	#[serde(rename = "1")]
@@ -52,7 +52,7 @@ impl Default for DisclosureType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DisclosureInstructionItem {
 	/// No
 	#[serde(rename = "0")]

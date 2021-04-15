@@ -110,7 +110,7 @@ pub struct UnderlyingStream {
 	pub underlying_stream_notional_adjustments: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamNotionalFrequencyUnit {
 	/// Hour
 	#[serde(rename = "H")]
@@ -144,7 +144,7 @@ impl Default for UnderlyingStreamNotionalFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamNotionalCommodityFrequency {
 	/// Term
 	#[serde(rename = "0")]
@@ -175,7 +175,7 @@ impl Default for UnderlyingStreamNotionalCommodityFrequency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -429,7 +429,7 @@ impl Default for UnderlyingStreamNotionalUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamTotalNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]

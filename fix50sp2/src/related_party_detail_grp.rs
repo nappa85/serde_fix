@@ -32,7 +32,7 @@ pub struct RelatedPartyDetailID {
 	pub related_party_detail_role_qualifier: Option<RelatedPartyDetailRoleQualifier>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedPartyDetailIDSource {
 	/// BIC (Bank Identification Code-Swift managed) code (ISO 9362)
 	#[serde(rename = "B")]
@@ -132,7 +132,7 @@ impl Default for RelatedPartyDetailIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedPartyDetailRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
 	#[serde(rename = "1")]
@@ -519,7 +519,7 @@ impl Default for RelatedPartyDetailRole {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedPartyDetailRoleQualifier {
 	/// Agency
 	#[serde(rename = "0")]

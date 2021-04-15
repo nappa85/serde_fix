@@ -68,7 +68,7 @@ pub struct PaymentStreamPaymentDates {
 	pub payment_stream_final_price_payment_date: Option<super::payment_stream_final_price_payment_date::PaymentStreamFinalPricePaymentDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamPaymentFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -93,7 +93,7 @@ impl Default for PaymentStreamPaymentFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamPaymentDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -115,7 +115,7 @@ impl Default for PaymentStreamPaymentDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamPaymentDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

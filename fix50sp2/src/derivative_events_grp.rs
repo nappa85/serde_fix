@@ -35,7 +35,7 @@ pub struct DerivativeEvent {
 	pub derivative_event_text: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeEventType {
 	/// Put
 	#[serde(rename = "1")]

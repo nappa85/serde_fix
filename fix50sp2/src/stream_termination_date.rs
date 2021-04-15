@@ -40,7 +40,7 @@ pub struct StreamTerminationDate {
 	pub stream_termination_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamTerminationDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -74,7 +74,7 @@ impl Default for StreamTerminationDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamTerminationDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -114,7 +114,7 @@ impl Default for StreamTerminationDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamTerminationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -136,7 +136,7 @@ impl Default for StreamTerminationDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamTerminationDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

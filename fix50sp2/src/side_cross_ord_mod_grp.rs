@@ -166,7 +166,7 @@ pub struct NoSide {
 	pub routing_arrangment_indicator: Option<RoutingArrangmentIndicator>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NoSides {
 	/// One Side
 	#[serde(rename = "1")]
@@ -182,7 +182,7 @@ impl Default for NoSides {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -243,7 +243,7 @@ impl Default for Side {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -274,7 +274,7 @@ impl Default for AcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -320,7 +320,7 @@ impl Default for AccountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DayBookingInst {
 	/// Can trigger booking without reference to the order initiator ("auto")
 	#[serde(rename = "0")]
@@ -339,7 +339,7 @@ impl Default for DayBookingInst {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BookingUnit {
 	/// Each partial execution is a bookable unit
 	#[serde(rename = "0")]
@@ -358,7 +358,7 @@ impl Default for BookingUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PreallocMethod {
 	/// Pro-rata
 	#[serde(rename = "0")]
@@ -374,7 +374,7 @@ impl Default for PreallocMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QtyType {
 	/// Units (shares, par, currency)
 	#[serde(rename = "0")]
@@ -393,7 +393,7 @@ impl Default for QtyType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderCapacity {
 	/// Agency
 	#[serde(rename = "A")]
@@ -424,7 +424,7 @@ impl Default for OrderCapacity {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderRestrictions {
 	/// Program Trade
 	#[serde(rename = "1")]
@@ -488,7 +488,7 @@ impl Default for OrderRestrictions {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CustOrderCapacity {
 	/// Member trading for their own account
 	#[serde(rename = "1")]
@@ -513,7 +513,7 @@ impl Default for CustOrderCapacity {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ForexReq {
 	/// Execute Forex after security trade
 	#[serde(rename = "Y")]
@@ -529,7 +529,7 @@ impl Default for ForexReq {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1739,7 +1739,7 @@ impl Default for SettlCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BookingType {
 	/// Regular booking
 	#[serde(rename = "0")]
@@ -1758,7 +1758,7 @@ impl Default for BookingType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PositionEffect {
 	/// Close
 	#[serde(rename = "C")]
@@ -1786,7 +1786,7 @@ impl Default for PositionEffect {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CoveredOrUncovered {
 	/// Covered
 	#[serde(rename = "0")]
@@ -1802,7 +1802,7 @@ impl Default for CoveredOrUncovered {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CashMargin {
 	/// Cash
 	#[serde(rename = "1")]
@@ -1821,7 +1821,7 @@ impl Default for CashMargin {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ClearingFeeIndicator {
 	/// 1st year delegate trading for own account
 	#[serde(rename = "1")]
@@ -1873,7 +1873,7 @@ impl Default for ClearingFeeIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SolicitedFlag {
 	/// Was not solicited
 	#[serde(rename = "N")]
@@ -1889,7 +1889,7 @@ impl Default for SolicitedFlag {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SideShortSaleExemptionReason {
 	/// Exemption reason unknown
 	#[serde(rename = "0")]
@@ -1929,7 +1929,7 @@ impl Default for SideShortSaleExemptionReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ClearingAccountType {
 	/// Customer
 	#[serde(rename = "1")]
@@ -1948,7 +1948,7 @@ impl Default for ClearingAccountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ShortMarkingExemptIndicator {
 	/// Account is not SME
 	#[serde(rename = "N")]
@@ -1964,7 +1964,7 @@ impl Default for ShortMarkingExemptIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderOrigination {
 	/// Order received from a customer
 	#[serde(rename = "1")]
@@ -1995,7 +1995,7 @@ impl Default for OrderOrigination {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RoutingArrangmentIndicator {
 	/// No routing arrangement in place
 	#[serde(rename = "0")]

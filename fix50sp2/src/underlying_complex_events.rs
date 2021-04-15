@@ -182,7 +182,7 @@ pub struct UnderlyingComplexEvent {
 	pub underlying_complex_event_pv_final_price_election_fallback: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventType {
 	/// Capped
 	#[serde(rename = "1")]
@@ -219,7 +219,7 @@ impl Default for UnderlyingComplexEventType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventPriceBoundaryMethod {
 	/// Less than UnderlyingComplexEventPrice(2048)
 	#[serde(rename = "1")]
@@ -244,7 +244,7 @@ impl Default for UnderlyingComplexEventPriceBoundaryMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventPriceTimeType {
 	/// Expiration
 	#[serde(rename = "1")]
@@ -263,7 +263,7 @@ impl Default for UnderlyingComplexEventPriceTimeType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventCondition {
 	/// And
 	#[serde(rename = "1")]
@@ -279,7 +279,7 @@ impl Default for UnderlyingComplexEventCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexOptPayoutPaySide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -295,7 +295,7 @@ impl Default for UnderlyingComplexOptPayoutPaySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexOptPayoutReceiveSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -311,7 +311,7 @@ impl Default for UnderlyingComplexOptPayoutReceiveSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexOptPayoutTime {
 	/// Close
 	#[serde(rename = "0")]
@@ -342,7 +342,7 @@ impl Default for UnderlyingComplexOptPayoutTime {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventQuoteBasis {
 	/// Currency 1 per currency 2
 	#[serde(rename = "0")]
@@ -358,7 +358,7 @@ impl Default for UnderlyingComplexEventQuoteBasis {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventCalculationAgent {
 	/// Exercising party
 	#[serde(rename = "0")]
@@ -380,7 +380,7 @@ impl Default for UnderlyingComplexEventCalculationAgent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventCreditEventNotifyingParty {
 	/// Seller notifies
 	#[serde(rename = "0")]

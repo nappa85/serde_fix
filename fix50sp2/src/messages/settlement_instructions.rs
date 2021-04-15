@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SettlementInstructions {
 	/// MsgType = T
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'T', ' '>,
 	/// Unique identifier for this message
 	#[serde(rename = "777")]
 	pub settl_inst_msg_id: String,
@@ -45,7 +45,7 @@ pub struct SettlementInstructions {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlInstMode {
 	/// Default (Replaced)
 	#[serde(rename = "0")]
@@ -73,7 +73,7 @@ impl Default for SettlInstMode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlInstReqRejCode {
 	/// Unable to process request
 	#[serde(rename = "0")]

@@ -23,7 +23,7 @@ pub struct DeliveryScheduleSettlDay {
 	pub delivery_schedule_settl_total_hours: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryScheduleSettlDayItem {
 	/// Monday
 	#[serde(rename = "1")]

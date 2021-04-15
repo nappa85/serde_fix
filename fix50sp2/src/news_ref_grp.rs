@@ -21,7 +21,7 @@ pub struct NewsRefID {
 	pub news_ref_type: Option<NewsRefType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NewsRefType {
 	/// Replacement
 	#[serde(rename = "0")]

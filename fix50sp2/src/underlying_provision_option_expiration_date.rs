@@ -48,7 +48,7 @@ pub struct UnderlyingProvisionOptionExpirationDate {
 	pub underlying_provision_option_expiration_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExpirationDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -82,7 +82,7 @@ impl Default for UnderlyingProvisionOptionExpirationDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExpirationDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -122,7 +122,7 @@ impl Default for UnderlyingProvisionOptionExpirationDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExpirationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -144,7 +144,7 @@ impl Default for UnderlyingProvisionOptionExpirationDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExpirationDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

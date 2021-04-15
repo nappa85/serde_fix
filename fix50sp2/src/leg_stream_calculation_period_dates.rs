@@ -82,7 +82,7 @@ pub struct LegStreamCalculationPeriodDates {
 	pub leg_stream_calculation_correction_unit: Option<LegStreamCalculationCorrectionUnit>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCalculationPeriodBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -116,7 +116,7 @@ impl Default for LegStreamCalculationPeriodBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamFirstPeriodStartDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -150,7 +150,7 @@ impl Default for LegStreamFirstPeriodStartDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCalculationFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -184,7 +184,7 @@ impl Default for LegStreamCalculationFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCalculationRollConvention {
 	/// 1st day of the month
 	#[serde(rename = "1")]
@@ -332,7 +332,7 @@ impl Default for LegStreamCalculationRollConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCalculationCorrectionUnit {
 	/// Day
 	#[serde(rename = "D")]

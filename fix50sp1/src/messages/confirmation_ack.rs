@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ConfirmationAck {
 	/// MsgType = AU
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'U'>,
 	/// ConfirmID
 	#[serde(rename = "664")]
 	pub confirm_id: String,
@@ -41,7 +41,7 @@ pub struct ConfirmationAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AffirmStatus {
 	/// Received
 	#[serde(rename = "1")]
@@ -60,7 +60,7 @@ impl Default for AffirmStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ConfirmRejReason {
 	/// Mismatched account
 	#[serde(rename = "1")]
@@ -79,7 +79,7 @@ impl Default for ConfirmRejReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
 	#[serde(rename = "0")]

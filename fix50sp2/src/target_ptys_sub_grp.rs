@@ -20,7 +20,7 @@ pub struct TargetPartySubID {
 	pub target_party_sub_id_type: Option<TargetPartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TargetPartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

@@ -27,7 +27,7 @@ pub struct CollateralReinvestment {
 	pub collateral_reinvestment_currency: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CollateralReinvestmentType {
 	/// Money market fund
 	#[serde(rename = "0")]

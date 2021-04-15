@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityTypeRequest {
 	/// MsgType = v
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'v', ' '>,
 	/// SecurityReqID
 	#[serde(rename = "320")]
 	pub security_req_id: String,
@@ -45,7 +45,7 @@ pub struct SecurityTypeRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -94,7 +94,7 @@ impl Default for Product {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityType {
 	/// Federal government or treasury
 	#[serde(rename = "TREASURY")]

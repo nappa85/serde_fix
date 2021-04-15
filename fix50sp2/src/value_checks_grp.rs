@@ -21,7 +21,7 @@ pub struct ValueCheck {
 	pub value_check_action: Option<ValueCheckAction>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ValueCheckType {
 	/// Price check
 	#[serde(rename = "1")]
@@ -40,7 +40,7 @@ impl Default for ValueCheckType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ValueCheckAction {
 	/// Do not check (checks will not be done for the specified ValueCheckType (1869))
 	#[serde(rename = "0")]

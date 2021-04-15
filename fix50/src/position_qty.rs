@@ -36,7 +36,7 @@ pub struct Position {
 	pub quantity_date: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosType {
 	/// Allocation Trade Qty
 	#[serde(rename = "ALC")]
@@ -115,7 +115,7 @@ impl Default for PosType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosQtyStatus {
 	/// Submitted
 	#[serde(rename = "0")]

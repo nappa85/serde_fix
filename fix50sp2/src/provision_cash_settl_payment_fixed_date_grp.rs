@@ -21,7 +21,7 @@ pub struct ProvisionCashSettlPaymentDate {
 	pub provision_cash_settl_payment_date_type: Option<ProvisionCashSettlPaymentDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlPaymentDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

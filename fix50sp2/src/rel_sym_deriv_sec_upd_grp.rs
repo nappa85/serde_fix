@@ -39,7 +39,7 @@ pub struct RelatedSy {
 	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -61,7 +61,7 @@ impl Default for ListUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CorporateAction {
 	/// Ex-Dividend
 	#[serde(rename = "A")]
@@ -140,7 +140,7 @@ impl Default for CorporateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderMassStatusRequest {
 	/// MsgType = AF
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'F'>,
 	/// Unique ID of mass status request as assigned by the institution.
 	#[serde(rename = "584")]
 	pub mass_status_req_id: String,
@@ -46,7 +46,7 @@ pub struct OrderMassStatusRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MassStatusReqType {
 	/// Status for orders for a security
 	#[serde(rename = "1")]
@@ -80,7 +80,7 @@ impl Default for MassStatusReqType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -108,7 +108,7 @@ impl Default for AcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

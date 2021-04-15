@@ -24,7 +24,7 @@ pub struct RiskInstrumentScope {
 	pub risk_instrument_multiplier: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentScopeOperator {
 	/// Include
 	#[serde(rename = "1")]

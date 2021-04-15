@@ -21,7 +21,7 @@ pub struct DerivativeInstrumentPartySubID {
 	pub derivative_instrument_party_sub_id_type: Option<DerivativeInstrumentPartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeInstrumentPartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

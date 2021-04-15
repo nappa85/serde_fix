@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PositionTransferReport {
 	/// MsgType = DN
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'N'>,
 	/// <p>Conditionally required when sent in response to a <a href="message_Position_Transfer_Instruction_Ack_DM.html" target="main">Position Transfer Instruction&nbsp;(DM)</a> .
 	/// </p>
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -109,7 +109,7 @@ pub struct PositionTransferReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -128,7 +128,7 @@ impl Default for TransferTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferReportType {
 	/// Submit
 	#[serde(rename = "0")]
@@ -144,7 +144,7 @@ impl Default for TransferReportType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferStatus {
 	/// Received
 	#[serde(rename = "0")]
@@ -172,7 +172,7 @@ impl Default for TransferStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferRejectReason {
 	/// Success
 	#[serde(rename = "0")]
@@ -200,7 +200,7 @@ impl Default for TransferRejectReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferScope {
 	/// Inter-firm transfer
 	#[serde(rename = "0")]
@@ -219,7 +219,7 @@ impl Default for TransferScope {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1429,7 +1429,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]

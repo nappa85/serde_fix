@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct QuoteRequestReject {
 	/// MsgType = AG
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'G'>,
 	/// QuoteReqID
 	#[serde(rename = "131")]
 	pub quote_req_id: String,
@@ -51,7 +51,7 @@ pub struct QuoteRequestReject {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteRequestRejectReason {
 	/// Unknown symbol (Security)
 	#[serde(rename = "1")]
@@ -109,7 +109,7 @@ impl Default for QuoteRequestRejectReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PrivateQuote {
 	/// Private Quote
 	#[serde(rename = "Y")]
@@ -125,7 +125,7 @@ impl Default for PrivateQuote {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RespondentType {
 	/// All market participants
 	#[serde(rename = "1")]

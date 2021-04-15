@@ -107,7 +107,7 @@ pub struct ClearingPriceParameter {
 	pub calculation_method: Option<CalculationMethod>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CalculationMethod {
 	/// Automatic (default)
 	#[serde(rename = "0")]

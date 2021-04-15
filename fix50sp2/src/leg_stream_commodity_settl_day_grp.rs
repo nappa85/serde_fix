@@ -23,7 +23,7 @@ pub struct LegStreamCommoditySettlDay {
 	pub leg_stream_commodity_settl_total_hours: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCommoditySettlDayItem {
 	/// Monday
 	#[serde(rename = "1")]

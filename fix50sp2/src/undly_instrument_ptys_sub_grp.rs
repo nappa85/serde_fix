@@ -21,7 +21,7 @@ pub struct UndlyInstrumentPartySubID {
 	pub underlying_instrument_party_sub_id_type: Option<UnderlyingInstrumentPartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingInstrumentPartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

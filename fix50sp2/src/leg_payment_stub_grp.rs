@@ -155,7 +155,7 @@ pub struct LegPaymentStub {
 	pub leg_payment_stub_index_2_floor_rate: Option<f32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubType {
 	/// Initial
 	#[serde(rename = "0")]
@@ -177,7 +177,7 @@ impl Default for LegPaymentStubType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubLength {
 	/// Short
 	#[serde(rename = "0")]
@@ -193,7 +193,7 @@ impl Default for LegPaymentStubLength {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndexSource {
 	/// Bloomberg
 	#[serde(rename = "0")]
@@ -215,7 +215,7 @@ impl Default for LegPaymentStubIndexSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndexCurveUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -237,7 +237,7 @@ impl Default for LegPaymentStubIndexCurveUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndexRateSpreadPositionType {
 	/// Short
 	#[serde(rename = "0")]
@@ -253,7 +253,7 @@ impl Default for LegPaymentStubIndexRateSpreadPositionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndexRateTreatment {
 	/// Bond equivalent yield
 	#[serde(rename = "0")]
@@ -269,7 +269,7 @@ impl Default for LegPaymentStubIndexRateTreatment {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndexCapRateBuySide {
 	/// Buyer of the trade
 	#[serde(rename = "1")]
@@ -285,7 +285,7 @@ impl Default for LegPaymentStubIndexCapRateBuySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndexCapRateSellSide {
 	/// Buyer of the trade
 	#[serde(rename = "1")]
@@ -301,7 +301,7 @@ impl Default for LegPaymentStubIndexCapRateSellSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndexFloorRateBuySide {
 	/// Buyer of the trade
 	#[serde(rename = "1")]
@@ -317,7 +317,7 @@ impl Default for LegPaymentStubIndexFloorRateBuySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndexFloorRateSellSide {
 	/// Buyer of the trade
 	#[serde(rename = "1")]
@@ -333,7 +333,7 @@ impl Default for LegPaymentStubIndexFloorRateSellSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndex2CurveUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -355,7 +355,7 @@ impl Default for LegPaymentStubIndex2CurveUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndex2RateSpreadPositionType {
 	/// Short
 	#[serde(rename = "0")]
@@ -371,7 +371,7 @@ impl Default for LegPaymentStubIndex2RateSpreadPositionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStubIndex2RateTreatment {
 	/// Bond equivalent yield
 	#[serde(rename = "0")]

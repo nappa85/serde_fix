@@ -49,7 +49,7 @@ pub struct UnderlyingProtectionTerm {
 	pub underlying_protection_term_xid: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProtectionTermCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]

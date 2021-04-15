@@ -715,7 +715,7 @@ pub struct InstrumentLeg {
 	pub leg_coupon_other_day_count: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -821,7 +821,7 @@ impl Default for LegSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProduct {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -870,7 +870,7 @@ impl Default for LegProduct {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -1341,7 +1341,7 @@ impl Default for LegSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegRepoCollateralSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -1812,7 +1812,7 @@ impl Default for LegRepoCollateralSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCountryOfIssue {
 	/// AFGHANISTAN
 	#[serde(rename = "AF")]
@@ -2539,7 +2539,7 @@ impl Default for LegCountryOfIssue {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStrikeCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -3749,7 +3749,7 @@ impl Default for LegStrikeCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegContractMultiplierUnit {
 	/// Shares
 	#[serde(rename = "0")]
@@ -3768,7 +3768,7 @@ impl Default for LegContractMultiplierUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegFlowScheduleType {
 	/// NERC Eastern Off-Peak
 	#[serde(rename = "0")]
@@ -3811,7 +3811,7 @@ impl Default for LegFlowScheduleType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -4065,7 +4065,7 @@ impl Default for LegUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPriceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -4319,7 +4319,7 @@ impl Default for LegPriceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegTimeUnit {
 	/// Hour
 	#[serde(rename = "H")]
@@ -4353,7 +4353,7 @@ impl Default for LegTimeUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegExerciseStyle {
 	/// European
 	#[serde(rename = "0")]
@@ -4375,7 +4375,7 @@ impl Default for LegExerciseStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -4436,7 +4436,7 @@ impl Default for LegSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -5646,7 +5646,7 @@ impl Default for LegCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPutOrCall {
 	/// Put
 	#[serde(rename = "0")]
@@ -5668,11 +5668,11 @@ impl Default for LegPutOrCall {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionRatio {
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPriceQuoteCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -6882,7 +6882,7 @@ impl Default for LegPriceQuoteCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegUnitOfMeasureCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -8092,7 +8092,7 @@ impl Default for LegUnitOfMeasureCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPriceUnitOfMeasureCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -9302,7 +9302,7 @@ impl Default for LegPriceUnitOfMeasureCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAssetClass {
 	/// Interest rate
 	#[serde(rename = "1")]
@@ -9345,7 +9345,7 @@ impl Default for LegAssetClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAssetSubClass {
 	/// Single currency
 	#[serde(rename = "1")]
@@ -9499,7 +9499,7 @@ impl Default for LegAssetSubClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSwapClass {
 	/// Basis swap
 	#[serde(rename = "BS")]
@@ -9521,7 +9521,7 @@ impl Default for LegSwapClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegInstrmtAssignmentMethod {
 	/// Pro rata
 	#[serde(rename = "P")]
@@ -9537,7 +9537,7 @@ impl Default for LegInstrmtAssignmentMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecurityStatus {
 	/// Active
 	#[serde(rename = "1")]
@@ -9553,7 +9553,7 @@ impl Default for LegSecurityStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegRestructuringType {
 	/// Full Restructuring
 	#[serde(rename = "FR")]
@@ -9575,7 +9575,7 @@ impl Default for LegRestructuringType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSeniority {
 	/// Senior Secured
 	#[serde(rename = "SD")]
@@ -9594,7 +9594,7 @@ impl Default for LegSeniority {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegObligationType {
 	/// Bond
 	#[serde(rename = "0")]
@@ -9616,7 +9616,7 @@ impl Default for LegObligationType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSwapSubClass {
 	/// Amortizing notional schedule
 	#[serde(rename = "AMTZ")]
@@ -9641,7 +9641,7 @@ impl Default for LegSwapSubClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCouponType {
 	/// Zero
 	#[serde(rename = "0")]
@@ -9663,7 +9663,7 @@ impl Default for LegCouponType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCouponFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -9697,7 +9697,7 @@ impl Default for LegCouponFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCouponDayCount {
 	/// 1/1 (If parties specify the Day Count Fraction to be 1/1 then in calculating the applicable amount, 1 is simply input into
 	/// the calculation as the relevant Day Count Fraction.)
@@ -9797,7 +9797,7 @@ impl Default for LegCouponDayCount {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegConvertibleBondEquityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -9903,7 +9903,7 @@ impl Default for LegConvertibleBondEquityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegLienSeniority {
 	/// Unknown
 	#[serde(rename = "0")]
@@ -9925,7 +9925,7 @@ impl Default for LegLienSeniority {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegLoanFacility {
 	/// Bridge loan
 	#[serde(rename = "0")]
@@ -9953,7 +9953,7 @@ impl Default for LegLoanFacility {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegReferenceEntityType {
 	/// Asian
 	#[serde(rename = "1")]
@@ -9993,7 +9993,7 @@ impl Default for LegReferenceEntityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStrikeUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -10247,7 +10247,7 @@ impl Default for LegStrikeUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStrikePriceDeterminationMethod {
 	/// Fixed Strike
 	#[serde(rename = "1")]
@@ -10269,7 +10269,7 @@ impl Default for LegStrikePriceDeterminationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStrikePriceBoundaryMethod {
 	/// Less than underlying price is in-the-money (ITM)
 	#[serde(rename = "1")]
@@ -10294,7 +10294,7 @@ impl Default for LegStrikePriceBoundaryMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegUnderlyingPriceDeterminationMethod {
 	/// Regular
 	#[serde(rename = "1")]
@@ -10316,7 +10316,7 @@ impl Default for LegUnderlyingPriceDeterminationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSettlMethod {
 	/// Election at exercise (The settlement method will be elected at the time of contract exercise)
 	#[serde(rename = "E")]
@@ -10335,7 +10335,7 @@ impl Default for LegSettlMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptPayoutType {
 	/// Vanilla
 	#[serde(rename = "1")]
@@ -10354,7 +10354,7 @@ impl Default for LegOptPayoutType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPriceQuoteMethod {
 	/// Standard, money per unit of a physical
 	#[serde(rename = "STD")]
@@ -10376,7 +10376,7 @@ impl Default for LegPriceQuoteMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegValuationMethod {
 	/// premium style
 	#[serde(rename = "EQTY")]
@@ -10401,7 +10401,7 @@ impl Default for LegValuationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegListMethod {
 	/// pre-listed only
 	#[serde(rename = "1")]
@@ -10417,7 +10417,7 @@ impl Default for LegListMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCPProgram {
 	/// 3(a)(3)
 	#[serde(rename = "1")]
@@ -10436,7 +10436,7 @@ impl Default for LegCPProgram {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegShortSaleRestriction {
 	/// No restrictions
 	#[serde(rename = "0")]
@@ -10455,7 +10455,7 @@ impl Default for LegShortSaleRestriction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStrategyType {
 	/// Straddle
 	#[serde(rename = "STD")]
@@ -10483,7 +10483,7 @@ impl Default for LegStrategyType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSettlDisruptionProvision {
 	/// Negotiation
 	#[serde(rename = "1")]
@@ -10499,7 +10499,7 @@ impl Default for LegSettlDisruptionProvision {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegInstrumentRoundingDirection {
 	/// Round to nearest
 	#[serde(rename = "0")]
@@ -10518,7 +10518,7 @@ impl Default for LegInstrumentRoundingDirection {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAssetGroup {
 	/// Financials (A categorization which usually includes rates, foreign exchange, credit, bonds and equity products or assets)
 	#[serde(rename = "1")]

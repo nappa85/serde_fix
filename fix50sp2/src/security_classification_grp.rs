@@ -21,7 +21,7 @@ pub struct SecurityClassification {
 	pub security_classification_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityClassificationReason {
 	/// Fee
 	#[serde(rename = "0")]

@@ -17,7 +17,7 @@ pub struct ThrottleResponse {
 	pub throttle_count_indicator: Option<ThrottleCountIndicator>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
 	#[serde(rename = "0")]
@@ -33,7 +33,7 @@ impl Default for ThrottleInst {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ThrottleStatus {
 	/// Throttle limit not exceeded, not queued
 	#[serde(rename = "0")]
@@ -49,7 +49,7 @@ impl Default for ThrottleStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ThrottleCountIndicator {
 	/// Outstanding requests unchanged
 	#[serde(rename = "0")]

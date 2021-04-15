@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ConfirmationRequest {
 	/// MsgType = BH
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'H'>,
 	/// Unique identifier for this message
 	#[serde(rename = "859")]
 	pub confirm_req_id: String,
@@ -102,7 +102,7 @@ pub struct Order {
 	pub order_booking_qty: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ConfirmType {
 	/// Status
 	#[serde(rename = "1")]
@@ -121,7 +121,7 @@ impl Default for ConfirmType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocAcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -149,7 +149,7 @@ impl Default for AllocAcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocAccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct UserNotification {
 	/// MsgType = CB
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'B'>,
 	/// Number of usernames.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "809")]
@@ -36,7 +36,7 @@ pub struct Username {
 	pub username: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UserStatus {
 	/// Logged In
 	#[serde(rename = "1")]

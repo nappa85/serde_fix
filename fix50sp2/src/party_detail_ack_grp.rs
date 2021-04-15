@@ -35,7 +35,7 @@ pub struct PartyUpdate {
 	pub encoded_reject_text: Option<fix_common::EncodedText<1665>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -57,7 +57,7 @@ impl Default for ListUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailDefinitionStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -76,7 +76,7 @@ impl Default for PartyDetailDefinitionStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailDefinitionResult {
 	/// Successful (default)
 	#[serde(rename = "0")]

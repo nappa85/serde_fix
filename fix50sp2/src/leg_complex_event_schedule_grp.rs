@@ -35,7 +35,7 @@ pub struct LegComplexEventSchedule {
 	pub leg_complex_event_schedule_roll_convention: Option<LegComplexEventScheduleRollConvention>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventScheduleFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -57,7 +57,7 @@ impl Default for LegComplexEventScheduleFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventScheduleRollConvention {
 	/// 1st day of the month
 	#[serde(rename = "1")]

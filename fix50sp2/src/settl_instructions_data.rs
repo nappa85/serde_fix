@@ -24,7 +24,7 @@ pub struct SettlInstructionsData {
 	pub dlvy_inst_grp: Option<super::dlvy_inst_grp::DlvyInstGrp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlDeliveryType {
 	/// "Versus. Payment": Deliver (if Sell) or Receive (if Buy) vs. (Against) Payment
 	#[serde(rename = "0")]
@@ -46,7 +46,7 @@ impl Default for SettlDeliveryType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StandInstDbType {
 	/// Other
 	#[serde(rename = "0")]

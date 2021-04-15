@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SettlementInstructionRequest {
 	/// MsgType = AV
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'V'>,
 	/// Unique message ID
 	#[serde(rename = "791")]
 	pub settl_inst_req_id: String,
@@ -69,7 +69,7 @@ pub struct SettlementInstructionRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocAcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -97,7 +97,7 @@ impl Default for AllocAcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -155,7 +155,7 @@ impl Default for Side {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -204,7 +204,7 @@ impl Default for Product {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityType {
 	/// Federal government or treasury
 	#[serde(rename = "TREASURY")]
@@ -514,7 +514,7 @@ impl Default for SecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StandInstDbType {
 	/// Other
 	#[serde(rename = "0")]

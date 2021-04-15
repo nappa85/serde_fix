@@ -83,7 +83,7 @@ pub struct BaseTradingRules {
 	pub quote_side_indicator: Option<QuoteSideIndicator>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExpirationCycle {
 	/// Expire on trading session close (default)
 	#[serde(rename = "0")]
@@ -102,7 +102,7 @@ impl Default for ExpirationCycle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ImpliedMarketIndicator {
 	/// Not implied
 	#[serde(rename = "0")]
@@ -124,7 +124,7 @@ impl Default for ImpliedMarketIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1334,7 +1334,7 @@ impl Default for TradingCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MultilegModel {
 	/// Predefined Multileg Security
 	#[serde(rename = "0")]
@@ -1353,7 +1353,7 @@ impl Default for MultilegModel {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MultilegPriceMethod {
 	/// Net Price
 	#[serde(rename = "0")]
@@ -1381,7 +1381,7 @@ impl Default for MultilegPriceMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]
@@ -1468,7 +1468,7 @@ impl Default for PriceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeVolType {
 	/// Number of units (e.g. share, par, currency, contracts) (default)
 	#[serde(rename = "0")]
@@ -1484,7 +1484,7 @@ impl Default for TradeVolType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteSideIndicator {
 	/// Single sided quotes are not allowed
 	#[serde(rename = "N")]

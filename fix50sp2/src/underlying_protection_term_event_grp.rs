@@ -43,7 +43,7 @@ pub struct UnderlyingProtectionTermEvent {
 	pub underlying_protection_term_event_rate_source: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProtectionTermEventCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1253,7 +1253,7 @@ impl Default for UnderlyingProtectionTermEventCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProtectionTermEventDayType {
 	/// Business
 	#[serde(rename = "0")]

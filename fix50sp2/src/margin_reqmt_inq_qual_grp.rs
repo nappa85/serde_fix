@@ -17,7 +17,7 @@ pub struct MarginReqmtInqQualifie {
 	pub margin_reqmt_inq_qualifier: Option<MarginReqmtInqQualifier>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarginReqmtInqQualifier {
 	/// Summary
 	#[serde(rename = "0")]

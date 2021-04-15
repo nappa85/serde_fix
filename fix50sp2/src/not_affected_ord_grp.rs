@@ -33,7 +33,7 @@ pub struct NotAffectedOrder {
 	pub not_affected_reason: Option<NotAffectedReason>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NotAffectedReason {
 	/// Order suspended
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityDefinition {
 	/// MsgType = d
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'d', ' '>,
 	/// Identifier for <a href="message_Security_Definition_d.html" target="main">Security Definition&nbsp;(d)</a> message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -103,7 +103,7 @@ pub struct Leg {
 	pub leg_price: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityResponseType {
 	/// Accept security proposal as is
 	#[serde(rename = "1")]
@@ -131,7 +131,7 @@ impl Default for SecurityResponseType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1341,7 +1341,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExpirationCycle {
 	/// Expire on trading session close (default)
 	#[serde(rename = "0")]
@@ -1357,6 +1357,6 @@ impl Default for ExpirationCycle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionRatio {
 }

@@ -17,7 +17,7 @@ pub struct ProtectionTermEventQualifier {
 	pub protection_term_event_qualifier_item: Option<ProtectionTermEventQualifierItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProtectionTermEventQualifierItem {
 	/// Retructuring - multiple holding obligations (In relation to a restructuring credit event, unless multiple holder obligation
 	/// is not specified restructurings are limited to multiple holder obligations. A multiple holder obligation means an obligation

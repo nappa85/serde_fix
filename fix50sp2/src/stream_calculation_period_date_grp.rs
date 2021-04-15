@@ -21,7 +21,7 @@ pub struct StreamCalculationPeriodDate {
 	pub stream_calculation_period_date_type: Option<StreamCalculationPeriodDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCalculationPeriodDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

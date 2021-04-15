@@ -41,7 +41,7 @@ pub struct Entitlement {
 	pub entitlement_sub_type: Option<EntitlementSubType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementType {
 	/// Trade
 	#[serde(rename = "0")]
@@ -78,7 +78,7 @@ impl Default for EntitlementType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementSubType {
 	/// Order Entry(Entitle to enter new orders)
 	#[serde(rename = "1")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct AllocationInstructionAck {
 	/// MsgType = P
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'P', ' '>,
 	/// AllocID
 	#[serde(rename = "70")]
 	pub alloc_id: String,
@@ -95,7 +95,7 @@ pub struct AllocationInstructionAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocStatus {
 	/// accepted (successfully processed)
 	#[serde(rename = "0")]
@@ -150,7 +150,7 @@ impl Default for AllocStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocRejCode {
 	/// Unknown account(s)
 	#[serde(rename = "0")]
@@ -250,7 +250,7 @@ impl Default for AllocRejCode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocType {
 	/// Calculated (includes MiscFees and NetMoney)
 	#[serde(rename = "1")]
@@ -338,7 +338,7 @@ impl Default for AllocType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocIntermedReqType {
 	/// Pending Accept
 	#[serde(rename = "1")]
@@ -366,7 +366,7 @@ impl Default for AllocIntermedReqType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// Compared, matched or affirmed
 	#[serde(rename = "0")]

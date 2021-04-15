@@ -41,7 +41,7 @@ pub struct SpreadOrBenchmarkCurveData {
 	pub benchmark_security_id_source: Option<BenchmarkSecurityIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BenchmarkCurveCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1251,7 +1251,7 @@ impl Default for BenchmarkCurveCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BenchmarkCurveName {
 	/// EONIA
 	#[serde(rename = "EONIA")]
@@ -1297,7 +1297,7 @@ impl Default for BenchmarkCurveName {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BenchmarkPriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]
@@ -1361,7 +1361,7 @@ impl Default for BenchmarkPriceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BenchmarkSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

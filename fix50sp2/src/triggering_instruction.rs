@@ -75,7 +75,7 @@ pub struct TriggeringInstruction {
 	pub trigger_scope: Option<TriggerScope>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TriggerType {
 	/// Partial Execution
 	#[serde(rename = "1")]
@@ -100,7 +100,7 @@ impl Default for TriggerType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TriggerAction {
 	/// Activate
 	#[serde(rename = "1")]
@@ -119,7 +119,7 @@ impl Default for TriggerAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TriggerSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -225,7 +225,7 @@ impl Default for TriggerSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TriggerPriceType {
 	/// Best Offer
 	#[serde(rename = "1")]
@@ -253,7 +253,7 @@ impl Default for TriggerPriceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TriggerPriceTypeScope {
 	/// None
 	#[serde(rename = "0")]
@@ -275,7 +275,7 @@ impl Default for TriggerPriceTypeScope {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TriggerPriceDirection {
 	/// Trigger if the price of the specified type goes UP to or through the specified Trigger Price.
 	#[serde(rename = "U")]
@@ -291,7 +291,7 @@ impl Default for TriggerPriceDirection {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TriggerOrderType {
 	/// Market
 	#[serde(rename = "1")]
@@ -307,7 +307,7 @@ impl Default for TriggerOrderType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TriggerScope {
 	/// This order (default)
 	#[serde(rename = "0")]

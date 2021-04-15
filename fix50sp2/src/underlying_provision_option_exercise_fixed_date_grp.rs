@@ -21,7 +21,7 @@ pub struct UnderlyingProvisionOptionExerciseFixedDate {
 	pub underlying_provision_option_exercise_fixed_date_type: Option<UnderlyingProvisionOptionExerciseFixedDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseFixedDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

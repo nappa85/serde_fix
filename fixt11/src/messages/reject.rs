@@ -1,14 +1,14 @@
 
 use serde::{Serialize, Deserialize};
 
-use fix_common::{EncodedText, FixVersion};
+use fix_common::EncodedText;
 use crate::{header::{Header, MsgType}, Trailer};
 
 /// MsgType = 3
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Reject {
     #[serde(flatten)]
-    pub header: Header,
+    pub header: Header<5, '3', ' '>,
     /// MsgSeqNum of rejected message
     #[serde(rename = "45")]
     pub ref_seq_num: u64,
@@ -19,11 +19,11 @@ pub struct Reject {
     /// The MsgType (35) of the FIX message being referenced.
     #[serde(rename = "372")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ref_msg_type: Option<MsgType>,
+    pub ref_msg_type: Option<MsgType<' ', ' '>>,
     /// Recommended when rejecting an application message that does not explicitly provide ApplVerID ( 1128) on the message being rejected. In this case the value from the DefaultApplVerID(1137) or the default value specified in the NoMsgTypes repeating group on the logon message should be provided.
     #[serde(rename = "1130")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ref_appl_ver_id: Option<fix_common::ApplVerID>,
+    pub ref_appl_ver_id: Option<fix_common::ApplVerID<9>>,
     /// Recommended when rejecting an application message that does not explicitly provide ApplExtID(1156) on the rejected message. In this case the value from the DefaultApplExtID(1407) or the default value specified in the NoMsgTypes repeating group on the logon message should be provided.
     #[serde(rename = "1406")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -49,20 +49,7 @@ pub struct Reject {
     pub trailer: Trailer,
 }
 
-impl Reject {
-    pub fn new() -> Self {
-        Reject {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::Reject),
-                ..Default::default()
-            },
-            ..Default::default()
-        }
-    }
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SessionRejectReason {
     /// Invalid Tag Number
     #[serde(rename = "0")]

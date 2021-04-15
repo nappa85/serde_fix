@@ -31,7 +31,7 @@ pub struct PegInstructions {
 	pub peg_scope: Option<PegScope>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PegMoveType {
 	/// Floating (default)
 	#[serde(rename = "0")]
@@ -47,7 +47,7 @@ impl Default for PegMoveType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PegOffsetType {
 	/// Price (default)
 	#[serde(rename = "0")]
@@ -69,7 +69,7 @@ impl Default for PegOffsetType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PegLimitType {
 	/// Or better (default) - price improvement allowed
 	#[serde(rename = "0")]
@@ -89,7 +89,7 @@ impl Default for PegLimitType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PegRoundDirection {
 	/// More aggressive - on a buy order round the price up round up to the nearest tick, on a sell round down to the nearest tick
 	#[serde(rename = "1")]
@@ -105,7 +105,7 @@ impl Default for PegRoundDirection {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PegScope {
 	/// Local (Exchange, ECN, ATS)
 	#[serde(rename = "1")]

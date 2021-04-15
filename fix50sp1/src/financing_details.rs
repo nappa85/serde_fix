@@ -44,7 +44,7 @@ pub struct FinancingDetails {
 	pub margin_ratio: Option<f32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AgreementCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1254,7 +1254,7 @@ impl Default for AgreementCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TerminationType {
 	/// Overnight
 	#[serde(rename = "1")]
@@ -1276,7 +1276,7 @@ impl Default for TerminationType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryType {
 	/// "Versus Payment": Deliver (if sell) or Receive (if buy) vs. (against) Payment
 	#[serde(rename = "0")]

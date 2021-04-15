@@ -125,7 +125,7 @@ pub struct ReturnRate {
 	pub return_rate_final_price_fallback: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ReturnRatePriceSequence {
 	/// Initial
 	#[serde(rename = "0")]
@@ -144,7 +144,7 @@ impl Default for ReturnRatePriceSequence {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ReturnRateQuoteTimeType {
 	/// Open
 	#[serde(rename = "0")]
@@ -178,7 +178,7 @@ impl Default for ReturnRateQuoteTimeType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ReturnRateValuationPriceOption {
 	/// None (the default)
 	#[serde(rename = "0")]

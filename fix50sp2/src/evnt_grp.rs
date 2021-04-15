@@ -56,7 +56,7 @@ pub struct Event {
 	pub encoded_event_text: Option<fix_common::EncodedText<1579>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EventType {
 	/// Put
 	#[serde(rename = "1")]
@@ -153,7 +153,7 @@ impl Default for EventType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EventTimeUnit {
 	/// Hour
 	#[serde(rename = "H")]

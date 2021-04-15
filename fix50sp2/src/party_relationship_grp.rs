@@ -17,7 +17,7 @@ pub struct PartyRelationship {
 	pub party_relationship_item: Option<PartyRelationshipItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyRelationshipItem {
 	/// IsAlso
 	#[serde(rename = "0")]

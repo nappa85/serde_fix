@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityDefinitionUpdateReport {
 	/// MsgType = BP
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'P'>,
 	/// ApplicationSequenceControl
 	#[serde(flatten)]
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
@@ -171,7 +171,7 @@ pub struct MarketSegment {
 	pub maturity_month_year_increment: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityResponseType {
 	/// Accept security proposal as is
 	#[serde(rename = "1")]
@@ -199,7 +199,7 @@ impl Default for SecurityResponseType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -218,7 +218,7 @@ impl Default for SecurityUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CorporateAction {
 	/// Ex-Dividend
 	#[serde(rename = "A")]
@@ -297,7 +297,7 @@ impl Default for CorporateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1507,7 +1507,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrikeExerciseStyle {
 	/// European
 	#[serde(rename = "0")]
@@ -1526,7 +1526,7 @@ impl Default for StrikeExerciseStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MaturityMonthYearFormat {
 	/// YearMonth Only (default)
 	#[serde(rename = "0")]
@@ -1545,7 +1545,7 @@ impl Default for MaturityMonthYearFormat {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MaturityMonthYearIncrementUnits {
 	/// Months
 	#[serde(rename = "0")]

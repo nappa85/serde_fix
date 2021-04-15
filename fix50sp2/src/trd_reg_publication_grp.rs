@@ -21,7 +21,7 @@ pub struct TrdRegPublication {
 	pub trd_reg_publication_reason: Option<TrdRegPublicationReason>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TrdRegPublicationType {
 	/// Pre-trade transparency waiver
 	#[serde(rename = "0")]
@@ -54,7 +54,7 @@ impl Default for TrdRegPublicationType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TrdRegPublicationReason {
 	/// No preceding order in book as transaction price set within average spread of a liquid instrument
 	#[serde(rename = "0")]

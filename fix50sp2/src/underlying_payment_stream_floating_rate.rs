@@ -405,7 +405,7 @@ pub struct UnderlyingPaymentStreamFloatingRate {
 	pub underlying_payment_stream_rate_index_id_source: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamRateIndexCurveUnit2 {
 	/// Day
 	#[serde(rename = "D")]
@@ -427,7 +427,7 @@ impl Default for UnderlyingPaymentStreamRateIndexCurveUnit2 {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamRateIndexUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -681,7 +681,7 @@ impl Default for UnderlyingPaymentStreamRateIndexUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamSettlLevel {
 	/// Average (The cumulative number of weather index units for each day in the calculation period divided by the number of days
 	/// in the calculation period)
@@ -704,7 +704,7 @@ impl Default for UnderlyingPaymentStreamSettlLevel {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamReferenceLevelUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -958,7 +958,7 @@ impl Default for UnderlyingPaymentStreamReferenceLevelUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamRateSpreadUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -1212,7 +1212,7 @@ impl Default for UnderlyingPaymentStreamRateSpreadUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamRateSpreadType {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -1228,7 +1228,7 @@ impl Default for UnderlyingPaymentStreamRateSpreadType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamCalculationLagUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -1250,7 +1250,7 @@ impl Default for UnderlyingPaymentStreamCalculationLagUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamFirstObservationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -1272,7 +1272,7 @@ impl Default for UnderlyingPaymentStreamFirstObservationDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamPricingDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -1300,7 +1300,7 @@ impl Default for UnderlyingPaymentStreamPricingDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamPricingDayDistribution {
 	/// All
 	#[serde(rename = "0")]
@@ -1322,7 +1322,7 @@ impl Default for UnderlyingPaymentStreamPricingDayDistribution {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamPricingBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]

@@ -21,7 +21,7 @@ pub struct DerivativeSecurityAltI {
 	pub derivative_security_alt_id_source: Option<DerivativeSecurityAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

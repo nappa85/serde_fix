@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PayManagementReport {
 	/// MsgType = DY
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'Y'>,
 	/// PayReportID
 	#[serde(rename = "2799")]
 	pub pay_report_id: String,
@@ -93,7 +93,7 @@ pub struct PayManagementReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PayReportTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -112,7 +112,7 @@ impl Default for PayReportTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PayRequestStatus {
 	/// Received, not yet processed
 	#[serde(rename = "0")]

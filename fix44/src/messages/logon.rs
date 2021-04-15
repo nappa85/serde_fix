@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Logon {
 	/// MsgType = A
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', ' '>,
 	/// (Always unencrypted)
 	#[serde(rename = "98")]
 	pub encrypt_method: EncryptMethod,
@@ -68,7 +68,7 @@ pub struct MsgType {
 	pub msg_direction: Option<MsgDirection>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EncryptMethod {
 	/// None / other
 	#[serde(rename = "0")]
@@ -99,7 +99,7 @@ impl Default for EncryptMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ResetSeqNumFlag {
 	/// Yes, reset sequence numbers
 	#[serde(rename = "Y")]
@@ -115,7 +115,7 @@ impl Default for ResetSeqNumFlag {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TestMessageIndicator {
 	/// Test
 	#[serde(rename = "Y")]
@@ -131,7 +131,7 @@ impl Default for TestMessageIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MsgDirection {
 	/// Send
 	#[serde(rename = "S")]

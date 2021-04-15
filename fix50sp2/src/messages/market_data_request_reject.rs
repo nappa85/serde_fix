@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MarketDataRequestReject {
 	/// MsgType = Y
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'Y', ' '>,
 	/// Must refer to the <a href="tag_262_MDReqID.html" target="bottom">MDReqID&nbsp;(262)</a> of the request.
 	#[serde(rename = "262")]
 	pub md_req_id: String,
@@ -34,7 +34,7 @@ pub struct MarketDataRequestReject {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDReqRejReason {
 	/// Unknown symbol
 	#[serde(rename = "0")]

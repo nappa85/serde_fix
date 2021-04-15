@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct AdjustedPositionReport {
 	/// MsgType = BL
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'L'>,
 	/// Unique identifier for this Adjusted Position report
 	#[serde(rename = "721")]
 	pub pos_maint_rpt_id: String,
@@ -50,7 +50,7 @@ pub struct AdjustedPositionReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosReqType {
 	/// Positions
 	#[serde(rename = "0")]
@@ -93,7 +93,7 @@ impl Default for PosReqType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlSessID {
 	/// Intraday
 	#[serde(rename = "ITD")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Email {
 	/// MsgType = C
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', ' '>,
 	/// Unique identifier for the email message thread
 	#[serde(rename = "164")]
 	pub email_thread_id: String,
@@ -62,7 +62,7 @@ pub struct Email {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EmailType {
 	/// New
 	#[serde(rename = "0")]

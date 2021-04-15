@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyActionRequest {
 	/// MsgType = DH
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'H'>,
 	/// PartyActionRequestID
 	#[serde(rename = "2328")]
 	pub party_action_request_id: String,
@@ -56,7 +56,7 @@ pub struct PartyActionRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyActionType {
 	/// Suspend
 	#[serde(rename = "0")]
@@ -75,7 +75,7 @@ impl Default for PartyActionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ApplTestMessageIndicator {
 	/// Not a test message
 	#[serde(rename = "N")]

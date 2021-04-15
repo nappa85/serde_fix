@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityList {
 	/// MsgType = y
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'y', ' '>,
 	/// SecurityReqID
 	#[serde(rename = "320")]
 	pub security_req_id: String,
@@ -97,7 +97,7 @@ pub struct RelatedSy {
 	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityRequestResult {
 	/// Valid request
 	#[serde(rename = "0")]
@@ -125,7 +125,7 @@ impl Default for SecurityRequestResult {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Last message
 	#[serde(rename = "Y")]
@@ -141,7 +141,7 @@ impl Default for LastFragment {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1351,7 +1351,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSwapType {
 	/// Par For Par
 	#[serde(rename = "1")]
@@ -1373,7 +1373,7 @@ impl Default for LegSwapType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSettlType {
 	/// Regular
 	#[serde(rename = "0")]
@@ -1413,7 +1413,7 @@ impl Default for LegSettlType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExpirationCycle {
 	/// Expire on trading session close (default)
 	#[serde(rename = "0")]

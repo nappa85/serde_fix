@@ -17,7 +17,7 @@ pub struct ExecInstRule {
 	pub exec_inst_value: Option<fix_common::SeparatedValues<ExecInstValue>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExecInstValue {
 	/// Stay on offerside
 	#[serde(rename = "0")]

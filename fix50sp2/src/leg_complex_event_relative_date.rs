@@ -46,7 +46,7 @@ pub struct LegComplexEventRelativeDate {
 	pub leg_complex_event_fixing_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -86,7 +86,7 @@ impl Default for LegComplexEventDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -108,7 +108,7 @@ impl Default for LegComplexEventDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -136,7 +136,7 @@ impl Default for LegComplexEventDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]

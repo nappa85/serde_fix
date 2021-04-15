@@ -25,7 +25,7 @@ pub struct LegPaymentScheduleRateSource {
 	pub leg_payment_schedule_reference_page: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateSourceItem {
 	/// Bloomberg
 	#[serde(rename = "0")]
@@ -51,7 +51,7 @@ impl Default for LegPaymentScheduleRateSourceItem {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentScheduleRateSourceType {
 	/// Primary
 	#[serde(rename = "0")]

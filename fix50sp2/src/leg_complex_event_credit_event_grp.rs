@@ -45,7 +45,7 @@ pub struct LegComplexEventCreditEvent {
 	pub leg_complex_event_credit_event_rate_source: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventCreditEventUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -67,7 +67,7 @@ impl Default for LegComplexEventCreditEventUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventCreditEventDayType {
 	/// Business
 	#[serde(rename = "0")]

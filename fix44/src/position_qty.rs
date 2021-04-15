@@ -32,7 +32,7 @@ pub struct Position {
 	pub pos_qty_status: Option<PosQtyStatus>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosType {
 	/// Transaction Quantity
 	#[serde(rename = "TQ")]
@@ -99,7 +99,7 @@ impl Default for PosType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosQtyStatus {
 	/// Submitted
 	#[serde(rename = "0")]

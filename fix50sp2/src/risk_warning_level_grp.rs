@@ -33,7 +33,7 @@ pub struct RiskWarningLevel {
 	pub risk_warning_level_amount: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskWarningLevelAction {
 	/// Queue Inbound
 	#[serde(rename = "0")]

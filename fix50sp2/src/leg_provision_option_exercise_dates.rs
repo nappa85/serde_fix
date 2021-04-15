@@ -93,7 +93,7 @@ pub struct LegProvisionOptionExerciseDates {
 	pub leg_provision_option_exercise_latest_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -127,7 +127,7 @@ impl Default for LegProvisionOptionExerciseBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseEarliestDateUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -161,7 +161,7 @@ impl Default for LegProvisionOptionExerciseEarliestDateUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -195,7 +195,7 @@ impl Default for LegProvisionOptionExerciseFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseStartDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -235,7 +235,7 @@ impl Default for LegProvisionOptionExerciseStartDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseStartDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -257,7 +257,7 @@ impl Default for LegProvisionOptionExerciseStartDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseStartDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

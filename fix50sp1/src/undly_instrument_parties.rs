@@ -39,7 +39,7 @@ pub struct UndlyInstrumentPartie {
 	pub undly_instrument_party_sub_id_type: Option<UndlyInstrumentPartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UndlyInstrumentPartyIDSource {
 	/// BIC (Bank Identification Code-Swift managed) code (ISO 9362)
 	#[serde(rename = "B")]
@@ -103,7 +103,7 @@ impl Default for UndlyInstrumentPartyIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UndlyInstrumentPartyRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
 	#[serde(rename = "1")]
@@ -344,7 +344,7 @@ impl Default for UndlyInstrumentPartyRole {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UndlyInstrumentPartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

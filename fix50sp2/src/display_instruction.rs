@@ -61,7 +61,7 @@ pub struct DisplayInstruction {
 	pub current_display_price: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DisplayWhen {
 	/// Immediate (after each fill)
 	#[serde(rename = "1")]
@@ -77,7 +77,7 @@ impl Default for DisplayWhen {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DisplayMethod {
 	/// Initial (use original DisplayQty)
 	#[serde(rename = "1")]

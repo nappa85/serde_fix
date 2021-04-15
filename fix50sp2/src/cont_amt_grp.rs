@@ -27,7 +27,7 @@ pub struct ContAmt {
 	pub cont_amt_curr: Option<ContAmtCurr>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ContAmtType {
 	/// Commission Amount (actual)
 	#[serde(rename = "1")]
@@ -82,7 +82,7 @@ impl Default for ContAmtType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ContAmtCurr {
 	/// Afghani
 	#[serde(rename = "AFA")]

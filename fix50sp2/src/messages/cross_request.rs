@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct CrossRequest {
 	/// MsgType = DS
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'S'>,
 	/// Unique identifier for cross request message.
 	#[serde(rename = "2672")]
 	pub cross_request_id: String,

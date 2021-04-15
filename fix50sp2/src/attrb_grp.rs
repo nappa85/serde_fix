@@ -21,7 +21,7 @@ pub struct InstrAttri {
 	pub instr_attrib_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrAttribType {
 	/// Flat (securities pay interest on a current basis but are traded without interest)
 	#[serde(rename = "1")]

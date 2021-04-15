@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ListStatus {
 	/// MsgType = N
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'N', ' '>,
 	/// ListID
 	#[serde(rename = "66")]
 	pub list_id: String,
@@ -101,7 +101,7 @@ pub struct Order {
 	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListStatusType {
 	/// Ack
 	#[serde(rename = "1")]
@@ -129,7 +129,7 @@ impl Default for ListStatusType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListOrderStatus {
 	/// In bidding process
 	#[serde(rename = "1")]
@@ -160,7 +160,7 @@ impl Default for ListOrderStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]
@@ -176,7 +176,7 @@ impl Default for LastFragment {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdStatus {
 	/// New
 	#[serde(rename = "0")]
@@ -231,7 +231,7 @@ impl Default for OrdStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum WorkingIndicator {
 	/// Order has been accepted but not yet in a working state
 	#[serde(rename = "N")]
@@ -247,7 +247,7 @@ impl Default for WorkingIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdRejReason {
 	/// Broker / Exchange option
 	#[serde(rename = "0")]

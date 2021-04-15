@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct NetworkCounterpartySystemStatusResponse {
 	/// MsgType = BD
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'D'>,
 	/// NetworkStatusResponseType
 	#[serde(rename = "937")]
 	pub network_status_response_type: NetworkStatusResponseType,
@@ -55,7 +55,7 @@ pub struct CompID {
 	pub status_text: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NetworkStatusResponseType {
 	/// Full
 	#[serde(rename = "1")]
@@ -71,7 +71,7 @@ impl Default for NetworkStatusResponseType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StatusValue {
 	/// Connected
 	#[serde(rename = "1")]

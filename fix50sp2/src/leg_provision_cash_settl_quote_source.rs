@@ -13,7 +13,7 @@ pub struct LegProvisionCashSettlQuoteSource {
 	pub leg_provision_cash_settl_quote_reference_page: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionCashSettlQuoteSourceItem {
 	/// Bloomberg
 	#[serde(rename = "0")]

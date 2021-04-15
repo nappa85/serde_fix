@@ -21,7 +21,7 @@ pub struct TransactionAttribute {
 	pub transaction_attribute_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransactionAttributeType {
 	/// Exclusive arrangement
 	#[serde(rename = "0")]

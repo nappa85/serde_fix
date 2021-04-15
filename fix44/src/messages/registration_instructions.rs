@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct RegistrationInstructions {
 	/// MsgType = o
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'o', ' '>,
 	/// RegistID
 	#[serde(rename = "513")]
 	pub regist_id: String,
@@ -126,7 +126,7 @@ pub struct DistribInst {
 	pub cash_distrib_agent_acct_name: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RegistTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -145,7 +145,7 @@ impl Default for RegistTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -173,7 +173,7 @@ impl Default for AcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TaxAdvantageType {
 	/// None/Not Applicable (default)
 	#[serde(rename = "0")]
@@ -276,7 +276,7 @@ impl Default for TaxAdvantageType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OwnershipType {
 	/// Joint Investors
 	#[serde(rename = "J")]
@@ -295,7 +295,7 @@ impl Default for OwnershipType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OwnerType {
 	/// Individual Investor
 	#[serde(rename = "1")]
@@ -344,7 +344,7 @@ impl Default for OwnerType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InvestorCountryOfResidence {
 	/// AFGHANISTAN
 	#[serde(rename = "AF")]
@@ -1071,7 +1071,7 @@ impl Default for InvestorCountryOfResidence {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DistribPaymentMethod {
 	/// CREST
 	#[serde(rename = "1")]
@@ -1117,7 +1117,7 @@ impl Default for DistribPaymentMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CashDistribCurr {
 	/// Afghani
 	#[serde(rename = "AFA")]

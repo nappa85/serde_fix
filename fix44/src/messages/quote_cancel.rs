@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct QuoteCancel {
 	/// MsgType = Z
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'Z', ' '>,
 	/// Required when quote is in response to a <a href="message_Quote_Request_R.html" target="main">Quote Request&nbsp;(R)</a> message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "131")]
@@ -68,7 +68,7 @@ pub struct QuoteEntrie {
 	pub no_legs: Option<usize>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteCancelType {
 	/// Cancel for Symbol(s)
 	#[serde(rename = "1")]
@@ -90,7 +90,7 @@ impl Default for QuoteCancelType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteResponseLevel {
 	/// No Acknowledgement (Default)
 	#[serde(rename = "0")]
@@ -109,7 +109,7 @@ impl Default for QuoteResponseLevel {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -137,7 +137,7 @@ impl Default for AcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]

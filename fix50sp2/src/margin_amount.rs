@@ -49,7 +49,7 @@ pub struct MarginAm {
 	pub margin_direction: Option<MarginDirection>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarginAmtType {
 	/// Additional Margin
 	#[serde(rename = "1")]
@@ -169,7 +169,7 @@ impl Default for MarginAmtType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarginAmtCcy {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1379,7 +1379,7 @@ impl Default for MarginAmtCcy {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarginAmtFXRateCalc {
 	/// Divided
 	#[serde(rename = "D")]
@@ -1395,7 +1395,7 @@ impl Default for MarginAmtFXRateCalc {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarginDirection {
 	/// Posted
 	#[serde(rename = "0")]

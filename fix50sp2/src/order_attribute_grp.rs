@@ -21,7 +21,7 @@ pub struct OrderAttribute {
 	pub order_attribute_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderAttributeType {
 	/// Aggregated order
 	#[serde(rename = "0")]

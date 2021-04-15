@@ -17,7 +17,7 @@ pub struct ClearingInstruction {
 	pub clearing_instruction_item: Option<ClearingInstructionItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ClearingInstructionItem {
 	/// Process normally
 	#[serde(rename = "0")]

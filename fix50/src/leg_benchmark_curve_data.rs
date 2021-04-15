@@ -26,7 +26,7 @@ pub struct LegBenchmarkCurveData {
 	pub leg_benchmark_price_type: Option<LegBenchmarkPriceType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegBenchmarkCurveCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1236,7 +1236,7 @@ impl Default for LegBenchmarkCurveCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegBenchmarkCurveName {
 	/// EONIA
 	#[serde(rename = "EONIA")]
@@ -1282,7 +1282,7 @@ impl Default for LegBenchmarkCurveName {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegBenchmarkPriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]

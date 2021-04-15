@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PayManagementRequestAck {
 	/// MsgType = EB
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'E', 'B'>,
 	/// PayRequestID
 	#[serde(rename = "2812")]
 	pub pay_request_id: String,
@@ -17,7 +17,7 @@ pub struct PayManagementRequestAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PayRequestStatus {
 	/// Received, not yet processed
 	#[serde(rename = "0")]

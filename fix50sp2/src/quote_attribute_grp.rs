@@ -21,7 +21,7 @@ pub struct QuoteAttribute {
 	pub quote_attribute_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteAttributeType {
 	/// Quote is above standard market size
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct AllocationInstructionAck {
 	/// MsgType = P
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'P', ' '>,
 	/// AllocID
 	#[serde(rename = "70")]
 	pub alloc_id: String,
@@ -107,7 +107,7 @@ pub struct Alloc {
 	pub encoded_alloc_text: Option<fix_common::EncodedText<361>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocStatus {
 	/// accepted (successfully processed)
 	#[serde(rename = "0")]
@@ -135,7 +135,7 @@ impl Default for AllocStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocRejCode {
 	/// unknown account(s)
 	#[serde(rename = "0")]
@@ -187,7 +187,7 @@ impl Default for AllocRejCode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocType {
 	/// Calculated (includes MiscFees and NetMoney)
 	#[serde(rename = "1")]
@@ -212,7 +212,7 @@ impl Default for AllocType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocIntermedReqType {
 	/// Pending Accept
 	#[serde(rename = "1")]
@@ -240,7 +240,7 @@ impl Default for AllocIntermedReqType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchStatus {
 	/// compared, matched or affirmed
 	#[serde(rename = "0")]
@@ -259,7 +259,7 @@ impl Default for MatchStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -308,7 +308,7 @@ impl Default for Product {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityType {
 	/// Federal government or treasury
 	#[serde(rename = "TREASURY")]
@@ -618,7 +618,7 @@ impl Default for SecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocAcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -646,7 +646,7 @@ impl Default for AllocAcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IndividualAllocRejCode {
 	/// unknown account(s)
 	#[serde(rename = "0")]

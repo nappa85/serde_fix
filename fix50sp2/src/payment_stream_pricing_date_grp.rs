@@ -21,7 +21,7 @@ pub struct PaymentStreamPricingDate {
 	pub payment_stream_pricing_date_type: Option<PaymentStreamPricingDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamPricingDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

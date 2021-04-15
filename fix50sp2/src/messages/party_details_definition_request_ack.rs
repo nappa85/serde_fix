@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyDetailsDefinitionRequestAck {
 	/// MsgType = CY
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'Y'>,
 	/// PartyDetailsListRequestID
 	#[serde(rename = "1505")]
 	pub party_details_list_request_id: String,
@@ -37,7 +37,7 @@ pub struct PartyDetailsDefinitionRequestAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailRequestStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -59,7 +59,7 @@ impl Default for PartyDetailRequestStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailRequestResult {
 	/// Successful (default)
 	#[serde(rename = "0")]

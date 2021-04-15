@@ -203,7 +203,7 @@ pub struct LegSecurityAltI {
 	pub leg_security_alt_id_source: Option<LegSecurityAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -276,7 +276,7 @@ impl Default for LegSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProduct {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -325,7 +325,7 @@ impl Default for LegProduct {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -632,7 +632,7 @@ impl Default for LegSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegRepoCollateralSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -939,7 +939,7 @@ impl Default for LegRepoCollateralSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCountryOfIssue {
 	/// AFGHANISTAN
 	#[serde(rename = "AF")]
@@ -1666,7 +1666,7 @@ impl Default for LegCountryOfIssue {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStrikeCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2876,7 +2876,7 @@ impl Default for LegStrikeCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegUnitofMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -2922,7 +2922,7 @@ impl Default for LegUnitofMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegTimeUnit {
 	/// Hour
 	#[serde(rename = "H")]
@@ -2953,7 +2953,7 @@ impl Default for LegTimeUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -3011,7 +3011,7 @@ impl Default for LegSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -4221,7 +4221,7 @@ impl Default for LegCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

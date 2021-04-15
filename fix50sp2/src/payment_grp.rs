@@ -190,7 +190,7 @@ pub struct Payment {
 	pub payment_frequency_period: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentType {
 	/// Brokerage
 	#[serde(rename = "0")]
@@ -248,7 +248,7 @@ impl Default for PaymentType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentPaySide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -264,7 +264,7 @@ impl Default for PaymentPaySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentReceiveSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -280,7 +280,7 @@ impl Default for PaymentReceiveSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -314,7 +314,7 @@ impl Default for PaymentBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentSettlStyle {
 	/// Standard
 	#[serde(rename = "0")]
@@ -333,7 +333,7 @@ impl Default for PaymentSettlStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentMethod {
 	/// CREST
 	#[serde(rename = "1")]
@@ -403,7 +403,7 @@ impl Default for PaymentMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -657,7 +657,7 @@ impl Default for PaymentUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -676,7 +676,7 @@ impl Default for PaymentDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -698,7 +698,7 @@ impl Default for PaymentDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -726,7 +726,7 @@ impl Default for PaymentDateOffsetDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentForwardStartType {
 	/// Prepaid
 	#[serde(rename = "0")]
@@ -748,7 +748,7 @@ impl Default for PaymentForwardStartType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentSubType {
 	/// Initial (principal exchange)
 	#[serde(rename = "0")]

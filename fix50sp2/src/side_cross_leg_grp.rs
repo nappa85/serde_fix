@@ -82,7 +82,7 @@ pub struct CrossLeg {
 	pub leg_short_sale_exemption_reason: Option<LegShortSaleExemptionReason>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSwapType {
 	/// Par For Par
 	#[serde(rename = "1")]
@@ -104,7 +104,7 @@ impl Default for LegSwapType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegClearingAccountType {
 	/// Customer
 	#[serde(rename = "1")]
@@ -123,7 +123,7 @@ impl Default for LegClearingAccountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPositionEffect {
 	/// Close
 	#[serde(rename = "C")]
@@ -151,7 +151,7 @@ impl Default for LegPositionEffect {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCoveredOrUncovered {
 	/// Covered
 	#[serde(rename = "0")]
@@ -167,7 +167,7 @@ impl Default for LegCoveredOrUncovered {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSettlType {
 	/// Regular / FX Spot settlement (T+1 or T+2 depending on currency)
 	#[serde(rename = "0")]
@@ -213,7 +213,7 @@ impl Default for LegSettlType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1423,7 +1423,7 @@ impl Default for LegSettlCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegExecInst {
 	/// Stay on offerside
 	#[serde(rename = "0")]
@@ -1616,7 +1616,7 @@ impl Default for LegExecInst {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegShortSaleExemptionReason {
 	/// Exemption reason unknown
 	#[serde(rename = "0")]

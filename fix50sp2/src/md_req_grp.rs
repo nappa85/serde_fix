@@ -16,7 +16,7 @@ pub struct MDEntryType {
 	pub md_entry_type_item: MDEntryTypeItem,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDEntryTypeItem {
 	/// Bid
 	#[serde(rename = "0")]

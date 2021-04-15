@@ -17,7 +17,7 @@ pub struct UnderlyingComplexEventCreditEventQualifier {
 	pub underlying_complex_event_credit_event_qualifier_item: Option<UnderlyingComplexEventCreditEventQualifierItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingComplexEventCreditEventQualifierItem {
 	/// Retructuring - multiple holding obligations (In relation to a restructuring credit event, unless multiple holder obligation
 	/// is not specified restructurings are limited to multiple holder obligations. A multiple holder obligation means an obligation

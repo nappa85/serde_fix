@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyRiskLimitsReportAck {
 	/// MsgType = DE
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'E'>,
 	/// The identifier of the Party Risk Limit Report (35=CM) or Party Risk Limit Update Report (35=CR) message.
 	#[serde(rename = "1667")]
 	pub risk_limit_report_id: String,
@@ -54,7 +54,7 @@ pub struct PartyRiskLimitsReportAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitReportStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -70,7 +70,7 @@ impl Default for RiskLimitReportStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitReportRejectReason {
 	/// Unknown RiskLimitReportID(1667)
 	#[serde(rename = "0")]

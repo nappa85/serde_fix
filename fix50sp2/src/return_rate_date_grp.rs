@@ -121,7 +121,7 @@ pub struct ReturnRateDate {
 	pub return_rate_valuation_date_business_day_convention: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ReturnRateDateMode {
 	/// Price valuation
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ContraryIntentionReport {
 	/// MsgType = BO
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'O'>,
 	/// Unique identifier for the Contrary Intention report
 	#[serde(rename = "977")]
 	pub cont_int_rpt_id: String,

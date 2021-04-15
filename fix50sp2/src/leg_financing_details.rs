@@ -102,7 +102,7 @@ pub struct LegFinancingDetails {
 	pub leg_financing_contractual_matrix_grp: Option<super::leg_financing_contractual_matrix_grp::LegFinancingContractualMatrixGrp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAgreementCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1312,7 +1312,7 @@ impl Default for LegAgreementCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegTerminationType {
 	/// Overnight
 	#[serde(rename = "1")]
@@ -1334,7 +1334,7 @@ impl Default for LegTerminationType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryType {
 	/// "Versus Payment": Deliver (if sell) or Receive (if buy) vs. (against) Payment
 	#[serde(rename = "0")]

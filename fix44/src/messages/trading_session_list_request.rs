@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Trading {
 	/// MsgType = BI
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'I'>,
 	/// Must be unique, or the ID of previous <a href="message_Trading_Session_Status_Request_g.html" target="main">Trading Session Status Request&nbsp;(g)</a> to disable if <a href="tag_263_SubscriptionRequestType.html" target="bottom">SubscriptionRequestType&nbsp;(263)</a> = Disable previous Snapshot + Update Request (2).
 	#[serde(rename = "335")]
 	pub trad_ses_req_id: String,
@@ -37,7 +37,7 @@ pub struct Trading {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesMethod {
 	/// Electronic
 	#[serde(rename = "1")]
@@ -56,7 +56,7 @@ impl Default for TradSesMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesMode {
 	/// Testing
 	#[serde(rename = "1")]
@@ -75,7 +75,7 @@ impl Default for TradSesMode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]

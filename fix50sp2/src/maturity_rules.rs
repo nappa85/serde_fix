@@ -40,7 +40,7 @@ pub struct MaturityRule {
 	pub maturity_month_year_increment: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MaturityMonthYearFormat {
 	/// YearMonth Only (default)
 	#[serde(rename = "0")]
@@ -59,7 +59,7 @@ impl Default for MaturityMonthYearFormat {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MaturityMonthYearIncrementUnits {
 	/// Months
 	#[serde(rename = "0")]

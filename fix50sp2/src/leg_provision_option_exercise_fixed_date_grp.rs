@@ -21,7 +21,7 @@ pub struct LegProvisionOptionExerciseFixedDate {
 	pub leg_provision_option_exercise_fixed_date_type: Option<LegProvisionOptionExerciseFixedDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExerciseFixedDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

@@ -38,7 +38,7 @@ pub struct AllocRegulatoryTradeID {
 	pub alloc_regulatory_trade_id_scope: Option<AllocRegulatoryTradeIDScope>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocRegulatoryTradeIDEvent {
 	/// Initial block trade
 	#[serde(rename = "0")]
@@ -66,7 +66,7 @@ impl Default for AllocRegulatoryTradeIDEvent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocRegulatoryTradeIDType {
 	/// Current
 	#[serde(rename = "0")]
@@ -88,7 +88,7 @@ impl Default for AllocRegulatoryTradeIDType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocRegulatoryTradeIDScope {
 	/// Clearing member
 	#[serde(rename = "1")]

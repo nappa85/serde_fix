@@ -43,7 +43,7 @@ pub struct ProvisionCashSettlPaymentDates {
 	pub provision_cash_settl_payment_fixed_date_grp: Option<super::provision_cash_settl_payment_fixed_date_grp::ProvisionCashSettlPaymentFixedDateGrp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlPaymentDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -77,7 +77,7 @@ impl Default for ProvisionCashSettlPaymentDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlPaymentDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -117,7 +117,7 @@ impl Default for ProvisionCashSettlPaymentDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlPaymentDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -139,7 +139,7 @@ impl Default for ProvisionCashSettlPaymentDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlPaymentDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

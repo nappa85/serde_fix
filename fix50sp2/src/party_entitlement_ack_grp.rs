@@ -39,7 +39,7 @@ pub struct PartyEntitlement {
 	pub entitlement_ref_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -61,7 +61,7 @@ impl Default for ListUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -89,7 +89,7 @@ impl Default for EntitlementStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementResult {
 	/// Successful(default)
 	#[serde(rename = "0")]

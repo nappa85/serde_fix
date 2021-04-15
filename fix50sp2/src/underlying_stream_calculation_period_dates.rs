@@ -86,7 +86,7 @@ pub struct UnderlyingStreamCalculationPeriodDates {
 	pub underlying_stream_calculation_correction_unit: Option<UnderlyingStreamCalculationCorrectionUnit>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamCalculationCorrectionUnit {
 	/// Day
 	#[serde(rename = "D")]

@@ -44,7 +44,7 @@ pub struct UnderlyingProvisionCashSettlValueDates {
 	pub underlying_provision_cash_settl_value_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlValueDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -78,7 +78,7 @@ impl Default for UnderlyingProvisionCashSettlValueDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlValueDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -118,7 +118,7 @@ impl Default for UnderlyingProvisionCashSettlValueDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlValueDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -140,7 +140,7 @@ impl Default for UnderlyingProvisionCashSettlValueDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlValueDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

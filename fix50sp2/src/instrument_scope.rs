@@ -96,7 +96,7 @@ pub struct InstrumentScope {
 	pub instrument_scope_settl_type: Option<InstrumentScopeSettlType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentScopeSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -202,7 +202,7 @@ impl Default for InstrumentScopeSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentScopeProduct {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -251,7 +251,7 @@ impl Default for InstrumentScopeProduct {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentScopeSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -722,7 +722,7 @@ impl Default for InstrumentScopeSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentScopePutOrCall {
 	/// Put
 	#[serde(rename = "0")]
@@ -738,7 +738,7 @@ impl Default for InstrumentScopePutOrCall {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentScopeSettlType {
 	/// Regular / FX Spot settlement (T+1 or T+2 depending on currency)
 	#[serde(rename = "0")]

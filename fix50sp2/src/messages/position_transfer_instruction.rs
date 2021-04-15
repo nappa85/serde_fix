@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PositionTransferInstruction {
 	/// MsgType = DL
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'L'>,
 	/// <p>Submitting, cancelling, changing, accepting, and declining a transfer are all considered separate instructions, and each must
 	/// have a unique ID. Chaining of firm generated IDs is not supported; <a href="tag_2437_TransferID.html" target="bottom">TransferID&nbsp;(2437)</a> assigned by the CCP must be used when sending an instruction referencing a previously submitted transfer.
 	/// </p>
@@ -90,7 +90,7 @@ pub struct PositionTransferInstruction {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -109,7 +109,7 @@ impl Default for TransferTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferType {
 	/// Request transfer
 	#[serde(rename = "0")]
@@ -128,7 +128,7 @@ impl Default for TransferType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferScope {
 	/// Inter-firm transfer
 	#[serde(rename = "0")]
@@ -147,7 +147,7 @@ impl Default for TransferScope {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1357,7 +1357,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]

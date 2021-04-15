@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct NetworkCounterpartySystemStatusRequest {
 	/// MsgType = BC
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'C'>,
 	/// NetworkRequestType
 	#[serde(rename = "935")]
 	pub network_request_type: NetworkRequestType,
@@ -43,7 +43,7 @@ pub struct CompID {
 	pub desk_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NetworkRequestType {
 	/// Snapshot
 	#[serde(rename = "1")]

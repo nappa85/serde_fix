@@ -45,7 +45,7 @@ pub struct Attachment {
 	pub encoded_attachment: Option<fix_common::EncodedText<2112>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AttachmentEncodingType {
 	/// Base64 encoding
 	#[serde(rename = "0")]

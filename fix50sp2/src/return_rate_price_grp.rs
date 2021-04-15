@@ -33,7 +33,7 @@ pub struct ReturnRatePrice {
 	pub return_rate_price_type: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ReturnRatePriceBasis {
 	/// Gross
 	#[serde(rename = "0")]

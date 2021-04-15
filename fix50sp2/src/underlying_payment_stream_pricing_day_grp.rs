@@ -23,7 +23,7 @@ pub struct UnderlyingPaymentStreamPricingDay {
 	pub underlying_payment_stream_pricing_day_number: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamPricingDayOfWeek {
 	/// Every day (the default if not specified)
 	#[serde(rename = "0")]

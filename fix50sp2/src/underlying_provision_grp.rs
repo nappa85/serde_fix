@@ -129,7 +129,7 @@ pub struct UnderlyingProvision {
 	pub underlying_provision_break_fee_rate: Option<f32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionType {
 	/// Mandatory early termination
 	#[serde(rename = "0")]
@@ -163,7 +163,7 @@ impl Default for UnderlyingProvisionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -197,7 +197,7 @@ impl Default for UnderlyingProvisionDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionDateTenorUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -219,7 +219,7 @@ impl Default for UnderlyingProvisionDateTenorUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCalculationAgent {
 	/// Exercising party
 	#[serde(rename = "0")]
@@ -241,7 +241,7 @@ impl Default for UnderlyingProvisionCalculationAgent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionSinglePartyBuyerSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -257,7 +257,7 @@ impl Default for UnderlyingProvisionOptionSinglePartyBuyerSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionSinglePartySellerSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -273,7 +273,7 @@ impl Default for UnderlyingProvisionOptionSinglePartySellerSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionOptionExerciseStyle {
 	/// European
 	#[serde(rename = "0")]
@@ -295,7 +295,7 @@ impl Default for UnderlyingProvisionOptionExerciseStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlMethod {
 	/// Cash price
 	#[serde(rename = "0")]
@@ -326,7 +326,7 @@ impl Default for UnderlyingProvisionCashSettlMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1536,7 +1536,7 @@ impl Default for UnderlyingProvisionCashSettlCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlCurrency2 {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2746,7 +2746,7 @@ impl Default for UnderlyingProvisionCashSettlCurrency2 {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlQuoteType {
 	/// Bid
 	#[serde(rename = "0")]

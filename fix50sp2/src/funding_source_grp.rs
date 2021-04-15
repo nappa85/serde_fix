@@ -27,7 +27,7 @@ pub struct FundingSource {
 	pub funding_source_currency: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum FundingSourceItem {
 	/// Repurchase agreement
 	#[serde(rename = "0")]

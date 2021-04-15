@@ -1,14 +1,14 @@
 
 use serde::{Serialize, Deserialize};
 
-use fix_common::{ApplVerID, Boolean, EncodedText, RepeatingValues, FixVersion};
-use crate::{header::{Header, MsgType}, Trailer};
+use fix_common::{ApplVerID, Boolean, EncodedText, RepeatingValues};
+use crate::{Header, Trailer};
 
 /// MsgType = A
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Logon {
     #[serde(flatten)]
-    pub header: Header,
+    pub header: Header<5, 'A', ' '>,
     /// (Always unencrypted, always last field in message)
     #[serde(rename = "98")]
     pub encrypt_method: EncryptMethod,
@@ -80,7 +80,7 @@ pub struct Logon {
     pub session_status: Option<SessionStatus>,
     /// The default version of FIX being carried over this FIXT session
     #[serde(rename = "1137")]
-    pub default_appl_ver_id: ApplVerID,
+    pub default_appl_ver_id: ApplVerID<9>,
     /// The default extension pack for FIX messages used in this session
     #[serde(rename = "1407")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -102,49 +102,7 @@ pub struct Logon {
     pub trailer: Trailer,
 }
 
-impl Logon {
-    pub fn new() -> Self {
-        Logon {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::Logon),
-                ..Default::default()
-            },
-            ..Default::default()
-        }
-    }
-}
-
-impl Default for Logon {
-    fn default() -> Self {
-        Logon {
-            header: Header::default(),
-            encrypt_method: EncryptMethod::None,
-            heart_bt_int: 0,
-            raw_data: None,
-            reset_seq_num_flag: None,
-            next_expected_msg_seq_num: None,
-            max_message_size: None,
-            ref_msg: None,
-            test_message_indicator: None,
-            username: None,
-            password: None,
-            new_password: None,
-            encrypted_password_method: None,
-            encrypted_password: None,
-            encrypted_new_password: None,
-            session_status: None,
-            default_appl_ver_id: ApplVerID::FIX50SP2,
-            default_appl_ext_id: None,
-            default_cstm_appl_ver_id: None,
-            text: None,
-            encoded_text: None,
-            trailer: Trailer::default(),
-        }
-    }
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EncryptMethod {
     /// None / other
     #[serde(rename = "0")]
@@ -169,6 +127,12 @@ pub enum EncryptMethod {
     PemDesMd5,
 }
 
+impl Default for EncryptMethod {
+    fn default() -> Self {
+        EncryptMethod::None
+    }
+}
+
 #[derive(Deserialize, Serialize, Clone, Debug, Default, PartialEq)]
 pub struct RefMsg {
     /// Specifies a specific, supported MsgType. Required if NoMsgTypes (384) is > 0. Should be specified from the point of view of the sender of the Logon (A) message
@@ -179,7 +143,7 @@ pub struct RefMsg {
     pub msg_direction: Option<Direction>,
     /// Specifies the service pack release being applied to a message at the session level. Enumerated field with values assigned at time of service pack release
     #[serde(rename = "1130")]
-    pub ref_appl_ver_id: Option<ApplVerID>,
+    pub ref_appl_ver_id: Option<ApplVerID<9>>,
     /// Specified the extension pack being applied to a message
     #[serde(rename = "1406")]
     pub ref_appl_ext_id: Option<String>,
@@ -191,7 +155,7 @@ pub struct RefMsg {
     pub default_ver_indicator: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Direction {
     #[serde(rename = "R")]
     Receive,
@@ -199,7 +163,7 @@ pub enum Direction {
     Send,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SessionStatus {
     /// Session active
     #[serde(rename = "0")]

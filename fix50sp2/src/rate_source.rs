@@ -33,7 +33,7 @@ pub struct RateSourceElement {
 	pub fx_benchmark_rate_fix: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RateSourceItem {
 	/// Bloomberg
 	#[serde(rename = "0")]
@@ -55,7 +55,7 @@ impl Default for RateSourceItem {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RateSourceType {
 	/// Primary
 	#[serde(rename = "0")]

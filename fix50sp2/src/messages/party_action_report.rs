@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyActionReport {
 	/// MsgType = DI
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'I'>,
 	/// Conditionally required when responding to a Party Action Request (35=DH) message.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2328")]
@@ -86,7 +86,7 @@ pub struct PartyActionReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyActionType {
 	/// Suspend
 	#[serde(rename = "0")]
@@ -105,7 +105,7 @@ impl Default for PartyActionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyActionResponse {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -124,7 +124,7 @@ impl Default for PartyActionResponse {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyActionRejectReason {
 	/// Invalid party or parties
 	#[serde(rename = "0")]
@@ -146,7 +146,7 @@ impl Default for PartyActionRejectReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ApplTestMessageIndicator {
 	/// Not a test message
 	#[serde(rename = "N")]

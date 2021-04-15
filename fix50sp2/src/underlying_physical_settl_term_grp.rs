@@ -33,7 +33,7 @@ pub struct UnderlyingPhysicalSettlTerm {
 	pub underlying_physical_settl_term_xid: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPhysicalSettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]

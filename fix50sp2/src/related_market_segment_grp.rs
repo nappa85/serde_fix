@@ -21,7 +21,7 @@ pub struct RelatedMarketSegment {
 	pub market_segment_relationship: Option<MarketSegmentRelationship>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarketSegmentRelationship {
 	/// Market segment pool member
 	#[serde(rename = "1")]

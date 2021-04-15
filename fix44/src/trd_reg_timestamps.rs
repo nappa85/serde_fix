@@ -24,7 +24,7 @@ pub struct TrdRegTimestamp {
 	pub trd_reg_timestamp_origin: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TrdRegTimestampType {
 	/// Execution Time
 	#[serde(rename = "1")]

@@ -29,7 +29,7 @@ pub struct LegSecondaryAssetClasse {
 	pub leg_secondary_asset_sub_type: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecondaryAssetClass {
 	/// Interest rate
 	#[serde(rename = "1")]
@@ -72,7 +72,7 @@ impl Default for LegSecondaryAssetClass {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecondaryAssetSubClass {
 	/// Single currency
 	#[serde(rename = "1")]

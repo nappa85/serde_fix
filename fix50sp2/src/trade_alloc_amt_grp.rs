@@ -31,7 +31,7 @@ pub struct TradeAllocAmt {
 	pub trade_alloc_amt_reason: Option<TradeAllocAmtReason>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeAllocAmtType {
 	/// Cash Amount (Corporate Event)
 	#[serde(rename = "CASH")]
@@ -95,7 +95,7 @@ impl Default for TradeAllocAmtType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeAllocAmtReason {
 	/// Options settlement
 	#[serde(rename = "0")]

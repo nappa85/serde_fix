@@ -91,7 +91,7 @@ pub struct UnderlyingAdditionalTermBondRef {
 	pub underlying_additional_term_bond_day_count: Option<UnderlyingAdditionalTermBondDayCount>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingAdditionalTermBondSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -197,7 +197,7 @@ impl Default for UnderlyingAdditionalTermBondSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingAdditionalTermBondCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1407,7 +1407,7 @@ impl Default for UnderlyingAdditionalTermBondCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingAdditionalTermBondSeniority {
 	/// Senior Secured
 	#[serde(rename = "SD")]
@@ -1435,7 +1435,7 @@ impl Default for UnderlyingAdditionalTermBondSeniority {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingAdditionalTermBondCouponType {
 	/// Zero
 	#[serde(rename = "0")]
@@ -1457,7 +1457,7 @@ impl Default for UnderlyingAdditionalTermBondCouponType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingAdditionalTermBondCouponFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -1491,7 +1491,7 @@ impl Default for UnderlyingAdditionalTermBondCouponFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingAdditionalTermBondDayCount {
 	/// 1/1 (If parties specify the Day Count Fraction to be 1/1 then in calculating the applicable amount, 1 is simply input into
 	/// the calculation as the relevant Day Count Fraction.)

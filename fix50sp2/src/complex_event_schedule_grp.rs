@@ -35,7 +35,7 @@ pub struct ComplexEventSchedule {
 	pub complex_event_schedule_roll_convention: Option<ComplexEventScheduleRollConvention>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventScheduleFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -57,7 +57,7 @@ impl Default for ComplexEventScheduleFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventScheduleRollConvention {
 	/// 1st day of the month
 	#[serde(rename = "1")]

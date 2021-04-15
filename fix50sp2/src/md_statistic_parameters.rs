@@ -179,7 +179,7 @@ pub struct MDStatisticParameters {
 	pub annual_trading_business_days: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticType {
 	/// Count (Simple count of entities or events, e.g. orders transactions during a period of time)
 	#[serde(rename = "1")]
@@ -280,7 +280,7 @@ impl Default for MDStatisticType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticScope {
 	/// Bid prices
 	#[serde(rename = "1")]
@@ -398,7 +398,7 @@ impl Default for MDStatisticScope {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticSubScope {
 	/// Visible (Only includes visible orders and/or quotes)
 	#[serde(rename = "1")]
@@ -507,7 +507,7 @@ impl Default for MDStatisticSubScope {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticScopeType {
 	/// Entry rate
 	#[serde(rename = "1")]
@@ -532,7 +532,7 @@ impl Default for MDStatisticScopeType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MarketDepth {
 	/// full book depth
 	#[serde(rename = "0")]
@@ -548,7 +548,7 @@ impl Default for MarketDepth {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticFrequencyUnit {
 	/// Seconds (default if not specified)
 	#[serde(rename = "0")]
@@ -594,7 +594,7 @@ impl Default for MDStatisticFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticDelayUnit {
 	/// Seconds (default if not specified)
 	#[serde(rename = "0")]
@@ -640,7 +640,7 @@ impl Default for MDStatisticDelayUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticIntervalType {
 	/// Sliding window (Window is defined as an interval period up to the current time of dissemination, see MDStatisticIntervalPeriod
 	/// (2466))
@@ -681,7 +681,7 @@ impl Default for MDStatisticIntervalType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticIntervalTypeUnit {
 	/// Seconds (default if not specified)
 	#[serde(rename = "0")]
@@ -727,7 +727,7 @@ impl Default for MDStatisticIntervalTypeUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticIntervalUnit {
 	/// Seconds (default if not specified)
 	#[serde(rename = "0")]
@@ -773,7 +773,7 @@ impl Default for MDStatisticIntervalUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticRatioType {
 	/// Buyers to sellers
 	#[serde(rename = "1")]
@@ -819,7 +819,7 @@ impl Default for MDStatisticRatioType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingCapacity {
 	/// Customer
 	#[serde(rename = "1")]
@@ -853,7 +853,7 @@ impl Default for TradingCapacity {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdType {
 	/// Market
 	#[serde(rename = "1")]
@@ -945,7 +945,7 @@ impl Default for OrdType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
 	#[serde(rename = "0")]
@@ -994,7 +994,7 @@ impl Default for TimeInForce {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteCondition {
 	/// Open / Active
 	#[serde(rename = "A")]
@@ -1184,7 +1184,7 @@ impl Default for QuoteCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeCondition {
 	/// Implied Trade
 	#[serde(rename = "1")]
@@ -1462,7 +1462,7 @@ impl Default for TradeCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -1523,7 +1523,7 @@ impl Default for Side {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -1554,7 +1554,7 @@ impl Default for TradingSessionID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -1604,7 +1604,7 @@ impl Default for TradingSessionSubID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDOriginType {
 	/// Book
 	#[serde(rename = "0")]
@@ -1641,7 +1641,7 @@ impl Default for MDOriginType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDValueTier {
 	/// Range 1
 	#[serde(rename = "1")]
@@ -1660,7 +1660,7 @@ impl Default for MDValueTier {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesMethod {
 	/// Electronic
 	#[serde(rename = "1")]
@@ -1682,7 +1682,7 @@ impl Default for TradSesMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExposureDurationUnit {
 	/// Seconds (default if not specified)
 	#[serde(rename = "0")]
@@ -1728,7 +1728,7 @@ impl Default for ExposureDurationUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AggressorIndicator {
 	/// Order initiator is aggressor
 	#[serde(rename = "Y")]

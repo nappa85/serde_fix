@@ -271,7 +271,7 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
             names.dedup();
             let has_duplicates = items.len() != names.len();
 
-            out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]\npub enum {} {{\n", name).as_bytes())
+            out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]\npub enum {} {{\n", name).as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
             let mut first = None;

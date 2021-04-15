@@ -44,7 +44,7 @@ pub struct OrderEvent {
 	pub order_event_text: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderEventType {
 	/// Added (0=New)
 	#[serde(rename = "1")]
@@ -87,7 +87,7 @@ impl Default for OrderEventType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderEventReason {
 	/// Add order request
 	#[serde(rename = "1")]
@@ -136,7 +136,7 @@ impl Default for OrderEventReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderEventLiquidityIndicator {
 	/// Added Liquidity
 	#[serde(rename = "1")]

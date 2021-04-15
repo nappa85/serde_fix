@@ -52,7 +52,7 @@ pub struct Fill {
 	pub fill_match_sub_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum FillLiquidityInd {
 	/// Added Liquidity
 	#[serde(rename = "1")]
@@ -74,7 +74,7 @@ impl Default for FillLiquidityInd {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum FillYieldType {
 	/// After Tax Yield (Municipals)
 	#[serde(rename = "AFTERTAX")]

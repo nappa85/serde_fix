@@ -55,7 +55,7 @@ pub struct UnderlyingOptionExerciseExpiration {
 	pub underlying_option_exercise_expiration_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -89,7 +89,7 @@ impl Default for UnderlyingOptionExerciseExpirationDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -129,7 +129,7 @@ impl Default for UnderlyingOptionExerciseExpirationDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -151,7 +151,7 @@ impl Default for UnderlyingOptionExerciseExpirationDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -173,7 +173,7 @@ impl Default for UnderlyingOptionExerciseExpirationFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationRollConvention {
 	/// 1st day of the month
 	#[serde(rename = "1")]
@@ -321,7 +321,7 @@ impl Default for UnderlyingOptionExerciseExpirationRollConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseExpirationDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

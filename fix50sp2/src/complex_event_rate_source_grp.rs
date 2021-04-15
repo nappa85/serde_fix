@@ -29,7 +29,7 @@ pub struct ComplexEventRateSource {
 	pub complex_event_reference_page_heading: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventRateSourceItem {
 	/// Bloomberg
 	#[serde(rename = "0")]
@@ -55,7 +55,7 @@ impl Default for ComplexEventRateSourceItem {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ComplexEventRateSourceType {
 	/// Primary
 	#[serde(rename = "0")]

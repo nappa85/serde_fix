@@ -136,7 +136,7 @@ pub struct UnderlyingStreamCommodity {
 	pub underlying_stream_commodity_delivery_pricing_region: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamCommoditySecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -242,7 +242,7 @@ impl Default for UnderlyingStreamCommoditySecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamCommodityUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -496,7 +496,7 @@ impl Default for UnderlyingStreamCommodityUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamCommodityNearbySettlDayUnit {
 	/// Week
 	#[serde(rename = "Wk")]
@@ -512,7 +512,7 @@ impl Default for UnderlyingStreamCommodityNearbySettlDayUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamCommoditySettlDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -546,7 +546,7 @@ impl Default for UnderlyingStreamCommoditySettlDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamCommoditySettlDateRollUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -559,7 +559,7 @@ impl Default for UnderlyingStreamCommoditySettlDateRollUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamCommoditySettlDayType {
 	/// Business
 	#[serde(rename = "0")]

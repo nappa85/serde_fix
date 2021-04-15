@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyEntitlementsDefinitionRequest {
 	/// MsgType = DA
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'A'>,
 	/// EntitlementRequestID
 	#[serde(rename = "1770")]
 	pub entitlement_request_id: String,

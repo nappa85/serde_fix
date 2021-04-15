@@ -29,7 +29,7 @@ pub struct MatchingDataPoint {
 	pub matching_data_point_name: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchingDataPointIndicator {
 	/// Mandatory
 	#[serde(rename = "1")]
@@ -45,7 +45,7 @@ impl Default for MatchingDataPointIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchingDataPointType {
 	/// Accrued interest
 	#[serde(rename = "1")]

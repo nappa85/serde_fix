@@ -13,7 +13,7 @@ pub struct SettlRateFallbackRateSource {
 	pub settl_rate_fallback_reference_page: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlRateFallbackRateSourceItem {
 	/// Bloomberg
 	#[serde(rename = "0")]

@@ -51,7 +51,7 @@ pub struct MiscFee {
 	pub misc_fee_desc: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MiscFeeCurr {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1261,7 +1261,7 @@ impl Default for MiscFeeCurr {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MiscFeeType {
 	/// Regulatory (e.g. SEC)
 	#[serde(rename = "1")]
@@ -1379,7 +1379,7 @@ impl Default for MiscFeeType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MiscFeeBasis {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -1398,7 +1398,7 @@ impl Default for MiscFeeBasis {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MiscFeeQualifier {
 	/// Contributes (default)
 	#[serde(rename = "0")]

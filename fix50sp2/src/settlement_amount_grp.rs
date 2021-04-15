@@ -23,7 +23,7 @@ pub struct SettlementAmount {
 	pub settlement_amount_currency: Option<SettlementAmountCurrency>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlementAmountCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]

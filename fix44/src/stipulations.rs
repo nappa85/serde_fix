@@ -21,7 +21,7 @@ pub struct Stipulation {
 	pub stipulation_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StipulationType {
 	/// AMT (y/n)
 	#[serde(rename = "AMT")]

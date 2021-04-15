@@ -47,7 +47,7 @@ pub struct DistribInst {
 	pub cash_distrib_agent_acct_name: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DistribPaymentMethod {
 	/// CREST
 	#[serde(rename = "1")]
@@ -93,7 +93,7 @@ impl Default for DistribPaymentMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CashDistribCurr {
 	/// Afghani
 	#[serde(rename = "AFA")]

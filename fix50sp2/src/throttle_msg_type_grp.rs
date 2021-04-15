@@ -17,7 +17,7 @@ pub struct ThrottleMsgTyp {
 	pub throttle_msg_type: Option<ThrottleMsgType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ThrottleMsgType {
 	/// Heartbeat
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ListCancelRequest {
 	/// MsgType = K
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'K', ' '>,
 	/// ListID
 	#[serde(rename = "66")]
 	pub list_id: String,

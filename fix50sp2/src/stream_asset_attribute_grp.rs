@@ -25,7 +25,7 @@ pub struct NoStreamAssetAttribute {
 	pub stream_asset_attribute_limit: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NoStreamAssetAttributes {
 	/// Day
 	#[serde(rename = "D")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyDetailsDefinitionRequest {
 	/// MsgType = CX
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'X'>,
 	/// PartyDetailsListRequestID
 	#[serde(rename = "1505")]
 	pub party_details_list_request_id: String,

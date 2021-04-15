@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MarketDataSnapshotFullRefresh {
 	/// MsgType = W
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'W', ' '>,
 	/// Conditionally required if this message is in response to a <a href="message_Market_Data_Request_V.html" target="main">Market Data Request&nbsp;(V)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "262")]
@@ -208,7 +208,7 @@ pub struct MDEntrie {
 	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum FinancialStatus {
 	/// Bankrupt
 	#[serde(rename = "1")]
@@ -224,7 +224,7 @@ impl Default for FinancialStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CorporateAction {
 	/// Ex-Dividend
 	#[serde(rename = "A")]
@@ -249,7 +249,7 @@ impl Default for CorporateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ApplQueueResolution {
 	/// No action taken
 	#[serde(rename = "0")]
@@ -271,7 +271,7 @@ impl Default for ApplQueueResolution {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDEntryType {
 	/// Bid
 	#[serde(rename = "0")]
@@ -320,7 +320,7 @@ impl Default for MDEntryType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1530,7 +1530,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TickDirection {
 	/// Plus Tick
 	#[serde(rename = "0")]
@@ -1552,7 +1552,7 @@ impl Default for TickDirection {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteCondition {
 	/// Open / Active
 	#[serde(rename = "A")]
@@ -1589,7 +1589,7 @@ impl Default for QuoteCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeCondition {
 	/// Cash (only) Market
 	#[serde(rename = "A")]
@@ -1650,7 +1650,7 @@ impl Default for TradeCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OpenCloseSettlFlag {
 	/// Daily Open / Close / Settlement entry
 	#[serde(rename = "0")]
@@ -1678,7 +1678,7 @@ impl Default for OpenCloseSettlFlag {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TimeInForce {
 	/// Day (or session)
 	#[serde(rename = "0")]
@@ -1712,7 +1712,7 @@ impl Default for TimeInForce {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExecInst {
 	/// Not held
 	#[serde(rename = "1")]
@@ -1842,7 +1842,7 @@ impl Default for ExecInst {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Scope {
 	/// Local (Exchange, ECN, ATS)
 	#[serde(rename = "1")]

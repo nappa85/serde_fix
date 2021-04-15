@@ -28,7 +28,7 @@ pub struct MatchIns {
 	pub match_attrib_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchInst {
 	/// Match
 	#[serde(rename = "1")]

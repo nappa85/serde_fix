@@ -21,7 +21,7 @@ pub struct DlvyIns {
 	pub dlvy_inst_type: Option<DlvyInstType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlInstSource {
 	/// Broker's Instructions
 	#[serde(rename = "1")]
@@ -40,7 +40,7 @@ impl Default for SettlInstSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DlvyInstType {
 	/// Cash
 	#[serde(rename = "C")]

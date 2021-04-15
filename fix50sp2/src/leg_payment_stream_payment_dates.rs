@@ -64,7 +64,7 @@ pub struct LegPaymentStreamPaymentDates {
 	pub leg_payment_stream_final_price_payment_date: Option<super::leg_payment_stream_final_price_payment_date::LegPaymentStreamFinalPricePaymentDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -98,7 +98,7 @@ impl Default for LegPaymentStreamPaymentDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -123,7 +123,7 @@ impl Default for LegPaymentStreamPaymentFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentRollConvention {
 	/// 1st day of the month
 	#[serde(rename = "1")]
@@ -271,7 +271,7 @@ impl Default for LegPaymentStreamPaymentRollConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -311,7 +311,7 @@ impl Default for LegPaymentStreamPaymentDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -333,7 +333,7 @@ impl Default for LegPaymentStreamPaymentDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPaymentDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

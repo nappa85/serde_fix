@@ -40,7 +40,7 @@ pub struct LegStreamEffectiveDate {
 	pub leg_stream_effective_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamEffectiveDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -74,7 +74,7 @@ impl Default for LegStreamEffectiveDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamEffectiveDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -114,7 +114,7 @@ impl Default for LegStreamEffectiveDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamEffectiveDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -136,7 +136,7 @@ impl Default for LegStreamEffectiveDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamEffectiveDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

@@ -379,7 +379,7 @@ pub struct LegPaymentStreamFloatingRate {
 	pub leg_payment_stream_rate_index_id_source: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateIndexSource {
 	/// Bloomberg
 	#[serde(rename = "0")]
@@ -401,7 +401,7 @@ impl Default for LegPaymentStreamRateIndexSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateIndexCurveUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -423,7 +423,7 @@ impl Default for LegPaymentStreamRateIndexCurveUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateSpreadPositionType {
 	/// Short
 	#[serde(rename = "0")]
@@ -439,7 +439,7 @@ impl Default for LegPaymentStreamRateSpreadPositionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateTreatment {
 	/// Bond equivalent yield
 	#[serde(rename = "0")]
@@ -455,7 +455,7 @@ impl Default for LegPaymentStreamRateTreatment {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamCapRateBuySide {
 	/// Buyer of the trade
 	#[serde(rename = "1")]
@@ -471,7 +471,7 @@ impl Default for LegPaymentStreamCapRateBuySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamCapRateSellSide {
 	/// Buyer of the trade
 	#[serde(rename = "1")]
@@ -487,7 +487,7 @@ impl Default for LegPaymentStreamCapRateSellSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFloorRateBuySide {
 	/// Buyer of the trade
 	#[serde(rename = "1")]
@@ -503,7 +503,7 @@ impl Default for LegPaymentStreamFloorRateBuySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFloorRateSellSide {
 	/// Buyer of the trade
 	#[serde(rename = "1")]
@@ -519,7 +519,7 @@ impl Default for LegPaymentStreamFloorRateSellSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFinalRateRoundingDirection {
 	/// Round to nearest
 	#[serde(rename = "0")]
@@ -538,7 +538,7 @@ impl Default for LegPaymentStreamFinalRateRoundingDirection {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamAveragingMethod {
 	/// Unweighted
 	#[serde(rename = "0")]
@@ -554,7 +554,7 @@ impl Default for LegPaymentStreamAveragingMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamNegativeRateTreatment {
 	/// Zero interest rate method
 	#[serde(rename = "0")]
@@ -570,7 +570,7 @@ impl Default for LegPaymentStreamNegativeRateTreatment {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamInflationLagUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -592,7 +592,7 @@ impl Default for LegPaymentStreamInflationLagUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamInflationLagDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -620,7 +620,7 @@ impl Default for LegPaymentStreamInflationLagDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamInflationInterpolationMethod {
 	/// None
 	#[serde(rename = "0")]
@@ -636,7 +636,7 @@ impl Default for LegPaymentStreamInflationInterpolationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamInflationIndexSource {
 	/// Bloomberg
 	#[serde(rename = "0")]
@@ -658,7 +658,7 @@ impl Default for LegPaymentStreamInflationIndexSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFRADiscounting {
 	/// None
 	#[serde(rename = "0")]
@@ -677,7 +677,7 @@ impl Default for LegPaymentStreamFRADiscounting {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateIndexCurveUnit2 {
 	/// Day
 	#[serde(rename = "D")]
@@ -699,7 +699,7 @@ impl Default for LegPaymentStreamRateIndexCurveUnit2 {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateIndexUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -953,7 +953,7 @@ impl Default for LegPaymentStreamRateIndexUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamSettlLevel {
 	/// Average (The cumulative number of weather index units for each day in the calculation period divided by the number of days
 	/// in the calculation period)
@@ -976,7 +976,7 @@ impl Default for LegPaymentStreamSettlLevel {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamReferenceLevelUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -1230,7 +1230,7 @@ impl Default for LegPaymentStreamReferenceLevelUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateSpreadCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2440,7 +2440,7 @@ impl Default for LegPaymentStreamRateSpreadCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateSpreadUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -2694,7 +2694,7 @@ impl Default for LegPaymentStreamRateSpreadUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateSpreadType {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -2710,7 +2710,7 @@ impl Default for LegPaymentStreamRateSpreadType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamCalculationLagUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -2732,7 +2732,7 @@ impl Default for LegPaymentStreamCalculationLagUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFirstObservationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -2754,7 +2754,7 @@ impl Default for LegPaymentStreamFirstObservationDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPricingDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -2782,7 +2782,7 @@ impl Default for LegPaymentStreamPricingDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPricingDayDistribution {
 	/// All
 	#[serde(rename = "0")]
@@ -2804,7 +2804,7 @@ impl Default for LegPaymentStreamPricingDayDistribution {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamPricingBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]

@@ -65,7 +65,7 @@ pub struct TrdRegTimestamp {
 	pub nbbo_source: Option<NBBOSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TrdRegTimestampType {
 	/// Execution Time
 	#[serde(rename = "1")]
@@ -177,7 +177,7 @@ impl Default for TrdRegTimestampType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeskType {
 	/// Agency
 	#[serde(rename = "A")]
@@ -241,7 +241,7 @@ impl Default for DeskType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeskTypeSource {
 	/// NASD OATS
 	#[serde(rename = "1")]
@@ -254,7 +254,7 @@ impl Default for DeskTypeSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeskOrderHandlingInst {
 	/// Add-on Order
 	#[serde(rename = "ADD")]
@@ -462,7 +462,7 @@ impl Default for DeskOrderHandlingInst {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TrdRegTimestampManualIndicator {
 	/// Not manually captured
 	#[serde(rename = "N")]
@@ -478,7 +478,7 @@ impl Default for TrdRegTimestampManualIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NBBOEntryType {
 	/// Bid
 	#[serde(rename = "0")]
@@ -497,7 +497,7 @@ impl Default for NBBOEntryType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NBBOSource {
 	/// Not applicable
 	#[serde(rename = "0")]

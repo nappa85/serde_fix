@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TradeCaptureReportRequestAck {
 	/// MsgType = AQ
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'A', 'Q'>,
 	/// Identifier for the trade request
 	#[serde(rename = "568")]
 	pub trade_request_id: String,
@@ -74,7 +74,7 @@ pub struct Underlying {
 pub struct Leg {
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeRequestType {
 	/// All trades
 	#[serde(rename = "0")]
@@ -99,7 +99,7 @@ impl Default for TradeRequestType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]
@@ -118,7 +118,7 @@ impl Default for SubscriptionRequestType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeRequestResult {
 	/// Successful (default)
 	#[serde(rename = "0")]
@@ -155,7 +155,7 @@ impl Default for TradeRequestResult {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeRequestStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -174,7 +174,7 @@ impl Default for TradeRequestStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MultiLegReportingType {
 	/// Single Security (default if not specified)
 	#[serde(rename = "1")]
@@ -193,7 +193,7 @@ impl Default for MultiLegReportingType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ResponseTransportType {
 	/// Inband: transport the request was sent over (Default)
 	#[serde(rename = "0")]

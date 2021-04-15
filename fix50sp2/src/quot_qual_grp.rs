@@ -17,7 +17,7 @@ pub struct QuoteQualifier {
 	pub quote_qualifier_item: Option<QuoteQualifierItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteQualifierItem {
 	/// All or none
 	#[serde(rename = "A")]

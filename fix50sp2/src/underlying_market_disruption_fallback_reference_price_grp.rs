@@ -53,7 +53,7 @@ pub struct UnderlyingMarketDisruptionFallbackReferencePrice {
 	pub underlying_market_disruption_fallback_basket_divisor: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingMarketDisruptionFallbackUnderlierType {
 	/// Basket
 	#[serde(rename = "0")]
@@ -99,7 +99,7 @@ impl Default for UnderlyingMarketDisruptionFallbackUnderlierType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingMarketDisruptionFallbackUnderlierSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

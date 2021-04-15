@@ -37,7 +37,7 @@ pub struct DlvyIns {
 	pub dlvy_inst_type: Option<DlvyInstType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlDeliveryType {
 	/// "Versus. Payment": Deliver (if Sell) or Receive (if Buy) vs. (Against) Payment
 	#[serde(rename = "0")]
@@ -59,7 +59,7 @@ impl Default for SettlDeliveryType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StandInstDbType {
 	/// Other
 	#[serde(rename = "0")]
@@ -84,7 +84,7 @@ impl Default for StandInstDbType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlInstSource {
 	/// Broker's Instructions
 	#[serde(rename = "1")]
@@ -103,7 +103,7 @@ impl Default for SettlInstSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DlvyInstType {
 	/// securities
 	#[serde(rename = "S")]

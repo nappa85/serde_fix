@@ -91,7 +91,7 @@ pub struct LegAdditionalTermBondRef {
 	pub leg_additional_term_bond_day_count: Option<LegAdditionalTermBondDayCount>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAdditionalTermBondSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -197,7 +197,7 @@ impl Default for LegAdditionalTermBondSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAdditionalTermBondSeniority {
 	/// Senior Secured
 	#[serde(rename = "SD")]
@@ -225,7 +225,7 @@ impl Default for LegAdditionalTermBondSeniority {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAdditionalTermBondCouponType {
 	/// Zero
 	#[serde(rename = "0")]
@@ -247,7 +247,7 @@ impl Default for LegAdditionalTermBondCouponType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAdditionalTermBondCouponFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -281,7 +281,7 @@ impl Default for LegAdditionalTermBondCouponFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAdditionalTermBondDayCount {
 	/// 1/1 (If parties specify the Day Count Fraction to be 1/1 then in calculating the applicable amount, 1 is simply input into
 	/// the calculation as the relevant Day Count Fraction.)

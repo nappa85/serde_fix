@@ -1,7 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Copy, Clone, Debug, PartialEq)]
 pub enum FixVersion<const V: u8> {
     #[serde(rename = "FIX.4.0")]
     FIX40,
@@ -31,7 +31,23 @@ impl<const V: u8> Default for FixVersion<V> {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+// impl<const V1: u8, const V2: u8> From<FixVersion<V2>> for FixVersion<V1> {
+//     fn from(other: FixVersion<V2>) -> Self {
+//         match other {
+impl<const V: u8> FixVersion<V> {
+    pub fn convert<const V2: u8>(&self) -> FixVersion<V2> {
+        match self {
+            FixVersion::FIX40 => FixVersion::FIX40,
+            FixVersion::FIX41 => FixVersion::FIX41,
+            FixVersion::FIX42 => FixVersion::FIX42,
+            FixVersion::FIX43 => FixVersion::FIX43,
+            FixVersion::FIX44 => FixVersion::FIX44,
+            FixVersion::FIXT11 => FixVersion::FIXT11,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Copy, Clone, Debug, PartialEq)]
 pub enum ApplVerID<const V: u8> {
     /// FIX27
     #[serde(rename = "0")]
@@ -83,6 +99,27 @@ impl<const V: u8> Default for ApplVerID<V> {
             9 => ApplVerID::FIX50SP2,
             10 => ApplVerID::FIXLatest,
             _ => unimplemented!(),
+        }
+    }
+}
+
+// impl<const V1: u8, const V2: u8> From<ApplVerID<V2>> for ApplVerID<V1> {
+//     fn from(other: ApplVerID<V2>) -> Self {
+//         match other {
+impl<const V: u8> ApplVerID<V> {
+    pub fn convert<const V2: u8>(&self) -> ApplVerID<V2> {
+        match self {
+            ApplVerID::FIX27 => ApplVerID::FIX27,
+            ApplVerID::FIX30 => ApplVerID::FIX30,
+            ApplVerID::FIX40 => ApplVerID::FIX40,
+            ApplVerID::FIX41 => ApplVerID::FIX41,
+            ApplVerID::FIX42 => ApplVerID::FIX42,
+            ApplVerID::FIX43 => ApplVerID::FIX43,
+            ApplVerID::FIX44 => ApplVerID::FIX44,
+            ApplVerID::FIX50 => ApplVerID::FIX50,
+            ApplVerID::FIX50SP1 => ApplVerID::FIX50SP1,
+            ApplVerID::FIX50SP2 => ApplVerID::FIX50SP2,
+            ApplVerID::FIXLatest => ApplVerID::FIXLatest,
         }
     }
 }

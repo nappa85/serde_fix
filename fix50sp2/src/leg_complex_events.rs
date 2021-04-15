@@ -182,7 +182,7 @@ pub struct LegComplexEvent {
 	pub leg_complex_event_pv_final_price_election_fallback: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventType {
 	/// Capped
 	#[serde(rename = "1")]
@@ -255,7 +255,7 @@ impl Default for LegComplexEventType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexOptPayoutPaySide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -271,7 +271,7 @@ impl Default for LegComplexOptPayoutPaySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexOptPayoutReceiveSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -287,7 +287,7 @@ impl Default for LegComplexOptPayoutReceiveSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexOptPayoutTime {
 	/// Close
 	#[serde(rename = "0")]
@@ -318,7 +318,7 @@ impl Default for LegComplexOptPayoutTime {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventPriceBoundaryMethod {
 	/// Less than ComplexEventPrice(1486)
 	#[serde(rename = "1")]
@@ -343,7 +343,7 @@ impl Default for LegComplexEventPriceBoundaryMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventPriceTimeType {
 	/// Expiration
 	#[serde(rename = "1")]
@@ -362,7 +362,7 @@ impl Default for LegComplexEventPriceTimeType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventCondition {
 	/// And
 	#[serde(rename = "1")]
@@ -378,7 +378,7 @@ impl Default for LegComplexEventCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventQuoteBasis {
 	/// Currency 1 per currency 2
 	#[serde(rename = "0")]
@@ -394,7 +394,7 @@ impl Default for LegComplexEventQuoteBasis {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventCalculationAgent {
 	/// Exercising party
 	#[serde(rename = "0")]
@@ -416,7 +416,7 @@ impl Default for LegComplexEventCalculationAgent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventCreditEventNotifyingParty {
 	/// Seller notifies
 	#[serde(rename = "0")]

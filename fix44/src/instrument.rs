@@ -227,7 +227,7 @@ pub struct Event {
 	pub event_text: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -294,7 +294,7 @@ impl Default for SecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -343,7 +343,7 @@ impl Default for Product {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityType {
 	/// Federal government or treasury
 	#[serde(rename = "TREASURY")]
@@ -653,7 +653,7 @@ impl Default for SecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RepoCollateralSecurityType {
 	/// Federal government or treasury
 	#[serde(rename = "TREASURY")]
@@ -963,7 +963,7 @@ impl Default for RepoCollateralSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CountryOfIssue {
 	/// AFGHANISTAN
 	#[serde(rename = "AF")]
@@ -1690,7 +1690,7 @@ impl Default for CountryOfIssue {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrikeCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2900,11 +2900,11 @@ impl Default for StrikeCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptAttribute {
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CPProgram {
 	/// 3(a)(3)
 	#[serde(rename = "1")]
@@ -2923,7 +2923,7 @@ impl Default for CPProgram {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -2990,7 +2990,7 @@ impl Default for SecurityAltIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EventType {
 	/// Put
 	#[serde(rename = "1")]

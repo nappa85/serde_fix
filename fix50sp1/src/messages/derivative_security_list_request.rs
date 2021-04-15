@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct DerivativeSecurityListRequest {
 	/// MsgType = z
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'z', ' '>,
 	/// SecurityReqID
 	#[serde(rename = "320")]
 	pub security_req_id: String,
@@ -400,7 +400,7 @@ pub struct DerivativeInstrumentPartie {
 	pub derivative_instrument_party_sub_id_type: Option<DerivativeInstrumentPartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityListRequestType {
 	/// <a href="tag_55_Symbol.html" target="bottom">Symbol&nbsp;(55)</a>
 	#[serde(rename = "0")]
@@ -428,7 +428,7 @@ impl Default for SecurityListRequestType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -504,7 +504,7 @@ impl Default for DerivativeSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeProduct {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -553,7 +553,7 @@ impl Default for DerivativeProduct {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -902,7 +902,7 @@ impl Default for DerivativeSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSecurityStatus {
 	/// Active
 	#[serde(rename = "1")]
@@ -918,7 +918,7 @@ impl Default for DerivativeSecurityStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -964,7 +964,7 @@ impl Default for DerivativeUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativePriceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -1010,7 +1010,7 @@ impl Default for DerivativePriceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSettlMethod {
 	/// Cash settlement required
 	#[serde(rename = "C")]
@@ -1026,7 +1026,7 @@ impl Default for DerivativeSettlMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativePriceQuoteMethod {
 	/// Standard, money per unit of a physical
 	#[serde(rename = "STD")]
@@ -1045,7 +1045,7 @@ impl Default for DerivativePriceQuoteMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeFuturesValuationMethod {
 	/// premium style
 	#[serde(rename = "EQTY")]
@@ -1064,7 +1064,7 @@ impl Default for DerivativeFuturesValuationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeListMethod {
 	/// pre-listed only
 	#[serde(rename = "0")]
@@ -1080,7 +1080,7 @@ impl Default for DerivativeListMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativePutOrCall {
 	/// Put
 	#[serde(rename = "0")]
@@ -1096,7 +1096,7 @@ impl Default for DerivativePutOrCall {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeExerciseStyle {
 	/// European
 	#[serde(rename = "0")]
@@ -1115,7 +1115,7 @@ impl Default for DerivativeExerciseStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeTimeUnit {
 	/// Hour
 	#[serde(rename = "H")]
@@ -1146,7 +1146,7 @@ impl Default for DerivativeTimeUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2356,7 +2356,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -2384,7 +2384,7 @@ impl Default for TradingSessionID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -2415,7 +2415,7 @@ impl Default for TradingSessionSubID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]
@@ -2434,7 +2434,7 @@ impl Default for SubscriptionRequestType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeSecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -2510,7 +2510,7 @@ impl Default for DerivativeSecurityAltIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeEventType {
 	/// Put
 	#[serde(rename = "1")]
@@ -2580,7 +2580,7 @@ impl Default for DerivativeEventType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeInstrumentPartyIDSource {
 	/// BIC (Bank Identification Code-Swift managed) code (ISO 9362)
 	#[serde(rename = "B")]
@@ -2644,7 +2644,7 @@ impl Default for DerivativeInstrumentPartyIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeInstrumentPartyRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
 	#[serde(rename = "1")]
@@ -2885,7 +2885,7 @@ impl Default for DerivativeInstrumentPartyRole {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeInstrumentPartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

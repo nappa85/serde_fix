@@ -17,7 +17,7 @@ pub struct Leg {
 	pub leg_ioi_qty: Option<LegIOIQty>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegIOIQty {
 	/// Small
 	#[serde(rename = "S")]

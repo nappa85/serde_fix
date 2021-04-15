@@ -37,7 +37,7 @@ pub struct Throttle {
 	pub throttle_time_unit: Option<ThrottleTimeUnit>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ThrottleAction {
 	/// Queue Inbound
 	#[serde(rename = "0")]
@@ -62,7 +62,7 @@ impl Default for ThrottleAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ThrottleType {
 	/// Inbound Rate
 	#[serde(rename = "0")]
@@ -78,7 +78,7 @@ impl Default for ThrottleType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ThrottleTimeUnit {
 	/// Seconds (default if not specified)
 	#[serde(rename = "0")]

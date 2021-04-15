@@ -21,7 +21,7 @@ pub struct OptionExerciseExpirationDate {
 	pub option_exercise_expiration_date_type: Option<OptionExerciseExpirationDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptionExerciseExpirationDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

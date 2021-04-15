@@ -95,7 +95,7 @@ pub struct LegOptionExerciseDates {
 	pub leg_option_exercise_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -129,7 +129,7 @@ impl Default for LegOptionExerciseBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseEarliestDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -157,7 +157,7 @@ impl Default for LegOptionExerciseEarliestDateOffsetDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseEarliestDateUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -191,7 +191,7 @@ impl Default for LegOptionExerciseEarliestDateUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -213,7 +213,7 @@ impl Default for LegOptionExerciseFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseStartDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -253,7 +253,7 @@ impl Default for LegOptionExerciseStartDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseStartDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -275,7 +275,7 @@ impl Default for LegOptionExerciseStartDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegOptionExerciseStartDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

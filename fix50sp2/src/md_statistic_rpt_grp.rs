@@ -40,7 +40,7 @@ pub struct MDStatistic {
 	pub md_statistic_value_unit: Option<MDStatisticValueUnit>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticStatus {
 	/// Active (default)
 	#[serde(rename = "1")]
@@ -56,7 +56,7 @@ impl Default for MDStatisticStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticValueType {
 	/// Absolute
 	#[serde(rename = "1")]
@@ -72,7 +72,7 @@ impl Default for MDStatisticValueType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MDStatisticValueUnit {
 	/// Seconds (default if not specified)
 	#[serde(rename = "0")]

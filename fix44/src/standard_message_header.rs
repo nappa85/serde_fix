@@ -114,6 +114,14 @@ pub struct StandardMessageHeader<const T1: char, const T2: char> {
 	pub hops: Option<fix_common::RepeatingValues<Hop>>,
 }
 
+impl<const T1: char, const T2: char> StandardMessageHeader<T1, T2> {
+    pub fn reply<const _T1: char, const _T2: char>(&mut self, headers: &StandardMessageHeader<_T1, _T2>) {
+        self.sender_comp_id = headers.target_comp_id.clone();
+        self.target_comp_id = headers.sender_comp_id.clone();
+        self.msg_seq_num = headers.msg_seq_num;
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Hop {
 	/// Third party firm which delivered a specific message either from the firm which originated the message or from another third
@@ -133,7 +141,7 @@ pub struct Hop {
 	pub hop_ref_id: Option<usize>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MsgType<const T1: char, const T2: char> {
 	/// Heartbeat
 	#[serde(rename = "0")]
@@ -418,8 +426,8 @@ pub enum MsgType<const T1: char, const T2: char> {
 
 impl<const T1: char, const T2: char> Default for MsgType<T1, T2> {
 	fn default() -> Self {
-		let temp = format!("{}{}", T1, T2).trim();
-        match temp.as_str() {
+		let temp = format!("{}{}", T1, T2);
+        match temp.trim() {
             "0" => MsgType::Heartbeat,
             "1" => MsgType::TestRequest,
             "2" => MsgType::ResendRequest,
@@ -518,7 +526,7 @@ impl<const T1: char, const T2: char> Default for MsgType<T1, T2> {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PossDupFlag {
 	/// Possible duplicate
 	#[serde(rename = "Y")]
@@ -534,7 +542,7 @@ impl Default for PossDupFlag {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PossResend {
 	/// Possible resend
 	#[serde(rename = "Y")]
@@ -550,7 +558,7 @@ impl Default for PossResend {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MessageEncoding {
 	/// JIS
 	#[serde(rename = "ISO-2022-JP")]

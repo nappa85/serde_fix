@@ -43,7 +43,7 @@ pub struct ProtectionTermEvent {
 	pub protection_term_event_rate_source: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProtectionTermEventUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -65,7 +65,7 @@ impl Default for ProtectionTermEventUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProtectionTermEventDayType {
 	/// Business
 	#[serde(rename = "0")]

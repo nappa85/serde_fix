@@ -21,7 +21,7 @@ pub struct LegSecurityAltI {
 	pub leg_security_alt_id_source: Option<LegSecurityAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

@@ -21,7 +21,7 @@ pub struct LegComplexEventPeriod {
 	pub leg_complex_event_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegComplexEventPeriodType {
 	/// Asian Out
 	#[serde(rename = "0")]

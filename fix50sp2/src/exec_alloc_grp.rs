@@ -61,7 +61,7 @@ pub struct Exec {
 	pub trade_reporting_indicator: Option<TradeReportingIndicator>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LastCapacity {
 	/// Agent
 	#[serde(rename = "1")]
@@ -86,7 +86,7 @@ impl Default for LastCapacity {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeReportingIndicator {
 	/// Trade has not (yet) been reported
 	#[serde(rename = "0")]

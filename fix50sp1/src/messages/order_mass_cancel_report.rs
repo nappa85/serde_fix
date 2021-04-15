@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderMassCancelReport {
 	/// MsgType = r
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'r', ' '>,
 	/// ClOrdID provided on the Order Mass Cancel Request.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "11")]
@@ -129,7 +129,7 @@ pub struct NotAffectedOrder {
 	pub not_affected_order_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MassCancelRequestType {
 	/// Cancel orders for a security
 	#[serde(rename = "1")]
@@ -169,7 +169,7 @@ impl Default for MassCancelRequestType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MassCancelResponse {
 	/// Cancel Request Rejected - See <a href="tag_532_MassCancelRejectReason.html" target="bottom">MassCancelRejectReason&nbsp;(532)</a>
 	#[serde(rename = "0")]
@@ -212,7 +212,7 @@ impl Default for MassCancelResponse {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MassCancelRejectReason {
 	/// Mass Cancel Not Supported
 	#[serde(rename = "0")]
@@ -255,7 +255,7 @@ impl Default for MassCancelRejectReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionID {
 	/// Day
 	#[serde(rename = "1")]
@@ -283,7 +283,7 @@ impl Default for TradingSessionID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradingSessionSubID {
 	/// Pre-Trading
 	#[serde(rename = "1")]
@@ -314,7 +314,7 @@ impl Default for TradingSessionSubID {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

@@ -40,7 +40,7 @@ pub struct UnderlyingMarketDisruption {
 	pub underlying_market_disruption_minimum_futures_contracts: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingMarketDisruptionProvision {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -62,7 +62,7 @@ impl Default for UnderlyingMarketDisruptionProvision {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingMarketDisruptionFallbackProvision {
 	/// As specified in master agreement
 	#[serde(rename = "0")]

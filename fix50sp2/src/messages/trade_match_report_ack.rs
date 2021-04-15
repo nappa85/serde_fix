@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TradeMatchReportAck {
 	/// MsgType = DD
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'D'>,
 	/// ApplicationSequenceControl
 	#[serde(flatten)]
 	pub application_sequence_control: Option<super::super::application_sequence_control::ApplicationSequenceControl>,
@@ -44,7 +44,7 @@ pub struct TradeMatchReportAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeMatchAckStatus {
 	/// Received, not yet processed
 	#[serde(rename = "0")]
@@ -63,7 +63,7 @@ impl Default for TradeMatchAckStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeMatchRejectReason {
 	/// Successful(default)
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyEntitlementsRequest {
 	/// MsgType = CU
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'U'>,
 	/// EntitlementRequestID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1770")]
@@ -55,7 +55,7 @@ pub struct PartyEntitlementsRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]
@@ -74,7 +74,7 @@ impl Default for SubscriptionRequestType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementStatus {
 	/// Accepted
 	#[serde(rename = "0")]

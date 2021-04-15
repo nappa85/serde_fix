@@ -281,7 +281,7 @@ pub struct UnderlyingPaymentSchedule {
 	pub underlying_payment_schedule_fixing_first_observation_date_offset_unit: Option<UnderlyingPaymentScheduleFixingFirstObservationDateOffsetUnit>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentScheduleRateUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -535,7 +535,7 @@ impl Default for UnderlyingPaymentScheduleRateUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentScheduleRateSpreadType {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -551,7 +551,7 @@ impl Default for UnderlyingPaymentScheduleRateSpreadType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentScheduleSettlPeriodPriceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -805,7 +805,7 @@ impl Default for UnderlyingPaymentScheduleSettlPeriodPriceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentScheduleStepUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -1059,7 +1059,7 @@ impl Default for UnderlyingPaymentScheduleStepUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentScheduleFixingDayDistribution {
 	/// All
 	#[serde(rename = "0")]
@@ -1081,7 +1081,7 @@ impl Default for UnderlyingPaymentScheduleFixingDayDistribution {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentScheduleFixingLagUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -1103,7 +1103,7 @@ impl Default for UnderlyingPaymentScheduleFixingLagUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentScheduleFixingFirstObservationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]

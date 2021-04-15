@@ -56,7 +56,7 @@ pub struct LegEvent {
 	pub encoded_leg_event_text: Option<fix_common::EncodedText<2075>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegEventType {
 	/// Put
 	#[serde(rename = "1")]
@@ -126,7 +126,7 @@ impl Default for LegEventType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegEventTimeUnit {
 	/// Hour
 	#[serde(rename = "H")]

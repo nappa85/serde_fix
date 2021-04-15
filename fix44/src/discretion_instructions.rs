@@ -35,7 +35,7 @@ pub struct DiscretionInstructions {
 	pub discretion_scope: Option<DiscretionScope>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DiscretionInst {
 	/// Related to displayed price
 	#[serde(rename = "0")]
@@ -66,7 +66,7 @@ impl Default for DiscretionInst {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DiscretionMoveType {
 	/// Floating (default)
 	#[serde(rename = "0")]
@@ -82,7 +82,7 @@ impl Default for DiscretionMoveType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DiscretionOffsetType {
 	/// Price (default)
 	#[serde(rename = "0")]
@@ -104,7 +104,7 @@ impl Default for DiscretionOffsetType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DiscretionLimitType {
 	/// Or better (default) - price improvement allowed
 	#[serde(rename = "0")]
@@ -124,7 +124,7 @@ impl Default for DiscretionLimitType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DiscretionRoundDirection {
 	/// More aggressive - on a buy order round the price up round up to the nearest tick, on a sell round down to the nearest tick
 	#[serde(rename = "1")]
@@ -140,7 +140,7 @@ impl Default for DiscretionRoundDirection {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DiscretionScope {
 	/// Local (Exchange, ECN, ATS)
 	#[serde(rename = "1")]

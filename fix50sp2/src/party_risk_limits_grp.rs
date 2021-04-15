@@ -25,7 +25,7 @@ pub struct PartyRiskLimit {
 	pub party_risk_limit_status: Option<PartyRiskLimitStatus>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitCheckModelType {
 	/// None (default if not specified)
 	#[serde(rename = "0")]
@@ -47,7 +47,7 @@ impl Default for RiskLimitCheckModelType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyRiskLimitStatus {
 	/// Disabled
 	#[serde(rename = "0")]

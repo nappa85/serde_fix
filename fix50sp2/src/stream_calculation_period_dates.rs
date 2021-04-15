@@ -82,7 +82,7 @@ pub struct StreamCalculationPeriodDates {
 	pub stream_calculation_correction_unit: Option<StreamCalculationCorrectionUnit>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCalculationPeriodBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -116,7 +116,7 @@ impl Default for StreamCalculationPeriodBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamFirstPeriodStartDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -150,7 +150,7 @@ impl Default for StreamFirstPeriodStartDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCalculationFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -184,7 +184,7 @@ impl Default for StreamCalculationFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCalculationRollConvention {
 	/// 1st day of the month
 	#[serde(rename = "1")]
@@ -332,7 +332,7 @@ impl Default for StreamCalculationRollConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCalculationCorrectionUnit {
 	/// Day
 	#[serde(rename = "D")]

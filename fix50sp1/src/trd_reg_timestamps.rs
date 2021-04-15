@@ -36,7 +36,7 @@ pub struct TrdRegTimestamp {
 	pub desk_order_handling_inst: Option<fix_common::SeparatedValues<DeskOrderHandlingInst>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TrdRegTimestampType {
 	/// Execution Time
 	#[serde(rename = "1")]
@@ -64,7 +64,7 @@ impl Default for TrdRegTimestampType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeskType {
 	/// Agency
 	#[serde(rename = "A")]
@@ -107,7 +107,7 @@ impl Default for DeskType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeskTypeSource {
 	/// NASD OATS
 	#[serde(rename = "1")]
@@ -120,7 +120,7 @@ impl Default for DeskTypeSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeskOrderHandlingInst {
 	/// Add-on Order
 	#[serde(rename = "ADD")]

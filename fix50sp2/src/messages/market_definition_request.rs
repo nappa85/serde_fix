@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MarketDefinitionRequest {
 	/// MsgType = BT
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'T'>,
 	/// Must be unique, or the ID of previous Market Segment Request to disable if SubscriptionRequestType = Disable previous Snapshot
 	/// + Updates Request(2).
 	#[serde(rename = "1393")]
@@ -30,7 +30,7 @@ pub struct MarketDefinitionRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]

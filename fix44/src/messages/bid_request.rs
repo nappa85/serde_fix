@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct BidRequest {
 	/// MsgType = k
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'k', ' '>,
 	/// Required to relate the bid response
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "390")]
@@ -240,7 +240,7 @@ pub struct BidComponent {
 	pub acct_id_source: Option<AcctIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BidRequestTransType {
 	/// New
 	#[serde(rename = "N")]
@@ -256,7 +256,7 @@ impl Default for BidRequestTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BidType {
 	/// "Non Disclosed" Style (e.g. US/European)
 	#[serde(rename = "1")]
@@ -275,7 +275,7 @@ impl Default for BidType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1485,7 +1485,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LiquidityIndType {
 	/// 5day moving average
 	#[serde(rename = "1")]
@@ -1507,7 +1507,7 @@ impl Default for LiquidityIndType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExchangeForPhysical {
 	/// True
 	#[serde(rename = "Y")]
@@ -1523,7 +1523,7 @@ impl Default for ExchangeForPhysical {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProgRptReqs {
 	/// BuySide explicitly requests status using StatusRequest (Default) The sell-side firm can however, send a DONE status <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> Response in an unsolicited fashion
 	#[serde(rename = "1")]
@@ -1542,7 +1542,7 @@ impl Default for ProgRptReqs {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IncTaxInd {
 	/// Net
 	#[serde(rename = "1")]
@@ -1558,7 +1558,7 @@ impl Default for IncTaxInd {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ForexReq {
 	/// Execute Forex after security trade
 	#[serde(rename = "Y")]
@@ -1574,7 +1574,7 @@ impl Default for ForexReq {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BidTradeType {
 	/// Risk Trade
 	#[serde(rename = "R")]
@@ -1596,7 +1596,7 @@ impl Default for BidTradeType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BasisPxType {
 	/// Closing Price at morning session
 	#[serde(rename = "2")]
@@ -1645,7 +1645,7 @@ impl Default for BasisPxType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BidDescriptorType {
 	/// Sector
 	#[serde(rename = "1")]
@@ -1664,7 +1664,7 @@ impl Default for BidDescriptorType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SideValueInd {
 	/// SideValue1
 	#[serde(rename = "1")]
@@ -1680,7 +1680,7 @@ impl Default for SideValueInd {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -1738,7 +1738,7 @@ impl Default for Side {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NetGrossInd {
 	/// Net
 	#[serde(rename = "1")]
@@ -1754,7 +1754,7 @@ impl Default for NetGrossInd {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlType {
 	/// Regular
 	#[serde(rename = "0")]
@@ -1794,7 +1794,7 @@ impl Default for SettlType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]

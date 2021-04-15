@@ -21,7 +21,7 @@ pub struct LegStipulation {
 	pub leg_stipulation_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStipulationType {
 	/// Alternative Minimum Tax (Y/N)
 	#[serde(rename = "AMT")]

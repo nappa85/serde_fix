@@ -111,7 +111,7 @@ pub struct LegPaymentStreamResetDates {
 	pub leg_payment_stream_fixing_date_grp: Option<super::leg_payment_stream_fixing_date_grp::LegPaymentStreamFixingDateGrp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamResetDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -151,7 +151,7 @@ impl Default for LegPaymentStreamResetDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamResetDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -185,7 +185,7 @@ impl Default for LegPaymentStreamResetDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamResetFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -219,7 +219,7 @@ impl Default for LegPaymentStreamResetFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamResetWeeklyRollConvention {
 	/// Monday
 	#[serde(rename = "MON")]
@@ -250,7 +250,7 @@ impl Default for LegPaymentStreamResetWeeklyRollConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamInitialFixingDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -290,7 +290,7 @@ impl Default for LegPaymentStreamInitialFixingDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamInitialFixingDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -324,7 +324,7 @@ impl Default for LegPaymentStreamInitialFixingDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamInitialFixingDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -346,7 +346,7 @@ impl Default for LegPaymentStreamInitialFixingDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamInitialFixingDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -374,7 +374,7 @@ impl Default for LegPaymentStreamInitialFixingDateOffsetDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFixingDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -414,7 +414,7 @@ impl Default for LegPaymentStreamFixingDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFixingDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -448,7 +448,7 @@ impl Default for LegPaymentStreamFixingDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFixingDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -470,7 +470,7 @@ impl Default for LegPaymentStreamFixingDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFixingDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -498,7 +498,7 @@ impl Default for LegPaymentStreamFixingDateOffsetDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateCutoffDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -520,7 +520,7 @@ impl Default for LegPaymentStreamRateCutoffDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamRateCutoffDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

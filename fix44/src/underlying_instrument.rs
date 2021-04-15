@@ -222,7 +222,7 @@ pub struct UnderlyingSecurityAltI {
 	pub underlying_security_alt_id_source: Option<UnderlyingSecurityAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -289,7 +289,7 @@ impl Default for UnderlyingSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProduct {
 	/// AGENCY
 	#[serde(rename = "1")]
@@ -338,7 +338,7 @@ impl Default for UnderlyingProduct {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingSecurityType {
 	/// Federal government or treasury
 	#[serde(rename = "TREASURY")]
@@ -648,7 +648,7 @@ impl Default for UnderlyingSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingRepoCollateralSecurityType {
 	/// Federal government or treasury
 	#[serde(rename = "TREASURY")]
@@ -958,7 +958,7 @@ impl Default for UnderlyingRepoCollateralSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingCountryOfIssue {
 	/// AFGHANISTAN
 	#[serde(rename = "AF")]
@@ -1685,7 +1685,7 @@ impl Default for UnderlyingCountryOfIssue {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStrikeCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2895,11 +2895,11 @@ impl Default for UnderlyingStrikeCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptAttribute {
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -4109,7 +4109,7 @@ impl Default for UnderlyingCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingSecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

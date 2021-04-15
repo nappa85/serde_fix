@@ -40,7 +40,7 @@ pub struct LegMarketDisruption {
 	pub leg_market_disruption_minimum_futures_contracts: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegMarketDisruptionProvision {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -62,7 +62,7 @@ impl Default for LegMarketDisruptionProvision {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegMarketDisruptionFallbackProvision {
 	/// As specified in master agreement
 	#[serde(rename = "0")]

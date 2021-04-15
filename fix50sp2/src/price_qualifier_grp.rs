@@ -17,7 +17,7 @@ pub struct PriceQualifier {
 	pub price_qualifier_item: Option<PriceQualifierItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceQualifierItem {
 	/// Accrued interest (if any) is factored into the price
 	#[serde(rename = "0")]

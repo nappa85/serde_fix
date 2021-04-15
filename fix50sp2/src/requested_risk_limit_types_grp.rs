@@ -18,7 +18,7 @@ pub struct RequestedRiskLimitTyp {
 	pub risk_limit_type: Option<RiskLimitType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitType {
 	/// Gross Limit
 	#[serde(rename = "1")]

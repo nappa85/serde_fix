@@ -127,7 +127,7 @@ pub struct Provision {
 	pub provision_break_fee_rate: Option<f32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionType {
 	/// Mandatory early termination
 	#[serde(rename = "0")]
@@ -161,7 +161,7 @@ impl Default for ProvisionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -195,7 +195,7 @@ impl Default for ProvisionDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionDateTenorUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -217,7 +217,7 @@ impl Default for ProvisionDateTenorUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCalculationAgent {
 	/// Exercising party
 	#[serde(rename = "0")]
@@ -239,7 +239,7 @@ impl Default for ProvisionCalculationAgent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionOptionSinglePartyBuyerSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -255,7 +255,7 @@ impl Default for ProvisionOptionSinglePartyBuyerSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionOptionSinglePartySellerSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -271,7 +271,7 @@ impl Default for ProvisionOptionSinglePartySellerSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionOptionExerciseStyle {
 	/// European
 	#[serde(rename = "0")]
@@ -293,7 +293,7 @@ impl Default for ProvisionOptionExerciseStyle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlMethod {
 	/// Cash price
 	#[serde(rename = "0")]
@@ -324,7 +324,7 @@ impl Default for ProvisionCashSettlMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionCashSettlQuoteType {
 	/// Bid
 	#[serde(rename = "0")]
@@ -347,7 +347,7 @@ impl Default for ProvisionCashSettlQuoteType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProvisionBreakFeeElection {
 	/// Flat fee
 	#[serde(rename = "0")]

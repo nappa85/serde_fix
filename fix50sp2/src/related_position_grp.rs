@@ -25,7 +25,7 @@ pub struct RelatedPosition {
 	pub related_position_date: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedPositionIDSource {
 	/// Position maintenance report ID
 	#[serde(rename = "1")]

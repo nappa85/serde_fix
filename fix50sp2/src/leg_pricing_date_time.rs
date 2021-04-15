@@ -28,7 +28,7 @@ pub struct LegPricingDateTime {
 	pub leg_pricing_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPricingDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]

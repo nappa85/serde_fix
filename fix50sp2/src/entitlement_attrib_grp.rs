@@ -31,7 +31,7 @@ pub struct EntitlementAttri {
 	pub entitlement_attrib_currency: Option<EntitlementAttribCurrency>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementAttribDatatype {
 	/// int
 	#[serde(rename = "1")]
@@ -160,7 +160,7 @@ impl Default for EntitlementAttribDatatype {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementAttribCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]

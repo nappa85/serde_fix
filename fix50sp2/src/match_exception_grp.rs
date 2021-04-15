@@ -54,7 +54,7 @@ pub struct MatchException {
 	pub encoded_match_exception_text: Option<fix_common::EncodedText<2798>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchExceptionType {
 	/// No matching confirmation
 	#[serde(rename = "0")]
@@ -85,7 +85,7 @@ impl Default for MatchExceptionType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchExceptionElementType {
 	/// Accrued interest
 	#[serde(rename = "1")]
@@ -146,7 +146,7 @@ impl Default for MatchExceptionElementType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MatchExceptionToleranceValueType {
 	/// Fixed amount (Default if not specified)
 	#[serde(rename = "1")]

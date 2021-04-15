@@ -21,7 +21,7 @@ pub struct DerivativeInstrAttri {
 	pub derivative_instr_attrib_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DerivativeInstrAttribType {
 	/// Flat (securities pay interest on a current basis but are traded without interest)
 	#[serde(rename = "1")]

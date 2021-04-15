@@ -156,7 +156,7 @@ pub struct PaymentStream {
 	pub payment_stream_other_day_count: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamType {
 	/// Periodic (default)
 	#[serde(rename = "0")]
@@ -196,7 +196,7 @@ impl Default for PaymentStreamType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamDiscountType {
 	/// Standard
 	#[serde(rename = "0")]
@@ -212,7 +212,7 @@ impl Default for PaymentStreamDiscountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamCompoundingMethod {
 	/// None
 	#[serde(rename = "0")]
@@ -234,7 +234,7 @@ impl Default for PaymentStreamCompoundingMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamInterpolationPeriod {
 	/// Initial
 	#[serde(rename = "0")]

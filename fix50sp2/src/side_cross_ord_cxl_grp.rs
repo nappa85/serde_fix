@@ -68,7 +68,7 @@ pub struct NoSide {
 	pub encoded_compliance_text: Option<fix_common::EncodedText<2352>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NoSides {
 	/// One Side
 	#[serde(rename = "1")]
@@ -84,7 +84,7 @@ impl Default for NoSides {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

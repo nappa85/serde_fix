@@ -104,7 +104,7 @@ pub struct LegStream {
 	pub leg_stream_notional_adjustments: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamType {
 	/// Payment / cash settlement
 	#[serde(rename = "0")]
@@ -120,7 +120,7 @@ impl Default for LegStreamType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamPaySide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -136,7 +136,7 @@ impl Default for LegStreamPaySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamReceiveSide {
 	/// Buy
 	#[serde(rename = "1")]
@@ -152,7 +152,7 @@ impl Default for LegStreamReceiveSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamNotionalFrequencyUnit {
 	/// Hour
 	#[serde(rename = "H")]
@@ -186,7 +186,7 @@ impl Default for LegStreamNotionalFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamNotionalCommodityFrequency {
 	/// Term
 	#[serde(rename = "0")]
@@ -217,7 +217,7 @@ impl Default for LegStreamNotionalCommodityFrequency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -471,7 +471,7 @@ impl Default for LegStreamNotionalUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamTotalNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]

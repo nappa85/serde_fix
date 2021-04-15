@@ -59,7 +59,7 @@ pub struct LegAlloc {
 	pub leg_current_cost_basis: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAllocAcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -90,7 +90,7 @@ impl Default for LegAllocAcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegAllocSettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]

@@ -17,7 +17,7 @@ pub struct ClearingAccountType {
 	pub clearing_account_type_item: Option<ClearingAccountTypeItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ClearingAccountTypeItem {
 	/// Customer
 	#[serde(rename = "1")]

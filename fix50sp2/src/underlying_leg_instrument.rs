@@ -70,7 +70,7 @@ pub struct UnderlyingLegInstrument {
 	pub underlying_leg_security_desc: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingLegSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]
@@ -176,7 +176,7 @@ impl Default for UnderlyingLegSecurityIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingLegSecurityType {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -647,7 +647,7 @@ impl Default for UnderlyingLegSecurityType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingLegPutOrCall {
 	/// Put
 	#[serde(rename = "0")]

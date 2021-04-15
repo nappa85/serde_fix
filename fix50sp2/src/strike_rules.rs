@@ -40,7 +40,7 @@ pub struct StrikeRule {
 	pub strike_exercise_style: Option<StrikeExerciseStyle>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrikeExerciseStyle {
 	/// European
 	#[serde(rename = "0")]

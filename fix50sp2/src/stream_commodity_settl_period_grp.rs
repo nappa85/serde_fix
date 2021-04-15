@@ -71,7 +71,7 @@ pub struct StreamCommoditySettlPeriod {
 	pub stream_commodity_settl_period_xid_ref: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCommoditySettlFlowType {
 	/// All times
 	#[serde(rename = "0")]
@@ -99,7 +99,7 @@ impl Default for StreamCommoditySettlFlowType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCommoditySettlPeriodNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -353,7 +353,7 @@ impl Default for StreamCommoditySettlPeriodNotionalUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCommoditySettlPeriodFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -375,7 +375,7 @@ impl Default for StreamCommoditySettlPeriodFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCommoditySettlPeriodPriceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -629,7 +629,7 @@ impl Default for StreamCommoditySettlPeriodPriceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamCommoditySettlHolidaysProcessingInstruction {
 	/// Do not include holidays
 	#[serde(rename = "0")]

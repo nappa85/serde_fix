@@ -41,7 +41,7 @@ pub struct RegistDtl {
 	pub investor_country_of_residence: Option<InvestorCountryOfResidence>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OwnerType {
 	/// Individual Investor
 	#[serde(rename = "1")]
@@ -117,7 +117,7 @@ impl Default for OwnerType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InvestorCountryOfResidence {
 	/// AFGHANISTAN
 	#[serde(rename = "AF")]

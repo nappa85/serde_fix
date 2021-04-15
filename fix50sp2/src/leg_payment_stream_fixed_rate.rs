@@ -57,7 +57,7 @@ pub struct LegPaymentStreamFixedRate {
 	pub leg_payment_stream_contract_price_currency: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamFixedAmountUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct AllocationInstructionAlertRequest {
 	/// MsgType = DU
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'U'>,
 	/// Unique identifier for this message. If used, other allocation messages may link to the request through this field.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2758")]

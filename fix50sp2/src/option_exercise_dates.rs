@@ -95,7 +95,7 @@ pub struct OptionExerciseDates {
 	pub option_exercise_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptionExerciseBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -129,7 +129,7 @@ impl Default for OptionExerciseBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptionExerciseEarliestDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -157,7 +157,7 @@ impl Default for OptionExerciseEarliestDateOffsetDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptionExerciseEarliestDateUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -191,7 +191,7 @@ impl Default for OptionExerciseEarliestDateUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptionExerciseFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -213,7 +213,7 @@ impl Default for OptionExerciseFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptionExerciseStartDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -253,7 +253,7 @@ impl Default for OptionExerciseStartDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptionExerciseStartDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -275,7 +275,7 @@ impl Default for OptionExerciseStartDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OptionExerciseStartDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

@@ -129,7 +129,7 @@ pub struct PaymentStreamResetDates {
 	pub payment_stream_fixing_date_grp: Option<super::payment_stream_fixing_date_grp::PaymentStreamFixingDateGrp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamResetWeeklyRollConvention {
 	/// Monday
 	#[serde(rename = "MON")]

@@ -44,7 +44,7 @@ pub struct StreamEffectiveDate {
 	pub stream_effective_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamEffectiveDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]

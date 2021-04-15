@@ -1,14 +1,14 @@
 
 use serde::{Serialize, Deserialize};
 
-use fix_common::{EncodedText, FixVersion};
-use crate::{header::{Header, MsgType}, Trailer};
+use fix_common::EncodedText;
+use crate::{Header, Trailer};
 
 /// MsgType = 5
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Logout {
     #[serde(flatten)]
-    pub header: Header,
+    pub header: Header<5, '5', ' '>,
     /// Session status at time of logout.
     #[serde(rename = "1409")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -25,17 +25,4 @@ pub struct Logout {
     pub encoded_text: Option<EncodedText<355>>,
     #[serde(flatten)]
     pub trailer: Trailer,
-}
-
-impl Logout {
-    pub fn new() -> Self {
-        Logout {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::Logout),
-                ..Default::default()
-            },
-            ..Default::default()
-        }
-    }
 }

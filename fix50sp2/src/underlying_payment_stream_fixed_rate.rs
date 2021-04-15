@@ -57,7 +57,7 @@ pub struct UnderlyingPaymentStreamFixedRate {
 	pub underlying_payment_stream_contract_price_currency: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentStreamFixedAmountUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]

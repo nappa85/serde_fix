@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ApplicationMessageRequest {
 	/// MsgType = BW
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'W'>,
 	/// Unique identifier for request.
 	#[serde(rename = "1346")]
 	pub appl_req_id: String,
@@ -52,7 +52,7 @@ pub struct ApplID {
 	pub appl_end_seq_num: Option<usize>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ApplReqType {
 	/// Retransmission of application messages for the specified Applications
 	#[serde(rename = "0")]

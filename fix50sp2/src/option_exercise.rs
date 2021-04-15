@@ -64,7 +64,7 @@ pub struct OptionExercise {
 	pub option_exercise_make_whole_provision: Option<super::option_exercise_make_whole_provision::OptionExerciseMakeWholeProvision>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExerciseConfirmationMethod {
 	/// Not required
 	#[serde(rename = "0")]

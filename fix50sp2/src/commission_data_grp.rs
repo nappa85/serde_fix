@@ -76,7 +76,7 @@ pub struct Commission {
 	pub commission_amount_sub_type: Option<CommissionAmountSubType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CommissionAmountType {
 	/// Unspecified
 	#[serde(rename = "0")]
@@ -110,7 +110,7 @@ impl Default for CommissionAmountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CommissionBasis {
 	/// Per unit
 	#[serde(rename = "1")]
@@ -129,7 +129,7 @@ impl Default for CommissionBasis {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CommissionAmountSubType {
 	/// Research payment account (RPA)
 	#[serde(rename = "0")]

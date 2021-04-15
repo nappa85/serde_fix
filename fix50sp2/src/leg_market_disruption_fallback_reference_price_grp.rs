@@ -53,7 +53,7 @@ pub struct LegMarketDisruptionFallbackReferencePrice {
 	pub leg_market_disruption_fallback_basket_divisor: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegMarketDisruptionFallbackUnderlierType {
 	/// Basket
 	#[serde(rename = "0")]
@@ -99,7 +99,7 @@ impl Default for LegMarketDisruptionFallbackUnderlierType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegMarketDisruptionFallbackUnderlierSecurityIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

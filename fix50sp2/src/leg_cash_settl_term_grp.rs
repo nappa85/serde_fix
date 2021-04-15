@@ -111,7 +111,7 @@ pub struct LegCashSettlTerm {
 	pub leg_cash_settl_price_default: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCashSettlQuoteMethod {
 	/// Bid
 	#[serde(rename = "0")]
@@ -130,7 +130,7 @@ impl Default for LegCashSettlQuoteMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegCashSettlValuationMethod {
 	/// Market
 	#[serde(rename = "0")]

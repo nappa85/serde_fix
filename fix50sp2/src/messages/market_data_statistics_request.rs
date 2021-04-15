@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct MarketDataStatisticsRequest {
 	/// MsgType = DO
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'O'>,
 	/// <p>Unique message identifier for the request or the identifier of a previous request when unsubscribing.</p>
 	#[serde(rename = "2452")]
 	pub md_statistic_req_id: String,
@@ -81,7 +81,7 @@ pub struct MarketDataStatisticsRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SubscriptionRequestType {
 	/// Snapshot
 	#[serde(rename = "0")]

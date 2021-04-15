@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct CrossOrderCancelRequest {
 	/// MsgType = u
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'u', ' '>,
 	/// Unique identifier of most recent order as assigned by sell-side (broker, exchange, ECN).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
@@ -60,7 +60,7 @@ pub struct CrossOrderCancelRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CrossType {
 	/// Cross AON - cross tade which is executed complete or not. Both sides are treated in the same manner. This is equivalent to
 	/// an "All or None"."
@@ -107,7 +107,7 @@ impl Default for CrossType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CrossPrioritization {
 	/// None
 	#[serde(rename = "0")]

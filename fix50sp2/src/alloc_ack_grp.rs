@@ -133,7 +133,7 @@ pub struct Alloc {
 	pub alloc_leg_ref_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocAcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -164,7 +164,7 @@ impl Default for AllocAcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocPositionEffect {
 	/// Open
 	#[serde(rename = "O")]
@@ -186,7 +186,7 @@ impl Default for AllocPositionEffect {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IndividualAllocRejCode {
 	/// Unknown account(s)
 	#[serde(rename = "0")]
@@ -238,7 +238,7 @@ impl Default for IndividualAllocRejCode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocHandlInst {
 	/// Match
 	#[serde(rename = "1")]
@@ -260,7 +260,7 @@ impl Default for AllocHandlInst {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IndividualAllocType {
 	/// Sub Allocate
 	#[serde(rename = "1")]
@@ -276,7 +276,7 @@ impl Default for IndividualAllocType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllocAvgPxIndicator {
 	/// No Average Pricing
 	#[serde(rename = "0")]
@@ -301,7 +301,7 @@ impl Default for AllocAvgPxIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ClearedIndicator {
 	/// Not cleared
 	#[serde(rename = "0")]

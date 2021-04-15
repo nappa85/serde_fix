@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct RegistrationInstructionsResponse {
 	/// MsgType = p
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'p', ' '>,
 	/// Unique identifier of the original <a href="message_Registration_Instructions_o.html" target="main">Registration Instructions&nbsp;(o)</a> details
 	#[serde(rename = "513")]
 	pub regist_id: String,
@@ -47,7 +47,7 @@ pub struct RegistrationInstructionsResponse {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RegistTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -66,7 +66,7 @@ impl Default for RegistTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -97,7 +97,7 @@ impl Default for AcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RegistStatus {
 	/// Accepted
 	#[serde(rename = "A")]
@@ -119,7 +119,7 @@ impl Default for RegistStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RegistRejReasonCode {
 	/// Invalid/unacceptable Account Type
 	#[serde(rename = "1")]

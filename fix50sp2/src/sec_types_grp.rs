@@ -33,7 +33,7 @@ pub struct SecurityType {
 	pub transact_time: Option<fix_common::UTCTimestamp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityTypeItem {
 	/// Future
 	#[serde(rename = "FUT")]
@@ -504,7 +504,7 @@ impl Default for SecurityTypeItem {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Product {
 	/// AGENCY
 	#[serde(rename = "1")]

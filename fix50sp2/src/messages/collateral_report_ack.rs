@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct CollateralReportAck {
 	/// MsgType = DQ
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'Q'>,
 	/// Identifer of the <a href="message_Collateral_Report_BA.html" target="main">CollateralReport(35=BA)&nbsp;(BA)</a> being acknowledged
 	#[serde(rename = "908")]
 	pub coll_rpt_id: String,
@@ -48,7 +48,7 @@ pub struct CollateralReportAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CollRptStatus {
 	/// Accepted (successfullly processed)
 	#[serde(rename = "0")]
@@ -67,7 +67,7 @@ impl Default for CollRptStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CollRptRejectReason {
 	/// Unknown trade or transaction
 	#[serde(rename = "0")]

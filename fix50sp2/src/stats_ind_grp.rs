@@ -18,7 +18,7 @@ pub struct StatsIndicator {
 	pub stats_type: Option<StatsType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StatsType {
 	/// Exchange Last
 	#[serde(rename = "1")]

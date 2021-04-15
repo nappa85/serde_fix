@@ -38,7 +38,7 @@ pub struct RegulatoryTradeID {
 	pub regulatory_trade_id_scope: Option<RegulatoryTradeIDScope>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RegulatoryTradeIDEvent {
 	/// Initial block trade
 	#[serde(rename = "0")]
@@ -69,7 +69,7 @@ impl Default for RegulatoryTradeIDEvent {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RegulatoryTradeIDType {
 	/// Current
 	#[serde(rename = "0")]
@@ -98,7 +98,7 @@ impl Default for RegulatoryTradeIDType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RegulatoryTradeIDScope {
 	/// Clearing member
 	#[serde(rename = "1")]

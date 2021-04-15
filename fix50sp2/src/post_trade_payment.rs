@@ -56,7 +56,7 @@ pub struct PostTradePayment {
 	pub post_trade_payment_status: Option<PostTradePaymentStatus>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PostTradePaymentDebitOrCredit {
 	/// Debit / Pay
 	#[serde(rename = "0")]
@@ -72,7 +72,7 @@ impl Default for PostTradePaymentDebitOrCredit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PostTradePaymentStatus {
 	/// New
 	#[serde(rename = "0")]

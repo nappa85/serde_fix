@@ -21,7 +21,7 @@ pub struct SecurityAltI {
 	pub security_alt_id_source: Option<SecurityAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

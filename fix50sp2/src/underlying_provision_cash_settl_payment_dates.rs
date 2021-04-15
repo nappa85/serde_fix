@@ -43,7 +43,7 @@ pub struct UnderlyingProvisionCashSettlPaymentDates {
 	pub underlying_provision_cash_settl_payment_fixed_date_grp: Option<super::underlying_provision_cash_settl_payment_fixed_date_grp::UnderlyingProvisionCashSettlPaymentFixedDateGrp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlPaymentDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -77,7 +77,7 @@ impl Default for UnderlyingProvisionCashSettlPaymentDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlPaymentDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -117,7 +117,7 @@ impl Default for UnderlyingProvisionCashSettlPaymentDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlPaymentDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -139,7 +139,7 @@ impl Default for UnderlyingProvisionCashSettlPaymentDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlPaymentDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

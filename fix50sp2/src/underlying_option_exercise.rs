@@ -64,7 +64,7 @@ pub struct UnderlyingOptionExercise {
 	pub underlying_option_exercise_make_whole_provision: Option<super::underlying_option_exercise_make_whole_provision::UnderlyingOptionExerciseMakeWholeProvision>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingExerciseConfirmationMethod {
 	/// Not required
 	#[serde(rename = "0")]

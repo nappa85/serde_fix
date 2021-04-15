@@ -27,7 +27,7 @@ pub struct RelativeValue {
 	pub relative_value_side: Option<RelativeValueSide>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelativeValueType {
 	/// Asset Swap Spread
 	#[serde(rename = "1")]
@@ -64,7 +64,7 @@ impl Default for RelativeValueType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelativeValueSide {
 	/// Bid
 	#[serde(rename = "1")]

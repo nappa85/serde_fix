@@ -111,7 +111,7 @@ pub struct UnderlyingCashSettlTerm {
 	pub underlying_cash_settl_price_default: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingCashSettlCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1321,7 +1321,7 @@ impl Default for UnderlyingCashSettlCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingCashSettlQuoteMethod {
 	/// Bid
 	#[serde(rename = "0")]
@@ -1340,7 +1340,7 @@ impl Default for UnderlyingCashSettlQuoteMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingCashSettlQuoteCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -2550,7 +2550,7 @@ impl Default for UnderlyingCashSettlQuoteCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingCashSettlMinimumQuoteCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -3760,7 +3760,7 @@ impl Default for UnderlyingCashSettlMinimumQuoteCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingCashSettlValuationMethod {
 	/// Market
 	#[serde(rename = "0")]

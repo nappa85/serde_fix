@@ -51,7 +51,7 @@ pub struct LimitAmt {
 	pub limit_role: Option<LimitRole>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LimitAmtType {
 	/// Credit Limit
 	#[serde(rename = "0")]
@@ -79,7 +79,7 @@ impl Default for LimitAmtType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LimitRole {
 	/// Executing Firm (formerly FIX 4.2 ExecBroker)
 	#[serde(rename = "1")]

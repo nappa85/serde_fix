@@ -33,7 +33,7 @@ pub struct CommissionData {
 	pub comm_unit_of_measure: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CommType {
 	/// Amount per unit
 	#[serde(rename = "1")]
@@ -67,7 +67,7 @@ impl Default for CommType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CommCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1277,7 +1277,7 @@ impl Default for CommCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum FundRenewWaiv {
 	/// No
 	#[serde(rename = "N")]

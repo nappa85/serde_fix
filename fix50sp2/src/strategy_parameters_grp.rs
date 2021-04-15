@@ -25,7 +25,7 @@ pub struct StrategyParameter {
 	pub strategy_parameter_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StrategyParameterType {
 	/// Int
 	#[serde(rename = "1")]

@@ -23,7 +23,7 @@ pub struct AuctionTypeRule {
 	pub auction_type_product_complex: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AuctionType {
 	/// None
 	#[serde(rename = "0")]

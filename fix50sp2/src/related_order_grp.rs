@@ -39,7 +39,7 @@ pub struct Order {
 	pub order_origination_firm_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedOrderIDSource {
 	/// Non-FIX Source
 	#[serde(rename = "0")]
@@ -64,7 +64,7 @@ impl Default for RelatedOrderIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrderRelationship {
 	/// Not specified
 	#[serde(rename = "0")]

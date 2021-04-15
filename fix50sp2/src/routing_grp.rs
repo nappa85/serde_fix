@@ -21,7 +21,7 @@ pub struct RoutingID {
 	pub routing_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RoutingType {
 	/// Target Firm
 	#[serde(rename = "1")]

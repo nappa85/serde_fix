@@ -48,7 +48,7 @@ pub struct LegProvisionOptionExpirationDate {
 	pub leg_provision_option_expiration_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExpirationDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -82,7 +82,7 @@ impl Default for LegProvisionOptionExpirationDateBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExpirationDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -122,7 +122,7 @@ impl Default for LegProvisionOptionExpirationDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExpirationDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -144,7 +144,7 @@ impl Default for LegProvisionOptionExpirationDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionExpirationDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

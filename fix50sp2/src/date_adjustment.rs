@@ -16,7 +16,7 @@ pub struct DateAdjustment {
 	pub date_roll_convention: Option<DateRollConvention>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -50,7 +50,7 @@ impl Default for BusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DateRollConvention {
 	/// 1st day of the month
 	#[serde(rename = "1")]

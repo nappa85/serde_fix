@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct UserNotification {
 	/// MsgType = CB
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'B'>,
 	/// List of users to which the notification is directed
 	#[serde(flatten)]
 	pub username_grp: Option<super::super::username_grp::UsernameGrp>,
@@ -30,7 +30,7 @@ pub struct UserNotification {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UserStatus {
 	/// Logged In
 	#[serde(rename = "1")]

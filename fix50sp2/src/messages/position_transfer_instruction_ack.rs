@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PositionTransedInstructionAck {
 	/// MsgType = DM
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'M'>,
 	/// <p>The identifier of the <a href="message_Position_Transfer_Instruction_DL.html" target="main">PositionTransfer Instruction&nbsp;(DL)</a> this message is responding to.
 	/// </p>
 	#[serde(rename = "2436")]
@@ -73,7 +73,7 @@ pub struct PositionTransedInstructionAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -92,7 +92,7 @@ impl Default for TransferTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferType {
 	/// Request transfer
 	#[serde(rename = "0")]
@@ -111,7 +111,7 @@ impl Default for TransferType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferStatus {
 	/// Received
 	#[serde(rename = "0")]
@@ -139,7 +139,7 @@ impl Default for TransferStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferRejectReason {
 	/// Success
 	#[serde(rename = "0")]
@@ -167,7 +167,7 @@ impl Default for TransferRejectReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TransferScope {
 	/// Inter-firm transfer
 	#[serde(rename = "0")]

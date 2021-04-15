@@ -60,7 +60,7 @@ pub struct RiskLimitType {
 	pub risk_limit_velocity_unit: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitTypeItem {
 	/// Gross Limit
 	#[serde(rename = "1")]
@@ -124,7 +124,7 @@ impl Default for RiskLimitTypeItem {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1334,7 +1334,7 @@ impl Default for RiskLimitCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitAction {
 	/// Queue inbound
 	#[serde(rename = "0")]

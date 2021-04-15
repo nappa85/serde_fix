@@ -21,7 +21,7 @@ pub struct PartyDetailAltSubID {
 	pub party_detail_alt_sub_id_type: Option<PartyDetailAltSubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PartyDetailAltSubIDType {
 	/// Firm
 	#[serde(rename = "1")]

@@ -35,7 +35,7 @@ pub struct InstrumentExtension {
 	pub reference_data_date_grp: Option<super::reference_data_date_grp::ReferenceDataDateGrp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DeliveryForm {
 	/// Book Entry (default)
 	#[serde(rename = "1")]
@@ -51,7 +51,7 @@ impl Default for DeliveryForm {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CommodityFinalPriceType {
 	/// Argus McCloskey
 	#[serde(rename = "0")]

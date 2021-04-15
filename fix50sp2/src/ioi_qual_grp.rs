@@ -17,7 +17,7 @@ pub struct IOIQualifier {
 	pub ioi_qualifier_item: Option<IOIQualifierItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum IOIQualifierItem {
 	/// All or none
 	#[serde(rename = "A")]

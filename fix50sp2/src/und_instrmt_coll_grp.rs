@@ -17,7 +17,7 @@ pub struct Underlying {
 	pub coll_action: Option<CollAction>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CollAction {
 	/// Retain
 	#[serde(rename = "0")]

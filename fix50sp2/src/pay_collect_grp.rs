@@ -51,7 +51,7 @@ pub struct PayCollect {
 	pub pay_collect_fx_rate_calc: Option<PayCollectFXRateCalc>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PayCollectCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1261,7 +1261,7 @@ impl Default for PayCollectCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PayCollectFXRateCalc {
 	/// Divided
 	#[serde(rename = "D")]

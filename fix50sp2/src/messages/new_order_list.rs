@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct NewOrderList {
 	/// MsgType = E
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'E', ' '>,
 	/// Must be unique, by customer, for the day
 	#[serde(rename = "66")]
 	pub list_id: String,
@@ -104,7 +104,7 @@ pub struct NewOrderList {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ProgRptReqs {
 	/// Buy-side explicitly requests status using Statue Request (default), the sell-side firm can, however, send a DONE status List
 	/// STatus Response in an unsolicited fashion
@@ -124,7 +124,7 @@ impl Default for ProgRptReqs {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum BidType {
 	/// "Non Disclosed" Style (e.g. US/European)
 	#[serde(rename = "1")]
@@ -143,7 +143,7 @@ impl Default for BidType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CancellationRights {
 	/// Yes
 	#[serde(rename = "Y")]
@@ -165,7 +165,7 @@ impl Default for CancellationRights {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MoneyLaunderingStatus {
 	/// Passed
 	#[serde(rename = "Y")]
@@ -190,7 +190,7 @@ impl Default for MoneyLaunderingStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListExecInstType {
 	/// Immediate
 	#[serde(rename = "1")]
@@ -215,7 +215,7 @@ impl Default for ListExecInstType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ContingencyType {
 	/// One Cancels the Other (OCO)
 	#[serde(rename = "1")]
@@ -244,7 +244,7 @@ impl Default for ContingencyType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AllowableOneSidednessCurr {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1454,7 +1454,7 @@ impl Default for AllowableOneSidednessCurr {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]
@@ -1470,7 +1470,7 @@ impl Default for LastFragment {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ThrottleInst {
 	/// Reject if throttle limit exceeded
 	#[serde(rename = "0")]

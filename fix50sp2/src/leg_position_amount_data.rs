@@ -31,7 +31,7 @@ pub struct LegPosAm {
 	pub leg_pos_amt_reason: Option<LegPosAmtReason>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPosAmtType {
 	/// Final Mark-to-Market Amount
 	#[serde(rename = "FMTM")]
@@ -95,7 +95,7 @@ impl Default for LegPosAmtType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPosCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1305,7 +1305,7 @@ impl Default for LegPosCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPosAmtReason {
 	/// Options settlement
 	#[serde(rename = "0")]

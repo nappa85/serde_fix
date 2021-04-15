@@ -21,7 +21,7 @@ pub struct PaymentSettlPartySubID {
 	pub payment_settl_party_sub_id_type: Option<PaymentSettlPartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentSettlPartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

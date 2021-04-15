@@ -23,7 +23,7 @@ pub struct TradeQty {
 	pub trade_qty: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeQtyType {
 	/// Cleared quantity
 	#[serde(rename = "0")]

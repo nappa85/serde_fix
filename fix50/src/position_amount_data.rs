@@ -26,7 +26,7 @@ pub struct PosAm {
 	pub position_currency: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosAmtType {
 	/// Final Mark-to-Market Amount
 	#[serde(rename = "FMTM")]

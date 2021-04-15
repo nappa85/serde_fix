@@ -27,7 +27,7 @@ pub struct SettlRateFallback {
 	pub settl_rate_postponement_calculation_agent: Option<SettlRatePostponementCalculationAgent>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SettlRatePostponementCalculationAgent {
 	/// Exercising party
 	#[serde(rename = "0")]

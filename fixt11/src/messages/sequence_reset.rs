@@ -1,14 +1,13 @@
 
 use serde::{Serialize, Deserialize};
 
-use fix_common::FixVersion;
-use crate::{header::{Header, MsgType}, Trailer};
+use crate::{Header, Trailer};
 
 /// MsgType = 4
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct SequenceReset {
     #[serde(flatten)]
-    pub header: Header,
+    pub header: Header<5, '4', ' '>,
     /// GapFillFlag
     #[serde(rename = "123")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -19,17 +18,4 @@ pub struct SequenceReset {
     pub new_seq_no: u64,
     #[serde(flatten)]
     pub trailer: Trailer,
-}
-
-impl SequenceReset {
-    pub fn new() -> Self {
-        SequenceReset {
-            header: Header {
-                begin_string: Some(FixVersion::FIXT11),
-                msg_type: Some(MsgType::SequenceReset),
-                ..Default::default()
-            },
-            ..Default::default()
-        }
-    }
 }

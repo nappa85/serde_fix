@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TradingSessionList {
 	/// MsgType = BJ
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'J'>,
 	/// Provided for a response to a specific <a href="message_Trading_Session_List_Request_BI.html" target="main">Trading Session List Request&nbsp;(BI)</a> message (snapshot).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "335")]
@@ -88,7 +88,7 @@ pub struct TradingSession {
 	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesMethod {
 	/// Electronic
 	#[serde(rename = "1")]
@@ -107,7 +107,7 @@ impl Default for TradSesMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesMode {
 	/// Testing
 	#[serde(rename = "1")]
@@ -126,7 +126,7 @@ impl Default for TradSesMode {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent as a result of a prior request
 	#[serde(rename = "N")]
@@ -142,7 +142,7 @@ impl Default for UnsolicitedIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesStatus {
 	/// Unknown
 	#[serde(rename = "0")]
@@ -173,7 +173,7 @@ impl Default for TradSesStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradSesStatusRejReason {
 	/// Unknown or invalid TradingSessionID
 	#[serde(rename = "1")]

@@ -17,7 +17,7 @@ pub struct CollInquiryQualifie {
 	pub coll_inquiry_qualifier: Option<CollInquiryQualifier>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CollInquiryQualifier {
 	/// Trade Date
 	#[serde(rename = "0")]

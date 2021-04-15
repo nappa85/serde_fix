@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ListStatus {
 	/// MsgType = N
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'N', ' '>,
 	/// ListID
 	#[serde(rename = "66")]
 	pub list_id: String,
@@ -61,7 +61,7 @@ pub struct ListStatus {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListStatusType {
 	/// Ack
 	#[serde(rename = "1")]
@@ -89,7 +89,7 @@ impl Default for ListStatusType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListOrderStatus {
 	/// In bidding process
 	#[serde(rename = "1")]
@@ -120,7 +120,7 @@ impl Default for ListOrderStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ContingencyType {
 	/// One Cancels the Other (OCO)
 	#[serde(rename = "1")]
@@ -149,7 +149,7 @@ impl Default for ContingencyType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListRejectReason {
 	/// Broker / Exchange option
 	#[serde(rename = "0")]
@@ -180,7 +180,7 @@ impl Default for ListRejectReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LastFragment {
 	/// Not Last Message
 	#[serde(rename = "N")]

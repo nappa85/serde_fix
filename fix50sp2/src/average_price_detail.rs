@@ -17,7 +17,7 @@ pub struct AveragePriceDetail {
 	pub average_price_end_time: Option<fix_common::UTCTimestamp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AveragePriceType {
 	/// Time weighted average price
 	#[serde(rename = "0")]

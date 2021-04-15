@@ -51,7 +51,7 @@ pub struct Position {
 	pub pos_qty_unit_of_measure_currency: Option<PosQtyUnitOfMeasureCurrency>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosType {
 	/// Allocation Trade Qty
 	#[serde(rename = "ALC")]
@@ -175,7 +175,7 @@ impl Default for PosType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosQtyStatus {
 	/// Submitted
 	#[serde(rename = "0")]
@@ -194,7 +194,7 @@ impl Default for PosQtyStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosQtyUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -448,7 +448,7 @@ impl Default for PosQtyUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosQtyUnitOfMeasureCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]

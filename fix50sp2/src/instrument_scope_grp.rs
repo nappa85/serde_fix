@@ -18,7 +18,7 @@ pub struct InstrumentScope {
 	pub instrument_scope_operator: Option<InstrumentScopeOperator>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentScopeOperator {
 	/// Include
 	#[serde(rename = "1")]

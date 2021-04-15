@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ApplicationMessageRequestAck {
 	/// MsgType = BX
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'X'>,
 	/// Identifier for the Application Message Request Ack.
 	#[serde(rename = "1353")]
 	pub appl_response_id: String,
@@ -48,7 +48,7 @@ pub struct ApplicationMessageRequestAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ApplReqType {
 	/// Retransmission of application messages for the specified Applications
 	#[serde(rename = "0")]
@@ -79,7 +79,7 @@ impl Default for ApplReqType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ApplResponseType {
 	/// Request successfully processed
 	#[serde(rename = "0")]

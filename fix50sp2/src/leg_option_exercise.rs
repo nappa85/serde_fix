@@ -64,7 +64,7 @@ pub struct LegOptionExercise {
 	pub leg_option_exercise_make_whole_provision: Option<super::leg_option_exercise_make_whole_provision::LegOptionExerciseMakeWholeProvision>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegExerciseConfirmationMethod {
 	/// Not required
 	#[serde(rename = "0")]

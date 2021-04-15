@@ -23,7 +23,7 @@ pub struct LotTypeRule {
 	pub min_lot_size: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LotType {
 	/// Odd Lot
 	#[serde(rename = "1")]

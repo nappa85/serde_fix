@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PayManagementRequest {
 	/// MsgType = EA
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'E', 'A'>,
 	/// PayRequestID
 	#[serde(rename = "2812")]
 	pub pay_request_id: String,
@@ -67,7 +67,7 @@ pub struct PayManagementRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PyRequestTransType {
 	/// New
 	#[serde(rename = "0")]

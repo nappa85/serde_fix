@@ -156,7 +156,7 @@ pub struct LegPaymentStream {
 	pub leg_payment_stream_other_day_count: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamType {
 	/// Periodic (default)
 	#[serde(rename = "0")]
@@ -196,7 +196,7 @@ impl Default for LegPaymentStreamType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamSettlCurrency {
 	/// 1/1 (If parties specify the Day Count Fraction to be 1/1 then in calculating the applicable amount, 1 is simply input into
 	/// the calculation as the relevant Day Count Fraction.)
@@ -296,7 +296,7 @@ impl Default for LegPaymentStreamSettlCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamDiscountType {
 	/// Standard
 	#[serde(rename = "0")]
@@ -312,7 +312,7 @@ impl Default for LegPaymentStreamDiscountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamDiscountRateDayCount {
 	/// 1/1 (If parties specify the Day Count Fraction to be 1/1 then in calculating the applicable amount, 1 is simply input into
 	/// the calculation as the relevant Day Count Fraction.)
@@ -412,7 +412,7 @@ impl Default for LegPaymentStreamDiscountRateDayCount {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamCompoundingMethod {
 	/// None
 	#[serde(rename = "0")]

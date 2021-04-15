@@ -29,7 +29,7 @@ pub struct PriceMovementValue {
 	pub price_movement_type: Option<PriceMovementType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceMovementType {
 	/// Amount
 	#[serde(rename = "0")]

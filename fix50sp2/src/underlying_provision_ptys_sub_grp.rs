@@ -21,7 +21,7 @@ pub struct UnderlyingProvisionPartySubID {
 	pub underlying_provision_party_sub_id_type: Option<UnderlyingProvisionPartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionPartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

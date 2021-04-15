@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderCancelReject {
 	/// MsgType = 9
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'9', ' '>,
 	/// If CxlRejReason="Unknown order", specify "NONE".
 	#[serde(rename = "37")]
 	pub order_id: String,
@@ -89,7 +89,7 @@ pub struct OrderCancelReject {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdStatus {
 	/// New
 	#[serde(rename = "0")]
@@ -144,7 +144,7 @@ impl Default for OrdStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum WorkingIndicator {
 	/// Order has been accepted but not yet in a working state
 	#[serde(rename = "N")]
@@ -160,7 +160,7 @@ impl Default for WorkingIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -188,7 +188,7 @@ impl Default for AcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AccountType {
 	/// Account is carried on customer Side of Books
 	#[serde(rename = "1")]
@@ -219,7 +219,7 @@ impl Default for AccountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CxlRejResponseTo {
 	/// Order cancel request
 	#[serde(rename = "1")]
@@ -235,7 +235,7 @@ impl Default for CxlRejResponseTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CxlRejReason {
 	/// Too late to cancel
 	#[serde(rename = "0")]

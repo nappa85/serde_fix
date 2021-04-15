@@ -23,7 +23,7 @@ pub struct RelatedPartyDetailAltSubID {
 	pub related_party_detail_alt_sub_id_type: Option<RelatedPartyDetailAltSubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedPartyDetailAltSubIDType {
 	/// Firm
 	#[serde(rename = "1")]

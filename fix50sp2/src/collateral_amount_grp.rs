@@ -80,7 +80,7 @@ pub struct CollateralAmount {
 	pub underlying_ref_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CollateralCurrency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1290,7 +1290,7 @@ impl Default for CollateralCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CollateralFXRateCalc {
 	/// Divided
 	#[serde(rename = "D")]
@@ -1306,7 +1306,7 @@ impl Default for CollateralFXRateCalc {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CollateralAmountType {
 	/// Market valuation (the default)
 	#[serde(rename = "0")]

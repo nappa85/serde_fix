@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ExecutionAck {
 	/// MsgType = BN
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'N'>,
 	/// OrderID
 	#[serde(rename = "37")]
 	pub order_id: String,
@@ -98,7 +98,7 @@ pub struct ExecutionAck {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ExecAckStatus {
 	/// Received, not yet processed
 	#[serde(rename = "0")]
@@ -117,7 +117,7 @@ impl Default for ExecAckStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DKReason {
 	/// Unknown Symbol
 	#[serde(rename = "A")]
@@ -151,7 +151,7 @@ impl Default for DKReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]
@@ -212,7 +212,7 @@ impl Default for Side {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceType {
 	/// Percentage (e.g. percent of par) (often called "dollar price" for fixed income)
 	#[serde(rename = "1")]

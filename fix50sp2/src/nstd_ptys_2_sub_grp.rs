@@ -21,7 +21,7 @@ pub struct Nested2PartySubID {
 	pub nested_2_party_sub_id_type: Option<Nested2PartySubIDType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Nested2PartySubIDType {
 	/// Firm
 	#[serde(rename = "1")]

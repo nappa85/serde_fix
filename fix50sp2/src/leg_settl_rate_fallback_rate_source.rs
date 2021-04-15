@@ -13,7 +13,7 @@ pub struct LegSettlRateFallbackRateSource {
 	pub leg_settl_rate_fallback_reference_page: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSettlRateFallbackRateSourceItem {
 	/// Bloomberg
 	#[serde(rename = "0")]

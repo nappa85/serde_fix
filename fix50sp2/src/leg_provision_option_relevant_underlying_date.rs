@@ -44,7 +44,7 @@ pub struct LegProvisionOptionRelevantUnderlyingDate {
 	pub leg_provision_option_relevant_underlying_date_adjusted: Option<fix_common::LocalMktDate>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegProvisionOptionRelevantUnderlyingDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]

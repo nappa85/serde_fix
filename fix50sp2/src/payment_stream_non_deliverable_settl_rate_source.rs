@@ -13,7 +13,7 @@ pub struct PaymentStreamNonDeliverableSettlRateSource {
 	pub payment_stream_non_deliverable_settl_reference_page: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStreamNonDeliverableSettlRateSourceItem {
 	/// Bloomberg
 	#[serde(rename = "0")]

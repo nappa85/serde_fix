@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct DontKnowTrade {
 	/// MsgType = Q
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'Q', ' '>,
 	/// Broker Order ID as identified on problem execution
 	#[serde(rename = "37")]
 	pub order_id: String,
@@ -71,7 +71,7 @@ pub struct Underlying {
 pub struct Leg {
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DKReason {
 	/// Unknown symbol
 	#[serde(rename = "A")]
@@ -102,7 +102,7 @@ impl Default for DKReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

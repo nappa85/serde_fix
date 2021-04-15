@@ -23,7 +23,7 @@ pub struct InstrumentScopeSecurityAltID {
 	pub instrument_scope_security_alt_id_source: Option<InstrumentScopeSecurityAltIDSource>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InstrumentScopeSecurityAltIDSource {
 	/// CUSIP
 	#[serde(rename = "1")]

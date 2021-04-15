@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct OrderStatusRequest {
 	/// MsgType = H
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'H', ' '>,
 	/// Conditionally required if <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID(11)&nbsp;(11)</a> is not provided. Either <a href="tag_37_OrderID.html" target="bottom">OrderID&nbsp;(37)</a> or <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> must be provided.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
@@ -59,7 +59,7 @@ pub struct OrderStatusRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum AcctIDSource {
 	/// BIC
 	#[serde(rename = "1")]
@@ -90,7 +90,7 @@ impl Default for AcctIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

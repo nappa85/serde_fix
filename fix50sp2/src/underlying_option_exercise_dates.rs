@@ -95,7 +95,7 @@ pub struct UnderlyingOptionExerciseDates {
 	pub underlying_option_exercise_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -129,7 +129,7 @@ impl Default for UnderlyingOptionExerciseBusinessDayConvention {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseEarliestDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]
@@ -157,7 +157,7 @@ impl Default for UnderlyingOptionExerciseEarliestDateOffsetDayType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseEarliestDateUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -191,7 +191,7 @@ impl Default for UnderlyingOptionExerciseEarliestDateUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseFrequencyUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -213,7 +213,7 @@ impl Default for UnderlyingOptionExerciseFrequencyUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseStartDateRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -253,7 +253,7 @@ impl Default for UnderlyingOptionExerciseStartDateRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseStartDateOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -275,7 +275,7 @@ impl Default for UnderlyingOptionExerciseStartDateOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingOptionExerciseStartDateOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

@@ -23,7 +23,7 @@ pub struct UnderlyingPaymentScheduleFixingDay {
 	pub underlying_payment_schedule_fixing_day_number: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingPaymentScheduleFixingDayOfWeek {
 	/// Every day (the default if not specified)
 	#[serde(rename = "0")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct NetworkCounterpartySystemStatusResponse {
 	/// MsgType = BD
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'D'>,
 	/// NetworkStatusResponseType
 	#[serde(rename = "937")]
 	pub network_status_response_type: NetworkStatusResponseType,
@@ -28,7 +28,7 @@ pub struct NetworkCounterpartySystemStatusResponse {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NetworkStatusResponseType {
 	/// Full
 	#[serde(rename = "1")]

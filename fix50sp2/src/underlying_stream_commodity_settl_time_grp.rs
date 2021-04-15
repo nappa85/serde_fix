@@ -25,7 +25,7 @@ pub struct UnderlyingStreamCommoditySettlTime {
 	pub underlying_stream_commodity_settl_time_type: Option<UnderlyingStreamCommoditySettlTimeType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStreamCommoditySettlTimeType {
 	/// Hour of the day (Applicable for electricity contracts. Time value is expressed as an integer hour of the day (1-24). The delivery
 	/// start/end hour is specified as the end of the included hour. For example, a start hour of ":4" begins at 3 a.m.; an end hour

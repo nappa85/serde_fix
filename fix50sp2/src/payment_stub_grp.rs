@@ -173,7 +173,7 @@ pub struct PaymentStub {
 	pub payment_stub_index_2_floor_rate: Option<f32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStubType {
 	/// Initial
 	#[serde(rename = "0")]
@@ -195,7 +195,7 @@ impl Default for PaymentStubType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PaymentStubLength {
 	/// Short
 	#[serde(rename = "0")]

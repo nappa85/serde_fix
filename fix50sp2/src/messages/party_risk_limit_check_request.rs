@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyRiskLimitCheckRequest {
 	/// MsgType = DF
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'F'>,
 	/// Either RiskLimitCheckRequestID(2318) or RiskLimitCheckID(2319) must be specified. RiskLimitCheckRequestID(2318) is conditionally
 	/// required in a message-chaining model in which a subsequent message may refer to a prior message via RiskLimitCheckRequestRefID(2322).
 	/// The alternative is an entity-based model in which RiskLimitCheckID(2319) is used to statically identify a given request. In
@@ -97,7 +97,7 @@ pub struct PartyRiskLimitCheckRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitCheckTransType {
 	/// New
 	#[serde(rename = "0")]
@@ -116,7 +116,7 @@ impl Default for RiskLimitCheckTransType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitCheckType {
 	/// Submit
 	#[serde(rename = "0")]
@@ -132,7 +132,7 @@ impl Default for RiskLimitCheckType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RefOrderIDSource {
 	/// Secondary order ID
 	#[serde(rename = "0")]
@@ -175,7 +175,7 @@ impl Default for RefOrderIDSource {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RiskLimitCheckRequestType {
 	/// All or none (default if not specified).
 	#[serde(rename = "0")]
@@ -191,7 +191,7 @@ impl Default for RiskLimitCheckRequestType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1401,7 +1401,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct PartyRiskLimitsDefinitionRequest {
 	/// MsgType = CS
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'S'>,
 	/// RiskLimitRequestID
 	#[serde(rename = "1666")]
 	pub risk_limit_request_id: String,

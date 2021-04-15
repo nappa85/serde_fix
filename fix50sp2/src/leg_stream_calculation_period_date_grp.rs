@@ -21,7 +21,7 @@ pub struct LegStreamCalculationPeriodDate {
 	pub leg_stream_calculation_period_date_type: Option<LegStreamCalculationPeriodDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegStreamCalculationPeriodDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

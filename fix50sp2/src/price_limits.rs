@@ -30,7 +30,7 @@ pub struct PriceLimits {
 	pub trading_reference_price: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PriceLimitType {
 	/// Price (default)
 	#[serde(rename = "0")]

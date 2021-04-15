@@ -18,7 +18,7 @@ pub struct PartyUpdate {
 	pub list_update_action: Option<ListUpdateAction>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListUpdateAction {
 	/// Add
 	#[serde(rename = "A")]

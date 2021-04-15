@@ -25,7 +25,7 @@ pub struct PartyEntitlement {
 	pub entitlement_status: Option<EntitlementStatus>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ListUpdateAction {
 	/// Add
 	#[serde(rename = "A")]
@@ -47,7 +47,7 @@ impl Default for ListUpdateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementStatus {
 	/// Accepted
 	#[serde(rename = "0")]

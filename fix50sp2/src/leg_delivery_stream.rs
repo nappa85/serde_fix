@@ -129,7 +129,7 @@ pub struct LegDeliveryStream {
 	pub leg_delivery_stream_route_or_charter: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamType {
 	/// Periodic (default if not specified)
 	#[serde(rename = "0")]
@@ -148,7 +148,7 @@ impl Default for LegDeliveryStreamType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamDeliveryRestriction {
 	/// Firm (Never excused of delivery obligations)
 	#[serde(rename = "1")]
@@ -174,7 +174,7 @@ impl Default for LegDeliveryStreamDeliveryRestriction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamDeliveryContingentPartySide {
 	/// Buyer
 	#[serde(rename = "0")]
@@ -190,7 +190,7 @@ impl Default for LegDeliveryStreamDeliveryContingentPartySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamTitleTransferCondition {
 	/// Transfers with risk of loss
 	#[serde(rename = "0")]
@@ -206,7 +206,7 @@ impl Default for LegDeliveryStreamTitleTransferCondition {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamToleranceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -460,7 +460,7 @@ impl Default for LegDeliveryStreamToleranceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamToleranceType {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -476,7 +476,7 @@ impl Default for LegDeliveryStreamToleranceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamToleranceOptionSide {
 	/// Buyer
 	#[serde(rename = "1")]
@@ -492,7 +492,7 @@ impl Default for LegDeliveryStreamToleranceOptionSide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamElectingPartySide {
 	/// Buyer
 	#[serde(rename = "0")]
@@ -508,7 +508,7 @@ impl Default for LegDeliveryStreamElectingPartySide {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryStreamDeliveryPointSource {
 	/// Proprietary
 	#[serde(rename = "0")]

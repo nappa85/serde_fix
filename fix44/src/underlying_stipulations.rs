@@ -21,7 +21,7 @@ pub struct UnderlyingStip {
 	pub underlying_stip_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingStipType {
 	/// AMT (y/n)
 	#[serde(rename = "AMT")]

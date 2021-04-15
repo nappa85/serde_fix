@@ -21,7 +21,7 @@ pub struct UnderlyingProvisionCashSettlPaymentDate {
 	pub underlying_provision_cash_settl_payment_date_type: Option<UnderlyingProvisionCashSettlPaymentDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingProvisionCashSettlPaymentDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

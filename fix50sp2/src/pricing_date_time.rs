@@ -28,7 +28,7 @@ pub struct PricingDateTime {
 	pub pricing_time_business_center: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PricingDateBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]

@@ -20,7 +20,7 @@ pub struct Header<const V: u8, const T1: char, const T2: char> {
     pub msg_type: MsgType<T1, T2>,
     /// Indicates application version using a service pack identifier. The ApplVerID (1128) applies to a specific message occurrence.
     #[serde(rename = "1128")]
-    #[serde(deafult)]
+    #[serde(default)]
     pub appl_ver_id: ApplVerID<V>,
     /// Identifies the Extension Pack which is to be applied to the FIX version specified in the ApplVerID.
     #[serde(rename = "1156")]
@@ -125,15 +125,16 @@ pub struct Header<const V: u8, const T1: char, const T2: char> {
     pub hops: Option<RepeatingValues<Hop>>,
 }
 
-impl Header {
-    pub fn reply(&mut self, headers: &Header) {
+impl<const V: u8, const T1: char, const T2: char> Header<V, T1, T2> {
+    pub fn reply<const _V: u8, const _T1: char, const _T2: char>(&mut self, headers: &Header<_V, _T1, _T2>) {
+        self.appl_ver_id = headers.appl_ver_id.convert();
         self.sender_comp_id = headers.target_comp_id.clone();
         self.target_comp_id = headers.sender_comp_id.clone();
         self.msg_seq_num = headers.msg_seq_num;
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum MsgType<const T1: char, const T2: char> {
     /// Heartbeat
     #[serde(rename = "0")]
@@ -487,8 +488,8 @@ pub enum MsgType<const T1: char, const T2: char> {
 
 impl<const T1: char, const T2: char> Default for MsgType<T1, T2> {
 	fn default() -> Self {
-		let temp = format!("{}{}", T1, T2).trim();
-        match temp.as_str() {
+		let temp = format!("{}{}", T1, T2);
+        match temp.trim() {
             "0" => MsgType::Heartbeat,
             "1" => MsgType::TestRequest,
             "2" => MsgType::ResendRequest,

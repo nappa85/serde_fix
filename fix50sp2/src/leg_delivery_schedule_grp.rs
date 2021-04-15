@@ -72,7 +72,7 @@ pub struct LegDeliverySchedule {
 	pub leg_delivery_schedule_settl_holidays_processing_instruction: Option<LegDeliveryScheduleSettlHolidaysProcessingInstruction>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryScheduleType {
 	/// Notional
 	#[serde(rename = "0")]
@@ -91,7 +91,7 @@ impl Default for LegDeliveryScheduleType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryScheduleNotionalUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -345,7 +345,7 @@ impl Default for LegDeliveryScheduleNotionalUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryScheduleNotionalCommodityFrequency {
 	/// Term
 	#[serde(rename = "0")]
@@ -376,7 +376,7 @@ impl Default for LegDeliveryScheduleNotionalCommodityFrequency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryScheduleToleranceUnitOfMeasure {
 	/// Barrels
 	#[serde(rename = "Bbl")]
@@ -630,7 +630,7 @@ impl Default for LegDeliveryScheduleToleranceUnitOfMeasure {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryScheduleToleranceType {
 	/// Absolute
 	#[serde(rename = "0")]
@@ -646,7 +646,7 @@ impl Default for LegDeliveryScheduleToleranceType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryScheduleSettlFlowType {
 	/// All times
 	#[serde(rename = "0")]
@@ -674,7 +674,7 @@ impl Default for LegDeliveryScheduleSettlFlowType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegDeliveryScheduleSettlHolidaysProcessingInstruction {
 	/// Do not include holidays
 	#[serde(rename = "0")]

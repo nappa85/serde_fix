@@ -40,7 +40,7 @@ pub struct RelatedTrade {
 	pub related_regulatory_trade_id_source: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum RelatedTradeIDSource {
 	/// Non-FIX source
 	#[serde(rename = "0")]

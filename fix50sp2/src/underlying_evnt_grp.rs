@@ -56,7 +56,7 @@ pub struct UnderlyingEvent {
 	pub encoded_underlying_event_text: Option<fix_common::EncodedText<2073>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingEventType {
 	/// Put
 	#[serde(rename = "1")]

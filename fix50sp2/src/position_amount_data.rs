@@ -66,7 +66,7 @@ pub struct PosAm {
 	pub pos_amt_price_type: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosAmtType {
 	/// Final Mark-to-Market Amount
 	#[serde(rename = "FMTM")]
@@ -181,7 +181,7 @@ impl Default for PosAmtType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PosAmtReason {
 	/// Options settlement
 	#[serde(rename = "0")]
@@ -212,7 +212,7 @@ impl Default for PosAmtReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum PositionFXRateCalc {
 	/// Divided
 	#[serde(rename = "D")]

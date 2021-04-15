@@ -109,7 +109,7 @@ pub struct CashSettlTerm {
 	pub cash_settl_price_default: Option<CashSettlPriceDefault>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CashSettlQuoteMethod {
 	/// Bid
 	#[serde(rename = "0")]
@@ -128,7 +128,7 @@ impl Default for CashSettlQuoteMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CashSettlValuationMethod {
 	/// Market
 	#[serde(rename = "0")]
@@ -162,7 +162,7 @@ impl Default for CashSettlValuationMethod {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CashSettlPriceDefault {
 	/// Close
 	#[serde(rename = "0")]

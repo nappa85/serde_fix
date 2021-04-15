@@ -17,7 +17,7 @@ pub struct PartyEntitlement {
 	pub entitlement_status: Option<EntitlementStatus>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum EntitlementStatus {
 	/// Accepted
 	#[serde(rename = "0")]

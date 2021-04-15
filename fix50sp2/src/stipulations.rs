@@ -21,7 +21,7 @@ pub struct Stipulation {
 	pub stipulation_value: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StipulationType {
 	/// Alternative Minimum Tax (Y/N)
 	#[serde(rename = "AMT")]

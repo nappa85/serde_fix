@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ApplicationMessageReport {
 	/// MsgType = BY
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'Y'>,
 	/// Identifier for the Application Message Report.
 	#[serde(rename = "1356")]
 	pub appl_report_id: String,
@@ -34,7 +34,7 @@ pub struct ApplicationMessageReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum ApplReportType {
 	/// Reset ApplSeqNum to new value specified in <a href="tag_1399_ApplNewSeqNum.html" target="bottom">ApplNewSeqNum&nbsp;(1399)</a>
 	#[serde(rename = "0")]

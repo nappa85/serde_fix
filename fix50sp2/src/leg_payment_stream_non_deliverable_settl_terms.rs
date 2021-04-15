@@ -45,7 +45,7 @@ pub struct LegPaymentStreamNonDeliverableSettlTerms {
 	pub leg_settl_rate_disruption_fallback_grp: Option<super::leg_settl_rate_disruption_fallback_grp::LegSettlRateDisruptionFallbackGrp>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamNonDeliverableFixingDatesBusinessDayConvention {
 	/// Not applicable
 	#[serde(rename = "0")]
@@ -79,7 +79,7 @@ impl Default for LegPaymentStreamNonDeliverableFixingDatesBusinessDayConvention 
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamNonDeliverableFixingDatesRelativeTo {
 	/// Trade date
 	#[serde(rename = "0")]
@@ -119,7 +119,7 @@ impl Default for LegPaymentStreamNonDeliverableFixingDatesRelativeTo {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamNonDeliverableFixingDatesOffsetUnit {
 	/// Day
 	#[serde(rename = "D")]
@@ -141,7 +141,7 @@ impl Default for LegPaymentStreamNonDeliverableFixingDatesOffsetUnit {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegPaymentStreamNonDeliverableFixingDatesOffsetDayType {
 	/// Business
 	#[serde(rename = "0")]

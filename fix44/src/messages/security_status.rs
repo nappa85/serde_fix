@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityStatus {
 	/// MsgType = f
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'f', ' '>,
 	/// SecurityStatusReqID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "324")]
@@ -126,7 +126,7 @@ pub struct Underlying {
 pub struct Leg {
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Currency {
 	/// Afghani
 	#[serde(rename = "AFA")]
@@ -1336,7 +1336,7 @@ impl Default for Currency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnsolicitedIndicator {
 	/// Message is being sent unsolicited
 	#[serde(rename = "Y")]
@@ -1352,7 +1352,7 @@ impl Default for UnsolicitedIndicator {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityTradingStatus {
 	/// Opening Delay
 	#[serde(rename = "1")]
@@ -1428,7 +1428,7 @@ impl Default for SecurityTradingStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum FinancialStatus {
 	/// Bankrupt
 	#[serde(rename = "1")]
@@ -1444,7 +1444,7 @@ impl Default for FinancialStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum CorporateAction {
 	/// Ex-Dividend
 	#[serde(rename = "A")]
@@ -1469,7 +1469,7 @@ impl Default for CorporateAction {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum HaltReason {
 	/// Order Imbalance
 	#[serde(rename = "I")]
@@ -1497,7 +1497,7 @@ impl Default for HaltReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum InViewOfCommon {
 	/// Halt was due to common stock being halted
 	#[serde(rename = "Y")]
@@ -1513,7 +1513,7 @@ impl Default for InViewOfCommon {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum DueToRelated {
 	/// Halt was due to related security being halted
 	#[serde(rename = "Y")]
@@ -1529,7 +1529,7 @@ impl Default for DueToRelated {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Adjustment {
 	/// Cancel
 	#[serde(rename = "1")]

@@ -21,7 +21,7 @@ pub struct NonDeliverableFixingDate {
 	pub non_deliverable_fixing_date_type: Option<NonDeliverableFixingDateType>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum NonDeliverableFixingDateType {
 	/// Unadjusted
 	#[serde(rename = "0")]

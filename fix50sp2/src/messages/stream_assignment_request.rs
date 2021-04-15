@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct StreamAssignmentRequest {
 	/// MsgType = CC
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'C', 'C'>,
 	/// Unique identifier of the request.
 	#[serde(rename = "1497")]
 	pub stream_asgn_req_id: String,
@@ -20,7 +20,7 @@ pub struct StreamAssignmentRequest {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum StreamAsgnReqType {
 	/// Stream assignment for new customer(s)
 	#[serde(rename = "1")]

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct TradeAggregationReport {
 	/// MsgType = DX
 	#[serde(flatten)]
-	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader,
+	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D', 'X'>,
 	/// Unique identifier for the report message.
 	#[serde(rename = "2792")]
 	pub trade_aggregation_report_id: String,
@@ -76,7 +76,7 @@ pub struct TradeAggregationReport {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeAggregationRequestStatus {
 	/// Accepted
 	#[serde(rename = "0")]
@@ -92,7 +92,7 @@ impl Default for TradeAggregationRequestStatus {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum TradeAggregationRejectReason {
 	/// Unknown order(s)
 	#[serde(rename = "0")]
@@ -111,7 +111,7 @@ impl Default for TradeAggregationRejectReason {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum Side {
 	/// Buy
 	#[serde(rename = "1")]

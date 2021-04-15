@@ -3,9 +3,9 @@ use serde::{Deserialize, Serialize};
 
 use fixt11::header::Header;
 
-pub trait HasHeader {
-    fn get_header(&self) -> &Header;
-    fn get_header_mut(&mut self) -> &mut Header;
+pub trait HasHeader<const V: u8, const T1: char, const T2: char> {
+    fn get_header(&self) -> &Header<V, T1, T2>;
+    fn get_header_mut(&mut self) -> &mut Header<V, T1, T2>;
 }
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
@@ -727,7 +727,7 @@ impl HasHeader for Message {
     }
 }
 
-impl HasHeader for fixt11::messages::Heartbeat {
+impl HasHeader<9, ' ', ' '> for fixt11::messages::Heartbeat {
     fn get_header(&self) -> &Header {
         &self.header
     }
@@ -736,7 +736,7 @@ impl HasHeader for fixt11::messages::Heartbeat {
     }
 }
 
-impl HasHeader for fixt11::messages::TestRequest {
+impl HasHeader<9, ' ', ' '> for fixt11::messages::TestRequest {
     fn get_header(&self) -> &Header {
         &self.header
     }
@@ -745,7 +745,7 @@ impl HasHeader for fixt11::messages::TestRequest {
     }
 }
 
-impl HasHeader for fixt11::messages::ResendRequest {
+impl HasHeader<9, ' ', ' '> for fixt11::messages::ResendRequest {
     fn get_header(&self) -> &Header {
         &self.header
     }
@@ -754,7 +754,7 @@ impl HasHeader for fixt11::messages::ResendRequest {
     }
 }
 
-impl HasHeader for fixt11::messages::Reject {
+impl HasHeader<9, ' ', ' '> for fixt11::messages::Reject {
     fn get_header(&self) -> &Header {
         &self.header
     }
@@ -763,7 +763,7 @@ impl HasHeader for fixt11::messages::Reject {
     }
 }
 
-impl HasHeader for fixt11::messages::SequenceReset {
+impl HasHeader<9, ' ', ' '> for fixt11::messages::SequenceReset {
     fn get_header(&self) -> &Header {
         &self.header
     }
@@ -772,7 +772,7 @@ impl HasHeader for fixt11::messages::SequenceReset {
     }
 }
 
-impl HasHeader for fixt11::messages::Logout {
+impl HasHeader<9, ' ', ' '> for fixt11::messages::Logout {
     fn get_header(&self) -> &Header {
         &self.header
     }
@@ -781,7 +781,7 @@ impl HasHeader for fixt11::messages::Logout {
     }
 }
 
-impl HasHeader for fixt11::messages::Logon {
+impl HasHeader<9, ' ', ' '> for fixt11::messages::Logon {
     fn get_header(&self) -> &Header {
         &self.header
     }
@@ -825,7 +825,7 @@ impl HasHeader for IndicationOfInterest {
     }
 }
 
-impl HasHeader for fix50::messages::indication_of_interest::IndicationOfInterest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::indication_of_interest::IndicationOfInterest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -834,7 +834,7 @@ impl HasHeader for fix50::messages::indication_of_interest::IndicationOfInterest
     }
 }
 
-impl HasHeader for fix50sp1::messages::indication_of_interest::IndicationOfInterest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::indication_of_interest::IndicationOfInterest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -884,7 +884,7 @@ impl HasHeader for Advertisement {
     }
 }
 
-impl HasHeader for fix50::messages::advertisement::Advertisement {
+impl HasHeader<7, ' ', ' '> for fix50::messages::advertisement::Advertisement {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -893,7 +893,7 @@ impl HasHeader for fix50::messages::advertisement::Advertisement {
     }
 }
 
-impl HasHeader for fix50sp1::messages::advertisement::Advertisement {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::advertisement::Advertisement {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -902,7 +902,7 @@ impl HasHeader for fix50sp1::messages::advertisement::Advertisement {
     }
 }
 
-impl HasHeader for fix50sp2::messages::advertisement::Advertisement {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::advertisement::Advertisement {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -952,7 +952,7 @@ impl HasHeader for ExecutionReport {
     }
 }
 
-impl HasHeader for fix50::messages::execution_report::ExecutionReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::execution_report::ExecutionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -961,7 +961,7 @@ impl HasHeader for fix50::messages::execution_report::ExecutionReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::execution_report::ExecutionReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::execution_report::ExecutionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -970,7 +970,7 @@ impl HasHeader for fix50sp1::messages::execution_report::ExecutionReport {
     }
 }
 
-impl HasHeader for fix50sp2::messages::execution_report::ExecutionReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::execution_report::ExecutionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1020,7 +1020,7 @@ impl HasHeader for OrderCancelReject {
     }
 }
 
-impl HasHeader for fix50::messages::order_cancel_reject::OrderCancelReject {
+impl HasHeader<7, ' ', ' '> for fix50::messages::order_cancel_reject::OrderCancelReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1029,7 +1029,7 @@ impl HasHeader for fix50::messages::order_cancel_reject::OrderCancelReject {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_cancel_reject::OrderCancelReject {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_cancel_reject::OrderCancelReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1038,7 +1038,7 @@ impl HasHeader for fix50sp1::messages::order_cancel_reject::OrderCancelReject {
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_cancel_reject::OrderCancelReject {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_cancel_reject::OrderCancelReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1088,7 +1088,7 @@ impl HasHeader for News {
     }
 }
 
-impl HasHeader for fix50::messages::news::News {
+impl HasHeader<7, ' ', ' '> for fix50::messages::news::News {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1097,7 +1097,7 @@ impl HasHeader for fix50::messages::news::News {
     }
 }
 
-impl HasHeader for fix50sp1::messages::news::News {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::news::News {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1106,7 +1106,7 @@ impl HasHeader for fix50sp1::messages::news::News {
     }
 }
 
-impl HasHeader for fix50sp2::messages::news::News {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::news::News {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1156,7 +1156,7 @@ impl HasHeader for Email {
     }
 }
 
-impl HasHeader for fix50::messages::email::Email {
+impl HasHeader<7, ' ', ' '> for fix50::messages::email::Email {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1165,7 +1165,7 @@ impl HasHeader for fix50::messages::email::Email {
     }
 }
 
-impl HasHeader for fix50sp1::messages::email::Email {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::email::Email {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1174,7 +1174,7 @@ impl HasHeader for fix50sp1::messages::email::Email {
     }
 }
 
-impl HasHeader for fix50sp2::messages::email::Email {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::email::Email {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1224,7 +1224,7 @@ impl HasHeader for NewOrderSingle {
     }
 }
 
-impl HasHeader for fix50::messages::new_order_single::NewOrderSingle {
+impl HasHeader<7, ' ', ' '> for fix50::messages::new_order_single::NewOrderSingle {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1233,7 +1233,7 @@ impl HasHeader for fix50::messages::new_order_single::NewOrderSingle {
     }
 }
 
-impl HasHeader for fix50sp1::messages::new_order_single::NewOrderSingle {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::new_order_single::NewOrderSingle {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1242,7 +1242,7 @@ impl HasHeader for fix50sp1::messages::new_order_single::NewOrderSingle {
     }
 }
 
-impl HasHeader for fix50sp2::messages::new_order_single::NewOrderSingle {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::new_order_single::NewOrderSingle {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1292,7 +1292,7 @@ impl HasHeader for NewOrderList {
     }
 }
 
-impl HasHeader for fix50::messages::new_order_list::NewOrderList {
+impl HasHeader<7, ' ', ' '> for fix50::messages::new_order_list::NewOrderList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1301,7 +1301,7 @@ impl HasHeader for fix50::messages::new_order_list::NewOrderList {
     }
 }
 
-impl HasHeader for fix50sp1::messages::new_order_list::NewOrderList {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::new_order_list::NewOrderList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1310,7 +1310,7 @@ impl HasHeader for fix50sp1::messages::new_order_list::NewOrderList {
     }
 }
 
-impl HasHeader for fix50sp2::messages::new_order_list::NewOrderList {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::new_order_list::NewOrderList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1360,7 +1360,7 @@ impl HasHeader for OrderCancelRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_cancel_request::OrderCancelRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::order_cancel_request::OrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1369,7 +1369,7 @@ impl HasHeader for fix50::messages::order_cancel_request::OrderCancelRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_cancel_request::OrderCancelRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_cancel_request::OrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1378,7 +1378,7 @@ impl HasHeader for fix50sp1::messages::order_cancel_request::OrderCancelRequest 
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_cancel_request::OrderCancelRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_cancel_request::OrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1428,7 +1428,7 @@ impl HasHeader for OrderCancelReplaceRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1437,7 +1437,7 @@ impl HasHeader for fix50::messages::order_cancel_replace_request::OrderCancelRep
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1446,7 +1446,7 @@ impl HasHeader for fix50sp1::messages::order_cancel_replace_request::OrderCancel
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1496,7 +1496,7 @@ impl HasHeader for OrderStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_status_request::OrderStatusRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::order_status_request::OrderStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1505,7 +1505,7 @@ impl HasHeader for fix50::messages::order_status_request::OrderStatusRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_status_request::OrderStatusRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_status_request::OrderStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1514,7 +1514,7 @@ impl HasHeader for fix50sp1::messages::order_status_request::OrderStatusRequest 
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_status_request::OrderStatusRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_status_request::OrderStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1564,7 +1564,7 @@ impl HasHeader for AllocationInstruction {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_instruction::AllocationInstruction {
+impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_instruction::AllocationInstruction {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1573,7 +1573,7 @@ impl HasHeader for fix50::messages::allocation_instruction::AllocationInstructio
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_instruction::AllocationInstruction {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_instruction::AllocationInstruction {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1582,7 +1582,7 @@ impl HasHeader for fix50sp1::messages::allocation_instruction::AllocationInstruc
     }
 }
 
-impl HasHeader for fix50sp2::messages::allocation_instruction::AllocationInstruction {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_instruction::AllocationInstruction {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1632,7 +1632,7 @@ impl HasHeader for ListCancelRequest {
     }
 }
 
-impl HasHeader for fix50::messages::list_cancel_request::ListCancelRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::list_cancel_request::ListCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1641,7 +1641,7 @@ impl HasHeader for fix50::messages::list_cancel_request::ListCancelRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_cancel_request::ListCancelRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_cancel_request::ListCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1650,7 +1650,7 @@ impl HasHeader for fix50sp1::messages::list_cancel_request::ListCancelRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_cancel_request::ListCancelRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_cancel_request::ListCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1700,7 +1700,7 @@ impl HasHeader for ListExecute {
     }
 }
 
-impl HasHeader for fix50::messages::list_execute::ListExecute {
+impl HasHeader<7, ' ', ' '> for fix50::messages::list_execute::ListExecute {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1709,7 +1709,7 @@ impl HasHeader for fix50::messages::list_execute::ListExecute {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_execute::ListExecute {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_execute::ListExecute {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1718,7 +1718,7 @@ impl HasHeader for fix50sp1::messages::list_execute::ListExecute {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_execute::ListExecute {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_execute::ListExecute {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1768,7 +1768,7 @@ impl HasHeader for ListStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::list_status_request::ListStatusRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::list_status_request::ListStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1777,7 +1777,7 @@ impl HasHeader for fix50::messages::list_status_request::ListStatusRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_status_request::ListStatusRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_status_request::ListStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1786,7 +1786,7 @@ impl HasHeader for fix50sp1::messages::list_status_request::ListStatusRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_status_request::ListStatusRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_status_request::ListStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1836,7 +1836,7 @@ impl HasHeader for ListStatus {
     }
 }
 
-impl HasHeader for fix50::messages::list_status::ListStatus {
+impl HasHeader<7, ' ', ' '> for fix50::messages::list_status::ListStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1845,7 +1845,7 @@ impl HasHeader for fix50::messages::list_status::ListStatus {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_status::ListStatus {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_status::ListStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1854,7 +1854,7 @@ impl HasHeader for fix50sp1::messages::list_status::ListStatus {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_status::ListStatus {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_status::ListStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1904,7 +1904,7 @@ impl HasHeader for AllocationInstructionAck {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_instruction_ack::AllocationInstructionAck {
+impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_instruction_ack::AllocationInstructionAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1913,7 +1913,7 @@ impl HasHeader for fix50::messages::allocation_instruction_ack::AllocationInstru
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_instruction_ack::AllocationInstructionAck {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_instruction_ack::AllocationInstructionAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1922,7 +1922,7 @@ impl HasHeader for fix50sp1::messages::allocation_instruction_ack::AllocationIns
     }
 }
 
-impl HasHeader for fix50sp2::messages::allocation_instruction_ack::AllocationInstructionAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_instruction_ack::AllocationInstructionAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1972,7 +1972,7 @@ impl HasHeader for DontKnowTrade {
     }
 }
 
-impl HasHeader for fix50::messages::dont_know_trade::DontKnowTrade {
+impl HasHeader<7, ' ', ' '> for fix50::messages::dont_know_trade::DontKnowTrade {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1981,7 +1981,7 @@ impl HasHeader for fix50::messages::dont_know_trade::DontKnowTrade {
     }
 }
 
-impl HasHeader for fix50sp1::messages::dont_know_trade::DontKnowTrade {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::dont_know_trade::DontKnowTrade {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -1990,7 +1990,7 @@ impl HasHeader for fix50sp1::messages::dont_know_trade::DontKnowTrade {
     }
 }
 
-impl HasHeader for fix50sp2::messages::dont_know_trade::DontKnowTrade {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::dont_know_trade::DontKnowTrade {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2040,7 +2040,7 @@ impl HasHeader for QuoteRequest {
     }
 }
 
-impl HasHeader for fix50::messages::quote_request::QuoteRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::quote_request::QuoteRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2049,7 +2049,7 @@ impl HasHeader for fix50::messages::quote_request::QuoteRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_request::QuoteRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_request::QuoteRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2058,7 +2058,7 @@ impl HasHeader for fix50sp1::messages::quote_request::QuoteRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_request::QuoteRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_request::QuoteRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2108,7 +2108,7 @@ impl HasHeader for Quote {
     }
 }
 
-impl HasHeader for fix50::messages::quote::Quote {
+impl HasHeader<7, ' ', ' '> for fix50::messages::quote::Quote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2117,7 +2117,7 @@ impl HasHeader for fix50::messages::quote::Quote {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote::Quote {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote::Quote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2126,7 +2126,7 @@ impl HasHeader for fix50sp1::messages::quote::Quote {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote::Quote {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote::Quote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2176,7 +2176,7 @@ impl HasHeader for SettlementInstructions {
     }
 }
 
-impl HasHeader for fix50::messages::settlement_instructions::SettlementInstructions {
+impl HasHeader<7, ' ', ' '> for fix50::messages::settlement_instructions::SettlementInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2185,7 +2185,7 @@ impl HasHeader for fix50::messages::settlement_instructions::SettlementInstructi
     }
 }
 
-impl HasHeader for fix50sp1::messages::settlement_instructions::SettlementInstructions {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::settlement_instructions::SettlementInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2194,7 +2194,7 @@ impl HasHeader for fix50sp1::messages::settlement_instructions::SettlementInstru
     }
 }
 
-impl HasHeader for fix50sp2::messages::settlement_instructions::SettlementInstructions {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::settlement_instructions::SettlementInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2244,7 +2244,7 @@ impl HasHeader for MarketDataRequest {
     }
 }
 
-impl HasHeader for fix50::messages::market_data_request::MarketDataRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::market_data_request::MarketDataRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2253,7 +2253,7 @@ impl HasHeader for fix50::messages::market_data_request::MarketDataRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_data_request::MarketDataRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_data_request::MarketDataRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2262,7 +2262,7 @@ impl HasHeader for fix50sp1::messages::market_data_request::MarketDataRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_data_request::MarketDataRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_data_request::MarketDataRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2312,7 +2312,7 @@ impl HasHeader for MarketDataSnapshotFullRefresh {
     }
 }
 
-impl HasHeader for fix50::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
+impl HasHeader<7, ' ', ' '> for fix50::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2321,7 +2321,7 @@ impl HasHeader for fix50::messages::market_data_snapshot_full_refresh::MarketDat
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2330,7 +2330,7 @@ impl HasHeader for fix50sp1::messages::market_data_snapshot_full_refresh::Market
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2380,7 +2380,7 @@ impl HasHeader for MarketDataIncrementalRefresh {
     }
 }
 
-impl HasHeader for fix50::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
+impl HasHeader<7, ' ', ' '> for fix50::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2389,7 +2389,7 @@ impl HasHeader for fix50::messages::market_data_incremental_refresh::MarketDataI
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2398,7 +2398,7 @@ impl HasHeader for fix50sp1::messages::market_data_incremental_refresh::MarketDa
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2448,7 +2448,7 @@ impl HasHeader for MarketDataRequestReject {
     }
 }
 
-impl HasHeader for fix50::messages::market_data_request_reject::MarketDataRequestReject {
+impl HasHeader<7, ' ', ' '> for fix50::messages::market_data_request_reject::MarketDataRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2457,7 +2457,7 @@ impl HasHeader for fix50::messages::market_data_request_reject::MarketDataReques
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_data_request_reject::MarketDataRequestReject {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_data_request_reject::MarketDataRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2466,7 +2466,7 @@ impl HasHeader for fix50sp1::messages::market_data_request_reject::MarketDataReq
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_data_request_reject::MarketDataRequestReject {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_data_request_reject::MarketDataRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2516,7 +2516,7 @@ impl HasHeader for QuoteCancel {
     }
 }
 
-impl HasHeader for fix50::messages::quote_cancel::QuoteCancel {
+impl HasHeader<7, ' ', ' '> for fix50::messages::quote_cancel::QuoteCancel {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2525,7 +2525,7 @@ impl HasHeader for fix50::messages::quote_cancel::QuoteCancel {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_cancel::QuoteCancel {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_cancel::QuoteCancel {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2534,7 +2534,7 @@ impl HasHeader for fix50sp1::messages::quote_cancel::QuoteCancel {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_cancel::QuoteCancel {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_cancel::QuoteCancel {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2584,7 +2584,7 @@ impl HasHeader for QuoteStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::quote_status_request::QuoteStatusRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::quote_status_request::QuoteStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2593,7 +2593,7 @@ impl HasHeader for fix50::messages::quote_status_request::QuoteStatusRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_status_request::QuoteStatusRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_status_request::QuoteStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2602,7 +2602,7 @@ impl HasHeader for fix50sp1::messages::quote_status_request::QuoteStatusRequest 
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_status_request::QuoteStatusRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_status_request::QuoteStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2646,7 +2646,7 @@ impl HasHeader for MassQuoteAcknowledgement {
     }
 }
 
-impl HasHeader for fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
+impl HasHeader<7, ' ', ' '> for fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2655,7 +2655,7 @@ impl HasHeader for fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowl
     }
 }
 
-impl HasHeader for fix50sp1::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2705,7 +2705,7 @@ impl HasHeader for SecurityDefinitionRequest {
     }
 }
 
-impl HasHeader for fix50::messages::security_definition_request::SecurityDefinitionRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_definition_request::SecurityDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2714,7 +2714,7 @@ impl HasHeader for fix50::messages::security_definition_request::SecurityDefinit
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_definition_request::SecurityDefinitionRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_definition_request::SecurityDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2723,7 +2723,7 @@ impl HasHeader for fix50sp1::messages::security_definition_request::SecurityDefi
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_definition_request::SecurityDefinitionRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_definition_request::SecurityDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2773,7 +2773,7 @@ impl HasHeader for SecurityDefinition {
     }
 }
 
-impl HasHeader for fix50::messages::security_definition::SecurityDefinition {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_definition::SecurityDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2782,7 +2782,7 @@ impl HasHeader for fix50::messages::security_definition::SecurityDefinition {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_definition::SecurityDefinition {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_definition::SecurityDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2791,7 +2791,7 @@ impl HasHeader for fix50sp1::messages::security_definition::SecurityDefinition {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_definition::SecurityDefinition {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_definition::SecurityDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2841,7 +2841,7 @@ impl HasHeader for SecurityStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::security_status_request::SecurityStatusRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_status_request::SecurityStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2850,7 +2850,7 @@ impl HasHeader for fix50::messages::security_status_request::SecurityStatusReque
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_status_request::SecurityStatusRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_status_request::SecurityStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2859,7 +2859,7 @@ impl HasHeader for fix50sp1::messages::security_status_request::SecurityStatusRe
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_status_request::SecurityStatusRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_status_request::SecurityStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2909,7 +2909,7 @@ impl HasHeader for SecurityStatus {
     }
 }
 
-impl HasHeader for fix50::messages::security_status::SecurityStatus {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_status::SecurityStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2918,7 +2918,7 @@ impl HasHeader for fix50::messages::security_status::SecurityStatus {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_status::SecurityStatus {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_status::SecurityStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2927,7 +2927,7 @@ impl HasHeader for fix50sp1::messages::security_status::SecurityStatus {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_status::SecurityStatus {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_status::SecurityStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2977,7 +2977,7 @@ impl HasHeader for TradingSessionStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::trading_session_status_request::TradingSessionStatusRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::trading_session_status_request::TradingSessionStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2986,7 +2986,7 @@ impl HasHeader for fix50::messages::trading_session_status_request::TradingSessi
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_status_request::TradingSessionStatusRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_status_request::TradingSessionStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -2995,7 +2995,7 @@ impl HasHeader for fix50sp1::messages::trading_session_status_request::TradingSe
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_status_request::TradingSessionStatusRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_status_request::TradingSessionStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3045,7 +3045,7 @@ impl HasHeader for TradingSessionStatus {
     }
 }
 
-impl HasHeader for fix50::messages::trading_session_status::TradingSessionStatus {
+impl HasHeader<7, ' ', ' '> for fix50::messages::trading_session_status::TradingSessionStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3054,7 +3054,7 @@ impl HasHeader for fix50::messages::trading_session_status::TradingSessionStatus
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_status::TradingSessionStatus {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_status::TradingSessionStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3063,7 +3063,7 @@ impl HasHeader for fix50sp1::messages::trading_session_status::TradingSessionSta
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_status::TradingSessionStatus {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_status::TradingSessionStatus {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3113,7 +3113,7 @@ impl HasHeader for MassQuote {
     }
 }
 
-impl HasHeader for fix50::messages::mass_quote::MassQuote {
+impl HasHeader<7, ' ', ' '> for fix50::messages::mass_quote::MassQuote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3122,7 +3122,7 @@ impl HasHeader for fix50::messages::mass_quote::MassQuote {
     }
 }
 
-impl HasHeader for fix50sp1::messages::mass_quote::MassQuote {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::mass_quote::MassQuote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3131,7 +3131,7 @@ impl HasHeader for fix50sp1::messages::mass_quote::MassQuote {
     }
 }
 
-impl HasHeader for fix50sp2::messages::mass_quote::MassQuote {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::mass_quote::MassQuote {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3181,7 +3181,7 @@ impl HasHeader for BusinessMessageReject {
     }
 }
 
-impl HasHeader for fix50::messages::business_message_reject::BusinessMessageReject {
+impl HasHeader<7, ' ', ' '> for fix50::messages::business_message_reject::BusinessMessageReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3190,7 +3190,7 @@ impl HasHeader for fix50::messages::business_message_reject::BusinessMessageReje
     }
 }
 
-impl HasHeader for fix50sp1::messages::business_message_reject::BusinessMessageReject {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::business_message_reject::BusinessMessageReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3199,7 +3199,7 @@ impl HasHeader for fix50sp1::messages::business_message_reject::BusinessMessageR
     }
 }
 
-impl HasHeader for fix50sp2::messages::business_message_reject::BusinessMessageReject {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::business_message_reject::BusinessMessageReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3249,7 +3249,7 @@ impl HasHeader for BidRequest {
     }
 }
 
-impl HasHeader for fix50::messages::bid_request::BidRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::bid_request::BidRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3258,7 +3258,7 @@ impl HasHeader for fix50::messages::bid_request::BidRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::bid_request::BidRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::bid_request::BidRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3267,7 +3267,7 @@ impl HasHeader for fix50sp1::messages::bid_request::BidRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::bid_request::BidRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::bid_request::BidRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3317,7 +3317,7 @@ impl HasHeader for BidResponse {
     }
 }
 
-impl HasHeader for fix50::messages::bid_response::BidResponse {
+impl HasHeader<7, ' ', ' '> for fix50::messages::bid_response::BidResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3326,7 +3326,7 @@ impl HasHeader for fix50::messages::bid_response::BidResponse {
     }
 }
 
-impl HasHeader for fix50sp1::messages::bid_response::BidResponse {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::bid_response::BidResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3335,7 +3335,7 @@ impl HasHeader for fix50sp1::messages::bid_response::BidResponse {
     }
 }
 
-impl HasHeader for fix50sp2::messages::bid_response::BidResponse {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::bid_response::BidResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3385,7 +3385,7 @@ impl HasHeader for ListStrikePrice {
     }
 }
 
-impl HasHeader for fix50::messages::list_strike_price::ListStrikePrice {
+impl HasHeader<7, ' ', ' '> for fix50::messages::list_strike_price::ListStrikePrice {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3394,7 +3394,7 @@ impl HasHeader for fix50::messages::list_strike_price::ListStrikePrice {
     }
 }
 
-impl HasHeader for fix50sp1::messages::list_strike_price::ListStrikePrice {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_strike_price::ListStrikePrice {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3403,7 +3403,7 @@ impl HasHeader for fix50sp1::messages::list_strike_price::ListStrikePrice {
     }
 }
 
-impl HasHeader for fix50sp2::messages::list_strike_price::ListStrikePrice {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_strike_price::ListStrikePrice {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3453,7 +3453,7 @@ impl HasHeader for XMLMessage {
     }
 }
 
-impl HasHeader for fix50::messages::xml_message::XMLMessage {
+impl HasHeader<7, ' ', ' '> for fix50::messages::xml_message::XMLMessage {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3462,7 +3462,7 @@ impl HasHeader for fix50::messages::xml_message::XMLMessage {
     }
 }
 
-impl HasHeader for fix50sp1::messages::xml_message::XMLMessage {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::xml_message::XMLMessage {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3471,7 +3471,7 @@ impl HasHeader for fix50sp1::messages::xml_message::XMLMessage {
     }
 }
 
-impl HasHeader for fix50sp2::messages::xml_message::XMLMessage {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::xml_message::XMLMessage {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3521,7 +3521,7 @@ impl HasHeader for RegistrationInstructions {
     }
 }
 
-impl HasHeader for fix50::messages::registration_instructions::RegistrationInstructions {
+impl HasHeader<7, ' ', ' '> for fix50::messages::registration_instructions::RegistrationInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3530,7 +3530,7 @@ impl HasHeader for fix50::messages::registration_instructions::RegistrationInstr
     }
 }
 
-impl HasHeader for fix50sp1::messages::registration_instructions::RegistrationInstructions {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::registration_instructions::RegistrationInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3539,7 +3539,7 @@ impl HasHeader for fix50sp1::messages::registration_instructions::RegistrationIn
     }
 }
 
-impl HasHeader for fix50sp2::messages::registration_instructions::RegistrationInstructions {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::registration_instructions::RegistrationInstructions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3589,7 +3589,7 @@ impl HasHeader for RegistrationInstructionsResponse {
     }
 }
 
-impl HasHeader for fix50::messages::registration_instructions_response::RegistrationInstructionsResponse {
+impl HasHeader<7, ' ', ' '> for fix50::messages::registration_instructions_response::RegistrationInstructionsResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3598,7 +3598,7 @@ impl HasHeader for fix50::messages::registration_instructions_response::Registra
     }
 }
 
-impl HasHeader for fix50sp1::messages::registration_instructions_response::RegistrationInstructionsResponse {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::registration_instructions_response::RegistrationInstructionsResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3607,7 +3607,7 @@ impl HasHeader for fix50sp1::messages::registration_instructions_response::Regis
     }
 }
 
-impl HasHeader for fix50sp2::messages::registration_instructions_response::RegistrationInstructionsResponse {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::registration_instructions_response::RegistrationInstructionsResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3657,7 +3657,7 @@ impl HasHeader for OrderMassCancelRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_mass_cancel_request::OrderMassCancelRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::order_mass_cancel_request::OrderMassCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3666,7 +3666,7 @@ impl HasHeader for fix50::messages::order_mass_cancel_request::OrderMassCancelRe
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_cancel_request::OrderMassCancelRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_cancel_request::OrderMassCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3675,7 +3675,7 @@ impl HasHeader for fix50sp1::messages::order_mass_cancel_request::OrderMassCance
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_cancel_request::OrderMassCancelRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_cancel_request::OrderMassCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3725,7 +3725,7 @@ impl HasHeader for OrderMassCancelReport {
     }
 }
 
-impl HasHeader for fix50::messages::order_mass_cancel_report::OrderMassCancelReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::order_mass_cancel_report::OrderMassCancelReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3734,7 +3734,7 @@ impl HasHeader for fix50::messages::order_mass_cancel_report::OrderMassCancelRep
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_cancel_report::OrderMassCancelReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_cancel_report::OrderMassCancelReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3743,7 +3743,7 @@ impl HasHeader for fix50sp1::messages::order_mass_cancel_report::OrderMassCancel
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_cancel_report::OrderMassCancelReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_cancel_report::OrderMassCancelReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3793,7 +3793,7 @@ impl HasHeader for NewOrderCross {
     }
 }
 
-impl HasHeader for fix50::messages::new_order_cross::NewOrderCross {
+impl HasHeader<7, ' ', ' '> for fix50::messages::new_order_cross::NewOrderCross {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3802,7 +3802,7 @@ impl HasHeader for fix50::messages::new_order_cross::NewOrderCross {
     }
 }
 
-impl HasHeader for fix50sp1::messages::new_order_cross::NewOrderCross {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::new_order_cross::NewOrderCross {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3811,7 +3811,7 @@ impl HasHeader for fix50sp1::messages::new_order_cross::NewOrderCross {
     }
 }
 
-impl HasHeader for fix50sp2::messages::new_order_cross::NewOrderCross {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::new_order_cross::NewOrderCross {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3861,7 +3861,7 @@ impl HasHeader for CrossOrderCancelReplaceRequest {
     }
 }
 
-impl HasHeader for fix50::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3870,7 +3870,7 @@ impl HasHeader for fix50::messages::cross_order_cancel_replace_request::CrossOrd
     }
 }
 
-impl HasHeader for fix50sp1::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3879,7 +3879,7 @@ impl HasHeader for fix50sp1::messages::cross_order_cancel_replace_request::Cross
     }
 }
 
-impl HasHeader for fix50sp2::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3929,7 +3929,7 @@ impl HasHeader for CrossOrderCancelRequest {
     }
 }
 
-impl HasHeader for fix50::messages::cross_order_cancel_request::CrossOrderCancelRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::cross_order_cancel_request::CrossOrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3938,7 +3938,7 @@ impl HasHeader for fix50::messages::cross_order_cancel_request::CrossOrderCancel
     }
 }
 
-impl HasHeader for fix50sp1::messages::cross_order_cancel_request::CrossOrderCancelRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::cross_order_cancel_request::CrossOrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3947,7 +3947,7 @@ impl HasHeader for fix50sp1::messages::cross_order_cancel_request::CrossOrderCan
     }
 }
 
-impl HasHeader for fix50sp2::messages::cross_order_cancel_request::CrossOrderCancelRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::cross_order_cancel_request::CrossOrderCancelRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -3997,7 +3997,7 @@ impl HasHeader for SecurityTypeRequest {
     }
 }
 
-impl HasHeader for fix50::messages::security_type_request::SecurityTypeRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_type_request::SecurityTypeRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4006,7 +4006,7 @@ impl HasHeader for fix50::messages::security_type_request::SecurityTypeRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_type_request::SecurityTypeRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_type_request::SecurityTypeRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4015,7 +4015,7 @@ impl HasHeader for fix50sp1::messages::security_type_request::SecurityTypeReques
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_type_request::SecurityTypeRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_type_request::SecurityTypeRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4065,7 +4065,7 @@ impl HasHeader for SecurityTypes {
     }
 }
 
-impl HasHeader for fix50::messages::security_types::SecurityTypes {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_types::SecurityTypes {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4074,7 +4074,7 @@ impl HasHeader for fix50::messages::security_types::SecurityTypes {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_types::SecurityTypes {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_types::SecurityTypes {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4083,7 +4083,7 @@ impl HasHeader for fix50sp1::messages::security_types::SecurityTypes {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_types::SecurityTypes {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_types::SecurityTypes {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4133,7 +4133,7 @@ impl HasHeader for SecurityListRequest {
     }
 }
 
-impl HasHeader for fix50::messages::security_list_request::SecurityListRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_list_request::SecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4142,7 +4142,7 @@ impl HasHeader for fix50::messages::security_list_request::SecurityListRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_list_request::SecurityListRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_list_request::SecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4151,7 +4151,7 @@ impl HasHeader for fix50sp1::messages::security_list_request::SecurityListReques
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_list_request::SecurityListRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_list_request::SecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4201,7 +4201,7 @@ impl HasHeader for SecurityList {
     }
 }
 
-impl HasHeader for fix50::messages::security_list::SecurityList {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_list::SecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4210,7 +4210,7 @@ impl HasHeader for fix50::messages::security_list::SecurityList {
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_list::SecurityList {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_list::SecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4219,7 +4219,7 @@ impl HasHeader for fix50sp1::messages::security_list::SecurityList {
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_list::SecurityList {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_list::SecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4269,7 +4269,7 @@ impl HasHeader for DerivativeSecurityListRequest {
     }
 }
 
-impl HasHeader for fix50::messages::derivative_security_list_request::DerivativeSecurityListRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::derivative_security_list_request::DerivativeSecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4278,7 +4278,7 @@ impl HasHeader for fix50::messages::derivative_security_list_request::Derivative
     }
 }
 
-impl HasHeader for fix50sp1::messages::derivative_security_list_request::DerivativeSecurityListRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::derivative_security_list_request::DerivativeSecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4287,7 +4287,7 @@ impl HasHeader for fix50sp1::messages::derivative_security_list_request::Derivat
     }
 }
 
-impl HasHeader for fix50sp2::messages::derivative_security_list_request::DerivativeSecurityListRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::derivative_security_list_request::DerivativeSecurityListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4337,7 +4337,7 @@ impl HasHeader for DerivativeSecurityList {
     }
 }
 
-impl HasHeader for fix50::messages::derivative_security_list::DerivativeSecurityList {
+impl HasHeader<7, ' ', ' '> for fix50::messages::derivative_security_list::DerivativeSecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4346,7 +4346,7 @@ impl HasHeader for fix50::messages::derivative_security_list::DerivativeSecurity
     }
 }
 
-impl HasHeader for fix50sp1::messages::derivative_security_list::DerivativeSecurityList {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::derivative_security_list::DerivativeSecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4355,7 +4355,7 @@ impl HasHeader for fix50sp1::messages::derivative_security_list::DerivativeSecur
     }
 }
 
-impl HasHeader for fix50sp2::messages::derivative_security_list::DerivativeSecurityList {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::derivative_security_list::DerivativeSecurityList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4405,7 +4405,7 @@ impl HasHeader for NewOrderMultileg {
     }
 }
 
-impl HasHeader for fix50::messages::new_order_multileg::NewOrderMultileg {
+impl HasHeader<7, ' ', ' '> for fix50::messages::new_order_multileg::NewOrderMultileg {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4414,7 +4414,7 @@ impl HasHeader for fix50::messages::new_order_multileg::NewOrderMultileg {
     }
 }
 
-impl HasHeader for fix50sp1::messages::new_order_multileg::NewOrderMultileg {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::new_order_multileg::NewOrderMultileg {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4423,7 +4423,7 @@ impl HasHeader for fix50sp1::messages::new_order_multileg::NewOrderMultileg {
     }
 }
 
-impl HasHeader for fix50sp2::messages::new_order_multileg::NewOrderMultileg {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::new_order_multileg::NewOrderMultileg {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4461,7 +4461,7 @@ impl HasHeader for MultilegOrderCancelReplace {
     }
 }
 
-impl HasHeader for fix50sp2::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4511,7 +4511,7 @@ impl HasHeader for TradeCaptureReportRequest {
     }
 }
 
-impl HasHeader for fix50::messages::trade_capture_report_request::TradeCaptureReportRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::trade_capture_report_request::TradeCaptureReportRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4520,7 +4520,7 @@ impl HasHeader for fix50::messages::trade_capture_report_request::TradeCaptureRe
     }
 }
 
-impl HasHeader for fix50sp1::messages::trade_capture_report_request::TradeCaptureReportRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trade_capture_report_request::TradeCaptureReportRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4529,7 +4529,7 @@ impl HasHeader for fix50sp1::messages::trade_capture_report_request::TradeCaptur
     }
 }
 
-impl HasHeader for fix50sp2::messages::trade_capture_report_request::TradeCaptureReportRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trade_capture_report_request::TradeCaptureReportRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4579,7 +4579,7 @@ impl HasHeader for TradeCaptureReport {
     }
 }
 
-impl HasHeader for fix50::messages::trade_capture_report::TradeCaptureReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::trade_capture_report::TradeCaptureReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4588,7 +4588,7 @@ impl HasHeader for fix50::messages::trade_capture_report::TradeCaptureReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trade_capture_report::TradeCaptureReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trade_capture_report::TradeCaptureReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4597,7 +4597,7 @@ impl HasHeader for fix50sp1::messages::trade_capture_report::TradeCaptureReport 
     }
 }
 
-impl HasHeader for fix50sp2::messages::trade_capture_report::TradeCaptureReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trade_capture_report::TradeCaptureReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4647,7 +4647,7 @@ impl HasHeader for OrderMassStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::order_mass_status_request::OrderMassStatusRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::order_mass_status_request::OrderMassStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4656,7 +4656,7 @@ impl HasHeader for fix50::messages::order_mass_status_request::OrderMassStatusRe
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_status_request::OrderMassStatusRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_status_request::OrderMassStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4665,7 +4665,7 @@ impl HasHeader for fix50sp1::messages::order_mass_status_request::OrderMassStatu
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_status_request::OrderMassStatusRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_status_request::OrderMassStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4715,7 +4715,7 @@ impl HasHeader for QuoteRequestReject {
     }
 }
 
-impl HasHeader for fix50::messages::quote_request_reject::QuoteRequestReject {
+impl HasHeader<7, ' ', ' '> for fix50::messages::quote_request_reject::QuoteRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4724,7 +4724,7 @@ impl HasHeader for fix50::messages::quote_request_reject::QuoteRequestReject {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_request_reject::QuoteRequestReject {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_request_reject::QuoteRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4733,7 +4733,7 @@ impl HasHeader for fix50sp1::messages::quote_request_reject::QuoteRequestReject 
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_request_reject::QuoteRequestReject {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_request_reject::QuoteRequestReject {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4783,7 +4783,7 @@ impl HasHeader for RFQRequest {
     }
 }
 
-impl HasHeader for fix50::messages::rfq_request::RFQRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::rfq_request::RFQRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4792,7 +4792,7 @@ impl HasHeader for fix50::messages::rfq_request::RFQRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::rfq_request::RFQRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::rfq_request::RFQRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4801,7 +4801,7 @@ impl HasHeader for fix50sp1::messages::rfq_request::RFQRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::rfq_request::RFQRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::rfq_request::RFQRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4851,7 +4851,7 @@ impl HasHeader for QuoteStatusReport {
     }
 }
 
-impl HasHeader for fix50::messages::quote_status_report::QuoteStatusReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::quote_status_report::QuoteStatusReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4860,7 +4860,7 @@ impl HasHeader for fix50::messages::quote_status_report::QuoteStatusReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_status_report::QuoteStatusReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_status_report::QuoteStatusReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4869,7 +4869,7 @@ impl HasHeader for fix50sp1::messages::quote_status_report::QuoteStatusReport {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_status_report::QuoteStatusReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_status_report::QuoteStatusReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4919,7 +4919,7 @@ impl HasHeader for QuoteResponse {
     }
 }
 
-impl HasHeader for fix50::messages::quote_response::QuoteResponse {
+impl HasHeader<7, ' ', ' '> for fix50::messages::quote_response::QuoteResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4928,7 +4928,7 @@ impl HasHeader for fix50::messages::quote_response::QuoteResponse {
     }
 }
 
-impl HasHeader for fix50sp1::messages::quote_response::QuoteResponse {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_response::QuoteResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4937,7 +4937,7 @@ impl HasHeader for fix50sp1::messages::quote_response::QuoteResponse {
     }
 }
 
-impl HasHeader for fix50sp2::messages::quote_response::QuoteResponse {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_response::QuoteResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4987,7 +4987,7 @@ impl HasHeader for Confirmation {
     }
 }
 
-impl HasHeader for fix50::messages::confirmation::Confirmation {
+impl HasHeader<7, ' ', ' '> for fix50::messages::confirmation::Confirmation {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -4996,7 +4996,7 @@ impl HasHeader for fix50::messages::confirmation::Confirmation {
     }
 }
 
-impl HasHeader for fix50sp1::messages::confirmation::Confirmation {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::confirmation::Confirmation {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5005,7 +5005,7 @@ impl HasHeader for fix50sp1::messages::confirmation::Confirmation {
     }
 }
 
-impl HasHeader for fix50sp2::messages::confirmation::Confirmation {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::confirmation::Confirmation {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5055,7 +5055,7 @@ impl HasHeader for PositionMaintenanceRequest {
     }
 }
 
-impl HasHeader for fix50::messages::position_maintenance_request::PositionMaintenanceRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::position_maintenance_request::PositionMaintenanceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5064,7 +5064,7 @@ impl HasHeader for fix50::messages::position_maintenance_request::PositionMainte
     }
 }
 
-impl HasHeader for fix50sp1::messages::position_maintenance_request::PositionMaintenanceRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::position_maintenance_request::PositionMaintenanceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5073,7 +5073,7 @@ impl HasHeader for fix50sp1::messages::position_maintenance_request::PositionMai
     }
 }
 
-impl HasHeader for fix50sp2::messages::position_maintenance_request::PositionMaintenanceRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::position_maintenance_request::PositionMaintenanceRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5123,7 +5123,7 @@ impl HasHeader for PositionMaintenanceReport {
     }
 }
 
-impl HasHeader for fix50::messages::position_maintenance_report::PositionMaintenanceReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::position_maintenance_report::PositionMaintenanceReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5132,7 +5132,7 @@ impl HasHeader for fix50::messages::position_maintenance_report::PositionMainten
     }
 }
 
-impl HasHeader for fix50sp1::messages::position_maintenance_report::PositionMaintenanceReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::position_maintenance_report::PositionMaintenanceReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5141,7 +5141,7 @@ impl HasHeader for fix50sp1::messages::position_maintenance_report::PositionMain
     }
 }
 
-impl HasHeader for fix50sp2::messages::position_maintenance_report::PositionMaintenanceReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::position_maintenance_report::PositionMaintenanceReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5191,7 +5191,7 @@ impl HasHeader for RequestForPositions {
     }
 }
 
-impl HasHeader for fix50::messages::request_for_positions::RequestForPositions {
+impl HasHeader<7, ' ', ' '> for fix50::messages::request_for_positions::RequestForPositions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5200,7 +5200,7 @@ impl HasHeader for fix50::messages::request_for_positions::RequestForPositions {
     }
 }
 
-impl HasHeader for fix50sp1::messages::request_for_positions::RequestForPositions {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::request_for_positions::RequestForPositions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5209,7 +5209,7 @@ impl HasHeader for fix50sp1::messages::request_for_positions::RequestForPosition
     }
 }
 
-impl HasHeader for fix50sp2::messages::request_for_positions::RequestForPositions {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::request_for_positions::RequestForPositions {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5259,7 +5259,7 @@ impl HasHeader for RequestForPositionsAck {
     }
 }
 
-impl HasHeader for fix50::messages::request_for_positions_ack::RequestForPositionsAck {
+impl HasHeader<7, ' ', ' '> for fix50::messages::request_for_positions_ack::RequestForPositionsAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5268,7 +5268,7 @@ impl HasHeader for fix50::messages::request_for_positions_ack::RequestForPositio
     }
 }
 
-impl HasHeader for fix50sp1::messages::request_for_positions_ack::RequestForPositionsAck {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::request_for_positions_ack::RequestForPositionsAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5277,7 +5277,7 @@ impl HasHeader for fix50sp1::messages::request_for_positions_ack::RequestForPosi
     }
 }
 
-impl HasHeader for fix50sp2::messages::request_for_positions_ack::RequestForPositionsAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::request_for_positions_ack::RequestForPositionsAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5327,7 +5327,7 @@ impl HasHeader for PositionReport {
     }
 }
 
-impl HasHeader for fix50::messages::position_report::PositionReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::position_report::PositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5336,7 +5336,7 @@ impl HasHeader for fix50::messages::position_report::PositionReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::position_report::PositionReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::position_report::PositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5345,7 +5345,7 @@ impl HasHeader for fix50sp1::messages::position_report::PositionReport {
     }
 }
 
-impl HasHeader for fix50sp2::messages::position_report::PositionReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::position_report::PositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5395,7 +5395,7 @@ impl HasHeader for TradeCaptureReportRequestAck {
     }
 }
 
-impl HasHeader for fix50::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
+impl HasHeader<7, ' ', ' '> for fix50::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5404,7 +5404,7 @@ impl HasHeader for fix50::messages::trade_capture_report_request_ack::TradeCaptu
     }
 }
 
-impl HasHeader for fix50sp1::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5413,7 +5413,7 @@ impl HasHeader for fix50sp1::messages::trade_capture_report_request_ack::TradeCa
     }
 }
 
-impl HasHeader for fix50sp2::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5463,7 +5463,7 @@ impl HasHeader for TradeCaptureReportAck {
     }
 }
 
-impl HasHeader for fix50::messages::trade_capture_report_ack::TradeCaptureReportAck {
+impl HasHeader<7, ' ', ' '> for fix50::messages::trade_capture_report_ack::TradeCaptureReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5472,7 +5472,7 @@ impl HasHeader for fix50::messages::trade_capture_report_ack::TradeCaptureReport
     }
 }
 
-impl HasHeader for fix50sp1::messages::trade_capture_report_ack::TradeCaptureReportAck {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trade_capture_report_ack::TradeCaptureReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5481,7 +5481,7 @@ impl HasHeader for fix50sp1::messages::trade_capture_report_ack::TradeCaptureRep
     }
 }
 
-impl HasHeader for fix50sp2::messages::trade_capture_report_ack::TradeCaptureReportAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trade_capture_report_ack::TradeCaptureReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5531,7 +5531,7 @@ impl HasHeader for AllocationReport {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_report::AllocationReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_report::AllocationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5540,7 +5540,7 @@ impl HasHeader for fix50::messages::allocation_report::AllocationReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_report::AllocationReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_report::AllocationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5549,7 +5549,7 @@ impl HasHeader for fix50sp1::messages::allocation_report::AllocationReport {
     }
 }
 
-impl HasHeader for fix50sp2::messages::allocation_report::AllocationReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_report::AllocationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5599,7 +5599,7 @@ impl HasHeader for AllocationReportAck {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_report_ack::AllocationReportAck {
+impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_report_ack::AllocationReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5608,7 +5608,7 @@ impl HasHeader for fix50::messages::allocation_report_ack::AllocationReportAck {
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_report_ack::AllocationReportAck {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_report_ack::AllocationReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5617,7 +5617,7 @@ impl HasHeader for fix50sp1::messages::allocation_report_ack::AllocationReportAc
     }
 }
 
-impl HasHeader for fix50sp2::messages::allocation_report_ack::AllocationReportAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_report_ack::AllocationReportAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5667,7 +5667,7 @@ impl HasHeader for ConfirmationAck {
     }
 }
 
-impl HasHeader for fix50::messages::confirmation_ack::ConfirmationAck {
+impl HasHeader<7, ' ', ' '> for fix50::messages::confirmation_ack::ConfirmationAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5676,7 +5676,7 @@ impl HasHeader for fix50::messages::confirmation_ack::ConfirmationAck {
     }
 }
 
-impl HasHeader for fix50sp1::messages::confirmation_ack::ConfirmationAck {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::confirmation_ack::ConfirmationAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5685,7 +5685,7 @@ impl HasHeader for fix50sp1::messages::confirmation_ack::ConfirmationAck {
     }
 }
 
-impl HasHeader for fix50sp2::messages::confirmation_ack::ConfirmationAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::confirmation_ack::ConfirmationAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5735,7 +5735,7 @@ impl HasHeader for SettlementInstructionRequest {
     }
 }
 
-impl HasHeader for fix50::messages::settlement_instruction_request::SettlementInstructionRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::settlement_instruction_request::SettlementInstructionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5744,7 +5744,7 @@ impl HasHeader for fix50::messages::settlement_instruction_request::SettlementIn
     }
 }
 
-impl HasHeader for fix50sp1::messages::settlement_instruction_request::SettlementInstructionRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::settlement_instruction_request::SettlementInstructionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5753,7 +5753,7 @@ impl HasHeader for fix50sp1::messages::settlement_instruction_request::Settlemen
     }
 }
 
-impl HasHeader for fix50sp2::messages::settlement_instruction_request::SettlementInstructionRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::settlement_instruction_request::SettlementInstructionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5803,7 +5803,7 @@ impl HasHeader for AssignmentReport {
     }
 }
 
-impl HasHeader for fix50::messages::assignment_report::AssignmentReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::assignment_report::AssignmentReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5812,7 +5812,7 @@ impl HasHeader for fix50::messages::assignment_report::AssignmentReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::assignment_report::AssignmentReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::assignment_report::AssignmentReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5821,7 +5821,7 @@ impl HasHeader for fix50sp1::messages::assignment_report::AssignmentReport {
     }
 }
 
-impl HasHeader for fix50sp2::messages::assignment_report::AssignmentReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::assignment_report::AssignmentReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5871,7 +5871,7 @@ impl HasHeader for CollateralRequest {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_request::CollateralRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_request::CollateralRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5880,7 +5880,7 @@ impl HasHeader for fix50::messages::collateral_request::CollateralRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_request::CollateralRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_request::CollateralRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5889,7 +5889,7 @@ impl HasHeader for fix50sp1::messages::collateral_request::CollateralRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_request::CollateralRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_request::CollateralRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5939,7 +5939,7 @@ impl HasHeader for CollateralAssignment {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_assignment::CollateralAssignment {
+impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_assignment::CollateralAssignment {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5948,7 +5948,7 @@ impl HasHeader for fix50::messages::collateral_assignment::CollateralAssignment 
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_assignment::CollateralAssignment {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_assignment::CollateralAssignment {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -5957,7 +5957,7 @@ impl HasHeader for fix50sp1::messages::collateral_assignment::CollateralAssignme
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_assignment::CollateralAssignment {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_assignment::CollateralAssignment {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6007,7 +6007,7 @@ impl HasHeader for CollateralResponse {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_response::CollateralResponse {
+impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_response::CollateralResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6016,7 +6016,7 @@ impl HasHeader for fix50::messages::collateral_response::CollateralResponse {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_response::CollateralResponse {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_response::CollateralResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6025,7 +6025,7 @@ impl HasHeader for fix50sp1::messages::collateral_response::CollateralResponse {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_response::CollateralResponse {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_response::CollateralResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6075,7 +6075,7 @@ impl HasHeader for CollateralReport {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_report::CollateralReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_report::CollateralReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6084,7 +6084,7 @@ impl HasHeader for fix50::messages::collateral_report::CollateralReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_report::CollateralReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_report::CollateralReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6093,7 +6093,7 @@ impl HasHeader for fix50sp1::messages::collateral_report::CollateralReport {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_report::CollateralReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_report::CollateralReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6143,7 +6143,7 @@ impl HasHeader for CollateralInquiry {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_inquiry::CollateralInquiry {
+impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_inquiry::CollateralInquiry {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6152,7 +6152,7 @@ impl HasHeader for fix50::messages::collateral_inquiry::CollateralInquiry {
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_inquiry::CollateralInquiry {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_inquiry::CollateralInquiry {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6161,7 +6161,7 @@ impl HasHeader for fix50sp1::messages::collateral_inquiry::CollateralInquiry {
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_inquiry::CollateralInquiry {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_inquiry::CollateralInquiry {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6211,7 +6211,7 @@ impl HasHeader for NetworkCounterpartySystemStatusRequest {
     }
 }
 
-impl HasHeader for fix50::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6220,7 +6220,7 @@ impl HasHeader for fix50::messages::network_counterparty_system_status_request::
     }
 }
 
-impl HasHeader for fix50sp1::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6229,7 +6229,7 @@ impl HasHeader for fix50sp1::messages::network_counterparty_system_status_reques
     }
 }
 
-impl HasHeader for fix50sp2::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6279,7 +6279,7 @@ impl HasHeader for NetworkCounterpartySystemStatusResponse {
     }
 }
 
-impl HasHeader for fix50::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
+impl HasHeader<7, ' ', ' '> for fix50::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6288,7 +6288,7 @@ impl HasHeader for fix50::messages::network_counterparty_system_status_response:
     }
 }
 
-impl HasHeader for fix50sp1::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6297,7 +6297,7 @@ impl HasHeader for fix50sp1::messages::network_counterparty_system_status_respon
     }
 }
 
-impl HasHeader for fix50sp2::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6347,7 +6347,7 @@ impl HasHeader for UserRequest {
     }
 }
 
-impl HasHeader for fix50::messages::user_request::UserRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::user_request::UserRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6356,7 +6356,7 @@ impl HasHeader for fix50::messages::user_request::UserRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::user_request::UserRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::user_request::UserRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6365,7 +6365,7 @@ impl HasHeader for fix50sp1::messages::user_request::UserRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::user_request::UserRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::user_request::UserRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6415,7 +6415,7 @@ impl HasHeader for UserResponse {
     }
 }
 
-impl HasHeader for fix50::messages::user_response::UserResponse {
+impl HasHeader<7, ' ', ' '> for fix50::messages::user_response::UserResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6424,7 +6424,7 @@ impl HasHeader for fix50::messages::user_response::UserResponse {
     }
 }
 
-impl HasHeader for fix50sp1::messages::user_response::UserResponse {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::user_response::UserResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6433,7 +6433,7 @@ impl HasHeader for fix50sp1::messages::user_response::UserResponse {
     }
 }
 
-impl HasHeader for fix50sp2::messages::user_response::UserResponse {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::user_response::UserResponse {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6483,7 +6483,7 @@ impl HasHeader for CollateralInquiryAck {
     }
 }
 
-impl HasHeader for fix50::messages::collateral_inquiry_ack::CollateralInquiryAck {
+impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_inquiry_ack::CollateralInquiryAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6492,7 +6492,7 @@ impl HasHeader for fix50::messages::collateral_inquiry_ack::CollateralInquiryAck
     }
 }
 
-impl HasHeader for fix50sp1::messages::collateral_inquiry_ack::CollateralInquiryAck {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_inquiry_ack::CollateralInquiryAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6501,7 +6501,7 @@ impl HasHeader for fix50sp1::messages::collateral_inquiry_ack::CollateralInquiry
     }
 }
 
-impl HasHeader for fix50sp2::messages::collateral_inquiry_ack::CollateralInquiryAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_inquiry_ack::CollateralInquiryAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6551,7 +6551,7 @@ impl HasHeader for ConfirmationRequest {
     }
 }
 
-impl HasHeader for fix50::messages::confirmation_request::ConfirmationRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::confirmation_request::ConfirmationRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6560,7 +6560,7 @@ impl HasHeader for fix50::messages::confirmation_request::ConfirmationRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::confirmation_request::ConfirmationRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::confirmation_request::ConfirmationRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6569,7 +6569,7 @@ impl HasHeader for fix50sp1::messages::confirmation_request::ConfirmationRequest
     }
 }
 
-impl HasHeader for fix50sp2::messages::confirmation_request::ConfirmationRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::confirmation_request::ConfirmationRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6619,7 +6619,7 @@ impl HasHeader for TradingSessionListRequest {
     }
 }
 
-impl HasHeader for fix50::messages::trading_session_list_request::TradingSessionListRequest {
+impl HasHeader<7, ' ', ' '> for fix50::messages::trading_session_list_request::TradingSessionListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6628,7 +6628,7 @@ impl HasHeader for fix50::messages::trading_session_list_request::TradingSession
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_list_request::TradingSessionListRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_list_request::TradingSessionListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6637,7 +6637,7 @@ impl HasHeader for fix50sp1::messages::trading_session_list_request::TradingSess
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_list_request::TradingSessionListRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_list_request::TradingSessionListRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6687,7 +6687,7 @@ impl HasHeader for TradingSessionList {
     }
 }
 
-impl HasHeader for fix50::messages::trading_session_list::TradingSessionList {
+impl HasHeader<7, ' ', ' '> for fix50::messages::trading_session_list::TradingSessionList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6696,7 +6696,7 @@ impl HasHeader for fix50::messages::trading_session_list::TradingSessionList {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_list::TradingSessionList {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_list::TradingSessionList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6705,7 +6705,7 @@ impl HasHeader for fix50sp1::messages::trading_session_list::TradingSessionList 
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_list::TradingSessionList {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_list::TradingSessionList {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6755,7 +6755,7 @@ impl HasHeader for SecurityListUpdateReport {
     }
 }
 
-impl HasHeader for fix50::messages::security_list_update_report::SecurityListUpdateReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_list_update_report::SecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6764,7 +6764,7 @@ impl HasHeader for fix50::messages::security_list_update_report::SecurityListUpd
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_list_update_report::SecurityListUpdateReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_list_update_report::SecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6773,7 +6773,7 @@ impl HasHeader for fix50sp1::messages::security_list_update_report::SecurityList
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_list_update_report::SecurityListUpdateReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_list_update_report::SecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6823,7 +6823,7 @@ impl HasHeader for AdjustedPositionReport {
     }
 }
 
-impl HasHeader for fix50::messages::adjusted_position_report::AdjustedPositionReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::adjusted_position_report::AdjustedPositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6832,7 +6832,7 @@ impl HasHeader for fix50::messages::adjusted_position_report::AdjustedPositionRe
     }
 }
 
-impl HasHeader for fix50sp1::messages::adjusted_position_report::AdjustedPositionReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::adjusted_position_report::AdjustedPositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6841,7 +6841,7 @@ impl HasHeader for fix50sp1::messages::adjusted_position_report::AdjustedPositio
     }
 }
 
-impl HasHeader for fix50sp2::messages::adjusted_position_report::AdjustedPositionReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::adjusted_position_report::AdjustedPositionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6891,7 +6891,7 @@ impl HasHeader for AllocationInstructionAlert {
     }
 }
 
-impl HasHeader for fix50::messages::allocation_instruction_alert::AllocationInstructionAlert {
+impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_instruction_alert::AllocationInstructionAlert {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6900,7 +6900,7 @@ impl HasHeader for fix50::messages::allocation_instruction_alert::AllocationInst
     }
 }
 
-impl HasHeader for fix50sp1::messages::allocation_instruction_alert::AllocationInstructionAlert {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_instruction_alert::AllocationInstructionAlert {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6909,7 +6909,7 @@ impl HasHeader for fix50sp1::messages::allocation_instruction_alert::AllocationI
     }
 }
 
-impl HasHeader for fix50sp2::messages::allocation_instruction_alert::AllocationInstructionAlert {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_instruction_alert::AllocationInstructionAlert {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6947,7 +6947,7 @@ impl HasHeader for ExecutionAcknowledgement {
     }
 }
 
-impl HasHeader for fix50sp2::messages::execution_ack::ExecutionAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::execution_ack::ExecutionAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -6997,7 +6997,7 @@ impl HasHeader for ContraryIntentionReport {
     }
 }
 
-impl HasHeader for fix50::messages::contrary_intention_report::ContraryIntentionReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::contrary_intention_report::ContraryIntentionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7006,7 +7006,7 @@ impl HasHeader for fix50::messages::contrary_intention_report::ContraryIntention
     }
 }
 
-impl HasHeader for fix50sp1::messages::contrary_intention_report::ContraryIntentionReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::contrary_intention_report::ContraryIntentionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7015,7 +7015,7 @@ impl HasHeader for fix50sp1::messages::contrary_intention_report::ContraryIntent
     }
 }
 
-impl HasHeader for fix50sp2::messages::contrary_intention_report::ContraryIntentionReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::contrary_intention_report::ContraryIntentionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7065,7 +7065,7 @@ impl HasHeader for SecurityDefinitionUpdateReport {
     }
 }
 
-impl HasHeader for fix50::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
+impl HasHeader<7, ' ', ' '> for fix50::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7074,7 +7074,7 @@ impl HasHeader for fix50::messages::security_definition_update_report::SecurityD
     }
 }
 
-impl HasHeader for fix50sp1::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7083,7 +7083,7 @@ impl HasHeader for fix50sp1::messages::security_definition_update_report::Securi
     }
 }
 
-impl HasHeader for fix50sp2::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7127,7 +7127,7 @@ impl HasHeader for SettlementObligationReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::settlement_obligation_report::SettlementObligationReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::settlement_obligation_report::SettlementObligationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7136,7 +7136,7 @@ impl HasHeader for fix50sp1::messages::settlement_obligation_report::SettlementO
     }
 }
 
-impl HasHeader for fix50sp2::messages::settlement_obligation_report::SettlementObligationReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::settlement_obligation_report::SettlementObligationReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7180,7 +7180,7 @@ impl HasHeader for DerivativeSecurityListUpdateReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7189,7 +7189,7 @@ impl HasHeader for fix50sp1::messages::derivative_security_list_update_report::D
     }
 }
 
-impl HasHeader for fix50sp2::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7233,7 +7233,7 @@ impl HasHeader for TradingSessionListUpdateReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7242,7 +7242,7 @@ impl HasHeader for fix50sp1::messages::trading_session_list_update_report::Tradi
     }
 }
 
-impl HasHeader for fix50sp2::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7286,7 +7286,7 @@ impl HasHeader for MarketDefinitionRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_definition_request::MarketDefinitionRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_definition_request::MarketDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7295,7 +7295,7 @@ impl HasHeader for fix50sp1::messages::market_definition_request::MarketDefiniti
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_definition_request::MarketDefinitionRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_definition_request::MarketDefinitionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7339,7 +7339,7 @@ impl HasHeader for MarketDefinition {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_definition::MarketDefinition {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_definition::MarketDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7348,7 +7348,7 @@ impl HasHeader for fix50sp1::messages::market_definition::MarketDefinition {
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_definition::MarketDefinition {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_definition::MarketDefinition {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7392,7 +7392,7 @@ impl HasHeader for MarketDefinitionUpdateReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::market_definition_update_report::MarketDefinitionUpdateReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_definition_update_report::MarketDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7401,7 +7401,7 @@ impl HasHeader for fix50sp1::messages::market_definition_update_report::MarketDe
     }
 }
 
-impl HasHeader for fix50sp2::messages::market_definition_update_report::MarketDefinitionUpdateReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_definition_update_report::MarketDefinitionUpdateReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7445,7 +7445,7 @@ impl HasHeader for ApplicationMessageRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::application_message_request::ApplicationMessageRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::application_message_request::ApplicationMessageRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7454,7 +7454,7 @@ impl HasHeader for fix50sp1::messages::application_message_request::ApplicationM
     }
 }
 
-impl HasHeader for fix50sp2::messages::application_message_request::ApplicationMessageRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::application_message_request::ApplicationMessageRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7498,7 +7498,7 @@ impl HasHeader for ApplicationMessageRequestAck {
     }
 }
 
-impl HasHeader for fix50sp1::messages::application_message_request_ack::ApplicationMessageRequestAck {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::application_message_request_ack::ApplicationMessageRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7507,7 +7507,7 @@ impl HasHeader for fix50sp1::messages::application_message_request_ack::Applicat
     }
 }
 
-impl HasHeader for fix50sp2::messages::application_message_request_ack::ApplicationMessageRequestAck {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::application_message_request_ack::ApplicationMessageRequestAck {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7551,7 +7551,7 @@ impl HasHeader for ApplicationMessageReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::application_message_report::ApplicationMessageReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::application_message_report::ApplicationMessageReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7560,7 +7560,7 @@ impl HasHeader for fix50sp1::messages::application_message_report::ApplicationMe
     }
 }
 
-impl HasHeader for fix50sp2::messages::application_message_report::ApplicationMessageReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::application_message_report::ApplicationMessageReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7604,7 +7604,7 @@ impl HasHeader for OrderMassActionReport {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_action_report::OrderMassActionReport {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_action_report::OrderMassActionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7613,7 +7613,7 @@ impl HasHeader for fix50sp1::messages::order_mass_action_report::OrderMassAction
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_action_report::OrderMassActionReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_action_report::OrderMassActionReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7657,7 +7657,7 @@ impl HasHeader for OrderMassActionRequest {
     }
 }
 
-impl HasHeader for fix50sp1::messages::order_mass_action_request::OrderMassActionRequest {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_action_request::OrderMassActionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7666,7 +7666,7 @@ impl HasHeader for fix50sp1::messages::order_mass_action_request::OrderMassActio
     }
 }
 
-impl HasHeader for fix50sp2::messages::order_mass_action_request::OrderMassActionRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_action_request::OrderMassActionRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7710,7 +7710,7 @@ impl HasHeader for UserNotification {
     }
 }
 
-impl HasHeader for fix50sp1::messages::user_notification::UserNotification {
+impl HasHeader<8, ' ', ' '> for fix50sp1::messages::user_notification::UserNotification {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7719,7 +7719,7 @@ impl HasHeader for fix50sp1::messages::user_notification::UserNotification {
     }
 }
 
-impl HasHeader for fix50sp2::messages::user_notification::UserNotification {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::user_notification::UserNotification {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7757,7 +7757,7 @@ impl HasHeader for StreamAssignmentRequest {
     }
 }
 
-impl HasHeader for fix50sp2::messages::stream_assignment_request::StreamAssignmentRequest {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::stream_assignment_request::StreamAssignmentRequest {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7795,7 +7795,7 @@ impl HasHeader for StreamAssignmentReport {
     }
 }
 
-impl HasHeader for fix50sp2::messages::stream_assignment_report::StreamAssignmentReport {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::stream_assignment_report::StreamAssignmentReport {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
@@ -7833,7 +7833,7 @@ impl HasHeader for StreamAssignmentReportACK {
     }
 }
 
-impl HasHeader for fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportACK {
+impl HasHeader<9, ' ', ' '> for fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportACK {
     fn get_header(&self) -> &Header {
         &self.standard_message_header
     }
