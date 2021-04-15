@@ -1,4 +1,7 @@
 
+#![warn(unused_extern_crates)]
+#![allow(clippy::upper_case_acronyms)]
+
 pub mod workarounds;
 pub mod datetime;
 pub use datetime::*;

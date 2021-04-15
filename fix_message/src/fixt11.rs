@@ -1,13 +1,6 @@
 
 use serde::{Deserialize, Serialize};
 
-use fixt11::header::Header;
-
-pub trait HasHeader<const V: u8, const T1: char, const T2: char> {
-    fn get_header(&self) -> &Header<V, T1, T2>;
-    fn get_header_mut(&mut self) -> &mut Header<V, T1, T2>;
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "35")]
 pub enum Message {
@@ -484,312 +477,6 @@ impl Serialize for Message {
     }
 }
 
-impl HasHeader for Message {
-    fn get_header(&self) -> &Header {
-        match self {
-            Message::Heartbeat(m) => m.get_header(),
-            Message::TestRequest(m) => m.get_header(),
-            Message::ResendRequest(m) => m.get_header(),
-            Message::Reject(m) => m.get_header(),
-            Message::SequenceReset(m) => m.get_header(),
-            Message::Logout(m) => m.get_header(),
-            Message::IndicationOfInterest(m) => m.get_header(),
-            Message::Advertisement(m) => m.get_header(),
-            Message::ExecutionReport(m) => m.get_header(),
-            Message::OrderCancelReject(m) => m.get_header(),
-            Message::Logon(m) => m.get_header(),
-            Message::News(m) => m.get_header(),
-            Message::Email(m) => m.get_header(),
-            Message::NewOrderSingle(m) => m.get_header(),
-            Message::NewOrderList(m) => m.get_header(),
-            Message::OrderCancelRequest(m) => m.get_header(),
-            Message::OrderCancelReplaceRequest(m) => m.get_header(),
-            Message::OrderStatusRequest(m) => m.get_header(),
-            Message::AllocationInstruction(m) => m.get_header(),
-            Message::ListCancelRequest(m) => m.get_header(),
-            Message::ListExecute(m) => m.get_header(),
-            Message::ListStatusRequest(m) => m.get_header(),
-            Message::ListStatus(m) => m.get_header(),
-            Message::AllocationInstructionAck(m) => m.get_header(),
-            Message::DontKnowTrade(m) => m.get_header(),
-            Message::QuoteRequest(m) => m.get_header(),
-            Message::Quote(m) => m.get_header(),
-            Message::SettlementInstructions(m) => m.get_header(),
-            Message::MarketDataRequest(m) => m.get_header(),
-            Message::MarketDataSnapshotFullRefresh(m) => m.get_header(),
-            Message::MarketDataIncrementalRefresh(m) => m.get_header(),
-            Message::MarketDataRequestReject(m) => m.get_header(),
-            Message::QuoteCancel(m) => m.get_header(),
-            Message::QuoteStatusRequest(m) => m.get_header(),
-            Message::MassQuoteAcknowledgement(m) => m.get_header(),
-            Message::SecurityDefinitionRequest(m) => m.get_header(),
-            Message::SecurityDefinition(m) => m.get_header(),
-            Message::SecurityStatusRequest(m) => m.get_header(),
-            Message::SecurityStatus(m) => m.get_header(),
-            Message::TradingSessionStatusRequest(m) => m.get_header(),
-            Message::TradingSessionStatus(m) => m.get_header(),
-            Message::MassQuote(m) => m.get_header(),
-            Message::BusinessMessageReject(m) => m.get_header(),
-            Message::BidRequest(m) => m.get_header(),
-            Message::BidResponse(m) => m.get_header(),
-            Message::ListStrikePrice(m) => m.get_header(),
-            Message::XMLMessage(m) => m.get_header(),
-            Message::RegistrationInstructions(m) => m.get_header(),
-            Message::RegistrationInstructionsResponse(m) => m.get_header(),
-            Message::OrderMassCancelRequest(m) => m.get_header(),
-            Message::OrderMassCancelReport(m) => m.get_header(),
-            Message::NewOrderCross(m) => m.get_header(),
-            Message::CrossOrderCancelReplaceRequest(m) => m.get_header(),
-            Message::CrossOrderCancelRequest(m) => m.get_header(),
-            Message::SecurityTypeRequest(m) => m.get_header(),
-            Message::SecurityTypes(m) => m.get_header(),
-            Message::SecurityListRequest(m) => m.get_header(),
-            Message::SecurityList(m) => m.get_header(),
-            Message::DerivativeSecurityListRequest(m) => m.get_header(),
-            Message::DerivativeSecurityList(m) => m.get_header(),
-            Message::NewOrderMultileg(m) => m.get_header(),
-            Message::MultilegOrderCancelReplace(m) => m.get_header(),
-            Message::TradeCaptureReportRequest(m) => m.get_header(),
-            Message::TradeCaptureReport(m) => m.get_header(),
-            Message::OrderMassStatusRequest(m) => m.get_header(),
-            Message::QuoteRequestReject(m) => m.get_header(),
-            Message::RFQRequest(m) => m.get_header(),
-            Message::QuoteStatusReport(m) => m.get_header(),
-            Message::QuoteResponse(m) => m.get_header(),
-            Message::Confirmation(m) => m.get_header(),
-            Message::PositionMaintenanceRequest(m) => m.get_header(),
-            Message::PositionMaintenanceReport(m) => m.get_header(),
-            Message::RequestForPositions(m) => m.get_header(),
-            Message::RequestForPositionsAck(m) => m.get_header(),
-            Message::PositionReport(m) => m.get_header(),
-            Message::TradeCaptureReportRequestAck(m) => m.get_header(),
-            Message::TradeCaptureReportAck(m) => m.get_header(),
-            Message::AllocationReport(m) => m.get_header(),
-            Message::AllocationReportAck(m) => m.get_header(),
-            Message::ConfirmationAck(m) => m.get_header(),
-            Message::SettlementInstructionRequest(m) => m.get_header(),
-            Message::AssignmentReport(m) => m.get_header(),
-            Message::CollateralRequest(m) => m.get_header(),
-            Message::CollateralAssignment(m) => m.get_header(),
-            Message::CollateralResponse(m) => m.get_header(),
-            Message::CollateralReport(m) => m.get_header(),
-            Message::CollateralInquiry(m) => m.get_header(),
-            Message::NetworkCounterpartySystemStatusRequest(m) => m.get_header(),
-            Message::NetworkCounterpartySystemStatusResponse(m) => m.get_header(),
-            Message::UserRequest(m) => m.get_header(),
-            Message::UserResponse(m) => m.get_header(),
-            Message::CollateralInquiryAck(m) => m.get_header(),
-            Message::ConfirmationRequest(m) => m.get_header(),
-            Message::TradingSessionListRequest(m) => m.get_header(),
-            Message::TradingSessionList(m) => m.get_header(),
-            Message::SecurityListUpdateReport(m) => m.get_header(),
-            Message::AdjustedPositionReport(m) => m.get_header(),
-            Message::AllocationInstructionAlert(m) => m.get_header(),
-            Message::ExecutionAcknowledgement(m) => m.get_header(),
-            Message::ContraryIntentionReport(m) => m.get_header(),
-            Message::SecurityDefinitionUpdateReport(m) => m.get_header(),
-            Message::SettlementObligationReport(m) => m.get_header(),
-            Message::DerivativeSecurityListUpdateReport(m) => m.get_header(),
-            Message::TradingSessionListUpdateReport(m) => m.get_header(),
-            Message::MarketDefinitionRequest(m) => m.get_header(),
-            Message::MarketDefinition(m) => m.get_header(),
-            Message::MarketDefinitionUpdateReport(m) => m.get_header(),
-            Message::ApplicationMessageRequest(m) => m.get_header(),
-            Message::ApplicationMessageRequestAck(m) => m.get_header(),
-            Message::ApplicationMessageReport(m) => m.get_header(),
-            Message::OrderMassActionReport(m) => m.get_header(),
-            Message::OrderMassActionRequest(m) => m.get_header(),
-            Message::UserNotification(m) => m.get_header(),
-            Message::StreamAssignmentRequest(m) => m.get_header(),
-            Message::StreamAssignmentReport(m) => m.get_header(),
-            Message::StreamAssignmentReportACK(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            Message::Heartbeat(m) => m.get_header_mut(),
-            Message::TestRequest(m) => m.get_header_mut(),
-            Message::ResendRequest(m) => m.get_header_mut(),
-            Message::Reject(m) => m.get_header_mut(),
-            Message::SequenceReset(m) => m.get_header_mut(),
-            Message::Logout(m) => m.get_header_mut(),
-            Message::IndicationOfInterest(m) => m.get_header_mut(),
-            Message::Advertisement(m) => m.get_header_mut(),
-            Message::ExecutionReport(m) => m.get_header_mut(),
-            Message::OrderCancelReject(m) => m.get_header_mut(),
-            Message::Logon(m) => m.get_header_mut(),
-            Message::News(m) => m.get_header_mut(),
-            Message::Email(m) => m.get_header_mut(),
-            Message::NewOrderSingle(m) => m.get_header_mut(),
-            Message::NewOrderList(m) => m.get_header_mut(),
-            Message::OrderCancelRequest(m) => m.get_header_mut(),
-            Message::OrderCancelReplaceRequest(m) => m.get_header_mut(),
-            Message::OrderStatusRequest(m) => m.get_header_mut(),
-            Message::AllocationInstruction(m) => m.get_header_mut(),
-            Message::ListCancelRequest(m) => m.get_header_mut(),
-            Message::ListExecute(m) => m.get_header_mut(),
-            Message::ListStatusRequest(m) => m.get_header_mut(),
-            Message::ListStatus(m) => m.get_header_mut(),
-            Message::AllocationInstructionAck(m) => m.get_header_mut(),
-            Message::DontKnowTrade(m) => m.get_header_mut(),
-            Message::QuoteRequest(m) => m.get_header_mut(),
-            Message::Quote(m) => m.get_header_mut(),
-            Message::SettlementInstructions(m) => m.get_header_mut(),
-            Message::MarketDataRequest(m) => m.get_header_mut(),
-            Message::MarketDataSnapshotFullRefresh(m) => m.get_header_mut(),
-            Message::MarketDataIncrementalRefresh(m) => m.get_header_mut(),
-            Message::MarketDataRequestReject(m) => m.get_header_mut(),
-            Message::QuoteCancel(m) => m.get_header_mut(),
-            Message::QuoteStatusRequest(m) => m.get_header_mut(),
-            Message::MassQuoteAcknowledgement(m) => m.get_header_mut(),
-            Message::SecurityDefinitionRequest(m) => m.get_header_mut(),
-            Message::SecurityDefinition(m) => m.get_header_mut(),
-            Message::SecurityStatusRequest(m) => m.get_header_mut(),
-            Message::SecurityStatus(m) => m.get_header_mut(),
-            Message::TradingSessionStatusRequest(m) => m.get_header_mut(),
-            Message::TradingSessionStatus(m) => m.get_header_mut(),
-            Message::MassQuote(m) => m.get_header_mut(),
-            Message::BusinessMessageReject(m) => m.get_header_mut(),
-            Message::BidRequest(m) => m.get_header_mut(),
-            Message::BidResponse(m) => m.get_header_mut(),
-            Message::ListStrikePrice(m) => m.get_header_mut(),
-            Message::XMLMessage(m) => m.get_header_mut(),
-            Message::RegistrationInstructions(m) => m.get_header_mut(),
-            Message::RegistrationInstructionsResponse(m) => m.get_header_mut(),
-            Message::OrderMassCancelRequest(m) => m.get_header_mut(),
-            Message::OrderMassCancelReport(m) => m.get_header_mut(),
-            Message::NewOrderCross(m) => m.get_header_mut(),
-            Message::CrossOrderCancelReplaceRequest(m) => m.get_header_mut(),
-            Message::CrossOrderCancelRequest(m) => m.get_header_mut(),
-            Message::SecurityTypeRequest(m) => m.get_header_mut(),
-            Message::SecurityTypes(m) => m.get_header_mut(),
-            Message::SecurityListRequest(m) => m.get_header_mut(),
-            Message::SecurityList(m) => m.get_header_mut(),
-            Message::DerivativeSecurityListRequest(m) => m.get_header_mut(),
-            Message::DerivativeSecurityList(m) => m.get_header_mut(),
-            Message::NewOrderMultileg(m) => m.get_header_mut(),
-            Message::MultilegOrderCancelReplace(m) => m.get_header_mut(),
-            Message::TradeCaptureReportRequest(m) => m.get_header_mut(),
-            Message::TradeCaptureReport(m) => m.get_header_mut(),
-            Message::OrderMassStatusRequest(m) => m.get_header_mut(),
-            Message::QuoteRequestReject(m) => m.get_header_mut(),
-            Message::RFQRequest(m) => m.get_header_mut(),
-            Message::QuoteStatusReport(m) => m.get_header_mut(),
-            Message::QuoteResponse(m) => m.get_header_mut(),
-            Message::Confirmation(m) => m.get_header_mut(),
-            Message::PositionMaintenanceRequest(m) => m.get_header_mut(),
-            Message::PositionMaintenanceReport(m) => m.get_header_mut(),
-            Message::RequestForPositions(m) => m.get_header_mut(),
-            Message::RequestForPositionsAck(m) => m.get_header_mut(),
-            Message::PositionReport(m) => m.get_header_mut(),
-            Message::TradeCaptureReportRequestAck(m) => m.get_header_mut(),
-            Message::TradeCaptureReportAck(m) => m.get_header_mut(),
-            Message::AllocationReport(m) => m.get_header_mut(),
-            Message::AllocationReportAck(m) => m.get_header_mut(),
-            Message::ConfirmationAck(m) => m.get_header_mut(),
-            Message::SettlementInstructionRequest(m) => m.get_header_mut(),
-            Message::AssignmentReport(m) => m.get_header_mut(),
-            Message::CollateralRequest(m) => m.get_header_mut(),
-            Message::CollateralAssignment(m) => m.get_header_mut(),
-            Message::CollateralResponse(m) => m.get_header_mut(),
-            Message::CollateralReport(m) => m.get_header_mut(),
-            Message::CollateralInquiry(m) => m.get_header_mut(),
-            Message::NetworkCounterpartySystemStatusRequest(m) => m.get_header_mut(),
-            Message::NetworkCounterpartySystemStatusResponse(m) => m.get_header_mut(),
-            Message::UserRequest(m) => m.get_header_mut(),
-            Message::UserResponse(m) => m.get_header_mut(),
-            Message::CollateralInquiryAck(m) => m.get_header_mut(),
-            Message::ConfirmationRequest(m) => m.get_header_mut(),
-            Message::TradingSessionListRequest(m) => m.get_header_mut(),
-            Message::TradingSessionList(m) => m.get_header_mut(),
-            Message::SecurityListUpdateReport(m) => m.get_header_mut(),
-            Message::AdjustedPositionReport(m) => m.get_header_mut(),
-            Message::AllocationInstructionAlert(m) => m.get_header_mut(),
-            Message::ExecutionAcknowledgement(m) => m.get_header_mut(),
-            Message::ContraryIntentionReport(m) => m.get_header_mut(),
-            Message::SecurityDefinitionUpdateReport(m) => m.get_header_mut(),
-            Message::SettlementObligationReport(m) => m.get_header_mut(),
-            Message::DerivativeSecurityListUpdateReport(m) => m.get_header_mut(),
-            Message::TradingSessionListUpdateReport(m) => m.get_header_mut(),
-            Message::MarketDefinitionRequest(m) => m.get_header_mut(),
-            Message::MarketDefinition(m) => m.get_header_mut(),
-            Message::MarketDefinitionUpdateReport(m) => m.get_header_mut(),
-            Message::ApplicationMessageRequest(m) => m.get_header_mut(),
-            Message::ApplicationMessageRequestAck(m) => m.get_header_mut(),
-            Message::ApplicationMessageReport(m) => m.get_header_mut(),
-            Message::OrderMassActionReport(m) => m.get_header_mut(),
-            Message::OrderMassActionRequest(m) => m.get_header_mut(),
-            Message::UserNotification(m) => m.get_header_mut(),
-            Message::StreamAssignmentRequest(m) => m.get_header_mut(),
-            Message::StreamAssignmentReport(m) => m.get_header_mut(),
-            Message::StreamAssignmentReportACK(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fixt11::messages::Heartbeat {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fixt11::messages::TestRequest {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fixt11::messages::ResendRequest {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fixt11::messages::Reject {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fixt11::messages::SequenceReset {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fixt11::messages::Logout {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fixt11::messages::Logon {
-    fn get_header(&self) -> &Header {
-        &self.header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum IndicationOfInterest {
@@ -807,39 +494,6 @@ impl Serialize for IndicationOfInterest {
             IndicationOfInterest::FIX50(m) => m.serialize(serializer),
             IndicationOfInterest::FIX50SP1(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for IndicationOfInterest {
-    fn get_header(&self) -> &Header {
-        match self {
-            IndicationOfInterest::FIX50(m) => m.get_header(),
-            IndicationOfInterest::FIX50SP1(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            IndicationOfInterest::FIX50(m) => m.get_header_mut(),
-            IndicationOfInterest::FIX50SP1(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::indication_of_interest::IndicationOfInterest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::indication_of_interest::IndicationOfInterest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -867,50 +521,6 @@ impl Serialize for Advertisement {
     }
 }
 
-impl HasHeader for Advertisement {
-    fn get_header(&self) -> &Header {
-        match self {
-            Advertisement::FIX50(m) => m.get_header(),
-            Advertisement::FIX50SP1(m) => m.get_header(),
-            Advertisement::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            Advertisement::FIX50(m) => m.get_header_mut(),
-            Advertisement::FIX50SP1(m) => m.get_header_mut(),
-            Advertisement::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::advertisement::Advertisement {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::advertisement::Advertisement {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::advertisement::Advertisement {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ExecutionReport {
@@ -932,50 +542,6 @@ impl Serialize for ExecutionReport {
             ExecutionReport::FIX50SP1(m) => m.serialize(serializer),
             ExecutionReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for ExecutionReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            ExecutionReport::FIX50(m) => m.get_header(),
-            ExecutionReport::FIX50SP1(m) => m.get_header(),
-            ExecutionReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ExecutionReport::FIX50(m) => m.get_header_mut(),
-            ExecutionReport::FIX50SP1(m) => m.get_header_mut(),
-            ExecutionReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::execution_report::ExecutionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::execution_report::ExecutionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::execution_report::ExecutionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -1003,50 +569,6 @@ impl Serialize for OrderCancelReject {
     }
 }
 
-impl HasHeader for OrderCancelReject {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderCancelReject::FIX50(m) => m.get_header(),
-            OrderCancelReject::FIX50SP1(m) => m.get_header(),
-            OrderCancelReject::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderCancelReject::FIX50(m) => m.get_header_mut(),
-            OrderCancelReject::FIX50SP1(m) => m.get_header_mut(),
-            OrderCancelReject::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::order_cancel_reject::OrderCancelReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_cancel_reject::OrderCancelReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_cancel_reject::OrderCancelReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum News {
@@ -1068,50 +590,6 @@ impl Serialize for News {
             News::FIX50SP1(m) => m.serialize(serializer),
             News::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for News {
-    fn get_header(&self) -> &Header {
-        match self {
-            News::FIX50(m) => m.get_header(),
-            News::FIX50SP1(m) => m.get_header(),
-            News::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            News::FIX50(m) => m.get_header_mut(),
-            News::FIX50SP1(m) => m.get_header_mut(),
-            News::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::news::News {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::news::News {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::news::News {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -1139,50 +617,6 @@ impl Serialize for Email {
     }
 }
 
-impl HasHeader for Email {
-    fn get_header(&self) -> &Header {
-        match self {
-            Email::FIX50(m) => m.get_header(),
-            Email::FIX50SP1(m) => m.get_header(),
-            Email::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            Email::FIX50(m) => m.get_header_mut(),
-            Email::FIX50SP1(m) => m.get_header_mut(),
-            Email::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::email::Email {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::email::Email {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::email::Email {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum NewOrderSingle {
@@ -1204,50 +638,6 @@ impl Serialize for NewOrderSingle {
             NewOrderSingle::FIX50SP1(m) => m.serialize(serializer),
             NewOrderSingle::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for NewOrderSingle {
-    fn get_header(&self) -> &Header {
-        match self {
-            NewOrderSingle::FIX50(m) => m.get_header(),
-            NewOrderSingle::FIX50SP1(m) => m.get_header(),
-            NewOrderSingle::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            NewOrderSingle::FIX50(m) => m.get_header_mut(),
-            NewOrderSingle::FIX50SP1(m) => m.get_header_mut(),
-            NewOrderSingle::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::new_order_single::NewOrderSingle {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::new_order_single::NewOrderSingle {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::new_order_single::NewOrderSingle {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -1275,50 +665,6 @@ impl Serialize for NewOrderList {
     }
 }
 
-impl HasHeader for NewOrderList {
-    fn get_header(&self) -> &Header {
-        match self {
-            NewOrderList::FIX50(m) => m.get_header(),
-            NewOrderList::FIX50SP1(m) => m.get_header(),
-            NewOrderList::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            NewOrderList::FIX50(m) => m.get_header_mut(),
-            NewOrderList::FIX50SP1(m) => m.get_header_mut(),
-            NewOrderList::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::new_order_list::NewOrderList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::new_order_list::NewOrderList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::new_order_list::NewOrderList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum OrderCancelRequest {
@@ -1340,50 +686,6 @@ impl Serialize for OrderCancelRequest {
             OrderCancelRequest::FIX50SP1(m) => m.serialize(serializer),
             OrderCancelRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for OrderCancelRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderCancelRequest::FIX50(m) => m.get_header(),
-            OrderCancelRequest::FIX50SP1(m) => m.get_header(),
-            OrderCancelRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderCancelRequest::FIX50(m) => m.get_header_mut(),
-            OrderCancelRequest::FIX50SP1(m) => m.get_header_mut(),
-            OrderCancelRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::order_cancel_request::OrderCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_cancel_request::OrderCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_cancel_request::OrderCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -1411,50 +713,6 @@ impl Serialize for OrderCancelReplaceRequest {
     }
 }
 
-impl HasHeader for OrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderCancelReplaceRequest::FIX50(m) => m.get_header(),
-            OrderCancelReplaceRequest::FIX50SP1(m) => m.get_header(),
-            OrderCancelReplaceRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderCancelReplaceRequest::FIX50(m) => m.get_header_mut(),
-            OrderCancelReplaceRequest::FIX50SP1(m) => m.get_header_mut(),
-            OrderCancelReplaceRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum OrderStatusRequest {
@@ -1476,50 +734,6 @@ impl Serialize for OrderStatusRequest {
             OrderStatusRequest::FIX50SP1(m) => m.serialize(serializer),
             OrderStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for OrderStatusRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderStatusRequest::FIX50(m) => m.get_header(),
-            OrderStatusRequest::FIX50SP1(m) => m.get_header(),
-            OrderStatusRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderStatusRequest::FIX50(m) => m.get_header_mut(),
-            OrderStatusRequest::FIX50SP1(m) => m.get_header_mut(),
-            OrderStatusRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::order_status_request::OrderStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_status_request::OrderStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_status_request::OrderStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -1547,50 +761,6 @@ impl Serialize for AllocationInstruction {
     }
 }
 
-impl HasHeader for AllocationInstruction {
-    fn get_header(&self) -> &Header {
-        match self {
-            AllocationInstruction::FIX50(m) => m.get_header(),
-            AllocationInstruction::FIX50SP1(m) => m.get_header(),
-            AllocationInstruction::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            AllocationInstruction::FIX50(m) => m.get_header_mut(),
-            AllocationInstruction::FIX50SP1(m) => m.get_header_mut(),
-            AllocationInstruction::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_instruction::AllocationInstruction {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_instruction::AllocationInstruction {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_instruction::AllocationInstruction {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ListCancelRequest {
@@ -1612,50 +782,6 @@ impl Serialize for ListCancelRequest {
             ListCancelRequest::FIX50SP1(m) => m.serialize(serializer),
             ListCancelRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for ListCancelRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            ListCancelRequest::FIX50(m) => m.get_header(),
-            ListCancelRequest::FIX50SP1(m) => m.get_header(),
-            ListCancelRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ListCancelRequest::FIX50(m) => m.get_header_mut(),
-            ListCancelRequest::FIX50SP1(m) => m.get_header_mut(),
-            ListCancelRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::list_cancel_request::ListCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_cancel_request::ListCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_cancel_request::ListCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -1683,50 +809,6 @@ impl Serialize for ListExecute {
     }
 }
 
-impl HasHeader for ListExecute {
-    fn get_header(&self) -> &Header {
-        match self {
-            ListExecute::FIX50(m) => m.get_header(),
-            ListExecute::FIX50SP1(m) => m.get_header(),
-            ListExecute::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ListExecute::FIX50(m) => m.get_header_mut(),
-            ListExecute::FIX50SP1(m) => m.get_header_mut(),
-            ListExecute::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::list_execute::ListExecute {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_execute::ListExecute {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_execute::ListExecute {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ListStatusRequest {
@@ -1748,50 +830,6 @@ impl Serialize for ListStatusRequest {
             ListStatusRequest::FIX50SP1(m) => m.serialize(serializer),
             ListStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for ListStatusRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            ListStatusRequest::FIX50(m) => m.get_header(),
-            ListStatusRequest::FIX50SP1(m) => m.get_header(),
-            ListStatusRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ListStatusRequest::FIX50(m) => m.get_header_mut(),
-            ListStatusRequest::FIX50SP1(m) => m.get_header_mut(),
-            ListStatusRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::list_status_request::ListStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_status_request::ListStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_status_request::ListStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -1819,50 +857,6 @@ impl Serialize for ListStatus {
     }
 }
 
-impl HasHeader for ListStatus {
-    fn get_header(&self) -> &Header {
-        match self {
-            ListStatus::FIX50(m) => m.get_header(),
-            ListStatus::FIX50SP1(m) => m.get_header(),
-            ListStatus::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ListStatus::FIX50(m) => m.get_header_mut(),
-            ListStatus::FIX50SP1(m) => m.get_header_mut(),
-            ListStatus::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::list_status::ListStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_status::ListStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_status::ListStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum AllocationInstructionAck {
@@ -1884,50 +878,6 @@ impl Serialize for AllocationInstructionAck {
             AllocationInstructionAck::FIX50SP1(m) => m.serialize(serializer),
             AllocationInstructionAck::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for AllocationInstructionAck {
-    fn get_header(&self) -> &Header {
-        match self {
-            AllocationInstructionAck::FIX50(m) => m.get_header(),
-            AllocationInstructionAck::FIX50SP1(m) => m.get_header(),
-            AllocationInstructionAck::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            AllocationInstructionAck::FIX50(m) => m.get_header_mut(),
-            AllocationInstructionAck::FIX50SP1(m) => m.get_header_mut(),
-            AllocationInstructionAck::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_instruction_ack::AllocationInstructionAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_instruction_ack::AllocationInstructionAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_instruction_ack::AllocationInstructionAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -1955,50 +905,6 @@ impl Serialize for DontKnowTrade {
     }
 }
 
-impl HasHeader for DontKnowTrade {
-    fn get_header(&self) -> &Header {
-        match self {
-            DontKnowTrade::FIX50(m) => m.get_header(),
-            DontKnowTrade::FIX50SP1(m) => m.get_header(),
-            DontKnowTrade::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            DontKnowTrade::FIX50(m) => m.get_header_mut(),
-            DontKnowTrade::FIX50SP1(m) => m.get_header_mut(),
-            DontKnowTrade::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::dont_know_trade::DontKnowTrade {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::dont_know_trade::DontKnowTrade {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::dont_know_trade::DontKnowTrade {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum QuoteRequest {
@@ -2020,50 +926,6 @@ impl Serialize for QuoteRequest {
             QuoteRequest::FIX50SP1(m) => m.serialize(serializer),
             QuoteRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for QuoteRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            QuoteRequest::FIX50(m) => m.get_header(),
-            QuoteRequest::FIX50SP1(m) => m.get_header(),
-            QuoteRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            QuoteRequest::FIX50(m) => m.get_header_mut(),
-            QuoteRequest::FIX50SP1(m) => m.get_header_mut(),
-            QuoteRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::quote_request::QuoteRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_request::QuoteRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_request::QuoteRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -2091,50 +953,6 @@ impl Serialize for Quote {
     }
 }
 
-impl HasHeader for Quote {
-    fn get_header(&self) -> &Header {
-        match self {
-            Quote::FIX50(m) => m.get_header(),
-            Quote::FIX50SP1(m) => m.get_header(),
-            Quote::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            Quote::FIX50(m) => m.get_header_mut(),
-            Quote::FIX50SP1(m) => m.get_header_mut(),
-            Quote::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::quote::Quote {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote::Quote {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote::Quote {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SettlementInstructions {
@@ -2156,50 +974,6 @@ impl Serialize for SettlementInstructions {
             SettlementInstructions::FIX50SP1(m) => m.serialize(serializer),
             SettlementInstructions::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for SettlementInstructions {
-    fn get_header(&self) -> &Header {
-        match self {
-            SettlementInstructions::FIX50(m) => m.get_header(),
-            SettlementInstructions::FIX50SP1(m) => m.get_header(),
-            SettlementInstructions::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SettlementInstructions::FIX50(m) => m.get_header_mut(),
-            SettlementInstructions::FIX50SP1(m) => m.get_header_mut(),
-            SettlementInstructions::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::settlement_instructions::SettlementInstructions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::settlement_instructions::SettlementInstructions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::settlement_instructions::SettlementInstructions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -2227,50 +1001,6 @@ impl Serialize for MarketDataRequest {
     }
 }
 
-impl HasHeader for MarketDataRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            MarketDataRequest::FIX50(m) => m.get_header(),
-            MarketDataRequest::FIX50SP1(m) => m.get_header(),
-            MarketDataRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MarketDataRequest::FIX50(m) => m.get_header_mut(),
-            MarketDataRequest::FIX50SP1(m) => m.get_header_mut(),
-            MarketDataRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::market_data_request::MarketDataRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_data_request::MarketDataRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_data_request::MarketDataRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MarketDataSnapshotFullRefresh {
@@ -2292,50 +1022,6 @@ impl Serialize for MarketDataSnapshotFullRefresh {
             MarketDataSnapshotFullRefresh::FIX50SP1(m) => m.serialize(serializer),
             MarketDataSnapshotFullRefresh::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for MarketDataSnapshotFullRefresh {
-    fn get_header(&self) -> &Header {
-        match self {
-            MarketDataSnapshotFullRefresh::FIX50(m) => m.get_header(),
-            MarketDataSnapshotFullRefresh::FIX50SP1(m) => m.get_header(),
-            MarketDataSnapshotFullRefresh::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MarketDataSnapshotFullRefresh::FIX50(m) => m.get_header_mut(),
-            MarketDataSnapshotFullRefresh::FIX50SP1(m) => m.get_header_mut(),
-            MarketDataSnapshotFullRefresh::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -2363,50 +1049,6 @@ impl Serialize for MarketDataIncrementalRefresh {
     }
 }
 
-impl HasHeader for MarketDataIncrementalRefresh {
-    fn get_header(&self) -> &Header {
-        match self {
-            MarketDataIncrementalRefresh::FIX50(m) => m.get_header(),
-            MarketDataIncrementalRefresh::FIX50SP1(m) => m.get_header(),
-            MarketDataIncrementalRefresh::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MarketDataIncrementalRefresh::FIX50(m) => m.get_header_mut(),
-            MarketDataIncrementalRefresh::FIX50SP1(m) => m.get_header_mut(),
-            MarketDataIncrementalRefresh::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MarketDataRequestReject {
@@ -2428,50 +1070,6 @@ impl Serialize for MarketDataRequestReject {
             MarketDataRequestReject::FIX50SP1(m) => m.serialize(serializer),
             MarketDataRequestReject::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for MarketDataRequestReject {
-    fn get_header(&self) -> &Header {
-        match self {
-            MarketDataRequestReject::FIX50(m) => m.get_header(),
-            MarketDataRequestReject::FIX50SP1(m) => m.get_header(),
-            MarketDataRequestReject::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MarketDataRequestReject::FIX50(m) => m.get_header_mut(),
-            MarketDataRequestReject::FIX50SP1(m) => m.get_header_mut(),
-            MarketDataRequestReject::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::market_data_request_reject::MarketDataRequestReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_data_request_reject::MarketDataRequestReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_data_request_reject::MarketDataRequestReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -2499,50 +1097,6 @@ impl Serialize for QuoteCancel {
     }
 }
 
-impl HasHeader for QuoteCancel {
-    fn get_header(&self) -> &Header {
-        match self {
-            QuoteCancel::FIX50(m) => m.get_header(),
-            QuoteCancel::FIX50SP1(m) => m.get_header(),
-            QuoteCancel::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            QuoteCancel::FIX50(m) => m.get_header_mut(),
-            QuoteCancel::FIX50SP1(m) => m.get_header_mut(),
-            QuoteCancel::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::quote_cancel::QuoteCancel {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_cancel::QuoteCancel {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_cancel::QuoteCancel {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum QuoteStatusRequest {
@@ -2567,50 +1121,6 @@ impl Serialize for QuoteStatusRequest {
     }
 }
 
-impl HasHeader for QuoteStatusRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            QuoteStatusRequest::FIX50(m) => m.get_header(),
-            QuoteStatusRequest::FIX50SP1(m) => m.get_header(),
-            QuoteStatusRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            QuoteStatusRequest::FIX50(m) => m.get_header_mut(),
-            QuoteStatusRequest::FIX50SP1(m) => m.get_header_mut(),
-            QuoteStatusRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::quote_status_request::QuoteStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_status_request::QuoteStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_status_request::QuoteStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MassQuoteAcknowledgement {
@@ -2628,39 +1138,6 @@ impl Serialize for MassQuoteAcknowledgement {
             MassQuoteAcknowledgement::FIX50(m) => m.serialize(serializer),
             MassQuoteAcknowledgement::FIX50SP1(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for MassQuoteAcknowledgement {
-    fn get_header(&self) -> &Header {
-        match self {
-            MassQuoteAcknowledgement::FIX50(m) => m.get_header(),
-            MassQuoteAcknowledgement::FIX50SP1(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MassQuoteAcknowledgement::FIX50(m) => m.get_header_mut(),
-            MassQuoteAcknowledgement::FIX50SP1(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -2688,50 +1165,6 @@ impl Serialize for SecurityDefinitionRequest {
     }
 }
 
-impl HasHeader for SecurityDefinitionRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityDefinitionRequest::FIX50(m) => m.get_header(),
-            SecurityDefinitionRequest::FIX50SP1(m) => m.get_header(),
-            SecurityDefinitionRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityDefinitionRequest::FIX50(m) => m.get_header_mut(),
-            SecurityDefinitionRequest::FIX50SP1(m) => m.get_header_mut(),
-            SecurityDefinitionRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_definition_request::SecurityDefinitionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_definition_request::SecurityDefinitionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_definition_request::SecurityDefinitionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityDefinition {
@@ -2753,50 +1186,6 @@ impl Serialize for SecurityDefinition {
             SecurityDefinition::FIX50SP1(m) => m.serialize(serializer),
             SecurityDefinition::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for SecurityDefinition {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityDefinition::FIX50(m) => m.get_header(),
-            SecurityDefinition::FIX50SP1(m) => m.get_header(),
-            SecurityDefinition::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityDefinition::FIX50(m) => m.get_header_mut(),
-            SecurityDefinition::FIX50SP1(m) => m.get_header_mut(),
-            SecurityDefinition::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_definition::SecurityDefinition {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_definition::SecurityDefinition {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_definition::SecurityDefinition {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -2824,50 +1213,6 @@ impl Serialize for SecurityStatusRequest {
     }
 }
 
-impl HasHeader for SecurityStatusRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityStatusRequest::FIX50(m) => m.get_header(),
-            SecurityStatusRequest::FIX50SP1(m) => m.get_header(),
-            SecurityStatusRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityStatusRequest::FIX50(m) => m.get_header_mut(),
-            SecurityStatusRequest::FIX50SP1(m) => m.get_header_mut(),
-            SecurityStatusRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_status_request::SecurityStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_status_request::SecurityStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_status_request::SecurityStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityStatus {
@@ -2889,50 +1234,6 @@ impl Serialize for SecurityStatus {
             SecurityStatus::FIX50SP1(m) => m.serialize(serializer),
             SecurityStatus::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for SecurityStatus {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityStatus::FIX50(m) => m.get_header(),
-            SecurityStatus::FIX50SP1(m) => m.get_header(),
-            SecurityStatus::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityStatus::FIX50(m) => m.get_header_mut(),
-            SecurityStatus::FIX50SP1(m) => m.get_header_mut(),
-            SecurityStatus::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_status::SecurityStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_status::SecurityStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_status::SecurityStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -2960,50 +1261,6 @@ impl Serialize for TradingSessionStatusRequest {
     }
 }
 
-impl HasHeader for TradingSessionStatusRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradingSessionStatusRequest::FIX50(m) => m.get_header(),
-            TradingSessionStatusRequest::FIX50SP1(m) => m.get_header(),
-            TradingSessionStatusRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradingSessionStatusRequest::FIX50(m) => m.get_header_mut(),
-            TradingSessionStatusRequest::FIX50SP1(m) => m.get_header_mut(),
-            TradingSessionStatusRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::trading_session_status_request::TradingSessionStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_status_request::TradingSessionStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_status_request::TradingSessionStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradingSessionStatus {
@@ -3025,50 +1282,6 @@ impl Serialize for TradingSessionStatus {
             TradingSessionStatus::FIX50SP1(m) => m.serialize(serializer),
             TradingSessionStatus::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for TradingSessionStatus {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradingSessionStatus::FIX50(m) => m.get_header(),
-            TradingSessionStatus::FIX50SP1(m) => m.get_header(),
-            TradingSessionStatus::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradingSessionStatus::FIX50(m) => m.get_header_mut(),
-            TradingSessionStatus::FIX50SP1(m) => m.get_header_mut(),
-            TradingSessionStatus::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::trading_session_status::TradingSessionStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_status::TradingSessionStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_status::TradingSessionStatus {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -3096,50 +1309,6 @@ impl Serialize for MassQuote {
     }
 }
 
-impl HasHeader for MassQuote {
-    fn get_header(&self) -> &Header {
-        match self {
-            MassQuote::FIX50(m) => m.get_header(),
-            MassQuote::FIX50SP1(m) => m.get_header(),
-            MassQuote::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MassQuote::FIX50(m) => m.get_header_mut(),
-            MassQuote::FIX50SP1(m) => m.get_header_mut(),
-            MassQuote::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::mass_quote::MassQuote {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::mass_quote::MassQuote {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::mass_quote::MassQuote {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum BusinessMessageReject {
@@ -3161,50 +1330,6 @@ impl Serialize for BusinessMessageReject {
             BusinessMessageReject::FIX50SP1(m) => m.serialize(serializer),
             BusinessMessageReject::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for BusinessMessageReject {
-    fn get_header(&self) -> &Header {
-        match self {
-            BusinessMessageReject::FIX50(m) => m.get_header(),
-            BusinessMessageReject::FIX50SP1(m) => m.get_header(),
-            BusinessMessageReject::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            BusinessMessageReject::FIX50(m) => m.get_header_mut(),
-            BusinessMessageReject::FIX50SP1(m) => m.get_header_mut(),
-            BusinessMessageReject::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::business_message_reject::BusinessMessageReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::business_message_reject::BusinessMessageReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::business_message_reject::BusinessMessageReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -3232,50 +1357,6 @@ impl Serialize for BidRequest {
     }
 }
 
-impl HasHeader for BidRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            BidRequest::FIX50(m) => m.get_header(),
-            BidRequest::FIX50SP1(m) => m.get_header(),
-            BidRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            BidRequest::FIX50(m) => m.get_header_mut(),
-            BidRequest::FIX50SP1(m) => m.get_header_mut(),
-            BidRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::bid_request::BidRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::bid_request::BidRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::bid_request::BidRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum BidResponse {
@@ -3297,50 +1378,6 @@ impl Serialize for BidResponse {
             BidResponse::FIX50SP1(m) => m.serialize(serializer),
             BidResponse::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for BidResponse {
-    fn get_header(&self) -> &Header {
-        match self {
-            BidResponse::FIX50(m) => m.get_header(),
-            BidResponse::FIX50SP1(m) => m.get_header(),
-            BidResponse::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            BidResponse::FIX50(m) => m.get_header_mut(),
-            BidResponse::FIX50SP1(m) => m.get_header_mut(),
-            BidResponse::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::bid_response::BidResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::bid_response::BidResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::bid_response::BidResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -3368,50 +1405,6 @@ impl Serialize for ListStrikePrice {
     }
 }
 
-impl HasHeader for ListStrikePrice {
-    fn get_header(&self) -> &Header {
-        match self {
-            ListStrikePrice::FIX50(m) => m.get_header(),
-            ListStrikePrice::FIX50SP1(m) => m.get_header(),
-            ListStrikePrice::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ListStrikePrice::FIX50(m) => m.get_header_mut(),
-            ListStrikePrice::FIX50SP1(m) => m.get_header_mut(),
-            ListStrikePrice::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::list_strike_price::ListStrikePrice {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::list_strike_price::ListStrikePrice {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::list_strike_price::ListStrikePrice {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum XMLMessage {
@@ -3433,50 +1426,6 @@ impl Serialize for XMLMessage {
             XMLMessage::FIX50SP1(m) => m.serialize(serializer),
             XMLMessage::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for XMLMessage {
-    fn get_header(&self) -> &Header {
-        match self {
-            XMLMessage::FIX50(m) => m.get_header(),
-            XMLMessage::FIX50SP1(m) => m.get_header(),
-            XMLMessage::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            XMLMessage::FIX50(m) => m.get_header_mut(),
-            XMLMessage::FIX50SP1(m) => m.get_header_mut(),
-            XMLMessage::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::xml_message::XMLMessage {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::xml_message::XMLMessage {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::xml_message::XMLMessage {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -3504,50 +1453,6 @@ impl Serialize for RegistrationInstructions {
     }
 }
 
-impl HasHeader for RegistrationInstructions {
-    fn get_header(&self) -> &Header {
-        match self {
-            RegistrationInstructions::FIX50(m) => m.get_header(),
-            RegistrationInstructions::FIX50SP1(m) => m.get_header(),
-            RegistrationInstructions::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            RegistrationInstructions::FIX50(m) => m.get_header_mut(),
-            RegistrationInstructions::FIX50SP1(m) => m.get_header_mut(),
-            RegistrationInstructions::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::registration_instructions::RegistrationInstructions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::registration_instructions::RegistrationInstructions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::registration_instructions::RegistrationInstructions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum RegistrationInstructionsResponse {
@@ -3569,50 +1474,6 @@ impl Serialize for RegistrationInstructionsResponse {
             RegistrationInstructionsResponse::FIX50SP1(m) => m.serialize(serializer),
             RegistrationInstructionsResponse::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for RegistrationInstructionsResponse {
-    fn get_header(&self) -> &Header {
-        match self {
-            RegistrationInstructionsResponse::FIX50(m) => m.get_header(),
-            RegistrationInstructionsResponse::FIX50SP1(m) => m.get_header(),
-            RegistrationInstructionsResponse::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            RegistrationInstructionsResponse::FIX50(m) => m.get_header_mut(),
-            RegistrationInstructionsResponse::FIX50SP1(m) => m.get_header_mut(),
-            RegistrationInstructionsResponse::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::registration_instructions_response::RegistrationInstructionsResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::registration_instructions_response::RegistrationInstructionsResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::registration_instructions_response::RegistrationInstructionsResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -3640,50 +1501,6 @@ impl Serialize for OrderMassCancelRequest {
     }
 }
 
-impl HasHeader for OrderMassCancelRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderMassCancelRequest::FIX50(m) => m.get_header(),
-            OrderMassCancelRequest::FIX50SP1(m) => m.get_header(),
-            OrderMassCancelRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderMassCancelRequest::FIX50(m) => m.get_header_mut(),
-            OrderMassCancelRequest::FIX50SP1(m) => m.get_header_mut(),
-            OrderMassCancelRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::order_mass_cancel_request::OrderMassCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_cancel_request::OrderMassCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_cancel_request::OrderMassCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum OrderMassCancelReport {
@@ -3705,50 +1522,6 @@ impl Serialize for OrderMassCancelReport {
             OrderMassCancelReport::FIX50SP1(m) => m.serialize(serializer),
             OrderMassCancelReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for OrderMassCancelReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderMassCancelReport::FIX50(m) => m.get_header(),
-            OrderMassCancelReport::FIX50SP1(m) => m.get_header(),
-            OrderMassCancelReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderMassCancelReport::FIX50(m) => m.get_header_mut(),
-            OrderMassCancelReport::FIX50SP1(m) => m.get_header_mut(),
-            OrderMassCancelReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::order_mass_cancel_report::OrderMassCancelReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_cancel_report::OrderMassCancelReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_cancel_report::OrderMassCancelReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -3776,50 +1549,6 @@ impl Serialize for NewOrderCross {
     }
 }
 
-impl HasHeader for NewOrderCross {
-    fn get_header(&self) -> &Header {
-        match self {
-            NewOrderCross::FIX50(m) => m.get_header(),
-            NewOrderCross::FIX50SP1(m) => m.get_header(),
-            NewOrderCross::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            NewOrderCross::FIX50(m) => m.get_header_mut(),
-            NewOrderCross::FIX50SP1(m) => m.get_header_mut(),
-            NewOrderCross::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::new_order_cross::NewOrderCross {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::new_order_cross::NewOrderCross {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::new_order_cross::NewOrderCross {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum CrossOrderCancelReplaceRequest {
@@ -3841,50 +1570,6 @@ impl Serialize for CrossOrderCancelReplaceRequest {
             CrossOrderCancelReplaceRequest::FIX50SP1(m) => m.serialize(serializer),
             CrossOrderCancelReplaceRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for CrossOrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            CrossOrderCancelReplaceRequest::FIX50(m) => m.get_header(),
-            CrossOrderCancelReplaceRequest::FIX50SP1(m) => m.get_header(),
-            CrossOrderCancelReplaceRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            CrossOrderCancelReplaceRequest::FIX50(m) => m.get_header_mut(),
-            CrossOrderCancelReplaceRequest::FIX50SP1(m) => m.get_header_mut(),
-            CrossOrderCancelReplaceRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -3912,50 +1597,6 @@ impl Serialize for CrossOrderCancelRequest {
     }
 }
 
-impl HasHeader for CrossOrderCancelRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            CrossOrderCancelRequest::FIX50(m) => m.get_header(),
-            CrossOrderCancelRequest::FIX50SP1(m) => m.get_header(),
-            CrossOrderCancelRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            CrossOrderCancelRequest::FIX50(m) => m.get_header_mut(),
-            CrossOrderCancelRequest::FIX50SP1(m) => m.get_header_mut(),
-            CrossOrderCancelRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::cross_order_cancel_request::CrossOrderCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::cross_order_cancel_request::CrossOrderCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::cross_order_cancel_request::CrossOrderCancelRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityTypeRequest {
@@ -3977,50 +1618,6 @@ impl Serialize for SecurityTypeRequest {
             SecurityTypeRequest::FIX50SP1(m) => m.serialize(serializer),
             SecurityTypeRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for SecurityTypeRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityTypeRequest::FIX50(m) => m.get_header(),
-            SecurityTypeRequest::FIX50SP1(m) => m.get_header(),
-            SecurityTypeRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityTypeRequest::FIX50(m) => m.get_header_mut(),
-            SecurityTypeRequest::FIX50SP1(m) => m.get_header_mut(),
-            SecurityTypeRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_type_request::SecurityTypeRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_type_request::SecurityTypeRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_type_request::SecurityTypeRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -4048,50 +1645,6 @@ impl Serialize for SecurityTypes {
     }
 }
 
-impl HasHeader for SecurityTypes {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityTypes::FIX50(m) => m.get_header(),
-            SecurityTypes::FIX50SP1(m) => m.get_header(),
-            SecurityTypes::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityTypes::FIX50(m) => m.get_header_mut(),
-            SecurityTypes::FIX50SP1(m) => m.get_header_mut(),
-            SecurityTypes::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_types::SecurityTypes {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_types::SecurityTypes {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_types::SecurityTypes {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityListRequest {
@@ -4113,50 +1666,6 @@ impl Serialize for SecurityListRequest {
             SecurityListRequest::FIX50SP1(m) => m.serialize(serializer),
             SecurityListRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for SecurityListRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityListRequest::FIX50(m) => m.get_header(),
-            SecurityListRequest::FIX50SP1(m) => m.get_header(),
-            SecurityListRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityListRequest::FIX50(m) => m.get_header_mut(),
-            SecurityListRequest::FIX50SP1(m) => m.get_header_mut(),
-            SecurityListRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_list_request::SecurityListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_list_request::SecurityListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_list_request::SecurityListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -4184,50 +1693,6 @@ impl Serialize for SecurityList {
     }
 }
 
-impl HasHeader for SecurityList {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityList::FIX50(m) => m.get_header(),
-            SecurityList::FIX50SP1(m) => m.get_header(),
-            SecurityList::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityList::FIX50(m) => m.get_header_mut(),
-            SecurityList::FIX50SP1(m) => m.get_header_mut(),
-            SecurityList::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_list::SecurityList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_list::SecurityList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_list::SecurityList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum DerivativeSecurityListRequest {
@@ -4249,50 +1714,6 @@ impl Serialize for DerivativeSecurityListRequest {
             DerivativeSecurityListRequest::FIX50SP1(m) => m.serialize(serializer),
             DerivativeSecurityListRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for DerivativeSecurityListRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            DerivativeSecurityListRequest::FIX50(m) => m.get_header(),
-            DerivativeSecurityListRequest::FIX50SP1(m) => m.get_header(),
-            DerivativeSecurityListRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            DerivativeSecurityListRequest::FIX50(m) => m.get_header_mut(),
-            DerivativeSecurityListRequest::FIX50SP1(m) => m.get_header_mut(),
-            DerivativeSecurityListRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::derivative_security_list_request::DerivativeSecurityListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::derivative_security_list_request::DerivativeSecurityListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::derivative_security_list_request::DerivativeSecurityListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -4320,50 +1741,6 @@ impl Serialize for DerivativeSecurityList {
     }
 }
 
-impl HasHeader for DerivativeSecurityList {
-    fn get_header(&self) -> &Header {
-        match self {
-            DerivativeSecurityList::FIX50(m) => m.get_header(),
-            DerivativeSecurityList::FIX50SP1(m) => m.get_header(),
-            DerivativeSecurityList::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            DerivativeSecurityList::FIX50(m) => m.get_header_mut(),
-            DerivativeSecurityList::FIX50SP1(m) => m.get_header_mut(),
-            DerivativeSecurityList::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::derivative_security_list::DerivativeSecurityList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::derivative_security_list::DerivativeSecurityList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::derivative_security_list::DerivativeSecurityList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum NewOrderMultileg {
@@ -4388,50 +1765,6 @@ impl Serialize for NewOrderMultileg {
     }
 }
 
-impl HasHeader for NewOrderMultileg {
-    fn get_header(&self) -> &Header {
-        match self {
-            NewOrderMultileg::FIX50(m) => m.get_header(),
-            NewOrderMultileg::FIX50SP1(m) => m.get_header(),
-            NewOrderMultileg::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            NewOrderMultileg::FIX50(m) => m.get_header_mut(),
-            NewOrderMultileg::FIX50SP1(m) => m.get_header_mut(),
-            NewOrderMultileg::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::new_order_multileg::NewOrderMultileg {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::new_order_multileg::NewOrderMultileg {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::new_order_multileg::NewOrderMultileg {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MultilegOrderCancelReplace {
@@ -4445,28 +1778,6 @@ impl Serialize for MultilegOrderCancelReplace {
         match self {
             MultilegOrderCancelReplace::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for MultilegOrderCancelReplace {
-    fn get_header(&self) -> &Header {
-        match self {
-            MultilegOrderCancelReplace::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MultilegOrderCancelReplace::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -4494,50 +1805,6 @@ impl Serialize for TradeCaptureReportRequest {
     }
 }
 
-impl HasHeader for TradeCaptureReportRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradeCaptureReportRequest::FIX50(m) => m.get_header(),
-            TradeCaptureReportRequest::FIX50SP1(m) => m.get_header(),
-            TradeCaptureReportRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradeCaptureReportRequest::FIX50(m) => m.get_header_mut(),
-            TradeCaptureReportRequest::FIX50SP1(m) => m.get_header_mut(),
-            TradeCaptureReportRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::trade_capture_report_request::TradeCaptureReportRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trade_capture_report_request::TradeCaptureReportRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trade_capture_report_request::TradeCaptureReportRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradeCaptureReport {
@@ -4559,50 +1826,6 @@ impl Serialize for TradeCaptureReport {
             TradeCaptureReport::FIX50SP1(m) => m.serialize(serializer),
             TradeCaptureReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for TradeCaptureReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradeCaptureReport::FIX50(m) => m.get_header(),
-            TradeCaptureReport::FIX50SP1(m) => m.get_header(),
-            TradeCaptureReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradeCaptureReport::FIX50(m) => m.get_header_mut(),
-            TradeCaptureReport::FIX50SP1(m) => m.get_header_mut(),
-            TradeCaptureReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::trade_capture_report::TradeCaptureReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trade_capture_report::TradeCaptureReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trade_capture_report::TradeCaptureReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -4630,50 +1853,6 @@ impl Serialize for OrderMassStatusRequest {
     }
 }
 
-impl HasHeader for OrderMassStatusRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderMassStatusRequest::FIX50(m) => m.get_header(),
-            OrderMassStatusRequest::FIX50SP1(m) => m.get_header(),
-            OrderMassStatusRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderMassStatusRequest::FIX50(m) => m.get_header_mut(),
-            OrderMassStatusRequest::FIX50SP1(m) => m.get_header_mut(),
-            OrderMassStatusRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::order_mass_status_request::OrderMassStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_status_request::OrderMassStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_status_request::OrderMassStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum QuoteRequestReject {
@@ -4695,50 +1874,6 @@ impl Serialize for QuoteRequestReject {
             QuoteRequestReject::FIX50SP1(m) => m.serialize(serializer),
             QuoteRequestReject::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for QuoteRequestReject {
-    fn get_header(&self) -> &Header {
-        match self {
-            QuoteRequestReject::FIX50(m) => m.get_header(),
-            QuoteRequestReject::FIX50SP1(m) => m.get_header(),
-            QuoteRequestReject::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            QuoteRequestReject::FIX50(m) => m.get_header_mut(),
-            QuoteRequestReject::FIX50SP1(m) => m.get_header_mut(),
-            QuoteRequestReject::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::quote_request_reject::QuoteRequestReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_request_reject::QuoteRequestReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_request_reject::QuoteRequestReject {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -4766,50 +1901,6 @@ impl Serialize for RFQRequest {
     }
 }
 
-impl HasHeader for RFQRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            RFQRequest::FIX50(m) => m.get_header(),
-            RFQRequest::FIX50SP1(m) => m.get_header(),
-            RFQRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            RFQRequest::FIX50(m) => m.get_header_mut(),
-            RFQRequest::FIX50SP1(m) => m.get_header_mut(),
-            RFQRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::rfq_request::RFQRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::rfq_request::RFQRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::rfq_request::RFQRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum QuoteStatusReport {
@@ -4831,50 +1922,6 @@ impl Serialize for QuoteStatusReport {
             QuoteStatusReport::FIX50SP1(m) => m.serialize(serializer),
             QuoteStatusReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for QuoteStatusReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            QuoteStatusReport::FIX50(m) => m.get_header(),
-            QuoteStatusReport::FIX50SP1(m) => m.get_header(),
-            QuoteStatusReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            QuoteStatusReport::FIX50(m) => m.get_header_mut(),
-            QuoteStatusReport::FIX50SP1(m) => m.get_header_mut(),
-            QuoteStatusReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::quote_status_report::QuoteStatusReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_status_report::QuoteStatusReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_status_report::QuoteStatusReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -4902,50 +1949,6 @@ impl Serialize for QuoteResponse {
     }
 }
 
-impl HasHeader for QuoteResponse {
-    fn get_header(&self) -> &Header {
-        match self {
-            QuoteResponse::FIX50(m) => m.get_header(),
-            QuoteResponse::FIX50SP1(m) => m.get_header(),
-            QuoteResponse::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            QuoteResponse::FIX50(m) => m.get_header_mut(),
-            QuoteResponse::FIX50SP1(m) => m.get_header_mut(),
-            QuoteResponse::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::quote_response::QuoteResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::quote_response::QuoteResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::quote_response::QuoteResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum Confirmation {
@@ -4967,50 +1970,6 @@ impl Serialize for Confirmation {
             Confirmation::FIX50SP1(m) => m.serialize(serializer),
             Confirmation::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for Confirmation {
-    fn get_header(&self) -> &Header {
-        match self {
-            Confirmation::FIX50(m) => m.get_header(),
-            Confirmation::FIX50SP1(m) => m.get_header(),
-            Confirmation::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            Confirmation::FIX50(m) => m.get_header_mut(),
-            Confirmation::FIX50SP1(m) => m.get_header_mut(),
-            Confirmation::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::confirmation::Confirmation {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::confirmation::Confirmation {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::confirmation::Confirmation {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -5038,50 +1997,6 @@ impl Serialize for PositionMaintenanceRequest {
     }
 }
 
-impl HasHeader for PositionMaintenanceRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            PositionMaintenanceRequest::FIX50(m) => m.get_header(),
-            PositionMaintenanceRequest::FIX50SP1(m) => m.get_header(),
-            PositionMaintenanceRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            PositionMaintenanceRequest::FIX50(m) => m.get_header_mut(),
-            PositionMaintenanceRequest::FIX50SP1(m) => m.get_header_mut(),
-            PositionMaintenanceRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::position_maintenance_request::PositionMaintenanceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::position_maintenance_request::PositionMaintenanceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::position_maintenance_request::PositionMaintenanceRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum PositionMaintenanceReport {
@@ -5103,50 +2018,6 @@ impl Serialize for PositionMaintenanceReport {
             PositionMaintenanceReport::FIX50SP1(m) => m.serialize(serializer),
             PositionMaintenanceReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for PositionMaintenanceReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            PositionMaintenanceReport::FIX50(m) => m.get_header(),
-            PositionMaintenanceReport::FIX50SP1(m) => m.get_header(),
-            PositionMaintenanceReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            PositionMaintenanceReport::FIX50(m) => m.get_header_mut(),
-            PositionMaintenanceReport::FIX50SP1(m) => m.get_header_mut(),
-            PositionMaintenanceReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::position_maintenance_report::PositionMaintenanceReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::position_maintenance_report::PositionMaintenanceReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::position_maintenance_report::PositionMaintenanceReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -5174,50 +2045,6 @@ impl Serialize for RequestForPositions {
     }
 }
 
-impl HasHeader for RequestForPositions {
-    fn get_header(&self) -> &Header {
-        match self {
-            RequestForPositions::FIX50(m) => m.get_header(),
-            RequestForPositions::FIX50SP1(m) => m.get_header(),
-            RequestForPositions::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            RequestForPositions::FIX50(m) => m.get_header_mut(),
-            RequestForPositions::FIX50SP1(m) => m.get_header_mut(),
-            RequestForPositions::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::request_for_positions::RequestForPositions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::request_for_positions::RequestForPositions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::request_for_positions::RequestForPositions {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum RequestForPositionsAck {
@@ -5239,50 +2066,6 @@ impl Serialize for RequestForPositionsAck {
             RequestForPositionsAck::FIX50SP1(m) => m.serialize(serializer),
             RequestForPositionsAck::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for RequestForPositionsAck {
-    fn get_header(&self) -> &Header {
-        match self {
-            RequestForPositionsAck::FIX50(m) => m.get_header(),
-            RequestForPositionsAck::FIX50SP1(m) => m.get_header(),
-            RequestForPositionsAck::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            RequestForPositionsAck::FIX50(m) => m.get_header_mut(),
-            RequestForPositionsAck::FIX50SP1(m) => m.get_header_mut(),
-            RequestForPositionsAck::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::request_for_positions_ack::RequestForPositionsAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::request_for_positions_ack::RequestForPositionsAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::request_for_positions_ack::RequestForPositionsAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -5310,50 +2093,6 @@ impl Serialize for PositionReport {
     }
 }
 
-impl HasHeader for PositionReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            PositionReport::FIX50(m) => m.get_header(),
-            PositionReport::FIX50SP1(m) => m.get_header(),
-            PositionReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            PositionReport::FIX50(m) => m.get_header_mut(),
-            PositionReport::FIX50SP1(m) => m.get_header_mut(),
-            PositionReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::position_report::PositionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::position_report::PositionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::position_report::PositionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradeCaptureReportRequestAck {
@@ -5375,50 +2114,6 @@ impl Serialize for TradeCaptureReportRequestAck {
             TradeCaptureReportRequestAck::FIX50SP1(m) => m.serialize(serializer),
             TradeCaptureReportRequestAck::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for TradeCaptureReportRequestAck {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradeCaptureReportRequestAck::FIX50(m) => m.get_header(),
-            TradeCaptureReportRequestAck::FIX50SP1(m) => m.get_header(),
-            TradeCaptureReportRequestAck::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradeCaptureReportRequestAck::FIX50(m) => m.get_header_mut(),
-            TradeCaptureReportRequestAck::FIX50SP1(m) => m.get_header_mut(),
-            TradeCaptureReportRequestAck::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -5446,50 +2141,6 @@ impl Serialize for TradeCaptureReportAck {
     }
 }
 
-impl HasHeader for TradeCaptureReportAck {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradeCaptureReportAck::FIX50(m) => m.get_header(),
-            TradeCaptureReportAck::FIX50SP1(m) => m.get_header(),
-            TradeCaptureReportAck::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradeCaptureReportAck::FIX50(m) => m.get_header_mut(),
-            TradeCaptureReportAck::FIX50SP1(m) => m.get_header_mut(),
-            TradeCaptureReportAck::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::trade_capture_report_ack::TradeCaptureReportAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trade_capture_report_ack::TradeCaptureReportAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trade_capture_report_ack::TradeCaptureReportAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum AllocationReport {
@@ -5511,50 +2162,6 @@ impl Serialize for AllocationReport {
             AllocationReport::FIX50SP1(m) => m.serialize(serializer),
             AllocationReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for AllocationReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            AllocationReport::FIX50(m) => m.get_header(),
-            AllocationReport::FIX50SP1(m) => m.get_header(),
-            AllocationReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            AllocationReport::FIX50(m) => m.get_header_mut(),
-            AllocationReport::FIX50SP1(m) => m.get_header_mut(),
-            AllocationReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_report::AllocationReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_report::AllocationReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_report::AllocationReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -5582,50 +2189,6 @@ impl Serialize for AllocationReportAck {
     }
 }
 
-impl HasHeader for AllocationReportAck {
-    fn get_header(&self) -> &Header {
-        match self {
-            AllocationReportAck::FIX50(m) => m.get_header(),
-            AllocationReportAck::FIX50SP1(m) => m.get_header(),
-            AllocationReportAck::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            AllocationReportAck::FIX50(m) => m.get_header_mut(),
-            AllocationReportAck::FIX50SP1(m) => m.get_header_mut(),
-            AllocationReportAck::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_report_ack::AllocationReportAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_report_ack::AllocationReportAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_report_ack::AllocationReportAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ConfirmationAck {
@@ -5647,50 +2210,6 @@ impl Serialize for ConfirmationAck {
             ConfirmationAck::FIX50SP1(m) => m.serialize(serializer),
             ConfirmationAck::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for ConfirmationAck {
-    fn get_header(&self) -> &Header {
-        match self {
-            ConfirmationAck::FIX50(m) => m.get_header(),
-            ConfirmationAck::FIX50SP1(m) => m.get_header(),
-            ConfirmationAck::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ConfirmationAck::FIX50(m) => m.get_header_mut(),
-            ConfirmationAck::FIX50SP1(m) => m.get_header_mut(),
-            ConfirmationAck::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::confirmation_ack::ConfirmationAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::confirmation_ack::ConfirmationAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::confirmation_ack::ConfirmationAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -5718,50 +2237,6 @@ impl Serialize for SettlementInstructionRequest {
     }
 }
 
-impl HasHeader for SettlementInstructionRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            SettlementInstructionRequest::FIX50(m) => m.get_header(),
-            SettlementInstructionRequest::FIX50SP1(m) => m.get_header(),
-            SettlementInstructionRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SettlementInstructionRequest::FIX50(m) => m.get_header_mut(),
-            SettlementInstructionRequest::FIX50SP1(m) => m.get_header_mut(),
-            SettlementInstructionRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::settlement_instruction_request::SettlementInstructionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::settlement_instruction_request::SettlementInstructionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::settlement_instruction_request::SettlementInstructionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum AssignmentReport {
@@ -5783,50 +2258,6 @@ impl Serialize for AssignmentReport {
             AssignmentReport::FIX50SP1(m) => m.serialize(serializer),
             AssignmentReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for AssignmentReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            AssignmentReport::FIX50(m) => m.get_header(),
-            AssignmentReport::FIX50SP1(m) => m.get_header(),
-            AssignmentReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            AssignmentReport::FIX50(m) => m.get_header_mut(),
-            AssignmentReport::FIX50SP1(m) => m.get_header_mut(),
-            AssignmentReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::assignment_report::AssignmentReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::assignment_report::AssignmentReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::assignment_report::AssignmentReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -5854,50 +2285,6 @@ impl Serialize for CollateralRequest {
     }
 }
 
-impl HasHeader for CollateralRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            CollateralRequest::FIX50(m) => m.get_header(),
-            CollateralRequest::FIX50SP1(m) => m.get_header(),
-            CollateralRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            CollateralRequest::FIX50(m) => m.get_header_mut(),
-            CollateralRequest::FIX50SP1(m) => m.get_header_mut(),
-            CollateralRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_request::CollateralRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_request::CollateralRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_request::CollateralRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum CollateralAssignment {
@@ -5919,50 +2306,6 @@ impl Serialize for CollateralAssignment {
             CollateralAssignment::FIX50SP1(m) => m.serialize(serializer),
             CollateralAssignment::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for CollateralAssignment {
-    fn get_header(&self) -> &Header {
-        match self {
-            CollateralAssignment::FIX50(m) => m.get_header(),
-            CollateralAssignment::FIX50SP1(m) => m.get_header(),
-            CollateralAssignment::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            CollateralAssignment::FIX50(m) => m.get_header_mut(),
-            CollateralAssignment::FIX50SP1(m) => m.get_header_mut(),
-            CollateralAssignment::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_assignment::CollateralAssignment {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_assignment::CollateralAssignment {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_assignment::CollateralAssignment {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -5990,50 +2333,6 @@ impl Serialize for CollateralResponse {
     }
 }
 
-impl HasHeader for CollateralResponse {
-    fn get_header(&self) -> &Header {
-        match self {
-            CollateralResponse::FIX50(m) => m.get_header(),
-            CollateralResponse::FIX50SP1(m) => m.get_header(),
-            CollateralResponse::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            CollateralResponse::FIX50(m) => m.get_header_mut(),
-            CollateralResponse::FIX50SP1(m) => m.get_header_mut(),
-            CollateralResponse::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_response::CollateralResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_response::CollateralResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_response::CollateralResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum CollateralReport {
@@ -6055,50 +2354,6 @@ impl Serialize for CollateralReport {
             CollateralReport::FIX50SP1(m) => m.serialize(serializer),
             CollateralReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for CollateralReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            CollateralReport::FIX50(m) => m.get_header(),
-            CollateralReport::FIX50SP1(m) => m.get_header(),
-            CollateralReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            CollateralReport::FIX50(m) => m.get_header_mut(),
-            CollateralReport::FIX50SP1(m) => m.get_header_mut(),
-            CollateralReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_report::CollateralReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_report::CollateralReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_report::CollateralReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -6126,50 +2381,6 @@ impl Serialize for CollateralInquiry {
     }
 }
 
-impl HasHeader for CollateralInquiry {
-    fn get_header(&self) -> &Header {
-        match self {
-            CollateralInquiry::FIX50(m) => m.get_header(),
-            CollateralInquiry::FIX50SP1(m) => m.get_header(),
-            CollateralInquiry::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            CollateralInquiry::FIX50(m) => m.get_header_mut(),
-            CollateralInquiry::FIX50SP1(m) => m.get_header_mut(),
-            CollateralInquiry::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_inquiry::CollateralInquiry {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_inquiry::CollateralInquiry {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_inquiry::CollateralInquiry {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum NetworkCounterpartySystemStatusRequest {
@@ -6191,50 +2402,6 @@ impl Serialize for NetworkCounterpartySystemStatusRequest {
             NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => m.serialize(serializer),
             NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for NetworkCounterpartySystemStatusRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            NetworkCounterpartySystemStatusRequest::FIX50(m) => m.get_header(),
-            NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => m.get_header(),
-            NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            NetworkCounterpartySystemStatusRequest::FIX50(m) => m.get_header_mut(),
-            NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => m.get_header_mut(),
-            NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -6262,50 +2429,6 @@ impl Serialize for NetworkCounterpartySystemStatusResponse {
     }
 }
 
-impl HasHeader for NetworkCounterpartySystemStatusResponse {
-    fn get_header(&self) -> &Header {
-        match self {
-            NetworkCounterpartySystemStatusResponse::FIX50(m) => m.get_header(),
-            NetworkCounterpartySystemStatusResponse::FIX50SP1(m) => m.get_header(),
-            NetworkCounterpartySystemStatusResponse::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            NetworkCounterpartySystemStatusResponse::FIX50(m) => m.get_header_mut(),
-            NetworkCounterpartySystemStatusResponse::FIX50SP1(m) => m.get_header_mut(),
-            NetworkCounterpartySystemStatusResponse::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum UserRequest {
@@ -6327,50 +2450,6 @@ impl Serialize for UserRequest {
             UserRequest::FIX50SP1(m) => m.serialize(serializer),
             UserRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for UserRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            UserRequest::FIX50(m) => m.get_header(),
-            UserRequest::FIX50SP1(m) => m.get_header(),
-            UserRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            UserRequest::FIX50(m) => m.get_header_mut(),
-            UserRequest::FIX50SP1(m) => m.get_header_mut(),
-            UserRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::user_request::UserRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::user_request::UserRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::user_request::UserRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -6398,50 +2477,6 @@ impl Serialize for UserResponse {
     }
 }
 
-impl HasHeader for UserResponse {
-    fn get_header(&self) -> &Header {
-        match self {
-            UserResponse::FIX50(m) => m.get_header(),
-            UserResponse::FIX50SP1(m) => m.get_header(),
-            UserResponse::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            UserResponse::FIX50(m) => m.get_header_mut(),
-            UserResponse::FIX50SP1(m) => m.get_header_mut(),
-            UserResponse::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::user_response::UserResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::user_response::UserResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::user_response::UserResponse {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum CollateralInquiryAck {
@@ -6463,50 +2498,6 @@ impl Serialize for CollateralInquiryAck {
             CollateralInquiryAck::FIX50SP1(m) => m.serialize(serializer),
             CollateralInquiryAck::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for CollateralInquiryAck {
-    fn get_header(&self) -> &Header {
-        match self {
-            CollateralInquiryAck::FIX50(m) => m.get_header(),
-            CollateralInquiryAck::FIX50SP1(m) => m.get_header(),
-            CollateralInquiryAck::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            CollateralInquiryAck::FIX50(m) => m.get_header_mut(),
-            CollateralInquiryAck::FIX50SP1(m) => m.get_header_mut(),
-            CollateralInquiryAck::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::collateral_inquiry_ack::CollateralInquiryAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::collateral_inquiry_ack::CollateralInquiryAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::collateral_inquiry_ack::CollateralInquiryAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -6534,50 +2525,6 @@ impl Serialize for ConfirmationRequest {
     }
 }
 
-impl HasHeader for ConfirmationRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            ConfirmationRequest::FIX50(m) => m.get_header(),
-            ConfirmationRequest::FIX50SP1(m) => m.get_header(),
-            ConfirmationRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ConfirmationRequest::FIX50(m) => m.get_header_mut(),
-            ConfirmationRequest::FIX50SP1(m) => m.get_header_mut(),
-            ConfirmationRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::confirmation_request::ConfirmationRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::confirmation_request::ConfirmationRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::confirmation_request::ConfirmationRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradingSessionListRequest {
@@ -6599,50 +2546,6 @@ impl Serialize for TradingSessionListRequest {
             TradingSessionListRequest::FIX50SP1(m) => m.serialize(serializer),
             TradingSessionListRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for TradingSessionListRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradingSessionListRequest::FIX50(m) => m.get_header(),
-            TradingSessionListRequest::FIX50SP1(m) => m.get_header(),
-            TradingSessionListRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradingSessionListRequest::FIX50(m) => m.get_header_mut(),
-            TradingSessionListRequest::FIX50SP1(m) => m.get_header_mut(),
-            TradingSessionListRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::trading_session_list_request::TradingSessionListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_list_request::TradingSessionListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_list_request::TradingSessionListRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -6670,50 +2573,6 @@ impl Serialize for TradingSessionList {
     }
 }
 
-impl HasHeader for TradingSessionList {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradingSessionList::FIX50(m) => m.get_header(),
-            TradingSessionList::FIX50SP1(m) => m.get_header(),
-            TradingSessionList::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradingSessionList::FIX50(m) => m.get_header_mut(),
-            TradingSessionList::FIX50SP1(m) => m.get_header_mut(),
-            TradingSessionList::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::trading_session_list::TradingSessionList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_list::TradingSessionList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_list::TradingSessionList {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityListUpdateReport {
@@ -6735,50 +2594,6 @@ impl Serialize for SecurityListUpdateReport {
             SecurityListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
             SecurityListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for SecurityListUpdateReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityListUpdateReport::FIX50(m) => m.get_header(),
-            SecurityListUpdateReport::FIX50SP1(m) => m.get_header(),
-            SecurityListUpdateReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityListUpdateReport::FIX50(m) => m.get_header_mut(),
-            SecurityListUpdateReport::FIX50SP1(m) => m.get_header_mut(),
-            SecurityListUpdateReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_list_update_report::SecurityListUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_list_update_report::SecurityListUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_list_update_report::SecurityListUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -6806,50 +2621,6 @@ impl Serialize for AdjustedPositionReport {
     }
 }
 
-impl HasHeader for AdjustedPositionReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            AdjustedPositionReport::FIX50(m) => m.get_header(),
-            AdjustedPositionReport::FIX50SP1(m) => m.get_header(),
-            AdjustedPositionReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            AdjustedPositionReport::FIX50(m) => m.get_header_mut(),
-            AdjustedPositionReport::FIX50SP1(m) => m.get_header_mut(),
-            AdjustedPositionReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::adjusted_position_report::AdjustedPositionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::adjusted_position_report::AdjustedPositionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::adjusted_position_report::AdjustedPositionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum AllocationInstructionAlert {
@@ -6874,50 +2645,6 @@ impl Serialize for AllocationInstructionAlert {
     }
 }
 
-impl HasHeader for AllocationInstructionAlert {
-    fn get_header(&self) -> &Header {
-        match self {
-            AllocationInstructionAlert::FIX50(m) => m.get_header(),
-            AllocationInstructionAlert::FIX50SP1(m) => m.get_header(),
-            AllocationInstructionAlert::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            AllocationInstructionAlert::FIX50(m) => m.get_header_mut(),
-            AllocationInstructionAlert::FIX50SP1(m) => m.get_header_mut(),
-            AllocationInstructionAlert::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::allocation_instruction_alert::AllocationInstructionAlert {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::allocation_instruction_alert::AllocationInstructionAlert {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::allocation_instruction_alert::AllocationInstructionAlert {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ExecutionAcknowledgement {
@@ -6931,28 +2658,6 @@ impl Serialize for ExecutionAcknowledgement {
         match self {
             ExecutionAcknowledgement::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for ExecutionAcknowledgement {
-    fn get_header(&self) -> &Header {
-        match self {
-            ExecutionAcknowledgement::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ExecutionAcknowledgement::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::execution_ack::ExecutionAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -6980,50 +2685,6 @@ impl Serialize for ContraryIntentionReport {
     }
 }
 
-impl HasHeader for ContraryIntentionReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            ContraryIntentionReport::FIX50(m) => m.get_header(),
-            ContraryIntentionReport::FIX50SP1(m) => m.get_header(),
-            ContraryIntentionReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ContraryIntentionReport::FIX50(m) => m.get_header_mut(),
-            ContraryIntentionReport::FIX50SP1(m) => m.get_header_mut(),
-            ContraryIntentionReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::contrary_intention_report::ContraryIntentionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::contrary_intention_report::ContraryIntentionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::contrary_intention_report::ContraryIntentionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityDefinitionUpdateReport {
@@ -7048,50 +2709,6 @@ impl Serialize for SecurityDefinitionUpdateReport {
     }
 }
 
-impl HasHeader for SecurityDefinitionUpdateReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            SecurityDefinitionUpdateReport::FIX50(m) => m.get_header(),
-            SecurityDefinitionUpdateReport::FIX50SP1(m) => m.get_header(),
-            SecurityDefinitionUpdateReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SecurityDefinitionUpdateReport::FIX50(m) => m.get_header_mut(),
-            SecurityDefinitionUpdateReport::FIX50SP1(m) => m.get_header_mut(),
-            SecurityDefinitionUpdateReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<7, ' ', ' '> for fix50::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SettlementObligationReport {
@@ -7109,39 +2726,6 @@ impl Serialize for SettlementObligationReport {
             SettlementObligationReport::FIX50SP1(m) => m.serialize(serializer),
             SettlementObligationReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for SettlementObligationReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            SettlementObligationReport::FIX50SP1(m) => m.get_header(),
-            SettlementObligationReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            SettlementObligationReport::FIX50SP1(m) => m.get_header_mut(),
-            SettlementObligationReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::settlement_obligation_report::SettlementObligationReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::settlement_obligation_report::SettlementObligationReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -7165,39 +2749,6 @@ impl Serialize for DerivativeSecurityListUpdateReport {
     }
 }
 
-impl HasHeader for DerivativeSecurityListUpdateReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            DerivativeSecurityListUpdateReport::FIX50SP1(m) => m.get_header(),
-            DerivativeSecurityListUpdateReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            DerivativeSecurityListUpdateReport::FIX50SP1(m) => m.get_header_mut(),
-            DerivativeSecurityListUpdateReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradingSessionListUpdateReport {
@@ -7215,39 +2766,6 @@ impl Serialize for TradingSessionListUpdateReport {
             TradingSessionListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
             TradingSessionListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for TradingSessionListUpdateReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            TradingSessionListUpdateReport::FIX50SP1(m) => m.get_header(),
-            TradingSessionListUpdateReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            TradingSessionListUpdateReport::FIX50SP1(m) => m.get_header_mut(),
-            TradingSessionListUpdateReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -7271,39 +2789,6 @@ impl Serialize for MarketDefinitionRequest {
     }
 }
 
-impl HasHeader for MarketDefinitionRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            MarketDefinitionRequest::FIX50SP1(m) => m.get_header(),
-            MarketDefinitionRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MarketDefinitionRequest::FIX50SP1(m) => m.get_header_mut(),
-            MarketDefinitionRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_definition_request::MarketDefinitionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_definition_request::MarketDefinitionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MarketDefinition {
@@ -7321,39 +2806,6 @@ impl Serialize for MarketDefinition {
             MarketDefinition::FIX50SP1(m) => m.serialize(serializer),
             MarketDefinition::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for MarketDefinition {
-    fn get_header(&self) -> &Header {
-        match self {
-            MarketDefinition::FIX50SP1(m) => m.get_header(),
-            MarketDefinition::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MarketDefinition::FIX50SP1(m) => m.get_header_mut(),
-            MarketDefinition::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_definition::MarketDefinition {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_definition::MarketDefinition {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -7377,39 +2829,6 @@ impl Serialize for MarketDefinitionUpdateReport {
     }
 }
 
-impl HasHeader for MarketDefinitionUpdateReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            MarketDefinitionUpdateReport::FIX50SP1(m) => m.get_header(),
-            MarketDefinitionUpdateReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            MarketDefinitionUpdateReport::FIX50SP1(m) => m.get_header_mut(),
-            MarketDefinitionUpdateReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::market_definition_update_report::MarketDefinitionUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::market_definition_update_report::MarketDefinitionUpdateReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ApplicationMessageRequest {
@@ -7427,39 +2846,6 @@ impl Serialize for ApplicationMessageRequest {
             ApplicationMessageRequest::FIX50SP1(m) => m.serialize(serializer),
             ApplicationMessageRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for ApplicationMessageRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            ApplicationMessageRequest::FIX50SP1(m) => m.get_header(),
-            ApplicationMessageRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ApplicationMessageRequest::FIX50SP1(m) => m.get_header_mut(),
-            ApplicationMessageRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::application_message_request::ApplicationMessageRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::application_message_request::ApplicationMessageRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -7483,39 +2869,6 @@ impl Serialize for ApplicationMessageRequestAck {
     }
 }
 
-impl HasHeader for ApplicationMessageRequestAck {
-    fn get_header(&self) -> &Header {
-        match self {
-            ApplicationMessageRequestAck::FIX50SP1(m) => m.get_header(),
-            ApplicationMessageRequestAck::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ApplicationMessageRequestAck::FIX50SP1(m) => m.get_header_mut(),
-            ApplicationMessageRequestAck::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::application_message_request_ack::ApplicationMessageRequestAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::application_message_request_ack::ApplicationMessageRequestAck {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ApplicationMessageReport {
@@ -7533,39 +2886,6 @@ impl Serialize for ApplicationMessageReport {
             ApplicationMessageReport::FIX50SP1(m) => m.serialize(serializer),
             ApplicationMessageReport::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for ApplicationMessageReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            ApplicationMessageReport::FIX50SP1(m) => m.get_header(),
-            ApplicationMessageReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            ApplicationMessageReport::FIX50SP1(m) => m.get_header_mut(),
-            ApplicationMessageReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::application_message_report::ApplicationMessageReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::application_message_report::ApplicationMessageReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -7589,39 +2909,6 @@ impl Serialize for OrderMassActionReport {
     }
 }
 
-impl HasHeader for OrderMassActionReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderMassActionReport::FIX50SP1(m) => m.get_header(),
-            OrderMassActionReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderMassActionReport::FIX50SP1(m) => m.get_header_mut(),
-            OrderMassActionReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_action_report::OrderMassActionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_action_report::OrderMassActionReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum OrderMassActionRequest {
@@ -7639,39 +2926,6 @@ impl Serialize for OrderMassActionRequest {
             OrderMassActionRequest::FIX50SP1(m) => m.serialize(serializer),
             OrderMassActionRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for OrderMassActionRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            OrderMassActionRequest::FIX50SP1(m) => m.get_header(),
-            OrderMassActionRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            OrderMassActionRequest::FIX50SP1(m) => m.get_header_mut(),
-            OrderMassActionRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::order_mass_action_request::OrderMassActionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::order_mass_action_request::OrderMassActionRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -7694,40 +2948,6 @@ impl Serialize for UserNotification {
         }
     }
 }
-
-impl HasHeader for UserNotification {
-    fn get_header(&self) -> &Header {
-        match self {
-            UserNotification::FIX50SP1(m) => m.get_header(),
-            UserNotification::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            UserNotification::FIX50SP1(m) => m.get_header_mut(),
-            UserNotification::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<8, ' ', ' '> for fix50sp1::messages::user_notification::UserNotification {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::user_notification::UserNotification {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum StreamAssignmentRequest {
@@ -7741,28 +2961,6 @@ impl Serialize for StreamAssignmentRequest {
         match self {
             StreamAssignmentRequest::FIX50SP2(m) => m.serialize(serializer),
         }
-    }
-}
-
-impl HasHeader for StreamAssignmentRequest {
-    fn get_header(&self) -> &Header {
-        match self {
-            StreamAssignmentRequest::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            StreamAssignmentRequest::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::stream_assignment_request::StreamAssignmentRequest {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
     }
 }
 
@@ -7782,28 +2980,6 @@ impl Serialize for StreamAssignmentReport {
     }
 }
 
-impl HasHeader for StreamAssignmentReport {
-    fn get_header(&self) -> &Header {
-        match self {
-            StreamAssignmentReport::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            StreamAssignmentReport::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::stream_assignment_report::StreamAssignmentReport {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum StreamAssignmentReportACK {
@@ -7820,39 +2996,21 @@ impl Serialize for StreamAssignmentReportACK {
     }
 }
 
-impl HasHeader for StreamAssignmentReportACK {
-    fn get_header(&self) -> &Header {
-        match self {
-            StreamAssignmentReportACK::FIX50SP2(m) => m.get_header(),
-        }
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        match self {
-            StreamAssignmentReportACK::FIX50SP2(m) => m.get_header_mut(),
-        }
-    }
-}
-
-impl HasHeader<9, ' ', ' '> for fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportACK {
-    fn get_header(&self) -> &Header {
-        &self.standard_message_header
-    }
-    fn get_header_mut(&mut self) -> &mut Header {
-        &mut self.standard_message_header
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::Message;
-    use fixt11::header::{MsgType, HasHeader};
+    use fixt11::header::MsgType;
 
     #[test]
     fn logon() {
         let msg = "8=FIXT.1.1\u{1}9=111\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}369=1\u{1}98=0\u{1}108=1\u{1}789=1\u{1}1137=0\u{1}10=073\u{1}";
         let mut obj = dbg!(serde_fix::from_str_checked::<Message>(msg)).unwrap();
-        obj.get_header_mut().msg_type = Some(MsgType::Logon);
-        obj.get_header_mut().body_length = 0;
+        match obj {
+            Message::Logon(l) => {
+                l.header.body_length = 0;
+            },
+            _ => panic!("Deserialized message is not of type Logon"),
+        }
         assert_eq!(serde_fix::to_string_checked(&obj), Ok(msg.to_owned()));
     }
 }

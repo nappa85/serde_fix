@@ -1,10 +1,8 @@
 
-use serde::{Deserialize, Serialize};
+#![warn(unused_extern_crates)]
+#![allow(clippy::upper_case_acronyms)]
 
-// pub use fixt11;
-// pub use fix50;
-// pub use fix50sp1;
-// pub use fix50sp2;
+use serde::{Deserialize, Serialize};
 
 pub mod fix44;
 pub mod fixt11;
@@ -29,6 +27,7 @@ pub enum Message {
 impl Serialize for Message {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
+            Message::FIX44(m) => m.serialize(serializer),
             Message::FIXT11(m) => m.serialize(serializer),
         }
     }

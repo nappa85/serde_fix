@@ -1,3 +1,7 @@
+
+#![warn(unused_extern_crates)]
+#![allow(clippy::upper_case_acronyms)]
+
 pub mod messages;
 pub mod standard_message_trailer;
 pub mod underlying_stipulations;
