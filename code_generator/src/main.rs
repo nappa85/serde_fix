@@ -520,6 +520,7 @@ fn type_map(t: &str) -> Result<&str, ()> {
         "TZTimestamp" => "fix_common::TZTimestamp",
         "UTCTimeOnly" => "fix_common::UTCTimeOnly",
         "UTCDateOnly" => "fix_common::UTCDateOnly",
+        "UTCDate" => "fix_common::UTCDateOnly",
         "char" => "char",
         "NumInGroup" => "usize",
         "Currency" => "String",
