@@ -522,6 +522,8 @@ fn type_map(t: &str) -> Result<&str, ()> {
         "UTCTimeOnly" => "fix_common::UTCTimeOnly",
         "UTCDateOnly" => "fix_common::UTCDateOnly",
         "UTCDate" => "fix_common::UTCDateOnly",
+        "time" => "fix_common::UTCTimeOnly",
+        "date" => "fix_common::UTCDateOnly",
         "char" => "char",
         "NumInGroup" => "usize",
         "Currency" => "String",

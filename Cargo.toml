@@ -12,5 +12,6 @@ members = [
     "fix44",
     "fix43",
     "fix42",
+    "fix41",
     "fix_message",
 ]
