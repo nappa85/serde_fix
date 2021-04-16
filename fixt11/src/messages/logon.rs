@@ -2,13 +2,13 @@
 use serde::{Serialize, Deserialize};
 
 use fix_common::{ApplVerID, Boolean, EncodedText, RepeatingValues};
-use crate::{Header, Trailer};
+use crate::{StandardMessageHeader, StandardMessageTrailer};
 
 /// MsgType = A
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Logon {
     #[serde(flatten)]
-    pub header: Header<5, 'A', ' '>,
+    pub standard_message_header: StandardMessageHeader<5, 'A', ' '>,
     /// (Always unencrypted, always last field in message)
     #[serde(rename = "98")]
     pub encrypt_method: EncryptMethod,
@@ -99,7 +99,7 @@ pub struct Logon {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub encoded_text: Option<EncodedText<355>>,
     #[serde(flatten)]
-    pub trailer: Trailer,
+    pub standard_message_trailer: StandardMessageTrailer,
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

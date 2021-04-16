@@ -2,13 +2,13 @@
 use serde::{Serialize, Deserialize};
 
 use fix_common::EncodedText;
-use crate::{Header, Trailer};
+use crate::{StandardMessageHeader, StandardMessageTrailer};
 
 /// MsgType = 5
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Logout {
     #[serde(flatten)]
-    pub header: Header<5, '5', ' '>,
+    pub standard_message_header: StandardMessageHeader<5, '5', ' '>,
     /// Session status at time of logout.
     #[serde(rename = "1409")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -24,5 +24,5 @@ pub struct Logout {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub encoded_text: Option<EncodedText<355>>,
     #[serde(flatten)]
-    pub trailer: Trailer,
+    pub standard_message_trailer: StandardMessageTrailer,
 }

@@ -3612,7 +3612,7 @@ mod test {
         let mut obj = dbg!(serde_fix::from_str_checked::<Message>(msg)).unwrap();
         match obj {
             Message::Logon(l) => {
-                l.header.body_length = 0;
+                l.standard_message_header.body_length = 0;
             },
             _ => panic!("Deserialized message is not of type Logon"),
         }

@@ -125,8 +125,8 @@ pub struct StandardMessageHeader<const V: u8, const T1: char, const T2: char> {
     pub hops: Option<RepeatingValues<Hop>>,
 }
 
-impl<const V: u8, const T1: char, const T2: char> Header<V, T1, T2> {
-    pub fn reply<const _V: u8, const _T1: char, const _T2: char>(&mut self, headers: &Header<_V, _T1, _T2>) {
+impl<const V: u8, const T1: char, const T2: char> StandardMessageHeader<V, T1, T2> {
+    pub fn reply<const _V: u8, const _T1: char, const _T2: char>(&mut self, headers: &StandardMessageHeader<_V, _T1, _T2>) {
         self.appl_ver_id = headers.appl_ver_id.convert();
         self.sender_comp_id = headers.target_comp_id.clone();
         self.target_comp_id = headers.sender_comp_id.clone();
