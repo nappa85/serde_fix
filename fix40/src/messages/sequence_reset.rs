@@ -33,7 +33,3 @@ impl Default for GapFillFlag {
 		GapFillFlag::GapFillMessageAHrefTag34MsgSeqNumHtmlTargetBottomMsgSeqNumNbspAFieldValid
 	}
 }
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum NewSeqNo {
-}

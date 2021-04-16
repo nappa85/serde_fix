@@ -46,7 +46,3 @@ pub struct Order {
 	#[serde(rename = "6")]
 	pub avg_px: f64,
 }
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum CumQty {
-}

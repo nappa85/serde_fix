@@ -406,10 +406,6 @@ impl Default for Side {
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum OrderQty {
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdType {
 	/// Market
 	#[serde(rename = "1")]
@@ -462,14 +458,6 @@ impl Default for OrdType {
 	fn default() -> Self {
 		OrdType::Market
 	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum Price {
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum StopPx {
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
@@ -1861,10 +1849,6 @@ impl Default for LastCapacity {
 	fn default() -> Self {
 		LastCapacity::Agent
 	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum CumQty {
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

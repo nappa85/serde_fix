@@ -27,7 +27,7 @@ pub struct Email {
 	pub cl_ord_id: Option<char>,
 	/// LinesOfText
 	#[serde(rename = "33")]
-	pub nes_of_text: fix_common::RepeatingValues<nesOfTex>,
+	pub lines_of_text: fix_common::RepeatingValues<LinesOfTex>,
 	/// RawDataLength
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -44,7 +44,7 @@ pub struct Email {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct nesOfTex {
+pub struct LinesOfTex {
 	/// Repeating field, number of instances defined in <a href="tag_33_LinesOfText.html" target="bottom">LinesOfText&nbsp;(33)</a>
 	#[serde(rename = "58")]
 	pub text: char,

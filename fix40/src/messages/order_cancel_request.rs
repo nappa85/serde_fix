@@ -138,7 +138,3 @@ impl Default for Side {
 		Side::Buy
 	}
 }
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum OrderQty {
-}
