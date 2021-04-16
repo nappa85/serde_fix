@@ -481,9 +481,11 @@ impl Serialize for Message {
 #[serde(tag = "1128")]
 pub enum IndicationOfInterest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::indication_of_interest::IndicationOfInterest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::indication_of_interest::IndicationOfInterest>),
 }
@@ -491,8 +493,10 @@ pub enum IndicationOfInterest {
 impl Serialize for IndicationOfInterest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            IndicationOfInterest::FIX50(m) => m.serialize(serializer),
-            IndicationOfInterest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			IndicationOfInterest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			IndicationOfInterest::FIX50SP1(m) => m.serialize(serializer),
         }
     }
 }
@@ -501,12 +505,15 @@ impl Serialize for IndicationOfInterest {
 #[serde(tag = "1128")]
 pub enum Advertisement {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::advertisement::Advertisement>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::advertisement::Advertisement>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::advertisement::Advertisement>),
 }
@@ -514,9 +521,12 @@ pub enum Advertisement {
 impl Serialize for Advertisement {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            Advertisement::FIX50(m) => m.serialize(serializer),
-            Advertisement::FIX50SP1(m) => m.serialize(serializer),
-            Advertisement::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			Advertisement::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			Advertisement::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			Advertisement::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -525,12 +535,15 @@ impl Serialize for Advertisement {
 #[serde(tag = "1128")]
 pub enum ExecutionReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::execution_report::ExecutionReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::execution_report::ExecutionReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::execution_report::ExecutionReport>),
 }
@@ -538,9 +551,12 @@ pub enum ExecutionReport {
 impl Serialize for ExecutionReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ExecutionReport::FIX50(m) => m.serialize(serializer),
-            ExecutionReport::FIX50SP1(m) => m.serialize(serializer),
-            ExecutionReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ExecutionReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ExecutionReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ExecutionReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -549,12 +565,15 @@ impl Serialize for ExecutionReport {
 #[serde(tag = "1128")]
 pub enum OrderCancelReject {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::order_cancel_reject::OrderCancelReject>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_cancel_reject::OrderCancelReject>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_cancel_reject::OrderCancelReject>),
 }
@@ -562,9 +581,12 @@ pub enum OrderCancelReject {
 impl Serialize for OrderCancelReject {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderCancelReject::FIX50(m) => m.serialize(serializer),
-            OrderCancelReject::FIX50SP1(m) => m.serialize(serializer),
-            OrderCancelReject::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			OrderCancelReject::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderCancelReject::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderCancelReject::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -573,12 +595,15 @@ impl Serialize for OrderCancelReject {
 #[serde(tag = "1128")]
 pub enum News {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::news::News>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::news::News>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::news::News>),
 }
@@ -586,9 +611,12 @@ pub enum News {
 impl Serialize for News {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            News::FIX50(m) => m.serialize(serializer),
-            News::FIX50SP1(m) => m.serialize(serializer),
-            News::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			News::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			News::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			News::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -597,12 +625,15 @@ impl Serialize for News {
 #[serde(tag = "1128")]
 pub enum Email {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::email::Email>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::email::Email>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::email::Email>),
 }
@@ -610,9 +641,12 @@ pub enum Email {
 impl Serialize for Email {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            Email::FIX50(m) => m.serialize(serializer),
-            Email::FIX50SP1(m) => m.serialize(serializer),
-            Email::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			Email::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			Email::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			Email::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -621,12 +655,15 @@ impl Serialize for Email {
 #[serde(tag = "1128")]
 pub enum NewOrderSingle {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::new_order_single::NewOrderSingle>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::new_order_single::NewOrderSingle>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::new_order_single::NewOrderSingle>),
 }
@@ -634,9 +671,12 @@ pub enum NewOrderSingle {
 impl Serialize for NewOrderSingle {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            NewOrderSingle::FIX50(m) => m.serialize(serializer),
-            NewOrderSingle::FIX50SP1(m) => m.serialize(serializer),
-            NewOrderSingle::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			NewOrderSingle::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			NewOrderSingle::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			NewOrderSingle::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -645,12 +685,15 @@ impl Serialize for NewOrderSingle {
 #[serde(tag = "1128")]
 pub enum NewOrderList {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::new_order_list::NewOrderList>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::new_order_list::NewOrderList>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::new_order_list::NewOrderList>),
 }
@@ -658,9 +701,12 @@ pub enum NewOrderList {
 impl Serialize for NewOrderList {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            NewOrderList::FIX50(m) => m.serialize(serializer),
-            NewOrderList::FIX50SP1(m) => m.serialize(serializer),
-            NewOrderList::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			NewOrderList::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			NewOrderList::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			NewOrderList::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -669,12 +715,15 @@ impl Serialize for NewOrderList {
 #[serde(tag = "1128")]
 pub enum OrderCancelRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::order_cancel_request::OrderCancelRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_cancel_request::OrderCancelRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_cancel_request::OrderCancelRequest>),
 }
@@ -682,9 +731,12 @@ pub enum OrderCancelRequest {
 impl Serialize for OrderCancelRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderCancelRequest::FIX50(m) => m.serialize(serializer),
-            OrderCancelRequest::FIX50SP1(m) => m.serialize(serializer),
-            OrderCancelRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			OrderCancelRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderCancelRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderCancelRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -693,12 +745,15 @@ impl Serialize for OrderCancelRequest {
 #[serde(tag = "1128")]
 pub enum OrderCancelReplaceRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::order_cancel_replace_request::OrderCancelReplaceRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_cancel_replace_request::OrderCancelReplaceRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_cancel_replace_request::OrderCancelReplaceRequest>),
 }
@@ -706,9 +761,12 @@ pub enum OrderCancelReplaceRequest {
 impl Serialize for OrderCancelReplaceRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderCancelReplaceRequest::FIX50(m) => m.serialize(serializer),
-            OrderCancelReplaceRequest::FIX50SP1(m) => m.serialize(serializer),
-            OrderCancelReplaceRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			OrderCancelReplaceRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderCancelReplaceRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderCancelReplaceRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -717,12 +775,15 @@ impl Serialize for OrderCancelReplaceRequest {
 #[serde(tag = "1128")]
 pub enum OrderStatusRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::order_status_request::OrderStatusRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_status_request::OrderStatusRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_status_request::OrderStatusRequest>),
 }
@@ -730,9 +791,12 @@ pub enum OrderStatusRequest {
 impl Serialize for OrderStatusRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderStatusRequest::FIX50(m) => m.serialize(serializer),
-            OrderStatusRequest::FIX50SP1(m) => m.serialize(serializer),
-            OrderStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			OrderStatusRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderStatusRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -741,12 +805,15 @@ impl Serialize for OrderStatusRequest {
 #[serde(tag = "1128")]
 pub enum AllocationInstruction {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::allocation_instruction::AllocationInstruction>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::allocation_instruction::AllocationInstruction>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::allocation_instruction::AllocationInstruction>),
 }
@@ -754,9 +821,12 @@ pub enum AllocationInstruction {
 impl Serialize for AllocationInstruction {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            AllocationInstruction::FIX50(m) => m.serialize(serializer),
-            AllocationInstruction::FIX50SP1(m) => m.serialize(serializer),
-            AllocationInstruction::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			AllocationInstruction::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			AllocationInstruction::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			AllocationInstruction::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -765,12 +835,15 @@ impl Serialize for AllocationInstruction {
 #[serde(tag = "1128")]
 pub enum ListCancelRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::list_cancel_request::ListCancelRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::list_cancel_request::ListCancelRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::list_cancel_request::ListCancelRequest>),
 }
@@ -778,9 +851,12 @@ pub enum ListCancelRequest {
 impl Serialize for ListCancelRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ListCancelRequest::FIX50(m) => m.serialize(serializer),
-            ListCancelRequest::FIX50SP1(m) => m.serialize(serializer),
-            ListCancelRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ListCancelRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ListCancelRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ListCancelRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -789,12 +865,15 @@ impl Serialize for ListCancelRequest {
 #[serde(tag = "1128")]
 pub enum ListExecute {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::list_execute::ListExecute>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::list_execute::ListExecute>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::list_execute::ListExecute>),
 }
@@ -802,9 +881,12 @@ pub enum ListExecute {
 impl Serialize for ListExecute {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ListExecute::FIX50(m) => m.serialize(serializer),
-            ListExecute::FIX50SP1(m) => m.serialize(serializer),
-            ListExecute::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ListExecute::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ListExecute::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ListExecute::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -813,12 +895,15 @@ impl Serialize for ListExecute {
 #[serde(tag = "1128")]
 pub enum ListStatusRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::list_status_request::ListStatusRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::list_status_request::ListStatusRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::list_status_request::ListStatusRequest>),
 }
@@ -826,9 +911,12 @@ pub enum ListStatusRequest {
 impl Serialize for ListStatusRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ListStatusRequest::FIX50(m) => m.serialize(serializer),
-            ListStatusRequest::FIX50SP1(m) => m.serialize(serializer),
-            ListStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ListStatusRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ListStatusRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ListStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -837,12 +925,15 @@ impl Serialize for ListStatusRequest {
 #[serde(tag = "1128")]
 pub enum ListStatus {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::list_status::ListStatus>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::list_status::ListStatus>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::list_status::ListStatus>),
 }
@@ -850,9 +941,12 @@ pub enum ListStatus {
 impl Serialize for ListStatus {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ListStatus::FIX50(m) => m.serialize(serializer),
-            ListStatus::FIX50SP1(m) => m.serialize(serializer),
-            ListStatus::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ListStatus::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ListStatus::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ListStatus::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -861,12 +955,15 @@ impl Serialize for ListStatus {
 #[serde(tag = "1128")]
 pub enum AllocationInstructionAck {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::allocation_instruction_ack::AllocationInstructionAck>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::allocation_instruction_ack::AllocationInstructionAck>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::allocation_instruction_ack::AllocationInstructionAck>),
 }
@@ -874,9 +971,12 @@ pub enum AllocationInstructionAck {
 impl Serialize for AllocationInstructionAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            AllocationInstructionAck::FIX50(m) => m.serialize(serializer),
-            AllocationInstructionAck::FIX50SP1(m) => m.serialize(serializer),
-            AllocationInstructionAck::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			AllocationInstructionAck::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			AllocationInstructionAck::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			AllocationInstructionAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -885,12 +985,15 @@ impl Serialize for AllocationInstructionAck {
 #[serde(tag = "1128")]
 pub enum DontKnowTrade {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::dont_know_trade::DontKnowTrade>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::dont_know_trade::DontKnowTrade>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::dont_know_trade::DontKnowTrade>),
 }
@@ -898,9 +1001,12 @@ pub enum DontKnowTrade {
 impl Serialize for DontKnowTrade {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            DontKnowTrade::FIX50(m) => m.serialize(serializer),
-            DontKnowTrade::FIX50SP1(m) => m.serialize(serializer),
-            DontKnowTrade::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			DontKnowTrade::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			DontKnowTrade::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			DontKnowTrade::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -909,12 +1015,15 @@ impl Serialize for DontKnowTrade {
 #[serde(tag = "1128")]
 pub enum QuoteRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::quote_request::QuoteRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::quote_request::QuoteRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote_request::QuoteRequest>),
 }
@@ -922,9 +1031,12 @@ pub enum QuoteRequest {
 impl Serialize for QuoteRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            QuoteRequest::FIX50(m) => m.serialize(serializer),
-            QuoteRequest::FIX50SP1(m) => m.serialize(serializer),
-            QuoteRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			QuoteRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			QuoteRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			QuoteRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -933,12 +1045,15 @@ impl Serialize for QuoteRequest {
 #[serde(tag = "1128")]
 pub enum Quote {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::quote::Quote>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::quote::Quote>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote::Quote>),
 }
@@ -946,9 +1061,12 @@ pub enum Quote {
 impl Serialize for Quote {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            Quote::FIX50(m) => m.serialize(serializer),
-            Quote::FIX50SP1(m) => m.serialize(serializer),
-            Quote::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			Quote::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			Quote::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			Quote::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -957,12 +1075,15 @@ impl Serialize for Quote {
 #[serde(tag = "1128")]
 pub enum SettlementInstructions {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::settlement_instructions::SettlementInstructions>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::settlement_instructions::SettlementInstructions>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::settlement_instructions::SettlementInstructions>),
 }
@@ -970,9 +1091,12 @@ pub enum SettlementInstructions {
 impl Serialize for SettlementInstructions {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SettlementInstructions::FIX50(m) => m.serialize(serializer),
-            SettlementInstructions::FIX50SP1(m) => m.serialize(serializer),
-            SettlementInstructions::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SettlementInstructions::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SettlementInstructions::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SettlementInstructions::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -981,12 +1105,15 @@ impl Serialize for SettlementInstructions {
 #[serde(tag = "1128")]
 pub enum MarketDataRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::market_data_request::MarketDataRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::market_data_request::MarketDataRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::market_data_request::MarketDataRequest>),
 }
@@ -994,9 +1121,12 @@ pub enum MarketDataRequest {
 impl Serialize for MarketDataRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MarketDataRequest::FIX50(m) => m.serialize(serializer),
-            MarketDataRequest::FIX50SP1(m) => m.serialize(serializer),
-            MarketDataRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			MarketDataRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MarketDataRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MarketDataRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1005,12 +1135,15 @@ impl Serialize for MarketDataRequest {
 #[serde(tag = "1128")]
 pub enum MarketDataSnapshotFullRefresh {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh>),
 }
@@ -1018,9 +1151,12 @@ pub enum MarketDataSnapshotFullRefresh {
 impl Serialize for MarketDataSnapshotFullRefresh {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MarketDataSnapshotFullRefresh::FIX50(m) => m.serialize(serializer),
-            MarketDataSnapshotFullRefresh::FIX50SP1(m) => m.serialize(serializer),
-            MarketDataSnapshotFullRefresh::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			MarketDataSnapshotFullRefresh::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MarketDataSnapshotFullRefresh::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MarketDataSnapshotFullRefresh::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1029,12 +1165,15 @@ impl Serialize for MarketDataSnapshotFullRefresh {
 #[serde(tag = "1128")]
 pub enum MarketDataIncrementalRefresh {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh>),
 }
@@ -1042,9 +1181,12 @@ pub enum MarketDataIncrementalRefresh {
 impl Serialize for MarketDataIncrementalRefresh {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MarketDataIncrementalRefresh::FIX50(m) => m.serialize(serializer),
-            MarketDataIncrementalRefresh::FIX50SP1(m) => m.serialize(serializer),
-            MarketDataIncrementalRefresh::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			MarketDataIncrementalRefresh::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MarketDataIncrementalRefresh::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MarketDataIncrementalRefresh::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1053,12 +1195,15 @@ impl Serialize for MarketDataIncrementalRefresh {
 #[serde(tag = "1128")]
 pub enum MarketDataRequestReject {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::market_data_request_reject::MarketDataRequestReject>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::market_data_request_reject::MarketDataRequestReject>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::market_data_request_reject::MarketDataRequestReject>),
 }
@@ -1066,9 +1211,12 @@ pub enum MarketDataRequestReject {
 impl Serialize for MarketDataRequestReject {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MarketDataRequestReject::FIX50(m) => m.serialize(serializer),
-            MarketDataRequestReject::FIX50SP1(m) => m.serialize(serializer),
-            MarketDataRequestReject::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			MarketDataRequestReject::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MarketDataRequestReject::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MarketDataRequestReject::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1077,12 +1225,15 @@ impl Serialize for MarketDataRequestReject {
 #[serde(tag = "1128")]
 pub enum QuoteCancel {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::quote_cancel::QuoteCancel>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::quote_cancel::QuoteCancel>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote_cancel::QuoteCancel>),
 }
@@ -1090,9 +1241,12 @@ pub enum QuoteCancel {
 impl Serialize for QuoteCancel {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            QuoteCancel::FIX50(m) => m.serialize(serializer),
-            QuoteCancel::FIX50SP1(m) => m.serialize(serializer),
-            QuoteCancel::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			QuoteCancel::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			QuoteCancel::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			QuoteCancel::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1101,12 +1255,15 @@ impl Serialize for QuoteCancel {
 #[serde(tag = "1128")]
 pub enum QuoteStatusRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::quote_status_request::QuoteStatusRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::quote_status_request::QuoteStatusRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote_status_request::QuoteStatusRequest>),
 }
@@ -1114,9 +1271,12 @@ pub enum QuoteStatusRequest {
 impl Serialize for QuoteStatusRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            QuoteStatusRequest::FIX50(m) => m.serialize(serializer),
-            QuoteStatusRequest::FIX50SP1(m) => m.serialize(serializer),
-            QuoteStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			QuoteStatusRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			QuoteStatusRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			QuoteStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1125,9 +1285,11 @@ impl Serialize for QuoteStatusRequest {
 #[serde(tag = "1128")]
 pub enum MassQuoteAcknowledgement {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement>),
 }
@@ -1135,8 +1297,10 @@ pub enum MassQuoteAcknowledgement {
 impl Serialize for MassQuoteAcknowledgement {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MassQuoteAcknowledgement::FIX50(m) => m.serialize(serializer),
-            MassQuoteAcknowledgement::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			MassQuoteAcknowledgement::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MassQuoteAcknowledgement::FIX50SP1(m) => m.serialize(serializer),
         }
     }
 }
@@ -1145,12 +1309,15 @@ impl Serialize for MassQuoteAcknowledgement {
 #[serde(tag = "1128")]
 pub enum SecurityDefinitionRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_definition_request::SecurityDefinitionRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_definition_request::SecurityDefinitionRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_definition_request::SecurityDefinitionRequest>),
 }
@@ -1158,9 +1325,12 @@ pub enum SecurityDefinitionRequest {
 impl Serialize for SecurityDefinitionRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityDefinitionRequest::FIX50(m) => m.serialize(serializer),
-            SecurityDefinitionRequest::FIX50SP1(m) => m.serialize(serializer),
-            SecurityDefinitionRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityDefinitionRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityDefinitionRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityDefinitionRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1169,12 +1339,15 @@ impl Serialize for SecurityDefinitionRequest {
 #[serde(tag = "1128")]
 pub enum SecurityDefinition {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_definition::SecurityDefinition>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_definition::SecurityDefinition>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_definition::SecurityDefinition>),
 }
@@ -1182,9 +1355,12 @@ pub enum SecurityDefinition {
 impl Serialize for SecurityDefinition {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityDefinition::FIX50(m) => m.serialize(serializer),
-            SecurityDefinition::FIX50SP1(m) => m.serialize(serializer),
-            SecurityDefinition::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityDefinition::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityDefinition::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityDefinition::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1193,12 +1369,15 @@ impl Serialize for SecurityDefinition {
 #[serde(tag = "1128")]
 pub enum SecurityStatusRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_status_request::SecurityStatusRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_status_request::SecurityStatusRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_status_request::SecurityStatusRequest>),
 }
@@ -1206,9 +1385,12 @@ pub enum SecurityStatusRequest {
 impl Serialize for SecurityStatusRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityStatusRequest::FIX50(m) => m.serialize(serializer),
-            SecurityStatusRequest::FIX50SP1(m) => m.serialize(serializer),
-            SecurityStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityStatusRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityStatusRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1217,12 +1399,15 @@ impl Serialize for SecurityStatusRequest {
 #[serde(tag = "1128")]
 pub enum SecurityStatus {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_status::SecurityStatus>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_status::SecurityStatus>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_status::SecurityStatus>),
 }
@@ -1230,9 +1415,12 @@ pub enum SecurityStatus {
 impl Serialize for SecurityStatus {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityStatus::FIX50(m) => m.serialize(serializer),
-            SecurityStatus::FIX50SP1(m) => m.serialize(serializer),
-            SecurityStatus::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityStatus::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityStatus::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityStatus::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1241,12 +1429,15 @@ impl Serialize for SecurityStatus {
 #[serde(tag = "1128")]
 pub enum TradingSessionStatusRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::trading_session_status_request::TradingSessionStatusRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trading_session_status_request::TradingSessionStatusRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trading_session_status_request::TradingSessionStatusRequest>),
 }
@@ -1254,9 +1445,12 @@ pub enum TradingSessionStatusRequest {
 impl Serialize for TradingSessionStatusRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradingSessionStatusRequest::FIX50(m) => m.serialize(serializer),
-            TradingSessionStatusRequest::FIX50SP1(m) => m.serialize(serializer),
-            TradingSessionStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			TradingSessionStatusRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradingSessionStatusRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradingSessionStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1265,12 +1459,15 @@ impl Serialize for TradingSessionStatusRequest {
 #[serde(tag = "1128")]
 pub enum TradingSessionStatus {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::trading_session_status::TradingSessionStatus>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trading_session_status::TradingSessionStatus>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trading_session_status::TradingSessionStatus>),
 }
@@ -1278,9 +1475,12 @@ pub enum TradingSessionStatus {
 impl Serialize for TradingSessionStatus {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradingSessionStatus::FIX50(m) => m.serialize(serializer),
-            TradingSessionStatus::FIX50SP1(m) => m.serialize(serializer),
-            TradingSessionStatus::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			TradingSessionStatus::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradingSessionStatus::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradingSessionStatus::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1289,12 +1489,15 @@ impl Serialize for TradingSessionStatus {
 #[serde(tag = "1128")]
 pub enum MassQuote {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::mass_quote::MassQuote>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::mass_quote::MassQuote>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::mass_quote::MassQuote>),
 }
@@ -1302,9 +1505,12 @@ pub enum MassQuote {
 impl Serialize for MassQuote {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MassQuote::FIX50(m) => m.serialize(serializer),
-            MassQuote::FIX50SP1(m) => m.serialize(serializer),
-            MassQuote::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			MassQuote::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MassQuote::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MassQuote::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1313,12 +1519,15 @@ impl Serialize for MassQuote {
 #[serde(tag = "1128")]
 pub enum BusinessMessageReject {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::business_message_reject::BusinessMessageReject>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::business_message_reject::BusinessMessageReject>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::business_message_reject::BusinessMessageReject>),
 }
@@ -1326,9 +1535,12 @@ pub enum BusinessMessageReject {
 impl Serialize for BusinessMessageReject {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            BusinessMessageReject::FIX50(m) => m.serialize(serializer),
-            BusinessMessageReject::FIX50SP1(m) => m.serialize(serializer),
-            BusinessMessageReject::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			BusinessMessageReject::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			BusinessMessageReject::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			BusinessMessageReject::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1337,12 +1549,15 @@ impl Serialize for BusinessMessageReject {
 #[serde(tag = "1128")]
 pub enum BidRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::bid_request::BidRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::bid_request::BidRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::bid_request::BidRequest>),
 }
@@ -1350,9 +1565,12 @@ pub enum BidRequest {
 impl Serialize for BidRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            BidRequest::FIX50(m) => m.serialize(serializer),
-            BidRequest::FIX50SP1(m) => m.serialize(serializer),
-            BidRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			BidRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			BidRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			BidRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1361,12 +1579,15 @@ impl Serialize for BidRequest {
 #[serde(tag = "1128")]
 pub enum BidResponse {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::bid_response::BidResponse>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::bid_response::BidResponse>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::bid_response::BidResponse>),
 }
@@ -1374,9 +1595,12 @@ pub enum BidResponse {
 impl Serialize for BidResponse {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            BidResponse::FIX50(m) => m.serialize(serializer),
-            BidResponse::FIX50SP1(m) => m.serialize(serializer),
-            BidResponse::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			BidResponse::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			BidResponse::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			BidResponse::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1385,12 +1609,15 @@ impl Serialize for BidResponse {
 #[serde(tag = "1128")]
 pub enum ListStrikePrice {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::list_strike_price::ListStrikePrice>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::list_strike_price::ListStrikePrice>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::list_strike_price::ListStrikePrice>),
 }
@@ -1398,9 +1625,12 @@ pub enum ListStrikePrice {
 impl Serialize for ListStrikePrice {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ListStrikePrice::FIX50(m) => m.serialize(serializer),
-            ListStrikePrice::FIX50SP1(m) => m.serialize(serializer),
-            ListStrikePrice::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ListStrikePrice::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ListStrikePrice::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ListStrikePrice::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1409,12 +1639,15 @@ impl Serialize for ListStrikePrice {
 #[serde(tag = "1128")]
 pub enum XMLMessage {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::xml_message::XMLMessage>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::xml_message::XMLMessage>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::xml_message::XMLMessage>),
 }
@@ -1422,9 +1655,12 @@ pub enum XMLMessage {
 impl Serialize for XMLMessage {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            XMLMessage::FIX50(m) => m.serialize(serializer),
-            XMLMessage::FIX50SP1(m) => m.serialize(serializer),
-            XMLMessage::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			XMLMessage::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			XMLMessage::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			XMLMessage::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1433,12 +1669,15 @@ impl Serialize for XMLMessage {
 #[serde(tag = "1128")]
 pub enum RegistrationInstructions {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::registration_instructions::RegistrationInstructions>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::registration_instructions::RegistrationInstructions>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::registration_instructions::RegistrationInstructions>),
 }
@@ -1446,9 +1685,12 @@ pub enum RegistrationInstructions {
 impl Serialize for RegistrationInstructions {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            RegistrationInstructions::FIX50(m) => m.serialize(serializer),
-            RegistrationInstructions::FIX50SP1(m) => m.serialize(serializer),
-            RegistrationInstructions::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			RegistrationInstructions::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			RegistrationInstructions::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			RegistrationInstructions::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1457,12 +1699,15 @@ impl Serialize for RegistrationInstructions {
 #[serde(tag = "1128")]
 pub enum RegistrationInstructionsResponse {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::registration_instructions_response::RegistrationInstructionsResponse>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::registration_instructions_response::RegistrationInstructionsResponse>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::registration_instructions_response::RegistrationInstructionsResponse>),
 }
@@ -1470,9 +1715,12 @@ pub enum RegistrationInstructionsResponse {
 impl Serialize for RegistrationInstructionsResponse {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            RegistrationInstructionsResponse::FIX50(m) => m.serialize(serializer),
-            RegistrationInstructionsResponse::FIX50SP1(m) => m.serialize(serializer),
-            RegistrationInstructionsResponse::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			RegistrationInstructionsResponse::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			RegistrationInstructionsResponse::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			RegistrationInstructionsResponse::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1481,12 +1729,15 @@ impl Serialize for RegistrationInstructionsResponse {
 #[serde(tag = "1128")]
 pub enum OrderMassCancelRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::order_mass_cancel_request::OrderMassCancelRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_mass_cancel_request::OrderMassCancelRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_mass_cancel_request::OrderMassCancelRequest>),
 }
@@ -1494,9 +1745,12 @@ pub enum OrderMassCancelRequest {
 impl Serialize for OrderMassCancelRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderMassCancelRequest::FIX50(m) => m.serialize(serializer),
-            OrderMassCancelRequest::FIX50SP1(m) => m.serialize(serializer),
-            OrderMassCancelRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			OrderMassCancelRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderMassCancelRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderMassCancelRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1505,12 +1759,15 @@ impl Serialize for OrderMassCancelRequest {
 #[serde(tag = "1128")]
 pub enum OrderMassCancelReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::order_mass_cancel_report::OrderMassCancelReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_mass_cancel_report::OrderMassCancelReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_mass_cancel_report::OrderMassCancelReport>),
 }
@@ -1518,9 +1775,12 @@ pub enum OrderMassCancelReport {
 impl Serialize for OrderMassCancelReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderMassCancelReport::FIX50(m) => m.serialize(serializer),
-            OrderMassCancelReport::FIX50SP1(m) => m.serialize(serializer),
-            OrderMassCancelReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			OrderMassCancelReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderMassCancelReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderMassCancelReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1529,12 +1789,15 @@ impl Serialize for OrderMassCancelReport {
 #[serde(tag = "1128")]
 pub enum NewOrderCross {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::new_order_cross::NewOrderCross>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::new_order_cross::NewOrderCross>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::new_order_cross::NewOrderCross>),
 }
@@ -1542,9 +1805,12 @@ pub enum NewOrderCross {
 impl Serialize for NewOrderCross {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            NewOrderCross::FIX50(m) => m.serialize(serializer),
-            NewOrderCross::FIX50SP1(m) => m.serialize(serializer),
-            NewOrderCross::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			NewOrderCross::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			NewOrderCross::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			NewOrderCross::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1553,12 +1819,15 @@ impl Serialize for NewOrderCross {
 #[serde(tag = "1128")]
 pub enum CrossOrderCancelReplaceRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest>),
 }
@@ -1566,9 +1835,12 @@ pub enum CrossOrderCancelReplaceRequest {
 impl Serialize for CrossOrderCancelReplaceRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            CrossOrderCancelReplaceRequest::FIX50(m) => m.serialize(serializer),
-            CrossOrderCancelReplaceRequest::FIX50SP1(m) => m.serialize(serializer),
-            CrossOrderCancelReplaceRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			CrossOrderCancelReplaceRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			CrossOrderCancelReplaceRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			CrossOrderCancelReplaceRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1577,12 +1849,15 @@ impl Serialize for CrossOrderCancelReplaceRequest {
 #[serde(tag = "1128")]
 pub enum CrossOrderCancelRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::cross_order_cancel_request::CrossOrderCancelRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::cross_order_cancel_request::CrossOrderCancelRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::cross_order_cancel_request::CrossOrderCancelRequest>),
 }
@@ -1590,9 +1865,12 @@ pub enum CrossOrderCancelRequest {
 impl Serialize for CrossOrderCancelRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            CrossOrderCancelRequest::FIX50(m) => m.serialize(serializer),
-            CrossOrderCancelRequest::FIX50SP1(m) => m.serialize(serializer),
-            CrossOrderCancelRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			CrossOrderCancelRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			CrossOrderCancelRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			CrossOrderCancelRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1601,12 +1879,15 @@ impl Serialize for CrossOrderCancelRequest {
 #[serde(tag = "1128")]
 pub enum SecurityTypeRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_type_request::SecurityTypeRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_type_request::SecurityTypeRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_type_request::SecurityTypeRequest>),
 }
@@ -1614,9 +1895,12 @@ pub enum SecurityTypeRequest {
 impl Serialize for SecurityTypeRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityTypeRequest::FIX50(m) => m.serialize(serializer),
-            SecurityTypeRequest::FIX50SP1(m) => m.serialize(serializer),
-            SecurityTypeRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityTypeRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityTypeRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityTypeRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1625,12 +1909,15 @@ impl Serialize for SecurityTypeRequest {
 #[serde(tag = "1128")]
 pub enum SecurityTypes {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_types::SecurityTypes>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_types::SecurityTypes>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_types::SecurityTypes>),
 }
@@ -1638,9 +1925,12 @@ pub enum SecurityTypes {
 impl Serialize for SecurityTypes {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityTypes::FIX50(m) => m.serialize(serializer),
-            SecurityTypes::FIX50SP1(m) => m.serialize(serializer),
-            SecurityTypes::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityTypes::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityTypes::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityTypes::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1649,12 +1939,15 @@ impl Serialize for SecurityTypes {
 #[serde(tag = "1128")]
 pub enum SecurityListRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_list_request::SecurityListRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_list_request::SecurityListRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_list_request::SecurityListRequest>),
 }
@@ -1662,9 +1955,12 @@ pub enum SecurityListRequest {
 impl Serialize for SecurityListRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityListRequest::FIX50(m) => m.serialize(serializer),
-            SecurityListRequest::FIX50SP1(m) => m.serialize(serializer),
-            SecurityListRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityListRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityListRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityListRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1673,12 +1969,15 @@ impl Serialize for SecurityListRequest {
 #[serde(tag = "1128")]
 pub enum SecurityList {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_list::SecurityList>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_list::SecurityList>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_list::SecurityList>),
 }
@@ -1686,9 +1985,12 @@ pub enum SecurityList {
 impl Serialize for SecurityList {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityList::FIX50(m) => m.serialize(serializer),
-            SecurityList::FIX50SP1(m) => m.serialize(serializer),
-            SecurityList::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityList::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityList::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityList::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1697,12 +1999,15 @@ impl Serialize for SecurityList {
 #[serde(tag = "1128")]
 pub enum DerivativeSecurityListRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::derivative_security_list_request::DerivativeSecurityListRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::derivative_security_list_request::DerivativeSecurityListRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::derivative_security_list_request::DerivativeSecurityListRequest>),
 }
@@ -1710,9 +2015,12 @@ pub enum DerivativeSecurityListRequest {
 impl Serialize for DerivativeSecurityListRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            DerivativeSecurityListRequest::FIX50(m) => m.serialize(serializer),
-            DerivativeSecurityListRequest::FIX50SP1(m) => m.serialize(serializer),
-            DerivativeSecurityListRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			DerivativeSecurityListRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			DerivativeSecurityListRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			DerivativeSecurityListRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1721,12 +2029,15 @@ impl Serialize for DerivativeSecurityListRequest {
 #[serde(tag = "1128")]
 pub enum DerivativeSecurityList {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::derivative_security_list::DerivativeSecurityList>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::derivative_security_list::DerivativeSecurityList>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::derivative_security_list::DerivativeSecurityList>),
 }
@@ -1734,9 +2045,12 @@ pub enum DerivativeSecurityList {
 impl Serialize for DerivativeSecurityList {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            DerivativeSecurityList::FIX50(m) => m.serialize(serializer),
-            DerivativeSecurityList::FIX50SP1(m) => m.serialize(serializer),
-            DerivativeSecurityList::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			DerivativeSecurityList::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			DerivativeSecurityList::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			DerivativeSecurityList::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1745,12 +2059,15 @@ impl Serialize for DerivativeSecurityList {
 #[serde(tag = "1128")]
 pub enum NewOrderMultileg {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::new_order_multileg::NewOrderMultileg>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::new_order_multileg::NewOrderMultileg>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::new_order_multileg::NewOrderMultileg>),
 }
@@ -1758,9 +2075,12 @@ pub enum NewOrderMultileg {
 impl Serialize for NewOrderMultileg {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            NewOrderMultileg::FIX50(m) => m.serialize(serializer),
-            NewOrderMultileg::FIX50SP1(m) => m.serialize(serializer),
-            NewOrderMultileg::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			NewOrderMultileg::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			NewOrderMultileg::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			NewOrderMultileg::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1769,6 +2089,7 @@ impl Serialize for NewOrderMultileg {
 #[serde(tag = "1128")]
 pub enum MultilegOrderCancelReplace {
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest>),
 }
@@ -1776,7 +2097,8 @@ pub enum MultilegOrderCancelReplace {
 impl Serialize for MultilegOrderCancelReplace {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MultilegOrderCancelReplace::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MultilegOrderCancelReplace::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1785,12 +2107,15 @@ impl Serialize for MultilegOrderCancelReplace {
 #[serde(tag = "1128")]
 pub enum TradeCaptureReportRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::trade_capture_report_request::TradeCaptureReportRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trade_capture_report_request::TradeCaptureReportRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trade_capture_report_request::TradeCaptureReportRequest>),
 }
@@ -1798,9 +2123,12 @@ pub enum TradeCaptureReportRequest {
 impl Serialize for TradeCaptureReportRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradeCaptureReportRequest::FIX50(m) => m.serialize(serializer),
-            TradeCaptureReportRequest::FIX50SP1(m) => m.serialize(serializer),
-            TradeCaptureReportRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			TradeCaptureReportRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradeCaptureReportRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradeCaptureReportRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1809,12 +2137,15 @@ impl Serialize for TradeCaptureReportRequest {
 #[serde(tag = "1128")]
 pub enum TradeCaptureReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::trade_capture_report::TradeCaptureReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trade_capture_report::TradeCaptureReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trade_capture_report::TradeCaptureReport>),
 }
@@ -1822,9 +2153,12 @@ pub enum TradeCaptureReport {
 impl Serialize for TradeCaptureReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradeCaptureReport::FIX50(m) => m.serialize(serializer),
-            TradeCaptureReport::FIX50SP1(m) => m.serialize(serializer),
-            TradeCaptureReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			TradeCaptureReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradeCaptureReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradeCaptureReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1833,12 +2167,15 @@ impl Serialize for TradeCaptureReport {
 #[serde(tag = "1128")]
 pub enum OrderMassStatusRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::order_mass_status_request::OrderMassStatusRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_mass_status_request::OrderMassStatusRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_mass_status_request::OrderMassStatusRequest>),
 }
@@ -1846,9 +2183,12 @@ pub enum OrderMassStatusRequest {
 impl Serialize for OrderMassStatusRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderMassStatusRequest::FIX50(m) => m.serialize(serializer),
-            OrderMassStatusRequest::FIX50SP1(m) => m.serialize(serializer),
-            OrderMassStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			OrderMassStatusRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderMassStatusRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderMassStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1857,12 +2197,15 @@ impl Serialize for OrderMassStatusRequest {
 #[serde(tag = "1128")]
 pub enum QuoteRequestReject {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::quote_request_reject::QuoteRequestReject>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::quote_request_reject::QuoteRequestReject>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote_request_reject::QuoteRequestReject>),
 }
@@ -1870,9 +2213,12 @@ pub enum QuoteRequestReject {
 impl Serialize for QuoteRequestReject {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            QuoteRequestReject::FIX50(m) => m.serialize(serializer),
-            QuoteRequestReject::FIX50SP1(m) => m.serialize(serializer),
-            QuoteRequestReject::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			QuoteRequestReject::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			QuoteRequestReject::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			QuoteRequestReject::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1881,12 +2227,15 @@ impl Serialize for QuoteRequestReject {
 #[serde(tag = "1128")]
 pub enum RFQRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::rfq_request::RFQRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::rfq_request::RFQRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::rfq_request::RFQRequest>),
 }
@@ -1894,9 +2243,12 @@ pub enum RFQRequest {
 impl Serialize for RFQRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            RFQRequest::FIX50(m) => m.serialize(serializer),
-            RFQRequest::FIX50SP1(m) => m.serialize(serializer),
-            RFQRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			RFQRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			RFQRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			RFQRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1905,12 +2257,15 @@ impl Serialize for RFQRequest {
 #[serde(tag = "1128")]
 pub enum QuoteStatusReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::quote_status_report::QuoteStatusReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::quote_status_report::QuoteStatusReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote_status_report::QuoteStatusReport>),
 }
@@ -1918,9 +2273,12 @@ pub enum QuoteStatusReport {
 impl Serialize for QuoteStatusReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            QuoteStatusReport::FIX50(m) => m.serialize(serializer),
-            QuoteStatusReport::FIX50SP1(m) => m.serialize(serializer),
-            QuoteStatusReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			QuoteStatusReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			QuoteStatusReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			QuoteStatusReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1929,12 +2287,15 @@ impl Serialize for QuoteStatusReport {
 #[serde(tag = "1128")]
 pub enum QuoteResponse {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::quote_response::QuoteResponse>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::quote_response::QuoteResponse>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::quote_response::QuoteResponse>),
 }
@@ -1942,9 +2303,12 @@ pub enum QuoteResponse {
 impl Serialize for QuoteResponse {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            QuoteResponse::FIX50(m) => m.serialize(serializer),
-            QuoteResponse::FIX50SP1(m) => m.serialize(serializer),
-            QuoteResponse::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			QuoteResponse::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			QuoteResponse::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			QuoteResponse::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1953,12 +2317,15 @@ impl Serialize for QuoteResponse {
 #[serde(tag = "1128")]
 pub enum Confirmation {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::confirmation::Confirmation>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::confirmation::Confirmation>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::confirmation::Confirmation>),
 }
@@ -1966,9 +2333,12 @@ pub enum Confirmation {
 impl Serialize for Confirmation {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            Confirmation::FIX50(m) => m.serialize(serializer),
-            Confirmation::FIX50SP1(m) => m.serialize(serializer),
-            Confirmation::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			Confirmation::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			Confirmation::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			Confirmation::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -1977,12 +2347,15 @@ impl Serialize for Confirmation {
 #[serde(tag = "1128")]
 pub enum PositionMaintenanceRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::position_maintenance_request::PositionMaintenanceRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::position_maintenance_request::PositionMaintenanceRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::position_maintenance_request::PositionMaintenanceRequest>),
 }
@@ -1990,9 +2363,12 @@ pub enum PositionMaintenanceRequest {
 impl Serialize for PositionMaintenanceRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            PositionMaintenanceRequest::FIX50(m) => m.serialize(serializer),
-            PositionMaintenanceRequest::FIX50SP1(m) => m.serialize(serializer),
-            PositionMaintenanceRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			PositionMaintenanceRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			PositionMaintenanceRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			PositionMaintenanceRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2001,12 +2377,15 @@ impl Serialize for PositionMaintenanceRequest {
 #[serde(tag = "1128")]
 pub enum PositionMaintenanceReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::position_maintenance_report::PositionMaintenanceReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::position_maintenance_report::PositionMaintenanceReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::position_maintenance_report::PositionMaintenanceReport>),
 }
@@ -2014,9 +2393,12 @@ pub enum PositionMaintenanceReport {
 impl Serialize for PositionMaintenanceReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            PositionMaintenanceReport::FIX50(m) => m.serialize(serializer),
-            PositionMaintenanceReport::FIX50SP1(m) => m.serialize(serializer),
-            PositionMaintenanceReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			PositionMaintenanceReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			PositionMaintenanceReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			PositionMaintenanceReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2025,12 +2407,15 @@ impl Serialize for PositionMaintenanceReport {
 #[serde(tag = "1128")]
 pub enum RequestForPositions {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::request_for_positions::RequestForPositions>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::request_for_positions::RequestForPositions>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::request_for_positions::RequestForPositions>),
 }
@@ -2038,9 +2423,12 @@ pub enum RequestForPositions {
 impl Serialize for RequestForPositions {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            RequestForPositions::FIX50(m) => m.serialize(serializer),
-            RequestForPositions::FIX50SP1(m) => m.serialize(serializer),
-            RequestForPositions::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			RequestForPositions::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			RequestForPositions::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			RequestForPositions::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2049,12 +2437,15 @@ impl Serialize for RequestForPositions {
 #[serde(tag = "1128")]
 pub enum RequestForPositionsAck {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::request_for_positions_ack::RequestForPositionsAck>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::request_for_positions_ack::RequestForPositionsAck>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::request_for_positions_ack::RequestForPositionsAck>),
 }
@@ -2062,9 +2453,12 @@ pub enum RequestForPositionsAck {
 impl Serialize for RequestForPositionsAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            RequestForPositionsAck::FIX50(m) => m.serialize(serializer),
-            RequestForPositionsAck::FIX50SP1(m) => m.serialize(serializer),
-            RequestForPositionsAck::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			RequestForPositionsAck::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			RequestForPositionsAck::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			RequestForPositionsAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2073,12 +2467,15 @@ impl Serialize for RequestForPositionsAck {
 #[serde(tag = "1128")]
 pub enum PositionReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::position_report::PositionReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::position_report::PositionReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::position_report::PositionReport>),
 }
@@ -2086,9 +2483,12 @@ pub enum PositionReport {
 impl Serialize for PositionReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            PositionReport::FIX50(m) => m.serialize(serializer),
-            PositionReport::FIX50SP1(m) => m.serialize(serializer),
-            PositionReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			PositionReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			PositionReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			PositionReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2097,12 +2497,15 @@ impl Serialize for PositionReport {
 #[serde(tag = "1128")]
 pub enum TradeCaptureReportRequestAck {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck>),
 }
@@ -2110,9 +2513,12 @@ pub enum TradeCaptureReportRequestAck {
 impl Serialize for TradeCaptureReportRequestAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradeCaptureReportRequestAck::FIX50(m) => m.serialize(serializer),
-            TradeCaptureReportRequestAck::FIX50SP1(m) => m.serialize(serializer),
-            TradeCaptureReportRequestAck::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			TradeCaptureReportRequestAck::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradeCaptureReportRequestAck::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradeCaptureReportRequestAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2121,12 +2527,15 @@ impl Serialize for TradeCaptureReportRequestAck {
 #[serde(tag = "1128")]
 pub enum TradeCaptureReportAck {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::trade_capture_report_ack::TradeCaptureReportAck>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trade_capture_report_ack::TradeCaptureReportAck>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trade_capture_report_ack::TradeCaptureReportAck>),
 }
@@ -2134,9 +2543,12 @@ pub enum TradeCaptureReportAck {
 impl Serialize for TradeCaptureReportAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradeCaptureReportAck::FIX50(m) => m.serialize(serializer),
-            TradeCaptureReportAck::FIX50SP1(m) => m.serialize(serializer),
-            TradeCaptureReportAck::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			TradeCaptureReportAck::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradeCaptureReportAck::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradeCaptureReportAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2145,12 +2557,15 @@ impl Serialize for TradeCaptureReportAck {
 #[serde(tag = "1128")]
 pub enum AllocationReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::allocation_report::AllocationReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::allocation_report::AllocationReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::allocation_report::AllocationReport>),
 }
@@ -2158,9 +2573,12 @@ pub enum AllocationReport {
 impl Serialize for AllocationReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            AllocationReport::FIX50(m) => m.serialize(serializer),
-            AllocationReport::FIX50SP1(m) => m.serialize(serializer),
-            AllocationReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			AllocationReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			AllocationReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			AllocationReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2169,12 +2587,15 @@ impl Serialize for AllocationReport {
 #[serde(tag = "1128")]
 pub enum AllocationReportAck {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::allocation_report_ack::AllocationReportAck>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::allocation_report_ack::AllocationReportAck>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::allocation_report_ack::AllocationReportAck>),
 }
@@ -2182,9 +2603,12 @@ pub enum AllocationReportAck {
 impl Serialize for AllocationReportAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            AllocationReportAck::FIX50(m) => m.serialize(serializer),
-            AllocationReportAck::FIX50SP1(m) => m.serialize(serializer),
-            AllocationReportAck::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			AllocationReportAck::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			AllocationReportAck::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			AllocationReportAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2193,12 +2617,15 @@ impl Serialize for AllocationReportAck {
 #[serde(tag = "1128")]
 pub enum ConfirmationAck {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::confirmation_ack::ConfirmationAck>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::confirmation_ack::ConfirmationAck>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::confirmation_ack::ConfirmationAck>),
 }
@@ -2206,9 +2633,12 @@ pub enum ConfirmationAck {
 impl Serialize for ConfirmationAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ConfirmationAck::FIX50(m) => m.serialize(serializer),
-            ConfirmationAck::FIX50SP1(m) => m.serialize(serializer),
-            ConfirmationAck::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ConfirmationAck::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ConfirmationAck::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ConfirmationAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2217,12 +2647,15 @@ impl Serialize for ConfirmationAck {
 #[serde(tag = "1128")]
 pub enum SettlementInstructionRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::settlement_instruction_request::SettlementInstructionRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::settlement_instruction_request::SettlementInstructionRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::settlement_instruction_request::SettlementInstructionRequest>),
 }
@@ -2230,9 +2663,12 @@ pub enum SettlementInstructionRequest {
 impl Serialize for SettlementInstructionRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SettlementInstructionRequest::FIX50(m) => m.serialize(serializer),
-            SettlementInstructionRequest::FIX50SP1(m) => m.serialize(serializer),
-            SettlementInstructionRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SettlementInstructionRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SettlementInstructionRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SettlementInstructionRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2241,12 +2677,15 @@ impl Serialize for SettlementInstructionRequest {
 #[serde(tag = "1128")]
 pub enum AssignmentReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::assignment_report::AssignmentReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::assignment_report::AssignmentReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::assignment_report::AssignmentReport>),
 }
@@ -2254,9 +2693,12 @@ pub enum AssignmentReport {
 impl Serialize for AssignmentReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            AssignmentReport::FIX50(m) => m.serialize(serializer),
-            AssignmentReport::FIX50SP1(m) => m.serialize(serializer),
-            AssignmentReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			AssignmentReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			AssignmentReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			AssignmentReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2265,12 +2707,15 @@ impl Serialize for AssignmentReport {
 #[serde(tag = "1128")]
 pub enum CollateralRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::collateral_request::CollateralRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::collateral_request::CollateralRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::collateral_request::CollateralRequest>),
 }
@@ -2278,9 +2723,12 @@ pub enum CollateralRequest {
 impl Serialize for CollateralRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            CollateralRequest::FIX50(m) => m.serialize(serializer),
-            CollateralRequest::FIX50SP1(m) => m.serialize(serializer),
-            CollateralRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			CollateralRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			CollateralRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			CollateralRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2289,12 +2737,15 @@ impl Serialize for CollateralRequest {
 #[serde(tag = "1128")]
 pub enum CollateralAssignment {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::collateral_assignment::CollateralAssignment>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::collateral_assignment::CollateralAssignment>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::collateral_assignment::CollateralAssignment>),
 }
@@ -2302,9 +2753,12 @@ pub enum CollateralAssignment {
 impl Serialize for CollateralAssignment {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            CollateralAssignment::FIX50(m) => m.serialize(serializer),
-            CollateralAssignment::FIX50SP1(m) => m.serialize(serializer),
-            CollateralAssignment::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			CollateralAssignment::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			CollateralAssignment::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			CollateralAssignment::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2313,12 +2767,15 @@ impl Serialize for CollateralAssignment {
 #[serde(tag = "1128")]
 pub enum CollateralResponse {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::collateral_response::CollateralResponse>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::collateral_response::CollateralResponse>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::collateral_response::CollateralResponse>),
 }
@@ -2326,9 +2783,12 @@ pub enum CollateralResponse {
 impl Serialize for CollateralResponse {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            CollateralResponse::FIX50(m) => m.serialize(serializer),
-            CollateralResponse::FIX50SP1(m) => m.serialize(serializer),
-            CollateralResponse::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			CollateralResponse::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			CollateralResponse::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			CollateralResponse::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2337,12 +2797,15 @@ impl Serialize for CollateralResponse {
 #[serde(tag = "1128")]
 pub enum CollateralReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::collateral_report::CollateralReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::collateral_report::CollateralReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::collateral_report::CollateralReport>),
 }
@@ -2350,9 +2813,12 @@ pub enum CollateralReport {
 impl Serialize for CollateralReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            CollateralReport::FIX50(m) => m.serialize(serializer),
-            CollateralReport::FIX50SP1(m) => m.serialize(serializer),
-            CollateralReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			CollateralReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			CollateralReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			CollateralReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2361,12 +2827,15 @@ impl Serialize for CollateralReport {
 #[serde(tag = "1128")]
 pub enum CollateralInquiry {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::collateral_inquiry::CollateralInquiry>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::collateral_inquiry::CollateralInquiry>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::collateral_inquiry::CollateralInquiry>),
 }
@@ -2374,9 +2843,12 @@ pub enum CollateralInquiry {
 impl Serialize for CollateralInquiry {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            CollateralInquiry::FIX50(m) => m.serialize(serializer),
-            CollateralInquiry::FIX50SP1(m) => m.serialize(serializer),
-            CollateralInquiry::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			CollateralInquiry::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			CollateralInquiry::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			CollateralInquiry::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2385,12 +2857,15 @@ impl Serialize for CollateralInquiry {
 #[serde(tag = "1128")]
 pub enum NetworkCounterpartySystemStatusRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest>),
 }
@@ -2398,9 +2873,12 @@ pub enum NetworkCounterpartySystemStatusRequest {
 impl Serialize for NetworkCounterpartySystemStatusRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            NetworkCounterpartySystemStatusRequest::FIX50(m) => m.serialize(serializer),
-            NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => m.serialize(serializer),
-            NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			NetworkCounterpartySystemStatusRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2409,12 +2887,15 @@ impl Serialize for NetworkCounterpartySystemStatusRequest {
 #[serde(tag = "1128")]
 pub enum NetworkCounterpartySystemStatusResponse {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse>),
 }
@@ -2422,9 +2903,12 @@ pub enum NetworkCounterpartySystemStatusResponse {
 impl Serialize for NetworkCounterpartySystemStatusResponse {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            NetworkCounterpartySystemStatusResponse::FIX50(m) => m.serialize(serializer),
-            NetworkCounterpartySystemStatusResponse::FIX50SP1(m) => m.serialize(serializer),
-            NetworkCounterpartySystemStatusResponse::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			NetworkCounterpartySystemStatusResponse::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			NetworkCounterpartySystemStatusResponse::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			NetworkCounterpartySystemStatusResponse::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2433,12 +2917,15 @@ impl Serialize for NetworkCounterpartySystemStatusResponse {
 #[serde(tag = "1128")]
 pub enum UserRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::user_request::UserRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::user_request::UserRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::user_request::UserRequest>),
 }
@@ -2446,9 +2933,12 @@ pub enum UserRequest {
 impl Serialize for UserRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            UserRequest::FIX50(m) => m.serialize(serializer),
-            UserRequest::FIX50SP1(m) => m.serialize(serializer),
-            UserRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			UserRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			UserRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			UserRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2457,12 +2947,15 @@ impl Serialize for UserRequest {
 #[serde(tag = "1128")]
 pub enum UserResponse {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::user_response::UserResponse>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::user_response::UserResponse>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::user_response::UserResponse>),
 }
@@ -2470,9 +2963,12 @@ pub enum UserResponse {
 impl Serialize for UserResponse {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            UserResponse::FIX50(m) => m.serialize(serializer),
-            UserResponse::FIX50SP1(m) => m.serialize(serializer),
-            UserResponse::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			UserResponse::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			UserResponse::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			UserResponse::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2481,12 +2977,15 @@ impl Serialize for UserResponse {
 #[serde(tag = "1128")]
 pub enum CollateralInquiryAck {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::collateral_inquiry_ack::CollateralInquiryAck>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::collateral_inquiry_ack::CollateralInquiryAck>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::collateral_inquiry_ack::CollateralInquiryAck>),
 }
@@ -2494,9 +2993,12 @@ pub enum CollateralInquiryAck {
 impl Serialize for CollateralInquiryAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            CollateralInquiryAck::FIX50(m) => m.serialize(serializer),
-            CollateralInquiryAck::FIX50SP1(m) => m.serialize(serializer),
-            CollateralInquiryAck::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			CollateralInquiryAck::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			CollateralInquiryAck::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			CollateralInquiryAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2505,12 +3007,15 @@ impl Serialize for CollateralInquiryAck {
 #[serde(tag = "1128")]
 pub enum ConfirmationRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::confirmation_request::ConfirmationRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::confirmation_request::ConfirmationRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::confirmation_request::ConfirmationRequest>),
 }
@@ -2518,9 +3023,12 @@ pub enum ConfirmationRequest {
 impl Serialize for ConfirmationRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ConfirmationRequest::FIX50(m) => m.serialize(serializer),
-            ConfirmationRequest::FIX50SP1(m) => m.serialize(serializer),
-            ConfirmationRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ConfirmationRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ConfirmationRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ConfirmationRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2529,12 +3037,15 @@ impl Serialize for ConfirmationRequest {
 #[serde(tag = "1128")]
 pub enum TradingSessionListRequest {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::trading_session_list_request::TradingSessionListRequest>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trading_session_list_request::TradingSessionListRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trading_session_list_request::TradingSessionListRequest>),
 }
@@ -2542,9 +3053,12 @@ pub enum TradingSessionListRequest {
 impl Serialize for TradingSessionListRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradingSessionListRequest::FIX50(m) => m.serialize(serializer),
-            TradingSessionListRequest::FIX50SP1(m) => m.serialize(serializer),
-            TradingSessionListRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			TradingSessionListRequest::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradingSessionListRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradingSessionListRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2553,12 +3067,15 @@ impl Serialize for TradingSessionListRequest {
 #[serde(tag = "1128")]
 pub enum TradingSessionList {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::trading_session_list::TradingSessionList>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trading_session_list::TradingSessionList>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trading_session_list::TradingSessionList>),
 }
@@ -2566,9 +3083,12 @@ pub enum TradingSessionList {
 impl Serialize for TradingSessionList {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradingSessionList::FIX50(m) => m.serialize(serializer),
-            TradingSessionList::FIX50SP1(m) => m.serialize(serializer),
-            TradingSessionList::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			TradingSessionList::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradingSessionList::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradingSessionList::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2577,12 +3097,15 @@ impl Serialize for TradingSessionList {
 #[serde(tag = "1128")]
 pub enum SecurityListUpdateReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_list_update_report::SecurityListUpdateReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_list_update_report::SecurityListUpdateReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_list_update_report::SecurityListUpdateReport>),
 }
@@ -2590,9 +3113,12 @@ pub enum SecurityListUpdateReport {
 impl Serialize for SecurityListUpdateReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityListUpdateReport::FIX50(m) => m.serialize(serializer),
-            SecurityListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
-            SecurityListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityListUpdateReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2601,12 +3127,15 @@ impl Serialize for SecurityListUpdateReport {
 #[serde(tag = "1128")]
 pub enum AdjustedPositionReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::adjusted_position_report::AdjustedPositionReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::adjusted_position_report::AdjustedPositionReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::adjusted_position_report::AdjustedPositionReport>),
 }
@@ -2614,9 +3143,12 @@ pub enum AdjustedPositionReport {
 impl Serialize for AdjustedPositionReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            AdjustedPositionReport::FIX50(m) => m.serialize(serializer),
-            AdjustedPositionReport::FIX50SP1(m) => m.serialize(serializer),
-            AdjustedPositionReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			AdjustedPositionReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			AdjustedPositionReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			AdjustedPositionReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2625,12 +3157,15 @@ impl Serialize for AdjustedPositionReport {
 #[serde(tag = "1128")]
 pub enum AllocationInstructionAlert {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::allocation_instruction_alert::AllocationInstructionAlert>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::allocation_instruction_alert::AllocationInstructionAlert>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::allocation_instruction_alert::AllocationInstructionAlert>),
 }
@@ -2638,9 +3173,12 @@ pub enum AllocationInstructionAlert {
 impl Serialize for AllocationInstructionAlert {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            AllocationInstructionAlert::FIX50(m) => m.serialize(serializer),
-            AllocationInstructionAlert::FIX50SP1(m) => m.serialize(serializer),
-            AllocationInstructionAlert::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			AllocationInstructionAlert::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			AllocationInstructionAlert::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			AllocationInstructionAlert::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2649,6 +3187,7 @@ impl Serialize for AllocationInstructionAlert {
 #[serde(tag = "1128")]
 pub enum ExecutionAcknowledgement {
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::execution_ack::ExecutionAck>),
 }
@@ -2656,7 +3195,8 @@ pub enum ExecutionAcknowledgement {
 impl Serialize for ExecutionAcknowledgement {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ExecutionAcknowledgement::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ExecutionAcknowledgement::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2665,12 +3205,15 @@ impl Serialize for ExecutionAcknowledgement {
 #[serde(tag = "1128")]
 pub enum ContraryIntentionReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::contrary_intention_report::ContraryIntentionReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::contrary_intention_report::ContraryIntentionReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::contrary_intention_report::ContraryIntentionReport>),
 }
@@ -2678,9 +3221,12 @@ pub enum ContraryIntentionReport {
 impl Serialize for ContraryIntentionReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ContraryIntentionReport::FIX50(m) => m.serialize(serializer),
-            ContraryIntentionReport::FIX50SP1(m) => m.serialize(serializer),
-            ContraryIntentionReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			ContraryIntentionReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ContraryIntentionReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ContraryIntentionReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2689,12 +3235,15 @@ impl Serialize for ContraryIntentionReport {
 #[serde(tag = "1128")]
 pub enum SecurityDefinitionUpdateReport {
     /// FIX50
+	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
     FIX50(Box<fix50::messages::security_definition_update_report::SecurityDefinitionUpdateReport>),
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::security_definition_update_report::SecurityDefinitionUpdateReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::security_definition_update_report::SecurityDefinitionUpdateReport>),
 }
@@ -2702,9 +3251,12 @@ pub enum SecurityDefinitionUpdateReport {
 impl Serialize for SecurityDefinitionUpdateReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SecurityDefinitionUpdateReport::FIX50(m) => m.serialize(serializer),
-            SecurityDefinitionUpdateReport::FIX50SP1(m) => m.serialize(serializer),
-            SecurityDefinitionUpdateReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50")]
+			SecurityDefinitionUpdateReport::FIX50(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SecurityDefinitionUpdateReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SecurityDefinitionUpdateReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2713,9 +3265,11 @@ impl Serialize for SecurityDefinitionUpdateReport {
 #[serde(tag = "1128")]
 pub enum SettlementObligationReport {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::settlement_obligation_report::SettlementObligationReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::settlement_obligation_report::SettlementObligationReport>),
 }
@@ -2723,8 +3277,10 @@ pub enum SettlementObligationReport {
 impl Serialize for SettlementObligationReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            SettlementObligationReport::FIX50SP1(m) => m.serialize(serializer),
-            SettlementObligationReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			SettlementObligationReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			SettlementObligationReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2733,9 +3289,11 @@ impl Serialize for SettlementObligationReport {
 #[serde(tag = "1128")]
 pub enum DerivativeSecurityListUpdateReport {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport>),
 }
@@ -2743,8 +3301,10 @@ pub enum DerivativeSecurityListUpdateReport {
 impl Serialize for DerivativeSecurityListUpdateReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            DerivativeSecurityListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
-            DerivativeSecurityListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			DerivativeSecurityListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			DerivativeSecurityListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2753,9 +3313,11 @@ impl Serialize for DerivativeSecurityListUpdateReport {
 #[serde(tag = "1128")]
 pub enum TradingSessionListUpdateReport {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::trading_session_list_update_report::TradingSessionListUpdateReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::trading_session_list_update_report::TradingSessionListUpdateReport>),
 }
@@ -2763,8 +3325,10 @@ pub enum TradingSessionListUpdateReport {
 impl Serialize for TradingSessionListUpdateReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            TradingSessionListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
-            TradingSessionListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			TradingSessionListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			TradingSessionListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2773,9 +3337,11 @@ impl Serialize for TradingSessionListUpdateReport {
 #[serde(tag = "1128")]
 pub enum MarketDefinitionRequest {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::market_definition_request::MarketDefinitionRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::market_definition_request::MarketDefinitionRequest>),
 }
@@ -2783,8 +3349,10 @@ pub enum MarketDefinitionRequest {
 impl Serialize for MarketDefinitionRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MarketDefinitionRequest::FIX50SP1(m) => m.serialize(serializer),
-            MarketDefinitionRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MarketDefinitionRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MarketDefinitionRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2793,9 +3361,11 @@ impl Serialize for MarketDefinitionRequest {
 #[serde(tag = "1128")]
 pub enum MarketDefinition {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::market_definition::MarketDefinition>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::market_definition::MarketDefinition>),
 }
@@ -2803,8 +3373,10 @@ pub enum MarketDefinition {
 impl Serialize for MarketDefinition {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MarketDefinition::FIX50SP1(m) => m.serialize(serializer),
-            MarketDefinition::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MarketDefinition::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MarketDefinition::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2813,9 +3385,11 @@ impl Serialize for MarketDefinition {
 #[serde(tag = "1128")]
 pub enum MarketDefinitionUpdateReport {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::market_definition_update_report::MarketDefinitionUpdateReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::market_definition_update_report::MarketDefinitionUpdateReport>),
 }
@@ -2823,8 +3397,10 @@ pub enum MarketDefinitionUpdateReport {
 impl Serialize for MarketDefinitionUpdateReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            MarketDefinitionUpdateReport::FIX50SP1(m) => m.serialize(serializer),
-            MarketDefinitionUpdateReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			MarketDefinitionUpdateReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			MarketDefinitionUpdateReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2833,9 +3409,11 @@ impl Serialize for MarketDefinitionUpdateReport {
 #[serde(tag = "1128")]
 pub enum ApplicationMessageRequest {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::application_message_request::ApplicationMessageRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::application_message_request::ApplicationMessageRequest>),
 }
@@ -2843,8 +3421,10 @@ pub enum ApplicationMessageRequest {
 impl Serialize for ApplicationMessageRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ApplicationMessageRequest::FIX50SP1(m) => m.serialize(serializer),
-            ApplicationMessageRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ApplicationMessageRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ApplicationMessageRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2853,9 +3433,11 @@ impl Serialize for ApplicationMessageRequest {
 #[serde(tag = "1128")]
 pub enum ApplicationMessageRequestAck {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::application_message_request_ack::ApplicationMessageRequestAck>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::application_message_request_ack::ApplicationMessageRequestAck>),
 }
@@ -2863,8 +3445,10 @@ pub enum ApplicationMessageRequestAck {
 impl Serialize for ApplicationMessageRequestAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ApplicationMessageRequestAck::FIX50SP1(m) => m.serialize(serializer),
-            ApplicationMessageRequestAck::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ApplicationMessageRequestAck::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ApplicationMessageRequestAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2873,9 +3457,11 @@ impl Serialize for ApplicationMessageRequestAck {
 #[serde(tag = "1128")]
 pub enum ApplicationMessageReport {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::application_message_report::ApplicationMessageReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::application_message_report::ApplicationMessageReport>),
 }
@@ -2883,8 +3469,10 @@ pub enum ApplicationMessageReport {
 impl Serialize for ApplicationMessageReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            ApplicationMessageReport::FIX50SP1(m) => m.serialize(serializer),
-            ApplicationMessageReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			ApplicationMessageReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			ApplicationMessageReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2893,9 +3481,11 @@ impl Serialize for ApplicationMessageReport {
 #[serde(tag = "1128")]
 pub enum OrderMassActionReport {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_mass_action_report::OrderMassActionReport>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_mass_action_report::OrderMassActionReport>),
 }
@@ -2903,8 +3493,10 @@ pub enum OrderMassActionReport {
 impl Serialize for OrderMassActionReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderMassActionReport::FIX50SP1(m) => m.serialize(serializer),
-            OrderMassActionReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderMassActionReport::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderMassActionReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2913,9 +3505,11 @@ impl Serialize for OrderMassActionReport {
 #[serde(tag = "1128")]
 pub enum OrderMassActionRequest {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::order_mass_action_request::OrderMassActionRequest>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::order_mass_action_request::OrderMassActionRequest>),
 }
@@ -2923,8 +3517,10 @@ pub enum OrderMassActionRequest {
 impl Serialize for OrderMassActionRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            OrderMassActionRequest::FIX50SP1(m) => m.serialize(serializer),
-            OrderMassActionRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			OrderMassActionRequest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			OrderMassActionRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2933,9 +3529,11 @@ impl Serialize for OrderMassActionRequest {
 #[serde(tag = "1128")]
 pub enum UserNotification {
     /// FIX50SP1
+	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::user_notification::UserNotification>),
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::user_notification::UserNotification>),
 }
@@ -2943,8 +3541,10 @@ pub enum UserNotification {
 impl Serialize for UserNotification {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            UserNotification::FIX50SP1(m) => m.serialize(serializer),
-            UserNotification::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp1")]
+			UserNotification::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			UserNotification::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2952,6 +3552,7 @@ impl Serialize for UserNotification {
 #[serde(tag = "1128")]
 pub enum StreamAssignmentRequest {
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::stream_assignment_request::StreamAssignmentRequest>),
 }
@@ -2959,7 +3560,8 @@ pub enum StreamAssignmentRequest {
 impl Serialize for StreamAssignmentRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            StreamAssignmentRequest::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			StreamAssignmentRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2968,6 +3570,7 @@ impl Serialize for StreamAssignmentRequest {
 #[serde(tag = "1128")]
 pub enum StreamAssignmentReport {
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::stream_assignment_report::StreamAssignmentReport>),
 }
@@ -2975,7 +3578,8 @@ pub enum StreamAssignmentReport {
 impl Serialize for StreamAssignmentReport {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            StreamAssignmentReport::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			StreamAssignmentReport::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2984,6 +3588,7 @@ impl Serialize for StreamAssignmentReport {
 #[serde(tag = "1128")]
 pub enum StreamAssignmentReportACK {
     /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
     FIX50SP2(Box<fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportACK>),
 }
@@ -2991,7 +3596,8 @@ pub enum StreamAssignmentReportACK {
 impl Serialize for StreamAssignmentReportACK {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            StreamAssignmentReportACK::FIX50SP2(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			StreamAssignmentReportACK::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
