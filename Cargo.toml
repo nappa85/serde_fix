@@ -2,8 +2,6 @@
 
 members = [
     "serde_fix",
-    "code_generator",
-    "enum_checker",
     "fix_common",
     "fixt11",
     "fix50sp2",
@@ -15,4 +13,8 @@ members = [
     "fix41",
     "fix40",
     "fix_message",
+]
+exclude = [
+    "code_generator",
+    "enum_checker",
 ]
