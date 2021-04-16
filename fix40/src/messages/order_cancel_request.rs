@@ -59,8 +59,9 @@ pub struct OrderCancelRequest {
 	pub side: Side,
 	/// Original OrderQty for <a href="tag_125_CxlType.html" target="bottom">CxlType&nbsp;(125)</a> =F or new OrderQty
 	/// for <a href="tag_125_CxlType.html" target="bottom">CxlType&nbsp;(125)</a> =P.
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "38")]
-	pub order_qty: OrderQty,
+	pub order_qty: u32,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]

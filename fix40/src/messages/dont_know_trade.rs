@@ -26,8 +26,9 @@ pub struct DontKnowTrade {
 	#[serde(rename = "54")]
 	pub side: Side,
 	/// OrderQty
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "38")]
-	pub order_qty: OrderQty,
+	pub order_qty: u32,
 	/// LastShares
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "32")]

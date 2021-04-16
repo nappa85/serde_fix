@@ -86,20 +86,25 @@ pub struct ExecutionReport {
 	#[serde(rename = "54")]
 	pub side: Side,
 	/// OrderQty
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "38")]
-	pub order_qty: OrderQty,
+	pub order_qty: u32,
 	/// OrdType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "40")]
 	pub ord_type: Option<OrdType>,
 	/// Price
 	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "44")]
-	pub price: Option<Price>,
+	pub price: Option<f64>,
 	/// Required for <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> = 4 (Stop Limit).
 	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "99")]
-	pub stop_px: Option<StopPx>,
+	pub stop_px: Option<f64>,
 	/// Message without currency field is interpreted as US dollars
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]
@@ -141,8 +146,9 @@ pub struct ExecutionReport {
 	#[serde(rename = "29")]
 	pub last_capacity: Option<LastCapacity>,
 	/// CumQty
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "14")]
-	pub cum_qty: CumQty,
+	pub cum_qty: u32,
 	/// AvgPx
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "6")]

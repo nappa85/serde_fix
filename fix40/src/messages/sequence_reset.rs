@@ -11,8 +11,9 @@ pub struct SequenceReset {
 	#[serde(rename = "123")]
 	pub gap_fill_flag: Option<GapFillFlag>,
 	/// NewSeqNo
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "36")]
-	pub new_seq_no: NewSeqNo,
+	pub new_seq_no: u32,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -22,14 +23,14 @@ pub struct SequenceReset {
 pub enum GapFillFlag {
 	/// Gap Fill message, <a href="tag_34_MsgSeqNum.html" target="bottom">MsgSeqNum&nbsp;(34)</a> field valid
 	#[serde(rename = "Y")]
-	GapFillMessageAHrefTag34MsgSeqNumHtmlTargetBottomMsgSeqNumNbspAFieldValid,
+	GapFillMessage,
 	/// Sequence Reset, ignore <a href="tag_34_MsgSeqNum.html" target="bottom">MsgSeqNum&nbsp;(34)</a>
 	#[serde(rename = "N")]
-	SequenceResetIgnoreAHrefTag34MsgSeqNumHtmlTargetBottomMsgSeqNumNbspA,
+	SequenceResetIgnore,
 }
 
 impl Default for GapFillFlag {
 	fn default() -> Self {
-		GapFillFlag::GapFillMessageAHrefTag34MsgSeqNumHtmlTargetBottomMsgSeqNumNbspAFieldValid
+		GapFillFlag::GapFillMessage
 	}
 }

@@ -94,19 +94,24 @@ pub struct OrderCancelReplaceRequest {
 	#[serde(rename = "54")]
 	pub side: Side,
 	/// OrderQty
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "38")]
-	pub order_qty: OrderQty,
+	pub order_qty: u32,
 	/// OrdType
 	#[serde(rename = "40")]
 	pub ord_type: OrdType,
 	/// Required for limit OrdTypes
 	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "44")]
-	pub price: Option<Price>,
+	pub price: Option<f64>,
 	/// Required for stop OrdTypes
 	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "99")]
-	pub stop_px: Option<StopPx>,
+	pub stop_px: Option<f64>,
 	/// Message without currency field is interpreted as US dollars. Must match original order.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]

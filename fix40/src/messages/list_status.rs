@@ -35,8 +35,9 @@ pub struct Order {
 	#[serde(rename = "11")]
 	pub cl_ord_id: char,
 	/// CumQty
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "14")]
-	pub cum_qty: CumQty,
+	pub cum_qty: u32,
 	/// CxlQty
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "84")]

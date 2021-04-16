@@ -44,8 +44,10 @@ pub struct QuoteRequest {
 	pub side: Option<Side>,
 	/// OrderQty
 	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "38")]
-	pub order_qty: Option<OrderQty>,
+	pub order_qty: Option<u32>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

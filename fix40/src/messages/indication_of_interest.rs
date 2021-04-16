@@ -50,8 +50,10 @@ pub struct IndicationofInterest {
 	pub ioi_shares: IOIShares,
 	/// Price
 	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "44")]
-	pub price: Option<Price>,
+	pub price: Option<f64>,
 	/// Indication without currency field is interpreted as US dollars.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]

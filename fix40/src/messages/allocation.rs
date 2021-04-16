@@ -55,8 +55,9 @@ pub struct Allocation {
 	#[serde(rename = "107")]
 	pub security_desc: Option<char>,
 	/// Total number of shares allocated to all accounts
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "53")]
-	pub shares: Shares,
+	pub shares: u32,
 	/// AvgPx
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "6")]
