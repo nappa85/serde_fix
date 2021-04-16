@@ -8,7 +8,7 @@ pub struct ExecutionReport {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'8'>,
 	/// OrderID
 	#[serde(rename = "37")]
-	pub order_id: char,
+	pub order_id: String,
 	/// Required for executions against electronically submitted orders which were assigned
 	/// an ID by the institution. Not required for orders manually entered by the broker.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -61,7 +61,7 @@ pub struct ExecutionReport {
 	pub fut_sett_date: Option<fix_common::UTCDateOnly>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

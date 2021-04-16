@@ -22,15 +22,11 @@ pub struct News {
 	#[serde(rename = "33")]
 	pub lines_of_text: fix_common::RepeatingValues<LinesOfTex>,
 	/// RawDataLength
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "95")]
-	pub raw_data_length: Option<i32>,
 	/// RawData
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "96")]
-	pub raw_data: Option<String>,
+	#[serde(alias = "96")]
+	pub raw_data: Option<fix_common::EncodedText<96>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
@@ -40,7 +36,7 @@ pub struct News {
 pub struct LinesOfTex {
 	/// Repeating field, number of instances defined in <a href="tag_33_LinesOfText.html" target="bottom">LinesOfText&nbsp;(33)</a>
 	#[serde(rename = "58")]
-	pub text: char,
+	pub text: String,
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

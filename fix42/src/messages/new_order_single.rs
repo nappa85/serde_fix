@@ -127,29 +127,21 @@ pub struct NewOrderSingle {
 	#[serde(rename = "106")]
 	pub issuer: Option<String>,
 	/// Must be set if <a href="tag_349_EncodedIssuer.html" target="bottom">EncodedIssuer&nbsp;(349)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "348")]
-	pub encoded_issuer_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_106_Issuer.html" target="bottom">Issuer&nbsp;(106)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "349")]
-	pub encoded_issuer: Option<String>,
+	#[serde(alias = "349")]
+	pub encoded_issuer: Option<fix_common::EncodedText<349>>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
 	pub security_desc: Option<String>,
 	/// Must be set if <a href="tag_351_EncodedSecurityDesc.html" target="bottom">EncodedSecurityDesc&nbsp;(351)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "350")]
-	pub encoded_security_desc_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_107_SecurityDesc.html" target="bottom">SecurityDesc&nbsp;(107)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "351")]
-	pub encoded_security_desc: Option<String>,
+	#[serde(alias = "351")]
+	pub encoded_security_desc: Option<fix_common::EncodedText<351>>,
 	/// Useful for verifying security identification
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -262,15 +254,11 @@ pub struct NewOrderSingle {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 	/// Can be used with <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the "value date" for the future portion of a F/X swap.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "193")]

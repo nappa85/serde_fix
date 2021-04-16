@@ -21,7 +21,7 @@ pub struct DontKnowTrade {
 	pub dk_reason: DKReason,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// Side
 	#[serde(rename = "54")]
 	pub side: Side,

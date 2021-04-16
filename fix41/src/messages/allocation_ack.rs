@@ -16,7 +16,7 @@ pub struct AllocationAck {
 	pub exec_broker: Option<char>,
 	/// AllocID
 	#[serde(rename = "70")]
-	pub alloc_id: char,
+	pub alloc_id: String,
 	/// TradeDate
 	#[serde(rename = "75")]
 	pub trade_date: fix_common::UTCDateOnly,

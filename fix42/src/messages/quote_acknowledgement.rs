@@ -111,29 +111,21 @@ pub struct QuoteSet {
 	#[serde(rename = "306")]
 	pub underlying_issuer: Option<String>,
 	/// Must be set if <a href="tag_363_EncodedUnderlyingIssuer.html" target="bottom">EncodedUnderlyingIssuer&nbsp;(363)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "362")]
-	pub encoded_underlying_issuer_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_306_UnderlyingIssuer.html" target="bottom">UnderlyingIssuer&nbsp;(306)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "363")]
-	pub encoded_underlying_issuer: Option<String>,
+	#[serde(alias = "363")]
+	pub encoded_underlying_issuer: Option<fix_common::EncodedText<363>>,
 	/// UnderlyingSecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "307")]
 	pub underlying_security_desc: Option<String>,
 	/// Must be set if <a href="tag_365_EncodedUnderlyingSecurityDesc.html" target="bottom">EncodedUnderlyingSecurityDesc&nbsp;(365)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "364")]
-	pub encoded_underlying_security_desc_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_307_UnderlyingSecurityDesc.html" target="bottom">UnderlyingSecurityDesc&nbsp;(307)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "365")]
-	pub encoded_underlying_security_desc: Option<String>,
+	#[serde(alias = "365")]
+	pub encoded_underlying_security_desc: Option<fix_common::EncodedText<365>>,
 	/// Total number of quotes for the QuoteSet across all messages. Should be the sum of all <a href="tag_295_NoQuoteEntries.html" target="bottom">NoQuoteEntries&nbsp;(295)</a> in each message that has repeating quotes that are part of the same QuoteSet. Required if <a href="tag_295_NoQuoteEntries.html" target="bottom">NoQuoteEntries&nbsp;(295)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "304")]
@@ -212,29 +204,21 @@ pub struct QuoteSet {
 	#[serde(rename = "106")]
 	pub issuer: Option<String>,
 	/// Must be set if <a href="tag_349_EncodedIssuer.html" target="bottom">EncodedIssuer&nbsp;(349)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "348")]
-	pub encoded_issuer_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_106_Issuer.html" target="bottom">Issuer&nbsp;(106)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "349")]
-	pub encoded_issuer: Option<String>,
+	#[serde(alias = "349")]
+	pub encoded_issuer: Option<fix_common::EncodedText<349>>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
 	pub security_desc: Option<String>,
 	/// Must be set if <a href="tag_351_EncodedSecurityDesc.html" target="bottom">EncodedSecurityDesc&nbsp;(351)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "350")]
-	pub encoded_security_desc_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_107_SecurityDesc.html" target="bottom">SecurityDesc&nbsp;(107)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "351")]
-	pub encoded_security_desc: Option<String>,
+	#[serde(alias = "351")]
+	pub encoded_security_desc: Option<fix_common::EncodedText<351>>,
 	/// Reason Quote Entry was rejected.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "368")]

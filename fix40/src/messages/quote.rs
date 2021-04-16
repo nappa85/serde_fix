@@ -12,10 +12,10 @@ pub struct Quote {
 	pub quote_req_id: Option<char>,
 	/// QuoteID
 	#[serde(rename = "117")]
-	pub quote_id: char,
+	pub quote_id: String,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

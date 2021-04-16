@@ -8,7 +8,7 @@ pub struct SettlementInstructions {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'T'>,
 	/// Unique message ID regardless of <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a>
 	#[serde(rename = "162")]
-	pub settl_inst_id: char,
+	pub settl_inst_id: String,
 	/// New, Replace, or Cancel
 	#[serde(rename = "163")]
 	pub settl_inst_trans_type: SettlInstTransType,
@@ -20,7 +20,7 @@ pub struct SettlementInstructions {
 	pub settl_inst_source: SettlInstSource,
 	/// Required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> =1, 2, or 3
 	#[serde(rename = "79")]
-	pub alloc_account: char,
+	pub alloc_account: String,
 	/// Required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> =2 or 3, may be required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> =1 (i.e. may not be required if <a href="tag_169_StandInstDbType.html" target="bottom">StandInstDbType&nbsp;(169)</a> and <a href="tag_171_StandInstDbID.html" target="bottom">StandInstDbID&nbsp;(171)</a> are used)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "166")]

@@ -8,14 +8,14 @@ pub struct OrderCancelRequest {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'F'>,
 	/// <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> of the previous order (NOT the initial order of the day) when canceling or replacing an order.
 	#[serde(rename = "41")]
-	pub orig_cl_ord_id: char,
+	pub orig_cl_ord_id: String,
 	/// Unique identifier of most recent order as assigned by broker.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
 	pub order_id: Option<char>,
 	/// Unique ID of cancel request as assigned by the institution.
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// Required for List Orders
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
@@ -30,7 +30,7 @@ pub struct OrderCancelRequest {
 	pub exec_broker: Option<char>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

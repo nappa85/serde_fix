@@ -8,7 +8,7 @@ pub struct IndicationOfInterest {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'6'>,
 	/// IOIid
 	#[serde(rename = "23")]
-	pub io_iid: char,
+	pub io_iid: String,
 	/// IOITransType
 	#[serde(rename = "28")]
 	pub ioi_trans_type: IOITransType,
@@ -18,7 +18,7 @@ pub struct IndicationOfInterest {
 	pub ioi_ref_id: Option<char>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

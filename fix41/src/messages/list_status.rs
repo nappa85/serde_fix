@@ -8,7 +8,7 @@ pub struct ListStatus {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'N'>,
 	/// ListID
 	#[serde(rename = "66")]
-	pub list_id: char,
+	pub list_id: String,
 	/// WaveNo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "105")]
@@ -33,7 +33,7 @@ pub struct ListStatus {
 pub struct Order {
 	/// ClOrdID
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// CumQty
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "14")]

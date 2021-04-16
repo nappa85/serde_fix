@@ -33,7 +33,7 @@ pub struct Allocation {
 	pub side: Side,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
@@ -129,7 +129,7 @@ pub struct Order {
 	/// Order ID assigned by client if order(s) were electronically delivered and
 	/// executed. If order(s) were manually delivered this field should contain string 'MANUAL'.
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// OrderID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
@@ -192,7 +192,7 @@ pub struct MiscFee {
 pub struct Alloc {
 	/// AllocAccount
 	#[serde(rename = "79")]
-	pub alloc_account: char,
+	pub alloc_account: String,
 	/// AllocShares
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "80")]

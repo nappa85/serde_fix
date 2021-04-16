@@ -8,7 +8,7 @@ pub struct Advertisement {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'7'>,
 	/// AdvId
 	#[serde(rename = "2")]
-	pub adv_id: char,
+	pub adv_id: String,
 	/// AdvTransType
 	#[serde(rename = "5")]
 	pub adv_trans_type: AdvTransType,
@@ -18,7 +18,7 @@ pub struct Advertisement {
 	pub adv_ref_id: Option<char>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

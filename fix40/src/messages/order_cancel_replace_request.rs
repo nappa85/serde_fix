@@ -20,11 +20,11 @@ pub struct OrderCancelReplaceRequest {
 	pub exec_broker: Option<char>,
 	/// Unique identifier of original order as assigned by institution.
 	#[serde(rename = "41")]
-	pub orig_cl_ord_id: char,
+	pub orig_cl_ord_id: String,
 	/// Unique identifier of replacement order as assigned by institution. Note that this
 	/// identifier will be used in <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> field of the <a href="message_Order_Cancel_Reject_9.html" target="main">Cancel Reject&nbsp;(9)</a> Message if the replacement request is rejected.
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// Required for List Orders
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
@@ -68,7 +68,7 @@ pub struct OrderCancelReplaceRequest {
 	pub ex_destination: Option<ExDestination>,
 	/// Must match original order
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

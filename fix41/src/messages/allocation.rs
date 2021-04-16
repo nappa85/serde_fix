@@ -8,7 +8,7 @@ pub struct Allocation {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'J'>,
 	/// AllocID
 	#[serde(rename = "70")]
-	pub alloc_id: char,
+	pub alloc_id: String,
 	/// AllocTransType
 	#[serde(rename = "71")]
 	pub alloc_trans_type: AllocTransType,
@@ -39,7 +39,7 @@ pub struct Allocation {
 	pub side: Side,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

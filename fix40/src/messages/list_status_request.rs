@@ -8,7 +8,7 @@ pub struct ListStatusRequest {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'M'>,
 	/// ListID
 	#[serde(rename = "66")]
-	pub list_id: char,
+	pub list_id: String,
 	/// WaveNo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "105")]

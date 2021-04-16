@@ -8,7 +8,7 @@ pub struct NewOrderList {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'E'>,
 	/// Must be unique, by customer, for the day
 	#[serde(rename = "66")]
-	pub list_id: char,
+	pub list_id: String,
 	/// WaveNo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "105")]
@@ -27,7 +27,7 @@ pub struct NewOrderList {
 	pub list_exec_inst: Option<char>,
 	/// Unique identifier of the order as assigned by institution.
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// Used for third-party transactions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
@@ -77,7 +77,7 @@ pub struct NewOrderList {
 	pub process_code: Option<ProcessCode>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct StandardMessageHeader<const T: char> {
 	/// FIX.4.1 (Always unencrypted, must be first field in message)
 	#[serde(rename = "8")]
+	#[serde(default)]
 	pub begin_string: fix_common::FixVersion<1>,
 	/// (Always unencrypted, must be second field in message)
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -12,13 +13,14 @@ pub struct StandardMessageHeader<const T: char> {
 	pub body_length: u32,
 	/// (Always unencrypted, must be third field in message)
 	#[serde(rename = "35")]
+	#[serde(default)]
 	pub msg_type: MsgType<T>,
 	/// (Always unencrypted)
 	#[serde(rename = "49")]
-	pub sender_comp_id: char,
+	pub sender_comp_id: String,
 	/// (Always unencrypted)
 	#[serde(rename = "56")]
-	pub target_comp_id: char,
+	pub target_comp_id: String,
 	/// Trading partner company ID used when sending messages via a third party (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "115")]
@@ -28,15 +30,11 @@ pub struct StandardMessageHeader<const T: char> {
 	#[serde(rename = "128")]
 	pub deliver_to_comp_id: Option<char>,
 	/// Required to identify length of encrypted section of message. (Always unencrypted)
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "90")]
-	pub secure_data_len: Option<i32>,
 	/// Required when message body is encrypted. Always immediately follows <a href="tag_90_SecureDataLen.html" target="bottom">SecureDataLen&nbsp;(90)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "91")]
-	pub secure_data: Option<String>,
+	#[serde(alias = "91")]
+	pub secure_data: Option<fix_common::EncodedText<91>>,
 	/// (Can be embedded within encrypted data section.)
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "34")]

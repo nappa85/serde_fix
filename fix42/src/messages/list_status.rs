@@ -28,15 +28,11 @@ pub struct ListStatus {
 	#[serde(rename = "444")]
 	pub list_status_text: Option<String>,
 	/// Must be set if <a href="tag_446_EncodedListStatusText.html" target="bottom">EncodedListStatusText&nbsp;(446)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "445")]
-	pub encoded_list_status_text_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_444_ListStatusText.html" target="bottom">ListStatusText&nbsp;(444)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "446")]
-	pub encoded_list_status_text: Option<String>,
+	#[serde(alias = "446")]
+	pub encoded_list_status_text: Option<fix_common::EncodedText<446>>,
 	/// TransactTime
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
@@ -86,15 +82,11 @@ pub struct Order {
 	#[serde(rename = "58")]
 	pub text: Option<String>,
 	/// Must be set if <a href="tag_355_EncodedText.html" target="bottom">EncodedText&nbsp;(355)</a> field is specified and must immediately precede it.
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "354")]
-	pub encoded_text_len: Option<i32>,
 	/// Encoded (non-ASCII characters) representation of the <a href="tag_58_Text.html" target="bottom">Text&nbsp;(58)</a> field in the encoded format specified via the <a href="tag_347_MessageEncoding.html" target="bottom">MessageEncoding&nbsp;(347)</a> field.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "355")]
-	pub encoded_text: Option<String>,
+	#[serde(alias = "355")]
+	pub encoded_text: Option<fix_common::EncodedText<355>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

@@ -8,10 +8,10 @@ pub struct OrderCancelReject {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'9'>,
 	/// OrderID
 	#[serde(rename = "37")]
-	pub order_id: char,
+	pub order_id: String,
 	/// Unique order id assigned by institution to the cancel request or to the replacement order.
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]

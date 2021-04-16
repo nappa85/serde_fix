@@ -8,7 +8,7 @@ pub struct NewOrderSingle {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'D'>,
 	/// ClOrdID
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
@@ -58,7 +58,7 @@ pub struct NewOrderSingle {
 	pub process_code: Option<ProcessCode>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

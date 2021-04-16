@@ -11,5 +11,6 @@ pub struct StandardMessageTrailer {
 	pub signature: Option<fix_common::EncodedText<89>>,
 	/// (Always unencrypted, always last field in message)
 	#[serde(rename = "10")]
+    #[serde(skip_serializing)]
 	pub check_sum: String,
 }

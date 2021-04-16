@@ -8,7 +8,7 @@ pub struct ExecutionReport {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'8'>,
 	/// <a href="tag_37_OrderID.html" target="bottom">OrderID&nbsp;(37)</a> is required to be unique for each chain of orders.
 	#[serde(rename = "37")]
-	pub order_id: char,
+	pub order_id: String,
 	/// Can be used to provide order id used by exchange or executing system.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "198")]
@@ -36,7 +36,7 @@ pub struct ExecutionReport {
 	pub list_id: Option<char>,
 	/// ExecID
 	#[serde(rename = "17")]
-	pub exec_id: char,
+	pub exec_id: String,
 	/// ExecTransType
 	#[serde(rename = "20")]
 	pub exec_trans_type: ExecTransType,
@@ -68,7 +68,7 @@ pub struct ExecutionReport {
 	pub fut_sett_date: Option<fix_common::UTCDateOnly>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

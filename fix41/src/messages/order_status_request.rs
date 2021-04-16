@@ -12,7 +12,7 @@ pub struct OrderStatusRequest {
 	pub order_id: Option<char>,
 	/// ClOrdID
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
@@ -23,7 +23,7 @@ pub struct OrderStatusRequest {
 	pub exec_broker: Option<char>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

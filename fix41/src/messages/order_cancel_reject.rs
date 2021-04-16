@@ -8,17 +8,17 @@ pub struct OrderCancelReject {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'9'>,
 	/// OrderID
 	#[serde(rename = "37")]
-	pub order_id: char,
+	pub order_id: String,
 	/// Can be used to provide order id used by exchange or executing system.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "198")]
 	pub secondary_order_id: Option<char>,
 	/// Unique order id assigned by institution to the cancel request or to the replacement order.
 	#[serde(rename = "11")]
-	pub cl_ord_id: char,
+	pub cl_ord_id: String,
 	/// <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> which could not be canceled/replaced. <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> of the previous order (NOT the initial order of the day) when canceling or replacing an order.
 	#[serde(rename = "41")]
-	pub orig_cl_ord_id: char,
+	pub orig_cl_ord_id: String,
 	/// OrdStatus value after this cancel reject is applied.
 	#[serde(rename = "39")]
 	pub ord_status: OrdStatus,

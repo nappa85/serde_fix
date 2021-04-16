@@ -21,7 +21,7 @@ pub struct Advertisement {
 	pub adv_ref_id: Option<i32>,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

@@ -8,10 +8,10 @@ pub struct QuoteRequest {
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'R'>,
 	/// QuoteReqID
 	#[serde(rename = "131")]
-	pub quote_req_id: char,
+	pub quote_req_id: String,
 	/// Symbol
 	#[serde(rename = "55")]
-	pub symbol: char,
+	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]

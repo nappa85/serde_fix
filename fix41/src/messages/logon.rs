@@ -14,15 +14,11 @@ pub struct Logon {
 	#[serde(rename = "108")]
 	pub heart_bt_int: i32,
 	/// Required for some authentication methods
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "95")]
-	pub raw_data_length: Option<i32>,
 	/// Required for some authentication methods
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "96")]
-	pub raw_data: Option<String>,
+	#[serde(alias = "96")]
+	pub raw_data: Option<fix_common::EncodedText<96>>,
 	/// Indicates both sides of a FIX session should reset sequence numbers
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "141")]
