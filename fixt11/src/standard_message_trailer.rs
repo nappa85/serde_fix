@@ -5,7 +5,7 @@ use fix_common::EncodedText;
 
 /// Standard Message Header
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Trailer {
+pub struct StandardMessageTrailer {
     /// Required when trailer contains signature. Note: Not to be included within SecureData (91) field
     #[serde(rename = "93")]
     #[serde(alias = "89")]
