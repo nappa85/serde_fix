@@ -2,13 +2,13 @@
 use serde::{Serialize, Deserialize};
 
 use fix_common::EncodedText;
-use crate::{header::{Header, MsgType}, Trailer};
+use crate::{standard_message_header::{StandardMessageHeader, MsgType}, StandardMessageTrailer};
 
 /// MsgType = 3
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Reject {
     #[serde(flatten)]
-    pub header: Header<5, '3', ' '>,
+    pub standard_message_header: StandardMessageHeader<5, '3', ' '>,
     /// MsgSeqNum of rejected message
     #[serde(rename = "45")]
     pub ref_seq_num: u64,
@@ -46,7 +46,7 @@ pub struct Reject {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub encoded_text: Option<EncodedText<355>>,
     #[serde(flatten)]
-    pub trailer: Trailer,
+    pub standard_message_trailer: StandardMessageTrailer,
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
