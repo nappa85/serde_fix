@@ -95,16 +95,12 @@ pub struct StandardMessageHeader<const T: char> {
 	#[serde(rename = "122")]
 	pub orig_sending_time: Option<fix_common::UTCTimestamp>,
 	/// Required when specifying <a href="tag_213_XmlData.html" target="bottom">XmlData&nbsp;(213)</a> to identify the length of a XmlData message block. (Can be embedded within encrypted data section.)
-	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "212")]
-	pub xml_data_len: Option<i32>,
 	/// Can contain a XML formatted message block (e.g. FIXML). Always immediately follows XmlDataLen field. (Can be embedded within
 	/// encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(rename = "213")]
-	pub xml_data: Option<String>,
+	#[serde(alias = "213")]
+	pub xml_data: Option<fix_common::EncodedText<213>>,
 	/// Type of message encoding (non-ASCII characters) used in a message's "Encoded" fields. Required if any "Encoding" fields are
 	/// used.
 	#[serde(skip_serializing_if = "Option::is_none")]
