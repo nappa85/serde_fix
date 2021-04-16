@@ -170,7 +170,8 @@ pub struct ExecutionReport {
 	pub rule_80_a: Option<Rule80A>,
 	/// Quantity of shares bought/sold on this (last) fill. Not required <a href="tag_20_ExecTransType.html" target="bottom">ExecTransType&nbsp;(20)</a> = 3 (Status)
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
+	#[serde(default)]
 	#[serde(rename = "32")]
 	pub last_shares: Option<u32>,
 	/// Price of this (last) fill. Not required for <a href="tag_20_ExecTransType.html" target="bottom">ExecTransType&nbsp;(20)</a> = 3 (Status), should represent the "all-in" ( <a href="tag_194_LastSpotRate.html" target="bottom">LastSpotRate&nbsp;(194)</a> + <a href="tag_195_LastForwardPoints.html" target="bottom">LastForwardPoints&nbsp;(195)</a> ) rate for F/X orders.
@@ -208,8 +209,7 @@ pub struct ExecutionReport {
 	#[serde(rename = "14")]
 	pub cum_qty: u32,
 	/// AvgPx
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "6")]
 	pub avg_px: f64,
 	/// Used when reporting other than current day trades.

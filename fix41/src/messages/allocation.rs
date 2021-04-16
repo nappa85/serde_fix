@@ -91,8 +91,7 @@ pub struct Allocation {
 	#[serde(rename = "107")]
 	pub security_desc: Option<char>,
 	/// Total number of shares allocated to all accounts
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "53")]
 	pub shares: u32,
 	/// Market of the executions.
@@ -219,8 +218,7 @@ pub struct Alloc {
 	#[serde(rename = "79")]
 	pub alloc_account: Option<char>,
 	/// AllocShares
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "80")]
 	pub alloc_shares: u32,
 	/// ProcessCode

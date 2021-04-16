@@ -17,5 +17,6 @@ fix50 = { path = "../fix50" }
 fix44 = { path = "../fix44" }
 fix43 = { path = "../fix43" }
 fix42 = { path = "../fix42" }
+fix41 = { path = "../fix41" }
 
 [dev-dependencies]

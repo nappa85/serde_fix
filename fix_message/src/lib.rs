@@ -4,6 +4,8 @@
 
 use serde::{Deserialize, Serialize};
 
+// pub mod fix40;
+pub mod fix41;
 pub mod fix42;
 pub mod fix43;
 pub mod fix44;
@@ -13,9 +15,9 @@ pub mod fixt11;
 #[serde(tag = "8")]
 pub enum Message {
     // #[serde(rename = "FIX.4.0")]
-    // FIX40,
-    // #[serde(rename = "FIX.4.1")]
-    // FIX41,
+    // FIX40(fix40::Message),
+    #[serde(rename = "FIX.4.1")]
+    FIX41(fix41::Message),
     #[serde(rename = "FIX.4.2")]
     FIX42(fix42::Message),
     #[serde(rename = "FIX.4.3")]
@@ -29,6 +31,8 @@ pub enum Message {
 impl Serialize for Message {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
+//             Message::FIX40(m) => m.serialize(serializer),
+            Message::FIX41(m) => m.serialize(serializer),
             Message::FIX42(m) => m.serialize(serializer),
             Message::FIX43(m) => m.serialize(serializer),
             Message::FIX44(m) => m.serialize(serializer),
