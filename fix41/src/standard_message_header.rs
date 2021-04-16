@@ -7,6 +7,7 @@ pub struct StandardMessageHeader<const T: char> {
 	#[serde(rename = "8")]
 	pub begin_string: fix_common::FixVersion<1>,
 	/// (Always unencrypted, must be second field in message)
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "9")]
 	pub body_length: u32,
 	/// (Always unencrypted, must be third field in message)

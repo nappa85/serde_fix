@@ -3605,7 +3605,6 @@ impl Serialize for StreamAssignmentReportACK {
 #[cfg(test)]
 mod test {
     use super::Message;
-    use fixt11::header::MsgType;
 
     #[test]
     fn logon() {

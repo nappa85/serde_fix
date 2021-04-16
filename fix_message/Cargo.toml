@@ -33,3 +33,4 @@ fix41 = { path = "../fix41", optional = true }
 fix40 = { path = "../fix40", optional = true }
 
 [dev-dependencies]
+serde_fix = { path = "../serde_fix" }
