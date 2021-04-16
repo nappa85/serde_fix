@@ -1,62 +1,26 @@
-FiX meets Serde
-===================================
+# FiX meets Serde
 
-This crate is a Rust library for serialising to and deserialising from
+This workspace is a set of Rust libraries for serialising to and deserialising from
 the [FiX] format. It is built
 upon [Serde], a high performance generic serialization framework.
 
 [Serde]: https://github.com/serde-rs/serde
 [FiX]: http://www.fixprotocol.org/
 
-Installation
-============
+## Composition
 
-This crate works with Cargo and can be found on
-[crates.io] with a `Cargo.toml` like:
-
-```toml
-[dependencies]
-serde_fix = "0.1"
-```
-
-The documentation is available on [docs.rs].
-
-[crates.io]: https://crates.io/crates/serde_fix
-[docs.rs]: https://docs.rs/serde_fix/0.1.0/serde_fix/
-
-## Getting help
-
-Serde developers live in the #serde channel on
-[`irc.mozilla.org`](https://wiki.mozilla.org/IRC).
-The #rust channel is also a good resource with generally
-faster response time but less specific knowledge about Serde or this
-crate. If IRC is not your thing, we are happy to respond to [GitHub
-issues](https://github.com/nappa85/serde_fix/issues/new) as well.
-
-## FiX docs
-
-You can find details about the protocol on those sites:
- * [btobits](https://btobits.com/fixopaedia/fixdict11ep/index.html)
- * [onixs](https://www.onixs.biz/fix-dictionary/FIXT1.1/index.html)
- * [tradingtechnologies](https://www.tradingtechnologies.com/xtrader-help/fix-adapter-reference/fix-message-conversations/logon-and-logout/)
-
-## License
-
-serde_fix is licensed under either of
-
- * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
-   http://www.apache.org/licenses/LICENSE-2.0)
- * MIT license ([LICENSE-MIT](LICENSE-MIT) or
-   http://opensource.org/licenses/MIT)
-
-at your option.
-
-### Contribution
-
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in serde_fix by you, as defined in the Apache-2.0 license,
-shall be dual licensed as above, without any additional terms or conditions.
-
-## Influences
-
-This crate is heavily influenced by [serde_urlencoded](https://github.com/nox/serde_urlencoded/).
+This workspace is composed of:
+* [code_generator](./code_generator): utility to generate code from protocol specs
+* [enum_checker](./enum_checker): utility to find duplicate enums across code
+* [fix40](./fix40): FiX 4.0 entities
+* [fix41](./fix41): FiX 4.1 entities
+* [fix42](./fix42): FiX 4.2 entities
+* [fix43](./fix43): FiX 4.3 entities
+* [fix44](./fix44): FiX 4.4 entities
+* [fix50](./fix45): FiX 5.0 entities
+* [fix50sp1](./fix50sp1): FiX 5.0SP1 entities
+* [fix50sp2](./fix50sp2): FiX 5.0SP2 entities
+* [fix_common](./fix_common): common FiX entities, data type and structures
+* [fix_message](./fix_message): Modular multiversion message enum
+* [fixt11](./fixt11): FiX Transport 1.1
+* [serde_fix](./serde_fix): Serialization/Deserialization methods

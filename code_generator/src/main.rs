@@ -14,6 +14,8 @@ use regex::{Captures, Regex};
 
 use convert_case::{Case, Casing};
 
+use once_cell::sync::Lazy;
+
 use log::{error, info};
 
 #[derive(Debug, StructOpt)]
@@ -105,7 +107,7 @@ async fn main() -> Result<(), ()> {
                         else {
                             if is_message {
                                 let mut lock = message_mod.lock().await;
-                                lock.push((name, clean_name(&c["name"])));
+                                lock.push(name);
                             }
                             else {
                                 let mut lock = block_mod.lock().await;
@@ -129,8 +131,8 @@ async fn main() -> Result<(), ()> {
                 let mut f = File::create(&file)
                     .await
                     .map_err(|e| error!("File open error {}: {}", file.display(), e))?;
-                for (mod_name, struct_name) in lock.iter() {
-                    f.write_all(format!("pub mod {};\npub use {}::{};\n", mod_name, mod_name, struct_name).as_bytes())
+                for mod_name in lock.iter() {
+                    f.write_all(format!("pub mod {};\n", mod_name).as_bytes())
                         .await
                         .map_err(|e| error!("File write error {}: {}", file.display(), e))?;
                 }
@@ -143,7 +145,7 @@ async fn main() -> Result<(), ()> {
         let lock = block_mod.lock().await;
         if !lock.is_empty() {
             let mut file = base_dir.clone();
-            file.push("mod.rs");
+            file.push("lib.rs");
             if !file.as_path().exists() {
                 let mut f = File::create(&file)
                     .await
@@ -187,7 +189,7 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
     let base_url = get_base_url(url);
 
     // prepare regexs
-    let table = Regex::new(r#"<h1>(&lt;)?(?P<name>\w+)(&gt;)?[\s\S]+?<table[^>]+>[\n\s]+<tr class="tbl-hdr">([\n\s]+<th[^>]*>[^<]+</th>)+[\n\s]+</tr>(?P<body>[\s\S]+?)</table>"#)
+    let table = Regex::new(r#"<h1>(&lt;)?(?P<name>[^&<]+)(&gt;)?[\s\S]+?<table[^>]+>[\n\s]+<tr class="tbl-hdr">([\n\s]+<th[^>]*>[^<]+</th>)+[\n\s]+</tr>(?P<body>[\s\S]+?)</table>"#)
         .map_err(|e| error!("Error building table Regex: {}", e))?;
     let tr = Regex::new(r#"<tr[^>]+>(?P<body>[\s\S]+?)</tr>(?P<rows>([\n\s]+<tr[^>]+>[\n\s]+<td[^>]+>=&gt;</td>[\s\S]+?</tr>)+)?"#)
         .map_err(|e| error!("Error building tr Regex: {}", e))?;
@@ -205,9 +207,11 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
 
     // retrieve struct name and table body
     let captures = table.captures(&text).ok_or_else(|| error!("Unrecognized body table"))?;
-    out.write_all(format!("\nuse serde::{{Deserialize, Serialize}};\n\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{\n", clean_name(&captures["name"])).as_bytes())
+    let name = clean_name(&captures["name"]);
+    out.write_all(format!("\nuse serde::{{Deserialize, Serialize}};\n\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{\n", name).as_bytes())
         .await
         .map_err(|e| error!("{}", e))?;
+    let mut next_encoded = None;
     for tr_match in tr.captures_iter(&captures["body"]) {
         let tr_body = &tr_match["body"];
 
@@ -217,11 +221,13 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
             out.write_all(format!("\t/// {}\n\t#[serde(flatten)]\n\tpub {}: {},\n", clean_comment(&b["comment"], &b["name"]), to_snake_case(&name), maybe_option(&name, &b["req"], if is_message { 2 } else { 1 })).as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
+            next_encoded = None;
         }
         // a normal tagvalue
         else if let Some(t) = tag.captures(tr_body) {
             let is_array = tr_match.name("rows").is_some();
-            let name = tag_processor(&t, &client, &base_url, tr_body, is_array, &mut enums, &vartype, &enum_body, out).await?;
+            let (name, is_encoded) = tag_processor(&t, &client, &base_url, tr_body, &name, is_array, next_encoded, &mut enums, &vartype, &enum_body, out).await?;
+            next_encoded = is_encoded;
             if is_array {
                 arrays.push(((&name[0..(name.len() - 1)]).to_owned(), (&tr_match["rows"]).to_owned()));
             }
@@ -241,8 +247,10 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
             out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]\npub struct {} {{\n", name).as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
+            let mut next_encoded = None;
             for t in tag.captures_iter(&list) {
-                tag_processor(&t, &client, &base_url, &list, false, &mut enums, &vartype, &enum_body, out).await?;
+                let (_, is_encoded) = tag_processor(&t, &client, &base_url, &list, &name, false, next_encoded, &mut enums, &vartype, &enum_body, out).await?;
+                next_encoded = is_encoded;
             }
             out.write_all("}\n".as_bytes())
                 .await
@@ -255,25 +263,70 @@ async fn parse_url<W: AsyncWrite + Unpin>(url: &str, client: &Client, is_message
         let enum_items = Regex::new(r#"<tr[^>]+>[\n\s]+<td class="val">'(?P<val>[^']+)'</td>[\n\s]+<td class="val-descr">(?P<desc>[\s\S]+?)</td>[\n\s]+</tr>"#)
             .map_err(|e| error!("Error building enum_items Regex: {}", e))?;
         for (name, list) in enums {
-            out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]\npub enum {} {{\n", name).as_bytes())
+            let items = enum_items.captures_iter(&list).map(|cap| (clean_comment(&cap["desc"], &cap["val"]), (&cap["val"]).to_owned(), clean_enum_name(&cap["desc"]))).collect::<Vec<_>>();
+
+            //check for duplicates
+            let mut names = items.iter().map(|(_, _, name)| name).collect::<Vec<_>>();
+            names.sort_unstable();
+            names.dedup();
+            let has_duplicates = items.len() != names.len();
+
+            out.write_all(format!("\n#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]\npub enum {} {{\n", name).as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
-            for cap in enum_items.captures_iter(&list) {
-                let name = clean_enum_name(&cap["desc"], &cap["val"]).map_err(|_| error!("Unable to clean enum name for {:?}", cap))?;
-                out.write_all(format!("\t/// {}\n\t#[serde(rename = \"{}\")]\n\t{},\n", clean_comment(&cap["desc"], &cap["val"]), &cap["val"], name).as_bytes())
+            let mut first = None;
+            for (comment, val, name) in items {
+                let mut label = if has_duplicates {
+                    let temp = clean_enum_name(&val);
+                    if temp.is_empty() {
+                        name
+                    }
+                    // avoid upper-lower case duplicates
+                    else if val.len() == 1 && val.chars().next().map(|c| c.is_ascii_lowercase()) == Some(true) {
+                        format!("_{}", temp)
+                    }
+                    else {
+                        temp
+                    }
+                }
+                else {
+                    name
+                };
+                label = if label.chars().next().map(char::is_numeric) == Some(true) {
+                    format!("N{}", label)
+                }
+                else {
+                    label
+                };
+                if first.is_none() {
+                    first = Some(label.clone());
+                }
+                out.write_all(format!(
+                        "\t/// {}\n\t#[serde(rename = \"{}\")]\n\t{},\n",
+                        comment,
+                        val,
+                        label
+                    ).as_bytes())
                     .await
                     .map_err(|e| error!("{}", e))?;
             }
             out.write_all("}\n".as_bytes())
                 .await
                 .map_err(|e| error!("{}", e))?;
+
+            // impl Default
+            if let Some(v) = &first {
+                out.write_all(format!("\nimpl Default for {} {{\n\tfn default() -> Self {{\n\t\t{}::{}\n\t}}\n}}\n", name, name, v).as_bytes())
+                    .await
+                    .map_err(|e| error!("{}", e))?;
+            }
         }
     }
 
     Ok(())
 }
 
-async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client, base_url: &str, tr_body: &str, is_array: bool, enums: &mut Vec<(String, String)>, vartype: &Regex, enum_body: &Regex, out: &mut W) -> Result<String, ()> {
+async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client, base_url: &str, tr_body: &str, parent: &str, is_array: bool, next_encoded: Option<String>, enums: &mut Vec<(String, String)>, vartype: &Regex, enum_body: &Regex, out: &mut W) -> Result<(String, Option<String>), ()> {
     let mut name = clean_name(&t["name"]);
     let descr = client.get(format!("{}{}", base_url, &t["url"]))
         .send()
@@ -284,10 +337,14 @@ async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client,
         .map_err(|e| error!("Child body {} load error: {}", &t["url"], e))?;
     let t_type = vartype.captures(&descr).ok_or_else(|| error!("Unrecognized vartype on {}", &t["url"]))?;
     let mut workaround = false;
+    let mut is_encoded = None;
     let type_name: Cow<'_, str> = if let Some(list) = enum_body.captures(&descr) {
+        if name.as_str() == parent {
+            name += "Item";
+        }
         enums.push((name.clone(), (&list["enum"]).to_owned()));
         if (&t_type["type"]).starts_with("Multiple") {
-            format!("crate::entities::SeparatedValues<{}>", name).into()
+            format!("fix_common::SeparatedValues<{}>", name).into()
         }
         else {
             name.as_str().into()
@@ -296,9 +353,10 @@ async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client,
     else {
         let mut temp: Cow<'_, str> = type_map(&t_type["type"]).map_err(|_| error!("Unmapped type {} in {}", &t_type["type"], &t["url"]))?.into();
         if is_array {
-            if temp.as_ref() == "usize" {
+            // on Fix 4.3 array length is simply an int
+            if temp.as_ref() == "usize" || temp.as_ref() == "i32" {
                 name = (&name[2..]).to_owned();
-                temp = format!("crate::entities::RepeatingValues<{}>", &name[0..(name.len() - 1)]).into();
+                temp = format!("fix_common::RepeatingValues<{}>", &name[0..(name.len() - 1)]).into();
             }
             else {
                 error!("Found array without length: {}", tr_body);
@@ -306,16 +364,61 @@ async fn tag_processor<W: AsyncWrite + Unpin>(t: &Captures<'_>, client: &Client,
             }
         }
         else {
+            // skip header BodyLength(9)
+            if temp.as_ref() == "usize" && &t["id"] != "9" {
+                if name.ends_with("Len") {
+                    is_encoded = Some((&name[0..name.len() - 3]).to_owned());
+                }
+                if name.ends_with("Length") {
+                    is_encoded = Some((&name[0..name.len() - 6]).to_owned());
+                }
+            }
             workaround = needs_workaround(temp.as_ref());
         }
         temp
     };
 
-    out.write_all(format!("\t/// {}{}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},\n", clean_comment(&t["comment"], &t["name"]), option_check(&t["req"], workaround), &t["id"], to_snake_case(&name), maybe_option(&type_name, &t["req"], 0)).as_bytes())
-        .await
-        .map_err(|e| error!("{}", e))?;
+    if is_encoded.is_some() {
+        out.write_all(format!(
+                "\t/// {}\n\t#[serde(rename = \"{}\")]\n",
+                clean_comment(&t["comment"], &t["name"]),
+                &t["id"]
+            ).as_bytes())
+            .await
+            .map_err(|e| error!("{}", e))?;
+    }
+    else if let Some(s) = next_encoded {
+        if name == s && type_name.as_ref() == "String" {
+        out.write_all(format!(
+                "\t/// {}{}\n\t#[serde(alias = \"{}\")]\n\tpub {}: {},\n",
+                clean_comment(&t["comment"], &t["name"]),
+                option_check(&t["req"], workaround),
+                &t["id"],
+                to_snake_case(&name),
+                maybe_option(&format!("fix_common::EncodedText<{}>", &t["id"]), &t["req"], 0)
+            ).as_bytes())
+            .await
+            .map_err(|e| error!("{}", e))?;
+        }
+        else {
+            error!("Expected {} of type String, found {} of type {}", s, name, type_name);
+            return Err(());
+        }
+    }
+    else {
+        out.write_all(format!(
+                "\t/// {}{}\n\t#[serde(rename = \"{}\")]\n\tpub {}: {},\n",
+                clean_comment(&t["comment"], &t["name"]),
+                option_check(&t["req"], workaround),
+                &t["id"],
+                to_snake_case(&name),
+                maybe_option(&type_name, &t["req"], 0)
+            ).as_bytes())
+            .await
+            .map_err(|e| error!("{}", e))?;
+    }
 
-    Ok(name)
+    Ok((name, is_encoded))
 }
 
 // prepare base_url for future relative calls
@@ -341,39 +444,22 @@ fn clean_name(name: &str) -> String {
     name.replace(|c: char| !c.is_ascii_alphanumeric(), "")
 }
 
-fn clean_enum_name(name: &str, key: &str) -> Result<String, ()> {
-    let mut temp = "";
-    let normalized = name.replace(|c: char| !c.is_ascii_alphanumeric(), " ");
-    for part in normalized.split("  ") {
-        let part = part.trim();
-        if part.is_empty() {
-            continue;
-        }
-        temp = part;
-        break;
-    }
-    if temp.is_empty() {
-        temp = key;
-    }
-    let temp2: Cow<'_, str> = match temp.chars().next().map(char::is_numeric) {
-        Some(true) => format!("N{}", temp).into(),
-        Some(false) => temp.into(),
-        None => return Err(()),
-    };
-    Ok(temp2.to_case(Case::Pascal))
+fn clean_enum_name(name: &str) -> String {
+    static CLEANUP: Lazy<Regex> = Lazy::new(|| Regex::new(r#"\([^\)]+\)"#).unwrap());
+    CLEANUP.replace_all(name, "").as_ref().replace(|c: char| !c.is_ascii_alphanumeric(), " ").to_case(Case::Pascal)
 }
 
-fn clean_comment<'a>(comment: &'a str, name: &'a str) -> Cow<'a, str> {
+fn clean_comment<'a>(comment: &'a str, name: &'a str) -> String {
     let res = comment.split("\n")
         .map(str::trim)
         .filter(|s| !s.is_empty())
         .collect::<Vec<_>>()
         .join("\n\t/// ");
     if res.is_empty() {
-        name.into()
+        name.to_owned()
     }
     else {
-        res.into()
+        res
     }
 }
 
@@ -408,9 +494,9 @@ fn needs_workaround(var_type: &str) -> bool {
 fn option_check(req: &str, workaround: bool) -> &str {
     match (req == "Y", workaround) {
         (true, false) => "",
-        (true, true) => "\n\t#[serde(deserialize_with = \"crate::entities::workarounds::from_str\")]// https://github.com/serde-rs/serde/issues/1183",
+        (true, true) => "\n\t#[serde(deserialize_with = \"fix_common::workarounds::from_str\")]// https://github.com/serde-rs/serde/issues/1183",
         (false, false) => "\n\t#[serde(skip_serializing_if = \"Option::is_none\")]",
-        (false, true) => "\n\t#[serde(skip_serializing_if = \"Option::is_none\")]\n\t#[serde(deserialize_with = \"crate::entities::workarounds::from_opt_str\")]// https://github.com/serde-rs/serde/issues/1183\n\t#[serde(default)]",
+        (false, true) => "\n\t#[serde(skip_serializing_if = \"Option::is_none\")]\n\t#[serde(deserialize_with = \"fix_common::workarounds::from_opt_str\")]// https://github.com/serde-rs/serde/issues/1183\n\t#[serde(default)]",
     }
 }
 
@@ -418,23 +504,26 @@ fn type_map(t: &str) -> Result<&str, ()> {
     Ok(match t {
         "String" => "String",
         "int" => "i32",
-        "LocalMktDate" => "crate::entities::LocalMktDate",
+        "LocalMktDate" => "fix_common::LocalMktDate",
         "Price" => "f64",
         "Percentage" => "f32",
         "float" => "f64",
-        "UTCTimestamp" => "crate::entities::UTCTimestamp",
-        "Boolean" => "crate::entities::Boolean",
+        "UTCTimestamp" => "fix_common::UTCTimestamp",
+        "Boolean" => "fix_common::Boolean",
         "Qty" => "f64",
         "PriceOffset" => "f64",
         "Exchange" => "String",
         "Amt" => "f64",
         "Length" => "usize",
         "data" => "String",
-        "month-year" => "crate::entities::MonthYear",
-        "TZTimeOnly" => "crate::entities::TZTimeOnly",
-        "TZTimestamp" => "crate::entities::TZTimestamp",
-        "UTCTimeOnly" => "crate::entities::UTCTimeOnly",
-        "UTCDateOnly" => "crate::entities::UTCDateOnly",
+        "month-year" => "fix_common::MonthYear",
+        "TZTimeOnly" => "fix_common::TZTimeOnly",
+        "TZTimestamp" => "fix_common::TZTimestamp",
+        "UTCTimeOnly" => "fix_common::UTCTimeOnly",
+        "UTCDateOnly" => "fix_common::UTCDateOnly",
+        "UTCDate" => "fix_common::UTCDateOnly",
+        "time" => "fix_common::UTCTimeOnly",
+        "date" => "fix_common::UTCDateOnly",
         "char" => "char",
         "NumInGroup" => "usize",
         "Currency" => "String",
@@ -442,6 +531,7 @@ fn type_map(t: &str) -> Result<&str, ()> {
         "SeqNum" => "usize",
         "XMLData" => "String",
         "TagNum" => "u16",
+        "day-of-month" => "u8",
         _ => return Err(()),
     })
 }

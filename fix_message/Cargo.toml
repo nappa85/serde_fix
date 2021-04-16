@@ -1,0 +1,36 @@
+[package]
+name = "fix_message"
+version = "0.1.0"
+authors = ["Marco Napetti <nappa85@therocktrading.com>"]
+license = "MIT/Apache-2.0"
+description = "FiX meets Serde"
+categories = ["encoding", "financial"]
+keywords = ["serde", "serialization", "fix"]
+edition = "2018"
+
+[features]
+default = ["full"]
+full = ["fix_50sp2", "fix_50sp1", "fix_50", "fix_44", "fix_43", "fix_42", "fix_41", "fix_40"]
+fix_50sp2 = ["fix50sp2", "fixt11"]
+fix_50sp1 = ["fix50sp1", "fixt11"]
+fix_50 = ["fix50", "fixt11"]
+fix_44 = ["fix44"]
+fix_43 = ["fix43"]
+fix_42 = ["fix42"]
+fix_41 = ["fix41"]
+fix_40 = ["fix40"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+fixt11 = { path = "../fixt11", optional = true }
+fix50sp2 = { path = "../fix50sp2", optional = true }
+fix50sp1 = { path = "../fix50sp1", optional = true }
+fix50 = { path = "../fix50", optional = true }
+fix44 = { path = "../fix44", optional = true }
+fix43 = { path = "../fix43", optional = true }
+fix42 = { path = "../fix42", optional = true }
+fix41 = { path = "../fix41", optional = true }
+fix40 = { path = "../fix40", optional = true }
+
+[dev-dependencies]
+serde_fix = { path = "../serde_fix" }
