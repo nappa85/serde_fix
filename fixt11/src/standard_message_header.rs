@@ -627,12 +627,12 @@ mod test {
     #[test]
     fn deserialize_header() {
         let msg = "8=FIXT.1.1\u{1}9=78\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}627=2\u{1}628=A\u{1}629=20210310-16:38:01.821\u{1}630=1\u{1}628=B\u{1}629=20210310-16:38:01.821\u{1}630=2\u{1}";
-        dbg!(serde_fix::from_str::<super::Header::<9, 'A', ' '>>(msg).unwrap());
+        dbg!(serde_fix::from_str::<super::StandardMessageHeader::<9, 'A', ' '>>(msg).unwrap());
     }
 
     #[test]
     fn serialize_header() {
-        let obj = super::Header::<9, 'A', ' '> {
+        let obj = super::StandardMessageHeader::<9, 'A', ' '> {
             begin_string: fix_common::version::FixVersion::FIXT11,
             body_length: 78,
             msg_type: super::MsgType::Logon,
