@@ -1,6 +1,8 @@
 
 use serde::{Deserialize, Serialize};
 
+pub use fix43::*;
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "35")]
 pub enum Message {

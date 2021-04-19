@@ -1,6 +1,18 @@
 
 use serde::{Deserialize, Serialize};
 
+/// FIXT11
+pub use fixt11::*;
+#[cfg(feature = "fix_50")]
+/// FIX50
+pub use fix50;
+#[cfg(feature = "fix_50sp1")]
+/// FIX50SP1
+pub use fix50sp1;
+#[cfg(feature = "fix_50sp2")]
+/// FIX50SP2
+pub use fix50sp2,
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "35")]
 pub enum Message {
