@@ -114,14 +114,6 @@ pub struct StandardMessageHeader<const T1: char, const T2: char> {
 	pub hops: Option<fix_common::RepeatingValues<Hop>>,
 }
 
-impl<const T1: char, const T2: char> StandardMessageHeader<T1, T2> {
-    pub fn reply<const _T1: char, const _T2: char>(&mut self, headers: &StandardMessageHeader<_T1, _T2>) {
-        self.sender_comp_id = headers.target_comp_id.clone();
-        self.target_comp_id = headers.sender_comp_id.clone();
-        self.msg_seq_num = headers.msg_seq_num;
-    }
-}
-
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Hop {
 	/// Third party firm which delivered a specific message either from the firm which originated the message or from another third
