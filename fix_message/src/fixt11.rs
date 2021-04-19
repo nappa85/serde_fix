@@ -11,7 +11,7 @@ pub use fix50;
 pub use fix50sp1;
 #[cfg(feature = "fix_50sp2")]
 /// FIX50SP2
-pub use fix50sp2,
+pub use fix50sp2;
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "35")]

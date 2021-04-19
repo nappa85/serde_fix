@@ -14,7 +14,7 @@ pub mod fix42;
 pub mod fix43;
 #[cfg(feature = "fix_44")]
 pub mod fix44;
-#[cfg(feature = "fixt_11")]
+#[cfg(any(feature = "fix_50", feature = "fix_50sp1", feature = "fix_50sp2"))]
 pub mod fixt11;
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
@@ -35,7 +35,7 @@ pub enum Message {
     #[cfg(feature = "fix_44")]
     #[serde(rename = "FIX.4.4")]
     FIX44(fix44::Message),
-    #[cfg(feature = "fixt_11")]
+    #[cfg(any(feature = "fix_50", feature = "fix_50sp1", feature = "fix_50sp2"))]
     #[serde(rename = "FIXT.1.1")]
     FIXT11(fixt11::Message)
 }
@@ -53,7 +53,7 @@ impl Serialize for Message {
             Message::FIX43(m) => m.serialize(serializer),
             #[cfg(feature = "fix_44")]
             Message::FIX44(m) => m.serialize(serializer),
-            #[cfg(feature = "fixt_11")]
+            #[cfg(any(feature = "fix_50", feature = "fix_50sp1", feature = "fix_50sp2"))]
             Message::FIXT11(m) => m.serialize(serializer),
         }
     }
