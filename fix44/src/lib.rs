@@ -29,3 +29,4 @@ pub mod standard_message_header;
 pub mod underlying_instrument;
 pub mod instrument;
 pub mod instrument_leg;
+pub mod expiration_qty;

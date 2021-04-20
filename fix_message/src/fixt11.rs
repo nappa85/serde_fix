@@ -156,7 +156,7 @@ pub enum Message {
     ListStrikePrice(Box<ListStrikePrice>),
     /// XML message
     #[serde(rename = "n")]
-    XMLMessage(Box<XMLMessage>),
+    XmlMessage(Box<XmlMessage>),
     /// Registration Instructions
     #[serde(rename = "o")]
     RegistrationInstructions(Box<RegistrationInstructions>),
@@ -216,7 +216,7 @@ pub enum Message {
     QuoteRequestReject(Box<QuoteRequestReject>),
     /// RFQ Request
     #[serde(rename = "AH")]
-    RFQRequest(Box<RFQRequest>),
+    RfqRequest(Box<RfqRequest>),
     /// Quote Status Report
     #[serde(rename = "AI")]
     QuoteStatusReport(Box<QuoteStatusReport>),
@@ -361,9 +361,9 @@ pub enum Message {
     /// Stream Assignment Report
     #[serde(rename = "CD")]
     StreamAssignmentReport(Box<StreamAssignmentReport>),
-    /// Stream Assignment Report ACK
+    /// Stream Assignment Report Ack
     #[serde(rename = "CE")]
-    StreamAssignmentReportACK(Box<StreamAssignmentReportACK>),
+    StreamAssignmentReportAck(Box<StreamAssignmentReportAck>),
 }
 
 impl Serialize for Message {
@@ -415,7 +415,7 @@ impl Serialize for Message {
             Message::BidRequest(m) => m.serialize(serializer),
             Message::BidResponse(m) => m.serialize(serializer),
             Message::ListStrikePrice(m) => m.serialize(serializer),
-            Message::XMLMessage(m) => m.serialize(serializer),
+            Message::XmlMessage(m) => m.serialize(serializer),
             Message::RegistrationInstructions(m) => m.serialize(serializer),
             Message::RegistrationInstructionsResponse(m) => m.serialize(serializer),
             Message::OrderMassCancelRequest(m) => m.serialize(serializer),
@@ -435,7 +435,7 @@ impl Serialize for Message {
             Message::TradeCaptureReport(m) => m.serialize(serializer),
             Message::OrderMassStatusRequest(m) => m.serialize(serializer),
             Message::QuoteRequestReject(m) => m.serialize(serializer),
-            Message::RFQRequest(m) => m.serialize(serializer),
+            Message::RfqRequest(m) => m.serialize(serializer),
             Message::QuoteStatusReport(m) => m.serialize(serializer),
             Message::QuoteResponse(m) => m.serialize(serializer),
             Message::Confirmation(m) => m.serialize(serializer),
@@ -484,7 +484,7 @@ impl Serialize for Message {
             Message::UserNotification(m) => m.serialize(serializer),
             Message::StreamAssignmentRequest(m) => m.serialize(serializer),
             Message::StreamAssignmentReport(m) => m.serialize(serializer),
-            Message::StreamAssignmentReportACK(m) => m.serialize(serializer),
+            Message::StreamAssignmentReportAck(m) => m.serialize(serializer),
         }
     }
 }
@@ -1649,30 +1649,30 @@ impl Serialize for ListStrikePrice {
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
-pub enum XMLMessage {
+pub enum XmlMessage {
     /// FIX50
 	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::xml_message::XMLMessage>),
+    FIX50(Box<fix50::messages::xml_message::XmlMessage>),
     /// FIX50SP1
 	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::xml_message::XMLMessage>),
+    FIX50SP1(Box<fix50sp1::messages::xml_message::XmlMessage>),
     /// FIX50SP2
 	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::xml_message::XMLMessage>),
+    FIX50SP2(Box<fix50sp2::messages::xml_message::XmlMessage>),
 }
 
-impl Serialize for XMLMessage {
+impl Serialize for XmlMessage {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
             #[cfg(feature = "fix_50")]
-			XMLMessage::FIX50(m) => m.serialize(serializer),
+			XmlMessage::FIX50(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp1")]
-			XMLMessage::FIX50SP1(m) => m.serialize(serializer),
+			XmlMessage::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
-			XMLMessage::FIX50SP2(m) => m.serialize(serializer),
+			XmlMessage::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -2237,30 +2237,30 @@ impl Serialize for QuoteRequestReject {
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
-pub enum RFQRequest {
+pub enum RfqRequest {
     /// FIX50
 	#[cfg(feature = "fix_50")]
     #[serde(rename = "7")]
-    FIX50(Box<fix50::messages::rfq_request::RFQRequest>),
+    FIX50(Box<fix50::messages::rfq_request::RfqRequest>),
     /// FIX50SP1
 	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
-    FIX50SP1(Box<fix50sp1::messages::rfq_request::RFQRequest>),
+    FIX50SP1(Box<fix50sp1::messages::rfq_request::RfqRequest>),
     /// FIX50SP2
 	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::rfq_request::RFQRequest>),
+    FIX50SP2(Box<fix50sp2::messages::rfq_request::RfqRequest>),
 }
 
-impl Serialize for RFQRequest {
+impl Serialize for RfqRequest {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
             #[cfg(feature = "fix_50")]
-			RFQRequest::FIX50(m) => m.serialize(serializer),
+			RfqRequest::FIX50(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp1")]
-			RFQRequest::FIX50SP1(m) => m.serialize(serializer),
+			RfqRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
-			RFQRequest::FIX50SP2(m) => m.serialize(serializer),
+			RfqRequest::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
@@ -3598,18 +3598,18 @@ impl Serialize for StreamAssignmentReport {
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
-pub enum StreamAssignmentReportACK {
+pub enum StreamAssignmentReportAck {
     /// FIX50SP2
 	#[cfg(feature = "fix_50sp2")]
     #[serde(rename = "9")]
-    FIX50SP2(Box<fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportACK>),
+    FIX50SP2(Box<fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportAck>),
 }
 
-impl Serialize for StreamAssignmentReportACK {
+impl Serialize for StreamAssignmentReportAck {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
             #[cfg(feature = "fix_50sp2")]
-			StreamAssignmentReportACK::FIX50SP2(m) => m.serialize(serializer),
+			StreamAssignmentReportAck::FIX50SP2(m) => m.serialize(serializer),
         }
     }
 }
