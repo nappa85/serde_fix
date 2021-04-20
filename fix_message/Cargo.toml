@@ -22,6 +22,7 @@ fix_40 = ["fix40"]
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
+fix_common = { path = "../fix_common" }
 fixt11 = { path = "../fixt11", optional = true }
 fix50sp2 = { path = "../fix50sp2", optional = true }
 fix50sp1 = { path = "../fix50sp1", optional = true }

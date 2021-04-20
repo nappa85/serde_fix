@@ -1,6 +1,8 @@
 
 use serde::{Deserialize, Serialize};
 
+use fix_common::ApplVerID;
+
 pub use fix41::*;
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
@@ -124,6 +126,222 @@ impl Serialize for Message {
             Message::Quote(m) => m.serialize(serializer),
             Message::SettlementInstructions(m) => m.serialize(serializer),
         }
+    }
+}
+
+impl<const T: char> crate::header::Header for fix41::standard_message_header::StandardMessageHeader<T> {
+    fn get_sender_comp_id(&self) -> &str {
+        &self.sender_comp_id
+    }
+    fn get_target_comp_id(&self) -> &str {
+        &self.target_comp_id
+    }
+    fn get_msg_seq_num(&self) -> u32 {
+        self.msg_seq_num
+    }
+    fn get_appl_ver_id<const V: u8>(&self) -> ApplVerID<V> {
+        ApplVerID::default()
+    }
+    fn reply<H: Header>(&mut self, other: &H) {
+        self.sender_comp_id = other.get_target_comp_id().to_owned();
+        self.target_comp_id = other.get_sender_comp_id().to_owned();
+        self.msg_seq_num = other.get_msg_seq_num();
+    }
+}
+
+impl HasHeader for fix41::messages::advertisement::Advertisement {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'7'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::allocation_ack::AllocationAck {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'P'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::allocation::Allocation {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'J'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::dont_know_trade::DontKnowTrade {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'Q'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::email::Email {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'C'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::execution_report::ExecutionReport {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'8'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::heartbeat::Heartbeat {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'0'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::indication_of_interest::IndicationOfInterest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'6'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::list_cancel_request::ListCancelRequest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'K'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::list_execute::ListExecute {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'L'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::list_status_request::ListStatusRequest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'M'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::list_status::ListStatus {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'N'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::logon::Logon {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'A'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::logout::Logout {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'5'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::new_order_list::NewOrderList {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'E'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::new_order_single::NewOrderSingle {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'D'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::news::News {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'B'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::order_cancel_reject::OrderCancelReject {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'9'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'G'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::order_cancel_request::OrderCancelRequest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'F'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::order_status_request::OrderStatusRequest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'H'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::quote_request::QuoteRequest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'R'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::quote::Quote {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'S'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::reject::Reject {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'3'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::resend_request::ResendRequest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'2'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::sequence_reset::SequenceReset {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'4'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::settlement_instructions::SettlementInstructions {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'T'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
+    }
+}
+
+impl HasHeader for fix41::messages::test_request::TestRequest {
+    type Output = fix41::standard_message_header::StandardMessageHeader<'1'>;
+    fn get_header(&self) -> &Self::Output {
+        &self.standard_message_header
     }
 }
 

@@ -4,6 +4,9 @@
 
 use serde::{Deserialize, Serialize};
 
+pub mod header;
+pub mod has_header;
+
 #[cfg(feature = "fix_40")]
 pub mod fix40;
 #[cfg(feature = "fix_41")]
