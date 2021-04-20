@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 
 use fix_common::ApplVerID;
 
+use crate::has_header::*;
+
 pub use fix40::*;
 
 #[derive(Deserialize, Clone, Debug, PartialEq)]
@@ -125,6 +127,40 @@ impl Serialize for Message {
     }
 }
 
+impl HasHeaderBoxed for Message {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            Message::Heartbeat(m) => Box::new(m.get_header()),
+            Message::TestRequest(m) => Box::new(m.get_header()),
+            Message::ResendRequest(m) => Box::new(m.get_header()),
+            Message::Reject(m) => Box::new(m.get_header()),
+            Message::SequenceReset(m) => Box::new(m.get_header()),
+            Message::Logout(m) => Box::new(m.get_header()),
+            Message::IndicationOfInterest(m) => Box::new(m.get_header()),
+            Message::Advertisement(m) => Box::new(m.get_header()),
+            Message::ExecutionReport(m) => Box::new(m.get_header()),
+            Message::OrderCancelReject(m) => Box::new(m.get_header()),
+            Message::Logon(m) => Box::new(m.get_header()),
+            Message::News(m) => Box::new(m.get_header()),
+            Message::Email(m) => Box::new(m.get_header()),
+            Message::NewOrderSingle(m) => Box::new(m.get_header()),
+            Message::NewOrderList(m) => Box::new(m.get_header()),
+            Message::OrderCancelRequest(m) => Box::new(m.get_header()),
+            Message::OrderCancelReplaceRequest(m) => Box::new(m.get_header()),
+            Message::OrderStatusRequest(m) => Box::new(m.get_header()),
+            Message::Allocation(m) => Box::new(m.get_header()),
+            Message::ListCancelRequest(m) => Box::new(m.get_header()),
+            Message::ListExecute(m) => Box::new(m.get_header()),
+            Message::ListStatusRequest(m) => Box::new(m.get_header()),
+            Message::ListStatus(m) => Box::new(m.get_header()),
+            Message::AllocationAck(m) => Box::new(m.get_header()),
+            Message::DontKnowTrade(m) => Box::new(m.get_header()),
+            Message::QuoteRequest(m) => Box::new(m.get_header()),
+            Message::Quote(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 impl<const T: char> crate::header::Header for fix40::standard_message_header::StandardMessageHeader<T> {
     fn get_sender_comp_id(&self) -> &str {
         &self.sender_comp_id
@@ -135,199 +171,202 @@ impl<const T: char> crate::header::Header for fix40::standard_message_header::St
     fn get_msg_seq_num(&self) -> u32 {
         self.msg_seq_num
     }
+}
+
+impl<const T: char> crate::header::HeaderExt for fix40::standard_message_header::StandardMessageHeader<T> {
     fn get_appl_ver_id<const V: u8>(&self) -> ApplVerID<V> {
         ApplVerID::default()
     }
-    fn reply<H: crate::header::Header>(&mut self, other: &H) {
+    fn reply<H: crate::header::HeaderExt>(&mut self, other: &H) {
         self.sender_comp_id = other.get_target_comp_id().to_owned();
         self.target_comp_id = other.get_sender_comp_id().to_owned();
         self.msg_seq_num = other.get_msg_seq_num();
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::advertisement::Advertisement {
+impl HasHeader for fix40::messages::advertisement::Advertisement {
     type Output = fix40::standard_message_header::StandardMessageHeader<'7'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::allocation_ack::AllocationAck {
+impl HasHeader for fix40::messages::allocation_ack::AllocationAck {
     type Output = fix40::standard_message_header::StandardMessageHeader<'P'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::allocation::Allocation {
+impl HasHeader for fix40::messages::allocation::Allocation {
     type Output = fix40::standard_message_header::StandardMessageHeader<'J'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::dont_know_trade::DontKnowTrade {
+impl HasHeader for fix40::messages::dont_know_trade::DontKnowTrade {
     type Output = fix40::standard_message_header::StandardMessageHeader<'Q'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::email::Email {
+impl HasHeader for fix40::messages::email::Email {
     type Output = fix40::standard_message_header::StandardMessageHeader<'C'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::execution_report::ExecutionReport {
+impl HasHeader for fix40::messages::execution_report::ExecutionReport {
     type Output = fix40::standard_message_header::StandardMessageHeader<'8'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::heartbeat::Heartbeat {
+impl HasHeader for fix40::messages::heartbeat::Heartbeat {
     type Output = fix40::standard_message_header::StandardMessageHeader<'0'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::indication_of_interest::IndicationOfInterest {
+impl HasHeader for fix40::messages::indication_of_interest::IndicationOfInterest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'6'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::list_cancel_request::ListCancelRequest {
+impl HasHeader for fix40::messages::list_cancel_request::ListCancelRequest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'K'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::list_execute::ListExecute {
+impl HasHeader for fix40::messages::list_execute::ListExecute {
     type Output = fix40::standard_message_header::StandardMessageHeader<'L'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::list_status_request::ListStatusRequest {
+impl HasHeader for fix40::messages::list_status_request::ListStatusRequest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'M'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::list_status::ListStatus {
+impl HasHeader for fix40::messages::list_status::ListStatus {
     type Output = fix40::standard_message_header::StandardMessageHeader<'N'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::logon::Logon {
+impl HasHeader for fix40::messages::logon::Logon {
     type Output = fix40::standard_message_header::StandardMessageHeader<'A'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::logout::Logout {
+impl HasHeader for fix40::messages::logout::Logout {
     type Output = fix40::standard_message_header::StandardMessageHeader<'5'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::new_order_list::NewOrderList {
+impl HasHeader for fix40::messages::new_order_list::NewOrderList {
     type Output = fix40::standard_message_header::StandardMessageHeader<'E'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::new_order_single::NewOrderSingle {
+impl HasHeader for fix40::messages::new_order_single::NewOrderSingle {
     type Output = fix40::standard_message_header::StandardMessageHeader<'D'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::news::News {
+impl HasHeader for fix40::messages::news::News {
     type Output = fix40::standard_message_header::StandardMessageHeader<'B'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::order_cancel_reject::OrderCancelReject {
+impl HasHeader for fix40::messages::order_cancel_reject::OrderCancelReject {
     type Output = fix40::standard_message_header::StandardMessageHeader<'9'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
+impl HasHeader for fix40::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'G'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::order_cancel_request::OrderCancelRequest {
+impl HasHeader for fix40::messages::order_cancel_request::OrderCancelRequest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'F'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::order_status_request::OrderStatusRequest {
+impl HasHeader for fix40::messages::order_status_request::OrderStatusRequest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'H'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::quote_request::QuoteRequest {
+impl HasHeader for fix40::messages::quote_request::QuoteRequest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'R'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::quote::Quote {
+impl HasHeader for fix40::messages::quote::Quote {
     type Output = fix40::standard_message_header::StandardMessageHeader<'S'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::reject::Reject {
+impl HasHeader for fix40::messages::reject::Reject {
     type Output = fix40::standard_message_header::StandardMessageHeader<'3'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::resend_request::ResendRequest {
+impl HasHeader for fix40::messages::resend_request::ResendRequest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'2'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::sequence_reset::SequenceReset {
+impl HasHeader for fix40::messages::sequence_reset::SequenceReset {
     type Output = fix40::standard_message_header::StandardMessageHeader<'4'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header
     }
 }
 
-impl crate::has_header::HasHeader for fix40::messages::test_request::TestRequest {
+impl HasHeader for fix40::messages::test_request::TestRequest {
     type Output = fix40::standard_message_header::StandardMessageHeader<'1'>;
     fn get_header(&self) -> &Self::Output {
         &self.standard_message_header

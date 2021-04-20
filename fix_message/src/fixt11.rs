@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 
 use fix_common::ApplVerID;
 
+use crate::has_header::*;
+
 /// FIXT11
 pub use fixt11::*;
 #[cfg(feature = "fix_50")]
@@ -491,6 +493,129 @@ impl Serialize for Message {
     }
 }
 
+impl HasHeaderBoxed for Message {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            Message::Heartbeat(m) => Box::new(m.get_header()),
+            Message::TestRequest(m) => Box::new(m.get_header()),
+            Message::ResendRequest(m) => Box::new(m.get_header()),
+            Message::Reject(m) => Box::new(m.get_header()),
+            Message::SequenceReset(m) => Box::new(m.get_header()),
+            Message::Logout(m) => Box::new(m.get_header()),
+            Message::IndicationOfInterest(m) => m.get_header_boxed(),
+            Message::Advertisement(m) => m.get_header_boxed(),
+            Message::ExecutionReport(m) => m.get_header_boxed(),
+            Message::OrderCancelReject(m) => m.get_header_boxed(),
+            Message::Logon(m) => Box::new(m.get_header()),
+            Message::News(m) => m.get_header_boxed(),
+            Message::Email(m) => m.get_header_boxed(),
+            Message::NewOrderSingle(m) => m.get_header_boxed(),
+            Message::NewOrderList(m) => m.get_header_boxed(),
+            Message::OrderCancelRequest(m) => m.get_header_boxed(),
+            Message::OrderCancelReplaceRequest(m) => m.get_header_boxed(),
+            Message::OrderStatusRequest(m) => m.get_header_boxed(),
+            Message::AllocationInstruction(m) => m.get_header_boxed(),
+            Message::ListCancelRequest(m) => m.get_header_boxed(),
+            Message::ListExecute(m) => m.get_header_boxed(),
+            Message::ListStatusRequest(m) => m.get_header_boxed(),
+            Message::ListStatus(m) => m.get_header_boxed(),
+            Message::AllocationInstructionAck(m) => m.get_header_boxed(),
+            Message::DontKnowTrade(m) => m.get_header_boxed(),
+            Message::QuoteRequest(m) => m.get_header_boxed(),
+            Message::Quote(m) => m.get_header_boxed(),
+            Message::SettlementInstructions(m) => m.get_header_boxed(),
+            Message::MarketDataRequest(m) => m.get_header_boxed(),
+            Message::MarketDataSnapshotFullRefresh(m) => m.get_header_boxed(),
+            Message::MarketDataIncrementalRefresh(m) => m.get_header_boxed(),
+            Message::MarketDataRequestReject(m) => m.get_header_boxed(),
+            Message::QuoteCancel(m) => m.get_header_boxed(),
+            Message::QuoteStatusRequest(m) => m.get_header_boxed(),
+            Message::MassQuoteAcknowledgement(m) => m.get_header_boxed(),
+            Message::SecurityDefinitionRequest(m) => m.get_header_boxed(),
+            Message::SecurityDefinition(m) => m.get_header_boxed(),
+            Message::SecurityStatusRequest(m) => m.get_header_boxed(),
+            Message::SecurityStatus(m) => m.get_header_boxed(),
+            Message::TradingSessionStatusRequest(m) => m.get_header_boxed(),
+            Message::TradingSessionStatus(m) => m.get_header_boxed(),
+            Message::MassQuote(m) => m.get_header_boxed(),
+            Message::BusinessMessageReject(m) => m.get_header_boxed(),
+            Message::BidRequest(m) => m.get_header_boxed(),
+            Message::BidResponse(m) => m.get_header_boxed(),
+            Message::ListStrikePrice(m) => m.get_header_boxed(),
+            Message::XmlMessage(m) => m.get_header_boxed(),
+            Message::RegistrationInstructions(m) => m.get_header_boxed(),
+            Message::RegistrationInstructionsResponse(m) => m.get_header_boxed(),
+            Message::OrderMassCancelRequest(m) => m.get_header_boxed(),
+            Message::OrderMassCancelReport(m) => m.get_header_boxed(),
+            Message::NewOrderCross(m) => m.get_header_boxed(),
+            Message::CrossOrderCancelReplaceRequest(m) => m.get_header_boxed(),
+            Message::CrossOrderCancelRequest(m) => m.get_header_boxed(),
+            Message::SecurityTypeRequest(m) => m.get_header_boxed(),
+            Message::SecurityTypes(m) => m.get_header_boxed(),
+            Message::SecurityListRequest(m) => m.get_header_boxed(),
+            Message::SecurityList(m) => m.get_header_boxed(),
+            Message::DerivativeSecurityListRequest(m) => m.get_header_boxed(),
+            Message::DerivativeSecurityList(m) => m.get_header_boxed(),
+            Message::NewOrderMultileg(m) => m.get_header_boxed(),
+            Message::MultilegOrderCancelReplace(m) => m.get_header_boxed(),
+            Message::TradeCaptureReportRequest(m) => m.get_header_boxed(),
+            Message::TradeCaptureReport(m) => m.get_header_boxed(),
+            Message::OrderMassStatusRequest(m) => m.get_header_boxed(),
+            Message::QuoteRequestReject(m) => m.get_header_boxed(),
+            Message::RfqRequest(m) => m.get_header_boxed(),
+            Message::QuoteStatusReport(m) => m.get_header_boxed(),
+            Message::QuoteResponse(m) => m.get_header_boxed(),
+            Message::Confirmation(m) => m.get_header_boxed(),
+            Message::PositionMaintenanceRequest(m) => m.get_header_boxed(),
+            Message::PositionMaintenanceReport(m) => m.get_header_boxed(),
+            Message::RequestForPositions(m) => m.get_header_boxed(),
+            Message::RequestForPositionsAck(m) => m.get_header_boxed(),
+            Message::PositionReport(m) => m.get_header_boxed(),
+            Message::TradeCaptureReportRequestAck(m) => m.get_header_boxed(),
+            Message::TradeCaptureReportAck(m) => m.get_header_boxed(),
+            Message::AllocationReport(m) => m.get_header_boxed(),
+            Message::AllocationReportAck(m) => m.get_header_boxed(),
+            Message::ConfirmationAck(m) => m.get_header_boxed(),
+            Message::SettlementInstructionRequest(m) => m.get_header_boxed(),
+            Message::AssignmentReport(m) => m.get_header_boxed(),
+            Message::CollateralRequest(m) => m.get_header_boxed(),
+            Message::CollateralAssignment(m) => m.get_header_boxed(),
+            Message::CollateralResponse(m) => m.get_header_boxed(),
+            Message::CollateralReport(m) => m.get_header_boxed(),
+            Message::CollateralInquiry(m) => m.get_header_boxed(),
+            Message::NetworkCounterpartySystemStatusRequest(m) => m.get_header_boxed(),
+            Message::NetworkCounterpartySystemStatusResponse(m) => m.get_header_boxed(),
+            Message::UserRequest(m) => m.get_header_boxed(),
+            Message::UserResponse(m) => m.get_header_boxed(),
+            Message::CollateralInquiryAck(m) => m.get_header_boxed(),
+            Message::ConfirmationRequest(m) => m.get_header_boxed(),
+            Message::TradingSessionListRequest(m) => m.get_header_boxed(),
+            Message::TradingSessionList(m) => m.get_header_boxed(),
+            Message::SecurityListUpdateReport(m) => m.get_header_boxed(),
+            Message::AdjustedPositionReport(m) => m.get_header_boxed(),
+            Message::AllocationInstructionAlert(m) => m.get_header_boxed(),
+            Message::ExecutionAcknowledgement(m) => m.get_header_boxed(),
+            Message::ContraryIntentionReport(m) => m.get_header_boxed(),
+            Message::SecurityDefinitionUpdateReport(m) => m.get_header_boxed(),
+            Message::SettlementObligationReport(m) => m.get_header_boxed(),
+            Message::DerivativeSecurityListUpdateReport(m) => m.get_header_boxed(),
+            Message::TradingSessionListUpdateReport(m) => m.get_header_boxed(),
+            Message::MarketDefinitionRequest(m) => m.get_header_boxed(),
+            Message::MarketDefinition(m) => m.get_header_boxed(),
+            Message::MarketDefinitionUpdateReport(m) => m.get_header_boxed(),
+            Message::ApplicationMessageRequest(m) => m.get_header_boxed(),
+            Message::ApplicationMessageRequestAck(m) => m.get_header_boxed(),
+            Message::ApplicationMessageReport(m) => m.get_header_boxed(),
+            Message::OrderMassActionReport(m) => m.get_header_boxed(),
+            Message::OrderMassActionRequest(m) => m.get_header_boxed(),
+            Message::UserNotification(m) => m.get_header_boxed(),
+            Message::StreamAssignmentRequest(m) => m.get_header_boxed(),
+            Message::StreamAssignmentReport(m) => m.get_header_boxed(),
+            Message::StreamAssignmentReportAck(m) => m.get_header_boxed(),
+        }
+    }
+}
+
 impl<const V: u8, const T1: char, const T2: char> crate::header::Header for fixt11::standard_message_header::StandardMessageHeader<V, T1, T2> {
     fn get_sender_comp_id(&self) -> &str {
         &self.sender_comp_id
@@ -501,10 +626,13 @@ impl<const V: u8, const T1: char, const T2: char> crate::header::Header for fixt
     fn get_msg_seq_num(&self) -> u32 {
         self.msg_seq_num
     }
+}
+
+impl<const V: u8, const T1: char, const T2: char> crate::header::HeaderExt for fixt11::standard_message_header::StandardMessageHeader<V, T1, T2> {
     fn get_appl_ver_id<const _V: u8>(&self) -> ApplVerID<_V> {
         self.appl_ver_id.convert()
     }
-    fn reply<H: crate::header::Header>(&mut self, other: &H) {
+    fn reply<H: crate::header::HeaderExt>(&mut self, other: &H) {
         self.appl_ver_id = other.get_appl_ver_id();
         self.sender_comp_id = other.get_target_comp_id().to_owned();
         self.target_comp_id = other.get_sender_comp_id().to_owned();
@@ -523,6 +651,10 @@ pub enum IndicationOfInterest {
 	#[cfg(feature = "fix_50sp1")]
     #[serde(rename = "8")]
     FIX50SP1(Box<fix50sp1::messages::indication_of_interest::IndicationOfInterest>),
+    /// FIX50SP2
+	#[cfg(feature = "fix_50sp2")]
+    #[serde(rename = "8")]
+    FIX50SP2(Box<fix50sp2::messages::indication_of_interest::IndicationOfInterest>),
 }
 
 impl Serialize for IndicationOfInterest {
@@ -532,6 +664,21 @@ impl Serialize for IndicationOfInterest {
 			IndicationOfInterest::FIX50(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp1")]
 			IndicationOfInterest::FIX50SP1(m) => m.serialize(serializer),
+            #[cfg(feature = "fix_50sp2")]
+			IndicationOfInterest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for IndicationOfInterest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            IndicationOfInterest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            IndicationOfInterest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            IndicationOfInterest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -566,6 +713,19 @@ impl Serialize for Advertisement {
     }
 }
 
+impl HasHeaderBoxed for Advertisement {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            Advertisement::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            Advertisement::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            Advertisement::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ExecutionReport {
@@ -592,6 +752,19 @@ impl Serialize for ExecutionReport {
 			ExecutionReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			ExecutionReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for ExecutionReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ExecutionReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ExecutionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ExecutionReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -626,6 +799,19 @@ impl Serialize for OrderCancelReject {
     }
 }
 
+impl HasHeaderBoxed for OrderCancelReject {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            OrderCancelReject::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            OrderCancelReject::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderCancelReject::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum News {
@@ -652,6 +838,19 @@ impl Serialize for News {
 			News::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			News::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for News {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            News::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            News::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            News::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -686,6 +885,19 @@ impl Serialize for Email {
     }
 }
 
+impl HasHeaderBoxed for Email {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            Email::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            Email::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            Email::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum NewOrderSingle {
@@ -712,6 +924,19 @@ impl Serialize for NewOrderSingle {
 			NewOrderSingle::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			NewOrderSingle::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for NewOrderSingle {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            NewOrderSingle::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            NewOrderSingle::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            NewOrderSingle::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -746,6 +971,19 @@ impl Serialize for NewOrderList {
     }
 }
 
+impl HasHeaderBoxed for NewOrderList {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            NewOrderList::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            NewOrderList::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            NewOrderList::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum OrderCancelRequest {
@@ -772,6 +1010,19 @@ impl Serialize for OrderCancelRequest {
 			OrderCancelRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			OrderCancelRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for OrderCancelRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            OrderCancelRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            OrderCancelRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderCancelRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -806,6 +1057,19 @@ impl Serialize for OrderCancelReplaceRequest {
     }
 }
 
+impl HasHeaderBoxed for OrderCancelReplaceRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            OrderCancelReplaceRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            OrderCancelReplaceRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderCancelReplaceRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum OrderStatusRequest {
@@ -832,6 +1096,19 @@ impl Serialize for OrderStatusRequest {
 			OrderStatusRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			OrderStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for OrderStatusRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            OrderStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            OrderStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -866,6 +1143,19 @@ impl Serialize for AllocationInstruction {
     }
 }
 
+impl HasHeaderBoxed for AllocationInstruction {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            AllocationInstruction::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            AllocationInstruction::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            AllocationInstruction::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ListCancelRequest {
@@ -892,6 +1182,19 @@ impl Serialize for ListCancelRequest {
 			ListCancelRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			ListCancelRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for ListCancelRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ListCancelRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ListCancelRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ListCancelRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -926,6 +1229,19 @@ impl Serialize for ListExecute {
     }
 }
 
+impl HasHeaderBoxed for ListExecute {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ListExecute::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ListExecute::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ListExecute::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ListStatusRequest {
@@ -952,6 +1268,19 @@ impl Serialize for ListStatusRequest {
 			ListStatusRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			ListStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for ListStatusRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ListStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ListStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ListStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -986,6 +1315,19 @@ impl Serialize for ListStatus {
     }
 }
 
+impl HasHeaderBoxed for ListStatus {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ListStatus::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ListStatus::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ListStatus::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum AllocationInstructionAck {
@@ -1012,6 +1354,19 @@ impl Serialize for AllocationInstructionAck {
 			AllocationInstructionAck::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			AllocationInstructionAck::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for AllocationInstructionAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            AllocationInstructionAck::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            AllocationInstructionAck::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            AllocationInstructionAck::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1046,6 +1401,19 @@ impl Serialize for DontKnowTrade {
     }
 }
 
+impl HasHeaderBoxed for DontKnowTrade {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            DontKnowTrade::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            DontKnowTrade::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            DontKnowTrade::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum QuoteRequest {
@@ -1072,6 +1440,19 @@ impl Serialize for QuoteRequest {
 			QuoteRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			QuoteRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for QuoteRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            QuoteRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            QuoteRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            QuoteRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1106,6 +1487,19 @@ impl Serialize for Quote {
     }
 }
 
+impl HasHeaderBoxed for Quote {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            Quote::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            Quote::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            Quote::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SettlementInstructions {
@@ -1132,6 +1526,19 @@ impl Serialize for SettlementInstructions {
 			SettlementInstructions::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			SettlementInstructions::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for SettlementInstructions {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SettlementInstructions::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SettlementInstructions::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SettlementInstructions::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1166,6 +1573,19 @@ impl Serialize for MarketDataRequest {
     }
 }
 
+impl HasHeaderBoxed for MarketDataRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            MarketDataRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            MarketDataRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            MarketDataRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MarketDataSnapshotFullRefresh {
@@ -1192,6 +1612,19 @@ impl Serialize for MarketDataSnapshotFullRefresh {
 			MarketDataSnapshotFullRefresh::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			MarketDataSnapshotFullRefresh::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for MarketDataSnapshotFullRefresh {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            MarketDataSnapshotFullRefresh::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            MarketDataSnapshotFullRefresh::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            MarketDataSnapshotFullRefresh::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1226,6 +1659,19 @@ impl Serialize for MarketDataIncrementalRefresh {
     }
 }
 
+impl HasHeaderBoxed for MarketDataIncrementalRefresh {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            MarketDataIncrementalRefresh::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            MarketDataIncrementalRefresh::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            MarketDataIncrementalRefresh::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MarketDataRequestReject {
@@ -1252,6 +1698,19 @@ impl Serialize for MarketDataRequestReject {
 			MarketDataRequestReject::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			MarketDataRequestReject::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for MarketDataRequestReject {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            MarketDataRequestReject::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            MarketDataRequestReject::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            MarketDataRequestReject::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1286,6 +1745,19 @@ impl Serialize for QuoteCancel {
     }
 }
 
+impl HasHeaderBoxed for QuoteCancel {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            QuoteCancel::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            QuoteCancel::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            QuoteCancel::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum QuoteStatusRequest {
@@ -1316,6 +1788,19 @@ impl Serialize for QuoteStatusRequest {
     }
 }
 
+impl HasHeaderBoxed for QuoteStatusRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            QuoteStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            QuoteStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            QuoteStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MassQuoteAcknowledgement {
@@ -1336,6 +1821,17 @@ impl Serialize for MassQuoteAcknowledgement {
 			MassQuoteAcknowledgement::FIX50(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp1")]
 			MassQuoteAcknowledgement::FIX50SP1(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for MassQuoteAcknowledgement {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            MassQuoteAcknowledgement::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            MassQuoteAcknowledgement::FIX50SP1(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1370,6 +1866,19 @@ impl Serialize for SecurityDefinitionRequest {
     }
 }
 
+impl HasHeaderBoxed for SecurityDefinitionRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityDefinitionRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityDefinitionRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityDefinitionRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityDefinition {
@@ -1396,6 +1905,19 @@ impl Serialize for SecurityDefinition {
 			SecurityDefinition::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			SecurityDefinition::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for SecurityDefinition {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityDefinition::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityDefinition::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityDefinition::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1430,6 +1952,19 @@ impl Serialize for SecurityStatusRequest {
     }
 }
 
+impl HasHeaderBoxed for SecurityStatusRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityStatus {
@@ -1456,6 +1991,19 @@ impl Serialize for SecurityStatus {
 			SecurityStatus::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			SecurityStatus::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for SecurityStatus {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityStatus::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityStatus::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityStatus::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1490,6 +2038,19 @@ impl Serialize for TradingSessionStatusRequest {
     }
 }
 
+impl HasHeaderBoxed for TradingSessionStatusRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            TradingSessionStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            TradingSessionStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradingSessionStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradingSessionStatus {
@@ -1516,6 +2077,19 @@ impl Serialize for TradingSessionStatus {
 			TradingSessionStatus::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			TradingSessionStatus::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for TradingSessionStatus {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            TradingSessionStatus::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            TradingSessionStatus::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradingSessionStatus::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1550,6 +2124,19 @@ impl Serialize for MassQuote {
     }
 }
 
+impl HasHeaderBoxed for MassQuote {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            MassQuote::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            MassQuote::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            MassQuote::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum BusinessMessageReject {
@@ -1576,6 +2163,19 @@ impl Serialize for BusinessMessageReject {
 			BusinessMessageReject::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			BusinessMessageReject::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for BusinessMessageReject {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            BusinessMessageReject::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            BusinessMessageReject::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            BusinessMessageReject::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1610,6 +2210,19 @@ impl Serialize for BidRequest {
     }
 }
 
+impl HasHeaderBoxed for BidRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            BidRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            BidRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            BidRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum BidResponse {
@@ -1636,6 +2249,19 @@ impl Serialize for BidResponse {
 			BidResponse::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			BidResponse::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for BidResponse {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            BidResponse::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            BidResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            BidResponse::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1670,6 +2296,19 @@ impl Serialize for ListStrikePrice {
     }
 }
 
+impl HasHeaderBoxed for ListStrikePrice {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ListStrikePrice::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ListStrikePrice::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ListStrikePrice::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum XmlMessage {
@@ -1696,6 +2335,19 @@ impl Serialize for XmlMessage {
 			XmlMessage::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			XmlMessage::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for XmlMessage {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            XmlMessage::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            XmlMessage::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            XmlMessage::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1730,6 +2382,19 @@ impl Serialize for RegistrationInstructions {
     }
 }
 
+impl HasHeaderBoxed for RegistrationInstructions {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            RegistrationInstructions::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            RegistrationInstructions::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            RegistrationInstructions::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum RegistrationInstructionsResponse {
@@ -1756,6 +2421,19 @@ impl Serialize for RegistrationInstructionsResponse {
 			RegistrationInstructionsResponse::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			RegistrationInstructionsResponse::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for RegistrationInstructionsResponse {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            RegistrationInstructionsResponse::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            RegistrationInstructionsResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            RegistrationInstructionsResponse::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1790,6 +2468,19 @@ impl Serialize for OrderMassCancelRequest {
     }
 }
 
+impl HasHeaderBoxed for OrderMassCancelRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            OrderMassCancelRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            OrderMassCancelRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderMassCancelRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum OrderMassCancelReport {
@@ -1816,6 +2507,19 @@ impl Serialize for OrderMassCancelReport {
 			OrderMassCancelReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			OrderMassCancelReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for OrderMassCancelReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            OrderMassCancelReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            OrderMassCancelReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderMassCancelReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1850,6 +2554,19 @@ impl Serialize for NewOrderCross {
     }
 }
 
+impl HasHeaderBoxed for NewOrderCross {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            NewOrderCross::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            NewOrderCross::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            NewOrderCross::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum CrossOrderCancelReplaceRequest {
@@ -1876,6 +2593,19 @@ impl Serialize for CrossOrderCancelReplaceRequest {
 			CrossOrderCancelReplaceRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			CrossOrderCancelReplaceRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for CrossOrderCancelReplaceRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            CrossOrderCancelReplaceRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            CrossOrderCancelReplaceRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            CrossOrderCancelReplaceRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1910,6 +2640,19 @@ impl Serialize for CrossOrderCancelRequest {
     }
 }
 
+impl HasHeaderBoxed for CrossOrderCancelRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            CrossOrderCancelRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            CrossOrderCancelRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            CrossOrderCancelRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityTypeRequest {
@@ -1936,6 +2679,19 @@ impl Serialize for SecurityTypeRequest {
 			SecurityTypeRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			SecurityTypeRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for SecurityTypeRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityTypeRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityTypeRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityTypeRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -1970,6 +2726,19 @@ impl Serialize for SecurityTypes {
     }
 }
 
+impl HasHeaderBoxed for SecurityTypes {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityTypes::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityTypes::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityTypes::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityListRequest {
@@ -1996,6 +2765,19 @@ impl Serialize for SecurityListRequest {
 			SecurityListRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			SecurityListRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for SecurityListRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityListRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityListRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityListRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2030,6 +2812,19 @@ impl Serialize for SecurityList {
     }
 }
 
+impl HasHeaderBoxed for SecurityList {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityList::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityList::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityList::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum DerivativeSecurityListRequest {
@@ -2056,6 +2851,19 @@ impl Serialize for DerivativeSecurityListRequest {
 			DerivativeSecurityListRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			DerivativeSecurityListRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for DerivativeSecurityListRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            DerivativeSecurityListRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            DerivativeSecurityListRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            DerivativeSecurityListRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2090,6 +2898,19 @@ impl Serialize for DerivativeSecurityList {
     }
 }
 
+impl HasHeaderBoxed for DerivativeSecurityList {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            DerivativeSecurityList::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            DerivativeSecurityList::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            DerivativeSecurityList::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum NewOrderMultileg {
@@ -2120,6 +2941,19 @@ impl Serialize for NewOrderMultileg {
     }
 }
 
+impl HasHeaderBoxed for NewOrderMultileg {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            NewOrderMultileg::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            NewOrderMultileg::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            NewOrderMultileg::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MultilegOrderCancelReplace {
@@ -2134,6 +2968,15 @@ impl Serialize for MultilegOrderCancelReplace {
         match self {
             #[cfg(feature = "fix_50sp2")]
 			MultilegOrderCancelReplace::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for MultilegOrderCancelReplace {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp2")]
+            MultilegOrderCancelReplace::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2168,6 +3011,19 @@ impl Serialize for TradeCaptureReportRequest {
     }
 }
 
+impl HasHeaderBoxed for TradeCaptureReportRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            TradeCaptureReportRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            TradeCaptureReportRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradeCaptureReportRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradeCaptureReport {
@@ -2194,6 +3050,19 @@ impl Serialize for TradeCaptureReport {
 			TradeCaptureReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			TradeCaptureReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for TradeCaptureReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            TradeCaptureReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            TradeCaptureReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradeCaptureReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2228,6 +3097,19 @@ impl Serialize for OrderMassStatusRequest {
     }
 }
 
+impl HasHeaderBoxed for OrderMassStatusRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            OrderMassStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            OrderMassStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderMassStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum QuoteRequestReject {
@@ -2254,6 +3136,19 @@ impl Serialize for QuoteRequestReject {
 			QuoteRequestReject::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			QuoteRequestReject::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for QuoteRequestReject {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            QuoteRequestReject::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            QuoteRequestReject::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            QuoteRequestReject::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2288,6 +3183,19 @@ impl Serialize for RfqRequest {
     }
 }
 
+impl HasHeaderBoxed for RfqRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            RfqRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            RfqRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            RfqRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum QuoteStatusReport {
@@ -2314,6 +3222,19 @@ impl Serialize for QuoteStatusReport {
 			QuoteStatusReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			QuoteStatusReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for QuoteStatusReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            QuoteStatusReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            QuoteStatusReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            QuoteStatusReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2348,6 +3269,19 @@ impl Serialize for QuoteResponse {
     }
 }
 
+impl HasHeaderBoxed for QuoteResponse {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            QuoteResponse::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            QuoteResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            QuoteResponse::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum Confirmation {
@@ -2374,6 +3308,19 @@ impl Serialize for Confirmation {
 			Confirmation::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			Confirmation::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for Confirmation {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            Confirmation::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            Confirmation::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            Confirmation::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2408,6 +3355,19 @@ impl Serialize for PositionMaintenanceRequest {
     }
 }
 
+impl HasHeaderBoxed for PositionMaintenanceRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            PositionMaintenanceRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            PositionMaintenanceRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            PositionMaintenanceRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum PositionMaintenanceReport {
@@ -2434,6 +3394,19 @@ impl Serialize for PositionMaintenanceReport {
 			PositionMaintenanceReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			PositionMaintenanceReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for PositionMaintenanceReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            PositionMaintenanceReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            PositionMaintenanceReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            PositionMaintenanceReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2468,6 +3441,19 @@ impl Serialize for RequestForPositions {
     }
 }
 
+impl HasHeaderBoxed for RequestForPositions {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            RequestForPositions::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            RequestForPositions::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            RequestForPositions::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum RequestForPositionsAck {
@@ -2494,6 +3480,19 @@ impl Serialize for RequestForPositionsAck {
 			RequestForPositionsAck::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			RequestForPositionsAck::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for RequestForPositionsAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            RequestForPositionsAck::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            RequestForPositionsAck::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            RequestForPositionsAck::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2528,6 +3527,19 @@ impl Serialize for PositionReport {
     }
 }
 
+impl HasHeaderBoxed for PositionReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            PositionReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            PositionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            PositionReport::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradeCaptureReportRequestAck {
@@ -2554,6 +3566,19 @@ impl Serialize for TradeCaptureReportRequestAck {
 			TradeCaptureReportRequestAck::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			TradeCaptureReportRequestAck::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for TradeCaptureReportRequestAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            TradeCaptureReportRequestAck::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            TradeCaptureReportRequestAck::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradeCaptureReportRequestAck::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2588,6 +3613,19 @@ impl Serialize for TradeCaptureReportAck {
     }
 }
 
+impl HasHeaderBoxed for TradeCaptureReportAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            TradeCaptureReportAck::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            TradeCaptureReportAck::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradeCaptureReportAck::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum AllocationReport {
@@ -2614,6 +3652,19 @@ impl Serialize for AllocationReport {
 			AllocationReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			AllocationReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for AllocationReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            AllocationReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            AllocationReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            AllocationReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2648,6 +3699,19 @@ impl Serialize for AllocationReportAck {
     }
 }
 
+impl HasHeaderBoxed for AllocationReportAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            AllocationReportAck::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            AllocationReportAck::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            AllocationReportAck::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ConfirmationAck {
@@ -2674,6 +3738,19 @@ impl Serialize for ConfirmationAck {
 			ConfirmationAck::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			ConfirmationAck::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for ConfirmationAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ConfirmationAck::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ConfirmationAck::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ConfirmationAck::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2708,6 +3785,19 @@ impl Serialize for SettlementInstructionRequest {
     }
 }
 
+impl HasHeaderBoxed for SettlementInstructionRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SettlementInstructionRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SettlementInstructionRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SettlementInstructionRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum AssignmentReport {
@@ -2734,6 +3824,19 @@ impl Serialize for AssignmentReport {
 			AssignmentReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			AssignmentReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for AssignmentReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            AssignmentReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            AssignmentReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            AssignmentReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2768,6 +3871,19 @@ impl Serialize for CollateralRequest {
     }
 }
 
+impl HasHeaderBoxed for CollateralRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            CollateralRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            CollateralRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            CollateralRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum CollateralAssignment {
@@ -2794,6 +3910,19 @@ impl Serialize for CollateralAssignment {
 			CollateralAssignment::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			CollateralAssignment::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for CollateralAssignment {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            CollateralAssignment::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            CollateralAssignment::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            CollateralAssignment::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2828,6 +3957,19 @@ impl Serialize for CollateralResponse {
     }
 }
 
+impl HasHeaderBoxed for CollateralResponse {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            CollateralResponse::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            CollateralResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            CollateralResponse::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum CollateralReport {
@@ -2854,6 +3996,19 @@ impl Serialize for CollateralReport {
 			CollateralReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			CollateralReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for CollateralReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            CollateralReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            CollateralReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            CollateralReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2888,6 +4043,19 @@ impl Serialize for CollateralInquiry {
     }
 }
 
+impl HasHeaderBoxed for CollateralInquiry {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            CollateralInquiry::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            CollateralInquiry::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            CollateralInquiry::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum NetworkCounterpartySystemStatusRequest {
@@ -2914,6 +4082,19 @@ impl Serialize for NetworkCounterpartySystemStatusRequest {
 			NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for NetworkCounterpartySystemStatusRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            NetworkCounterpartySystemStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -2948,6 +4129,19 @@ impl Serialize for NetworkCounterpartySystemStatusResponse {
     }
 }
 
+impl HasHeaderBoxed for NetworkCounterpartySystemStatusResponse {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            NetworkCounterpartySystemStatusResponse::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            NetworkCounterpartySystemStatusResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            NetworkCounterpartySystemStatusResponse::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum UserRequest {
@@ -2974,6 +4168,19 @@ impl Serialize for UserRequest {
 			UserRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			UserRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for UserRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            UserRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            UserRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            UserRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3008,6 +4215,19 @@ impl Serialize for UserResponse {
     }
 }
 
+impl HasHeaderBoxed for UserResponse {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            UserResponse::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            UserResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            UserResponse::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum CollateralInquiryAck {
@@ -3034,6 +4254,19 @@ impl Serialize for CollateralInquiryAck {
 			CollateralInquiryAck::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			CollateralInquiryAck::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for CollateralInquiryAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            CollateralInquiryAck::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            CollateralInquiryAck::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            CollateralInquiryAck::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3068,6 +4301,19 @@ impl Serialize for ConfirmationRequest {
     }
 }
 
+impl HasHeaderBoxed for ConfirmationRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ConfirmationRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ConfirmationRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ConfirmationRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradingSessionListRequest {
@@ -3094,6 +4340,19 @@ impl Serialize for TradingSessionListRequest {
 			TradingSessionListRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			TradingSessionListRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for TradingSessionListRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            TradingSessionListRequest::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            TradingSessionListRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradingSessionListRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3128,6 +4387,19 @@ impl Serialize for TradingSessionList {
     }
 }
 
+impl HasHeaderBoxed for TradingSessionList {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            TradingSessionList::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            TradingSessionList::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradingSessionList::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityListUpdateReport {
@@ -3154,6 +4426,19 @@ impl Serialize for SecurityListUpdateReport {
 			SecurityListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			SecurityListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for SecurityListUpdateReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityListUpdateReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityListUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityListUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3188,6 +4473,19 @@ impl Serialize for AdjustedPositionReport {
     }
 }
 
+impl HasHeaderBoxed for AdjustedPositionReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            AdjustedPositionReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            AdjustedPositionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            AdjustedPositionReport::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum AllocationInstructionAlert {
@@ -3218,6 +4516,19 @@ impl Serialize for AllocationInstructionAlert {
     }
 }
 
+impl HasHeaderBoxed for AllocationInstructionAlert {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            AllocationInstructionAlert::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            AllocationInstructionAlert::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            AllocationInstructionAlert::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ExecutionAcknowledgement {
@@ -3232,6 +4543,15 @@ impl Serialize for ExecutionAcknowledgement {
         match self {
             #[cfg(feature = "fix_50sp2")]
 			ExecutionAcknowledgement::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for ExecutionAcknowledgement {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp2")]
+            ExecutionAcknowledgement::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3266,6 +4586,19 @@ impl Serialize for ContraryIntentionReport {
     }
 }
 
+impl HasHeaderBoxed for ContraryIntentionReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            ContraryIntentionReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            ContraryIntentionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ContraryIntentionReport::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SecurityDefinitionUpdateReport {
@@ -3296,6 +4629,19 @@ impl Serialize for SecurityDefinitionUpdateReport {
     }
 }
 
+impl HasHeaderBoxed for SecurityDefinitionUpdateReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50")]
+            SecurityDefinitionUpdateReport::FIX50(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp1")]
+            SecurityDefinitionUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SecurityDefinitionUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum SettlementObligationReport {
@@ -3316,6 +4662,17 @@ impl Serialize for SettlementObligationReport {
 			SettlementObligationReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			SettlementObligationReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for SettlementObligationReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            SettlementObligationReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            SettlementObligationReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3344,6 +4701,17 @@ impl Serialize for DerivativeSecurityListUpdateReport {
     }
 }
 
+impl HasHeaderBoxed for DerivativeSecurityListUpdateReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            DerivativeSecurityListUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            DerivativeSecurityListUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum TradingSessionListUpdateReport {
@@ -3364,6 +4732,17 @@ impl Serialize for TradingSessionListUpdateReport {
 			TradingSessionListUpdateReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			TradingSessionListUpdateReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for TradingSessionListUpdateReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            TradingSessionListUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            TradingSessionListUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3392,6 +4771,17 @@ impl Serialize for MarketDefinitionRequest {
     }
 }
 
+impl HasHeaderBoxed for MarketDefinitionRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            MarketDefinitionRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            MarketDefinitionRequest::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum MarketDefinition {
@@ -3412,6 +4802,17 @@ impl Serialize for MarketDefinition {
 			MarketDefinition::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			MarketDefinition::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for MarketDefinition {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            MarketDefinition::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            MarketDefinition::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3440,6 +4841,17 @@ impl Serialize for MarketDefinitionUpdateReport {
     }
 }
 
+impl HasHeaderBoxed for MarketDefinitionUpdateReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            MarketDefinitionUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            MarketDefinitionUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ApplicationMessageRequest {
@@ -3460,6 +4872,17 @@ impl Serialize for ApplicationMessageRequest {
 			ApplicationMessageRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			ApplicationMessageRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for ApplicationMessageRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            ApplicationMessageRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ApplicationMessageRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3488,6 +4911,17 @@ impl Serialize for ApplicationMessageRequestAck {
     }
 }
 
+impl HasHeaderBoxed for ApplicationMessageRequestAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            ApplicationMessageRequestAck::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ApplicationMessageRequestAck::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum ApplicationMessageReport {
@@ -3508,6 +4942,17 @@ impl Serialize for ApplicationMessageReport {
 			ApplicationMessageReport::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			ApplicationMessageReport::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for ApplicationMessageReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            ApplicationMessageReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            ApplicationMessageReport::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3536,6 +4981,17 @@ impl Serialize for OrderMassActionReport {
     }
 }
 
+impl HasHeaderBoxed for OrderMassActionReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            OrderMassActionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderMassActionReport::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum OrderMassActionRequest {
@@ -3556,6 +5012,17 @@ impl Serialize for OrderMassActionRequest {
 			OrderMassActionRequest::FIX50SP1(m) => m.serialize(serializer),
             #[cfg(feature = "fix_50sp2")]
 			OrderMassActionRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for OrderMassActionRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            OrderMassActionRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            OrderMassActionRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3583,6 +5050,17 @@ impl Serialize for UserNotification {
         }
     }
 }
+
+impl HasHeaderBoxed for UserNotification {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp1")]
+            UserNotification::FIX50SP1(m) => Box::new(m.get_header()),
+            #[cfg(feature = "fix_50sp2")]
+            UserNotification::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum StreamAssignmentRequest {
@@ -3597,6 +5075,15 @@ impl Serialize for StreamAssignmentRequest {
         match self {
             #[cfg(feature = "fix_50sp2")]
 			StreamAssignmentRequest::FIX50SP2(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for StreamAssignmentRequest {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp2")]
+            StreamAssignmentRequest::FIX50SP2(m) => Box::new(m.get_header()),
         }
     }
 }
@@ -3619,6 +5106,15 @@ impl Serialize for StreamAssignmentReport {
     }
 }
 
+impl HasHeaderBoxed for StreamAssignmentReport {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp2")]
+            StreamAssignmentReport::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq)]
 #[serde(tag = "1128")]
 pub enum StreamAssignmentReportAck {
@@ -3637,2556 +5133,2571 @@ impl Serialize for StreamAssignmentReportAck {
     }
 }
 
+impl HasHeaderBoxed for StreamAssignmentReportAck {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_50sp2")]
+            StreamAssignmentReportAck::FIX50SP2(m) => Box::new(m.get_header()),
+        }
+    }
+}
+
 #[cfg(feature = "fix_50")]
 mod _fix50 {
-    impl crate::has_header::HasHeader for fix50::messages::adjusted_position_report::AdjustedPositionReport {
+    use crate::has_header::HasHeader;
+
+    impl HasHeader for fix50::messages::adjusted_position_report::AdjustedPositionReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'L'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::advertisement::Advertisement {
+
+    impl HasHeader for fix50::messages::advertisement::Advertisement {
         type Output = fix50::standard_message_header::StandardMessageHeader<'7', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::allocation_instruction_ack::AllocationInstructionAck {
+
+    impl HasHeader for fix50::messages::allocation_instruction_ack::AllocationInstructionAck {
         type Output = fix50::standard_message_header::StandardMessageHeader<'P', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::allocation_instruction_alert::AllocationInstructionAlert {
+
+    impl HasHeader for fix50::messages::allocation_instruction_alert::AllocationInstructionAlert {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'M'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::allocation_instruction::AllocationInstruction {
+
+    impl HasHeader for fix50::messages::allocation_instruction::AllocationInstruction {
         type Output = fix50::standard_message_header::StandardMessageHeader<'J', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::allocation_report_ack::AllocationReportAck {
+
+    impl HasHeader for fix50::messages::allocation_report_ack::AllocationReportAck {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'T'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::allocation_report::AllocationReport {
+
+    impl HasHeader for fix50::messages::allocation_report::AllocationReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'S'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::assignment_report::AssignmentReport {
+
+    impl HasHeader for fix50::messages::assignment_report::AssignmentReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'W'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::bid_request::BidRequest {
+
+    impl HasHeader for fix50::messages::bid_request::BidRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'k', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::bid_response::BidResponse {
+
+    impl HasHeader for fix50::messages::bid_response::BidResponse {
         type Output = fix50::standard_message_header::StandardMessageHeader<'l', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::business_message_reject::BusinessMessageReject {
+
+    impl HasHeader for fix50::messages::business_message_reject::BusinessMessageReject {
         type Output = fix50::standard_message_header::StandardMessageHeader<'j', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::collateral_assignment::CollateralAssignment {
+
+    impl HasHeader for fix50::messages::collateral_assignment::CollateralAssignment {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'Y'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::collateral_inquiry_ack::CollateralInquiryAck {
+
+    impl HasHeader for fix50::messages::collateral_inquiry_ack::CollateralInquiryAck {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'G'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::collateral_inquiry::CollateralInquiry {
+
+    impl HasHeader for fix50::messages::collateral_inquiry::CollateralInquiry {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::collateral_report::CollateralReport {
+
+    impl HasHeader for fix50::messages::collateral_report::CollateralReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::collateral_request::CollateralRequest {
+
+    impl HasHeader for fix50::messages::collateral_request::CollateralRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'X'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::collateral_response::CollateralResponse {
+
+    impl HasHeader for fix50::messages::collateral_response::CollateralResponse {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'Z'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::confirmation_ack::ConfirmationAck {
+
+    impl HasHeader for fix50::messages::confirmation_ack::ConfirmationAck {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'U'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::confirmation_request::ConfirmationRequest {
+
+    impl HasHeader for fix50::messages::confirmation_request::ConfirmationRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'H'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::confirmation::Confirmation {
+
+    impl HasHeader for fix50::messages::confirmation::Confirmation {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'K'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::contrary_intention_report::ContraryIntentionReport {
+
+    impl HasHeader for fix50::messages::contrary_intention_report::ContraryIntentionReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'O'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
+
+    impl HasHeader for fix50::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'t', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::cross_order_cancel_request::CrossOrderCancelRequest {
+
+    impl HasHeader for fix50::messages::cross_order_cancel_request::CrossOrderCancelRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'u', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::derivative_security_list_request::DerivativeSecurityListRequest {
+
+    impl HasHeader for fix50::messages::derivative_security_list_request::DerivativeSecurityListRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'z', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::derivative_security_list::DerivativeSecurityList {
+
+    impl HasHeader for fix50::messages::derivative_security_list::DerivativeSecurityList {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::dont_know_trade::DontKnowTrade {
+
+    impl HasHeader for fix50::messages::dont_know_trade::DontKnowTrade {
         type Output = fix50::standard_message_header::StandardMessageHeader<'Q', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::email::Email {
+
+    impl HasHeader for fix50::messages::email::Email {
         type Output = fix50::standard_message_header::StandardMessageHeader<'C', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::execution_report_acknowledgement::ExecutionReportAcknowledgement {
+
+    impl HasHeader for fix50::messages::execution_report_acknowledgement::ExecutionReportAcknowledgement {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'N'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::execution_report::ExecutionReport {
+
+    impl HasHeader for fix50::messages::execution_report::ExecutionReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'8', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::indication_of_interest::IndicationOfInterest {
+
+    impl HasHeader for fix50::messages::indication_of_interest::IndicationOfInterest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'6', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::list_cancel_request::ListCancelRequest {
+
+    impl HasHeader for fix50::messages::list_cancel_request::ListCancelRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'K', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::list_execute::ListExecute {
+
+    impl HasHeader for fix50::messages::list_execute::ListExecute {
         type Output = fix50::standard_message_header::StandardMessageHeader<'L', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::list_status_request::ListStatusRequest {
+
+    impl HasHeader for fix50::messages::list_status_request::ListStatusRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'M', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::list_status::ListStatus {
+
+    impl HasHeader for fix50::messages::list_status::ListStatus {
         type Output = fix50::standard_message_header::StandardMessageHeader<'N', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::list_strike_price::ListStrikePrice {
+
+    impl HasHeader for fix50::messages::list_strike_price::ListStrikePrice {
         type Output = fix50::standard_message_header::StandardMessageHeader<'m', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
+
+    impl HasHeader for fix50::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
         type Output = fix50::standard_message_header::StandardMessageHeader<'X', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::market_data_request_reject::MarketDataRequestReject {
+
+    impl HasHeader for fix50::messages::market_data_request_reject::MarketDataRequestReject {
         type Output = fix50::standard_message_header::StandardMessageHeader<'Y', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::market_data_request::MarketDataRequest {
+
+    impl HasHeader for fix50::messages::market_data_request::MarketDataRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'V', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
+
+    impl HasHeader for fix50::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
         type Output = fix50::standard_message_header::StandardMessageHeader<'W', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
+
+    impl HasHeader for fix50::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
         type Output = fix50::standard_message_header::StandardMessageHeader<'b', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::mass_quote::MassQuote {
+
+    impl HasHeader for fix50::messages::mass_quote::MassQuote {
         type Output = fix50::standard_message_header::StandardMessageHeader<'i', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
+
+    impl HasHeader for fix50::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'C'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
+
+    impl HasHeader for fix50::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'C'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
+
+    impl HasHeader for fix50::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'D'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::new_order_cross::NewOrderCross {
+
+    impl HasHeader for fix50::messages::new_order_cross::NewOrderCross {
         type Output = fix50::standard_message_header::StandardMessageHeader<'s', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::new_order_list::NewOrderList {
+
+    impl HasHeader for fix50::messages::new_order_list::NewOrderList {
         type Output = fix50::standard_message_header::StandardMessageHeader<'E', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::new_order_multileg::NewOrderMultileg {
+
+    impl HasHeader for fix50::messages::new_order_multileg::NewOrderMultileg {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::new_order_single::NewOrderSingle {
+
+    impl HasHeader for fix50::messages::new_order_single::NewOrderSingle {
         type Output = fix50::standard_message_header::StandardMessageHeader<'D', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::news::News {
+
+    impl HasHeader for fix50::messages::news::News {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::order_cancel_reject::OrderCancelReject {
+
+    impl HasHeader for fix50::messages::order_cancel_reject::OrderCancelReject {
         type Output = fix50::standard_message_header::StandardMessageHeader<'9', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
+
+    impl HasHeader for fix50::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'G', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::order_cancel_request::OrderCancelRequest {
+
+    impl HasHeader for fix50::messages::order_cancel_request::OrderCancelRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'F', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::order_mass_cancel_report::OrderMassCancelReport {
+
+    impl HasHeader for fix50::messages::order_mass_cancel_report::OrderMassCancelReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'r', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::order_mass_cancel_request::OrderMassCancelRequest {
+
+    impl HasHeader for fix50::messages::order_mass_cancel_request::OrderMassCancelRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'q', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::order_mass_status_request::OrderMassStatusRequest {
+
+    impl HasHeader for fix50::messages::order_mass_status_request::OrderMassStatusRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'F'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::order_status_request::OrderStatusRequest {
+
+    impl HasHeader for fix50::messages::order_status_request::OrderStatusRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'H', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::position_maintenance_report::PositionMaintenanceReport {
+
+    impl HasHeader for fix50::messages::position_maintenance_report::PositionMaintenanceReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'M'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::position_maintenance_request::PositionMaintenanceRequest {
+
+    impl HasHeader for fix50::messages::position_maintenance_request::PositionMaintenanceRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'L'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::position_report::PositionReport {
+
+    impl HasHeader for fix50::messages::position_report::PositionReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'P'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::quote_cancel::QuoteCancel {
+
+    impl HasHeader for fix50::messages::quote_cancel::QuoteCancel {
         type Output = fix50::standard_message_header::StandardMessageHeader<'Z', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::quote_request_reject::QuoteRequestReject {
+
+    impl HasHeader for fix50::messages::quote_request_reject::QuoteRequestReject {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'G'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::quote_request::QuoteRequest {
+
+    impl HasHeader for fix50::messages::quote_request::QuoteRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'R', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::quote_response::QuoteResponse {
+
+    impl HasHeader for fix50::messages::quote_response::QuoteResponse {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'J'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::quote::Quote {
+
+    impl HasHeader for fix50::messages::quote::Quote {
         type Output = fix50::standard_message_header::StandardMessageHeader<'S', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::quote_status_report::QuoteStatusReport {
+
+    impl HasHeader for fix50::messages::quote_status_report::QuoteStatusReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'I'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::quote_status_request::QuoteStatusRequest {
+
+    impl HasHeader for fix50::messages::quote_status_request::QuoteStatusRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'a', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::registration_instructions_response::RegistrationInstructionsResponse {
+
+    impl HasHeader for fix50::messages::registration_instructions_response::RegistrationInstructionsResponse {
         type Output = fix50::standard_message_header::StandardMessageHeader<'p', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::registration_instructions::RegistrationInstructions {
+
+    impl HasHeader for fix50::messages::registration_instructions::RegistrationInstructions {
         type Output = fix50::standard_message_header::StandardMessageHeader<'o', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::request_for_positions_ack::RequestForPositionsAck {
+
+    impl HasHeader for fix50::messages::request_for_positions_ack::RequestForPositionsAck {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'O'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::request_for_positions::RequestForPositions {
+
+    impl HasHeader for fix50::messages::request_for_positions::RequestForPositions {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'N'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::rfq_request::RfqRequest {
+
+    impl HasHeader for fix50::messages::rfq_request::RfqRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'H'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_definition_request::SecurityDefinitionRequest {
+
+    impl HasHeader for fix50::messages::security_definition_request::SecurityDefinitionRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'c', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_definition::SecurityDefinition {
+
+    impl HasHeader for fix50::messages::security_definition::SecurityDefinition {
         type Output = fix50::standard_message_header::StandardMessageHeader<'d', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
+
+    impl HasHeader for fix50::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'P'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_list_request::SecurityListRequest {
+
+    impl HasHeader for fix50::messages::security_list_request::SecurityListRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'x', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_list::SecurityList {
+
+    impl HasHeader for fix50::messages::security_list::SecurityList {
         type Output = fix50::standard_message_header::StandardMessageHeader<'y', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_list_update_report::SecurityListUpdateReport {
+
+    impl HasHeader for fix50::messages::security_list_update_report::SecurityListUpdateReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'K'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_status_request::SecurityStatusRequest {
+
+    impl HasHeader for fix50::messages::security_status_request::SecurityStatusRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'e', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_status::SecurityStatus {
+
+    impl HasHeader for fix50::messages::security_status::SecurityStatus {
         type Output = fix50::standard_message_header::StandardMessageHeader<'f', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_type_request::SecurityTypeRequest {
+
+    impl HasHeader for fix50::messages::security_type_request::SecurityTypeRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'v', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::security_types::SecurityTypes {
+
+    impl HasHeader for fix50::messages::security_types::SecurityTypes {
         type Output = fix50::standard_message_header::StandardMessageHeader<'w', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::settlement_instruction_request::SettlementInstructionRequest {
+
+    impl HasHeader for fix50::messages::settlement_instruction_request::SettlementInstructionRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'V'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::settlement_instructions::SettlementInstructions {
+
+    impl HasHeader for fix50::messages::settlement_instructions::SettlementInstructions {
         type Output = fix50::standard_message_header::StandardMessageHeader<'T', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::trade_capture_report_ack::TradeCaptureReportAck {
+
+    impl HasHeader for fix50::messages::trade_capture_report_ack::TradeCaptureReportAck {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'R'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
+
+    impl HasHeader for fix50::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'Q'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::trade_capture_report_request::TradeCaptureReportRequest {
+
+    impl HasHeader for fix50::messages::trade_capture_report_request::TradeCaptureReportRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'D'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::trade_capture_report::TradeCaptureReport {
+
+    impl HasHeader for fix50::messages::trade_capture_report::TradeCaptureReport {
         type Output = fix50::standard_message_header::StandardMessageHeader<'A', 'E'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::trading_session_list_request::TradingSessionListRequest {
+
+    impl HasHeader for fix50::messages::trading_session_list_request::TradingSessionListRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'I'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::trading_session_list::TradingSessionList {
+
+    impl HasHeader for fix50::messages::trading_session_list::TradingSessionList {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'J'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::trading_session_status_request::TradingSessionStatusRequest {
+
+    impl HasHeader for fix50::messages::trading_session_status_request::TradingSessionStatusRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'g', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::trading_session_status::TradingSessionStatus {
+
+    impl HasHeader for fix50::messages::trading_session_status::TradingSessionStatus {
         type Output = fix50::standard_message_header::StandardMessageHeader<'h', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::user_request::UserRequest {
+
+    impl HasHeader for fix50::messages::user_request::UserRequest {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'E'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::user_response::UserResponse {
+
+    impl HasHeader for fix50::messages::user_response::UserResponse {
         type Output = fix50::standard_message_header::StandardMessageHeader<'B', 'F'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50::messages::xml_message::XmlMessage {
+
+    impl HasHeader for fix50::messages::xml_message::XmlMessage {
         type Output = fix50::standard_message_header::StandardMessageHeader<'n', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fixt11::messages::heartbeat::Heartbeat {
+
+    impl HasHeader for fixt11::messages::heartbeat::Heartbeat {
         type Output = fixt11::standard_message_header::StandardMessageHeader<5, '0', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fixt11::messages::logon::Logon {
+
+    impl HasHeader for fixt11::messages::logon::Logon {
         type Output = fixt11::standard_message_header::StandardMessageHeader<5, 'A', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fixt11::messages::logout::Logout {
+
+    impl HasHeader for fixt11::messages::logout::Logout {
         type Output = fixt11::standard_message_header::StandardMessageHeader<5, '5', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fixt11::messages::reject::Reject {
+
+    impl HasHeader for fixt11::messages::reject::Reject {
         type Output = fixt11::standard_message_header::StandardMessageHeader<5, '3', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fixt11::messages::resend_request::ResendRequest {
+
+    impl HasHeader for fixt11::messages::resend_request::ResendRequest {
         type Output = fixt11::standard_message_header::StandardMessageHeader<5, '2', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fixt11::messages::sequence_reset::SequenceReset {
+
+    impl HasHeader for fixt11::messages::sequence_reset::SequenceReset {
         type Output = fixt11::standard_message_header::StandardMessageHeader<5, '4', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fixt11::messages::test_request::TestRequest {
+
+    impl HasHeader for fixt11::messages::test_request::TestRequest {
         type Output = fixt11::standard_message_header::StandardMessageHeader<5, '1', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
-    }    
+    }
 }
 
 #[cfg(feature = "fix_50sp1")]
 mod _fix50sp1 {
-    impl crate::has_header::HasHeader for fix50sp1::messages::adjusted_position_report::AdjustedPositionReport {
+    use crate::has_header::HasHeader;
+
+    impl HasHeader for fix50sp1::messages::adjusted_position_report::AdjustedPositionReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'L'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::advertisement::Advertisement {
+
+    impl HasHeader for fix50sp1::messages::advertisement::Advertisement {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'7', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::allocation_instruction_ack::AllocationInstructionAck {
+
+    impl HasHeader for fix50sp1::messages::allocation_instruction_ack::AllocationInstructionAck {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'P', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::allocation_instruction_alert::AllocationInstructionAlert {
+
+    impl HasHeader for fix50sp1::messages::allocation_instruction_alert::AllocationInstructionAlert {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'M'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::allocation_instruction::AllocationInstruction {
+
+    impl HasHeader for fix50sp1::messages::allocation_instruction::AllocationInstruction {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'J', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::allocation_report_ack::AllocationReportAck {
+
+    impl HasHeader for fix50sp1::messages::allocation_report_ack::AllocationReportAck {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'T'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::allocation_report::AllocationReport {
+
+    impl HasHeader for fix50sp1::messages::allocation_report::AllocationReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'S'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::application_message_report::ApplicationMessageReport {
+
+    impl HasHeader for fix50sp1::messages::application_message_report::ApplicationMessageReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'Y'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::application_message_request_ack::ApplicationMessageRequestAck {
+
+    impl HasHeader for fix50sp1::messages::application_message_request_ack::ApplicationMessageRequestAck {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'X'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::application_message_request::ApplicationMessageRequest {
+
+    impl HasHeader for fix50sp1::messages::application_message_request::ApplicationMessageRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'W'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::assignment_report::AssignmentReport {
+
+    impl HasHeader for fix50sp1::messages::assignment_report::AssignmentReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'W'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::bid_request::BidRequest {
+
+    impl HasHeader for fix50sp1::messages::bid_request::BidRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'k', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::bid_response::BidResponse {
+
+    impl HasHeader for fix50sp1::messages::bid_response::BidResponse {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'l', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::business_message_reject::BusinessMessageReject {
+
+    impl HasHeader for fix50sp1::messages::business_message_reject::BusinessMessageReject {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'j', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::collateral_assignment::CollateralAssignment {
+
+    impl HasHeader for fix50sp1::messages::collateral_assignment::CollateralAssignment {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'Y'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::collateral_inquiry_ack::CollateralInquiryAck {
+
+    impl HasHeader for fix50sp1::messages::collateral_inquiry_ack::CollateralInquiryAck {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'G'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::collateral_inquiry::CollateralInquiry {
+
+    impl HasHeader for fix50sp1::messages::collateral_inquiry::CollateralInquiry {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::collateral_report::CollateralReport {
+
+    impl HasHeader for fix50sp1::messages::collateral_report::CollateralReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::collateral_request::CollateralRequest {
+
+    impl HasHeader for fix50sp1::messages::collateral_request::CollateralRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'X'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::collateral_response::CollateralResponse {
+
+    impl HasHeader for fix50sp1::messages::collateral_response::CollateralResponse {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'Z'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::confirmation_ack::ConfirmationAck {
+
+    impl HasHeader for fix50sp1::messages::confirmation_ack::ConfirmationAck {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'U'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::confirmation_request::ConfirmationRequest {
+
+    impl HasHeader for fix50sp1::messages::confirmation_request::ConfirmationRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'H'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::confirmation::Confirmation {
+
+    impl HasHeader for fix50sp1::messages::confirmation::Confirmation {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'K'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::contrary_intention_report::ContraryIntentionReport {
+
+    impl HasHeader for fix50sp1::messages::contrary_intention_report::ContraryIntentionReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'O'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
+
+    impl HasHeader for fix50sp1::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'t', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::cross_order_cancel_request::CrossOrderCancelRequest {
+
+    impl HasHeader for fix50sp1::messages::cross_order_cancel_request::CrossOrderCancelRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'u', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::derivative_security_list_request::DerivativeSecurityListRequest {
+
+    impl HasHeader for fix50sp1::messages::derivative_security_list_request::DerivativeSecurityListRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'z', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::derivative_security_list::DerivativeSecurityList {
+
+    impl HasHeader for fix50sp1::messages::derivative_security_list::DerivativeSecurityList {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
+
+    impl HasHeader for fix50sp1::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'R'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::dont_know_trade::DontKnowTrade {
+
+    impl HasHeader for fix50sp1::messages::dont_know_trade::DontKnowTrade {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'Q', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::email::Email {
+
+    impl HasHeader for fix50sp1::messages::email::Email {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'C', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::execution_report_acknowledgement::ExecutionReportAcknowledgement {
+
+    impl HasHeader for fix50sp1::messages::execution_report_acknowledgement::ExecutionReportAcknowledgement {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'N'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::execution_report::ExecutionReport {
+
+    impl HasHeader for fix50sp1::messages::execution_report::ExecutionReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'8', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::indication_of_interest::IndicationOfInterest {
+
+    impl HasHeader for fix50sp1::messages::indication_of_interest::IndicationOfInterest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'6', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::list_cancel_request::ListCancelRequest {
+
+    impl HasHeader for fix50sp1::messages::list_cancel_request::ListCancelRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'K', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::list_execute::ListExecute {
+
+    impl HasHeader for fix50sp1::messages::list_execute::ListExecute {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'L', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::list_status_request::ListStatusRequest {
+
+    impl HasHeader for fix50sp1::messages::list_status_request::ListStatusRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'M', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::list_status::ListStatus {
+
+    impl HasHeader for fix50sp1::messages::list_status::ListStatus {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'N', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::list_strike_price::ListStrikePrice {
+
+    impl HasHeader for fix50sp1::messages::list_strike_price::ListStrikePrice {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'m', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
+
+    impl HasHeader for fix50sp1::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'X', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::market_data_request_reject::MarketDataRequestReject {
+
+    impl HasHeader for fix50sp1::messages::market_data_request_reject::MarketDataRequestReject {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'Y', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::market_data_request::MarketDataRequest {
+
+    impl HasHeader for fix50sp1::messages::market_data_request::MarketDataRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'V', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
+
+    impl HasHeader for fix50sp1::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'W', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::market_definition_request::MarketDefinitionRequest {
+
+    impl HasHeader for fix50sp1::messages::market_definition_request::MarketDefinitionRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'T'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::market_definition::MarketDefinition {
+
+    impl HasHeader for fix50sp1::messages::market_definition::MarketDefinition {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'U'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::market_definition_update_report::MarketDefinitionUpdateReport {
+
+    impl HasHeader for fix50sp1::messages::market_definition_update_report::MarketDefinitionUpdateReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'V'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
+
+    impl HasHeader for fix50sp1::messages::mass_quote_acknowledgement::MassQuoteAcknowledgement {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'b', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::mass_quote::MassQuote {
+
+    impl HasHeader for fix50sp1::messages::mass_quote::MassQuote {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'i', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
+
+    impl HasHeader for fix50sp1::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'C'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
+
+    impl HasHeader for fix50sp1::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'C'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
+
+    impl HasHeader for fix50sp1::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'D'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::new_order_cross::NewOrderCross {
+
+    impl HasHeader for fix50sp1::messages::new_order_cross::NewOrderCross {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'s', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::new_order_list::NewOrderList {
+
+    impl HasHeader for fix50sp1::messages::new_order_list::NewOrderList {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'E', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::new_order_multileg::NewOrderMultileg {
+
+    impl HasHeader for fix50sp1::messages::new_order_multileg::NewOrderMultileg {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::new_order_single::NewOrderSingle {
+
+    impl HasHeader for fix50sp1::messages::new_order_single::NewOrderSingle {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'D', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::news::News {
+
+    impl HasHeader for fix50sp1::messages::news::News {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_cancel_reject::OrderCancelReject {
+
+    impl HasHeader for fix50sp1::messages::order_cancel_reject::OrderCancelReject {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'9', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
+
+    impl HasHeader for fix50sp1::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'G', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_cancel_request::OrderCancelRequest {
+
+    impl HasHeader for fix50sp1::messages::order_cancel_request::OrderCancelRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'F', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_mass_action_report::OrderMassActionReport {
+
+    impl HasHeader for fix50sp1::messages::order_mass_action_report::OrderMassActionReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'Z'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_mass_action_request::OrderMassActionRequest {
+
+    impl HasHeader for fix50sp1::messages::order_mass_action_request::OrderMassActionRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'C', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_mass_cancel_report::OrderMassCancelReport {
+
+    impl HasHeader for fix50sp1::messages::order_mass_cancel_report::OrderMassCancelReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'r', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_mass_cancel_request::OrderMassCancelRequest {
+
+    impl HasHeader for fix50sp1::messages::order_mass_cancel_request::OrderMassCancelRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'q', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_mass_status_request::OrderMassStatusRequest {
+
+    impl HasHeader for fix50sp1::messages::order_mass_status_request::OrderMassStatusRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'F'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::order_status_request::OrderStatusRequest {
+
+    impl HasHeader for fix50sp1::messages::order_status_request::OrderStatusRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'H', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::position_maintenance_report::PositionMaintenanceReport {
+
+    impl HasHeader for fix50sp1::messages::position_maintenance_report::PositionMaintenanceReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'M'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::position_maintenance_request::PositionMaintenanceRequest {
+
+    impl HasHeader for fix50sp1::messages::position_maintenance_request::PositionMaintenanceRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'L'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::position_report::PositionReport {
+
+    impl HasHeader for fix50sp1::messages::position_report::PositionReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'P'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::quote_cancel::QuoteCancel {
+
+    impl HasHeader for fix50sp1::messages::quote_cancel::QuoteCancel {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'Z', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::quote_request_reject::QuoteRequestReject {
+
+    impl HasHeader for fix50sp1::messages::quote_request_reject::QuoteRequestReject {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'G'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::quote_request::QuoteRequest {
+
+    impl HasHeader for fix50sp1::messages::quote_request::QuoteRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'R', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::quote_response::QuoteResponse {
+
+    impl HasHeader for fix50sp1::messages::quote_response::QuoteResponse {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'J'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::quote::Quote {
+
+    impl HasHeader for fix50sp1::messages::quote::Quote {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'S', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::quote_status_report::QuoteStatusReport {
+
+    impl HasHeader for fix50sp1::messages::quote_status_report::QuoteStatusReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'I'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::quote_status_request::QuoteStatusRequest {
+
+    impl HasHeader for fix50sp1::messages::quote_status_request::QuoteStatusRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'a', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::registration_instructions_response::RegistrationInstructionsResponse {
+
+    impl HasHeader for fix50sp1::messages::registration_instructions_response::RegistrationInstructionsResponse {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'p', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::registration_instructions::RegistrationInstructions {
+
+    impl HasHeader for fix50sp1::messages::registration_instructions::RegistrationInstructions {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'o', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::request_for_positions_ack::RequestForPositionsAck {
+
+    impl HasHeader for fix50sp1::messages::request_for_positions_ack::RequestForPositionsAck {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'O'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::request_for_positions::RequestForPositions {
+
+    impl HasHeader for fix50sp1::messages::request_for_positions::RequestForPositions {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'N'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::rfq_request::RfqRequest {
+
+    impl HasHeader for fix50sp1::messages::rfq_request::RfqRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'H'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_definition_request::SecurityDefinitionRequest {
+
+    impl HasHeader for fix50sp1::messages::security_definition_request::SecurityDefinitionRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'c', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_definition::SecurityDefinition {
+
+    impl HasHeader for fix50sp1::messages::security_definition::SecurityDefinition {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'d', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
+
+    impl HasHeader for fix50sp1::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'P'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_list_request::SecurityListRequest {
+
+    impl HasHeader for fix50sp1::messages::security_list_request::SecurityListRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'x', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_list::SecurityList {
+
+    impl HasHeader for fix50sp1::messages::security_list::SecurityList {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'y', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_list_update_report::SecurityListUpdateReport {
+
+    impl HasHeader for fix50sp1::messages::security_list_update_report::SecurityListUpdateReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'K'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_status_request::SecurityStatusRequest {
+
+    impl HasHeader for fix50sp1::messages::security_status_request::SecurityStatusRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'e', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_status::SecurityStatus {
+
+    impl HasHeader for fix50sp1::messages::security_status::SecurityStatus {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'f', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_type_request::SecurityTypeRequest {
+
+    impl HasHeader for fix50sp1::messages::security_type_request::SecurityTypeRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'v', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::security_types::SecurityTypes {
+
+    impl HasHeader for fix50sp1::messages::security_types::SecurityTypes {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'w', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::settlement_instruction_request::SettlementInstructionRequest {
+
+    impl HasHeader for fix50sp1::messages::settlement_instruction_request::SettlementInstructionRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'V'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::settlement_instructions::SettlementInstructions {
+
+    impl HasHeader for fix50sp1::messages::settlement_instructions::SettlementInstructions {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'T', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::settlement_obligation_report::SettlementObligationReport {
+
+    impl HasHeader for fix50sp1::messages::settlement_obligation_report::SettlementObligationReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'Q'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trade_capture_report_ack::TradeCaptureReportAck {
+
+    impl HasHeader for fix50sp1::messages::trade_capture_report_ack::TradeCaptureReportAck {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'R'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
+
+    impl HasHeader for fix50sp1::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'Q'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trade_capture_report_request::TradeCaptureReportRequest {
+
+    impl HasHeader for fix50sp1::messages::trade_capture_report_request::TradeCaptureReportRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'D'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trade_capture_report::TradeCaptureReport {
+
+    impl HasHeader for fix50sp1::messages::trade_capture_report::TradeCaptureReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'A', 'E'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trading_session_list_request::TradingSessionListRequest {
+
+    impl HasHeader for fix50sp1::messages::trading_session_list_request::TradingSessionListRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'I'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trading_session_list::TradingSessionList {
+
+    impl HasHeader for fix50sp1::messages::trading_session_list::TradingSessionList {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'J'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
+
+    impl HasHeader for fix50sp1::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'S'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trading_session_status_request::TradingSessionStatusRequest {
+
+    impl HasHeader for fix50sp1::messages::trading_session_status_request::TradingSessionStatusRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'g', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::trading_session_status::TradingSessionStatus {
+
+    impl HasHeader for fix50sp1::messages::trading_session_status::TradingSessionStatus {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'h', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::user_notification::UserNotification {
+
+    impl HasHeader for fix50sp1::messages::user_notification::UserNotification {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'C', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::user_request::UserRequest {
+
+    impl HasHeader for fix50sp1::messages::user_request::UserRequest {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'E'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::user_response::UserResponse {
+
+    impl HasHeader for fix50sp1::messages::user_response::UserResponse {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'B', 'F'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp1::messages::xml_message::XmlMessage {
+
+    impl HasHeader for fix50sp1::messages::xml_message::XmlMessage {
         type Output = fix50sp1::standard_message_header::StandardMessageHeader<'n', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
-    }    
+    }
 }
 
 #[cfg(feature = "fix_50sp2")]
 mod _fix50sp2 {
-    impl crate::has_header::HasHeader for fix50sp2::messages::account_summary_report::AccountSummaryReport {
+    use crate::has_header::HasHeader;
+
+    impl HasHeader for fix50sp2::messages::account_summary_report::AccountSummaryReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'Q'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::adjusted_position_report::AdjustedPositionReport {
+
+    impl HasHeader for fix50sp2::messages::adjusted_position_report::AdjustedPositionReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'L'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::advertisement::Advertisement {
+
+    impl HasHeader for fix50sp2::messages::advertisement::Advertisement {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'7', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::allocation_instruction_ack::AllocationInstructionAck {
+
+    impl HasHeader for fix50sp2::messages::allocation_instruction_ack::AllocationInstructionAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'P', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::allocation_instruction_alert_request_ack::AllocationInstructionAlertRequestAck {
+
+    impl HasHeader for fix50sp2::messages::allocation_instruction_alert_request_ack::AllocationInstructionAlertRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'V'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::allocation_instruction_alert_request::AllocationInstructionAlertRequest {
+
+    impl HasHeader for fix50sp2::messages::allocation_instruction_alert_request::AllocationInstructionAlertRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'U'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::allocation_instruction_alert::AllocationInstructionAlert {
+
+    impl HasHeader for fix50sp2::messages::allocation_instruction_alert::AllocationInstructionAlert {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'M'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::allocation_instruction::AllocationInstruction {
+
+    impl HasHeader for fix50sp2::messages::allocation_instruction::AllocationInstruction {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'J', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::allocation_report_ack::AllocationReportAck {
+
+    impl HasHeader for fix50sp2::messages::allocation_report_ack::AllocationReportAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'T'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::allocation_report::AllocationReport {
+
+    impl HasHeader for fix50sp2::messages::allocation_report::AllocationReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'S'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::application_message_report::ApplicationMessageReport {
+
+    impl HasHeader for fix50sp2::messages::application_message_report::ApplicationMessageReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'Y'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::application_message_request_ack::ApplicationMessageRequestAck {
+
+    impl HasHeader for fix50sp2::messages::application_message_request_ack::ApplicationMessageRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'X'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::application_message_request::ApplicationMessageRequest {
+
+    impl HasHeader for fix50sp2::messages::application_message_request::ApplicationMessageRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'W'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::assignment_report::AssignmentReport {
+
+    impl HasHeader for fix50sp2::messages::assignment_report::AssignmentReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'W'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::bid_request::BidRequest {
+
+    impl HasHeader for fix50sp2::messages::bid_request::BidRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'k', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::bid_response::BidResponse {
+
+    impl HasHeader for fix50sp2::messages::bid_response::BidResponse {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'l', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::business_message_reject::BusinessMessageReject {
+
+    impl HasHeader for fix50sp2::messages::business_message_reject::BusinessMessageReject {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'j', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::collateral_assignment::CollateralAssignment {
+
+    impl HasHeader for fix50sp2::messages::collateral_assignment::CollateralAssignment {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'Y'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::collateral_inquiry_ack::CollateralInquiryAck {
+
+    impl HasHeader for fix50sp2::messages::collateral_inquiry_ack::CollateralInquiryAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'G'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::collateral_inquiry::CollateralInquiry {
+
+    impl HasHeader for fix50sp2::messages::collateral_inquiry::CollateralInquiry {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::collateral_report_ack::CollateralReportAck {
+
+    impl HasHeader for fix50sp2::messages::collateral_report_ack::CollateralReportAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'Q'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::collateral_report::CollateralReport {
+
+    impl HasHeader for fix50sp2::messages::collateral_report::CollateralReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::collateral_request::CollateralRequest {
+
+    impl HasHeader for fix50sp2::messages::collateral_request::CollateralRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'X'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::collateral_response::CollateralResponse {
+
+    impl HasHeader for fix50sp2::messages::collateral_response::CollateralResponse {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'Z'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::confirmation_ack::ConfirmationAck {
+
+    impl HasHeader for fix50sp2::messages::confirmation_ack::ConfirmationAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'U'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::confirmation_request::ConfirmationRequest {
+
+    impl HasHeader for fix50sp2::messages::confirmation_request::ConfirmationRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'H'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::confirmation::Confirmation {
+
+    impl HasHeader for fix50sp2::messages::confirmation::Confirmation {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'K'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::contrary_intention_report::ContraryIntentionReport {
+
+    impl HasHeader for fix50sp2::messages::contrary_intention_report::ContraryIntentionReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'O'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
+
+    impl HasHeader for fix50sp2::messages::cross_order_cancel_replace_request::CrossOrderCancelReplaceRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'t', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::cross_order_cancel_request::CrossOrderCancelRequest {
+
+    impl HasHeader for fix50sp2::messages::cross_order_cancel_request::CrossOrderCancelRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'u', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::cross_request_ack::CrossRequestAck {
+
+    impl HasHeader for fix50sp2::messages::cross_request_ack::CrossRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'T'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::cross_request::CrossRequest {
+
+    impl HasHeader for fix50sp2::messages::cross_request::CrossRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'S'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::derivative_security_list_request::DerivativeSecurityListRequest {
+
+    impl HasHeader for fix50sp2::messages::derivative_security_list_request::DerivativeSecurityListRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'z', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::derivative_security_list::DerivativeSecurityList {
+
+    impl HasHeader for fix50sp2::messages::derivative_security_list::DerivativeSecurityList {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
+
+    impl HasHeader for fix50sp2::messages::derivative_security_list_update_report::DerivativeSecurityListUpdateReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'R'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::dont_know_trade::DontKnowTrade {
+
+    impl HasHeader for fix50sp2::messages::dont_know_trade::DontKnowTrade {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'Q', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::email::Email {
+
+    impl HasHeader for fix50sp2::messages::email::Email {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::execution_ack::ExecutionAck {
+
+    impl HasHeader for fix50sp2::messages::execution_ack::ExecutionAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'N'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::execution_report::ExecutionReport {
+
+    impl HasHeader for fix50sp2::messages::execution_report::ExecutionReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'8', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::indication_of_interest::IndicationOfInterest {
+
+    impl HasHeader for fix50sp2::messages::indication_of_interest::IndicationOfInterest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'6', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::list_cancel_request::ListCancelRequest {
+
+    impl HasHeader for fix50sp2::messages::list_cancel_request::ListCancelRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'K', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::list_execute::ListExecute {
+
+    impl HasHeader for fix50sp2::messages::list_execute::ListExecute {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'L', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::list_status_request::ListStatusRequest {
+
+    impl HasHeader for fix50sp2::messages::list_status_request::ListStatusRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'M', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::list_status::ListStatus {
+
+    impl HasHeader for fix50sp2::messages::list_status::ListStatus {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'N', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::list_strike_price::ListStrikePrice {
+
+    impl HasHeader for fix50sp2::messages::list_strike_price::ListStrikePrice {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'m', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::margin_requirement_inquiry_ack::MarginRequirementInquiryAck {
+
+    impl HasHeader for fix50sp2::messages::margin_requirement_inquiry_ack::MarginRequirementInquiryAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'I'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::margin_requirement_inquiry::MarginRequirementInquiry {
+
+    impl HasHeader for fix50sp2::messages::margin_requirement_inquiry::MarginRequirementInquiry {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'H'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::margin_requirement_report::MarginRequirementReport {
+
+    impl HasHeader for fix50sp2::messages::margin_requirement_report::MarginRequirementReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'J'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
+
+    impl HasHeader for fix50sp2::messages::market_data_incremental_refresh::MarketDataIncrementalRefresh {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'X', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_data_report::MarketDataReport {
+
+    impl HasHeader for fix50sp2::messages::market_data_report::MarketDataReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'R'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_data_request_reject::MarketDataRequestReject {
+
+    impl HasHeader for fix50sp2::messages::market_data_request_reject::MarketDataRequestReject {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'Y', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_data_request::MarketDataRequest {
+
+    impl HasHeader for fix50sp2::messages::market_data_request::MarketDataRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'V', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
+
+    impl HasHeader for fix50sp2::messages::market_data_snapshot_full_refresh::MarketDataSnapshotFullRefresh {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'W', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_data_statistics_report::MarketDataStatisticsReport {
+
+    impl HasHeader for fix50sp2::messages::market_data_statistics_report::MarketDataStatisticsReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'P'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_data_statistics_request::MarketDataStatisticsRequest {
+
+    impl HasHeader for fix50sp2::messages::market_data_statistics_request::MarketDataStatisticsRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'O'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_definition_request::MarketDefinitionRequest {
+
+    impl HasHeader for fix50sp2::messages::market_definition_request::MarketDefinitionRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'T'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_definition::MarketDefinition {
+
+    impl HasHeader for fix50sp2::messages::market_definition::MarketDefinition {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'U'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::market_definition_update_report::MarketDefinitionUpdateReport {
+
+    impl HasHeader for fix50sp2::messages::market_definition_update_report::MarketDefinitionUpdateReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'V'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::mass_order_ack::MassOrderAck {
+
+    impl HasHeader for fix50sp2::messages::mass_order_ack::MassOrderAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'K'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::mass_order::MassOrder {
+
+    impl HasHeader for fix50sp2::messages::mass_order::MassOrder {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'J'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::mass_quote_ack::MassQuoteAck {
+
+    impl HasHeader for fix50sp2::messages::mass_quote_ack::MassQuoteAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'b', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::mass_quote::MassQuote {
+
+    impl HasHeader for fix50sp2::messages::mass_quote::MassQuote {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'i', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
+
+    impl HasHeader for fix50sp2::messages::multileg_order_cancel_replace_request::MultilegOrderCancelReplaceRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'C'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
+
+    impl HasHeader for fix50sp2::messages::network_counterparty_system_status_request::NetworkCounterpartySystemStatusRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'C'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
+
+    impl HasHeader for fix50sp2::messages::network_counterparty_system_status_response::NetworkCounterpartySystemStatusResponse {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'D'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::new_order_cross::NewOrderCross {
+
+    impl HasHeader for fix50sp2::messages::new_order_cross::NewOrderCross {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'s', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::new_order_list::NewOrderList {
+
+    impl HasHeader for fix50sp2::messages::new_order_list::NewOrderList {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'E', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::new_order_multileg::NewOrderMultileg {
+
+    impl HasHeader for fix50sp2::messages::new_order_multileg::NewOrderMultileg {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::new_order_single::NewOrderSingle {
+
+    impl HasHeader for fix50sp2::messages::new_order_single::NewOrderSingle {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::news::News {
+
+    impl HasHeader for fix50sp2::messages::news::News {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_cancel_reject::OrderCancelReject {
+
+    impl HasHeader for fix50sp2::messages::order_cancel_reject::OrderCancelReject {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'9', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
+
+    impl HasHeader for fix50sp2::messages::order_cancel_replace_request::OrderCancelReplaceRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'G', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_cancel_request::OrderCancelRequest {
+
+    impl HasHeader for fix50sp2::messages::order_cancel_request::OrderCancelRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'F', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_mass_action_report::OrderMassActionReport {
+
+    impl HasHeader for fix50sp2::messages::order_mass_action_report::OrderMassActionReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'Z'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_mass_action_request::OrderMassActionRequest {
+
+    impl HasHeader for fix50sp2::messages::order_mass_action_request::OrderMassActionRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_mass_cancel_report::OrderMassCancelReport {
+
+    impl HasHeader for fix50sp2::messages::order_mass_cancel_report::OrderMassCancelReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'r', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_mass_cancel_request::OrderMassCancelRequest {
+
+    impl HasHeader for fix50sp2::messages::order_mass_cancel_request::OrderMassCancelRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'q', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_mass_status_request::OrderMassStatusRequest {
+
+    impl HasHeader for fix50sp2::messages::order_mass_status_request::OrderMassStatusRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'F'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::order_status_request::OrderStatusRequest {
+
+    impl HasHeader for fix50sp2::messages::order_status_request::OrderStatusRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'H', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_action_report::PartyActionReport {
+
+    impl HasHeader for fix50sp2::messages::party_action_report::PartyActionReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'I'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_action_request::PartyActionRequest {
+
+    impl HasHeader for fix50sp2::messages::party_action_request::PartyActionRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'H'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_details_definition_request_ack::PartyDetailsDefinitionRequestAck {
+
+    impl HasHeader for fix50sp2::messages::party_details_definition_request_ack::PartyDetailsDefinitionRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'Y'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_details_definition_request::PartyDetailsDefinitionRequest {
+
+    impl HasHeader for fix50sp2::messages::party_details_definition_request::PartyDetailsDefinitionRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'X'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_details_list_report::PartyDetailsListReport {
+
+    impl HasHeader for fix50sp2::messages::party_details_list_report::PartyDetailsListReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'G'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_details_list_request::PartyDetailsListRequest {
+
+    impl HasHeader for fix50sp2::messages::party_details_list_request::PartyDetailsListRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'F'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_details_list_update_report::PartyDetailsListUpdateReport {
+
+    impl HasHeader for fix50sp2::messages::party_details_list_update_report::PartyDetailsListUpdateReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'K'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_entitlements_definition_request_ack::PartyEntitlementsDefinitionRequestAck {
+
+    impl HasHeader for fix50sp2::messages::party_entitlements_definition_request_ack::PartyEntitlementsDefinitionRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_entitlements_definition_request::PartyEntitlementsDefinitionRequest {
+
+    impl HasHeader for fix50sp2::messages::party_entitlements_definition_request::PartyEntitlementsDefinitionRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_entitlements_report::PartyEntitlementsReport {
+
+    impl HasHeader for fix50sp2::messages::party_entitlements_report::PartyEntitlementsReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'V'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_entitlements_request::PartyEntitlementsRequest {
+
+    impl HasHeader for fix50sp2::messages::party_entitlements_request::PartyEntitlementsRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'U'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_entitlements_update_report::PartyEntitlementsUpdateReport {
+
+    impl HasHeader for fix50sp2::messages::party_entitlements_update_report::PartyEntitlementsUpdateReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'Z'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_risk_limit_check_request_ack::PartyRiskLimitCheckRequestAck {
+
+    impl HasHeader for fix50sp2::messages::party_risk_limit_check_request_ack::PartyRiskLimitCheckRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'G'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_risk_limit_check_request::PartyRiskLimitCheckRequest {
+
+    impl HasHeader for fix50sp2::messages::party_risk_limit_check_request::PartyRiskLimitCheckRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'F'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_risk_limits_definition_request_ack::PartyRiskLimitsDefinitionRequestAck {
+
+    impl HasHeader for fix50sp2::messages::party_risk_limits_definition_request_ack::PartyRiskLimitsDefinitionRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'T'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_risk_limits_definition_request::PartyRiskLimitsDefinitionRequest {
+
+    impl HasHeader for fix50sp2::messages::party_risk_limits_definition_request::PartyRiskLimitsDefinitionRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'S'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_risk_limits_report_ack::PartyRiskLimitsReportAck {
+
+    impl HasHeader for fix50sp2::messages::party_risk_limits_report_ack::PartyRiskLimitsReportAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'E'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_risk_limits_report::PartyRiskLimitsReport {
+
+    impl HasHeader for fix50sp2::messages::party_risk_limits_report::PartyRiskLimitsReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'M'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_risk_limits_request::PartyRiskLimitsRequest {
+
+    impl HasHeader for fix50sp2::messages::party_risk_limits_request::PartyRiskLimitsRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'L'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::party_risk_limits_update_report::PartyRiskLimitsUpdateReport {
+
+    impl HasHeader for fix50sp2::messages::party_risk_limits_update_report::PartyRiskLimitsUpdateReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'R'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::pay_management_report_ack::PayManagementReportAck {
+
+    impl HasHeader for fix50sp2::messages::pay_management_report_ack::PayManagementReportAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'Z'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::pay_management_report::PayManagementReport {
+
+    impl HasHeader for fix50sp2::messages::pay_management_report::PayManagementReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'Y'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::pay_management_request_ack::PayManagementRequestAck {
+
+    impl HasHeader for fix50sp2::messages::pay_management_request_ack::PayManagementRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'E', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::pay_management_request::PayManagementRequest {
+
+    impl HasHeader for fix50sp2::messages::pay_management_request::PayManagementRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'E', 'A'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::position_maintenance_report::PositionMaintenanceReport {
+
+    impl HasHeader for fix50sp2::messages::position_maintenance_report::PositionMaintenanceReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'M'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::position_maintenance_request::PositionMaintenanceRequest {
+
+    impl HasHeader for fix50sp2::messages::position_maintenance_request::PositionMaintenanceRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'L'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::position_report::PositionReport {
+
+    impl HasHeader for fix50sp2::messages::position_report::PositionReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'P'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::position_transfer_instruction_ack::PositionTransferInstructionAck {
+
+    impl HasHeader for fix50sp2::messages::position_transfer_instruction_ack::PositionTransferInstructionAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'M'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::position_transfer_instruction::PositionTransferInstruction {
+
+    impl HasHeader for fix50sp2::messages::position_transfer_instruction::PositionTransferInstruction {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'L'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::position_transfer_report::PositionTransferReport {
+
+    impl HasHeader for fix50sp2::messages::position_transfer_report::PositionTransferReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'N'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::quote_ack::QuoteAck {
+
+    impl HasHeader for fix50sp2::messages::quote_ack::QuoteAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'W'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::quote_cancel::QuoteCancel {
+
+    impl HasHeader for fix50sp2::messages::quote_cancel::QuoteCancel {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'Z', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::quote_request_reject::QuoteRequestReject {
+
+    impl HasHeader for fix50sp2::messages::quote_request_reject::QuoteRequestReject {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'G'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::quote_request::QuoteRequest {
+
+    impl HasHeader for fix50sp2::messages::quote_request::QuoteRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'R', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::quote_response::QuoteResponse {
+
+    impl HasHeader for fix50sp2::messages::quote_response::QuoteResponse {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'J'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::quote::Quote {
+
+    impl HasHeader for fix50sp2::messages::quote::Quote {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'S', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::quote_status_report::QuoteStatusReport {
+
+    impl HasHeader for fix50sp2::messages::quote_status_report::QuoteStatusReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'I'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::quote_status_request::QuoteStatusRequest {
+
+    impl HasHeader for fix50sp2::messages::quote_status_request::QuoteStatusRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'a', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::registration_instructions_response::RegistrationInstructionsResponse {
+
+    impl HasHeader for fix50sp2::messages::registration_instructions_response::RegistrationInstructionsResponse {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'p', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::registration_instructions::RegistrationInstructions {
+
+    impl HasHeader for fix50sp2::messages::registration_instructions::RegistrationInstructions {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'o', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::request_for_positions_ack::RequestForPositionsAck {
+
+    impl HasHeader for fix50sp2::messages::request_for_positions_ack::RequestForPositionsAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'O'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::request_for_positions::RequestForPositions {
+
+    impl HasHeader for fix50sp2::messages::request_for_positions::RequestForPositions {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'N'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::rfq_request::RfqRequest {
+
+    impl HasHeader for fix50sp2::messages::rfq_request::RfqRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'H'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_definition_request::SecurityDefinitionRequest {
+
+    impl HasHeader for fix50sp2::messages::security_definition_request::SecurityDefinitionRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'c', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_definition::SecurityDefinition {
+
+    impl HasHeader for fix50sp2::messages::security_definition::SecurityDefinition {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'d', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
+
+    impl HasHeader for fix50sp2::messages::security_definition_update_report::SecurityDefinitionUpdateReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'P'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_list_request::SecurityListRequest {
+
+    impl HasHeader for fix50sp2::messages::security_list_request::SecurityListRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'x', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_list::SecurityList {
+
+    impl HasHeader for fix50sp2::messages::security_list::SecurityList {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'y', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_list_update_report::SecurityListUpdateReport {
+
+    impl HasHeader for fix50sp2::messages::security_list_update_report::SecurityListUpdateReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'K'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_mass_status_request::SecurityMassStatusRequest {
+
+    impl HasHeader for fix50sp2::messages::security_mass_status_request::SecurityMassStatusRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'N'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_mass_status::SecurityMassStatus {
+
+    impl HasHeader for fix50sp2::messages::security_mass_status::SecurityMassStatus {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'O'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_status_request::SecurityStatusRequest {
+
+    impl HasHeader for fix50sp2::messages::security_status_request::SecurityStatusRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'e', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_status::SecurityStatus {
+
+    impl HasHeader for fix50sp2::messages::security_status::SecurityStatus {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'f', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_type_request::SecurityTypeRequest {
+
+    impl HasHeader for fix50sp2::messages::security_type_request::SecurityTypeRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'v', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::security_types::SecurityTypes {
+
+    impl HasHeader for fix50sp2::messages::security_types::SecurityTypes {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'w', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::settlement_instruction_request::SettlementInstructionRequest {
+
+    impl HasHeader for fix50sp2::messages::settlement_instruction_request::SettlementInstructionRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'V'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::settlement_instructions::SettlementInstructions {
+
+    impl HasHeader for fix50sp2::messages::settlement_instructions::SettlementInstructions {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'T', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::settlement_obligation_report::SettlementObligationReport {
+
+    impl HasHeader for fix50sp2::messages::settlement_obligation_report::SettlementObligationReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'Q'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportAck {
+
+    impl HasHeader for fix50sp2::messages::stream_assignment_report_ack::StreamAssignmentReportAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'E'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::stream_assignment_report::StreamAssignmentReport {
+
+    impl HasHeader for fix50sp2::messages::stream_assignment_report::StreamAssignmentReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'D'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::stream_assignment_request::StreamAssignmentRequest {
+
+    impl HasHeader for fix50sp2::messages::stream_assignment_request::StreamAssignmentRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'C'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trade_aggregation_report::TradeAggregationReport {
+
+    impl HasHeader for fix50sp2::messages::trade_aggregation_report::TradeAggregationReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'X'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trade_aggregation_request::TradeAggregationRequest {
+
+    impl HasHeader for fix50sp2::messages::trade_aggregation_request::TradeAggregationRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'W'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trade_capture_report_ack::TradeCaptureReportAck {
+
+    impl HasHeader for fix50sp2::messages::trade_capture_report_ack::TradeCaptureReportAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'R'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
+
+    impl HasHeader for fix50sp2::messages::trade_capture_report_request_ack::TradeCaptureReportRequestAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'Q'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trade_capture_report_request::TradeCaptureReportRequest {
+
+    impl HasHeader for fix50sp2::messages::trade_capture_report_request::TradeCaptureReportRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'D'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trade_capture_report::TradeCaptureReport {
+
+    impl HasHeader for fix50sp2::messages::trade_capture_report::TradeCaptureReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'A', 'E'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trade_match_report_ack::TradeMatchReportAck {
+
+    impl HasHeader for fix50sp2::messages::trade_match_report_ack::TradeMatchReportAck {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'D'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trade_match_report::TradeMatchReport {
+
+    impl HasHeader for fix50sp2::messages::trade_match_report::TradeMatchReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'D', 'C'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trading_session_list_request::TradingSessionListRequest {
+
+    impl HasHeader for fix50sp2::messages::trading_session_list_request::TradingSessionListRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'I'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trading_session_list::TradingSessionList {
+
+    impl HasHeader for fix50sp2::messages::trading_session_list::TradingSessionList {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'J'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
+
+    impl HasHeader for fix50sp2::messages::trading_session_list_update_report::TradingSessionListUpdateReport {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'S'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trading_session_status_request::TradingSessionStatusRequest {
+
+    impl HasHeader for fix50sp2::messages::trading_session_status_request::TradingSessionStatusRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'g', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::trading_session_status::TradingSessionStatus {
+
+    impl HasHeader for fix50sp2::messages::trading_session_status::TradingSessionStatus {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'h', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::user_notification::UserNotification {
+
+    impl HasHeader for fix50sp2::messages::user_notification::UserNotification {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'C', 'B'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::user_request::UserRequest {
+
+    impl HasHeader for fix50sp2::messages::user_request::UserRequest {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'E'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::user_response::UserResponse {
+
+    impl HasHeader for fix50sp2::messages::user_response::UserResponse {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'B', 'F'>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
         }
     }
-    
-    impl crate::has_header::HasHeader for fix50sp2::messages::xml_message::XmlMessage {
+
+    impl HasHeader for fix50sp2::messages::xml_message::XmlMessage {
         type Output = fix50sp2::standard_message_header::StandardMessageHeader<'n', ' '>;
         fn get_header(&self) -> &Self::Output {
             &self.standard_message_header
@@ -6196,14 +7707,14 @@ mod _fix50sp2 {
 
 #[cfg(test)]
 mod test {
-    use super::Message;
+    use crate::Message;
 
     #[test]
     fn logon() {
         let msg = "8=FIXT.1.1\u{1}9=111\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}369=1\u{1}98=0\u{1}108=1\u{1}789=1\u{1}1137=0\u{1}10=073\u{1}";
         let mut obj = dbg!(serde_fix::from_str_checked::<Message>(msg)).unwrap();
         match obj {
-            Message::Logon(l) => {
+            Message::FIXT11(super::Message::Logon(ref mut l)) => {
                 l.standard_message_header.body_length = 0;
             },
             _ => panic!("Deserialized message is not of type Logon"),
