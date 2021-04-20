@@ -59,7 +59,7 @@ pub mod mass_quote_ack;
 pub mod news;
 pub mod rfq_request;
 pub mod party_risk_limits_update_report;
-pub mod ioi;
+pub mod indication_of_interest;
 pub mod party_risk_limits_report_ack;
 pub mod market_data_statistics_report;
 pub mod stream_assignment_request;
