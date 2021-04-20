@@ -2,7 +2,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Adjusted {
+pub struct AdjustedPositionReport {
 	/// MsgType = BL
 	#[serde(flatten)]
 	pub standard_message_header: super::super::standard_message_header::StandardMessageHeader<'B', 'L'>,

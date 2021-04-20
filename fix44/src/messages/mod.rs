@@ -97,3 +97,5 @@ pub mod execution_report_acknowledgement;
 pub mod security_definition_update_report;
 pub mod trading_session_list_request;
 pub mod trading_session_list;
+pub mod adjusted_position_report;
+pub mod security_list_update_report;
