@@ -53,7 +53,7 @@ pub struct StandardMessageHeader<const V: u8, const T1: char, const T2: char> {
     /// (Can be embedded within encrypted data section.)
     #[serde(rename = "34")]
     #[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
-    pub msg_seq_num: u64,
+    pub msg_seq_num: u32,
     /// (Can be embedded within encrypted data section.)
     #[serde(rename = "50")]
     #[serde(skip_serializing_if = "Option::is_none")]
