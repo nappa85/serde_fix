@@ -501,6 +501,11 @@ impl<const T1: char, const T2: char> crate::header::Header for fix44::standard_m
     fn get_msg_seq_num(&self) -> u32 {
         self.msg_seq_num
     }
+    fn reply_boxed(&mut self, other: Box<&dyn crate::header::Header>) {
+        self.sender_comp_id = other.get_target_comp_id().to_owned();
+        self.target_comp_id = other.get_sender_comp_id().to_owned();
+        self.msg_seq_num = other.get_msg_seq_num();
+    }
 }
 
 impl<const T1: char, const T2: char> crate::header::HeaderExt for fix44::standard_message_header::StandardMessageHeader<T1, T2> {
