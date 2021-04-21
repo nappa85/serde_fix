@@ -12,7 +12,7 @@ pub struct OrderCancelReject {
 	/// Can be used to provide order id used by exchange or executing system.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "198")]
-	pub secondary_order_id: Option<char>,
+	pub secondary_order_id: Option<String>,
 	/// Unique order id assigned by institution to the cancel request or to the replacement order.
 	#[serde(rename = "11")]
 	pub cl_ord_id: String,
@@ -25,15 +25,15 @@ pub struct OrderCancelReject {
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// Required for rejects against orders which were submitted as part of a list.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
-	pub list_id: Option<char>,
+	pub list_id: Option<String>,
 	/// CxlRejReason
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "102")]
@@ -41,7 +41,7 @@ pub struct OrderCancelReject {
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

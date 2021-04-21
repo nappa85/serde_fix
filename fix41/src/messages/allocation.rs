@@ -15,11 +15,11 @@ pub struct Allocation {
 	/// Required for <a href="tag_71_AllocTransType.html" target="bottom">AllocTransType&nbsp;(71)</a> = Calculated, Replace, or Cancel
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "72")]
-	pub ref_alloc_id: Option<char>,
+	pub ref_alloc_id: Option<String>,
 	/// Can be used to link two different <a href="message_Allocation_J.html" target="main">Allocation&nbsp;(J)</a> messages (each with unique <a href="tag_70_AllocID.html" target="bottom">AllocID&nbsp;(70)</a> ) together, i.e. for F/X "Netting" or "Swaps"
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "196")]
-	pub alloc_link_id: Option<char>,
+	pub alloc_link_id: Option<String>,
 	/// Can be used to link two different <a href="message_Allocation_J.html" target="main">Allocation&nbsp;(J)</a> messages and identifies the type of link. Required if <a href="tag_196_AllocLinkID.html" target="bottom">AllocLinkID&nbsp;(196)</a> is specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "197")]
@@ -43,11 +43,11 @@ pub struct Allocation {
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// SecurityID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// IDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -81,15 +81,15 @@ pub struct Allocation {
 	/// Can be used to identify the security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "207")]
-	pub security_exchange: Option<char>,
+	pub security_exchange: Option<String>,
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// Total number of shares allocated to all accounts
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "53")]
@@ -97,7 +97,7 @@ pub struct Allocation {
 	/// Market of the executions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "30")]
-	pub last_mkt: Option<char>,
+	pub last_mkt: Option<String>,
 	/// For F/X orders, should be the "all-in" rate (spot rate adjusted for forward points).
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "6")]
@@ -140,7 +140,7 @@ pub struct Allocation {
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Applicable for Convertible Bonds and fixed income
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -168,23 +168,23 @@ pub struct Order {
 	/// field should contain string "MANUAL". Not required for <a href="tag_71_AllocTransType.html" target="bottom">AllocTransType&nbsp;(71)</a> =Cancel
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "11")]
-	pub cl_ord_id: Option<char>,
+	pub cl_ord_id: Option<String>,
 	/// OrderID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
-	pub order_id: Option<char>,
+	pub order_id: Option<String>,
 	/// Can be used to provide order id used by exchange or executing system.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "198")]
-	pub secondary_order_id: Option<char>,
+	pub secondary_order_id: Option<String>,
 	/// Required for List Orders.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
-	pub list_id: Option<char>,
+	pub list_id: Option<String>,
 	/// WaveNo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "105")]
-	pub wave_no: Option<char>,
+	pub wave_no: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -198,7 +198,7 @@ pub struct Exec {
 	/// ExecID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "17")]
-	pub exec_id: Option<char>,
+	pub exec_id: Option<String>,
 	/// Price of individual execution. Required if <a href="tag_124_NoExecs.html" target="bottom">NoExecs&nbsp;(124)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -216,7 +216,7 @@ pub struct Alloc {
 	/// May be the same value as <a href="tag_92_BrokerOfCredit.html" target="bottom">BrokerOfCredit&nbsp;(92)</a> if <a href="tag_81_ProcessCode.html" target="bottom">ProcessCode&nbsp;(81)</a> is step-out or soft-dollar step-out and Institution does not wish to disclose individual account breakdowns to the <a href="tag_76_ExecBroker.html" target="bottom">ExecBroker&nbsp;(76)</a> . Not required for <a href="tag_71_AllocTransType.html" target="bottom">AllocTransType&nbsp;(71)</a> =Cancel
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "79")]
-	pub alloc_account: Option<char>,
+	pub alloc_account: Option<String>,
 	/// AllocShares
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "80")]
@@ -228,7 +228,7 @@ pub struct Alloc {
 	/// Required if <a href="tag_81_ProcessCode.html" target="bottom">ProcessCode&nbsp;(81)</a> is step-out or soft-dollar step-out
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "92")]
-	pub broker_of_credit: Option<char>,
+	pub broker_of_credit: Option<String>,
 	/// NotifyBrokerOfCredit
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "208")]
@@ -240,15 +240,15 @@ pub struct Alloc {
 	/// Free format text field related to this <a href="tag_79_AllocAccount.html" target="bottom">AllocAccount&nbsp;(79)</a>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "161")]
-	pub alloc_text: Option<char>,
+	pub alloc_text: Option<String>,
 	/// Required for step-in and step-out trades
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Commission
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183

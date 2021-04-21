@@ -32,11 +32,11 @@ pub struct SettlementInstructions {
 	/// Required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> =2 or 3
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "70")]
-	pub alloc_id: Option<char>,
+	pub alloc_id: Option<String>,
 	/// Required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> =2 or 3, May be required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> =1
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "30")]
-	pub last_mkt: Option<char>,
+	pub last_mkt: Option<String>,
 	/// Required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> =2 or 3, May be required for <a href="tag_160_SettlInstMode.html" target="bottom">SettlInstMode&nbsp;(160)</a> =1
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "54")]
@@ -55,11 +55,11 @@ pub struct SettlementInstructions {
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// 1=DTC SID, 2=Thomson ALERT, 3=Global Custodian's, etc.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "169")]
@@ -67,11 +67,11 @@ pub struct SettlementInstructions {
 	/// Name of <a href="tag_169_StandInstDbType.html" target="bottom">StandInstDbType&nbsp;(169)</a> (i.e. DTC, Global Custodian's name)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "170")]
-	pub stand_inst_db_name: Option<char>,
+	pub stand_inst_db_name: Option<String>,
 	/// Identifier used within the <a href="tag_169_StandInstDbType.html" target="bottom">StandInstDbType&nbsp;(169)</a>
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "171")]
-	pub stand_inst_db_id: Option<char>,
+	pub stand_inst_db_id: Option<String>,
 	/// SettlDeliveryType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "172")]
@@ -79,63 +79,63 @@ pub struct SettlementInstructions {
 	/// Applicable when <a href="tag_166_SettlLocation.html" target="bottom">SettlLocation&nbsp;(166)</a> is a depository
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "173")]
-	pub settl_depository_code: Option<char>,
+	pub settl_depository_code: Option<String>,
 	/// SettlBrkrCode
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "174")]
-	pub settl_brkr_code: Option<char>,
+	pub settl_brkr_code: Option<String>,
 	/// SettlInstCode
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "175")]
-	pub settl_inst_code: Option<char>,
+	pub settl_inst_code: Option<String>,
 	/// Applicable when settlement is being performed at a country vs. a depository
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "176")]
-	pub security_settl_agent_name: Option<char>,
+	pub security_settl_agent_name: Option<String>,
 	/// Applicable when settlement is being performed at a country vs. a depository
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "177")]
-	pub security_settl_agent_code: Option<char>,
+	pub security_settl_agent_code: Option<String>,
 	/// Applicable when settlement is being performed at a country vs. a depository
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "178")]
-	pub security_settl_agent_acct_num: Option<char>,
+	pub security_settl_agent_acct_num: Option<String>,
 	/// Applicable when settlement is being performed at a country vs. a depository
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "179")]
-	pub security_settl_agent_acct_name: Option<char>,
+	pub security_settl_agent_acct_name: Option<String>,
 	/// Applicable when settlement is being performed at a country vs. a depository
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "180")]
-	pub security_settl_agent_contact_name: Option<char>,
+	pub security_settl_agent_contact_name: Option<String>,
 	/// Applicable when settlement is being performed at a country vs. a depository
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "181")]
-	pub security_settl_agent_contact_phone: Option<char>,
+	pub security_settl_agent_contact_phone: Option<String>,
 	/// Applicable when <a href="tag_172_SettlDeliveryType.html" target="bottom">SettlDeliveryType&nbsp;(172)</a> =Free
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "182")]
-	pub cash_settl_agent_name: Option<char>,
+	pub cash_settl_agent_name: Option<String>,
 	/// Applicable when <a href="tag_172_SettlDeliveryType.html" target="bottom">SettlDeliveryType&nbsp;(172)</a> =Free
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "183")]
-	pub cash_settl_agent_code: Option<char>,
+	pub cash_settl_agent_code: Option<String>,
 	/// Applicable when <a href="tag_172_SettlDeliveryType.html" target="bottom">SettlDeliveryType&nbsp;(172)</a> =Free
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "184")]
-	pub cash_settl_agent_acct_num: Option<char>,
+	pub cash_settl_agent_acct_num: Option<String>,
 	/// Applicable when <a href="tag_172_SettlDeliveryType.html" target="bottom">SettlDeliveryType&nbsp;(172)</a> =Free
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "185")]
-	pub cash_settl_agent_acct_name: Option<char>,
+	pub cash_settl_agent_acct_name: Option<String>,
 	/// Applicable when <a href="tag_172_SettlDeliveryType.html" target="bottom">SettlDeliveryType&nbsp;(172)</a> =Free
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "186")]
-	pub cash_settl_agent_contact_name: Option<char>,
+	pub cash_settl_agent_contact_name: Option<String>,
 	/// Applicable when <a href="tag_172_SettlDeliveryType.html" target="bottom">SettlDeliveryType&nbsp;(172)</a> =Free
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "187")]
-	pub cash_settl_agent_contact_phone: Option<char>,
+	pub cash_settl_agent_contact_phone: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

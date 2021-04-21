@@ -12,7 +12,7 @@ pub struct NewOrderList {
 	/// WaveNo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "105")]
-	pub wave_no: Option<char>,
+	pub wave_no: Option<String>,
 	/// ListSeqNo
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "67")]
@@ -24,22 +24,22 @@ pub struct NewOrderList {
 	/// Include only in <a href="tag_67_ListSeqNo.html" target="bottom">ListSeqNo&nbsp;(67)</a> = 1 message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "69")]
-	pub list_exec_inst: Option<char>,
+	pub list_exec_inst: Option<String>,
 	/// Unique identifier of the order as assigned by institution.
 	#[serde(rename = "11")]
 	pub cl_ord_id: String,
 	/// Used for third-party transactions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Used for third-party transactions
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
-	pub account: Option<char>,
+	pub account: Option<String>,
 	/// Absence of this field is interpreted as Regular.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "63")]
@@ -70,7 +70,7 @@ pub struct NewOrderList {
 	/// ExDestination
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "100")]
-	pub ex_destination: Option<char>,
+	pub ex_destination: Option<String>,
 	/// ProcessCode
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "81")]
@@ -81,11 +81,11 @@ pub struct NewOrderList {
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// SecurityID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// IDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -119,15 +119,15 @@ pub struct NewOrderList {
 	/// Can be used to identify the security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "207")]
-	pub security_exchange: Option<char>,
+	pub security_exchange: Option<String>,
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// Useful for verifying security identification
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -204,7 +204,7 @@ pub struct NewOrderList {
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Can be used with <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the "value date" for the future portion of a F/X swap.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "193")]

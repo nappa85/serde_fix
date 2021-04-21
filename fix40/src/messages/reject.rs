@@ -13,7 +13,7 @@ pub struct Reject {
 	/// Where possible, message to explain reason for rejection
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

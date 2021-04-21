@@ -26,11 +26,11 @@ pub struct Email {
 	/// OrderID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
-	pub order_id: Option<char>,
+	pub order_id: Option<String>,
 	/// ClOrdID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "11")]
-	pub cl_ord_id: Option<char>,
+	pub cl_ord_id: Option<String>,
 	/// Specifies the number of repeating lines of text specified
 	#[serde(rename = "33")]
 	pub lines_of_text: fix_common::RepeatingValues<LinesOfTex>,
@@ -50,15 +50,15 @@ pub struct RelatedSy {
 	/// Can be repeated multiple times if message is related to multiple symbols.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "46")]
-	pub relatd_sym: Option<char>,
+	pub relatd_sym: Option<String>,
 	/// Can be repeated multiple times if message is related to multiple symbols.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// Can be repeated multiple times if message is related to multiple symbols.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// Can be repeated multiple times if message is related to multiple symbols.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -92,15 +92,15 @@ pub struct RelatedSy {
 	/// Can be used to identify the security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "207")]
-	pub security_exchange: Option<char>,
+	pub security_exchange: Option<String>,
 	/// Can be repeated multiple times if message is related to multiple symbols.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// Can be repeated multiple times if message is related to multiple symbols.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

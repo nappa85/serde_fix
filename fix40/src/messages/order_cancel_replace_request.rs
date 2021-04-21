@@ -9,15 +9,15 @@ pub struct OrderCancelReplaceRequest {
 	/// Unique identifier of original order as assigned by broker
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
-	pub order_id: Option<char>,
+	pub order_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// Unique identifier of original order as assigned by institution.
 	#[serde(rename = "41")]
 	pub orig_cl_ord_id: String,
@@ -28,11 +28,11 @@ pub struct OrderCancelReplaceRequest {
 	/// Required for List Orders
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
-	pub list_id: Option<char>,
+	pub list_id: Option<String>,
 	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
-	pub account: Option<char>,
+	pub account: Option<String>,
 	/// Absence of this field is interpreted as Regular.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "63")]
@@ -72,11 +72,11 @@ pub struct OrderCancelReplaceRequest {
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// Must match original order
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// Must match original order
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -84,11 +84,11 @@ pub struct OrderCancelReplaceRequest {
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// Must match original side, however, Buy and Buy Minus can be interchanged as well as
 	/// Sell and Sell Plus
 	#[serde(rename = "54")]
@@ -150,7 +150,7 @@ pub struct OrderCancelReplaceRequest {
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

@@ -9,15 +9,15 @@ pub struct OrderCancelReplaceRequest {
 	/// Unique identifier of most recent order as assigned by broker.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
-	pub order_id: Option<char>,
+	pub order_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> of the previous order (NOT the initial order of the day) when canceling or replacing an order.
 	#[serde(rename = "41")]
 	pub orig_cl_ord_id: String,
@@ -27,11 +27,11 @@ pub struct OrderCancelReplaceRequest {
 	/// Required for List Orders
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
-	pub list_id: Option<char>,
+	pub list_id: Option<String>,
 	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
-	pub account: Option<char>,
+	pub account: Option<String>,
 	/// Absence of this field is interpreted as Regular.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "63")]
@@ -63,18 +63,18 @@ pub struct OrderCancelReplaceRequest {
 	/// ExDestination
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "100")]
-	pub ex_destination: Option<char>,
+	pub ex_destination: Option<String>,
 	/// Must match original order
 	#[serde(rename = "55")]
 	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// Must match original order
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// Must match original order
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -108,15 +108,15 @@ pub struct OrderCancelReplaceRequest {
 	/// Can be used to identify the security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "207")]
-	pub security_exchange: Option<char>,
+	pub security_exchange: Option<String>,
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// Must match original side, however, Buy and Buy Minus can be interchanged as well as Sell and Sell Plus
 	#[serde(rename = "54")]
 	pub side: Side,
@@ -191,7 +191,7 @@ pub struct OrderCancelReplaceRequest {
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Can be used with <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> = "Forex - Swap" to specify the "value date" for the future portion of a F/X swap.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "193")]

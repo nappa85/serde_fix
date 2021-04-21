@@ -9,7 +9,7 @@ pub struct Quote {
 	/// Required when quote is in response to a <a href="message_Quote_Request_R.html" target="main">Quote Request&nbsp;(R)</a> message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "131")]
-	pub quote_req_id: Option<char>,
+	pub quote_req_id: Option<String>,
 	/// QuoteID
 	#[serde(rename = "117")]
 	pub quote_id: String,
@@ -19,11 +19,11 @@ pub struct Quote {
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// SecurityID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// IDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -57,15 +57,15 @@ pub struct Quote {
 	/// Can be used to identify the security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "207")]
-	pub security_exchange: Option<char>,
+	pub security_exchange: Option<String>,
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// If F/X quote, should be the "all-in" rate (spot rate adjusted for forward points). Note that either <a href="tag_132_BidPx.html" target="bottom">BidPx&nbsp;(132)</a> , <a href="tag_133_OfferPx.html" target="bottom">OfferPx&nbsp;(133)</a> or both must be specified.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183

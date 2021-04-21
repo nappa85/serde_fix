@@ -9,7 +9,7 @@ pub struct Quote {
 	/// Required when quote is in response to a <a href="message_Quote_Request_R.html" target="main">Quote Request&nbsp;(R)</a> message
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "131")]
-	pub quote_req_id: Option<char>,
+	pub quote_req_id: Option<String>,
 	/// QuoteID
 	#[serde(rename = "117")]
 	pub quote_id: String,
@@ -19,11 +19,11 @@ pub struct Quote {
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// SecurityID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// IDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -31,11 +31,11 @@ pub struct Quote {
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// BidPx
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "132")]

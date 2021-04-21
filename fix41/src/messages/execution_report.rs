@@ -12,28 +12,28 @@ pub struct ExecutionReport {
 	/// Can be used to provide order id used by exchange or executing system.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "198")]
-	pub secondary_order_id: Option<char>,
+	pub secondary_order_id: Option<String>,
 	/// Required for executions against electronically submitted orders which were assigned an ID by the institution. Not required
 	/// for orders manually entered by the broker.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "11")]
-	pub cl_ord_id: Option<char>,
+	pub cl_ord_id: Option<String>,
 	/// Conditionally required for PendingCancel, Replaced <a href="tag_150_ExecType.html" target="bottom">ExecType&nbsp;(150)</a> values. <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> of the previous order (NOT the initial order of the day) when canceling or replacing an order.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "41")]
-	pub orig_cl_ord_id: Option<char>,
+	pub orig_cl_ord_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// Required for executions against orders which were submitted as part of a list.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
-	pub list_id: Option<char>,
+	pub list_id: Option<String>,
 	/// ExecID
 	#[serde(rename = "17")]
 	pub exec_id: String,
@@ -43,7 +43,7 @@ pub struct ExecutionReport {
 	/// Required for Cancel and Correct <a href="tag_20_ExecTransType.html" target="bottom">ExecTransType&nbsp;(20)</a> messages
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "19")]
-	pub exec_ref_id: Option<char>,
+	pub exec_ref_id: Option<String>,
 	/// Describes the type of execution report. Same possible values as <a href="tag_39_OrdStatus.html" target="bottom">OrdStatus&nbsp;(39)</a> .
 	#[serde(rename = "150")]
 	pub exec_type: ExecType,
@@ -57,7 +57,7 @@ pub struct ExecutionReport {
 	/// Required for executions against electronically submitted orders which were assigned an account by the institution
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
-	pub account: Option<char>,
+	pub account: Option<String>,
 	/// Absence of this field is interpreted as Regular.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "63")]
@@ -72,11 +72,11 @@ pub struct ExecutionReport {
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// SecurityID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// IDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -110,15 +110,15 @@ pub struct ExecutionReport {
 	/// Can be used to identify the security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "207")]
-	pub security_exchange: Option<char>,
+	pub security_exchange: Option<String>,
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// Side
 	#[serde(rename = "54")]
 	pub side: Side,
@@ -195,7 +195,7 @@ pub struct ExecutionReport {
 	/// LastMkt
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "30")]
-	pub last_mkt: Option<char>,
+	pub last_mkt: Option<String>,
 	/// LastCapacity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "29")]
@@ -257,7 +257,7 @@ pub struct ExecutionReport {
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

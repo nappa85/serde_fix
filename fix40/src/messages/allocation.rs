@@ -37,11 +37,11 @@ pub struct Allocation {
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// SecurityID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// IDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -49,11 +49,11 @@ pub struct Allocation {
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// Total number of shares allocated to all accounts
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "53")]
@@ -111,11 +111,11 @@ pub struct Allocation {
 	/// OpenClose
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "77")]
-	pub open_close: Option<char>,
+	pub open_close: Option<String>,
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Indicates number of allocation groups to follow.
 	#[serde(rename = "78")]
 	pub allocs: fix_common::RepeatingValues<Alloc>,
@@ -133,15 +133,15 @@ pub struct Order {
 	/// OrderID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
-	pub order_id: Option<char>,
+	pub order_id: Option<String>,
 	/// Required for List Orders.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "66")]
-	pub list_id: Option<char>,
+	pub list_id: Option<String>,
 	/// WaveNo
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "105")]
-	pub wave_no: Option<char>,
+	pub wave_no: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -167,7 +167,7 @@ pub struct Exec {
 	/// Market of individual execution.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "30")]
-	pub last_mkt: Option<char>,
+	pub last_mkt: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
@@ -204,11 +204,11 @@ pub struct Alloc {
 	/// Required for step-in and step-out trades
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Commission
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -228,11 +228,11 @@ pub struct Alloc {
 	/// BrokerOfCredit
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "92")]
-	pub broker_of_credit: Option<char>,
+	pub broker_of_credit: Option<String>,
 	/// Required if <a href="tag_85_NoDlvyInst.html" target="bottom">NoDlvyInst&nbsp;(85)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "86")]
-	pub dlvy_inst: Option<char>,
+	pub dlvy_inst: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

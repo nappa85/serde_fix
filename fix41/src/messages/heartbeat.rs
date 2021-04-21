@@ -9,7 +9,7 @@ pub struct Heartbeat {
 	/// Required when the heartbeat is the result of a <a href="message_Test_Request_1.html" target="main">Test Request&nbsp;(1)</a> message.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "112")]
-	pub test_req_id: Option<char>,
+	pub test_req_id: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

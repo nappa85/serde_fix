@@ -15,18 +15,18 @@ pub struct Advertisement {
 	/// Required for Cancel and Replace <a href="tag_5_AdvTransType.html" target="bottom">AdvTransType&nbsp;(5)</a> messages
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "3")]
-	pub adv_ref_id: Option<char>,
+	pub adv_ref_id: Option<String>,
 	/// Symbol
 	#[serde(rename = "55")]
 	pub symbol: String,
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// SecurityID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// IDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -60,15 +60,15 @@ pub struct Advertisement {
 	/// Can be used to identify the security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "207")]
-	pub security_exchange: Option<char>,
+	pub security_exchange: Option<String>,
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// AdvSide
 	#[serde(rename = "4")]
 	pub adv_side: AdvSide,
@@ -97,15 +97,15 @@ pub struct Advertisement {
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// A URL (Uniform Resource Locator) link to additional information (i.e. http://en.wikipedia.org/wiki/Uniform_Resource_Locator)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "149")]
-	pub url_link: Option<char>,
+	pub url_link: Option<String>,
 	/// LastMkt
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "30")]
-	pub last_mkt: Option<char>,
+	pub last_mkt: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

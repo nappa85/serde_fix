@@ -12,15 +12,15 @@ pub struct NewOrderSingle {
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "109")]
-	pub client_id: Option<char>,
+	pub client_id: Option<String>,
 	/// Used for firm identification in third-party transactions.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "76")]
-	pub exec_broker: Option<char>,
+	pub exec_broker: Option<String>,
 	/// Account
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1")]
-	pub account: Option<char>,
+	pub account: Option<String>,
 	/// Absence of this field is interpreted as Regular.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "63")]
@@ -62,11 +62,11 @@ pub struct NewOrderSingle {
 	/// SymbolSfx
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "65")]
-	pub symbol_sfx: Option<char>,
+	pub symbol_sfx: Option<String>,
 	/// SecurityID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "48")]
-	pub security_id: Option<char>,
+	pub security_id: Option<String>,
 	/// IDSource
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "22")]
@@ -74,11 +74,11 @@ pub struct NewOrderSingle {
 	/// Issuer
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "106")]
-	pub issuer: Option<char>,
+	pub issuer: Option<String>,
 	/// SecurityDesc
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "107")]
-	pub security_desc: Option<char>,
+	pub security_desc: Option<String>,
 	/// Useful for verifying security identification
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -124,7 +124,7 @@ pub struct NewOrderSingle {
 	/// Required for Previously Quoted Orders ( <a href="tag_40_OrdType.html" target="bottom">OrdType&nbsp;(40)</a> =D)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "117")]
-	pub quote_id: Option<char>,
+	pub quote_id: Option<String>,
 	/// Absence of this field indicates Day order
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "59")]
@@ -159,7 +159,7 @@ pub struct NewOrderSingle {
 	/// Text
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "58")]
-	pub text: Option<char>,
+	pub text: Option<String>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,

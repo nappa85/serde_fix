@@ -24,11 +24,11 @@ pub struct StandardMessageHeader<const T: char> {
 	/// Trading partner company ID used when sending messages via a third party (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "115")]
-	pub on_behalf_of_comp_id: Option<char>,
+	pub on_behalf_of_comp_id: Option<String>,
 	/// Trading partner company ID used when sending messages via a third party (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "128")]
-	pub deliver_to_comp_id: Option<char>,
+	pub deliver_to_comp_id: Option<String>,
 	/// Required to identify length of encrypted section of message. (Always unencrypted)
 	#[serde(rename = "90")]
 	/// Required when message body is encrypted. Always immediately follows <a href="tag_90_SecureDataLen.html" target="bottom">SecureDataLen&nbsp;(90)</a> field.
@@ -42,37 +42,37 @@ pub struct StandardMessageHeader<const T: char> {
 	/// (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "50")]
-	pub sender_sub_id: Option<char>,
+	pub sender_sub_id: Option<String>,
 	/// Trading partner LocationID (i.e. geographic location and/or desk) (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "142")]
-	pub sender_location_id: Option<char>,
+	pub sender_location_id: Option<String>,
 	/// 'ADMIN' reserved for administrative messages not intended for a specific user. (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "57")]
-	pub target_sub_id: Option<char>,
+	pub target_sub_id: Option<String>,
 	/// Trading partner LocationID (i.e. geographic location and/or desk) (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "143")]
-	pub target_location_id: Option<char>,
+	pub target_location_id: Option<String>,
 	/// Trading partner SubID used when delivering messages via a third party. (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "116")]
-	pub on_behalf_of_sub_id: Option<char>,
+	pub on_behalf_of_sub_id: Option<String>,
 	/// Trading partner LocationID (i.e. geographic location and/or desk) used when delivering messages via a third party. (Can be
 	/// embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "144")]
-	pub on_behalf_of_location_id: Option<char>,
+	pub on_behalf_of_location_id: Option<String>,
 	/// Trading partner SubID used when delivering messages via a third party. (Can be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "129")]
-	pub deliver_to_sub_id: Option<char>,
+	pub deliver_to_sub_id: Option<String>,
 	/// Trading partner LocationID (i.e. geographic location and/or desk) used when delivering messages via a third party. (Can be
 	/// embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "145")]
-	pub deliver_to_location_id: Option<char>,
+	pub deliver_to_location_id: Option<String>,
 	/// Always required for retransmitted messages, whether prompted by the sending system or as the result of a resend request. (Can
 	/// be embedded within encrypted data section.)
 	#[serde(skip_serializing_if = "Option::is_none")]

@@ -16,15 +16,15 @@ pub struct Email {
 	/// Can be repeated multiple times if message is related to multiple symbols.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "46")]
-	pub relatd_sym: Option<char>,
+	pub relatd_sym: Option<String>,
 	/// OrderID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "37")]
-	pub order_id: Option<char>,
+	pub order_id: Option<String>,
 	/// ClOrdID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "11")]
-	pub cl_ord_id: Option<char>,
+	pub cl_ord_id: Option<String>,
 	/// LinesOfText
 	#[serde(rename = "33")]
 	pub lines_of_text: fix_common::RepeatingValues<LinesOfTex>,
