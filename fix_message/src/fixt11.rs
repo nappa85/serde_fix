@@ -40,334 +40,334 @@ pub enum Message {
     Logout(Box<fixt11::messages::Logout>),
     /// Indication of Interest
     #[serde(rename = "6")]
-    IndicationOfInterest(Box<IndicationOfInterest>),
+    IndicationOfInterest(IndicationOfInterest),
     /// Advertisement
     #[serde(rename = "7")]
-    Advertisement(Box<Advertisement>),
+    Advertisement(Advertisement),
     /// Execution Report
     #[serde(rename = "8")]
     ExecutionReport(ExecutionReport),
     /// Order Cancel Reject
     #[serde(rename = "9")]
-    OrderCancelReject(Box<OrderCancelReject>),
+    OrderCancelReject(OrderCancelReject),
     /// Logon
     #[serde(rename = "A")]
     Logon(Box<fixt11::messages::Logon>),
     /// News
     #[serde(rename = "B")]
-    News(Box<News>),
+    News(News),
     /// Email
     #[serde(rename = "C")]
-    Email(Box<Email>),
+    Email(Email),
     /// New Order - Single
     #[serde(rename = "D")]
     NewOrderSingle(NewOrderSingle),
     /// New Order - List
     #[serde(rename = "E")]
-    NewOrderList(Box<NewOrderList>),
+    NewOrderList(NewOrderList),
     /// Order Cancel Request
     #[serde(rename = "F")]
-    OrderCancelRequest(Box<OrderCancelRequest>),
+    OrderCancelRequest(OrderCancelRequest),
     /// Order Cancel/Replace Request
     #[serde(rename = "G")]
-    OrderCancelReplaceRequest(Box<OrderCancelReplaceRequest>),
+    OrderCancelReplaceRequest(OrderCancelReplaceRequest),
     /// Order Status Request
     #[serde(rename = "H")]
-    OrderStatusRequest(Box<OrderStatusRequest>),
+    OrderStatusRequest(OrderStatusRequest),
     /// Allocation Instruction
     #[serde(rename = "J")]
-    AllocationInstruction(Box<AllocationInstruction>),
+    AllocationInstruction(AllocationInstruction),
     /// List Cancel Request
     #[serde(rename = "K")]
-    ListCancelRequest(Box<ListCancelRequest>),
+    ListCancelRequest(ListCancelRequest),
     /// List Execute
     #[serde(rename = "L")]
-    ListExecute(Box<ListExecute>),
+    ListExecute(ListExecute),
     /// List Status Request
     #[serde(rename = "M")]
-    ListStatusRequest(Box<ListStatusRequest>),
+    ListStatusRequest(ListStatusRequest),
     /// List Status
     #[serde(rename = "N")]
-    ListStatus(Box<ListStatus>),
+    ListStatus(ListStatus),
     /// Allocation Instruction Ack
     #[serde(rename = "P")]
-    AllocationInstructionAck(Box<AllocationInstructionAck>),
+    AllocationInstructionAck(AllocationInstructionAck),
     /// Don't Know Trade
     #[serde(rename = "Q")]
-    DontKnowTrade(Box<DontKnowTrade>),
+    DontKnowTrade(DontKnowTrade),
     /// Quote Request
     #[serde(rename = "R")]
-    QuoteRequest(Box<QuoteRequest>),
+    QuoteRequest(QuoteRequest),
     /// Quote
     #[serde(rename = "S")]
-    Quote(Box<Quote>),
+    Quote(Quote),
     /// Settlement Instructions
     #[serde(rename = "T")]
-    SettlementInstructions(Box<SettlementInstructions>),
+    SettlementInstructions(SettlementInstructions),
     /// Market Data Request
     #[serde(rename = "V")]
-    MarketDataRequest(Box<MarketDataRequest>),
+    MarketDataRequest(MarketDataRequest),
     /// Market Data - Snapshot/Full Refresh
     #[serde(rename = "W")]
-    MarketDataSnapshotFullRefresh(Box<MarketDataSnapshotFullRefresh>),
+    MarketDataSnapshotFullRefresh(MarketDataSnapshotFullRefresh),
     /// Market Data - Incremental Refresh
     #[serde(rename = "X")]
-    MarketDataIncrementalRefresh(Box<MarketDataIncrementalRefresh>),
+    MarketDataIncrementalRefresh(MarketDataIncrementalRefresh),
     /// Market Data Request Reject
     #[serde(rename = "Y")]
-    MarketDataRequestReject(Box<MarketDataRequestReject>),
+    MarketDataRequestReject(MarketDataRequestReject),
     /// Quote Cancel
     #[serde(rename = "Z")]
-    QuoteCancel(Box<QuoteCancel>),
+    QuoteCancel(QuoteCancel),
     /// Quote Status Request
     #[serde(rename = "a")]
-    QuoteStatusRequest(Box<QuoteStatusRequest>),
+    QuoteStatusRequest(QuoteStatusRequest),
     /// Mass Quote Acknowledgement
     #[serde(rename = "b")]
-    MassQuoteAcknowledgement(Box<MassQuoteAcknowledgement>),
+    MassQuoteAcknowledgement(MassQuoteAcknowledgement),
     /// Security Definition Request
     #[serde(rename = "c")]
-    SecurityDefinitionRequest(Box<SecurityDefinitionRequest>),
+    SecurityDefinitionRequest(SecurityDefinitionRequest),
     /// Security Definition
     #[serde(rename = "d")]
-    SecurityDefinition(Box<SecurityDefinition>),
+    SecurityDefinition(SecurityDefinition),
     /// Security Status Request
     #[serde(rename = "e")]
-    SecurityStatusRequest(Box<SecurityStatusRequest>),
+    SecurityStatusRequest(SecurityStatusRequest),
     /// Security Status
     #[serde(rename = "f")]
-    SecurityStatus(Box<SecurityStatus>),
+    SecurityStatus(SecurityStatus),
     /// Trading Session Status Request
     #[serde(rename = "g")]
-    TradingSessionStatusRequest(Box<TradingSessionStatusRequest>),
+    TradingSessionStatusRequest(TradingSessionStatusRequest),
     /// Trading Session Status
     #[serde(rename = "h")]
-    TradingSessionStatus(Box<TradingSessionStatus>),
+    TradingSessionStatus(TradingSessionStatus),
     /// Mass Quote
     #[serde(rename = "i")]
-    MassQuote(Box<MassQuote>),
+    MassQuote(MassQuote),
     /// Business Message Reject
     #[serde(rename = "j")]
-    BusinessMessageReject(Box<BusinessMessageReject>),
+    BusinessMessageReject(BusinessMessageReject),
     /// Bid Request
     #[serde(rename = "k")]
-    BidRequest(Box<BidRequest>),
+    BidRequest(BidRequest),
     /// Bid Response
     #[serde(rename = "l")]
-    BidResponse(Box<BidResponse>),
+    BidResponse(BidResponse),
     /// List Strike Price
     #[serde(rename = "m")]
-    ListStrikePrice(Box<ListStrikePrice>),
+    ListStrikePrice(ListStrikePrice),
     /// XML message
     #[serde(rename = "n")]
-    XmlMessage(Box<XmlMessage>),
+    XmlMessage(XmlMessage),
     /// Registration Instructions
     #[serde(rename = "o")]
-    RegistrationInstructions(Box<RegistrationInstructions>),
+    RegistrationInstructions(RegistrationInstructions),
     /// Registration Instructions Response
     #[serde(rename = "p")]
-    RegistrationInstructionsResponse(Box<RegistrationInstructionsResponse>),
+    RegistrationInstructionsResponse(RegistrationInstructionsResponse),
     /// Order Mass Cancel Request
     #[serde(rename = "q")]
-    OrderMassCancelRequest(Box<OrderMassCancelRequest>),
+    OrderMassCancelRequest(OrderMassCancelRequest),
     /// Order Mass Cancel Report
     #[serde(rename = "r")]
-    OrderMassCancelReport(Box<OrderMassCancelReport>),
+    OrderMassCancelReport(OrderMassCancelReport),
     /// New Order - Cross
     #[serde(rename = "s")]
-    NewOrderCross(Box<NewOrderCross>),
+    NewOrderCross(NewOrderCross),
     /// Cross Order Cancel/Replace Request
     #[serde(rename = "t")]
-    CrossOrderCancelReplaceRequest(Box<CrossOrderCancelReplaceRequest>),
+    CrossOrderCancelReplaceRequest(CrossOrderCancelReplaceRequest),
     /// Cross Order Cancel Request
     #[serde(rename = "u")]
-    CrossOrderCancelRequest(Box<CrossOrderCancelRequest>),
+    CrossOrderCancelRequest(CrossOrderCancelRequest),
     /// Security Type Request
     #[serde(rename = "v")]
-    SecurityTypeRequest(Box<SecurityTypeRequest>),
+    SecurityTypeRequest(SecurityTypeRequest),
     /// Security Types
     #[serde(rename = "w")]
-    SecurityTypes(Box<SecurityTypes>),
+    SecurityTypes(SecurityTypes),
     /// Security List Request
     #[serde(rename = "x")]
-    SecurityListRequest(Box<SecurityListRequest>),
+    SecurityListRequest(SecurityListRequest),
     /// Security List
     #[serde(rename = "y")]
-    SecurityList(Box<SecurityList>),
+    SecurityList(SecurityList),
     /// Derivative Security List Request
     #[serde(rename = "z")]
-    DerivativeSecurityListRequest(Box<DerivativeSecurityListRequest>),
+    DerivativeSecurityListRequest(DerivativeSecurityListRequest),
     /// Derivative Security List
     #[serde(rename = "AA")]
-    DerivativeSecurityList(Box<DerivativeSecurityList>),
+    DerivativeSecurityList(DerivativeSecurityList),
     /// New Order - Multileg
     #[serde(rename = "AB")]
-    NewOrderMultileg(Box<NewOrderMultileg>),
+    NewOrderMultileg(NewOrderMultileg),
     /// Multileg Order Cancel/Replace
     #[serde(rename = "AC")]
-    MultilegOrderCancelReplace(Box<MultilegOrderCancelReplace>),
+    MultilegOrderCancelReplace(MultilegOrderCancelReplace),
     /// Trade Capture Report Request
     #[serde(rename = "AD")]
-    TradeCaptureReportRequest(Box<TradeCaptureReportRequest>),
+    TradeCaptureReportRequest(TradeCaptureReportRequest),
     /// Trade Capture Report
     #[serde(rename = "AE")]
-    TradeCaptureReport(Box<TradeCaptureReport>),
+    TradeCaptureReport(TradeCaptureReport),
     /// Order Mass Status Request
     #[serde(rename = "AF")]
-    OrderMassStatusRequest(Box<OrderMassStatusRequest>),
+    OrderMassStatusRequest(OrderMassStatusRequest),
     /// Quote Request Reject
     #[serde(rename = "AG")]
-    QuoteRequestReject(Box<QuoteRequestReject>),
+    QuoteRequestReject(QuoteRequestReject),
     /// RFQ Request
     #[serde(rename = "AH")]
-    RfqRequest(Box<RfqRequest>),
+    RfqRequest(RfqRequest),
     /// Quote Status Report
     #[serde(rename = "AI")]
-    QuoteStatusReport(Box<QuoteStatusReport>),
+    QuoteStatusReport(QuoteStatusReport),
     /// Quote Response
     #[serde(rename = "AJ")]
-    QuoteResponse(Box<QuoteResponse>),
+    QuoteResponse(QuoteResponse),
     /// Confirmation
     #[serde(rename = "AK")]
-    Confirmation(Box<Confirmation>),
+    Confirmation(Confirmation),
     /// Position Maintenance Request
     #[serde(rename = "AL")]
-    PositionMaintenanceRequest(Box<PositionMaintenanceRequest>),
+    PositionMaintenanceRequest(PositionMaintenanceRequest),
     /// Position Maintenance Report
     #[serde(rename = "AM")]
-    PositionMaintenanceReport(Box<PositionMaintenanceReport>),
+    PositionMaintenanceReport(PositionMaintenanceReport),
     /// Request For Positions
     #[serde(rename = "AN")]
-    RequestForPositions(Box<RequestForPositions>),
+    RequestForPositions(RequestForPositions),
     /// Request For Positions Ack
     #[serde(rename = "AO")]
-    RequestForPositionsAck(Box<RequestForPositionsAck>),
+    RequestForPositionsAck(RequestForPositionsAck),
     /// Position Report
     #[serde(rename = "AP")]
-    PositionReport(Box<PositionReport>),
+    PositionReport(PositionReport),
     /// Trade Capture Report Request Ack
     #[serde(rename = "AQ")]
-    TradeCaptureReportRequestAck(Box<TradeCaptureReportRequestAck>),
+    TradeCaptureReportRequestAck(TradeCaptureReportRequestAck),
     /// Trade Capture Report Ack
     #[serde(rename = "AR")]
-    TradeCaptureReportAck(Box<TradeCaptureReportAck>),
+    TradeCaptureReportAck(TradeCaptureReportAck),
     /// Allocation Report
     #[serde(rename = "AS")]
-    AllocationReport(Box<AllocationReport>),
+    AllocationReport(AllocationReport),
     /// Allocation Report Ack
     #[serde(rename = "AT")]
-    AllocationReportAck(Box<AllocationReportAck>),
+    AllocationReportAck(AllocationReportAck),
     /// Confirmation Ack
     #[serde(rename = "AU")]
-    ConfirmationAck(Box<ConfirmationAck>),
+    ConfirmationAck(ConfirmationAck),
     /// Settlement Instruction Request
     #[serde(rename = "AV")]
-    SettlementInstructionRequest(Box<SettlementInstructionRequest>),
+    SettlementInstructionRequest(SettlementInstructionRequest),
     /// Assignment Report
     #[serde(rename = "AW")]
-    AssignmentReport(Box<AssignmentReport>),
+    AssignmentReport(AssignmentReport),
     /// Collateral Request
     #[serde(rename = "AX")]
-    CollateralRequest(Box<CollateralRequest>),
+    CollateralRequest(CollateralRequest),
     /// Collateral Assignment
     #[serde(rename = "AY")]
-    CollateralAssignment(Box<CollateralAssignment>),
+    CollateralAssignment(CollateralAssignment),
     /// Collateral Response
     #[serde(rename = "AZ")]
-    CollateralResponse(Box<CollateralResponse>),
+    CollateralResponse(CollateralResponse),
     /// Collateral Report
     #[serde(rename = "BA")]
-    CollateralReport(Box<CollateralReport>),
+    CollateralReport(CollateralReport),
     /// Collateral Inquiry
     #[serde(rename = "BB")]
-    CollateralInquiry(Box<CollateralInquiry>),
+    CollateralInquiry(CollateralInquiry),
     /// Network Counterparty System Status Request
     #[serde(rename = "BC")]
-    NetworkCounterpartySystemStatusRequest(Box<NetworkCounterpartySystemStatusRequest>),
+    NetworkCounterpartySystemStatusRequest(NetworkCounterpartySystemStatusRequest),
     /// Network Counterparty System Status Response
     #[serde(rename = "BD")]
-    NetworkCounterpartySystemStatusResponse(Box<NetworkCounterpartySystemStatusResponse>),
+    NetworkCounterpartySystemStatusResponse(NetworkCounterpartySystemStatusResponse),
     /// User Request
     #[serde(rename = "BE")]
-    UserRequest(Box<UserRequest>),
+    UserRequest(UserRequest),
     /// User Response
     #[serde(rename = "BF")]
-    UserResponse(Box<UserResponse>),
+    UserResponse(UserResponse),
     /// Collateral Inquiry Ack
     #[serde(rename = "BG")]
-    CollateralInquiryAck(Box<CollateralInquiryAck>),
+    CollateralInquiryAck(CollateralInquiryAck),
     /// Confirmation Request
     #[serde(rename = "BH")]
-    ConfirmationRequest(Box<ConfirmationRequest>),
+    ConfirmationRequest(ConfirmationRequest),
     /// Trading Session List Request
     #[serde(rename = "BI")]
-    TradingSessionListRequest(Box<TradingSessionListRequest>),
+    TradingSessionListRequest(TradingSessionListRequest),
     /// Trading Session List
     #[serde(rename = "BJ")]
-    TradingSessionList(Box<TradingSessionList>),
+    TradingSessionList(TradingSessionList),
     /// Security List Update Report
     #[serde(rename = "BK")]
-    SecurityListUpdateReport(Box<SecurityListUpdateReport>),
+    SecurityListUpdateReport(SecurityListUpdateReport),
     /// Adjusted Position Report
     #[serde(rename = "BL")]
-    AdjustedPositionReport(Box<AdjustedPositionReport>),
+    AdjustedPositionReport(AdjustedPositionReport),
     /// Allocation Instruction Alert
     #[serde(rename = "BM")]
-    AllocationInstructionAlert(Box<AllocationInstructionAlert>),
+    AllocationInstructionAlert(AllocationInstructionAlert),
     /// Execution Acknowledgement
     #[serde(rename = "BN")]
-    ExecutionAcknowledgement(Box<ExecutionAcknowledgement>),
+    ExecutionAcknowledgement(ExecutionAcknowledgement),
     /// Contrary Intention Report
     #[serde(rename = "BO")]
-    ContraryIntentionReport(Box<ContraryIntentionReport>),
+    ContraryIntentionReport(ContraryIntentionReport),
     /// Security Definition Update Report
     #[serde(rename = "BP")]
-    SecurityDefinitionUpdateReport(Box<SecurityDefinitionUpdateReport>),
+    SecurityDefinitionUpdateReport(SecurityDefinitionUpdateReport),
     /// Settlement Obligation Report
     #[serde(rename = "BQ")]
-    SettlementObligationReport(Box<SettlementObligationReport>),
+    SettlementObligationReport(SettlementObligationReport),
     /// Derivative Security List Update Report
     #[serde(rename = "BR")]
-    DerivativeSecurityListUpdateReport(Box<DerivativeSecurityListUpdateReport>),
+    DerivativeSecurityListUpdateReport(DerivativeSecurityListUpdateReport),
     /// Trading Session List Update Report
     #[serde(rename = "BS")]
-    TradingSessionListUpdateReport(Box<TradingSessionListUpdateReport>),
+    TradingSessionListUpdateReport(TradingSessionListUpdateReport),
     /// Market Definition Request
     #[serde(rename = "BT")]
-    MarketDefinitionRequest(Box<MarketDefinitionRequest>),
+    MarketDefinitionRequest(MarketDefinitionRequest),
     /// Market Definition
     #[serde(rename = "BU")]
-    MarketDefinition(Box<MarketDefinition>),
+    MarketDefinition(MarketDefinition),
     /// Market Definition Update Report
     #[serde(rename = "BV")]
-    MarketDefinitionUpdateReport(Box<MarketDefinitionUpdateReport>),
+    MarketDefinitionUpdateReport(MarketDefinitionUpdateReport),
     /// Application Message Request
     #[serde(rename = "BW")]
-    ApplicationMessageRequest(Box<ApplicationMessageRequest>),
+    ApplicationMessageRequest(ApplicationMessageRequest),
     /// Application Message Request Ack
     #[serde(rename = "BX")]
-    ApplicationMessageRequestAck(Box<ApplicationMessageRequestAck>),
+    ApplicationMessageRequestAck(ApplicationMessageRequestAck),
     /// Application Message Report
     #[serde(rename = "BY")]
-    ApplicationMessageReport(Box<ApplicationMessageReport>),
+    ApplicationMessageReport(ApplicationMessageReport),
     /// Order Mass Action Report
     #[serde(rename = "BZ")]
-    OrderMassActionReport(Box<OrderMassActionReport>),
+    OrderMassActionReport(OrderMassActionReport),
     /// Order Mass Action Request
     #[serde(rename = "CA")]
-    OrderMassActionRequest(Box<OrderMassActionRequest>),
+    OrderMassActionRequest(OrderMassActionRequest),
     /// User Notification
     #[serde(rename = "CB")]
-    UserNotification(Box<UserNotification>),
+    UserNotification(UserNotification),
     /// Stream Assignment Request
     #[serde(rename = "CC")]
-    StreamAssignmentRequest(Box<StreamAssignmentRequest>),
+    StreamAssignmentRequest(StreamAssignmentRequest),
     /// Stream Assignment Report
     #[serde(rename = "CD")]
-    StreamAssignmentReport(Box<StreamAssignmentReport>),
+    StreamAssignmentReport(StreamAssignmentReport),
     /// Stream Assignment Report Ack
     #[serde(rename = "CE")]
-    StreamAssignmentReportAck(Box<StreamAssignmentReportAck>),
+    StreamAssignmentReportAck(StreamAssignmentReportAck),
 }
 
 impl Serialize for Message {
