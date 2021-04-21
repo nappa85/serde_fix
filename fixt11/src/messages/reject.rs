@@ -15,7 +15,7 @@ pub struct Reject {
     /// The tag number of the FIX field being referenced.
     #[serde(rename = "371")]
     #[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-    pub ref_tag_id: Option<i32>,
+    pub ref_tag_id: Option<u16>,
     /// The MsgType (35) of the FIX message being referenced.
     #[serde(rename = "372")]
     #[serde(skip_serializing_if = "Option::is_none")]
