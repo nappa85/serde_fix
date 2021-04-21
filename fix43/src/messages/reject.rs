@@ -17,7 +17,7 @@ pub struct Reject {
 	/// The <a href="tag_35_MsgType.html" target="bottom">MsgType&nbsp;(35)</a> of the FIX message being referenced.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "372")]
-	pub ref_msg_type: Option<super::super::standard_message_header::MsgType<' '>>,
+	pub ref_msg_type: Option<super::super::standard_message_header::MsgType<' ', ' '>>,
 	/// Code to identify reason for a session-level <a href="message_Reject_3.html" target="main">Reject&nbsp;(3)</a> message.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "373")]
