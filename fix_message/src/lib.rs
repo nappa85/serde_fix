@@ -7,6 +7,8 @@ use serde::{Deserialize, Serialize};
 pub mod header;
 pub mod has_header;
 
+use has_header::*;
+
 #[cfg(feature = "fix_40")]
 pub mod fix40;
 #[cfg(feature = "fix_41")]
@@ -58,6 +60,25 @@ impl Serialize for Message {
             Message::FIX44(m) => m.serialize(serializer),
             #[cfg(any(feature = "fix_50", feature = "fix_50sp1", feature = "fix_50sp2"))]
             Message::FIXT11(m) => m.serialize(serializer),
+        }
+    }
+}
+
+impl HasHeaderBoxed for Message {
+    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+        match self {
+            #[cfg(feature = "fix_40")]
+            Message::FIX40(m) => m.get_header_boxed(),
+            #[cfg(feature = "fix_41")]
+            Message::FIX41(m) => m.get_header_boxed(),
+            #[cfg(feature = "fix_42")]
+            Message::FIX42(m) => m.get_header_boxed(),
+            #[cfg(feature = "fix_43")]
+            Message::FIX43(m) => m.get_header_boxed(),
+            #[cfg(feature = "fix_44")]
+            Message::FIX44(m) => m.get_header_boxed(),
+            #[cfg(any(feature = "fix_50", feature = "fix_50sp1", feature = "fix_50sp2"))]
+            Message::FIXT11(m) => m.get_header_boxed(),
         }
     }
 }
