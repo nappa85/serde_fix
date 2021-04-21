@@ -9,7 +9,7 @@ pub struct Reject {
 	/// <a href="tag_34_MsgSeqNum.html" target="bottom">MsgSeqNum&nbsp;(34)</a> of rejected message
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "45")]
-	pub ref_seq_num: i32,
+	pub ref_seq_num: u32,
 	/// The tag number of the FIX field being referenced.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -19,7 +19,7 @@ pub struct Reject {
 	/// The <a href="tag_35_MsgType.html" target="bottom">MsgType&nbsp;(35)</a> of the FIX message being referenced.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "372")]
-	pub ref_msg_type: Option<String>,
+	pub ref_msg_type: Option<super::super::standard_message_header::MsgType<' '>>,
 	/// Code to identify reason for a session-level <a href="message_Reject_3.html" target="main">Reject&nbsp;(3)</a> message.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "373")]
