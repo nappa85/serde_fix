@@ -19,7 +19,7 @@ pub struct Reject {
     /// The MsgType (35) of the FIX message being referenced.
     #[serde(rename = "372")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ref_msg_type: Option<MsgType<' ', ' '>>,
+    pub ref_msg_type: Option<MsgType<'3', ' '>>,
     /// Recommended when rejecting an application message that does not explicitly provide ApplVerID ( 1128) on the message being rejected. In this case the value from the DefaultApplVerID(1137) or the default value specified in the NoMsgTypes repeating group on the logon message should be provided.
     #[serde(rename = "1130")]
     #[serde(skip_serializing_if = "Option::is_none")]
