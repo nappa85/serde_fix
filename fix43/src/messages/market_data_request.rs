@@ -15,7 +15,7 @@ pub struct MarketDataRequest {
 	pub subscription_request_type: SubscriptionRequestType,
 	/// MarketDepth
 	#[serde(rename = "264")]
-	pub market_depth: MarketDepth,
+	pub market_depth: u32,
 	/// Required if <a href="tag_263_SubscriptionRequestType.html" target="bottom">SubscriptionRequestType&nbsp;(263)</a> = Snapshot + Updates (1).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "265")]
@@ -91,22 +91,6 @@ pub enum SubscriptionRequestType {
 impl Default for SubscriptionRequestType {
 	fn default() -> Self {
 		SubscriptionRequestType::Snapshot
-	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum MarketDepth {
-	/// Full Book
-	#[serde(rename = "0")]
-	FullBook,
-	/// Top of Book
-	#[serde(rename = "1")]
-	TopOfBook,
-}
-
-impl Default for MarketDepth {
-	fn default() -> Self {
-		MarketDepth::FullBook
 	}
 }
 

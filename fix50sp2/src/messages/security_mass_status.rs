@@ -59,7 +59,7 @@ pub struct SecurityMassStatus {
 	/// Used to relay changes in Market Depth.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "264")]
-	pub market_depth: Option<MarketDepth>,
+	pub market_depth: Option<u32>,
 	/// Time of state change for security list.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "60")]
@@ -347,22 +347,6 @@ pub enum MDBookType {
 impl Default for MDBookType {
 	fn default() -> Self {
 		MDBookType::TopOfBook
-	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum MarketDepth {
-	/// full book depth
-	#[serde(rename = "0")]
-	FullBookDepth,
-	/// top of book
-	#[serde(rename = "1")]
-	TopOfBook,
-}
-
-impl Default for MarketDepth {
-	fn default() -> Self {
-		MarketDepth::FullBookDepth
 	}
 }
 

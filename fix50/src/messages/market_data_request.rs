@@ -17,7 +17,7 @@ pub struct MarketDataRequest {
 	/// MarketDepth
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "264")]
-	pub market_depth: i32,
+	pub market_depth: u32,
 	/// Required if <a href="tag_263_SubscriptionRequestType.html" target="bottom">SubscriptionRequestType&nbsp;(263)</a> = Snapshot + Updates (1).
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "265")]

@@ -22,7 +22,7 @@ pub struct MDFeedType {
 	/// Specifies the depth of book (or levels of market depth) for the feed type.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "264")]
-	pub market_depth: Option<MarketDepth>,
+	pub market_depth: Option<u32>,
 	/// MDBookType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1021")]
@@ -65,22 +65,6 @@ pub struct MDFeedType {
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "2568")]
 	pub secondary_service_location_id: Option<String>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum MarketDepth {
-	/// full book depth
-	#[serde(rename = "0")]
-	FullBookDepth,
-	/// top of book
-	#[serde(rename = "1")]
-	TopOfBook,
-}
-
-impl Default for MarketDepth {
-	fn default() -> Self {
-		MarketDepth::FullBookDepth
-	}
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

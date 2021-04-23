@@ -206,7 +206,7 @@ pub struct TradingSessionRule {
 	/// The depth of book associated with a particular feed type.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "264")]
-	pub market_depth: Option<MarketDepth>,
+	pub market_depth: Option<u32>,
 	/// Describes the type of book for which the feed is intended. Can be used when multiple feeds are provided over the same connection.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1021")]
@@ -2097,22 +2097,6 @@ pub enum MatchType {
 impl Default for MatchType {
 	fn default() -> Self {
 		MatchType::ActAcceptedTrade
-	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum MarketDepth {
-	/// full book depth
-	#[serde(rename = "0")]
-	FullBookDepth,
-	/// top of book
-	#[serde(rename = "1")]
-	TopOfBook,
-}
-
-impl Default for MarketDepth {
-	fn default() -> Self {
-		MarketDepth::FullBookDepth
 	}
 }
 

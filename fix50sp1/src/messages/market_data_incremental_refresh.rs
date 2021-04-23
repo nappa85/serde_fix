@@ -65,7 +65,7 @@ pub struct MDEntrie {
 	/// Can be used to define the current depth of the book.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "264")]
-	pub market_depth: Option<MarketDepth>,
+	pub market_depth: Option<u32>,
 	/// Conditionally required if <a href="tag_279_MDUpdateAction.html" target="bottom">MDUpdateAction&nbsp;(279)</a> = New(0). Cannot be changed.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "269")]
@@ -479,22 +479,6 @@ pub enum DeleteReason {
 impl Default for DeleteReason {
 	fn default() -> Self {
 		DeleteReason::CancelationTradeBust
-	}
-}
-
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum MarketDepth {
-	/// full book depth
-	#[serde(rename = "0")]
-	FullBookDepth,
-	/// top of book
-	#[serde(rename = "1")]
-	TopOfBook,
-}
-
-impl Default for MarketDepth {
-	fn default() -> Self {
-		MarketDepth::FullBookDepth
 	}
 }
 
