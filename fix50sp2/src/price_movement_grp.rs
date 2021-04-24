@@ -14,5 +14,5 @@ pub struct PriceMovement {
     #[serde(flatten)]
     pub price_movement_value_grp: Option<super::price_movement_value_grp::PriceMovementValueGrp>,
     #[serde(flatten)]
-    pub clearing_account_Type_grp: Option<super::clearing_account_Type_grp::ClearingAccountTypeGrp>,
+    pub clearing_account_type_grp: Option<super::clearing_account_type_grp::ClearingAccountTypeGrp>,
 }
