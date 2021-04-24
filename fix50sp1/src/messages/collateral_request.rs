@@ -81,7 +81,7 @@ pub struct CollateralRequest {
 	/// Number of legs. Identifies a Multi-leg Execution if present and non-zero.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "555")]
-	pub legs: Option<fix_common::RepeatingValues<Leg>>,
+	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// Number of legs that make up the Security
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
@@ -211,9 +211,7 @@ pub struct Trade {
 	pub secondary_trade_report_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Leg {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Underlying {

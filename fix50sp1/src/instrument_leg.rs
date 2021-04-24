@@ -220,7 +220,7 @@ pub struct InstrumentLeg {
 	/// LegOptionRatio
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1017")]
-	pub leg_option_ratio: Option<LegOptionRatio>,
+	pub leg_option_ratio: Option<f32>,
 	/// LegPrice
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -4427,9 +4427,7 @@ impl Default for LegPutOrCall {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum LegOptionRatio {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum LegSecurityAltIDSource {

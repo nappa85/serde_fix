@@ -111,7 +111,7 @@ pub struct Instrument {
 	/// actions to the underlying. Should not be used to indicate type of option - use the <a href="tag_461_CFICode.html" target="bottom">CFICode&nbsp;(461)</a> for this purpose.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "206")]
-	pub opt_attribute: Option<OptAttribute>,
+	pub opt_attribute: Option<char>,
 	/// For Fixed Income, Convertible Bonds, Derivatives, etc. Note: If used, quantities should be expressed in the "nominal" (e.g.
 	/// contracts vs. shares) amount.
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -1507,9 +1507,7 @@ impl Default for CountryOfIssue {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum OptAttribute {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum SecurityAltIDSource {

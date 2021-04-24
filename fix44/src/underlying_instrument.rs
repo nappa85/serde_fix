@@ -113,7 +113,7 @@ pub struct UnderlyingInstrument {
 	/// UnderlyingOptAttribute
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "317")]
-	pub underlying_opt_attribute: Option<UnderlyingOptAttribute>,
+	pub underlying_opt_attribute: Option<char>,
 	/// UnderlyingContractMultiplier
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -2895,9 +2895,7 @@ impl Default for UnderlyingStrikeCurrency {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum UnderlyingOptAttribute {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum UnderlyingCurrency {

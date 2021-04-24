@@ -185,7 +185,7 @@ pub struct ExecutionReport {
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Side
 	#[serde(rename = "54")]
 	pub side: Side,
@@ -837,9 +837,7 @@ pub struct Alloc {
 	pub alloc_qty: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct StrategyParameter {

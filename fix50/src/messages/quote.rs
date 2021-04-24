@@ -49,7 +49,7 @@ pub struct Quote {
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Required for Tradeable or Counter quotes of single instruments
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "54")]
@@ -311,9 +311,7 @@ pub struct QuoteQualifier {
 	pub quote_qualifier_item: Option<QuoteQualifierItem>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Leg {

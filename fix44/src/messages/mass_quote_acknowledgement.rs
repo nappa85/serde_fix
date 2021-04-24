@@ -72,7 +72,7 @@ pub struct QuoteSet {
 	/// Total number of quotes for the QuoteSet across all messages. Should be the sum of all <a href="tag_295_NoQuoteEntries.html" target="bottom">NoQuoteEntries&nbsp;(295)</a> in each message that has repeating quotes that are part of the same QuoteSet. Required if <a href="tag_295_NoQuoteEntries.html" target="bottom">NoQuoteEntries&nbsp;(295)</a> &gt; 0
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "304")]
-	pub tot_no_quote_entries: Option<TotNoQuoteEntries>,
+	pub tot_no_quote_entries: Option<u32>,
 	/// The number of quotes for this Symbol (QuoteSet) that follow in this message.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -415,9 +415,7 @@ impl Default for AccountType {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum TotNoQuoteEntries {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum OrdType {

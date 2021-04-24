@@ -37,7 +37,7 @@ pub struct SecurityDefinition {
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]
@@ -85,16 +85,14 @@ pub struct SecurityDefinition {
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct Leg {
 	/// LegOptionRatio is provided on Covering leg to create a delta neutral spread. In Listed Derivatives, LegDelta <a href="tag_1017_LegOptionRatio.html" target="bottom">LegOptionRatio&nbsp;(1017)</a> is multiplied by <a href="tag_1017_LegOptionRatio.html" target="bottom">LegOptionRatio&nbsp;(1017)</a> and <a href="tag_38_OrderQty.html" target="bottom">OrderQty&nbsp;(38)</a> to determine the covering quantity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1017")]
-	pub leg_option_ratio: Option<LegOptionRatio>,
+	pub leg_option_ratio: Option<f32>,
 	/// Specifies the price of a Leg
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -1357,6 +1355,4 @@ impl Default for ExpirationCycle {
 	}
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
-pub enum LegOptionRatio {
-}
+

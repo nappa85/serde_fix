@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct RFQReqGrp {
 	/// Number of related symbols (instruments) in Request
 	#[serde(rename = "146")]
-	pub related_sym: fix_common::RepeatingValues<RelatedSy>,
+	pub related_sym: fix_common::RepeatingValues<super::instrument::Instrument>,
 	/// Useful for verifying security identification
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -30,9 +30,7 @@ pub struct RFQReqGrp {
 	pub trading_session_sub_id: Option<TradingSessionSubID>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct RelatedSy {
-}
+
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
 pub enum QuoteRequestType {
