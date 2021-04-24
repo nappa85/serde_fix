@@ -98,11 +98,11 @@ pub struct AllocationReport {
 	/// NoUnderlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// NoLegs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "555")]
-	pub legs: Option<fix_common::RepeatingValues<Leg>>,
+	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// Total quantity (e.g. number of shares) allocated to all accounts, or that is Ready-To-Book
 	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "53")]
@@ -372,14 +372,6 @@ pub struct Exec {
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "29")]
 	pub last_capacity: Option<LastCapacity>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Leg {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

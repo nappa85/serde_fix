@@ -56,7 +56,7 @@ pub struct QuoteResponse {
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Required when countering a quote or "hit/lift" an <a href="message_Indication_of_Interest_6.html" target="main">Indication of Interest&nbsp;(6)</a> or <a href="message_Quote_S.html" target="main">Quote&nbsp;(S)</a> .
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "54")]
@@ -299,10 +299,6 @@ pub struct QuoteQualifier {
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "695")]
 	pub quote_qualifier_item: Option<QuoteQualifierItem>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

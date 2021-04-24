@@ -123,7 +123,7 @@ pub struct TradeCaptureReport {
 	/// NoUnderlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// UnderlyingTradingSessionID
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "822")]
@@ -237,10 +237,6 @@ pub struct TradeCaptureReport {
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

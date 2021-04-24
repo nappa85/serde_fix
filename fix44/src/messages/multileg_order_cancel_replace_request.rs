@@ -129,7 +129,7 @@ pub struct MultilegOrderCancelReplaceRequest {
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Useful for verifying security identification
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -348,10 +348,6 @@ pub struct TradingSession {
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "625")]
 	pub trading_session_sub_id: Option<String>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

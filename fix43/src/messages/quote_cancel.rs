@@ -42,14 +42,10 @@ pub struct QuoteCancel {
 	/// The number of securities (instruments) whose quotes are to be canceled. Not required when cancelling all quotes.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "295")]
-	pub quote_entries: Option<fix_common::RepeatingValues<QuoteEntrie>>,
+	pub quote_entries: Option<fix_common::RepeatingValues<super::super::instrument::Instrument>>,
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct QuoteEntrie {
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

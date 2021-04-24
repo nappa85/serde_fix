@@ -130,7 +130,7 @@ pub struct OrderCancelReplaceRequest {
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Should match original order's side, however, if bilaterally agreed to the following groups could potentially be interchanged:
 	/// Buy and Buy Minus; Sell, Sell Plus, Sell Short, and Sell Short Exempt, Cross, Cross Short, and Cross Short Exempt
 	#[serde(rename = "54")]
@@ -353,10 +353,6 @@ pub struct TradingSession {
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "625")]
 	pub trading_session_sub_id: Option<String>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]

@@ -41,7 +41,7 @@ pub struct MarketDataRequest {
 	pub md_entry_types: fix_common::RepeatingValues<MDEntryType>,
 	/// Number of symbols (instruments) requested.
 	#[serde(rename = "146")]
-	pub related_sym: fix_common::RepeatingValues<RelatedSy>,
+	pub related_sym: fix_common::RepeatingValues<super::super::instrument::Instrument>,
 	/// Number of trading sessions for which the request is valid.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "386")]
@@ -57,10 +57,6 @@ pub struct MDEntryType {
 	/// the Market Data is interested in receiving.
 	#[serde(rename = "269")]
 	pub md_entry_type_item: MDEntryTypeItem,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct RelatedSy {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

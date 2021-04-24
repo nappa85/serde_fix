@@ -88,11 +88,11 @@ pub struct TradeCaptureReportRequest {
 	/// Indicates number of repeating entries.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Indicates number of repeating entries.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "555")]
-	pub legs: Option<fix_common::RepeatingValues<Leg>>,
+	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// Number of date ranges provided (must be 1 or 2 if specified)
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "580")]
@@ -150,14 +150,6 @@ pub struct TradeCaptureReportRequest {
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Leg {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

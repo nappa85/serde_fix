@@ -77,11 +77,11 @@ pub struct Confirmation {
 	/// NoUnderlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// NoLegs
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "555")]
-	pub legs: Option<fix_common::RepeatingValues<Leg>>,
+	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// If traded on Yield, price must be calculated "to worst" and the <a href="block_Yield_Data.html" target="main">YieldData</a> component block must specify how calculated, redemption date and price (if not par). If traded on Price, the <a href="block_Yield_Data.html" target="main">YieldData</a> component block must specify how calculated - "Worst", and include redemptiondate and price (if not par).
 	#[serde(flatten)]
 	pub yield_data: Option<super::super::yield_data::YieldData>,
@@ -328,14 +328,6 @@ pub struct Order {
 	#[serde(default)]
 	#[serde(rename = "800")]
 	pub order_booking_qty: Option<f64>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Leg {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]

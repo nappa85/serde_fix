@@ -43,11 +43,11 @@ pub struct RequestForPositions {
 	/// Specifies the number of legs that make up the Security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "555")]
-	pub legs: Option<fix_common::RepeatingValues<Leg>>,
+	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// Specifies the number of underlying legs that make up the Security.
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
-	pub underlyings: Option<fix_common::RepeatingValues<Underlying>>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// The Clearing Business Date covered by this request.
 	#[serde(rename = "715")]
 	pub clearing_business_date: fix_common::LocalMktDate,
@@ -87,14 +87,6 @@ pub struct RequestForPositions {
 	/// Standard Message Trailer
 	#[serde(flatten)]
 	pub standard_message_trailer: super::super::standard_message_trailer::StandardMessageTrailer,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Leg {
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
-pub struct Underlying {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
