@@ -11,4 +11,6 @@ pub struct TradeCapLegUnderlyingsGrp {
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct OfLegUnderlying {
+    #[serde(flatten)]
+    pub underlying_leg_instrument: Option<super::underlying_leg_instrument::UnderlyingLegInstrument>,
 }

@@ -11,4 +11,8 @@ pub struct StrmAsgnReqGrp {
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct AsgnReq {
+    #[serde(flatten)]
+    pub parties: Option<super::parties::Parties>,
+    #[serde(flatten)]
+    pub strm_asgn_req_instrmt_grp: Option<super::strm_asgn_req_instrmt_grp::StrmAsgnReqInstrmtGrp>,
 }

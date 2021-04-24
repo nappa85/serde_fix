@@ -11,4 +11,12 @@ pub struct QuotCxlEntriesGrp {
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct QuoteEntrie {
+    #[serde(flatten)]
+    pub instrument: Option<super::instrument::Instrument>,
+    #[serde(flatten)]
+    pub financing_details: Option<super::financing_details::FinancingDetails>,
+    #[serde(flatten)]
+    pub und_instrmt_grp: Option<super::und_instrmt_grp::UndInstrmtGrp>,
+    #[serde(flatten)]
+    pub instrmt_leg_grp: Option<super::instrmt_leg_grp::InstrmtLegGrp>,
 }
