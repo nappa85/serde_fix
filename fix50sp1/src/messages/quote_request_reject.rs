@@ -54,7 +54,7 @@ pub struct QuoteRequestReject {
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct RelatedSy {
     #[serde(flatten)]
-    pub instruments: fix_common::RepeatingValues<super::super::instrument::Instrument>,
+    pub instruments: super::super::instrument::Instrument,
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
