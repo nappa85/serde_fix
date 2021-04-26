@@ -46,7 +46,7 @@ pub struct RelatedSy {
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "711")]
-	pub no_underlyings: Option<usize>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Useful for verifying security identification
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
@@ -124,7 +124,7 @@ pub struct RelatedSy {
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "555")]
-	pub no_legs: Option<usize>,
+	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// LegOptionRatio is provided on Covering leg to create a delta neutral spread. In Listed Derivatives, LegDelta <a href="tag_1017_LegOptionRatio.html" target="bottom">LegOptionRatio&nbsp;(1017)</a> is multiplied by <a href="tag_1017_LegOptionRatio.html" target="bottom">LegOptionRatio&nbsp;(1017)</a> and <a href="tag_38_OrderQty.html" target="bottom">OrderQty&nbsp;(38)</a> to determine the covering quantity
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "1017")]

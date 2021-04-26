@@ -55,7 +55,7 @@ pub struct RelatedSy {
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "711")]
-	pub no_underlyings: Option<usize>,
+	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]
@@ -65,7 +65,7 @@ pub struct RelatedSy {
 	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(default)]
 	#[serde(rename = "555")]
-	pub no_legs: Option<usize>,
+	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// LegSwapType
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "690")]
