@@ -91,8 +91,6 @@ pub struct QuoteSet {
 	pub quote_entry_id: Option<String>,
 	/// Number of legs Identifies a Multi-leg Execution if present and non-zero.
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "555")]
 	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// If F/X quote, should be the "all-in" rate (spot rate adjusted for forward points). Note that either BidPx, <a href="tag_133_OfferPx.html" target="bottom">OfferPx&nbsp;(133)</a> or both must be specified.

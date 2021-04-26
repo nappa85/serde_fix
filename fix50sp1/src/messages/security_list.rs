@@ -130,8 +130,6 @@ pub struct RelatedSy {
 	pub maturity_month_year_increment: Option<i32>,
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "711")]
 	pub underlyings: Option<fix_common::RepeatingValues<super::super::underlying_instrument::UnderlyingInstrument>>,
 	/// Currency
@@ -140,8 +138,6 @@ pub struct RelatedSy {
 	pub currency: Option<Currency>,
 	/// Number of legs that make up the Security
 	#[serde(skip_serializing_if = "Option::is_none")]
-	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
-	#[serde(default)]
 	#[serde(rename = "555")]
 	pub legs: Option<fix_common::RepeatingValues<super::super::instrument_leg::InstrumentLeg>>,
 	/// LegSwapType
