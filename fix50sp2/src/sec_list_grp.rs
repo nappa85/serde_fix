@@ -14,6 +14,8 @@ pub struct SecListGrp {
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct RelatedSy {
+    #[serde(flatten)]
+    pub instruments: fix_common::RepeatingValues<super::instrument::Instrument>,
 	/// Currency
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "15")]
