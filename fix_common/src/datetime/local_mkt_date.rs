@@ -14,6 +14,12 @@ impl Default for LocalMktDate {
     }
 }
 
+impl From<DateTime<Local>> for LocalMktDate {
+    fn from(date: DateTime<Local>) -> Self {
+        LocalMktDate(date)
+    }
+}
+
 impl AsRef<DateTime<Local>> for LocalMktDate {
     fn as_ref(&self) -> &DateTime<Local> {
         &self.0

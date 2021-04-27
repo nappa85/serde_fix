@@ -14,6 +14,12 @@ impl Default for UTCDateOnly {
     }
 }
 
+impl From<DateTime<Utc>> for UTCDateOnly {
+    fn from(date: DateTime<Utc>) -> Self {
+        UTCDateOnly(date)
+    }
+}
+
 impl AsRef<DateTime<Utc>> for UTCDateOnly {
     fn as_ref(&self) -> &DateTime<Utc> {
         &self.0
