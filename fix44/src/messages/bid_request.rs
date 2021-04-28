@@ -1527,10 +1527,10 @@ impl Default for ExchangeForPhysical {
 pub enum ProgRptReqs {
 	/// BuySide explicitly requests status using StatusRequest (Default) The sell-side firm can however, send a DONE status <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> Response in an unsolicited fashion
 	#[serde(rename = "1")]
-	BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusAHrefMessageListStatusNHtmlTargetMainListStatusNbspAResponseInAnUnsolicitedFashion,
+	BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusListStatusResponseInAnUnsolicitedFashion,
 	/// SellSide periodically sends status using <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> . Period optionally specified in ProgressPeriod
 	#[serde(rename = "2")]
-	SellSidePeriodicallySendsStatusUsingAHrefMessageListStatusNHtmlTargetMainListStatusNbspAPeriodOptionallySpecifiedInProgressPeriod,
+	SellSidePeriodicallySendsStatusUsingListStatusPeriodOptionallySpecifiedInProgressPeriod,
 	/// Real-time execution reports (to be discouraged)
 	#[serde(rename = "3")]
 	RealTimeExecutionReports,
@@ -1538,7 +1538,7 @@ pub enum ProgRptReqs {
 
 impl Default for ProgRptReqs {
 	fn default() -> Self {
-		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusAHrefMessageListStatusNHtmlTargetMainListStatusNbspAResponseInAnUnsolicitedFashion
+		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusListStatusResponseInAnUnsolicitedFashion
 	}
 }
 

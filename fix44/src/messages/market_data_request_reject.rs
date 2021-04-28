@@ -47,7 +47,7 @@ pub enum MDReqRejReason {
 	UnknownSymbol,
 	/// Duplicate <a href="tag_262_MDReqID.html" target="bottom">MDReqID&nbsp;(262)</a>
 	#[serde(rename = "1")]
-	DuplicateAHrefTag262MdReqIdHtmlTargetBottomMdReqIdNbspA,
+	DuplicateMdReqId,
 	/// Insufficient Bandwidth
 	#[serde(rename = "2")]
 	InsufficientBandwidth,
@@ -56,31 +56,31 @@ pub enum MDReqRejReason {
 	InsufficientPermissions,
 	/// Unsupported <a href="tag_263_SubscriptionRequestType.html" target="bottom">SubscriptionRequestType&nbsp;(263)</a>
 	#[serde(rename = "4")]
-	UnsupportedAHrefTag263SubscriptionRequestTypeHtmlTargetBottomSubscriptionRequestTypeNbspA,
+	UnsupportedSubscriptionRequestType,
 	/// Unsupported <a href="tag_264_MarketDepth.html" target="bottom">MarketDepth&nbsp;(264)</a>
 	#[serde(rename = "5")]
-	UnsupportedAHrefTag264MarketDepthHtmlTargetBottomMarketDepthNbspA,
+	UnsupportedMarketDepth,
 	/// Unsupported <a href="tag_265_MDUpdateType.html" target="bottom">MDUpdateType&nbsp;(265)</a>
 	#[serde(rename = "6")]
-	UnsupportedAHrefTag265MdUpdateTypeHtmlTargetBottomMdUpdateTypeNbspA,
+	UnsupportedMdUpdateType,
 	/// Unsupported <a href="tag_266_AggregatedBook.html" target="bottom">AggregatedBook&nbsp;(266)</a>
 	#[serde(rename = "7")]
-	UnsupportedAHrefTag266AggregatedBookHtmlTargetBottomAggregatedBookNbspA,
+	UnsupportedAggregatedBook,
 	/// Unsupported <a href="tag_269_MDEntryType.html" target="bottom">MDEntryType&nbsp;(269)</a>
 	#[serde(rename = "8")]
-	UnsupportedAHrefTag269MdEntryTypeHtmlTargetBottomMdEntryTypeNbspA,
+	UnsupportedMdEntryType,
 	/// Unsupported <a href="tag_336_TradingSessionID.html" target="bottom">TradingSessionID&nbsp;(336)</a>
 	#[serde(rename = "9")]
-	UnsupportedAHrefTag336TradingSessionIdHtmlTargetBottomTradingSessionIdNbspA,
+	UnsupportedTradingSessionId,
 	/// Unsupported <a href="tag_546_Scope.html" target="bottom">Scope&nbsp;(546)</a>
 	#[serde(rename = "A")]
-	UnsupportedAHrefTag546ScopeHtmlTargetBottomScopeNbspA,
+	UnsupportedScope,
 	/// Unsupported <a href="tag_286_OpenCloseSettlFlag.html" target="bottom">OpenCloseSettleFlag&nbsp;(286)</a>
 	#[serde(rename = "B")]
-	UnsupportedAHrefTag286OpenCloseSettlFlagHtmlTargetBottomOpenCloseSettleFlagNbspA,
+	UnsupportedOpenCloseSettleFlag,
 	/// Unsupported <a href="tag_547_MDImplicitDelete.html" target="bottom">MDImplicitDelete&nbsp;(547)</a>
 	#[serde(rename = "C")]
-	UnsupportedAHrefTag547MdImplicitDeleteHtmlTargetBottomMdImplicitDeleteNbspA,
+	UnsupportedMdImplicitDelete,
 }
 
 impl Default for MDReqRejReason {

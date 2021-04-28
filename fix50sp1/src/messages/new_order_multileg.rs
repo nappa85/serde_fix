@@ -664,7 +664,7 @@ pub enum SettlType {
 	T5,
 	/// Broken date - for FX expressing non-standard tenor, <a href="tag_64_SettlDate.html" target="bottom">SettlDate&nbsp;(64)</a> must be specified
 	#[serde(rename = "B")]
-	BrokenDateForFxExpressingNonStandardTenorAHrefTag64SettlDateHtmlTargetBottomSettlDateNbspAMustBeSpecified,
+	BrokenDateForFxExpressingNonStandardTenorSettlDateMustBeSpecified,
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
@@ -1084,7 +1084,7 @@ pub enum QtyType {
 	ContractsA,
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
-	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+	UnitsOfMeasurePerTimeUnitAAndTimeUnit,
 }
 
 impl Default for QtyType {
@@ -2538,21 +2538,21 @@ impl Default for SolicitedFlag {
 pub enum RefOrderIDSource {
 	/// <a href="tag_198_SecondaryOrderID.html" target="bottom">SecondaryOrdeID&nbsp;(198)</a>
 	#[serde(rename = "0")]
-	AHrefTag198SecondaryOrderIdHtmlTargetBottomSecondaryOrdeIdNbspA,
+	SecondaryOrdeId,
 	/// <a href="tag_37_OrderID.html" target="bottom">OrdeID&nbsp;(37)</a>
 	#[serde(rename = "1")]
-	AHrefTag37OrderIdHtmlTargetBottomOrdeIdNbspA,
+	OrdeId,
 	/// <a href="tag_278_MDEntryID.html" target="bottom">MEntryID&nbsp;(278)</a>
 	#[serde(rename = "2")]
-	AHrefTag278MdEntryIdHtmlTargetBottomMEntryIdNbspA,
+	MEntryId,
 	/// <a href="tag_299_QuoteEntryID.html" target="bottom">QuotEntryID&nbsp;(299)</a>
 	#[serde(rename = "3")]
-	AHrefTag299QuoteEntryIdHtmlTargetBottomQuotEntryIdNbspA,
+	QuotEntryId,
 }
 
 impl Default for RefOrderIDSource {
 	fn default() -> Self {
-		RefOrderIDSource::AHrefTag198SecondaryOrderIdHtmlTargetBottomSecondaryOrdeIdNbspA
+		RefOrderIDSource::SecondaryOrdeId
 	}
 }
 
@@ -6726,7 +6726,7 @@ pub enum LegSettlType {
 	T5,
 	/// Broken date - for FX expressing non-standard tenor, <a href="tag_64_SettlDate.html" target="bottom">SettlDate&nbsp;(64)</a> must be specified
 	#[serde(rename = "B")]
-	BrokenDateForFxExpressingNonStandardTenorAHrefTag64SettlDateHtmlTargetBottomSettlDateNbspAMustBeSpecified,
+	BrokenDateForFxExpressingNonStandardTenorSettlDateMustBeSpecified,
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,

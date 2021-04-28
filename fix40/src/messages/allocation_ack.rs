@@ -82,10 +82,10 @@ pub enum AllocRejCode {
 	CommissionDifference,
 	/// unknown <a href="tag_37_OrderID.html" target="bottom">OrderID&nbsp;(37)</a>
 	#[serde(rename = "5")]
-	UnknownAHrefTag37OrderIdHtmlTargetBottomOrderIdNbspA,
+	UnknownOrderId,
 	/// unknown <a href="tag_66_ListID.html" target="bottom">ListID&nbsp;(66)</a>
 	#[serde(rename = "6")]
-	UnknownAHrefTag66ListIdHtmlTargetBottomListIdNbspA,
+	UnknownListId,
 	/// other
 	#[serde(rename = "7")]
 	Other,

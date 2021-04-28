@@ -52,13 +52,13 @@ pub enum MassStatusReqType {
 	StatusForOrdersForAnUnderlyingSecurity,
 	/// Status for orders for a <a href="tag_460_Product.html" target="bottom">Product&nbsp;(460)</a>
 	#[serde(rename = "3")]
-	StatusForOrdersForAAHrefTag460ProductHtmlTargetBottomProductNbspA,
+	StatusForOrdersForAProduct,
 	/// Status for orders for a <a href="tag_461_CFICode.html" target="bottom">CFICode&nbsp;(461)</a>
 	#[serde(rename = "4")]
-	StatusForOrdersForAAHrefTag461CfiCodeHtmlTargetBottomCfiCodeNbspA,
+	StatusForOrdersForACfiCode,
 	/// Status for orders for a <a href="tag_167_SecurityType.html" target="bottom">SecurityType&nbsp;(167)</a>
 	#[serde(rename = "5")]
-	StatusForOrdersForAAHrefTag167SecurityTypeHtmlTargetBottomSecurityTypeNbspA,
+	StatusForOrdersForASecurityType,
 	/// Status for orders for a trading session
 	#[serde(rename = "6")]
 	StatusForOrdersForATradingSession,
@@ -67,7 +67,7 @@ pub enum MassStatusReqType {
 	StatusForAllOrders,
 	/// Status for orders for a <a href="tag_448_PartyID.html" target="bottom">PartyID&nbsp;(448)</a>
 	#[serde(rename = "8")]
-	StatusForOrdersForAAHrefTag448PartyIdHtmlTargetBottomPartyIdNbspA,
+	StatusForOrdersForAPartyId,
 }
 
 impl Default for MassStatusReqType {

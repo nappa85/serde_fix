@@ -162,10 +162,10 @@ pub enum AvgPxIndicator {
 	NoAveragePricing,
 	/// Trade is part of an average price group identified by the <a href="tag_820_TradeLinkID.html" target="bottom">TradeLinkID&nbsp;(820)</a>
 	#[serde(rename = "1")]
-	TradeIsPartOfAnAveragePriceGroupIdentifiedByTheAHrefTag820TradeLinkIdHtmlTargetBottomTradeLinkIdNbspA,
+	TradeIsPartOfAnAveragePriceGroupIdentifiedByTheTradeLinkId,
 	/// Last trade is the average price group identified by the <a href="tag_820_TradeLinkID.html" target="bottom">TradeLinkID&nbsp;(820)</a>
 	#[serde(rename = "2")]
-	LastTradeIsTheAveragePriceGroupIdentifiedByTheAHrefTag820TradeLinkIdHtmlTargetBottomTradeLinkIdNbspA,
+	LastTradeIsTheAveragePriceGroupIdentifiedByTheTradeLinkId,
 }
 
 impl Default for AvgPxIndicator {

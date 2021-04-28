@@ -170,15 +170,15 @@ impl Default for Scope {
 pub enum MDImplicitDelete {
 	/// Client has responsibility for implicitly deleting bids or offers falling outside the <a href="tag_264_MarketDepth.html" target="bottom">MarketDepth&nbsp;(264)</a> of the request.
 	#[serde(rename = "Y")]
-	ClientHasResponsibilityForImplicitlyDeletingBidsOrOffersFallingOutsideTheAHrefTag264MarketDepthHtmlTargetBottomMarketDepthNbspAOfTheRequest,
+	ClientHasResponsibilityForImplicitlyDeletingBidsOrOffersFallingOutsideTheMarketDepthOfTheRequest,
 	/// Server must send an explicit delete for bids or offers falling outside the requested <a href="tag_264_MarketDepth.html" target="bottom">MarketDepth&nbsp;(264)</a> of the request.
 	#[serde(rename = "N")]
-	ServerMustSendAnExplicitDeleteForBidsOrOffersFallingOutsideTheRequestedAHrefTag264MarketDepthHtmlTargetBottomMarketDepthNbspAOfTheRequest,
+	ServerMustSendAnExplicitDeleteForBidsOrOffersFallingOutsideTheRequestedMarketDepthOfTheRequest,
 }
 
 impl Default for MDImplicitDelete {
 	fn default() -> Self {
-		MDImplicitDelete::ClientHasResponsibilityForImplicitlyDeletingBidsOrOffersFallingOutsideTheAHrefTag264MarketDepthHtmlTargetBottomMarketDepthNbspAOfTheRequest
+		MDImplicitDelete::ClientHasResponsibilityForImplicitlyDeletingBidsOrOffersFallingOutsideTheMarketDepthOfTheRequest
 	}
 }
 

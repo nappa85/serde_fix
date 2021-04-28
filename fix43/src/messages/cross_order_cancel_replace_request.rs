@@ -356,7 +356,7 @@ pub enum CrossType {
 	/// Cross Trade which is executed partially and the rest is cancelled. One side is fully executed, the other side is partially
 	/// executed with the remainder being cancelled. This is equivalent to an Immediate or Cancel on the other side. Note: The <a href="tag_550_CrossPrioritization.html" target="bottom">CrossPrioritization&nbsp;(550)</a> field may be used to indicate which side should fully execute in this scenario.
 	#[serde(rename = "2")]
-	CrossTradeWhichIsExecutedPartiallyAndTheRestIsCancelledOneSideIsFullyExecutedTheOtherSideIsPartiallyExecutedWithTheRemainderBeingCancelledThisIsEquivalentToAnImmediateOrCancelOnTheOtherSideNoteTheAHrefTag550CrossPrioritizationHtmlTargetBottomCrossPrioritizationNbspAFieldMayBeUsedToIndicateWhichSideShouldFullyExecuteInThisScenario,
+	CrossTradeWhichIsExecutedPartiallyAndTheRestIsCancelledOneSideIsFullyExecutedTheOtherSideIsPartiallyExecutedWithTheRemainderBeingCancelledThisIsEquivalentToAnImmediateOrCancelOnTheOtherSideNoteTheCrossPrioritizationFieldMayBeUsedToIndicateWhichSideShouldFullyExecuteInThisScenario,
 	/// Cross trade which is partially executed with the unfilled portions remaining active. One side of the cross is fully executed
 	/// (as denoted with the <a href="tag_550_CrossPrioritization.html" target="bottom">CrossPrioritization&nbsp;(550)</a> field), but the unfilled portion remains active.
 	#[serde(rename = "3")]

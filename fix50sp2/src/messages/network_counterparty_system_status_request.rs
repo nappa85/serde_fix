@@ -35,7 +35,7 @@ pub enum NetworkRequestType {
 	StopSubscribing,
 	/// Level of Detail, then <a href="tag_936_NoCompIDs.html" target="bottom">NoCompIDs&nbsp;(936)</a> becomes required
 	#[serde(rename = "8")]
-	LevelOfDetailThenAHrefTag936NoCompIDsHtmlTargetBottomNoCompIDsNbspABecomesRequired,
+	LevelOfDetailThenNoCompIDsBecomesRequired,
 }
 
 impl Default for NetworkRequestType {

@@ -388,7 +388,7 @@ pub enum QtyType {
 	ContractsA,
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
-	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+	UnitsOfMeasurePerTimeUnitAAndTimeUnit,
 }
 
 impl Default for QtyType {

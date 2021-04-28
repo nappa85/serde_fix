@@ -71,10 +71,10 @@ pub enum SessionRejectReason {
 	CompIdProblem,
 	/// <a href="tag_52_SendingTime.html" target="bottom">SendingTime&nbsp;(52)</a> accuracy problem
 	#[serde(rename = "10")]
-	AHrefTag52SendingTimeHtmlTargetBottomSendingTimeNbspAAccuracyProblem,
+	SendingTimeAccuracyProblem,
 	/// Invalid <a href="tag_35_MsgType.html" target="bottom">MsgType&nbsp;(35)</a>
 	#[serde(rename = "11")]
-	InvalidAHrefTag35MsgTypeHtmlTargetBottomMsgTypeNbspA,
+	InvalidMsgType,
 	/// XML Validation error
 	#[serde(rename = "12")]
 	XmlValidationError,

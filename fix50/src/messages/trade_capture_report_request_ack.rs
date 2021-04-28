@@ -159,7 +159,7 @@ pub enum TradeRequestResult {
 	TradeRequestTypeNotSupported,
 	/// Unauthorized for <a href="message_Trade_Capture_Report_Request_AD.html" target="main">Trade Capture Report Request&nbsp;(AD)</a>
 	#[serde(rename = "9")]
-	UnauthorizedForAHrefMessageTradeCaptureReportRequestAdHtmlTargetMainTradeCaptureReportRequestNbspA,
+	UnauthorizedForTradeCaptureReportRequest,
 	/// Other
 	#[serde(rename = "99")]
 	Other,

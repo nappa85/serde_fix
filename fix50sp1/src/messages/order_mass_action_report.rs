@@ -191,7 +191,7 @@ impl Default for MassActionScope {
 pub enum MassActionResponse {
 	/// Rejected - See <a href="tag_1376_MassActionRejectReason.html" target="bottom">MassActionRejectReason&nbsp;(1376)</a>
 	#[serde(rename = "0")]
-	RejectedSeeAHrefTag1376MassActionRejectReasonHtmlTargetBottomMassActionRejectReasonNbspA,
+	RejectedSeeMassActionRejectReason,
 	/// Accepted
 	#[serde(rename = "1")]
 	Accepted,
@@ -199,7 +199,7 @@ pub enum MassActionResponse {
 
 impl Default for MassActionResponse {
 	fn default() -> Self {
-		MassActionResponse::RejectedSeeAHrefTag1376MassActionRejectReasonHtmlTargetBottomMassActionRejectReasonNbspA
+		MassActionResponse::RejectedSeeMassActionRejectReason
 	}
 }
 

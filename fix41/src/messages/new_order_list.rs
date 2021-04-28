@@ -607,7 +607,7 @@ pub enum Side {
 	SellShortExempt,
 	/// Undisclosed (valid for <a href="message_Indication_of_Interest_6.html" target="main">Indication of Interest&nbsp;(6)</a> and <a href="message_New_Order_List_E.html" target="main">List Order&nbsp;(E)</a> messages only)
 	#[serde(rename = "7")]
-	UndisclosedAAndAHrefMessageNewOrderListEHtmlTargetMainListOrderNbspAMessagesOnly,
+	UndisclosedAAndListOrderMessagesOnly,
 	/// Cross (orders where counterparty is an exchange, valid for all messages except IOIs)
 	#[serde(rename = "8")]
 	Cross,

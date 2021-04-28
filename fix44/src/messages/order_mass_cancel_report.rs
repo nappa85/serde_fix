@@ -129,7 +129,7 @@ impl Default for MassCancelRequestType {
 pub enum MassCancelResponse {
 	/// Cancel Request Rejected - See <a href="tag_532_MassCancelRejectReason.html" target="bottom">MassCancelRejectReason&nbsp;(532)</a>
 	#[serde(rename = "0")]
-	CancelRequestRejectedSeeAHrefTag532MassCancelRejectReasonHtmlTargetBottomMassCancelRejectReasonNbspA,
+	CancelRequestRejectedSeeMassCancelRejectReason,
 	/// Cancel orders for a security
 	#[serde(rename = "1")]
 	CancelOrdersForASecurity,
@@ -155,7 +155,7 @@ pub enum MassCancelResponse {
 
 impl Default for MassCancelResponse {
 	fn default() -> Self {
-		MassCancelResponse::CancelRequestRejectedSeeAHrefTag532MassCancelRejectReasonHtmlTargetBottomMassCancelRejectReasonNbspA
+		MassCancelResponse::CancelRequestRejectedSeeMassCancelRejectReason
 	}
 }
 

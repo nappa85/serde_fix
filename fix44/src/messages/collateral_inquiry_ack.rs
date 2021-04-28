@@ -217,7 +217,7 @@ pub enum CollInquiryResult {
 	NoCollateralFoundForTheOrderSpecified,
 	/// <a href="message_Collateral_Inquiry_BB.html" target="main">Collateral Inquiry&nbsp;(BB)</a> type not supported
 	#[serde(rename = "8")]
-	AHrefMessageCollateralInquiryBbHtmlTargetMainCollateralInquiryNbspATypeNotSupported,
+	CollateralInquiryTypeNotSupported,
 	/// Unauthorized for collateral inquiry
 	#[serde(rename = "9")]
 	UnauthorizedForCollateralInquiry,
@@ -1497,7 +1497,7 @@ pub enum ResponseTransportType {
 	/// Out-of-Band: pre-arranged out of band delivery mechanism (i.e. FTP, HTTP, NDM, etc) between counterparties. Details specified
 	/// via <a href="tag_726_ResponseDestination.html" target="bottom">ResponseDestination&nbsp;(726)</a> .
 	#[serde(rename = "1")]
-	OutOfBandPreArrangedOutOfBandDeliveryMechanismBetweenCounterpartiesDetailsSpecifiedViaAHrefTag726ResponseDestinationHtmlTargetBottomResponseDestinationNbspA,
+	OutOfBandPreArrangedOutOfBandDeliveryMechanismBetweenCounterpartiesDetailsSpecifiedViaResponseDestination,
 }
 
 impl Default for ResponseTransportType {

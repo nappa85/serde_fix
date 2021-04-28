@@ -3142,7 +3142,7 @@ pub enum LotType {
 	BlockLot,
 	/// Round lot based upon <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitOfMeasure&nbsp;(996)</a>
 	#[serde(rename = "4")]
-	RoundLotBasedUponAHrefTag996UnitOfMeasureHtmlTargetBottomUnitOfMeasureNbspA,
+	RoundLotBasedUponUnitOfMeasure,
 }
 
 impl Default for LotType {
@@ -4443,7 +4443,7 @@ pub enum SettlType {
 	T5,
 	/// Broken date - for FX expressing non-standard tenor, <a href="tag_64_SettlDate.html" target="bottom">SettlDate&nbsp;(64)</a> must be specified
 	#[serde(rename = "B")]
-	BrokenDateForFxExpressingNonStandardTenorAHrefTag64SettlDateHtmlTargetBottomSettlDateNbspAMustBeSpecified,
+	BrokenDateForFxExpressingNonStandardTenorSettlDateMustBeSpecified,
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,

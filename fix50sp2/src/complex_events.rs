@@ -262,24 +262,24 @@ impl Default for ComplexEventType {
 pub enum ComplexEventPriceBoundaryMethod {
 	/// Less than <a href="tag_1486_ComplexEventPrice.html" target="bottom">ComplexEventPrice&nbsp;(1486)</a>
 	#[serde(rename = "1")]
-	LessThanAHrefTag1486ComplexEventPriceHtmlTargetBottomComplexEventPriceNbspA,
+	LessThanComplexEventPrice,
 	/// Less than or equal to <a href="tag_1486_ComplexEventPrice.html" target="bottom">ComplexEventPrice&nbsp;(1486)</a>
 	#[serde(rename = "2")]
-	LessThanOrEqualToAHrefTag1486ComplexEventPriceHtmlTargetBottomComplexEventPriceNbspA,
+	LessThanOrEqualToComplexEventPrice,
 	/// Equal to <a href="tag_1486_ComplexEventPrice.html" target="bottom">ComplexEventPrice&nbsp;(1486)</a>
 	#[serde(rename = "3")]
-	EqualToAHrefTag1486ComplexEventPriceHtmlTargetBottomComplexEventPriceNbspA,
+	EqualToComplexEventPrice,
 	/// Greater than or equal to <a href="tag_1486_ComplexEventPrice.html" target="bottom">ComplexEventPrice&nbsp;(1486)</a>
 	#[serde(rename = "4")]
-	GreaterThanOrEqualToAHrefTag1486ComplexEventPriceHtmlTargetBottomComplexEventPriceNbspA,
+	GreaterThanOrEqualToComplexEventPrice,
 	/// Greater than <a href="tag_1486_ComplexEventPrice.html" target="bottom">ComplexEventPrice&nbsp;(1486)</a>
 	#[serde(rename = "5")]
-	GreaterThanAHrefTag1486ComplexEventPriceHtmlTargetBottomComplexEventPriceNbspA,
+	GreaterThanComplexEventPrice,
 }
 
 impl Default for ComplexEventPriceBoundaryMethod {
 	fn default() -> Self {
-		ComplexEventPriceBoundaryMethod::LessThanAHrefTag1486ComplexEventPriceHtmlTargetBottomComplexEventPriceNbspA
+		ComplexEventPriceBoundaryMethod::LessThanComplexEventPrice
 	}
 }
 

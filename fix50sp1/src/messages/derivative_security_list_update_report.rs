@@ -1906,7 +1906,7 @@ pub enum DerivativeInstrAttribType {
 	SteppedCoupon,
 	/// Coupon period (if not semi-annual). Supply redemption date in the <a href="tag_872_InstrAttribValue.html" target="bottom">InstrAttribValue&nbsp;(872)</a> field
 	#[serde(rename = "8")]
-	CouponPeriodSupplyRedemptionDateInTheAHrefTag872InstrAttribValueHtmlTargetBottomInstrAttribValueNbspAField,
+	CouponPeriodSupplyRedemptionDateInTheInstrAttribValueField,
 	/// When [and if] issued
 	#[serde(rename = "9")]
 	WhenAndIfIssued,
@@ -1921,7 +1921,7 @@ pub enum DerivativeInstrAttribType {
 	EscrowedToMaturity,
 	/// Escrowed to redemption date - callable. Supply redemption date in the <a href="tag_872_InstrAttribValue.html" target="bottom">InstrAttribValue&nbsp;(872)</a> field
 	#[serde(rename = "13")]
-	EscrowedToRedemptionDateCallableSupplyRedemptionDateInTheAHrefTag872InstrAttribValueHtmlTargetBottomInstrAttribValueNbspAField,
+	EscrowedToRedemptionDateCallableSupplyRedemptionDateInTheInstrAttribValueField,
 	/// Prerefunded
 	#[serde(rename = "14")]
 	Prerefunded,
@@ -1942,7 +1942,7 @@ pub enum DerivativeInstrAttribType {
 	SubjectToAlternativeMinimumTax,
 	/// Original issue discount price. Supply price in the <a href="tag_872_InstrAttribValue.html" target="bottom">InstrAttribValue&nbsp;(872)</a> field
 	#[serde(rename = "20")]
-	OriginalIssueDiscountPriceSupplyPriceInTheAHrefTag872InstrAttribValueHtmlTargetBottomInstrAttribValueNbspAField,
+	OriginalIssueDiscountPriceSupplyPriceInTheInstrAttribValueField,
 	/// Callable below maturity value
 	#[serde(rename = "21")]
 	CallableBelowMaturityValue,
@@ -1972,7 +1972,7 @@ pub enum DerivativeInstrAttribType {
 	TradeableIndicator,
 	/// Text. Supply the text of the attribute or disclaimer in the <a href="tag_872_InstrAttribValue.html" target="bottom">InstrAttribValue&nbsp;(872)</a> field
 	#[serde(rename = "99")]
-	TextSupplyTheTextOfTheAttributeOrDisclaimerInTheAHrefTag872InstrAttribValueHtmlTargetBottomInstrAttribValueNbspAField,
+	TextSupplyTheTextOfTheAttributeOrDisclaimerInTheInstrAttribValueField,
 }
 
 impl Default for DerivativeInstrAttribType {

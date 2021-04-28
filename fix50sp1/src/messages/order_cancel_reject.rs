@@ -254,10 +254,10 @@ pub enum CxlRejReason {
 	UnableToProcessOrderMassCancelRequest,
 	/// <a href="tag_586_OrigOrdModTime.html" target="bottom">OrigOrdModTime&nbsp;(586)</a> did not match last <a href="tag_60_TransactTime.html" target="bottom">TransactTime&nbsp;(60)</a> of order
 	#[serde(rename = "5")]
-	AHrefTag586OrigOrdModTimeHtmlTargetBottomOrigOrdModTimeNbspADidNotMatchLastAHrefTag60TransactTimeHtmlTargetBottomTransactTimeNbspAOfOrder,
+	TransactTimeOfOrder,
 	/// Duplicate <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> received
 	#[serde(rename = "6")]
-	DuplicateAHrefTag11ClOrdIdHtmlTargetBottomClOrdIdNbspAReceived,
+	DuplicateClOrdIdReceived,
 	/// Price exceeds current price
 	#[serde(rename = "7")]
 	PriceExceedsCurrentPrice,

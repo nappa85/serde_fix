@@ -69,7 +69,7 @@ pub enum CrossType {
 	/// Cross IOC - cross trade which is executed partially and the rest is cancelled. One side is fully executed, the other side
 	/// is partially executed with the remainder being cancelled. This is equivalent to an IOC on the other side. Note: <a href="tag_550_CrossPrioritization.html" target="bottom">CrossPrioritization&nbsp;(550)</a> field may be used to indicate which side should fully execute in this scenario.
 	#[serde(rename = "2")]
-	CrossIocCrossTradeWhichIsExecutedPartiallyAndTheRestIsCancelledOneSideIsFullyExecutedTheOtherSideIsPartiallyExecutedWithTheRemainderBeingCancelledThisIsEquivalentToAnIocOnTheOtherSideNoteAHrefTag550CrossPrioritizationHtmlTargetBottomCrossPrioritizationNbspAFieldMayBeUsedToIndicateWhichSideShouldFullyExecuteInThisScenario,
+	CrossIocCrossTradeWhichIsExecutedPartiallyAndTheRestIsCancelledOneSideIsFullyExecutedTheOtherSideIsPartiallyExecutedWithTheRemainderBeingCancelledThisIsEquivalentToAnIocOnTheOtherSideNoteCrossPrioritizationFieldMayBeUsedToIndicateWhichSideShouldFullyExecuteInThisScenario,
 	/// Cross One Side - cross trade which is partially executed with the unfilled portions remaining active. One side of the corss
 	/// is fully executed (as denoted by the <a href="tag_550_CrossPrioritization.html" target="bottom">CrossPrioritization&nbsp;(550)</a> field), but the unfilled portion remains active.
 	#[serde(rename = "3")]

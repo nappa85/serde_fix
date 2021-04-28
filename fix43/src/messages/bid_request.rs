@@ -1523,10 +1523,10 @@ impl Default for ExchangeForPhysical {
 pub enum ProgRptReqs {
 	/// BuySide explicitly requests status using StatusRequest (Default) The sell-side firm can however, send a DONE status <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> Response in an unsolicited fashion
 	#[serde(rename = "1")]
-	BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusAHrefMessageListStatusNHtmlTargetMainListStatusNbspAResponseInAnUnsolicitedFashion,
+	BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusListStatusResponseInAnUnsolicitedFashion,
 	/// SellSide periodically sends status using <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> . Period optionally specified in ProgressPeriod
 	#[serde(rename = "2")]
-	SellSidePeriodicallySendsStatusUsingAHrefMessageListStatusNHtmlTargetMainListStatusNbspAPeriodOptionallySpecifiedInProgressPeriod,
+	SellSidePeriodicallySendsStatusUsingListStatusPeriodOptionallySpecifiedInProgressPeriod,
 	/// Real-time execution reports (to be discouraged)
 	#[serde(rename = "3")]
 	RealTimeExecutionReports,
@@ -1534,7 +1534,7 @@ pub enum ProgRptReqs {
 
 impl Default for ProgRptReqs {
 	fn default() -> Self {
-		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusAHrefMessageListStatusNHtmlTargetMainListStatusNbspAResponseInAnUnsolicitedFashion
+		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusListStatusResponseInAnUnsolicitedFashion
 	}
 }
 
@@ -1664,15 +1664,15 @@ impl Default for BidDescriptorType {
 pub enum SideValueInd {
 	/// <a href="tag_396_SideValue1.html" target="bottom">SideValue1&nbsp;(396)</a>
 	#[serde(rename = "1")]
-	AHrefTag396SideValue1HtmlTargetBottomSideValue1NbspA,
+	SideValue1,
 	/// <a href="tag_397_SideValue2.html" target="bottom">SideValue2&nbsp;(397)</a>
 	#[serde(rename = "2")]
-	AHrefTag397SideValue2HtmlTargetBottomSideValue2NbspA,
+	SideValue2,
 }
 
 impl Default for SideValueInd {
 	fn default() -> Self {
-		SideValueInd::AHrefTag396SideValue1HtmlTargetBottomSideValue1NbspA
+		SideValueInd::SideValue1
 	}
 }
 

@@ -3749,10 +3749,10 @@ pub enum SideAvgPxIndicator {
 	NoAveragePricing,
 	/// Trade is part of an average price group identified by the <a href="tag_1854_SideAvgPxGroupID.html" target="bottom">SideAvgPxGroupID&nbsp;(1854)</a>
 	#[serde(rename = "1")]
-	TradeIsPartOfAnAveragePriceGroupIdentifiedByTheAHrefTag1854SideAvgPxGroupIdHtmlTargetBottomSideAvgPxGroupIdNbspA,
+	TradeIsPartOfAnAveragePriceGroupIdentifiedByTheSideAvgPxGroupId,
 	/// Last trade is the average price group identified by the <a href="tag_1854_SideAvgPxGroupID.html" target="bottom">SideAvgPxGroupID&nbsp;(1854)</a>
 	#[serde(rename = "2")]
-	LastTradeIsTheAveragePriceGroupIdentifiedByTheAHrefTag1854SideAvgPxGroupIdHtmlTargetBottomSideAvgPxGroupIdNbspA,
+	LastTradeIsTheAveragePriceGroupIdentifiedByTheSideAvgPxGroupId,
 }
 
 impl Default for SideAvgPxIndicator {

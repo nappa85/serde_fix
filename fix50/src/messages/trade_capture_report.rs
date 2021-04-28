@@ -1575,7 +1575,7 @@ pub enum ExecRestatementReason {
 	BrokerOption,
 	/// Partial decline of <a href="tag_38_OrderQty.html" target="bottom">OrderQty&nbsp;(38)</a> (e.g. exchange-initiated partial cancel)
 	#[serde(rename = "5")]
-	PartialDeclineOfAHrefTag38OrderQtyHtmlTargetBottomOrderQtyNbspA,
+	PartialDeclineOfOrderQty,
 	/// Cancel on Trading Halt
 	#[serde(rename = "6")]
 	CancelOnTradingHalt,
@@ -1733,7 +1733,7 @@ pub enum QtyType {
 	ContractsA,
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitofMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
-	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+	UnitsOfMeasurePerTimeUnitAAndTimeUnit,
 }
 
 impl Default for QtyType {
@@ -1749,10 +1749,10 @@ pub enum AvgPxIndicator {
 	NoAveragePricing,
 	/// Trade is part of an average price group identified by the <a href="tag_820_TradeLinkID.html" target="bottom">TradeLinkID&nbsp;(820)</a>
 	#[serde(rename = "1")]
-	TradeIsPartOfAnAveragePriceGroupIdentifiedByTheAHrefTag820TradeLinkIdHtmlTargetBottomTradeLinkIdNbspA,
+	TradeIsPartOfAnAveragePriceGroupIdentifiedByTheTradeLinkId,
 	/// Last trade is the average price group identified by the <a href="tag_820_TradeLinkID.html" target="bottom">TradeLinkID&nbsp;(820)</a>
 	#[serde(rename = "2")]
-	LastTradeIsTheAveragePriceGroupIdentifiedByTheAHrefTag820TradeLinkIdHtmlTargetBottomTradeLinkIdNbspA,
+	LastTradeIsTheAveragePriceGroupIdentifiedByTheTradeLinkId,
 }
 
 impl Default for AvgPxIndicator {
@@ -1814,7 +1814,7 @@ pub enum SettlType {
 	T5,
 	/// Broken date - for FX expressing non-standard tenor, <a href="tag_64_SettlDate.html" target="bottom">SettlDate&nbsp;(64)</a> must be specified
 	#[serde(rename = "B")]
-	BrokenDateForFxExpressingNonStandardTenorAHrefTag64SettlDateHtmlTargetBottomSettlDateNbspAMustBeSpecified,
+	BrokenDateForFxExpressingNonStandardTenorSettlDateMustBeSpecified,
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
@@ -2139,7 +2139,7 @@ pub enum LegSettlType {
 	T5,
 	/// Broken date - for FX expressing non-standard tenor, <a href="tag_64_SettlDate.html" target="bottom">SettlDate&nbsp;(64)</a> must be specified
 	#[serde(rename = "B")]
-	BrokenDateForFxExpressingNonStandardTenorAHrefTag64SettlDateHtmlTargetBottomSettlDateNbspAMustBeSpecified,
+	BrokenDateForFxExpressingNonStandardTenorSettlDateMustBeSpecified,
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,

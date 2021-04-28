@@ -278,7 +278,7 @@ pub enum SecurityType {
 	FederalAgencyDiscountNote,
 	/// Private Export Funding Identify the Issuer in the <a href="tag_106_Issuer.html" target="bottom">Issuer&nbsp;(106)</a> field
 	#[serde(rename = "PEF")]
-	PrivateExportFundingIdentifyTheIssuerInTheAHrefTag106IssuerHtmlTargetBottomIssuerNbspAField,
+	PrivateExportFundingIdentifyTheIssuerInTheIssuerField,
 	/// Corporate Bond
 	#[serde(rename = "CORP")]
 	CorporateBond,
@@ -534,7 +534,7 @@ pub enum RepoCollateralSecurityType {
 	FederalAgencyDiscountNote,
 	/// Private Export Funding Identify the Issuer in the <a href="tag_106_Issuer.html" target="bottom">Issuer&nbsp;(106)</a> field
 	#[serde(rename = "PEF")]
-	PrivateExportFundingIdentifyTheIssuerInTheAHrefTag106IssuerHtmlTargetBottomIssuerNbspAField,
+	PrivateExportFundingIdentifyTheIssuerInTheIssuerField,
 	/// Corporate Bond
 	#[serde(rename = "CORP")]
 	CorporateBond,

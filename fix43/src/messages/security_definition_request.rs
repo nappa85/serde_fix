@@ -72,7 +72,7 @@ pub enum SecurityRequestType {
 	RequestListSecurityTypes,
 	/// Request List Securities (Can be qualified with <a href="tag_55_Symbol.html" target="bottom">Symbol&nbsp;(55)</a> , <a href="tag_167_SecurityType.html" target="bottom">SecurityType&nbsp;(167)</a> , <a href="tag_336_TradingSessionID.html" target="bottom">TradingSessionID&nbsp;(336)</a> , <a href="tag_207_SecurityExchange.html" target="bottom">SecurityExchange&nbsp;(207)</a> is provided then only list Securities for the specific type)
 	#[serde(rename = "3")]
-	RequestListSecuritiesAAHrefTag167SecurityTypeHtmlTargetBottomSecurityTypeNbspAAHrefTag336TradingSessionIdHtmlTargetBottomTradingSessionIdNbspAAHrefTag207SecurityExchangeHtmlTargetBottomSecurityExchangeNbspAIsProvidedThenOnlyListSecuritiesForTheSpecificType,
+	RequestListSecuritiesASecurityExchangeIsProvidedThenOnlyListSecuritiesForTheSpecificType,
 }
 
 impl Default for SecurityRequestType {

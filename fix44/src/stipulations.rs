@@ -136,7 +136,7 @@ pub enum StipulationType {
 	MarketSector,
 	/// <a href="tag_167_SecurityType.html" target="bottom">SecurityType&nbsp;(167)</a> included or excluded
 	#[serde(rename = "SECTYPE")]
-	AHrefTag167SecurityTypeHtmlTargetBottomSecurityTypeNbspAIncludedOrExcluded,
+	SecurityTypeIncludedOrExcluded,
 	/// Structure
 	#[serde(rename = "STRUCT")]
 	Structure,

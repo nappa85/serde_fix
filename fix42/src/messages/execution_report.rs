@@ -505,7 +505,7 @@ pub enum ExecType {
 	Expired,
 	/// Restated ( <a href="message_Execution_Report_8.html" target="main">ExecutionRpt&nbsp;(8)</a> sent unsolicited by sellside, with <a href="tag_378_ExecRestatementReason.html" target="bottom">ExecRestatementReason&nbsp;(378)</a> set)
 	#[serde(rename = "D")]
-	RestatedASentUnsolicitedBySellsideWithAHrefTag378ExecRestatementReasonHtmlTargetBottomExecRestatementReasonNbspASet,
+	RestatedASentUnsolicitedBySellsideWithExecRestatementReasonSet,
 	/// Pending Replace (e.g. result of <a href="message_Order_Cancel_Replace_Request_G.html" target="main">Order Cancel/Replace Request&nbsp;(G)</a> )
 	#[serde(rename = "E")]
 	PendingReplaceA,
@@ -628,7 +628,7 @@ pub enum ExecRestatementReason {
 	BrokerOption,
 	/// Partial decline of <a href="tag_38_OrderQty.html" target="bottom">OrderQty&nbsp;(38)</a> (e.g. exchange-initiated partial cancel)
 	#[serde(rename = "5")]
-	PartialDeclineOfAHrefTag38OrderQtyHtmlTargetBottomOrderQtyNbspA,
+	PartialDeclineOfOrderQty,
 }
 
 impl Default for ExecRestatementReason {
@@ -874,7 +874,7 @@ pub enum Side {
 	SellShortExempt,
 	/// Undisclosed (valid for <a href="message_Indication_of_Interest_6.html" target="main">Indication of Interest&nbsp;(6)</a> and <a href="message_New_Order_List_E.html" target="main">List Order&nbsp;(E)</a> messages only)
 	#[serde(rename = "7")]
-	UndisclosedAAndAHrefMessageNewOrderListEHtmlTargetMainListOrderNbspAMessagesOnly,
+	UndisclosedAAndListOrderMessagesOnly,
 	/// Cross (orders where counterparty is an exchange, valid for all messages except IOIs)
 	#[serde(rename = "8")]
 	Cross,

@@ -166,7 +166,7 @@ impl Default for TradSesStatus {
 pub enum TradSesStatusRejReason {
 	/// Unknown or invalid <a href="tag_336_TradingSessionID.html" target="bottom">TradingSessionID&nbsp;(336)</a>
 	#[serde(rename = "1")]
-	UnknownOrInvalidAHrefTag336TradingSessionIdHtmlTargetBottomTradingSessionIdNbspA,
+	UnknownOrInvalidTradingSessionId,
 	/// Other
 	#[serde(rename = "99")]
 	Other,
@@ -174,6 +174,6 @@ pub enum TradSesStatusRejReason {
 
 impl Default for TradSesStatusRejReason {
 	fn default() -> Self {
-		TradSesStatusRejReason::UnknownOrInvalidAHrefTag336TradingSessionIdHtmlTargetBottomTradingSessionIdNbspA
+		TradSesStatusRejReason::UnknownOrInvalidTradingSessionId
 	}
 }

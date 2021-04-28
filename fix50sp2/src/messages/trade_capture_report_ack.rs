@@ -1370,7 +1370,7 @@ pub enum ExecRestatementReason {
 	BrokerOption,
 	/// Partial decline of <a href="tag_38_OrderQty.html" target="bottom">OrderQty&nbsp;(38)</a> (e.g. exchange-initiated partial cancel)
 	#[serde(rename = "5")]
-	PartialDeclineOfAHrefTag38OrderQtyHtmlTargetBottomOrderQtyNbspA,
+	PartialDeclineOfOrderQty,
 	/// Cancel on Trading Halt
 	#[serde(rename = "6")]
 	CancelOnTradingHalt,
@@ -1550,7 +1550,7 @@ pub enum QtyType {
 	ContractsA,
 	/// Units of Measure per Time Unit (if used - must specify <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitofMeasure&nbsp;(996)</a> and <a href="tag_997_TimeUnit.html" target="bottom">TimeUnit&nbsp;(997)</a> )
 	#[serde(rename = "2")]
-	UnitsOfMeasurePerTimeUnitAAndAHrefTag997TimeUnitHtmlTargetBottomTimeUnitNbspA,
+	UnitsOfMeasurePerTimeUnitAAndTimeUnit,
 }
 
 impl Default for QtyType {
@@ -4106,7 +4106,7 @@ pub enum SettlType {
 	T5,
 	/// Broken date - for FX expressing non-standard tenor, <a href="tag_64_SettlDate.html" target="bottom">SettlDate&nbsp;(64)</a> must be specified
 	#[serde(rename = "B")]
-	BrokenDateForFxExpressingNonStandardTenorAHrefTag64SettlDateHtmlTargetBottomSettlDateNbspAMustBeSpecified,
+	BrokenDateForFxExpressingNonStandardTenorSettlDateMustBeSpecified,
 	/// FX Spot Next settlement (Spot+1, aka next day)
 	#[serde(rename = "C")]
 	FxSpotNextSettlement,
@@ -4400,7 +4400,7 @@ pub enum CrossType {
 	/// Cross IOC - cross trade which is executed partially and the rest is cancelled. One side is fully executed, the other side
 	/// is partially executed with the remainder being cancelled. This is equivalent to an IOC on the other side. Note: <a href="tag_550_CrossPrioritization.html" target="bottom">CrossPrioritization&nbsp;(550)</a> field may be used to indicate which side should fully execute in this scenario.
 	#[serde(rename = "2")]
-	CrossIocCrossTradeWhichIsExecutedPartiallyAndTheRestIsCancelledOneSideIsFullyExecutedTheOtherSideIsPartiallyExecutedWithTheRemainderBeingCancelledThisIsEquivalentToAnIocOnTheOtherSideNoteAHrefTag550CrossPrioritizationHtmlTargetBottomCrossPrioritizationNbspAFieldMayBeUsedToIndicateWhichSideShouldFullyExecuteInThisScenario,
+	CrossIocCrossTradeWhichIsExecutedPartiallyAndTheRestIsCancelledOneSideIsFullyExecutedTheOtherSideIsPartiallyExecutedWithTheRemainderBeingCancelledThisIsEquivalentToAnIocOnTheOtherSideNoteCrossPrioritizationFieldMayBeUsedToIndicateWhichSideShouldFullyExecuteInThisScenario,
 	/// Cross One Side - cross trade which is partially executed with the unfilled portions remaining active. One side of the corss
 	/// is fully executed (as denoted by the <a href="tag_550_CrossPrioritization.html" target="bottom">CrossPrioritization&nbsp;(550)</a> field), but the unfilled portion remains active.
 	#[serde(rename = "3")]

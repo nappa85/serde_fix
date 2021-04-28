@@ -636,10 +636,10 @@ pub enum AllocRejCode {
 	CommissionDifference,
 	/// unknown <a href="tag_37_OrderID.html" target="bottom">OrderID&nbsp;(37)</a>
 	#[serde(rename = "5")]
-	UnknownAHrefTag37OrderIdHtmlTargetBottomOrderIdNbspA,
+	UnknownOrderId,
 	/// unknown <a href="tag_66_ListID.html" target="bottom">ListID&nbsp;(66)</a>
 	#[serde(rename = "6")]
-	UnknownAHrefTag66ListIdHtmlTargetBottomListIdNbspA,
+	UnknownListId,
 	/// other (further in Note 58=)
 	#[serde(rename = "7")]
 	Other,
@@ -651,13 +651,13 @@ pub enum AllocRejCode {
 	CalculationDifference,
 	/// unknown or stale <a href="tag_17_ExecID.html" target="bottom">ExecID&nbsp;(17)</a>
 	#[serde(rename = "10")]
-	UnknownOrStaleAHrefTag17ExecIdHtmlTargetBottomExecIdNbspA,
+	UnknownOrStaleExecId,
 	/// mismatched data value (further in Note 58=)
 	#[serde(rename = "11")]
 	MismatchedDataValue,
 	/// unknown <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a>
 	#[serde(rename = "12")]
-	UnknownAHrefTag11ClOrdIdHtmlTargetBottomClOrdIdNbspA,
+	UnknownClOrdId,
 	/// warehouse request rejected
 	#[serde(rename = "13")]
 	WarehouseRequestRejected,

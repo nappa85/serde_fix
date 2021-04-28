@@ -220,15 +220,15 @@ impl Default for AccountType {
 pub enum CxlRejResponseTo {
 	/// <a href="message_Order_Cancel_Request_F.html" target="main">Order Cancel Request&nbsp;(F)</a>
 	#[serde(rename = "1")]
-	AHrefMessageOrderCancelRequestFHtmlTargetMainOrderCancelRequestNbspA,
+	OrderCancelRequest,
 	/// <a href="message_Order_Cancel_Replace_Request_G.html" target="main">Order Cancel/Replace Request&nbsp;(G)</a>
 	#[serde(rename = "2")]
-	AHrefMessageOrderCancelReplaceRequestGHtmlTargetMainOrderCancelReplaceRequestNbspA,
+	OrderCancelReplaceRequest,
 }
 
 impl Default for CxlRejResponseTo {
 	fn default() -> Self {
-		CxlRejResponseTo::AHrefMessageOrderCancelRequestFHtmlTargetMainOrderCancelRequestNbspA
+		CxlRejResponseTo::OrderCancelRequest
 	}
 }
 
@@ -248,13 +248,13 @@ pub enum CxlRejReason {
 	OrderAlreadyInPendingCancelOrPendingReplaceStatus,
 	/// Unable to process <a href="message_Order_Mass_Cancel_Request_q.html" target="main">Order Mass Cancel Request&nbsp;(q)</a>
 	#[serde(rename = "4")]
-	UnableToProcessAHrefMessageOrderMassCancelRequestQHtmlTargetMainOrderMassCancelRequestNbspA,
+	UnableToProcessOrderMassCancelRequest,
 	/// <a href="tag_586_OrigOrdModTime.html" target="bottom">OrigOrdModTime&nbsp;(586)</a> did not match last <a href="tag_60_TransactTime.html" target="bottom">TransactTime&nbsp;(60)</a> of order
 	#[serde(rename = "5")]
-	AHrefTag586OrigOrdModTimeHtmlTargetBottomOrigOrdModTimeNbspADidNotMatchLastAHrefTag60TransactTimeHtmlTargetBottomTransactTimeNbspAOfOrder,
+	TransactTimeOfOrder,
 	/// Duplicate <a href="tag_11_ClOrdID.html" target="bottom">ClOrdID&nbsp;(11)</a> received
 	#[serde(rename = "6")]
-	DuplicateAHrefTag11ClOrdIdHtmlTargetBottomClOrdIdNbspAReceived,
+	DuplicateClOrdIdReceived,
 	/// Other
 	#[serde(rename = "99")]
 	Other,

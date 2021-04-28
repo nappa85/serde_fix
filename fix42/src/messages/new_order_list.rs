@@ -401,10 +401,10 @@ pub struct Order {
 pub enum ProgRptReqs {
 	/// BuySide explicitly requests status using StatusRequest (Default) The sell-side firm can however, send a DONE status <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> Response in an unsolicited fashion
 	#[serde(rename = "1")]
-	BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusAHrefMessageListStatusNHtmlTargetMainListStatusNbspAResponseInAnUnsolicitedFashion,
+	BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusListStatusResponseInAnUnsolicitedFashion,
 	/// SellSide periodically sends status using <a href="message_List_Status_N.html" target="main">List Status&nbsp;(N)</a> . Period optionally specified in ProgressPeriod
 	#[serde(rename = "2")]
-	SellSidePeriodicallySendsStatusUsingAHrefMessageListStatusNHtmlTargetMainListStatusNbspAPeriodOptionallySpecifiedInProgressPeriod,
+	SellSidePeriodicallySendsStatusUsingListStatusPeriodOptionallySpecifiedInProgressPeriod,
 	/// Real-time execution reports (to be discouraged)
 	#[serde(rename = "3")]
 	RealTimeExecutionReports,
@@ -412,7 +412,7 @@ pub enum ProgRptReqs {
 
 impl Default for ProgRptReqs {
 	fn default() -> Self {
-		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusAHrefMessageListStatusNHtmlTargetMainListStatusNbspAResponseInAnUnsolicitedFashion
+		ProgRptReqs::BuySideExplicitlyRequestsStatusUsingStatusRequestTheSellSideFirmCanHoweverSendADoneStatusListStatusResponseInAnUnsolicitedFashion
 	}
 }
 
@@ -857,7 +857,7 @@ pub enum Side {
 	SellShortExempt,
 	/// Undisclosed (valid for <a href="message_Indication_of_Interest_6.html" target="main">Indication of Interest&nbsp;(6)</a> and <a href="message_New_Order_List_E.html" target="main">List Order&nbsp;(E)</a> messages only)
 	#[serde(rename = "7")]
-	UndisclosedAAndAHrefMessageNewOrderListEHtmlTargetMainListOrderNbspAMessagesOnly,
+	UndisclosedAAndListOrderMessagesOnly,
 	/// Cross (orders where counterparty is an exchange, valid for all messages except IOIs)
 	#[serde(rename = "8")]
 	Cross,

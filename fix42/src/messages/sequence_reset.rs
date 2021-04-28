@@ -23,14 +23,14 @@ pub struct SequenceReset {
 pub enum GapFillFlag {
 	/// Gap Fill message, <a href="tag_34_MsgSeqNum.html" target="bottom">MsgSeqNum&nbsp;(34)</a> field valid
 	#[serde(rename = "Y")]
-	GapFillMessageAHrefTag34MsgSeqNumHtmlTargetBottomMsgSeqNumNbspAFieldValid,
+	GapFillMessageMsgSeqNumFieldValid,
 	/// Sequence Reset, ignore <a href="tag_34_MsgSeqNum.html" target="bottom">MsgSeqNum&nbsp;(34)</a>
 	#[serde(rename = "N")]
-	SequenceResetIgnoreAHrefTag34MsgSeqNumHtmlTargetBottomMsgSeqNumNbspA,
+	SequenceResetIgnoreMsgSeqNum,
 }
 
 impl Default for GapFillFlag {
 	fn default() -> Self {
-		GapFillFlag::GapFillMessageAHrefTag34MsgSeqNumHtmlTargetBottomMsgSeqNumNbspAFieldValid
+		GapFillFlag::GapFillMessageMsgSeqNumFieldValid
 	}
 }

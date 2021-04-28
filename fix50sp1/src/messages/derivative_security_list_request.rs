@@ -404,16 +404,16 @@ pub struct DerivativeInstrumentPartie {
 pub enum SecurityListRequestType {
 	/// <a href="tag_55_Symbol.html" target="bottom">Symbol&nbsp;(55)</a>
 	#[serde(rename = "0")]
-	AHrefTag55SymbolHtmlTargetBottomSymbolNbspA,
+	Symbol,
 	/// <a href="tag_167_SecurityType.html" target="bottom">SecurityType&nbsp;(167)</a> and/or <a href="tag_461_CFICode.html" target="bottom">CFICode&nbsp;(461)</a>
 	#[serde(rename = "1")]
-	AHrefTag167SecurityTypeHtmlTargetBottomSecurityTypeNbspAAndOrAHrefTag461CfiCodeHtmlTargetBottomCfiCodeNbspA,
+	CfiCode,
 	/// <a href="tag_460_Product.html" target="bottom">Product&nbsp;(460)</a>
 	#[serde(rename = "2")]
-	AHrefTag460ProductHtmlTargetBottomProductNbspA,
+	Product,
 	/// <a href="tag_336_TradingSessionID.html" target="bottom">TradingSessionID&nbsp;(336)</a>
 	#[serde(rename = "3")]
-	AHrefTag336TradingSessionIdHtmlTargetBottomTradingSessionIdNbspA,
+	TradingSessionId,
 	/// All Securities
 	#[serde(rename = "4")]
 	AllSecurities,
@@ -424,7 +424,7 @@ pub enum SecurityListRequestType {
 
 impl Default for SecurityListRequestType {
 	fn default() -> Self {
-		SecurityListRequestType::AHrefTag55SymbolHtmlTargetBottomSymbolNbspA
+		SecurityListRequestType::Symbol
 	}
 }
 

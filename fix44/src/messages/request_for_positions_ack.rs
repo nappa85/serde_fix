@@ -1422,7 +1422,7 @@ pub enum ResponseTransportType {
 	/// Out-of-Band: pre-arranged out of band delivery mechanism (i.e. FTP, HTTP, NDM, etc) between counterparties. Details specified
 	/// via <a href="tag_726_ResponseDestination.html" target="bottom">ResponseDestination&nbsp;(726)</a> .
 	#[serde(rename = "1")]
-	OutOfBandPreArrangedOutOfBandDeliveryMechanismBetweenCounterpartiesDetailsSpecifiedViaAHrefTag726ResponseDestinationHtmlTargetBottomResponseDestinationNbspA,
+	OutOfBandPreArrangedOutOfBandDeliveryMechanismBetweenCounterpartiesDetailsSpecifiedViaResponseDestination,
 }
 
 impl Default for ResponseTransportType {

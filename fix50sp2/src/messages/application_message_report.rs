@@ -38,13 +38,13 @@ pub struct ApplicationMessageReport {
 pub enum ApplReportType {
 	/// Reset ApplSeqNum to new value specified in <a href="tag_1399_ApplNewSeqNum.html" target="bottom">ApplNewSeqNum&nbsp;(1399)</a>
 	#[serde(rename = "0")]
-	ResetApplSeqNumToNewValueSpecifiedInAHrefTag1399ApplNewSeqNumHtmlTargetBottomApplNewSeqNumNbspA,
+	ResetApplSeqNumToNewValueSpecifiedInApplNewSeqNum,
 	/// Reports that the last message has been sent for the ApplIDs Refer to <a href="tag_1357_RefApplLastSeqNum.html" target="bottom">RefApplLastSeqNum&nbsp;(1357)</a> for the application sequence number of the last message
 	#[serde(rename = "1")]
-	ReportsThatTheLastMessageHasBeenSentForTheApplIDsReferToAHrefTag1357RefApplLastSeqNumHtmlTargetBottomRefApplLastSeqNumNbspAForTheApplicationSequenceNumberOfTheLastMessage,
+	ReportsThatTheLastMessageHasBeenSentForTheApplIDsReferToRefApplLastSeqNumForTheApplicationSequenceNumberOfTheLastMessage,
 	/// Heartbeat message indicating that Application identified by <a href="tag_1355_RefApplID.html" target="bottom">RefApplID&nbsp;(1355)</a> is still alive. Refer to <a href="tag_1357_RefApplLastSeqNum.html" target="bottom">RefApplLastSeqNum&nbsp;(1357)</a> for the application sequence number of the previous message.
 	#[serde(rename = "2")]
-	HeartbeatMessageIndicatingThatApplicationIdentifiedByAHrefTag1355RefApplIdHtmlTargetBottomRefApplIdNbspAIsStillAliveReferToAHrefTag1357RefApplLastSeqNumHtmlTargetBottomRefApplLastSeqNumNbspAForTheApplicationSequenceNumberOfThePreviousMessage,
+	HeartbeatMessageIndicatingThatApplicationIdentifiedByRefApplLastSeqNumForTheApplicationSequenceNumberOfThePreviousMessage,
 	/// Application message re-send completed
 	#[serde(rename = "3")]
 	ApplicationMessageReSendCompleted,
@@ -52,6 +52,6 @@ pub enum ApplReportType {
 
 impl Default for ApplReportType {
 	fn default() -> Self {
-		ApplReportType::ResetApplSeqNumToNewValueSpecifiedInAHrefTag1399ApplNewSeqNumHtmlTargetBottomApplNewSeqNumNbspA
+		ApplReportType::ResetApplSeqNumToNewValueSpecifiedInApplNewSeqNum
 	}
 }

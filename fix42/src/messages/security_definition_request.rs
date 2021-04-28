@@ -228,7 +228,7 @@ pub enum SecurityRequestType {
 	RequestListSecurityTypes,
 	/// Request List Securities (Can be qualified with <a href="tag_55_Symbol.html" target="bottom">Symbol&nbsp;(55)</a> , <a href="tag_167_SecurityType.html" target="bottom">SecurityType&nbsp;(167)</a> , <a href="tag_336_TradingSessionID.html" target="bottom">TradingSessionID&nbsp;(336)</a> , <a href="tag_207_SecurityExchange.html" target="bottom">SecurityExchange&nbsp;(207)</a> is provided then only list Securities for the specific type)
 	#[serde(rename = "3")]
-	RequestListSecuritiesAAHrefTag167SecurityTypeHtmlTargetBottomSecurityTypeNbspAAHrefTag336TradingSessionIdHtmlTargetBottomTradingSessionIdNbspAAHrefTag207SecurityExchangeHtmlTargetBottomSecurityExchangeNbspAIsProvidedThenOnlyListSecuritiesForTheSpecificType,
+	RequestListSecuritiesASecurityExchangeIsProvidedThenOnlyListSecuritiesForTheSpecificType,
 }
 
 impl Default for SecurityRequestType {
@@ -1819,7 +1819,7 @@ pub enum Side {
 	SellShortExempt,
 	/// Undisclosed (valid for <a href="message_Indication_of_Interest_6.html" target="main">Indication of Interest&nbsp;(6)</a> and <a href="message_New_Order_List_E.html" target="main">List Order&nbsp;(E)</a> messages only)
 	#[serde(rename = "7")]
-	UndisclosedAAndAHrefMessageNewOrderListEHtmlTargetMainListOrderNbspAMessagesOnly,
+	UndisclosedAAndListOrderMessagesOnly,
 	/// Cross (orders where counterparty is an exchange, valid for all messages except IOIs)
 	#[serde(rename = "8")]
 	Cross,

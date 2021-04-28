@@ -36,7 +36,7 @@ pub enum LotType {
 	BlockLot,
 	/// Round lot based upon <a href="tag_996_UnitOfMeasure.html" target="bottom">UnitOfMeasure&nbsp;(996)</a>
 	#[serde(rename = "4")]
-	RoundLotBasedUponAHrefTag996UnitOfMeasureHtmlTargetBottomUnitOfMeasureNbspA,
+	RoundLotBasedUponUnitOfMeasure,
 }
 
 impl Default for LotType {

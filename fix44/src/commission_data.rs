@@ -42,7 +42,7 @@ pub enum CommType {
 	PercentageWaivedEnhancedUnits,
 	/// points per bond or ontract [Supply <a href="tag_231_ContractMultiplier.html" target="bottom">ContractMultiplier&nbsp;(231)</a> in the <a href="block_Instrument.html" target="main">Instrument</a> component block if the object security is denominated in a size other than the industry default - 1000 par for bonds.]
 	#[serde(rename = "6")]
-	PointsPerBondOrOntractSupplyAHrefTag231ContractMultiplierHtmlTargetBottomContractMultiplierNbspAInTheAHrefBlockInstrumentHtmlTargetMainInstrumentAComponentBlockIfTheObjectSecurityIsDenominatedInASizeOtherThanTheIndustryDefault1000ParForBonds,
+	PointsPerBondOrOntractSupplyContractMultiplierInTheAHrefBlockInstrumentHtmlTargetMainInstrumentAComponentBlockIfTheObjectSecurityIsDenominatedInASizeOtherThanTheIndustryDefault1000ParForBonds,
 }
 
 impl Default for CommType {
