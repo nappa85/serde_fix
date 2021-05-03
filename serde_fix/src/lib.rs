@@ -5,7 +5,6 @@
 
 pub mod de;
 pub mod ser;
-// pub mod entities;
 
 const CHECKSUM_MOD: usize = 256;
 
