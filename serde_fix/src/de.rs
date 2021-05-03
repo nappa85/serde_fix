@@ -103,6 +103,32 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Parser<'de, T> {
     }
 }
 
+macro_rules! extract_length {
+    ($self:ident $key:ident $val:ident ($id:literal, [$($sid:literal),+])) => {{
+        if $key == $id {
+            if let Ok(len) = $val.parse::<usize>() {
+                $val = $self.extract_length($val, len, &[$($sid),+]);
+            }
+        }
+    }};
+    ($self:ident $key:ident $val:ident ($id:literal, [$($sid:literal),+]), $(($id2:literal, [$($sid2:literal),+])),+) => {{
+        extract_length! { $self $key $val ($id, [$($sid),+]) }
+        extract_length! { $self $key $val $(($id2, [$($sid2),+])),+ }
+    }};
+}
+
+macro_rules! extract_fields {
+    ($self:ident $key:ident $val:ident ($id:literal, [$($sid:literal),+])) => {{
+        if $key == $id {
+            $val = $self.extract_fields($val, &[$($sid),+]);
+        }
+    }};
+    ($self:ident $key:ident $val:ident ($id:literal, [$($sid:literal),+]), $(($id2:literal, [$($sid2:literal),+])),+) => {{
+        extract_fields! { $self $key $val ($id, [$($sid),+]) }
+        extract_fields! { $self $key $val $(($id2, [$($sid2),+])),+ }
+    }};
+}
+
 impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
     type Item = (Cow<'de, str>, Cow<'de, str>);
     fn next(&mut self) -> Option<Self::Item> {
@@ -116,530 +142,597 @@ impl<'de, T: Iterator<Item=&'de [u8]> + Clone> Iterator for Parser<'de, T> {
                 None => (String::from_utf8_lossy(&a[0..]), Cow::Borrowed("")),
             };
             // special fields who needs to be grouped
-            match &key as &str {
-                "90" => {// SecureDataLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be SecureData (91)
-                        value = self.extract_length(value, len, &[b"91="]);
-                    }
-                },
-                "93" => {// SignatureLength
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be Signature (89)
-                        value = self.extract_length(value, len, &[b"89="]);
-                    }
-                },
-                "95" => {// RawDataLength
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be RawData (96)
-                        value = self.extract_length(value, len, &[b"96="]);
-                    }
-                },
-                "212" => {// XmlDataLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be XmlData (213)
-                        value = self.extract_length(value, len, &[b"213="]);
-                    }
-                },
-                "348" => {// EncodedIssuerLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedIssuer (349)
-                        value = self.extract_length(value, len, &[b"349="]);
-                    }
-                },
-                "350" => {// EncodedSecurityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedSecurityDesc (351)
-                        value = self.extract_length(value, len, &[b"351="]);
-                    }
-                },
-                "352" => {// EncodedListExecInstLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedListExecInst (353)
-                        value = self.extract_length(value, len, &[b"353="]);
-                    }
-                },
-                "354" => {// EncodedTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedText (355)
-                        value = self.extract_length(value, len, &[b"355="]);
-                    }
-                },
-                "356" => {// EncodedSubjectLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedSubject (357)
-                        value = self.extract_length(value, len, &[b"357="]);
-                    }
-                },
-                "358" => {// EncodedHeadlineLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedHeadline (359)
-                        value = self.extract_length(value, len, &[b"359="]);
-                    }
-                },
-                "360" => {// EncodedAllocTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedAllocText (361)
-                        value = self.extract_length(value, len, &[b"361="]);
-                    }
-                },
-                "362" => {// EncodedUnderlyingIssuerLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingIssuer (363)
-                        value = self.extract_length(value, len, &[b"363="]);
-                    }
-                },
-                "364" => {// EncodedUnderlyingSecurityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingSecurityDesc (365)
-                        value = self.extract_length(value, len, &[b"365="]);
-                    }
-                },
-                "445" => {// EncodedListStatusTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedListStatusText (446)
-                        value = self.extract_length(value, len, &[b"446="]);
-                    }
-                },
-                "618" => {// EncodedLegIssuerLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegIssuer (619)
-                        value = self.extract_length(value, len, &[b"619="]);
-                    }
-                },
-                "621" => {// EncodedLegSecurityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegSecurityDesc (622)
-                        value = self.extract_length(value, len, &[b"622="]);
-                    }
-                },
-                "1184" => {// SecurityXMLLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be SecurityXML (1185)
-                        value = self.extract_length(value, len, &[b"1185="]);
-                    }
-                },
-                "1277" => {// DerivativeEncodedIssuerLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be DerivativeEncodedIssuer (1278)
-                        value = self.extract_length(value, len, &[b"1278="]);
-                    }
-                },
-                "1280" => {// DerivativeEncodedSecurityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be DerivativeEncodedSecurityDesc (1281)
-                        value = self.extract_length(value, len, &[b"1281="]);
-                    }
-                },
-                "1282" => {// DerivativeSecurityXMLLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be DerivativeSecurityXML (1283)
-                        value = self.extract_length(value, len, &[b"1283="]);
-                    }
-                },
-                "1397" => {// EncodedMktSegmDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedMktSegmDesc (1398)
-                        value = self.extract_length(value, len, &[b"1398="]);
-                    }
-                },
-                "1401" => {// EncryptedPasswordLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncryptedPassword (1402)
-                        value = self.extract_length(value, len, &[b"1402="]);
-                    }
-                },
-                "1403" => {// EncryptedNewPasswordLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncryptedNewPassword (1404)
-                        value = self.extract_length(value, len, &[b"1404="]);
-                    }
-                },
-                "1468" => {// EncodedSecurityListDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedSecurityListDesc (1469)
-                        value = self.extract_length(value, len, &[b"1469="]);
-                    }
-                },
-                "1525" => {// EncodedDocumentationTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedDocumentationText (1527)
-                        value = self.extract_length(value, len, &[b"1527="]);
-                    }
-                },
-                "1578" => {// EncodedEventTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedEventText (1579)
-                        value = self.extract_length(value, len, &[b"1579="]);
-                    }
-                },
-                "1620" => {// InstrumentScopeEncodedSecurityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be InstrumentScopeEncodedSecurityDesc (1621)
-                        value = self.extract_length(value, len, &[b"1621="]);
-                    }
-                },
-                "1664" => {// EncodedRejectTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedRejectText (1665)
-                        value = self.extract_length(value, len, &[b"1665="]);
-                    }
-                },
-                "1678" => {// EncodedOptionExpirationDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedOptionExpirationDesc (1697)
-                        value = self.extract_length(value, len, &[b"1697="]);
-                    }
-                },
-                "1733" => {// EncodedFirmAllocTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedFirmAllocText (1734)
-                        value = self.extract_length(value, len, &[b"1734="]);
-                    }
-                },
-                "1871" => {// LegSecurityXMLLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be LegSecurityXML (1872)
-                        value = self.extract_length(value, len, &[b"1872="]);
-                    }
-                },
-                "1874" => {// UnderlyingSecurityXMLLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be UnderlyingSecurityXML (1875)
-                        value = self.extract_length(value, len, &[b"1875="]);
-                    }
-                },
-                "2072" => {// EncodedUnderlyingEventTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingEventText (2073)
-                        value = self.extract_length(value, len, &[b"2073="]);
-                    }
-                },
-                "2074" => {// EncodedLegEventTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegEventText (2075)
-                        value = self.extract_length(value, len, &[b"2075="]);
-                    }
-                },
-                "2111" => {// EncodedAttachmentLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedAttachment (2112)
-                        value = self.extract_length(value, len, &[b"2112="]);
-                    }
-                },
-                "2179" => {// EncodedLegOptionExpirationDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegOptionExpirationDesc (2180)
-                        value = self.extract_length(value, len, &[b"2180="]);
-                    }
-                },
-                "2287" => {// EncodedUnderlyingOptionExpirationDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingOptionExpirationDesc (2288)
-                        value = self.extract_length(value, len, &[b"2288="]);
-                    }
-                },
-                "2351" => {// EncodedComplianceTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedComplianceText (2352)
-                        value = self.extract_length(value, len, &[b"2352="]);
-                    }
-                },
-                "2372" => {// EncodedTradeContinuationTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedTradeContinuationText (2371)
-                        value = self.extract_length(value, len, &[b"2371="]);
-                    }
-                },
-                "2481" => {// EncodedMDStatisticDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedMDStatisticDesc (2482)
-                        value = self.extract_length(value, len, &[b"2482="]);
-                    }
-                },
-                "2494" => {// EncodedLegDocumentationTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegDocumentationText (2493)
-                        value = self.extract_length(value, len, &[b"2493="]);
-                    }
-                },
-                "2522" => {// EncodedWarningTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedWarningText (2521)
-                        value = self.extract_length(value, len, &[b"2521="]);
-                    }
-                },
-                "2637" => {// EncodedMiscFeeSubTypeDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedMiscFeeSubTypeDesc (2638)
-                        value = self.extract_length(value, len, &[b"2638="]);
-                    }
-                },
-                "2651" => {// EncodedCommissionDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedCommissionDesc (2652)
-                        value = self.extract_length(value, len, &[b"2652="]);
-                    }
-                },
-                "2665" => {// EncodedAllocCommissionDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedAllocCommissionDesc (2666)
-                        value = self.extract_length(value, len, &[b"2666="]);
-                    }
-                },
-                "2715" => {// EncodedFinancialInstrumentFullNameLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedFinancialInstrumentFullName (2716)
-                        value = self.extract_length(value, len, &[b"2716="]);
-                    }
-                },
-                "2718" => {// EncodedLegFinancialInstrumentFullNameLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegFinancialInstrumentFullName (2719)
-                        value = self.extract_length(value, len, &[b"2719="]);
-                    }
-                },
-                "2721" => {// EncodedUnderlyingFinancialInstrumentFullNameLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingFinancialInstrumentFullName (2722)
-                        value = self.extract_length(value, len, &[b"2722="]);
-                    }
-                },
-                "2797" => {// EncodedMatchExceptionTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedMatchExceptionText (2798)
-                        value = self.extract_length(value, len, &[b"2798="]);
-                    }
-                },
-                "2802" => {// EncodedReplaceTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedReplaceText (2801)
-                        value = self.extract_length(value, len, &[b"2801="]);
-                    }
-                },
-                "2809" => {// EncodedCancelTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedCancelText (2808)
-                        value = self.extract_length(value, len, &[b"2808="]);
-                    }
-                },
-                "2815" => {// EncodedPostTradePaymentDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedPostTradePaymentDesc (2814)
-                        value = self.extract_length(value, len, &[b"2814="]);
-                    }
-                },
-                "40004" => {// EncodedAdditionalTermBondDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedAdditionalTermBondDesc (40005)
-                        value = self.extract_length(value, len, &[b"40005="]);
-                    }
-                },
-                "40008" => {// EncodedAdditionalTermBondIssuerLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedAdditionalTermBondIssuer (40009)
-                        value = self.extract_length(value, len, &[b"40009="]);
-                    }
-                },
-                "40978" => {// EncodedLegStreamTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegStreamText (40979)
-                        value = self.extract_length(value, len, &[b"40979="]);
-                    }
-                },
-                "40980" => {// EncodedLegProvisionTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegProvisionText (40981)
-                        value = self.extract_length(value, len, &[b"40981="]);
-                    }
-                },
-                "40982" => {// EncodedStreamTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedStreamText (40983)
-                        value = self.extract_length(value, len, &[b"40983="]);
-                    }
-                },
-                "40984" => {// EncodedPaymentTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedPaymentText (40985)
-                        value = self.extract_length(value, len, &[b"40985="]);
-                    }
-                },
-                "40986" => {// EncodedProvisionTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedProvisionText (40987)
-                        value = self.extract_length(value, len, &[b"40987="]);
-                    }
-                },
-                "40988" => {// EncodedUnderlyingStreamTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingStreamText (40989)
-                        value = self.extract_length(value, len, &[b"40989="]);
-                    }
-                },
-                "41083" => {// EncodedDeliveryStreamCycleDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedDeliveryStreamCycleDesc (41084)
-                        value = self.extract_length(value, len, &[b"41084="]);
-                    }
-                },
-                "41101" => {// EncodedMarketDisruptionFallbackUnderlierSecurityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedMarketDisruptionFallbackUnderlierSecurityDesc (41102)
-                        value = self.extract_length(value, len, &[b"41102="]);
-                    }
-                },
-                "41107" => {// EncodedExerciseDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedExerciseDesc (41108)
-                        value = self.extract_length(value, len, &[b"41108="]);
-                    }
-                },
-                "41256" => {// EncodedStreamCommodityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedStreamCommodityDesc (41257)
-                        value = self.extract_length(value, len, &[b"41257="]);
-                    }
-                },
-                "41320" => {// EncodedLegAdditionalTermBondDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegAdditionalTermBondDesc (41321)
-                        value = self.extract_length(value, len, &[b"41321="]);
-                    }
-                },
-                "41324" => {// EncodedLegAdditionalTermBondIssuerLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegAdditionalTermBondIssuer (41325)
-                        value = self.extract_length(value, len, &[b"41325="]);
-                    }
-                },
-                "41458" => {// EncodedLegDeliveryStreamCycleDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegDeliveryStreamCycleDesc (41459)
-                        value = self.extract_length(value, len, &[b"41459="]);
-                    }
-                },
-                "41476" => {// EncodedLegMarketDisruptionFallbackUnderlierSecurityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegMarketDisruptionFallbackUnderlierSecurityDesc (41477)
-                        value = self.extract_length(value, len, &[b"41477="]);
-                    }
-                },
-                "41482" => {// EncodedLegExerciseDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegExerciseDesc (41483)
-                        value = self.extract_length(value, len, &[b"41483="]);
-                    }
-                },
-                "41653" => {// EncodedLegStreamCommodityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedLegStreamCommodityDesc (41654)
-                        value = self.extract_length(value, len, &[b"41654="]);
-                    }
-                },
-                "41710" => {// EncodedUnderlyingAdditionalTermBondDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingAdditionalTermBondDesc (41711)
-                        value = self.extract_length(value, len, &[b"41711="]);
-                    }
-                },
-                "41806" => {// EncodedUnderlyingDeliveryStreamCycleDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingDeliveryStreamCycleDesc (41807)
-                        value = self.extract_length(value, len, &[b"41807="]);
-                    }
-                },
-                "41811" => {// EncodedUnderlyingExerciseDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingExerciseDesc (41812)
-                        value = self.extract_length(value, len, &[b"41812="]);
-                    }
-                },
-                "41873" => {// EncodedUnderlyingMarketDisruptionFallbackUnderlierSecurityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingMarketDisruptionFallbackUnderlierSecurityDesc (41874)
-                        value = self.extract_length(value, len, &[b"41874="]);
-                    }
-                },
-                "41969" => {// EncodedUnderlyingStreamCommodityDescLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingStreamCommodityDesc (41970)
-                        value = self.extract_length(value, len, &[b"41970="]);
-                    }
-                },
-                "42025" => {// EncodedUnderlyingAdditionalTermBondIssuerLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingAdditionalTermBondIssuer (42026)
-                        value = self.extract_length(value, len, &[b"42026="]);
-                    }
-                },
-                "42171" => {// EncodedUnderlyingProvisionTextLen
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be EncodedUnderlyingProvisionText (42172)
-                        value = self.extract_length(value, len, &[b"42172="]);
-                    }
-                },
-                "42451" => {// LegPaymentStreamFormulaImageLength
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be LegPaymentStreamFormulaImage (42452)
-                        value = self.extract_length(value, len, &[b"42452="]);
-                    }
-                },
-                "42652" => {// PaymentStreamFormulaImageLength
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be PaymentStreamFormulaImage (42653)
-                        value = self.extract_length(value, len, &[b"42653="]);
-                    }
-                },
-                "42947" => {// UnderlyingPaymentStreamFormulaImageLength
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be UnderlyingPaymentStreamFormulaImage (42948)
-                        value = self.extract_length(value, len, &[b"42948="]);
-                    }
-                },
-                "43109" => {// PaymentStreamFormulaLength
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be PaymentStreamFormula (42684)
-                        value = self.extract_length(value, len, &[b"42684="]);
-                    }
-                },
-                "43110" => {// LegPaymentStreamFormulaLength
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be LegPaymentStreamFormula (42486)
-                        value = self.extract_length(value, len, &[b"42486="]);
-                    }
-                },
-                "43111" => {// UnderlyingPaymentStreamFormulaLength
-                    if let Ok(len) = value.parse::<usize>() {
-                        // next field should be UnderlyingPaymentStreamFormula (42982)
-                        value = self.extract_length(value, len, &[b"42982="]);
-                    }
-                },
-                "384" => {// NoMsgTypes
-                    // next fields can be RefMsgType (372), MsgDirection (385), RefApplVerID (1130), RefApplExtID (1406), RefCstmApplVerID (1131) and DefaultVerIndicator (1410)
-                    value = self.extract_fields(value, &["372", "385", "1130", "1406", "1131", "1410"]);
-                },
-                "453" => {// NoPartyIDs
-                    // next fields can be PartyID (448), PartyIDSource (447), PartyRole (452), PartyRoleQualifier (2376), NoPartySubIDs (802), PartySubID (523) and PartySubIDType (803)
-                    value = self.extract_fields(value, &["448", "447", "452", "2376", "802", "523", "803"]);
-                },
-                "454" => {// NoSecurityAltID
-                    // next fields can be SecurityAltID (455) and SecurityAltIDSource (456)
-                    value = self.extract_fields(value, &["455", "456"]);
-                },
-                "627" => {// NoHops
-                    // next fields can be HopCompID (628), HopSendingTime (629) and HopRefID (630)
-                    value = self.extract_fields(value, &["628", "629", "630"]);
-                },
-                "802" => {// NoPartySubIDs
-                    // next fields can be PartySubID (523) and PartySubIDType (803)
-                    value = self.extract_fields(value, &["523", "803"]);
-                },
-                "864" => {// NoEvents
-                    // next fields can be EventType (865), EventDate (866), EventTime (630), EventPx (867), EventText (868), EventTimeUnit (1827), EventTimePeriod (1826), EventMonthYear (2340), EncodedEventTextLen (1578) and EncodedEventText (1579)
-                    value = self.extract_fields(value, &["865", "866", "1145", "867", "868", "1827", "1826", "2340", "1578", "1579"]);
-                },
-                _=> {},
+            extract_length! {
+                self key value
+                ("90", [b"91="]),
+                ("93", [b"89="]),
+                ("95", [b"96="]),
+                ("212", [b"213="]),
+                ("348", [b"349="]),
+                ("350", [b"351="]),
+                ("352", [b"353="]),
+                ("354", [b"355="]),
+                ("356", [b"357="]),
+                ("358", [b"359="]),
+                ("360", [b"361="]),
+                ("362", [b"363="]),
+                ("364", [b"365="]),
+                ("445", [b"446="]),
+                ("618", [b"619="]),
+                ("621", [b"622="]),
+                ("1184", [b"1185="]),
+                ("1277", [b"1278="]),
+                ("1280", [b"1281="]),
+                ("1282", [b"1283="]),
+                ("1397", [b"1398="]),
+                ("1401", [b"1402="]),
+                ("1403", [b"1404="]),
+                ("1468", [b"1469="]),
+                ("1525", [b"1527="]),
+                ("1578", [b"1579="]),
+                ("1620", [b"1621="]),
+                ("1664", [b"1665="]),
+                ("1678", [b"1697="]),
+                ("1733", [b"1734="]),
+                ("1871", [b"1872="]),
+                ("1874", [b"1875="]),
+                ("2072", [b"2073="]),
+                ("2074", [b"2075="]),
+                ("2111", [b"2112="]),
+                ("2179", [b"2180="]),
+                ("2287", [b"2288="]),
+                ("2351", [b"2352="]),
+                ("2372", [b"2371="]),
+                ("2481", [b"2482="]),
+                ("2494", [b"2493="]),
+                ("2522", [b"2521="]),
+                ("2637", [b"2638="]),
+                ("2651", [b"2652="]),
+                ("2665", [b"2666="]),
+                ("2715", [b"2716="]),
+                ("2718", [b"2719="]),
+                ("2721", [b"2722="]),
+                ("2797", [b"2798="]),
+                ("2802", [b"2801="]),
+                ("2809", [b"2808="]),
+                ("2815", [b"2814="]),
+                ("40004", [b"40005="]),
+                ("40008", [b"40009="]),
+                ("40978", [b"40979="]),
+                ("40980", [b"40981="]),
+                ("40982", [b"40983="]),
+                ("40984", [b"40985="]),
+                ("40986", [b"40987="]),
+                ("40988", [b"40989="]),
+                ("41083", [b"41084="]),
+                ("41101", [b"41102="]),
+                ("41107", [b"41108="]),
+                ("41256", [b"41257="]),
+                ("41320", [b"41321="]),
+                ("41324", [b"41325="]),
+                ("41458", [b"41459="]),
+                ("41476", [b"41477="]),
+                ("41482", [b"41483="]),
+                ("41653", [b"41654="]),
+                ("41710", [b"41711="]),
+                ("41806", [b"41807="]),
+                ("41811", [b"41812="]),
+                ("41873", [b"41874="]),
+                ("41969", [b"41970="]),
+                ("42025", [b"42026="]),
+                ("42171", [b"42172="]),
+                ("42451", [b"42452="]),
+                ("42652", [b"42653="]),
+                ("42947", [b"42948="]),
+                ("43109", [b"42684="]),
+                ("43110", [b"42486="]),
+                ("43111", [b"42982="])
+            }
+            extract_fields! {
+                self key value
+                ("33", ["58", "354"]),
+                ("73", ["1", "6", "11", "12", "13", "14", "15", "18", "21", "22", "23", "37", "38", "39", "40", "44", "47", "48", "54", "55", "58", "59", "60", "63", "64", "65", "66", "67", "70", "75", "76", "77", "78", "79", "80", "81", "84", "99", "100", "103", "105", "106", "107", "109", "110", "111", "114", "117", "118", "120", "121", "126", "140", "151", "152", "158", "159", "160", "167", "168", "192", "193", "198", "200", "201", "202", "203", "204", "205", "206", "207", "210", "211", "223", "229", "231", "336", "348", "350", "354", "376", "377", "386", "388", "389", "401", "423", "427", "432", "439", "440", "465", "467", "494", "526", "528", "529", "544", "581", "582", "583", "589", "590", "591", "625", "635", "636", "640", "660", "661", "711", "736", "775", "799", "800", "847", "848", "849", "854", "957", "958", "959", "960", "1028", "1080", "1081", "1089", "1090", "1091", "1092", "1133", "1688", "2102", "2351", "2404", "2835", "2836", "2887", "2888", "2889", "2890"]),
+                ("78", ["12", "13", "76", "79", "80", "81", "85", "86", "92", "109", "119", "120", "136", "137", "138", "139", "153", "154", "155", "156", "159", "160", "161", "208", "209", "360", "366", "467", "573", "576", "577", "635", "661", "736", "737", "741", "742", "776", "780", "891", "989", "992", "993", "1002", "1047", "1136", "1593", "1729", "1732", "1733", "1735", "1752", "1753", "1754", "1755", "1832", "1840", "2300", "2392", "2393", "2483", "2515", "2727", "2761", "2769", "2770"]),
+                ("85", ["165", "787"]),
+                ("124", ["17", "29", "30", "31", "32", "527", "669", "1003", "1041", "2524", "2749"]),
+                ("136", ["137", "138", "139", "891", "2216", "2217", "2712", "2713"]),
+                ("146", ["1", "15", "22", "38", "40", "44", "46", "48", "54", "55", "58", "60", "62", "63", "64", "65", "106", "107", "110", "117", "120", "126", "140", "152", "167", "192", "193", "200", "201", "202", "205", "206", "207", "223", "224", "225", "226", "227", "228", "229", "231", "239", "240", "255", "271", "291", "292", "303", "305", "306", "307", "308", "309", "310", "311", "312", "313", "314", "315", "316", "317", "318", "319", "326", "327", "336", "348", "350", "354", "362", "364", "423", "435", "436", "443", "454", "460", "461", "465", "470", "471", "472", "537", "541", "543", "555", "556", "561", "562", "566", "581", "587", "588", "625", "631", "640", "654", "660", "667", "685", "687", "690", "691", "692", "695", "711", "735", "762", "788", "827", "854", "864", "873", "874", "875", "876", "898", "913", "914", "915", "916", "917", "918", "919", "947", "965", "966", "967", "968", "969", "970", "971", "996", "997", "1017", "1018", "1049", "1079", "1146", "1147", "1151", "1174", "1184", "1186", "1191", "1192", "1193", "1194", "1195", "1196", "1197", "1198", "1199", "1200", "1201", "1202", "1203", "1204", "1221", "1222", "1223", "1226", "1227", "1229", "1230", "1236", "1240", "1241", "1242", "1244", "1302", "1303", "1304", "1305", "1324", "1435", "1439", "1449", "1450", "1451", "1452", "1457", "1458", "1478", "1479", "1480", "1481", "1482", "1483", "1500", "1502", "1504", "1524", "1575", "1577", "1580", "1581", "1606", "1617", "1629", "1678", "1687", "1698", "1716", "1717", "1739", "1751", "1787", "1866", "1913", "1914", "1915", "1916", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1976", "2001", "2002", "2115", "2140", "2141", "2142", "2143", "2144", "2145", "2210", "2304", "2353", "2372", "2374", "2574", "2575", "2576", "2577", "2578", "2579", "2600", "2601", "2602", "2603", "2681", "2685", "2714", "2715", "2735", "2737", "2752", "2753", "2879", "40019", "40022", "40049", "40090", "40181", "40204", "40278", "40921", "40922", "41087", "41088", "41089", "41090", "41091", "41092", "41094", "41096", "41106", "41107", "41109", "41110", "41111", "41112", "41113", "41114", "41115", "41116", "41118", "41119", "41120", "41121", "41122", "41123", "41124", "41125", "41126", "41127", "41128", "41129", "41130", "41131", "41132", "41133", "41134", "41135", "41136", "41137", "41140", "41142", "41143", "41144", "41145", "41146", "41147", "41148", "41149", "41150", "41151", "41152", "41230", "41232", "41233", "41234", "41235", "41236", "42296", "42590", "42591", "42592", "42593", "42594", "42595", "42596", "42597", "42775", "42777", "42778", "42779", "42780", "42781", "42782", "42783"]),
+                ("199", ["104"]),
+                ("215", ["216", "217"]),
+                ("232", ["233", "234"]),
+                ("267", ["269"]),
+                ("268", ["15", "18", "22", "31", "37", "40", "48", "55", "58", "59", "60", "63", "64", "65", "83", "106", "107", "110", "120", "126", "167", "198", "200", "201", "202", "205", "206", "207", "223", "231", "264", "269", "270", "271", "272", "273", "274", "275", "276", "277", "278", "279", "280", "282", "283", "284", "285", "286", "287", "288", "289", "290", "291", "292", "299", "326", "327", "332", "333", "336", "346", "348", "350", "354", "387", "423", "432", "449", "450", "451", "483", "528", "546", "555", "570", "574", "582", "625", "654", "711", "811", "819", "828", "829", "1003", "1020", "1023", "1024", "1025", "1026", "1027", "1048", "1070", "1093", "1115", "1173", "1175", "1176", "1177", "1178", "1179", "1390", "1500", "1629", "1851", "1916", "1934", "2405", "2445", "2446", "2447", "2449", "2450", "2451", "2667", "2705"]),
+                ("295", ["15", "22", "40", "48", "55", "60", "62", "64", "65", "106", "107", "132", "133", "134", "135", "167", "188", "189", "190", "191", "192", "193", "200", "201", "202", "205", "206", "207", "223", "224", "225", "226", "227", "228", "231", "239", "240", "255", "299", "311", "336", "348", "350", "368", "454", "460", "461", "470", "471", "472", "528", "529", "541", "543", "555", "625", "631", "632", "633", "634", "642", "643", "667", "691", "711", "762", "775", "788", "864", "873", "874", "875", "876", "898", "913", "914", "915", "916", "917", "918", "919", "947", "965", "966", "967", "968", "969", "970", "971", "996", "997", "1018", "1049", "1079", "1146", "1147", "1151", "1167", "1184", "1186", "1191", "1192", "1193", "1194", "1195", "1196", "1197", "1198", "1199", "1200", "1227", "1242", "1244", "1435", "1439", "1449", "1450", "1451", "1452", "1457", "1458", "1478", "1479", "1480", "1481", "1482", "1483", "1513", "1524", "1525", "1575", "1577", "1580", "1581", "1678", "1687", "1698", "1716", "1717", "1739", "1749", "1750", "1787", "1866", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1976", "2001", "2002", "2140", "2141", "2142", "2143", "2144", "2145", "2210", "2304", "2353", "2574", "2575", "2576", "2577", "2578", "2579", "2600", "2601", "2602", "2603", "2681", "2685", "2714", "2715", "2735", "2737", "2752", "2753", "2879", "40019", "40022", "40040", "40042", "40046", "40049", "40090", "40181", "40204", "40278", "40921", "40922", "41087", "41088", "41089", "41090", "41091", "41092", "41094", "41096", "41106", "41107", "41109", "41110", "41111", "41112", "41113", "41114", "41115", "41116", "41118", "41119", "41120", "41121", "41122", "41123", "41124", "41125", "41126", "41127", "41128", "41129", "41130", "41131", "41132", "41133", "41134", "41135", "41136", "41137", "41140", "41142", "41143", "41144", "41145", "41146", "41147", "41148", "41149", "41150", "41151", "41152", "41230", "41232", "41233", "41234", "41235", "41236", "42296", "42590", "42591", "42592", "42593", "42594", "42595", "42596", "42597", "42775", "42777", "42778", "42779", "42780", "42781", "42782", "42783"]),
+                ("296", ["15", "22", "40", "48", "55", "60", "62", "64", "65", "106", "107", "132", "133", "134", "135", "167", "188", "189", "190", "191", "192", "193", "200", "201", "202", "205", "206", "207", "223", "231", "295", "299", "302", "304", "305", "306", "307", "308", "309", "310", "311", "312", "313", "314", "315", "316", "317", "336", "348", "350", "362", "364", "367", "368", "435", "436", "555", "625", "631", "632", "633", "634", "642", "643", "893", "1167", "1168", "1169", "1170"]),
+                ("382", ["337", "375", "437", "438", "655"]),
+                ("384", ["372", "385"]),
+                ("386", ["40", "58", "59", "60", "207", "264", "325", "336", "338", "339", "340", "341", "342", "343", "344", "345", "354", "387", "567", "574", "625", "1021", "1022", "1141", "1142", "1232", "1235", "1237", "1239", "1300", "1301", "1308", "1326", "1327"]),
+                ("398", ["399", "400", "401", "402", "403", "404", "405", "406", "407", "408", "441"]),
+                ("420", ["1", "12", "13", "44", "54", "58", "63", "64", "66", "336", "354", "406", "421", "423", "430", "625", "660"]),
+                ("428", ["11", "15", "22", "44", "48", "54", "55", "58", "65", "106", "107", "140", "167", "200", "201", "202", "205", "206", "207", "223", "231", "348", "350", "354", "526", "711"]),
+                ("453", ["447", "448", "452", "523", "802", "803", "2376"]),
+                ("454", ["455", "456"]),
+                ("457", ["458", "459"]),
+                ("473", ["474", "475", "482", "486", "509", "511", "522"]),
+                ("510", ["477", "478", "498", "499", "500", "501", "502", "512"]),
+                ("518", ["519", "520", "521"]),
+                ("534", ["41", "535", "536", "1824"]),
+                ("539", ["524", "525", "538", "545", "804", "805", "2384"]),
+                ("555", ["248", "249", "250", "251", "252", "253", "254", "257", "556", "564", "565", "566", "587", "588", "596", "597", "598", "599", "600", "601", "602", "603", "604", "607", "608", "609", "610", "611", "612", "613", "614", "615", "616", "617", "618", "620", "621", "623", "624", "637", "654", "670", "671", "672", "673", "674", "675", "681", "682", "684", "685", "686", "687", "690", "739", "740", "764", "942", "955", "956", "990", "999", "1001", "1017", "1067", "1068", "1073", "1074", "1075", "1152", "1212", "1224", "1330", "1331", "1332", "1333", "1334", "1335", "1336", "1337", "1338", "1339", "1340", "1341", "1342", "1343", "1344", "1345", "1358", "1366", "1367", "1379", "1381", "1383", "1384", "1391", "1392", "1405", "1418", "1420", "1421", "1422", "1436", "1440", "1528", "1591", "1594", "1689", "1720", "1721", "1788", "1817", "1871", "1873", "2059", "2067", "2068", "2069", "2070", "2076", "2146", "2147", "2148", "2149", "2150", "2151", "2152", "2153", "2154", "2155", "2156", "2157", "2158", "2159", "2160", "2161", "2162", "2163", "2164", "2165", "2166", "2167", "2168", "2169", "2170", "2171", "2172", "2173", "2174", "2175", "2176", "2177", "2178", "2179", "2181", "2182", "2183", "2184", "2185", "2186", "2187", "2188", "2189", "2190", "2191", "2192", "2193", "2194", "2195", "2196", "2197", "2198", "2199", "2200", "2201", "2202", "2203", "2205", "2206", "2207", "2208", "2209", "2211", "2212", "2213", "2214", "2215", "2218", "2254", "2308", "2346", "2348", "2354", "2357", "2358", "2359", "2360", "2421", "2492", "2604", "2605", "2606", "2607", "2680", "2682", "2686", "2717", "2718", "2739", "2740", "2754", "2755", "2880", "40241", "40448", "40923", "40925", "40926", "41335", "41344", "41462", "41463", "41464", "41465", "41466", "41467", "41469", "41471", "41481", "41482", "41484", "41485", "41486", "41487", "41488", "41489", "41490", "41491", "41493", "41494", "41495", "41496", "41497", "41498", "41499", "41500", "41501", "41502", "41503", "41504", "41505", "41506", "41507", "41508", "41509", "41510", "41511", "41512", "41515", "41517", "41518", "41519", "41520", "41521", "41522", "41523", "41524", "41525", "41526", "41527", "41599", "41607", "41609", "41610", "41611", "41612", "41613", "41614", "41616", "41617", "41618", "41619", "41620", "41621", "41622", "41623", "41624", "41625", "41635", "42388", "42391", "42392", "42393", "42394", "42395", "42396", "42397", "42398", "42574", "42575", "42576", "42577", "42578", "42579", "42580", "42581"]),
+                ("558", ["60", "167", "460", "461", "762"]),
+                ("576", ["577"]),
+                ("580", ["60", "75", "779"]),
+                ("604", ["605", "606"]),
+                ("670", ["671", "672", "673", "674", "1367", "1756", "1757", "1758", "1759"]),
+                ("683", ["688", "689"]),
+                ("702", ["703", "704", "705", "706", "976", "1654", "1835", "1836"]),
+                ("711", ["241", "242", "243", "244", "245", "246", "247", "256", "305", "306", "307", "308", "309", "310", "311", "312", "313", "315", "316", "317", "318", "362", "364", "435", "436", "457", "462", "463", "542", "592", "593", "594", "595", "732", "733", "763", "810", "877", "878", "879", "882", "883", "884", "885", "886", "887", "941", "944", "972", "973", "974", "975", "998", "1000", "1037", "1038", "1039", "1044", "1045", "1046", "1058", "1213", "1419", "1423", "1424", "1425", "1437", "1441", "1453", "1454", "1455", "1456", "1459", "1460", "1526", "1718", "1719", "1837", "1874", "1876", "1981", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2080", "2284", "2285", "2286", "2287", "2289", "2290", "2291", "2292", "2312", "2363", "2491", "2614", "2615", "2616", "2617", "2619", "2620", "2621", "2622", "2623", "2624", "2625", "2626", "2627", "2628", "2629", "2630", "2631", "2683", "2687", "2720", "2721", "2723", "2724", "2742", "2744", "2756", "2757", "2874", "2881", "2885", "2886", "40540", "40962", "40964", "40965", "41314", "41315", "42036", "42041", "42060", "42068", "42149", "42855", "42860", "42861", "42884", "43004", "43005"]),
+                ("735", ["695"]),
+                ("753", ["707", "708", "1055", "1585", "2096", "2097", "2098", "2099", "2100", "2876", "2877"]),
+                ("756", ["757", "758", "759", "760", "806", "807", "2381"]),
+                ("768", ["769", "770", "771", "1033", "1034", "1035", "1727", "2831", "2832", "2833", "2834", "2839"]),
+                ("778", ["54", "120", "126", "162", "163", "167", "168", "214", "460", "461", "476", "488", "489", "490", "491", "492", "503", "504", "505", "779"]),
+                ("781", ["782", "783", "784", "785", "786", "801", "2389"]),
+                ("801", ["785", "786"]),
+                ("802", ["523", "803"]),
+                ("804", ["545", "805"]),
+                ("806", ["760", "807"]),
+                ("809", ["553"]),
+                ("816", ["817"]),
+                ("862", ["528", "529", "863"]),
+                ("864", ["865", "866", "867", "868", "1145", "1578", "1826", "1827", "2340"]),
+                ("870", ["871", "872"]),
+                ("887", ["888", "889"]),
+                ("897", ["571", "818"]),
+                ("936", ["283", "284", "928", "929", "930", "931"]),
+                ("938", ["896"]),
+                ("948", ["949", "950", "951", "952", "953", "954", "2382"]),
+                ("952", ["953", "954"]),
+                ("957", ["958", "959", "960"]),
+                ("981", ["982", "983"]),
+                ("984", ["984", "985", "986", "987", "988"]),
+                ("1016", ["1012", "1013", "1014"]),
+                ("1018", ["1019", "1050", "1051", "1052", "1053", "1054", "2378"]),
+                ("1052", ["1053", "1054"]),
+                ("1058", ["1059", "1060", "1061", "1062", "1063", "1064", "2391"]),
+                ("1062", ["1063", "1064"]),
+                ("1116", ["1117", "1118", "1119", "1120", "1121", "1122", "2388"]),
+                ("1120", ["1121", "1122"]),
+                ("1141", ["264", "1021", "1022", "1173", "2563", "2564", "2565", "2566", "2567", "2568"]),
+                ("1158", ["169", "170", "171", "1164"]),
+                ("1165", ["15", "64", "119", "120", "126", "155", "168", "430", "779", "1157", "1158", "1161", "1162", "1163", "1164"]),
+                ("1175", ["1176"]),
+                ("1177", ["1178", "1179"]),
+                ("1201", ["1202", "1203", "1204", "1223", "1304"]),
+                ("1205", ["1206", "1207", "1208", "1209", "1830", "1831", "2571"]),
+                ("1218", ["1219", "1220"]),
+                ("1232", ["1308"]),
+                ("1234", ["1093", "1231"]),
+                ("1235", ["574", "1142", "2569", "2570"]),
+                ("1236", ["1222", "1226", "1229", "1241", "1302", "1303"]),
+                ("1237", ["40"]),
+                ("1239", ["59"]),
+                ("1286", ["1287", "1288", "1289", "1290", "1291"]),
+                ("1292", ["1293", "1294", "1295", "1296", "1297", "1298", "2377"]),
+                ("1296", ["1297", "1298"]),
+                ("1309", ["40", "59", "264", "336", "574", "625", "1021", "1022", "1141", "1142", "1232", "1235", "1237", "1239", "1308"]),
+                ("1310", ["1201", "1202", "1203", "1204", "1222", "1223", "1226", "1229", "1236", "1241", "1300", "1301", "1302", "1303", "1304"]),
+                ("1311", ["1313", "1314"]),
+                ("1312", ["1210", "1211"]),
+                ("1334", ["1335", "1336"]),
+                ("1342", ["1330", "1331", "1332", "1333", "1334", "1337", "1338", "1339", "1340", "1341", "1343", "1344", "1345", "1391", "1392", "1405"]),
+                ("1351", ["1182", "1183", "1354", "1355", "1357", "1399", "1433"]),
+                ("1362", ["1363", "1364", "1365", "1443", "1622", "1623", "2673", "2674"]),
+                ("1370", ["1371", "1372", "1825", "2677"]),
+                ("1387", ["1388", "1389"]),
+                ("1413", ["1411", "1412"]),
+                ("1414", ["1411", "1412", "1413", "1415", "1416", "1417", "2383"]),
+                ("1445", ["1446", "1447", "1448", "2412", "2796"]),
+                ("1461", ["1462", "1463", "1464", "1818"]),
+                ("1475", ["1476", "1477"]),
+                ("1483", ["1484", "1485", "1486", "1487", "1488", "1489", "1490", "2117", "2118", "2119", "2120", "2121", "2122", "2123", "2124", "2125", "2126", "2127", "2128", "2129", "2130", "2131", "2132", "2133", "2134", "2135", "2136", "2137", "2138", "2139", "2407", "2408", "2597", "2598", "2599"]),
+                ("1491", ["1492", "1493"]),
+                ("1494", ["1495", "1496"]),
+                ("1499", ["146", "453"]),
+                ("1508", ["1509", "2386"]),
+                ("1514", ["1515"]),
+                ("1516", ["1517", "1518"]),
+                ("1519", ["1520", "1521"]),
+                ("1529", ["1530", "1531", "1532", "1533", "1765", "1766", "1767", "2336", "2337"]),
+                ("1534", ["1535", "1558"]),
+                ("1540", ["1541", "1542"]),
+                ("1559", ["1560", "1561", "1768", "1769"]),
+                ("1562", ["1563", "1564", "1565", "1675"]),
+                ("1566", ["1567", "1568"]),
+                ("1569", ["1570", "1571"]),
+                ("1572", ["1573", "1574"]),
+                ("1582", ["1583", "1584"]),
+                ("1586", ["1587", "1588", "1589", "1590"]),
+                ("1610", ["1611", "1612", "1613", "1614", "1615"]),
+                ("1618", ["1619"]),
+                ("1624", ["1625", "1626", "1627", "1673"]),
+                ("1630", ["1631", "1632", "1633", "1634", "2394", "2395", "2396"]),
+                ("1636", ["1637"]),
+                ("1643", ["1644", "1645", "1646", "1714", "1715", "2088", "2089", "2851"]),
+                ("1647", ["1648", "1649", "1650", "1651", "1652", "1653", "2413", "2414", "2415", "2417"]),
+                ("1656", ["1535"]),
+                ("1657", ["1658", "1659", "1660", "2338"]),
+                ("1661", ["1662", "1663"]),
+                ("1668", ["1530"]),
+                ("1669", ["1529", "1534", "1559"]),
+                ("1671", ["1672", "1674", "1691", "1692", "1693"]),
+                ("1676", ["1324", "1328", "1664", "1879", "1880"]),
+                ("1677", ["1324", "1328", "1664", "1670", "1763", "1764", "2339", "2355"]),
+                ("1694", ["1695", "1696"]),
+                ("1700", ["1701", "1702"]),
+                ("1703", ["1704", "1705", "1706", "1902", "2090", "2091", "2092", "2093", "2350", "2632", "2689", "2690", "2840", "2841"]),
+                ("1707", ["1708", "1709", "1710", "1711", "1712", "1713", "2094", "2095"]),
+                ("1772", ["1324", "1328", "1664", "1883", "1884", "1885"]),
+                ("1773", ["1774", "1775", "1776", "1782", "1783", "1784", "2402"]),
+                ("1777", ["1778", "1779", "1780", "1781"]),
+                ("1789", ["1790"]),
+                ("1791", ["1792"]),
+                ("1793", ["1794"]),
+                ("1795", ["1796", "1797", "1798", "1799", "1800", "1801", "1802"]),
+                ("1812", ["1813", "1814"]),
+                ("1829", ["564", "565", "587", "588", "654", "675", "685", "690", "1366", "1379", "1381", "1383", "1384", "1689", "1817"]),
+                ("1838", ["1839"]),
+                ("1841", ["1842", "1843"]),
+                ("1844", ["1845", "1846", "1847", "1850"]),
+                ("1855", ["1856", "1857", "1858", "1859", "1860", "2103"]),
+                ("1861", ["1862", "1863", "1864"]),
+                ("1868", ["1869", "1870"]),
+                ("1889", ["15", "30", "31", "32", "53", "120", "423", "854", "1891"]),
+                ("1890", ["54", "58", "70", "77", "354", "376", "377", "430", "578", "579", "582", "591", "635", "819", "825", "826", "943", "1005", "1006", "1007", "1008", "1009", "1031", "1032", "1057", "1072", "1115", "1139", "1154", "1155", "1427", "1428", "1429", "1506", "1597", "1598", "1599", "1690", "1731", "1898", "1899", "1900", "2351", "2404"]),
+                ("1892", ["564", "565", "637", "654", "675", "685", "686", "1418", "1591", "1689", "1893", "1894", "1895", "1901"]),
+                ("1907", ["1903", "1904", "1905", "1906", "2397", "2411"]),
+                ("1908", ["1909", "1910", "1911", "1912", "2399", "2406"]),
+                ("1918", ["1816"]),
+                ("1919", ["1918", "1920"]),
+                ("1920", ["1921", "1922", "1923"]),
+                ("1971", ["1972", "1973", "1974", "1975", "2398", "2416"]),
+                ("1976", ["1977", "1978", "1979", "2741"]),
+                ("1981", ["1982", "1983", "1984", "1985", "1986", "1987", "2071", "2072", "2342"]),
+                ("2045", ["2046", "2047", "2048", "2049", "2050", "2051", "2052", "2261", "2262", "2263", "2264", "2265", "2266", "2267", "2268", "2269", "2270", "2271", "2272", "2273", "2274", "2275", "2276", "2277", "2278", "2279", "2280", "2281", "2282", "2283", "2419", "2420", "2611", "2612", "2613"]),
+                ("2053", ["2054", "2055"]),
+                ("2056", ["2057", "2058"]),
+                ("2059", ["2060", "2061", "2062", "2063", "2064", "2065", "2066", "2074", "2341"]),
+                ("2076", ["2077", "2078", "2079", "2743"]),
+                ("2080", ["2081", "2082", "2083", "2745"]),
+                ("2104", ["2105", "2106", "2107", "2108", "2109", "2110", "2111"]),
+                ("2113", ["2114"]),
+                ("2218", ["2219", "2220", "2221", "2222", "2223", "2224", "2225", "2226", "2227", "2228", "2229", "2230", "2231", "2232", "2233", "2234", "2235", "2236", "2237", "2238", "2239", "2240", "2241", "2242", "2243", "2244", "2245", "2246", "2248", "2249", "2409", "2410", "2608", "2609", "2610"]),
+                ("2250", ["2251", "2252"]),
+                ("2253", ["2204", "2247"]),
+                ("2254", ["2255", "2256", "2257", "2379"]),
+                ("2258", ["2259", "2260"]),
+                ("2304", ["2305", "2306", "2307"]),
+                ("2308", ["2309", "2310", "2311"]),
+                ("2312", ["2313", "2314", "2315"]),
+                ("2345", ["1775", "2402"]),
+                ("2428", ["11", "14", "37", "39", "40", "41", "44", "54", "59", "84", "103", "150", "151", "2429", "2430", "2431"]),
+                ("2433", ["2434", "2435"]),
+                ("2474", ["2475", "2476", "2477", "2478", "2479", "2480"]),
+                ("2529", ["2530", "2531", "2532"]),
+                ("2545", ["2546", "2547"]),
+                ("2548", ["1803", "2549"]),
+                ("2550", ["2551", "2552", "2553", "2554", "2555", "2556"]),
+                ("2558", ["647", "648", "2447"]),
+                ("2560", ["1242", "2561"]),
+                ("2580", ["730", "1188", "1190", "1592", "2581", "2582", "2583", "2584", "2585", "2586", "2587", "2588", "2589", "2590", "2591", "2592"]),
+                ("2593", ["2594", "2595"]),
+                ("2633", ["2634", "2635", "2636", "2637"]),
+                ("2639", ["2640", "2641", "2642", "2643", "2644", "2645", "2646", "2647", "2648", "2649", "2650", "2651", "2725"]),
+                ("2653", ["2654", "2655", "2656", "2657", "2658", "2659", "2660", "2661", "2662", "2663", "2664", "2665", "2726"]),
+                ("2668", ["2669", "2670"]),
+                ("2691", ["2692", "2693", "2694", "2695", "2696", "2697", "2698", "2699", "2700", "2701", "2702", "2703", "2862", "2863"]),
+                ("2706", ["2707", "2708"]),
+                ("2709", ["2710"]),
+                ("2734", ["2733"]),
+                ("2746", ["2747", "2748"]),
+                ("2772", ["2773", "2774", "2775", "2776", "2777", "2778", "2779", "2780", "2797"]),
+                ("2781", ["2782", "2783", "2784", "2785"]),
+                ("2845", ["2842", "2843", "2844"]),
+                ("2849", ["2846", "2847", "2848"]),
+                ("2864", ["2865", "2866", "2867"]),
+                ("2871", ["2872", "2873"]),
+                ("40000", ["40001", "40002", "40003", "40004", "40006", "40007", "40008", "40010", "40011", "40012", "40013", "40014", "40015", "40016", "40017", "40018"]),
+                ("40019", ["40020", "40021"]),
+                ("40022", ["40023", "40024", "40025", "40026", "40027", "40028", "40029", "40030", "40031", "40033", "40034", "40035", "40036", "40037", "40038", "40039", "40916", "40917", "42216", "42217"]),
+                ("40040", ["40041"]),
+                ("40042", ["40043", "40044", "40045"]),
+                ("40046", ["40047", "40048"]),
+                ("40049", ["40050", "40051", "40052", "40053", "40054", "40055", "40056", "40982", "41303", "41305", "41306", "41307", "41308", "41309", "41310", "41311", "42784", "42785", "42786", "42787"]),
+                ("40085", ["40086", "40088", "40089"]),
+                ("40090", ["40091", "40092", "40093", "40095", "40096", "40097", "40098", "40099", "40100", "40101", "40102", "40103", "40104", "40105", "40106", "40107", "40108", "40109", "40110", "40111", "40113", "40986", "42707", "42708"]),
+                ("40142", ["40143", "40144"]),
+                ("40171", ["40172", "40173"]),
+                ("40174", ["2385", "40175", "40176", "40177"]),
+                ("40178", ["40179", "40180"]),
+                ("40181", ["40182", "40183", "40184", "40185", "40186", "40187", "40188", "40190"]),
+                ("40191", ["40192", "40193", "40194", "40195", "40196", "40197", "40198"]),
+                ("40199", ["40200"]),
+                ("40201", ["40202", "40203"]),
+                ("40204", ["40205", "40206", "40207", "40208"]),
+                ("40209", ["40210", "40211"]),
+                ("40212", ["492", "40213", "40214", "40215", "40216", "40217", "40218", "40219", "40220", "40222", "40224", "40225", "40226", "40227", "40229", "40919", "40984", "40993", "41155", "41156", "41157", "41158", "41159", "41160", "41304", "42598", "42599", "43087", "43097", "43098", "43099", "43100", "43101", "43102", "43103", "43104", "43105"]),
+                ("40230", ["40231", "40232"]),
+                ("40233", ["40234", "40235", "40236", "40237"]),
+                ("40238", ["40239", "40240"]),
+                ("40241", ["40242", "40243", "40244", "40245", "40246", "40247", "40248", "40978", "41700", "41702", "41703", "41704", "41705", "41706", "41707", "41708", "42583", "42584", "42585", "42586"]),
+                ("40277", ["40032"]),
+                ("40278", ["40471"]),
+                ("40367", ["40368", "40369"]),
+                ("40374", ["40375", "40376", "40377", "40378", "40379", "40380", "40381", "40382", "40383", "40384", "40385", "40386", "40387", "40388", "40389", "40390", "40391", "40392", "40393", "40394", "40395", "40396", "40397", "40398", "40399", "40401", "40402", "40403", "40404", "40405", "40406", "40407", "40408", "40410", "40411", "40412", "40413", "41533", "41534", "41535", "41536", "41537", "41538", "41539", "41540", "41541", "41542", "41543", "41544", "41545", "41546", "41547", "41548"]),
+                ("40414", ["40415", "40416", "40417"]),
+                ("40418", ["40419", "40420", "40421", "40422", "40423", "40424", "40425", "40426", "40427", "40428", "40429", "40430", "40431", "40432", "40433", "40434", "40435", "40436", "40437", "40438", "40439", "40440", "40441", "40442", "40443", "40444", "40445", "40446", "40447"]),
+                ("40448", ["40449", "40450", "40451", "40453", "40454", "40455", "40456", "40457", "40458", "40459", "40460", "40461", "40462", "40463", "40464", "40465", "40466", "40467", "40468", "40469", "40472", "40980", "42506", "42507"]),
+                ("40473", ["40474", "40475"]),
+                ("40495", ["40496", "40497"]),
+                ("40533", ["2380", "40534", "40535", "40536"]),
+                ("40537", ["40538", "40539"]),
+                ("40540", ["40541", "40542", "40543", "40544", "40545", "40546", "40547", "40988", "42016", "42018", "42019", "42020", "42021", "42022", "42023", "42024", "43083", "43084", "43085", "43086"]),
+                ("40656", ["40657", "40658"]),
+                ("40659", ["40660", "40662", "40663"]),
+                ("40664", ["40665", "40666", "40667", "40668", "40669", "40670", "40671", "40672", "40673", "40674", "40675", "40676", "40678", "40679", "40680", "40681", "40682", "40683", "40684", "40685", "40686", "40687", "40688", "40689", "40691", "40692", "40693", "40694", "40695", "40696", "40697", "40698", "40700", "40701", "40702", "40703", "41881", "41882", "41883", "41884", "41885", "41886", "41887", "41888", "41889", "41890", "41891", "41892", "41893", "41894", "41895", "41896"]),
+                ("40704", ["40705", "40706", "40707"]),
+                ("40708", ["40709", "40710", "40711", "40712", "40713", "40714", "40715", "40716", "40717", "40718", "40719", "40720", "40721", "40722", "40723", "40724", "40725", "40726", "40727", "40728", "40729", "40730", "40731", "40732", "40733", "40734", "40735", "40736", "40737"]),
+                ("40825", ["40826", "40827"]),
+                ("40828", ["40829", "40830", "40831", "40832", "40833", "40834", "40835", "40836", "40837", "40838", "40839", "40840", "40841", "40842", "40843", "40844", "40845", "40846", "40847", "40848", "40849", "40850", "40851", "40852", "40853", "40855", "40856", "40857", "40858", "40859", "40860", "40861", "40862", "40864", "40865", "40866", "40867", "41164", "41165", "41166", "41167", "41168", "41169", "41170", "41171", "41172", "41173", "41174", "41175", "41176", "41177", "41178", "41179"]),
+                ("40868", ["40869", "40870", "40871"]),
+                ("40872", ["40873", "40874", "40875", "40876", "40877", "40878", "40879", "40880", "40881", "40882", "40883", "40884", "40885", "40886", "40887", "40888", "40889", "40890", "40891", "40892", "40893", "40894", "40895", "40896", "40897", "40898", "40899", "40900", "40901"]),
+                ("40902", ["40903", "40905", "40906"]),
+                ("40923", ["40924"]),
+                ("40927", ["40400"]),
+                ("40928", ["40409"]),
+                ("40929", ["40361"]),
+                ("40930", ["40293"]),
+                ("40931", ["40305"]),
+                ("40932", ["40311"]),
+                ("40933", ["40318"]),
+                ("40934", ["40517"]),
+                ("40935", ["40527"]),
+                ("40936", ["40477"]),
+                ("40937", ["40500"]),
+                ("40938", ["40510"]),
+                ("40939", ["40452"]),
+                ("40940", ["40266"]),
+                ("40941", ["40269"]),
+                ("40942", ["40251"]),
+                ("40943", ["40259"]),
+                ("40944", ["40221"]),
+                ("40945", ["40863"]),
+                ("40946", ["40819"]),
+                ("40947", ["40752"]),
+                ("40948", ["40763"]),
+                ("40949", ["40769"]),
+                ("40950", ["40776"]),
+                ("40951", ["40189"]),
+                ("40952", ["40164"]),
+                ("40953", ["40117"]),
+                ("40954", ["40124"]),
+                ("40955", ["40147"]),
+                ("40956", ["40157"]),
+                ("40957", ["40094"]),
+                ("40958", ["40074"]),
+                ("40959", ["40077"]),
+                ("40960", ["40909"]),
+                ("40961", ["40067"]),
+                ("40962", ["40963"]),
+                ("40966", ["40690"]),
+                ("40967", ["40699"]),
+                ("40968", ["40650"]),
+                ("40969", ["40582"]),
+                ("40970", ["40594"]),
+                ("40971", ["40600"]),
+                ("40972", ["40607"]),
+                ("40973", ["40557"]),
+                ("40974", ["40560"]),
+                ("40975", ["40059"]),
+                ("40976", ["40550"]),
+                ("40977", ["40854"]),
+                ("40994", ["40995", "40996"]),
+                ("40997", ["40998", "40999", "41000", "41001", "41002", "41003", "41004"]),
+                ("41005", ["41006"]),
+                ("41007", ["41008", "41009"]),
+                ("41010", ["41011", "41012"]),
+                ("41013", ["41014", "41015", "41016", "41017"]),
+                ("41018", ["41019"]),
+                ("41029", ["41030"]),
+                ("41031", ["41032", "41033", "41034", "41035", "41036"]),
+                ("41037", ["41038", "41039", "41040", "41041", "41042", "41043", "41044", "41045", "41046", "41047", "41048", "41049", "41050"]),
+                ("41051", ["41052", "41053"]),
+                ("41054", ["41055", "41056", "41057"]),
+                ("41081", ["41082", "41083"]),
+                ("41085", ["41086"]),
+                ("41092", ["40991", "41093"]),
+                ("41094", ["40992", "41095"]),
+                ("41096", ["41097", "41098", "41099", "41100", "41101", "41103", "41104", "41105"]),
+                ("41116", ["41117"]),
+                ("41137", ["41138", "41139"]),
+                ("41140", ["41141"]),
+                ("41152", ["41153", "41154"]),
+                ("41161", ["41162", "41163"]),
+                ("41192", ["41193"]),
+                ("41220", ["41221", "41222"]),
+                ("41224", ["41225", "41226"]),
+                ("41227", ["41228", "41229"]),
+                ("41230", ["41231"]),
+                ("41241", ["41242", "41243"]),
+                ("41249", ["41250"]),
+                ("41277", ["41278", "41279"]),
+                ("41280", ["41281", "41282"]),
+                ("41283", ["41284", "41285"]),
+                ("41286", ["41287", "41288", "41588"]),
+                ("41289", ["41290", "41291", "41292", "41293", "41294", "41295", "41296", "41297", "41298", "41299", "41300", "41301", "41302"]),
+                ("41312", ["41313"]),
+                ("41316", ["41317", "41318", "41319", "41320", "41322", "41323", "41324", "41326", "41327", "41328", "41329", "41330", "41331", "41332", "41333", "41334"]),
+                ("41335", ["41336", "41337"]),
+                ("41340", ["41341", "41701", "41709", "41710", "41712", "42017", "42025", "42027", "42028", "42029", "42030", "42031", "42032", "42033", "42034", "42035"]),
+                ("41342", ["41343"]),
+                ("41344", ["41345", "41346", "41347", "41348", "41349", "41350", "41351", "41352", "41353", "41354", "41355", "41356", "41357", "41358", "41359", "41360", "41361", "41362", "42308", "42309"]),
+                ("41363", ["41364", "41365"]),
+                ("41366", ["41367", "41368", "41369", "41370", "41371", "41372", "41373"]),
+                ("41374", ["41375"]),
+                ("41376", ["41377", "41378"]),
+                ("41379", ["41380", "41381"]),
+                ("41382", ["41383", "41384", "41385", "41386"]),
+                ("41387", ["41388"]),
+                ("41398", ["41399"]),
+                ("41400", ["41401", "41402", "41403", "41404", "41405"]),
+                ("41408", ["41409", "41410", "41411", "41412", "41413", "41414", "41415", "41416", "41417", "41418", "41419", "41420", "41421"]),
+                ("41422", ["41423", "41424"]),
+                ("41425", ["41426", "41427", "41428"]),
+                ("41452", ["41453", "41454", "41455"]),
+                ("41456", ["41457", "41458"]),
+                ("41460", ["41461"]),
+                ("41467", ["40223", "41468"]),
+                ("41469", ["40990", "41470"]),
+                ("41471", ["41472", "41473", "41474", "41475", "41476", "41478", "41479", "41480"]),
+                ("41491", ["41492"]),
+                ("41512", ["41513", "41514"]),
+                ("41515", ["41516"]),
+                ("41527", ["41528", "41529"]),
+                ("41530", ["41531", "41532"]),
+                ("41561", ["41562"]),
+                ("41589", ["41590", "41591"]),
+                ("41593", ["41594", "41595"]),
+                ("41596", ["41597", "41598"]),
+                ("41599", ["41600", "41601", "41602", "41603"]),
+                ("41604", ["41605", "41606"]),
+                ("41607", ["41608"]),
+                ("41614", ["41615"]),
+                ("41625", ["41626", "41627", "41628", "41629", "41630", "41631", "41632"]),
+                ("41633", ["41634"]),
+                ("41635", ["41636", "41637"]),
+                ("41638", ["41639", "41640"]),
+                ("41646", ["41647"]),
+                ("41674", ["41675", "41676"]),
+                ("41677", ["41678", "41679"]),
+                ("41680", ["41681", "41682"]),
+                ("41683", ["41684", "41685", "41935"]),
+                ("41686", ["41687", "41688", "41689", "41690", "41691", "41692", "41693", "41694", "41695", "41696", "41697", "41698", "41699"]),
+                ("41713", ["41714", "41715"]),
+                ("41716", ["41717", "41718", "41719", "41720", "41721", "41722", "41723"]),
+                ("41724", ["41725"]),
+                ("41726", ["41727", "41728"]),
+                ("41729", ["41730", "41731"]),
+                ("41732", ["41733", "41734", "41735", "41736"]),
+                ("41737", ["41738"]),
+                ("41748", ["41749"]),
+                ("41750", ["41751", "41752", "41753", "41754", "41755"]),
+                ("41756", ["41757", "41758", "41759", "41760", "41761", "41762", "41763", "41764", "41765", "41766", "41767", "41768", "41769"]),
+                ("41770", ["41771", "41772"]),
+                ("41773", ["41774", "41775", "41776"]),
+                ("41800", ["41801", "41802", "41803"]),
+                ("41804", ["41805", "41806"]),
+                ("41808", ["41809"]),
+                ("41820", ["41821"]),
+                ("41841", ["41842", "41843"]),
+                ("41844", ["41845"]),
+                ("41856", ["41857", "41858"]),
+                ("41864", ["41338", "41865"]),
+                ("41866", ["41339", "41867"]),
+                ("41868", ["41869", "41870", "41871", "41872", "41873", "41875", "41876", "41877"]),
+                ("41878", ["41879", "41880"]),
+                ("41909", ["41910"]),
+                ("41937", ["41938", "41939"]),
+                ("41941", ["41942", "41943"]),
+                ("41944", ["41945", "41946"]),
+                ("41947", ["41948"]),
+                ("41954", ["41955", "41956"]),
+                ("41962", ["41963"]),
+                ("41990", ["41991", "41992"]),
+                ("41993", ["41994", "41995"]),
+                ("41996", ["41997", "41998"]),
+                ("41999", ["41936", "42000", "42001"]),
+                ("42002", ["42003", "42004", "42005", "42006", "42007", "42008", "42009", "42010", "42011", "42012", "42013", "42014", "42015"]),
+                ("42036", ["42037", "42038"]),
+                ("42039", ["42040"]),
+                ("42041", ["42042", "42043", "42044", "42045", "42046", "42047", "42048", "42049", "42050", "42051", "42052", "42053", "42054", "42055", "42056", "42057", "42058", "42059", "42797", "42798"]),
+                ("42060", ["42061", "42062", "42063", "42064"]),
+                ("42065", ["42066", "42067"]),
+                ("42068", ["42069", "42070", "42071", "42072", "42073", "42074", "42075", "42076"]),
+                ("42077", ["42078", "42079", "42080", "42081", "42082", "42083", "42084"]),
+                ("42085", ["42086"]),
+                ("42087", ["42088", "42089"]),
+                ("42090", ["42091"]),
+                ("42099", ["42100", "42101"]),
+                ("42112", ["42113", "42114"]),
+                ("42149", ["42150", "42151", "42152", "42153", "42154", "42155", "42156", "42157", "42158", "42159", "42160", "42161", "42162", "42163", "42164", "42165", "42166", "42167", "42168", "42169", "42170", "42171", "43002", "43003"]),
+                ("42173", ["40918", "42174", "42175", "42176"]),
+                ("42177", ["42178", "42179"]),
+                ("42180", ["42181"]),
+                ("42182", ["42183"]),
+                ("42184", ["42185"]),
+                ("42186", ["42187"]),
+                ("42188", ["42189"]),
+                ("42190", ["42191"]),
+                ("42198", ["42199"]),
+                ("42200", ["42201", "42202"]),
+                ("42203", ["42204", "42205", "42206"]),
+                ("42214", ["42215"]),
+                ("42236", ["42237"]),
+                ("42272", ["42273"]),
+                ("42274", ["42275", "42276", "42277", "42278", "42279", "42280", "42281", "42282", "42283", "42284", "42285", "42286", "42287", "42288", "42289", "42290", "42291", "42292", "42293"]),
+                ("42294", ["42295"]),
+                ("42296", ["42297", "42298"]),
+                ("42306", ["42307"]),
+                ("42310", ["42311"]),
+                ("42364", ["42365"]),
+                ("42366", ["42367", "42368", "42369", "42370", "42371", "42372", "42373", "42374", "42375", "42376", "42377", "42378", "42379", "42380", "42381", "42382", "42383", "42384", "42385"]),
+                ("42386", ["42387"]),
+                ("42388", ["42389", "42390"]),
+                ("42405", ["42406", "42407"]),
+                ("42419", ["42420"]),
+                ("42459", ["42460", "42461"]),
+                ("42485", ["42487", "43110"]),
+                ("42495", ["42496"]),
+                ("42504", ["42505"]),
+                ("42508", ["42509", "42510", "42511", "42512", "42513", "42514", "42515", "42516", "42517", "42518", "42519", "42520", "42521", "42522", "42523", "42524", "42525", "42526", "42527", "42528", "42529"]),
+                ("42530", ["42531", "42532", "42533"]),
+                ("42534", ["42535", "42536", "42537", "42538", "42539", "42540", "42541", "42542", "42543", "42544", "42545", "42546", "42547", "42548", "42549", "42550", "42551", "42552", "42553", "42554", "42555", "42556", "42557", "42558", "42559"]),
+                ("42560", ["42561", "42562", "42563"]),
+                ("42564", ["42565", "42566", "42567", "42568"]),
+                ("42569", ["42570"]),
+                ("42571", ["42572", "42573"]),
+                ("42581", ["42582"]),
+                ("42606", ["42607", "42608"]),
+                ("42620", ["42621"]),
+                ("42660", ["42661", "42662"]),
+                ("42683", ["42685", "43109"]),
+                ("42696", ["42697"]),
+                ("42705", ["42706"]),
+                ("42709", ["42710", "42711", "42712", "42713", "42714", "42715", "42716", "42717", "42718", "42719", "42720", "42721", "42722", "42723", "42724", "42725", "42726", "42727", "42728", "42729", "42730"]),
+                ("42731", ["42732", "42733", "42734"]),
+                ("42735", ["42736", "42737", "42738", "42739", "42740", "42741", "42742", "42743", "42744", "42745", "42746", "42747", "42748", "42749", "42750", "42751", "42752", "42753", "42754", "42755", "42756", "42757", "42758", "42759", "42760"]),
+                ("42761", ["42762", "42763", "42764"]),
+                ("42765", ["42766", "42767", "42768", "42769"]),
+                ("42770", ["42771"]),
+                ("42772", ["42773", "42774"]),
+                ("42775", ["42776"]),
+                ("42788", ["42789"]),
+                ("42799", ["42800"]),
+                ("42853", ["42854"]),
+                ("42855", ["42856", "42857", "42858", "42859"]),
+                ("42862", ["42863", "42864", "42865", "42866", "42867", "42868", "42869", "42870", "42871", "42872", "42873", "42874", "42875", "42876", "42877", "42878", "42879", "42880", "42881"]),
+                ("42882", ["42883"]),
+                ("42884", ["42885", "42886"]),
+                ("42901", ["42902", "42903"]),
+                ("42915", ["42916"]),
+                ("42955", ["42956", "42957"]),
+                ("42981", ["42983", "43111"]),
+                ("42991", ["42992"]),
+                ("43000", ["43001"]),
+                ("43005", ["43006", "43007"]),
+                ("43008", ["43009", "43010", "43011", "43012", "43013", "43014", "43015", "43016", "43017", "43018", "43019", "43020", "43021", "43022", "43023", "43024", "43025", "43026", "43027", "43028", "43029"]),
+                ("43030", ["43031", "43032", "43033"]),
+                ("43034", ["43035", "43036", "43037", "43038", "43039", "43040", "43041", "43042", "43043", "43044", "43045", "43046", "43047", "43048", "43049", "43050", "43051", "43052", "43053", "43054", "43055", "43056", "43057", "43058", "43059"]),
+                ("43060", ["43061", "43062", "43063"]),
+                ("43064", ["43065", "43066", "43067", "43068"]),
+                ("43069", ["43070"]),
+                ("43071", ["43072", "43073"]),
+                ("43074", ["43075"])
             }
             Some((key, value))
         }

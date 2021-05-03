@@ -1,6 +1,7 @@
 //! `FiX` meets Serde
 
 #![warn(unused_extern_crates)]
+#![recursion_limit = "1024"]
 
 pub mod de;
 pub mod ser;

@@ -40,7 +40,7 @@ pub struct RelatedSy {
     pub instruments: super::super::instrument::Instrument,
     #[serde(flatten)]
 	#[serde(skip_serializing_if = "Option::is_none")]
-	pub financing_details: Option<fix_common::RepeatingValues<super::super::financing_details::FinancingDetails>>,
+	pub financing_details: Option<super::super::financing_details::FinancingDetails>,
 	/// Number of underlyings
 	#[serde(skip_serializing_if = "Option::is_none")]
 	#[serde(rename = "711")]
