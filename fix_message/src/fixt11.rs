@@ -7716,7 +7716,7 @@ mod test {
 
     #[test]
     fn logon() {
-        let msg = "8=FIXT.1.1\u{1}9=111\u{1}35=A\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}369=1\u{1}98=0\u{1}108=1\u{1}789=1\u{1}1137=0\u{1}10=073\u{1}";
+        let msg = "8=FIXT.1.1\u{1}9=118\u{1}35=A\u{1}1128=5\u{1}49=CLIENT1\u{1}56=EXECUTOR\u{1}34=17\u{1}52=20210310-16:38:01.821\u{1}212=10\u{1}213=0123456789\u{1}369=1\u{1}98=0\u{1}108=1\u{1}789=1\u{1}1137=0\u{1}10=143\u{1}";
         let mut obj = dbg!(serde_fix::from_str_checked::<Message>(msg)).unwrap();
         match obj {
             Message::FIXT11(super::Message::Logon(ref mut l)) => {

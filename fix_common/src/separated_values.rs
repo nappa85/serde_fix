@@ -36,7 +36,7 @@ impl<'de, T> Deserialize<'de> for SeparatedValues<T>
 where T: DeserializeOwned + Serialize + Clone + Debug + PartialEq {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let a = <Cow<'_, str> as Deserialize>::deserialize(deserializer)?;
-        let mut v = Vec::with_capacity(a.chars().filter(|c| *c == ' ').count());
+        let mut v = Vec::with_capacity(a.chars().filter(|c| *c == ' ').count() + 1);
         for t in a.split(' ') {
             v.push(serde_fix::from_str::<T>(t).map_err(serde::de::Error::custom)?);
         }
