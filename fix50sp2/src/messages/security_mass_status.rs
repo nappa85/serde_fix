@@ -58,6 +58,7 @@ pub struct SecurityMassStatus {
 	pub md_book_type: Option<MDBookType>,
 	/// Used to relay changes in Market Depth.
 	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "264")]
 	pub market_depth: Option<u32>,
 	/// Time of state change for security list.

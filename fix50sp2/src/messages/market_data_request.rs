@@ -18,6 +18,7 @@ pub struct MarketDataRequest {
 	#[serde(flatten)]
 	pub parties: Option<super::super::parties::Parties>,
 	/// MarketDepth
+	#[serde(deserialize_with = "fix_common::workarounds::from_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "264")]
 	pub market_depth: u32,
 	/// Required if <a href="tag_263_SubscriptionRequestType.html" target="bottom">SubscriptionRequestType&nbsp;(263)</a> = Snapshot + Updates (1).

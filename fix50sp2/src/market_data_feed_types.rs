@@ -21,6 +21,7 @@ pub struct MDFeedType {
 	pub md_feed_type: Option<String>,
 	/// Specifies the depth of book (or levels of market depth) for the feed type.
 	#[serde(skip_serializing_if = "Option::is_none")]
+	#[serde(deserialize_with = "fix_common::workarounds::from_opt_str")]// https://github.com/serde-rs/serde/issues/1183
 	#[serde(rename = "264")]
 	pub market_depth: Option<u32>,
 	/// MDBookType
