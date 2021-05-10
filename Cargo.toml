@@ -17,4 +17,5 @@ members = [
 exclude = [
     "code_generator",
     "enum_checker",
+    "fix_message_viewer",
 ]

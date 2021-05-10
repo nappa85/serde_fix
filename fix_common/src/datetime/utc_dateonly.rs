@@ -1,33 +1,33 @@
 use std::{borrow::Cow, convert::TryFrom};
 
-use chrono::{DateTime, Utc, TimeZone};
+use chrono::{Date, NaiveDate, Utc};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
 
 const FORMAT: &str = "%Y%m%d";
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct UTCDateOnly(DateTime<Utc>);
+pub struct UTCDateOnly(Date<Utc>);
 
 impl Default for UTCDateOnly {
     fn default() -> Self {
-        UTCDateOnly(Utc::now())
+        UTCDateOnly(Utc::today())
     }
 }
 
-impl From<DateTime<Utc>> for UTCDateOnly {
-    fn from(date: DateTime<Utc>) -> Self {
+impl From<Date<Utc>> for UTCDateOnly {
+    fn from(date: Date<Utc>) -> Self {
         UTCDateOnly(date)
     }
 }
 
-impl AsRef<DateTime<Utc>> for UTCDateOnly {
-    fn as_ref(&self) -> &DateTime<Utc> {
+impl AsRef<Date<Utc>> for UTCDateOnly {
+    fn as_ref(&self) -> &Date<Utc> {
         &self.0
     }
 }
 
-impl AsMut<DateTime<Utc>> for UTCDateOnly {
-    fn as_mut(&mut self) -> &mut DateTime<Utc> {
+impl AsMut<Date<Utc>> for UTCDateOnly {
+    fn as_mut(&mut self) -> &mut Date<Utc> {
         &mut self.0
     }
 }
@@ -36,7 +36,7 @@ impl TryFrom<&str> for UTCDateOnly {
     type Error = chrono::ParseError;
 
     fn try_from(s: &str) -> Result<Self, Self::Error> {
-        Ok(UTCDateOnly(Utc.datetime_from_str(s, FORMAT)?))
+        Ok(UTCDateOnly(Date::from_utc(NaiveDate::parse_from_str(s, FORMAT)?, Utc)))
     }
 }
 

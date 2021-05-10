@@ -1,33 +1,33 @@
 use std::{borrow::Cow, convert::TryFrom};
 
-use chrono::{DateTime, Local, TimeZone};
+use chrono::{NaiveDate, Local};
 use serde::{self, Serialize, Deserialize, Serializer, Deserializer};
 
 const FORMAT: &str = "%Y%m%d";
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct LocalMktDate(DateTime<Local>);
+pub struct LocalMktDate(NaiveDate);
 
 impl Default for LocalMktDate {
     fn default() -> Self {
-        LocalMktDate(Local::now())
+        LocalMktDate(Local::today().naive_local())
     }
 }
 
-impl From<DateTime<Local>> for LocalMktDate {
-    fn from(date: DateTime<Local>) -> Self {
+impl From<NaiveDate> for LocalMktDate {
+    fn from(date: NaiveDate) -> Self {
         LocalMktDate(date)
     }
 }
 
-impl AsRef<DateTime<Local>> for LocalMktDate {
-    fn as_ref(&self) -> &DateTime<Local> {
+impl AsRef<NaiveDate> for LocalMktDate {
+    fn as_ref(&self) -> &NaiveDate {
         &self.0
     }
 }
 
-impl AsMut<DateTime<Local>> for LocalMktDate {
-    fn as_mut(&mut self) -> &mut DateTime<Local> {
+impl AsMut<NaiveDate> for LocalMktDate {
+    fn as_mut(&mut self) -> &mut NaiveDate {
         &mut self.0
     }
 }
@@ -36,7 +36,7 @@ impl TryFrom<&str> for LocalMktDate {
     type Error = chrono::ParseError;
 
     fn try_from(s: &str) -> Result<Self, Self::Error> {
-        Ok(LocalMktDate(Local.datetime_from_str(s, FORMAT)?))
+        Ok(LocalMktDate(NaiveDate::parse_from_str(s, FORMAT)?))
     }
 }
 
