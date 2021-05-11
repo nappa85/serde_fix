@@ -57,3 +57,18 @@ impl<'de> Deserialize<'de> for UTCDateOnly {
         UTCDateOnly::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.as_ref()).map_err(serde::de::Error::custom)
     }
 }
+
+#[cfg(test)]
+mod test {
+    use std::convert::TryFrom;
+
+    use chrono::{Date, NaiveDate, Utc};
+
+    use super::UTCDateOnly;
+
+    #[test]
+    fn decode() {
+        let msg = "20210511";
+        assert_eq!(UTCDateOnly::try_from(msg).unwrap(), UTCDateOnly::from(Date::from_utc(NaiveDate::from_ymd(2021, 5, 11), Utc)));
+    }
+}

@@ -57,3 +57,18 @@ impl<'de> Deserialize<'de> for UTCTimestamp {
         UTCTimestamp::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.as_ref()).map_err(serde::de::Error::custom)
     }
 }
+
+#[cfg(test)]
+mod test {
+    use std::convert::TryFrom;
+
+    use chrono::{DateTime, NaiveDate, Utc};
+
+    use super::UTCTimestamp;
+
+    #[test]
+    fn decode() {
+        let msg = "20210511-08:55:12.123";
+        assert_eq!(UTCTimestamp::try_from(msg).unwrap(), UTCTimestamp::from(DateTime::from_utc(NaiveDate::from_ymd(2021, 5, 11).and_hms_milli(8, 55, 12, 123), Utc)));
+    }
+}

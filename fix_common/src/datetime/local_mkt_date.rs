@@ -57,3 +57,18 @@ impl<'de> Deserialize<'de> for LocalMktDate {
         LocalMktDate::try_from(<Cow<'_, str> as Deserialize>::deserialize(deserializer)?.as_ref()).map_err(serde::de::Error::custom)
     }
 }
+
+#[cfg(test)]
+mod test {
+    use std::convert::TryFrom;
+
+    use chrono::NaiveDate;
+
+    use super::LocalMktDate;
+
+    #[test]
+    fn decode() {
+        let msg = "20210511";
+        assert_eq!(LocalMktDate::try_from(msg).unwrap(), LocalMktDate::from(NaiveDate::from_ymd(2021, 5, 11)));
+    }
+}
