@@ -494,19 +494,19 @@ impl Serialize for Message {
 }
 
 impl HasHeaderBoxed for Message {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
-            Message::Heartbeat(m) => Box::new(m.get_header()),
-            Message::TestRequest(m) => Box::new(m.get_header()),
-            Message::ResendRequest(m) => Box::new(m.get_header()),
-            Message::Reject(m) => Box::new(m.get_header()),
-            Message::SequenceReset(m) => Box::new(m.get_header()),
-            Message::Logout(m) => Box::new(m.get_header()),
+            Message::Heartbeat(m) => m.get_header(),
+            Message::TestRequest(m) => m.get_header(),
+            Message::ResendRequest(m) => m.get_header(),
+            Message::Reject(m) => m.get_header(),
+            Message::SequenceReset(m) => m.get_header(),
+            Message::Logout(m) => m.get_header(),
             Message::IndicationOfInterest(m) => m.get_header_boxed(),
             Message::Advertisement(m) => m.get_header_boxed(),
             Message::ExecutionReport(m) => m.get_header_boxed(),
             Message::OrderCancelReject(m) => m.get_header_boxed(),
-            Message::Logon(m) => Box::new(m.get_header()),
+            Message::Logon(m) => m.get_header(),
             Message::News(m) => m.get_header_boxed(),
             Message::Email(m) => m.get_header_boxed(),
             Message::NewOrderSingle(m) => m.get_header_boxed(),
@@ -626,7 +626,7 @@ impl<const V: u8, const T1: char, const T2: char> crate::header::Header for fixt
     fn get_msg_seq_num(&self) -> u32 {
         self.msg_seq_num
     }
-	fn reply_boxed(&mut self, other: Box<&dyn crate::header::Header>) {
+	fn reply_boxed(&mut self, other: &dyn crate::header::Header) {
 		self.sender_comp_id = other.get_target_comp_id().to_owned();
 		self.target_comp_id = other.get_sender_comp_id().to_owned();
 		self.msg_seq_num = other.get_msg_seq_num();
@@ -676,14 +676,14 @@ impl Serialize for IndicationOfInterest {
 }
 
 impl HasHeaderBoxed for IndicationOfInterest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            IndicationOfInterest::FIX50(m) => Box::new(m.get_header()),
+            IndicationOfInterest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            IndicationOfInterest::FIX50SP1(m) => Box::new(m.get_header()),
+            IndicationOfInterest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            IndicationOfInterest::FIX50SP2(m) => Box::new(m.get_header()),
+            IndicationOfInterest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -719,14 +719,14 @@ impl Serialize for Advertisement {
 }
 
 impl HasHeaderBoxed for Advertisement {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            Advertisement::FIX50(m) => Box::new(m.get_header()),
+            Advertisement::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            Advertisement::FIX50SP1(m) => Box::new(m.get_header()),
+            Advertisement::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            Advertisement::FIX50SP2(m) => Box::new(m.get_header()),
+            Advertisement::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -762,14 +762,14 @@ impl Serialize for ExecutionReport {
 }
 
 impl HasHeaderBoxed for ExecutionReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ExecutionReport::FIX50(m) => Box::new(m.get_header()),
+            ExecutionReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ExecutionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            ExecutionReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ExecutionReport::FIX50SP2(m) => Box::new(m.get_header()),
+            ExecutionReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -805,14 +805,14 @@ impl Serialize for OrderCancelReject {
 }
 
 impl HasHeaderBoxed for OrderCancelReject {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            OrderCancelReject::FIX50(m) => Box::new(m.get_header()),
+            OrderCancelReject::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            OrderCancelReject::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderCancelReject::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderCancelReject::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderCancelReject::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -848,14 +848,14 @@ impl Serialize for News {
 }
 
 impl HasHeaderBoxed for News {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            News::FIX50(m) => Box::new(m.get_header()),
+            News::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            News::FIX50SP1(m) => Box::new(m.get_header()),
+            News::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            News::FIX50SP2(m) => Box::new(m.get_header()),
+            News::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -891,14 +891,14 @@ impl Serialize for Email {
 }
 
 impl HasHeaderBoxed for Email {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            Email::FIX50(m) => Box::new(m.get_header()),
+            Email::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            Email::FIX50SP1(m) => Box::new(m.get_header()),
+            Email::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            Email::FIX50SP2(m) => Box::new(m.get_header()),
+            Email::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -934,14 +934,14 @@ impl Serialize for NewOrderSingle {
 }
 
 impl HasHeaderBoxed for NewOrderSingle {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            NewOrderSingle::FIX50(m) => Box::new(m.get_header()),
+            NewOrderSingle::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            NewOrderSingle::FIX50SP1(m) => Box::new(m.get_header()),
+            NewOrderSingle::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            NewOrderSingle::FIX50SP2(m) => Box::new(m.get_header()),
+            NewOrderSingle::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -977,14 +977,14 @@ impl Serialize for NewOrderList {
 }
 
 impl HasHeaderBoxed for NewOrderList {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            NewOrderList::FIX50(m) => Box::new(m.get_header()),
+            NewOrderList::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            NewOrderList::FIX50SP1(m) => Box::new(m.get_header()),
+            NewOrderList::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            NewOrderList::FIX50SP2(m) => Box::new(m.get_header()),
+            NewOrderList::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1020,14 +1020,14 @@ impl Serialize for OrderCancelRequest {
 }
 
 impl HasHeaderBoxed for OrderCancelRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            OrderCancelRequest::FIX50(m) => Box::new(m.get_header()),
+            OrderCancelRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            OrderCancelRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderCancelRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderCancelRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderCancelRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1063,14 +1063,14 @@ impl Serialize for OrderCancelReplaceRequest {
 }
 
 impl HasHeaderBoxed for OrderCancelReplaceRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            OrderCancelReplaceRequest::FIX50(m) => Box::new(m.get_header()),
+            OrderCancelReplaceRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            OrderCancelReplaceRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderCancelReplaceRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderCancelReplaceRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderCancelReplaceRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1106,14 +1106,14 @@ impl Serialize for OrderStatusRequest {
 }
 
 impl HasHeaderBoxed for OrderStatusRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            OrderStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            OrderStatusRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            OrderStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderStatusRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderStatusRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1149,14 +1149,14 @@ impl Serialize for AllocationInstruction {
 }
 
 impl HasHeaderBoxed for AllocationInstruction {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            AllocationInstruction::FIX50(m) => Box::new(m.get_header()),
+            AllocationInstruction::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            AllocationInstruction::FIX50SP1(m) => Box::new(m.get_header()),
+            AllocationInstruction::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            AllocationInstruction::FIX50SP2(m) => Box::new(m.get_header()),
+            AllocationInstruction::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1192,14 +1192,14 @@ impl Serialize for ListCancelRequest {
 }
 
 impl HasHeaderBoxed for ListCancelRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ListCancelRequest::FIX50(m) => Box::new(m.get_header()),
+            ListCancelRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ListCancelRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            ListCancelRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ListCancelRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            ListCancelRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1235,14 +1235,14 @@ impl Serialize for ListExecute {
 }
 
 impl HasHeaderBoxed for ListExecute {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ListExecute::FIX50(m) => Box::new(m.get_header()),
+            ListExecute::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ListExecute::FIX50SP1(m) => Box::new(m.get_header()),
+            ListExecute::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ListExecute::FIX50SP2(m) => Box::new(m.get_header()),
+            ListExecute::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1278,14 +1278,14 @@ impl Serialize for ListStatusRequest {
 }
 
 impl HasHeaderBoxed for ListStatusRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ListStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            ListStatusRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ListStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            ListStatusRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ListStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            ListStatusRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1321,14 +1321,14 @@ impl Serialize for ListStatus {
 }
 
 impl HasHeaderBoxed for ListStatus {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ListStatus::FIX50(m) => Box::new(m.get_header()),
+            ListStatus::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ListStatus::FIX50SP1(m) => Box::new(m.get_header()),
+            ListStatus::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ListStatus::FIX50SP2(m) => Box::new(m.get_header()),
+            ListStatus::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1364,14 +1364,14 @@ impl Serialize for AllocationInstructionAck {
 }
 
 impl HasHeaderBoxed for AllocationInstructionAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            AllocationInstructionAck::FIX50(m) => Box::new(m.get_header()),
+            AllocationInstructionAck::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            AllocationInstructionAck::FIX50SP1(m) => Box::new(m.get_header()),
+            AllocationInstructionAck::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            AllocationInstructionAck::FIX50SP2(m) => Box::new(m.get_header()),
+            AllocationInstructionAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1407,14 +1407,14 @@ impl Serialize for DontKnowTrade {
 }
 
 impl HasHeaderBoxed for DontKnowTrade {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            DontKnowTrade::FIX50(m) => Box::new(m.get_header()),
+            DontKnowTrade::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            DontKnowTrade::FIX50SP1(m) => Box::new(m.get_header()),
+            DontKnowTrade::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            DontKnowTrade::FIX50SP2(m) => Box::new(m.get_header()),
+            DontKnowTrade::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1450,14 +1450,14 @@ impl Serialize for QuoteRequest {
 }
 
 impl HasHeaderBoxed for QuoteRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            QuoteRequest::FIX50(m) => Box::new(m.get_header()),
+            QuoteRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            QuoteRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            QuoteRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            QuoteRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            QuoteRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1493,14 +1493,14 @@ impl Serialize for Quote {
 }
 
 impl HasHeaderBoxed for Quote {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            Quote::FIX50(m) => Box::new(m.get_header()),
+            Quote::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            Quote::FIX50SP1(m) => Box::new(m.get_header()),
+            Quote::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            Quote::FIX50SP2(m) => Box::new(m.get_header()),
+            Quote::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1536,14 +1536,14 @@ impl Serialize for SettlementInstructions {
 }
 
 impl HasHeaderBoxed for SettlementInstructions {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SettlementInstructions::FIX50(m) => Box::new(m.get_header()),
+            SettlementInstructions::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SettlementInstructions::FIX50SP1(m) => Box::new(m.get_header()),
+            SettlementInstructions::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SettlementInstructions::FIX50SP2(m) => Box::new(m.get_header()),
+            SettlementInstructions::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1579,14 +1579,14 @@ impl Serialize for MarketDataRequest {
 }
 
 impl HasHeaderBoxed for MarketDataRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            MarketDataRequest::FIX50(m) => Box::new(m.get_header()),
+            MarketDataRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            MarketDataRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            MarketDataRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            MarketDataRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            MarketDataRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1622,14 +1622,14 @@ impl Serialize for MarketDataSnapshotFullRefresh {
 }
 
 impl HasHeaderBoxed for MarketDataSnapshotFullRefresh {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            MarketDataSnapshotFullRefresh::FIX50(m) => Box::new(m.get_header()),
+            MarketDataSnapshotFullRefresh::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            MarketDataSnapshotFullRefresh::FIX50SP1(m) => Box::new(m.get_header()),
+            MarketDataSnapshotFullRefresh::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            MarketDataSnapshotFullRefresh::FIX50SP2(m) => Box::new(m.get_header()),
+            MarketDataSnapshotFullRefresh::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1665,14 +1665,14 @@ impl Serialize for MarketDataIncrementalRefresh {
 }
 
 impl HasHeaderBoxed for MarketDataIncrementalRefresh {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            MarketDataIncrementalRefresh::FIX50(m) => Box::new(m.get_header()),
+            MarketDataIncrementalRefresh::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            MarketDataIncrementalRefresh::FIX50SP1(m) => Box::new(m.get_header()),
+            MarketDataIncrementalRefresh::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            MarketDataIncrementalRefresh::FIX50SP2(m) => Box::new(m.get_header()),
+            MarketDataIncrementalRefresh::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1708,14 +1708,14 @@ impl Serialize for MarketDataRequestReject {
 }
 
 impl HasHeaderBoxed for MarketDataRequestReject {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            MarketDataRequestReject::FIX50(m) => Box::new(m.get_header()),
+            MarketDataRequestReject::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            MarketDataRequestReject::FIX50SP1(m) => Box::new(m.get_header()),
+            MarketDataRequestReject::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            MarketDataRequestReject::FIX50SP2(m) => Box::new(m.get_header()),
+            MarketDataRequestReject::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1751,14 +1751,14 @@ impl Serialize for QuoteCancel {
 }
 
 impl HasHeaderBoxed for QuoteCancel {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            QuoteCancel::FIX50(m) => Box::new(m.get_header()),
+            QuoteCancel::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            QuoteCancel::FIX50SP1(m) => Box::new(m.get_header()),
+            QuoteCancel::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            QuoteCancel::FIX50SP2(m) => Box::new(m.get_header()),
+            QuoteCancel::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1794,14 +1794,14 @@ impl Serialize for QuoteStatusRequest {
 }
 
 impl HasHeaderBoxed for QuoteStatusRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            QuoteStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            QuoteStatusRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            QuoteStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            QuoteStatusRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            QuoteStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            QuoteStatusRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1831,12 +1831,12 @@ impl Serialize for MassQuoteAcknowledgement {
 }
 
 impl HasHeaderBoxed for MassQuoteAcknowledgement {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            MassQuoteAcknowledgement::FIX50(m) => Box::new(m.get_header()),
+            MassQuoteAcknowledgement::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            MassQuoteAcknowledgement::FIX50SP1(m) => Box::new(m.get_header()),
+            MassQuoteAcknowledgement::FIX50SP1(m) => m.get_header(),
         }
     }
 }
@@ -1872,14 +1872,14 @@ impl Serialize for SecurityDefinitionRequest {
 }
 
 impl HasHeaderBoxed for SecurityDefinitionRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityDefinitionRequest::FIX50(m) => Box::new(m.get_header()),
+            SecurityDefinitionRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityDefinitionRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityDefinitionRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityDefinitionRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityDefinitionRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1915,14 +1915,14 @@ impl Serialize for SecurityDefinition {
 }
 
 impl HasHeaderBoxed for SecurityDefinition {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityDefinition::FIX50(m) => Box::new(m.get_header()),
+            SecurityDefinition::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityDefinition::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityDefinition::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityDefinition::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityDefinition::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -1958,14 +1958,14 @@ impl Serialize for SecurityStatusRequest {
 }
 
 impl HasHeaderBoxed for SecurityStatusRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            SecurityStatusRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityStatusRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityStatusRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2001,14 +2001,14 @@ impl Serialize for SecurityStatus {
 }
 
 impl HasHeaderBoxed for SecurityStatus {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityStatus::FIX50(m) => Box::new(m.get_header()),
+            SecurityStatus::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityStatus::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityStatus::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityStatus::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityStatus::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2044,14 +2044,14 @@ impl Serialize for TradingSessionStatusRequest {
 }
 
 impl HasHeaderBoxed for TradingSessionStatusRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            TradingSessionStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            TradingSessionStatusRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            TradingSessionStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            TradingSessionStatusRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradingSessionStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            TradingSessionStatusRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2087,14 +2087,14 @@ impl Serialize for TradingSessionStatus {
 }
 
 impl HasHeaderBoxed for TradingSessionStatus {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            TradingSessionStatus::FIX50(m) => Box::new(m.get_header()),
+            TradingSessionStatus::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            TradingSessionStatus::FIX50SP1(m) => Box::new(m.get_header()),
+            TradingSessionStatus::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradingSessionStatus::FIX50SP2(m) => Box::new(m.get_header()),
+            TradingSessionStatus::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2130,14 +2130,14 @@ impl Serialize for MassQuote {
 }
 
 impl HasHeaderBoxed for MassQuote {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            MassQuote::FIX50(m) => Box::new(m.get_header()),
+            MassQuote::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            MassQuote::FIX50SP1(m) => Box::new(m.get_header()),
+            MassQuote::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            MassQuote::FIX50SP2(m) => Box::new(m.get_header()),
+            MassQuote::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2173,14 +2173,14 @@ impl Serialize for BusinessMessageReject {
 }
 
 impl HasHeaderBoxed for BusinessMessageReject {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            BusinessMessageReject::FIX50(m) => Box::new(m.get_header()),
+            BusinessMessageReject::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            BusinessMessageReject::FIX50SP1(m) => Box::new(m.get_header()),
+            BusinessMessageReject::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            BusinessMessageReject::FIX50SP2(m) => Box::new(m.get_header()),
+            BusinessMessageReject::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2216,14 +2216,14 @@ impl Serialize for BidRequest {
 }
 
 impl HasHeaderBoxed for BidRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            BidRequest::FIX50(m) => Box::new(m.get_header()),
+            BidRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            BidRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            BidRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            BidRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            BidRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2259,14 +2259,14 @@ impl Serialize for BidResponse {
 }
 
 impl HasHeaderBoxed for BidResponse {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            BidResponse::FIX50(m) => Box::new(m.get_header()),
+            BidResponse::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            BidResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            BidResponse::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            BidResponse::FIX50SP2(m) => Box::new(m.get_header()),
+            BidResponse::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2302,14 +2302,14 @@ impl Serialize for ListStrikePrice {
 }
 
 impl HasHeaderBoxed for ListStrikePrice {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ListStrikePrice::FIX50(m) => Box::new(m.get_header()),
+            ListStrikePrice::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ListStrikePrice::FIX50SP1(m) => Box::new(m.get_header()),
+            ListStrikePrice::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ListStrikePrice::FIX50SP2(m) => Box::new(m.get_header()),
+            ListStrikePrice::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2345,14 +2345,14 @@ impl Serialize for XmlMessage {
 }
 
 impl HasHeaderBoxed for XmlMessage {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            XmlMessage::FIX50(m) => Box::new(m.get_header()),
+            XmlMessage::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            XmlMessage::FIX50SP1(m) => Box::new(m.get_header()),
+            XmlMessage::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            XmlMessage::FIX50SP2(m) => Box::new(m.get_header()),
+            XmlMessage::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2388,14 +2388,14 @@ impl Serialize for RegistrationInstructions {
 }
 
 impl HasHeaderBoxed for RegistrationInstructions {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            RegistrationInstructions::FIX50(m) => Box::new(m.get_header()),
+            RegistrationInstructions::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            RegistrationInstructions::FIX50SP1(m) => Box::new(m.get_header()),
+            RegistrationInstructions::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            RegistrationInstructions::FIX50SP2(m) => Box::new(m.get_header()),
+            RegistrationInstructions::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2431,14 +2431,14 @@ impl Serialize for RegistrationInstructionsResponse {
 }
 
 impl HasHeaderBoxed for RegistrationInstructionsResponse {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            RegistrationInstructionsResponse::FIX50(m) => Box::new(m.get_header()),
+            RegistrationInstructionsResponse::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            RegistrationInstructionsResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            RegistrationInstructionsResponse::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            RegistrationInstructionsResponse::FIX50SP2(m) => Box::new(m.get_header()),
+            RegistrationInstructionsResponse::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2474,14 +2474,14 @@ impl Serialize for OrderMassCancelRequest {
 }
 
 impl HasHeaderBoxed for OrderMassCancelRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            OrderMassCancelRequest::FIX50(m) => Box::new(m.get_header()),
+            OrderMassCancelRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            OrderMassCancelRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderMassCancelRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderMassCancelRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderMassCancelRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2517,14 +2517,14 @@ impl Serialize for OrderMassCancelReport {
 }
 
 impl HasHeaderBoxed for OrderMassCancelReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            OrderMassCancelReport::FIX50(m) => Box::new(m.get_header()),
+            OrderMassCancelReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            OrderMassCancelReport::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderMassCancelReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderMassCancelReport::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderMassCancelReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2560,14 +2560,14 @@ impl Serialize for NewOrderCross {
 }
 
 impl HasHeaderBoxed for NewOrderCross {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            NewOrderCross::FIX50(m) => Box::new(m.get_header()),
+            NewOrderCross::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            NewOrderCross::FIX50SP1(m) => Box::new(m.get_header()),
+            NewOrderCross::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            NewOrderCross::FIX50SP2(m) => Box::new(m.get_header()),
+            NewOrderCross::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2603,14 +2603,14 @@ impl Serialize for CrossOrderCancelReplaceRequest {
 }
 
 impl HasHeaderBoxed for CrossOrderCancelReplaceRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            CrossOrderCancelReplaceRequest::FIX50(m) => Box::new(m.get_header()),
+            CrossOrderCancelReplaceRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            CrossOrderCancelReplaceRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            CrossOrderCancelReplaceRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            CrossOrderCancelReplaceRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            CrossOrderCancelReplaceRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2646,14 +2646,14 @@ impl Serialize for CrossOrderCancelRequest {
 }
 
 impl HasHeaderBoxed for CrossOrderCancelRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            CrossOrderCancelRequest::FIX50(m) => Box::new(m.get_header()),
+            CrossOrderCancelRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            CrossOrderCancelRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            CrossOrderCancelRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            CrossOrderCancelRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            CrossOrderCancelRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2689,14 +2689,14 @@ impl Serialize for SecurityTypeRequest {
 }
 
 impl HasHeaderBoxed for SecurityTypeRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityTypeRequest::FIX50(m) => Box::new(m.get_header()),
+            SecurityTypeRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityTypeRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityTypeRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityTypeRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityTypeRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2732,14 +2732,14 @@ impl Serialize for SecurityTypes {
 }
 
 impl HasHeaderBoxed for SecurityTypes {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityTypes::FIX50(m) => Box::new(m.get_header()),
+            SecurityTypes::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityTypes::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityTypes::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityTypes::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityTypes::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2775,14 +2775,14 @@ impl Serialize for SecurityListRequest {
 }
 
 impl HasHeaderBoxed for SecurityListRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityListRequest::FIX50(m) => Box::new(m.get_header()),
+            SecurityListRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityListRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityListRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityListRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityListRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2818,14 +2818,14 @@ impl Serialize for SecurityList {
 }
 
 impl HasHeaderBoxed for SecurityList {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityList::FIX50(m) => Box::new(m.get_header()),
+            SecurityList::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityList::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityList::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityList::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityList::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2861,14 +2861,14 @@ impl Serialize for DerivativeSecurityListRequest {
 }
 
 impl HasHeaderBoxed for DerivativeSecurityListRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            DerivativeSecurityListRequest::FIX50(m) => Box::new(m.get_header()),
+            DerivativeSecurityListRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            DerivativeSecurityListRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            DerivativeSecurityListRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            DerivativeSecurityListRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            DerivativeSecurityListRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2904,14 +2904,14 @@ impl Serialize for DerivativeSecurityList {
 }
 
 impl HasHeaderBoxed for DerivativeSecurityList {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            DerivativeSecurityList::FIX50(m) => Box::new(m.get_header()),
+            DerivativeSecurityList::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            DerivativeSecurityList::FIX50SP1(m) => Box::new(m.get_header()),
+            DerivativeSecurityList::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            DerivativeSecurityList::FIX50SP2(m) => Box::new(m.get_header()),
+            DerivativeSecurityList::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2947,14 +2947,14 @@ impl Serialize for NewOrderMultileg {
 }
 
 impl HasHeaderBoxed for NewOrderMultileg {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            NewOrderMultileg::FIX50(m) => Box::new(m.get_header()),
+            NewOrderMultileg::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            NewOrderMultileg::FIX50SP1(m) => Box::new(m.get_header()),
+            NewOrderMultileg::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            NewOrderMultileg::FIX50SP2(m) => Box::new(m.get_header()),
+            NewOrderMultileg::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -2978,10 +2978,10 @@ impl Serialize for MultilegOrderCancelReplace {
 }
 
 impl HasHeaderBoxed for MultilegOrderCancelReplace {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp2")]
-            MultilegOrderCancelReplace::FIX50SP2(m) => Box::new(m.get_header()),
+            MultilegOrderCancelReplace::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3017,14 +3017,14 @@ impl Serialize for TradeCaptureReportRequest {
 }
 
 impl HasHeaderBoxed for TradeCaptureReportRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            TradeCaptureReportRequest::FIX50(m) => Box::new(m.get_header()),
+            TradeCaptureReportRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            TradeCaptureReportRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            TradeCaptureReportRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradeCaptureReportRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            TradeCaptureReportRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3060,14 +3060,14 @@ impl Serialize for TradeCaptureReport {
 }
 
 impl HasHeaderBoxed for TradeCaptureReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            TradeCaptureReport::FIX50(m) => Box::new(m.get_header()),
+            TradeCaptureReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            TradeCaptureReport::FIX50SP1(m) => Box::new(m.get_header()),
+            TradeCaptureReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradeCaptureReport::FIX50SP2(m) => Box::new(m.get_header()),
+            TradeCaptureReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3103,14 +3103,14 @@ impl Serialize for OrderMassStatusRequest {
 }
 
 impl HasHeaderBoxed for OrderMassStatusRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            OrderMassStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            OrderMassStatusRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            OrderMassStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderMassStatusRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderMassStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderMassStatusRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3146,14 +3146,14 @@ impl Serialize for QuoteRequestReject {
 }
 
 impl HasHeaderBoxed for QuoteRequestReject {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            QuoteRequestReject::FIX50(m) => Box::new(m.get_header()),
+            QuoteRequestReject::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            QuoteRequestReject::FIX50SP1(m) => Box::new(m.get_header()),
+            QuoteRequestReject::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            QuoteRequestReject::FIX50SP2(m) => Box::new(m.get_header()),
+            QuoteRequestReject::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3189,14 +3189,14 @@ impl Serialize for RfqRequest {
 }
 
 impl HasHeaderBoxed for RfqRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            RfqRequest::FIX50(m) => Box::new(m.get_header()),
+            RfqRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            RfqRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            RfqRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            RfqRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            RfqRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3232,14 +3232,14 @@ impl Serialize for QuoteStatusReport {
 }
 
 impl HasHeaderBoxed for QuoteStatusReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            QuoteStatusReport::FIX50(m) => Box::new(m.get_header()),
+            QuoteStatusReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            QuoteStatusReport::FIX50SP1(m) => Box::new(m.get_header()),
+            QuoteStatusReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            QuoteStatusReport::FIX50SP2(m) => Box::new(m.get_header()),
+            QuoteStatusReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3275,14 +3275,14 @@ impl Serialize for QuoteResponse {
 }
 
 impl HasHeaderBoxed for QuoteResponse {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            QuoteResponse::FIX50(m) => Box::new(m.get_header()),
+            QuoteResponse::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            QuoteResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            QuoteResponse::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            QuoteResponse::FIX50SP2(m) => Box::new(m.get_header()),
+            QuoteResponse::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3318,14 +3318,14 @@ impl Serialize for Confirmation {
 }
 
 impl HasHeaderBoxed for Confirmation {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            Confirmation::FIX50(m) => Box::new(m.get_header()),
+            Confirmation::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            Confirmation::FIX50SP1(m) => Box::new(m.get_header()),
+            Confirmation::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            Confirmation::FIX50SP2(m) => Box::new(m.get_header()),
+            Confirmation::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3361,14 +3361,14 @@ impl Serialize for PositionMaintenanceRequest {
 }
 
 impl HasHeaderBoxed for PositionMaintenanceRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            PositionMaintenanceRequest::FIX50(m) => Box::new(m.get_header()),
+            PositionMaintenanceRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            PositionMaintenanceRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            PositionMaintenanceRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            PositionMaintenanceRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            PositionMaintenanceRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3404,14 +3404,14 @@ impl Serialize for PositionMaintenanceReport {
 }
 
 impl HasHeaderBoxed for PositionMaintenanceReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            PositionMaintenanceReport::FIX50(m) => Box::new(m.get_header()),
+            PositionMaintenanceReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            PositionMaintenanceReport::FIX50SP1(m) => Box::new(m.get_header()),
+            PositionMaintenanceReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            PositionMaintenanceReport::FIX50SP2(m) => Box::new(m.get_header()),
+            PositionMaintenanceReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3447,14 +3447,14 @@ impl Serialize for RequestForPositions {
 }
 
 impl HasHeaderBoxed for RequestForPositions {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            RequestForPositions::FIX50(m) => Box::new(m.get_header()),
+            RequestForPositions::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            RequestForPositions::FIX50SP1(m) => Box::new(m.get_header()),
+            RequestForPositions::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            RequestForPositions::FIX50SP2(m) => Box::new(m.get_header()),
+            RequestForPositions::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3490,14 +3490,14 @@ impl Serialize for RequestForPositionsAck {
 }
 
 impl HasHeaderBoxed for RequestForPositionsAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            RequestForPositionsAck::FIX50(m) => Box::new(m.get_header()),
+            RequestForPositionsAck::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            RequestForPositionsAck::FIX50SP1(m) => Box::new(m.get_header()),
+            RequestForPositionsAck::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            RequestForPositionsAck::FIX50SP2(m) => Box::new(m.get_header()),
+            RequestForPositionsAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3533,14 +3533,14 @@ impl Serialize for PositionReport {
 }
 
 impl HasHeaderBoxed for PositionReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            PositionReport::FIX50(m) => Box::new(m.get_header()),
+            PositionReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            PositionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            PositionReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            PositionReport::FIX50SP2(m) => Box::new(m.get_header()),
+            PositionReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3576,14 +3576,14 @@ impl Serialize for TradeCaptureReportRequestAck {
 }
 
 impl HasHeaderBoxed for TradeCaptureReportRequestAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            TradeCaptureReportRequestAck::FIX50(m) => Box::new(m.get_header()),
+            TradeCaptureReportRequestAck::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            TradeCaptureReportRequestAck::FIX50SP1(m) => Box::new(m.get_header()),
+            TradeCaptureReportRequestAck::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradeCaptureReportRequestAck::FIX50SP2(m) => Box::new(m.get_header()),
+            TradeCaptureReportRequestAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3619,14 +3619,14 @@ impl Serialize for TradeCaptureReportAck {
 }
 
 impl HasHeaderBoxed for TradeCaptureReportAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            TradeCaptureReportAck::FIX50(m) => Box::new(m.get_header()),
+            TradeCaptureReportAck::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            TradeCaptureReportAck::FIX50SP1(m) => Box::new(m.get_header()),
+            TradeCaptureReportAck::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradeCaptureReportAck::FIX50SP2(m) => Box::new(m.get_header()),
+            TradeCaptureReportAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3662,14 +3662,14 @@ impl Serialize for AllocationReport {
 }
 
 impl HasHeaderBoxed for AllocationReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            AllocationReport::FIX50(m) => Box::new(m.get_header()),
+            AllocationReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            AllocationReport::FIX50SP1(m) => Box::new(m.get_header()),
+            AllocationReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            AllocationReport::FIX50SP2(m) => Box::new(m.get_header()),
+            AllocationReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3705,14 +3705,14 @@ impl Serialize for AllocationReportAck {
 }
 
 impl HasHeaderBoxed for AllocationReportAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            AllocationReportAck::FIX50(m) => Box::new(m.get_header()),
+            AllocationReportAck::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            AllocationReportAck::FIX50SP1(m) => Box::new(m.get_header()),
+            AllocationReportAck::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            AllocationReportAck::FIX50SP2(m) => Box::new(m.get_header()),
+            AllocationReportAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3748,14 +3748,14 @@ impl Serialize for ConfirmationAck {
 }
 
 impl HasHeaderBoxed for ConfirmationAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ConfirmationAck::FIX50(m) => Box::new(m.get_header()),
+            ConfirmationAck::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ConfirmationAck::FIX50SP1(m) => Box::new(m.get_header()),
+            ConfirmationAck::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ConfirmationAck::FIX50SP2(m) => Box::new(m.get_header()),
+            ConfirmationAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3791,14 +3791,14 @@ impl Serialize for SettlementInstructionRequest {
 }
 
 impl HasHeaderBoxed for SettlementInstructionRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SettlementInstructionRequest::FIX50(m) => Box::new(m.get_header()),
+            SettlementInstructionRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SettlementInstructionRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            SettlementInstructionRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SettlementInstructionRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            SettlementInstructionRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3834,14 +3834,14 @@ impl Serialize for AssignmentReport {
 }
 
 impl HasHeaderBoxed for AssignmentReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            AssignmentReport::FIX50(m) => Box::new(m.get_header()),
+            AssignmentReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            AssignmentReport::FIX50SP1(m) => Box::new(m.get_header()),
+            AssignmentReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            AssignmentReport::FIX50SP2(m) => Box::new(m.get_header()),
+            AssignmentReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3877,14 +3877,14 @@ impl Serialize for CollateralRequest {
 }
 
 impl HasHeaderBoxed for CollateralRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            CollateralRequest::FIX50(m) => Box::new(m.get_header()),
+            CollateralRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            CollateralRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            CollateralRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            CollateralRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            CollateralRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3920,14 +3920,14 @@ impl Serialize for CollateralAssignment {
 }
 
 impl HasHeaderBoxed for CollateralAssignment {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            CollateralAssignment::FIX50(m) => Box::new(m.get_header()),
+            CollateralAssignment::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            CollateralAssignment::FIX50SP1(m) => Box::new(m.get_header()),
+            CollateralAssignment::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            CollateralAssignment::FIX50SP2(m) => Box::new(m.get_header()),
+            CollateralAssignment::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -3963,14 +3963,14 @@ impl Serialize for CollateralResponse {
 }
 
 impl HasHeaderBoxed for CollateralResponse {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            CollateralResponse::FIX50(m) => Box::new(m.get_header()),
+            CollateralResponse::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            CollateralResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            CollateralResponse::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            CollateralResponse::FIX50SP2(m) => Box::new(m.get_header()),
+            CollateralResponse::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4006,14 +4006,14 @@ impl Serialize for CollateralReport {
 }
 
 impl HasHeaderBoxed for CollateralReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            CollateralReport::FIX50(m) => Box::new(m.get_header()),
+            CollateralReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            CollateralReport::FIX50SP1(m) => Box::new(m.get_header()),
+            CollateralReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            CollateralReport::FIX50SP2(m) => Box::new(m.get_header()),
+            CollateralReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4049,14 +4049,14 @@ impl Serialize for CollateralInquiry {
 }
 
 impl HasHeaderBoxed for CollateralInquiry {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            CollateralInquiry::FIX50(m) => Box::new(m.get_header()),
+            CollateralInquiry::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            CollateralInquiry::FIX50SP1(m) => Box::new(m.get_header()),
+            CollateralInquiry::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            CollateralInquiry::FIX50SP2(m) => Box::new(m.get_header()),
+            CollateralInquiry::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4092,14 +4092,14 @@ impl Serialize for NetworkCounterpartySystemStatusRequest {
 }
 
 impl HasHeaderBoxed for NetworkCounterpartySystemStatusRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            NetworkCounterpartySystemStatusRequest::FIX50(m) => Box::new(m.get_header()),
+            NetworkCounterpartySystemStatusRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            NetworkCounterpartySystemStatusRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            NetworkCounterpartySystemStatusRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4135,14 +4135,14 @@ impl Serialize for NetworkCounterpartySystemStatusResponse {
 }
 
 impl HasHeaderBoxed for NetworkCounterpartySystemStatusResponse {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            NetworkCounterpartySystemStatusResponse::FIX50(m) => Box::new(m.get_header()),
+            NetworkCounterpartySystemStatusResponse::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            NetworkCounterpartySystemStatusResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            NetworkCounterpartySystemStatusResponse::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            NetworkCounterpartySystemStatusResponse::FIX50SP2(m) => Box::new(m.get_header()),
+            NetworkCounterpartySystemStatusResponse::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4178,14 +4178,14 @@ impl Serialize for UserRequest {
 }
 
 impl HasHeaderBoxed for UserRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            UserRequest::FIX50(m) => Box::new(m.get_header()),
+            UserRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            UserRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            UserRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            UserRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            UserRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4221,14 +4221,14 @@ impl Serialize for UserResponse {
 }
 
 impl HasHeaderBoxed for UserResponse {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            UserResponse::FIX50(m) => Box::new(m.get_header()),
+            UserResponse::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            UserResponse::FIX50SP1(m) => Box::new(m.get_header()),
+            UserResponse::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            UserResponse::FIX50SP2(m) => Box::new(m.get_header()),
+            UserResponse::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4264,14 +4264,14 @@ impl Serialize for CollateralInquiryAck {
 }
 
 impl HasHeaderBoxed for CollateralInquiryAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            CollateralInquiryAck::FIX50(m) => Box::new(m.get_header()),
+            CollateralInquiryAck::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            CollateralInquiryAck::FIX50SP1(m) => Box::new(m.get_header()),
+            CollateralInquiryAck::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            CollateralInquiryAck::FIX50SP2(m) => Box::new(m.get_header()),
+            CollateralInquiryAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4307,14 +4307,14 @@ impl Serialize for ConfirmationRequest {
 }
 
 impl HasHeaderBoxed for ConfirmationRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ConfirmationRequest::FIX50(m) => Box::new(m.get_header()),
+            ConfirmationRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ConfirmationRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            ConfirmationRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ConfirmationRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            ConfirmationRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4350,14 +4350,14 @@ impl Serialize for TradingSessionListRequest {
 }
 
 impl HasHeaderBoxed for TradingSessionListRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            TradingSessionListRequest::FIX50(m) => Box::new(m.get_header()),
+            TradingSessionListRequest::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            TradingSessionListRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            TradingSessionListRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradingSessionListRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            TradingSessionListRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4393,14 +4393,14 @@ impl Serialize for TradingSessionList {
 }
 
 impl HasHeaderBoxed for TradingSessionList {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            TradingSessionList::FIX50(m) => Box::new(m.get_header()),
+            TradingSessionList::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            TradingSessionList::FIX50SP1(m) => Box::new(m.get_header()),
+            TradingSessionList::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradingSessionList::FIX50SP2(m) => Box::new(m.get_header()),
+            TradingSessionList::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4436,14 +4436,14 @@ impl Serialize for SecurityListUpdateReport {
 }
 
 impl HasHeaderBoxed for SecurityListUpdateReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityListUpdateReport::FIX50(m) => Box::new(m.get_header()),
+            SecurityListUpdateReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityListUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityListUpdateReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityListUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityListUpdateReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4479,14 +4479,14 @@ impl Serialize for AdjustedPositionReport {
 }
 
 impl HasHeaderBoxed for AdjustedPositionReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            AdjustedPositionReport::FIX50(m) => Box::new(m.get_header()),
+            AdjustedPositionReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            AdjustedPositionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            AdjustedPositionReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            AdjustedPositionReport::FIX50SP2(m) => Box::new(m.get_header()),
+            AdjustedPositionReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4522,14 +4522,14 @@ impl Serialize for AllocationInstructionAlert {
 }
 
 impl HasHeaderBoxed for AllocationInstructionAlert {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            AllocationInstructionAlert::FIX50(m) => Box::new(m.get_header()),
+            AllocationInstructionAlert::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            AllocationInstructionAlert::FIX50SP1(m) => Box::new(m.get_header()),
+            AllocationInstructionAlert::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            AllocationInstructionAlert::FIX50SP2(m) => Box::new(m.get_header()),
+            AllocationInstructionAlert::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4553,10 +4553,10 @@ impl Serialize for ExecutionAcknowledgement {
 }
 
 impl HasHeaderBoxed for ExecutionAcknowledgement {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp2")]
-            ExecutionAcknowledgement::FIX50SP2(m) => Box::new(m.get_header()),
+            ExecutionAcknowledgement::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4592,14 +4592,14 @@ impl Serialize for ContraryIntentionReport {
 }
 
 impl HasHeaderBoxed for ContraryIntentionReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            ContraryIntentionReport::FIX50(m) => Box::new(m.get_header()),
+            ContraryIntentionReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            ContraryIntentionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            ContraryIntentionReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ContraryIntentionReport::FIX50SP2(m) => Box::new(m.get_header()),
+            ContraryIntentionReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4635,14 +4635,14 @@ impl Serialize for SecurityDefinitionUpdateReport {
 }
 
 impl HasHeaderBoxed for SecurityDefinitionUpdateReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50")]
-            SecurityDefinitionUpdateReport::FIX50(m) => Box::new(m.get_header()),
+            SecurityDefinitionUpdateReport::FIX50(m) => m.get_header(),
             #[cfg(feature = "fix_50sp1")]
-            SecurityDefinitionUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            SecurityDefinitionUpdateReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SecurityDefinitionUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
+            SecurityDefinitionUpdateReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4672,12 +4672,12 @@ impl Serialize for SettlementObligationReport {
 }
 
 impl HasHeaderBoxed for SettlementObligationReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            SettlementObligationReport::FIX50SP1(m) => Box::new(m.get_header()),
+            SettlementObligationReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            SettlementObligationReport::FIX50SP2(m) => Box::new(m.get_header()),
+            SettlementObligationReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4707,12 +4707,12 @@ impl Serialize for DerivativeSecurityListUpdateReport {
 }
 
 impl HasHeaderBoxed for DerivativeSecurityListUpdateReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            DerivativeSecurityListUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            DerivativeSecurityListUpdateReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            DerivativeSecurityListUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
+            DerivativeSecurityListUpdateReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4742,12 +4742,12 @@ impl Serialize for TradingSessionListUpdateReport {
 }
 
 impl HasHeaderBoxed for TradingSessionListUpdateReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            TradingSessionListUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            TradingSessionListUpdateReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            TradingSessionListUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
+            TradingSessionListUpdateReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4777,12 +4777,12 @@ impl Serialize for MarketDefinitionRequest {
 }
 
 impl HasHeaderBoxed for MarketDefinitionRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            MarketDefinitionRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            MarketDefinitionRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            MarketDefinitionRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            MarketDefinitionRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4812,12 +4812,12 @@ impl Serialize for MarketDefinition {
 }
 
 impl HasHeaderBoxed for MarketDefinition {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            MarketDefinition::FIX50SP1(m) => Box::new(m.get_header()),
+            MarketDefinition::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            MarketDefinition::FIX50SP2(m) => Box::new(m.get_header()),
+            MarketDefinition::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4847,12 +4847,12 @@ impl Serialize for MarketDefinitionUpdateReport {
 }
 
 impl HasHeaderBoxed for MarketDefinitionUpdateReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            MarketDefinitionUpdateReport::FIX50SP1(m) => Box::new(m.get_header()),
+            MarketDefinitionUpdateReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            MarketDefinitionUpdateReport::FIX50SP2(m) => Box::new(m.get_header()),
+            MarketDefinitionUpdateReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4882,12 +4882,12 @@ impl Serialize for ApplicationMessageRequest {
 }
 
 impl HasHeaderBoxed for ApplicationMessageRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            ApplicationMessageRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            ApplicationMessageRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ApplicationMessageRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            ApplicationMessageRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4917,12 +4917,12 @@ impl Serialize for ApplicationMessageRequestAck {
 }
 
 impl HasHeaderBoxed for ApplicationMessageRequestAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            ApplicationMessageRequestAck::FIX50SP1(m) => Box::new(m.get_header()),
+            ApplicationMessageRequestAck::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ApplicationMessageRequestAck::FIX50SP2(m) => Box::new(m.get_header()),
+            ApplicationMessageRequestAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4952,12 +4952,12 @@ impl Serialize for ApplicationMessageReport {
 }
 
 impl HasHeaderBoxed for ApplicationMessageReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            ApplicationMessageReport::FIX50SP1(m) => Box::new(m.get_header()),
+            ApplicationMessageReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            ApplicationMessageReport::FIX50SP2(m) => Box::new(m.get_header()),
+            ApplicationMessageReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -4987,12 +4987,12 @@ impl Serialize for OrderMassActionReport {
 }
 
 impl HasHeaderBoxed for OrderMassActionReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            OrderMassActionReport::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderMassActionReport::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderMassActionReport::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderMassActionReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -5022,12 +5022,12 @@ impl Serialize for OrderMassActionRequest {
 }
 
 impl HasHeaderBoxed for OrderMassActionRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            OrderMassActionRequest::FIX50SP1(m) => Box::new(m.get_header()),
+            OrderMassActionRequest::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            OrderMassActionRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            OrderMassActionRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -5057,12 +5057,12 @@ impl Serialize for UserNotification {
 }
 
 impl HasHeaderBoxed for UserNotification {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp1")]
-            UserNotification::FIX50SP1(m) => Box::new(m.get_header()),
+            UserNotification::FIX50SP1(m) => m.get_header(),
             #[cfg(feature = "fix_50sp2")]
-            UserNotification::FIX50SP2(m) => Box::new(m.get_header()),
+            UserNotification::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -5085,10 +5085,10 @@ impl Serialize for StreamAssignmentRequest {
 }
 
 impl HasHeaderBoxed for StreamAssignmentRequest {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp2")]
-            StreamAssignmentRequest::FIX50SP2(m) => Box::new(m.get_header()),
+            StreamAssignmentRequest::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -5112,10 +5112,10 @@ impl Serialize for StreamAssignmentReport {
 }
 
 impl HasHeaderBoxed for StreamAssignmentReport {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp2")]
-            StreamAssignmentReport::FIX50SP2(m) => Box::new(m.get_header()),
+            StreamAssignmentReport::FIX50SP2(m) => m.get_header(),
         }
     }
 }
@@ -5139,10 +5139,10 @@ impl Serialize for StreamAssignmentReportAck {
 }
 
 impl HasHeaderBoxed for StreamAssignmentReportAck {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_50sp2")]
-            StreamAssignmentReportAck::FIX50SP2(m) => Box::new(m.get_header()),
+            StreamAssignmentReportAck::FIX50SP2(m) => m.get_header(),
         }
     }
 }

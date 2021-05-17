@@ -128,35 +128,35 @@ impl Serialize for Message {
 }
 
 impl HasHeaderBoxed for Message {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
-            Message::Heartbeat(m) => Box::new(m.get_header()),
-            Message::TestRequest(m) => Box::new(m.get_header()),
-            Message::ResendRequest(m) => Box::new(m.get_header()),
-            Message::Reject(m) => Box::new(m.get_header()),
-            Message::SequenceReset(m) => Box::new(m.get_header()),
-            Message::Logout(m) => Box::new(m.get_header()),
-            Message::IndicationOfInterest(m) => Box::new(m.get_header()),
-            Message::Advertisement(m) => Box::new(m.get_header()),
-            Message::ExecutionReport(m) => Box::new(m.get_header()),
-            Message::OrderCancelReject(m) => Box::new(m.get_header()),
-            Message::Logon(m) => Box::new(m.get_header()),
-            Message::News(m) => Box::new(m.get_header()),
-            Message::Email(m) => Box::new(m.get_header()),
-            Message::NewOrderSingle(m) => Box::new(m.get_header()),
-            Message::NewOrderList(m) => Box::new(m.get_header()),
-            Message::OrderCancelRequest(m) => Box::new(m.get_header()),
-            Message::OrderCancelReplaceRequest(m) => Box::new(m.get_header()),
-            Message::OrderStatusRequest(m) => Box::new(m.get_header()),
-            Message::Allocation(m) => Box::new(m.get_header()),
-            Message::ListCancelRequest(m) => Box::new(m.get_header()),
-            Message::ListExecute(m) => Box::new(m.get_header()),
-            Message::ListStatusRequest(m) => Box::new(m.get_header()),
-            Message::ListStatus(m) => Box::new(m.get_header()),
-            Message::AllocationAck(m) => Box::new(m.get_header()),
-            Message::DontKnowTrade(m) => Box::new(m.get_header()),
-            Message::QuoteRequest(m) => Box::new(m.get_header()),
-            Message::Quote(m) => Box::new(m.get_header()),
+            Message::Heartbeat(m) => m.get_header(),
+            Message::TestRequest(m) => m.get_header(),
+            Message::ResendRequest(m) => m.get_header(),
+            Message::Reject(m) => m.get_header(),
+            Message::SequenceReset(m) => m.get_header(),
+            Message::Logout(m) => m.get_header(),
+            Message::IndicationOfInterest(m) => m.get_header(),
+            Message::Advertisement(m) => m.get_header(),
+            Message::ExecutionReport(m) => m.get_header(),
+            Message::OrderCancelReject(m) => m.get_header(),
+            Message::Logon(m) => m.get_header(),
+            Message::News(m) => m.get_header(),
+            Message::Email(m) => m.get_header(),
+            Message::NewOrderSingle(m) => m.get_header(),
+            Message::NewOrderList(m) => m.get_header(),
+            Message::OrderCancelRequest(m) => m.get_header(),
+            Message::OrderCancelReplaceRequest(m) => m.get_header(),
+            Message::OrderStatusRequest(m) => m.get_header(),
+            Message::Allocation(m) => m.get_header(),
+            Message::ListCancelRequest(m) => m.get_header(),
+            Message::ListExecute(m) => m.get_header(),
+            Message::ListStatusRequest(m) => m.get_header(),
+            Message::ListStatus(m) => m.get_header(),
+            Message::AllocationAck(m) => m.get_header(),
+            Message::DontKnowTrade(m) => m.get_header(),
+            Message::QuoteRequest(m) => m.get_header(),
+            Message::Quote(m) => m.get_header(),
         }
     }
 }
@@ -171,7 +171,7 @@ impl<const T: char> crate::header::Header for fix40::standard_message_header::St
     fn get_msg_seq_num(&self) -> u32 {
         self.msg_seq_num
     }
-    fn reply_boxed(&mut self, other: Box<&dyn crate::header::Header>) {
+    fn reply_boxed(&mut self, other: &dyn crate::header::Header) {
         self.sender_comp_id = other.get_target_comp_id().to_owned();
         self.target_comp_id = other.get_sender_comp_id().to_owned();
         self.msg_seq_num = other.get_msg_seq_num();

@@ -7,5 +7,5 @@ pub trait HasHeader {
 }
 
 pub trait HasHeaderBoxed {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn Header>;
+    fn get_header_boxed(&'_ self) -> &'_ dyn Header;
 }

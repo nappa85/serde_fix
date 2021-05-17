@@ -65,7 +65,7 @@ impl Serialize for Message {
 }
 
 impl HasHeaderBoxed for Message {
-    fn get_header_boxed<'a>(&'a self) -> Box<&'a dyn crate::header::Header> {
+    fn get_header_boxed(&'_ self) -> &'_ dyn crate::header::Header {
         match self {
             #[cfg(feature = "fix_40")]
             Message::FIX40(m) => m.get_header_boxed(),
