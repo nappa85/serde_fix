@@ -9,7 +9,6 @@ edition = "2018"
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 futures-util = "0.3"
-async-lock = "2.3"
 reqwest = "0.11"
 regex = "1.4"
 once_cell = "1.5"

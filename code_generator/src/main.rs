@@ -1,10 +1,8 @@
 use std::{borrow::Cow, path::PathBuf};
 
-use tokio::{io::{AsyncWrite, AsyncWriteExt, stdout}, fs::{File, create_dir_all, remove_file}};
+use tokio::{io::{AsyncWrite, AsyncWriteExt, stdout}, fs::{File, create_dir_all, remove_file}, sync::Mutex};
 
 use futures_util::stream::{iter, StreamExt};
-
-use async_lock::Mutex;
 
 use structopt::StructOpt;
 
