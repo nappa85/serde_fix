@@ -6,7 +6,7 @@ license = "MIT/Apache-2.0"
 description = "FiX meets Serde"
 categories = ["encoding", "financial"]
 keywords = ["serde", "serialization", "fix"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 itoa = "0.4"
