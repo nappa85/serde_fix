@@ -42,7 +42,7 @@ serde_fix = "*"
 If you need only certain FiX protocol versions, to speed up build times, you can use `fix_messages` features:
 ```toml
 [dependencies]
-fix_message = { version = "*", deafult-featues = false, features = ["fix_50", "fix_50sp1", "fix_50sp2"] }
+fix_message = { version = "*", default-features = false, features = ["fix_50", "fix_50sp1", "fix_50sp2"] }
 serde_fix = "*"
 ```
 
